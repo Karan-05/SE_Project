@@ -1,0 +1,1 @@
+{"content": "[MOCK] cb006307f6a19dd6 :: List three high-risk failure modes for this coding task along with short rationales: Return counts of characters as a di", "tokens": 23, "elapsed": 1.9580000001351294e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "failure-scout", "caller": "failure_mode_first"}}

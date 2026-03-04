@@ -1,0 +1,1 @@
+{"content": "The \"two pointers\" pattern is typically used in problems involving arrays or strings where you need to traverse the data in a linear fashion, often to find pairs,", "tokens": 92, "elapsed": 1.6361111659789458, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

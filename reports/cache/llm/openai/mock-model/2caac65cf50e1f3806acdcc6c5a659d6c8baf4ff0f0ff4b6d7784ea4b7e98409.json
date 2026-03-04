@@ -1,0 +1,1 @@
+{"content": "The issue you're facing with the two failed test cases in `RsGetOrdersServiceImplTest` seems to be related to a `ClassCastException`. This typically", "tokens": 105, "elapsed": 1.3296784170088358, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

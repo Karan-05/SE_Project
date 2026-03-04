@@ -1,0 +1,58 @@
+[
+  {
+    "name": "browse_tab_display",
+    "mode": "io",
+    "expected": "{\"files\":[{\"name\":\"file1.txt\",\"status\":\"Processed\"},{\"name\":\"file2.txt\",\"status\":\"Needs Manual Review\"}]}",
+    "stdin": "{\"viewMode\":\"nested\",\"filter\":\"\",\"status\":\"\"}",
+    "expected_stdout": "{\"files\":[{\"name\":\"file1.txt\",\"status\":\"Processed\"},{\"name\":\"file2.txt\",\"status\":\"Needs Manual Review\"}]}"
+  },
+  {
+    "name": "browse_tab_filtering",
+    "mode": "io",
+    "expected": "{\"files\":[{\"name\":\"file1.txt\",\"status\":\"Processed\"}]}",
+    "stdin": "{\"viewMode\":\"tree\",\"filter\":\"file1\",\"status\":\"\"}",
+    "expected_stdout": "{\"files\":[{\"name\":\"file1.txt\",\"status\":\"Processed\"}]}"
+  },
+  {
+    "name": "process_tab_rename",
+    "mode": "io",
+    "expected": "{\"status\":\"success\",\"message\":\"Tab renamed successfully\"}",
+    "stdin": "{\"action\":\"rename\",\"newName\":\"Process\"}",
+    "expected_stdout": "{\"status\":\"success\",\"message\":\"Tab renamed successfully\"}"
+  },
+  {
+    "name": "process_tab_default_filter",
+    "mode": "io",
+    "expected": "{\"records\":[{\"id\":1,\"status\":\"Needs Manual Review\"}]}",
+    "stdin": "{\"status\":\"Needs Manual Review\"}",
+    "expected_stdout": "{\"records\":[{\"id\":1,\"status\":\"Needs Manual Review\"}]}"
+  },
+  {
+    "name": "mock_api_endpoint_creation",
+    "mode": "io",
+    "expected": "{\"status\":\"success\",\"message\":\"Mock API endpoint created\"}",
+    "stdin": "{\"endpoint\":\"/api/browse\",\"method\":\"GET\"}",
+    "expected_stdout": "{\"status\":\"success\",\"message\":\"Mock API endpoint created\"}"
+  },
+  {
+    "name": "remove_logo",
+    "mode": "io",
+    "expected": "{\"status\":\"success\",\"message\":\"Logo removed\"}",
+    "stdin": "{\"action\":\"removeLogo\"}",
+    "expected_stdout": "{\"status\":\"success\",\"message\":\"Logo removed\"}"
+  },
+  {
+    "name": "edge_case_empty_browse",
+    "mode": "io",
+    "expected": "{\"files\":[]}",
+    "stdin": "{\"viewMode\":\"nested\",\"filter\":\"\",\"status\":\"\"}",
+    "expected_stdout": "{\"files\":[]}"
+  },
+  {
+    "name": "edge_case_invalid_filter",
+    "mode": "io",
+    "expected": "{\"files\":[]}",
+    "stdin": "{\"viewMode\":\"tree\",\"filter\":\"invalid_file\",\"status\":\"\"}",
+    "expected_stdout": "{\"files\":[]}"
+  }
+]

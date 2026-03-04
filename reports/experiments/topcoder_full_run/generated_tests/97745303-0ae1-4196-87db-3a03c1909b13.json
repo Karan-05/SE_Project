@@ -1,0 +1,209 @@
+[
+  {
+    "name": "winners_not_displayed",
+    "mode": "call",
+    "expected": null,
+    "input": [
+      {
+        "submissions": [
+          {
+            "id": 1,
+            "status": "winner"
+          },
+          {
+            "id": 2,
+            "status": "winner"
+          },
+          {
+            "id": 3,
+            "status": "winner"
+          },
+          {
+            "id": 4,
+            "status": "placement"
+          },
+          {
+            "id": 5,
+            "status": "placement"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "only_non_winners_displayed",
+    "mode": "call",
+    "expected": [
+      {
+        "id": 1,
+        "status": "placement"
+      },
+      {
+        "id": 2,
+        "status": "placement"
+      },
+      {
+        "id": 3,
+        "status": "placement"
+      }
+    ],
+    "input": [
+      {
+        "submissions": [
+          {
+            "id": 1,
+            "status": "placement"
+          },
+          {
+            "id": 2,
+            "status": "placement"
+          },
+          {
+            "id": 3,
+            "status": "placement"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "no_submissions",
+    "mode": "call",
+    "expected": null,
+    "input": [
+      {
+        "submissions": []
+      }
+    ]
+  },
+  {
+    "name": "mixed_status_submissions",
+    "mode": "call",
+    "expected": [
+      {
+        "id": 2,
+        "status": "placement"
+      },
+      {
+        "id": 3,
+        "status": "loser"
+      }
+    ],
+    "input": [
+      {
+        "submissions": [
+          {
+            "id": 1,
+            "status": "winner"
+          },
+          {
+            "id": 2,
+            "status": "placement"
+          },
+          {
+            "id": 3,
+            "status": "loser"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "all_winners",
+    "mode": "call",
+    "expected": null,
+    "input": [
+      {
+        "submissions": [
+          {
+            "id": 1,
+            "status": "winner"
+          },
+          {
+            "id": 2,
+            "status": "winner"
+          },
+          {
+            "id": 3,
+            "status": "winner"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "single_submission_winner",
+    "mode": "call",
+    "expected": null,
+    "input": [
+      {
+        "submissions": [
+          {
+            "id": 1,
+            "status": "winner"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "single_submission_non_winner",
+    "mode": "call",
+    "expected": [
+      {
+        "id": 1,
+        "status": "placement"
+      }
+    ],
+    "input": [
+      {
+        "submissions": [
+          {
+            "id": 1,
+            "status": "placement"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "multiple_placements",
+    "mode": "call",
+    "expected": [
+      {
+        "id": 1,
+        "status": "placement"
+      },
+      {
+        "id": 2,
+        "status": "placement"
+      },
+      {
+        "id": 3,
+        "status": "placement"
+      }
+    ],
+    "input": [
+      {
+        "submissions": [
+          {
+            "id": 1,
+            "status": "placement"
+          },
+          {
+            "id": 2,
+            "status": "placement"
+          },
+          {
+            "id": 3,
+            "status": "placement"
+          },
+          {
+            "id": 4,
+            "status": "winner"
+          }
+        ]
+      }
+    ]
+  }
+]

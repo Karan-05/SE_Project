@@ -1,0 +1,117 @@
+[
+  {
+    "name": "valid_pending_reviews_for_active_challenge",
+    "mode": "call",
+    "expected": [
+      {
+        "reviewId": 101,
+        "challengeId": 201,
+        "status": "pending",
+        "role": "reviewer"
+      }
+    ],
+    "input": [
+      {
+        "userId": 1,
+        "role": "reviewer"
+      }
+    ]
+  },
+  {
+    "name": "no_pending_reviews_for_inactive_challenge",
+    "mode": "call",
+    "expected": null,
+    "input": [
+      {
+        "userId": 2,
+        "role": "reviewer"
+      }
+    ]
+  },
+  {
+    "name": "valid_pending_reviews_for_multiple_roles",
+    "mode": "call",
+    "expected": [
+      {
+        "reviewId": 102,
+        "challengeId": 202,
+        "status": "pending",
+        "role": "submitter"
+      },
+      {
+        "reviewId": 103,
+        "challengeId": 203,
+        "status": "pending",
+        "role": "reviewer"
+      }
+    ],
+    "input": [
+      {
+        "userId": 3,
+        "role": "submitter"
+      }
+    ]
+  },
+  {
+    "name": "no_reviews_for_user_without_role",
+    "mode": "call",
+    "expected": null,
+    "input": [
+      {
+        "userId": 4,
+        "role": "guest"
+      }
+    ]
+  },
+  {
+    "name": "valid_reviews_with_role_filter",
+    "mode": "call",
+    "expected": [
+      {
+        "reviewId": 104,
+        "challengeId": 204,
+        "status": "pending",
+        "role": "reviewer"
+      }
+    ],
+    "input": [
+      {
+        "userId": 5,
+        "role": "reviewer"
+      }
+    ]
+  },
+  {
+    "name": "edge_case_no_active_challenges",
+    "mode": "call",
+    "expected": null,
+    "input": [
+      {
+        "userId": 6,
+        "role": "reviewer"
+      }
+    ]
+  },
+  {
+    "name": "edge_case_invalid_user_id",
+    "mode": "call",
+    "expected": "Error: Invalid user ID",
+    "input": [
+      {
+        "userId": -1,
+        "role": "reviewer"
+      }
+    ]
+  },
+  {
+    "name": "edge_case_no_reviews_due_to_role_mismatch",
+    "mode": "call",
+    "expected": null,
+    "input": [
+      {
+        "userId": 7,
+        "role": "observer"
+      }
+    ]
+  }
+]

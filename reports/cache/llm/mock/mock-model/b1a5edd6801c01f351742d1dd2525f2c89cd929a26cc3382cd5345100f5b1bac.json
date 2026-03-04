@@ -1,0 +1,1 @@
+{"content": "[MOCK] fe01e3455e02b79a :: Given the problem: Return counts of characters as a dict sorted by key., would pattern hash_bucket be relevant?", "tokens": 18, "elapsed": 1.6670000000384988e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "pattern-hint", "caller": "pattern_skeleton"}}

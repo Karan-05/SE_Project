@@ -1,0 +1,1 @@
+{"content": "[MOCK] 25a7a8db1b115717 :: Architect: propose a phased plan for task array_sum_test: Return the sum of all integers.", "tokens": 14, "elapsed": 1.9170000000734433e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "role-architect", "caller": "role_decomposed"}}

@@ -1,0 +1,10 @@
+[
+  {
+    "name": "sample_0",
+    "mode": "call",
+    "expected": "cba",
+    "input": [
+      "abc"
+    ]
+  }
+]

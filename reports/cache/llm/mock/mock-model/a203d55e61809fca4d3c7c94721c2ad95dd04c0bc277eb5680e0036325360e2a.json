@@ -1,0 +1,1 @@
+{"content": "[MOCK] 01b9cceff70f6c55 :: List three high-risk failure modes for this coding task along with short rationales: Return the running prefix sums.", "tokens": 18, "elapsed": 1.5829999999716904e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "failure-scout", "caller": "failure_mode_first"}}

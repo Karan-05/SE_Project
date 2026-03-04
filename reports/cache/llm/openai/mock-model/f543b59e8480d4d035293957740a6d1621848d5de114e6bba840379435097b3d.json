@@ -1,0 +1,1 @@
+{"content": "Kadane's algorithm is primarily used for finding the maximum sum of a contiguous subarray in an array of numbers. In the context of a genomic annotation pipeline,", "tokens": 89, "elapsed": 1.7854933330090716, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

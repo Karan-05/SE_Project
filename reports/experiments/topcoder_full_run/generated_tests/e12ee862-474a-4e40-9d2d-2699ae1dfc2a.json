@@ -1,0 +1,129 @@
+[
+  {
+    "name": "valid_image_upload",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "message": "Image uploaded successfully."
+    },
+    "input": [
+      {
+        "file": "valid_image.png",
+        "user_id": "user123"
+      }
+    ]
+  },
+  {
+    "name": "invalid_image_format",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Invalid file format. Only PNG and JPEG are allowed."
+    },
+    "input": [
+      {
+        "file": "invalid_image.txt",
+        "user_id": "user123"
+      }
+    ]
+  },
+  {
+    "name": "large_image_upload",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "File size exceeds the maximum limit."
+    },
+    "input": [
+      {
+        "file": "large_image.png",
+        "user_id": "user123"
+      }
+    ]
+  },
+  {
+    "name": "asset_adaptation_selection",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "message": "Adaptation options selected."
+    },
+    "input": [
+      {
+        "platforms": [
+          "Instagram",
+          "LinkedIn"
+        ],
+        "formats": [
+          "Feed",
+          "Story"
+        ],
+        "user_id": "user123"
+      }
+    ]
+  },
+  {
+    "name": "manual_editing_save",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "message": "Changes saved successfully."
+    },
+    "input": [
+      {
+        "edited_text": "New Ad Text",
+        "logo_selected": "logo.png",
+        "user_id": "user123"
+      }
+    ]
+  },
+  {
+    "name": "batch_generation_trigger",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "message": "Batch generation triggered."
+    },
+    "input": [
+      {
+        "asset_ids": [
+          "asset1",
+          "asset2",
+          "asset3"
+        ],
+        "user_id": "user123"
+      }
+    ]
+  },
+  {
+    "name": "download_generated_assets",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "message": "Assets downloaded successfully."
+    },
+    "input": [
+      {
+        "asset_ids": [
+          "generated_asset1",
+          "generated_asset2"
+        ],
+        "user_id": "user123"
+      }
+    ]
+  },
+  {
+    "name": "track_generation_status",
+    "mode": "call",
+    "expected": {
+      "status": "in_progress",
+      "message": "Asset generation is still in progress."
+    },
+    "input": [
+      {
+        "job_id": "job123",
+        "user_id": "user123"
+      }
+    ]
+  }
+]

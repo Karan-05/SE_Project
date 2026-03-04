@@ -1,0 +1,1 @@
+{"content": "[MOCK] 891c4ca08bc776d8 :: Given the problem: Return the nth Fibonacci number., would pattern hash_bucket be relevant?", "tokens": 13, "elapsed": 1.5829999999716904e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "pattern-hint", "caller": "pattern_skeleton"}}

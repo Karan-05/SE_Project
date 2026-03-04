@@ -1,0 +1,77 @@
+{
+  "task_id": "dp_coin",
+  "strategy": "contract_first",
+  "attempt": 1,
+  "pass_rate": 1.0,
+  "plan_subtasks": [
+    "Validate inputs vs contract",
+    "Implement core logic",
+    "Check edge cases",
+    "Generate minimal unit tests for critical behaviors",
+    "Add adversarial/edge-case tests",
+    "Run tests and interpret failures"
+  ],
+  "plan_tests": [
+    "",
+    ""
+  ],
+  "plan_diagnostics": {
+    "missing_fields": "constraints",
+    "contract_length": "34",
+    "audit_note": "[MOCK] f9c2a9aa08236e0f :: Review this contract for completeness and note any missing guarantees. Contract: {'inputs': 'Underspecified', 'outputs':",
+    "planning_tokens": "29",
+    "planning_time": "0.000002"
+  },
+  "patch_summary": {
+    "phase": "initial"
+  },
+  "tests_run": [
+    {
+      "name": "sample_0",
+      "mode": "call",
+      "status": "pass",
+      "expected": "3",
+      "output": "3",
+      "error": "",
+      "input": "[[1, 2, 5], 11]",
+      "kwargs": "{}",
+      "duration": 6.249999999985434e-06
+    },
+    {
+      "name": "sample_1",
+      "mode": "call",
+      "status": "pass",
+      "expected": "-1",
+      "output": "-1",
+      "error": "",
+      "input": "[[2], 3]",
+      "kwargs": "{}",
+      "duration": 1.8749999999290168e-06
+    }
+  ],
+  "llm_calls": 0,
+  "timeline": {
+    "attempt": 1,
+    "strategy": "contract_first",
+    "phase": "initial",
+    "events": {
+      "decompose": {
+        "start": "2026-02-24T00:19:21.381793",
+        "end": "2026-02-24T00:19:21.381842"
+      },
+      "solve": {
+        "start": "2026-02-24T00:19:21.381844",
+        "end": "2026-02-24T00:19:21.381951"
+      },
+      "tests": {
+        "start": "2026-02-24T00:19:21.381937",
+        "end": "2026-02-24T00:19:21.381947",
+        "duration_seconds": "0.000"
+      }
+    },
+    "meta": {
+      "llm_calls": "0"
+    }
+  },
+  "solution_preview": "def solve(coins, amount):\n                dp = [float('inf')] * (amount + 1)\n                dp[0] = 0\n                for coin in coins:\n                    for value in range(coin, amount + 1):\n                        dp[value] = min(dp[value], dp[value - coin] + 1)\n                return dp[amount] if dp[amount] != float('inf') else -1"
+}

@@ -1,0 +1,6 @@
+avg_reward,std_reward,win_rate,starved_tasks,deadline_misses,agent,seed,episodes
+10421.7,2455.986901430869,0.43600000000000005,20.8,0.0,random,4,5
+28490.0,8668.019958444951,0.516,6.8,0.0,skill_match,4,5
+33510.0,5186.6549914178795,0.524,6.2,0.0,contract_first,4,5
+33510.0,5186.6549914178795,0.524,6.2,0.0,pattern_skeleton,4,5
+33510.0,5186.6549914178795,0.524,6.2,0.0,meta_strategy,4,5

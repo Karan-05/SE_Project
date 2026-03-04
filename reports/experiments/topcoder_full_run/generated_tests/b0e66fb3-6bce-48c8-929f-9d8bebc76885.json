@@ -1,0 +1,58 @@
+[
+  {
+    "name": "test_no_scroll_logged_out",
+    "mode": "io",
+    "expected": "200 OK\n{\"scrolling\": false}",
+    "stdin": "GET /activity-feed",
+    "expected_stdout": "200 OK\n{\"scrolling\": false}"
+  },
+  {
+    "name": "test_activity_feed_content",
+    "mode": "io",
+    "expected": "200 OK\n{\"activities\": [{\"id\": 1, \"title\": \"Challenge 1\"}, {\"id\": 2, \"title\": \"Challenge 2\"}]}",
+    "stdin": "GET /activity-feed",
+    "expected_stdout": "200 OK\n{\"activities\": [{\"id\": 1, \"title\": \"Challenge 1\"}, {\"id\": 2, \"title\": \"Challenge 2\"}]}"
+  },
+  {
+    "name": "test_no_scroll_with_large_data",
+    "mode": "io",
+    "expected": "200 OK\n{\"scrolling\": false}",
+    "stdin": "GET /activity-feed?page=1000",
+    "expected_stdout": "200 OK\n{\"scrolling\": false}"
+  },
+  {
+    "name": "test_empty_activity_feed",
+    "mode": "io",
+    "expected": "200 OK\n{\"activities\": []}",
+    "stdin": "GET /activity-feed?page=1",
+    "expected_stdout": "200 OK\n{\"activities\": []}"
+  },
+  {
+    "name": "test_invalid_page_request",
+    "mode": "io",
+    "expected": "400 Bad Request\n{\"error\": \"Invalid page number\"}",
+    "stdin": "GET /activity-feed?page=invalid",
+    "expected_stdout": "400 Bad Request\n{\"error\": \"Invalid page number\"}"
+  },
+  {
+    "name": "test_activity_feed_format",
+    "mode": "io",
+    "expected": "200 OK\n{\"activities\": [{\"id\": 1, \"title\": \"Challenge 1\"}]}",
+    "stdin": "GET /activity-feed",
+    "expected_stdout": "200 OK\n{\"activities\": [{\"id\": 1, \"title\": \"Challenge 1\"}]}"
+  },
+  {
+    "name": "test_rate_limiting",
+    "mode": "io",
+    "expected": "429 Too Many Requests\n{\"error\": \"Rate limit exceeded\"}",
+    "stdin": "GET /activity-feed",
+    "expected_stdout": "429 Too Many Requests\n{\"error\": \"Rate limit exceeded\"}"
+  },
+  {
+    "name": "test_authentication_required",
+    "mode": "io",
+    "expected": "401 Unauthorized\n{\"error\": \"Authentication required\"}",
+    "stdin": "GET /activity-feed",
+    "expected_stdout": "401 Unauthorized\n{\"error\": \"Authentication required\"}"
+  }
+]

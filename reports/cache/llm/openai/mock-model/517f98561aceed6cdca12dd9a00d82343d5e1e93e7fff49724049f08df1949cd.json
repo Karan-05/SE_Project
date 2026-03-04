@@ -1,0 +1,1 @@
+{"content": "The \"two pointers\" technique is typically used in algorithmic problems involving arrays or lists, where you need to traverse the data structure in a way that requires comparing", "tokens": 91, "elapsed": 1.5140116669936106, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

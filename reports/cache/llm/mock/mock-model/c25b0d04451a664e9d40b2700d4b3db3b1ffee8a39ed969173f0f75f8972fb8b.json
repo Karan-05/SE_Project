@@ -1,0 +1,1 @@
+{"content": "[MOCK] a73f3eeb231af842 :: Implement function solve(*args) to solve the described problem. Do not read stdin or write stdout. Generate targeted tes", "tokens": 23, "elapsed": 1.7500000000225668e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "failure-tests", "caller": "failure_mode_first"}}

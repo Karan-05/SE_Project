@@ -1,0 +1,52 @@
+{
+  "task_type": "data_etl",
+  "summary": "Design an ETL pipeline to update the download function for challenge submitters, ensuring that only members who have submitted can download other submissions. The pipeline will include schema definitions, transformation steps, validation queries, and a checklist for acceptance.",
+  "artifacts": {
+    "pipeline_overview": "Extract submission data from the database, transform it to check submission status, and load the updated permissions into the user settings table.",
+    "sql_or_pseudocode": "SELECT user_id, submission_id FROM submissions WHERE challenge_id = ? AND status = 'submitted';\n\nUPDATE user_settings SET can_download = TRUE WHERE user_id IN (SELECT user_id FROM submissions WHERE challenge_id = ? AND status = 'submitted');",
+    "tables": [
+      "submissions(user_id STRING, submission_id STRING, challenge_id STRING, status ENUM)",
+      "user_settings(user_id STRING PK, can_download BOOLEAN)"
+    ],
+    "dq_checks": [
+      "Ensure that all users who submitted have can_download set to TRUE.",
+      "Check that no users who did not submit have can_download set to TRUE."
+    ],
+    "tests": [
+      "SELECT * FROM user_settings WHERE can_download = TRUE AND user_id NOT IN (SELECT user_id FROM submissions WHERE challenge_id = ? AND status = 'submitted');",
+      "SELECT * FROM user_settings WHERE can_download = FALSE AND user_id IN (SELECT user_id FROM submissions WHERE challenge_id = ? AND status = 'submitted');"
+    ]
+  },
+  "rubric_self_check": {
+    "coverage": 90.0,
+    "specificity": 88.0,
+    "actionability": 92.0,
+    "overall_notes": "The ETL blueprint includes schema, transformation logic, and validation queries, addressing the requirements effectively."
+  },
+  "raw": {
+    "task_type": "data_etl",
+    "summary": "Design an ETL pipeline to update the download function for challenge submitters, ensuring that only members who have submitted can download other submissions. The pipeline will include schema definitions, transformation steps, validation queries, and a checklist for acceptance.",
+    "artifacts": {
+      "pipeline_overview": "Extract submission data from the database, transform it to check submission status, and load the updated permissions into the user settings table.",
+      "sql_or_pseudocode": "SELECT user_id, submission_id FROM submissions WHERE challenge_id = ? AND status = 'submitted';\n\nUPDATE user_settings SET can_download = TRUE WHERE user_id IN (SELECT user_id FROM submissions WHERE challenge_id = ? AND status = 'submitted');",
+      "tables": [
+        "submissions(user_id STRING, submission_id STRING, challenge_id STRING, status ENUM)",
+        "user_settings(user_id STRING PK, can_download BOOLEAN)"
+      ],
+      "dq_checks": [
+        "Ensure that all users who submitted have can_download set to TRUE.",
+        "Check that no users who did not submit have can_download set to TRUE."
+      ],
+      "tests": [
+        "SELECT * FROM user_settings WHERE can_download = TRUE AND user_id NOT IN (SELECT user_id FROM submissions WHERE challenge_id = ? AND status = 'submitted');",
+        "SELECT * FROM user_settings WHERE can_download = FALSE AND user_id IN (SELECT user_id FROM submissions WHERE challenge_id = ? AND status = 'submitted');"
+      ]
+    },
+    "rubric_self_check": {
+      "coverage": 90,
+      "specificity": 88,
+      "actionability": 92,
+      "overall_notes": "The ETL blueprint includes schema, transformation logic, and validation queries, addressing the requirements effectively."
+    }
+  }
+}

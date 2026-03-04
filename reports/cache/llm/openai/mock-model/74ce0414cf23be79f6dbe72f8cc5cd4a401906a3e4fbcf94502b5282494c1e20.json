@@ -1,0 +1,1 @@
+{"content": "The Kadane's algorithm is primarily used for solving the maximum subarray sum problem in arrays. It efficiently finds the contiguous subarray within a one-dimensional array of", "tokens": 89, "elapsed": 1.281930042008753, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

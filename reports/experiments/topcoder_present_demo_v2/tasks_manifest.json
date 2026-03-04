@@ -1,0 +1,77 @@
+{
+  "run_id": "topcoder_present_demo_v2",
+  "generated_at": "2026-02-23T16:21:12.260288",
+  "task_count": 10,
+  "tasks": [
+    {
+      "id": "67eebff5-6369-428c-b533-be857d91f9d7",
+      "title": "RTC Data Quality - Frontend update",
+      "dataset_id": "analysis_output_ai_feasibility_analysis.csv",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/analysis/output/ai_feasibility_analysis.csv",
+      "has_tests": false
+    },
+    {
+      "id": "8b0a7f1c-86a3-46de-b549-dac53e662b3c",
+      "title": "Make Me a (Rails) Wizard!",
+      "dataset_id": "analysis_output_ai_feasibility_analysis.csv",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/analysis/output/ai_feasibility_analysis.csv",
+      "has_tests": false
+    },
+    {
+      "id": "982e3415-a4d4-4eb5-ada7-f7dc53b9dd1d",
+      "title": "Doppler App - Mobile App iOS -  Fixes Part 1",
+      "dataset_id": "analysis_output_ai_super_analysis.csv",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/analysis/output/ai_super_analysis.csv",
+      "has_tests": false
+    },
+    {
+      "id": "99afca18-f9aa-4c3b-b534-611f99e570ca",
+      "title": "SunShot - Solar Land Solutions - Land Acquisition UI Prototype Challenge",
+      "dataset_id": "analysis_output_ai_super_analysis.csv",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/analysis/output/ai_super_analysis.csv",
+      "has_tests": false
+    },
+    {
+      "id": "ff556541-ee83-492c-85ec-e0aea4ec6a4f",
+      "title": "Mnemosyne AngularJS Web App Bug Fix Series 4",
+      "dataset_id": "analysis_output_ai_super_analysis.csv",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/analysis/output/ai_super_analysis.csv",
+      "has_tests": false
+    },
+    {
+      "id": "57ea52c6-a2c3-48f3-90fa-72aa10ac0186",
+      "title": "Contracts Frontend Template Management Actions",
+      "dataset_id": "analysis_output_ai_feasibility_analysis.csv",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/analysis/output/ai_feasibility_analysis.csv",
+      "has_tests": false
+    },
+    {
+      "id": "d820250f-ae5c-403a-85c9-23acafaef884",
+      "title": "BSIC Refugees 1st Place - 2",
+      "dataset_id": "analysis_output_ai_feasibility_analysis.csv",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/analysis/output/ai_feasibility_analysis.csv",
+      "has_tests": false
+    },
+    {
+      "id": "16155839-7275-4713-9684-4906d5991783",
+      "title": "Topcoder Connect Landing Page HTML F2F Challenge",
+      "dataset_id": "analysis_output_ai_feasibility_analysis.csv",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/analysis/output/ai_feasibility_analysis.csv",
+      "has_tests": false
+    },
+    {
+      "id": "2cdb240c-2417-4cd8-b257-c35e96ce017b",
+      "title": "John Hancock - Project Snapshot Multiple Updates UI Prototype Challenge",
+      "dataset_id": "analysis_output_legacy_ai_feasibility_analysis.csv",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/analysis/output_legacy/ai_feasibility_analysis.csv",
+      "has_tests": false
+    },
+    {
+      "id": "852fdfec-3ada-4d0c-8060-add578236ad5",
+      "title": "Customer Web Portal Mobile Version Module Architecture",
+      "dataset_id": "analysis_output_ai_feasibility_analysis.csv",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/analysis/output/ai_feasibility_analysis.csv",
+      "has_tests": false
+    }
+  ]
+}

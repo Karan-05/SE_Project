@@ -1,0 +1,154 @@
+[
+  {
+    "name": "valid_reskin",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "message": "Reskin applied successfully"
+    },
+    "input": [
+      {
+        "style": "new",
+        "page": "ViewCompositeScorecard",
+        "assets": [
+          "header",
+          "footer",
+          "scorecard"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "missing_assets",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Missing required assets"
+    },
+    "input": [
+      {
+        "style": "new",
+        "page": "ViewCompositeScorecard",
+        "assets": [
+          "header",
+          "footer"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "invalid_page",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Invalid page specified"
+    },
+    "input": [
+      {
+        "style": "new",
+        "page": "InvalidPage",
+        "assets": [
+          "header",
+          "footer",
+          "scorecard"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "no_style_change",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "message": "No changes made"
+    },
+    "input": [
+      {
+        "style": "existing",
+        "page": "ViewCompositeScorecard",
+        "assets": [
+          "header",
+          "footer",
+          "scorecard"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "large_asset_list",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "message": "Reskin applied successfully"
+    },
+    "input": [
+      {
+        "style": "new",
+        "page": "ViewCompositeScorecard",
+        "assets": [
+          "header",
+          "footer",
+          "scorecard",
+          "sidebar",
+          "button",
+          "modal",
+          "tooltip",
+          "notification"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "empty_asset_list",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "No assets provided"
+    },
+    "input": [
+      {
+        "style": "new",
+        "page": "ViewCompositeScorecard",
+        "assets": []
+      }
+    ]
+  },
+  {
+    "name": "style_conflict",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Style conflict detected"
+    },
+    "input": [
+      {
+        "style": "conflicting",
+        "page": "ViewCompositeScorecard",
+        "assets": [
+          "header",
+          "footer",
+          "scorecard"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "successful_patch_creation",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "message": "Patch created successfully"
+    },
+    "input": [
+      {
+        "style": "new",
+        "page": "ViewCompositeScorecard",
+        "assets": [
+          "header",
+          "footer",
+          "scorecard"
+        ]
+      }
+    ]
+  }
+]

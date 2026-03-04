@@ -1,0 +1,122 @@
+[
+  {
+    "name": "valid_login",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "message": "Login successful",
+      "roles": [
+        "user",
+        "admin"
+      ]
+    },
+    "input": [
+      {
+        "username": "validUser",
+        "password": "validPassword"
+      }
+    ]
+  },
+  {
+    "name": "invalid_login",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Invalid credentials"
+    },
+    "input": [
+      {
+        "username": "invalidUser",
+        "password": "invalidPassword"
+      }
+    ]
+  },
+  {
+    "name": "missing_username",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Username is required"
+    },
+    "input": [
+      {
+        "username": "",
+        "password": "somePassword"
+      }
+    ]
+  },
+  {
+    "name": "missing_password",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Password is required"
+    },
+    "input": [
+      {
+        "username": "someUser",
+        "password": ""
+      }
+    ]
+  },
+  {
+    "name": "role_lookup_valid",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "roles": [
+        "user",
+        "admin"
+      ]
+    },
+    "input": [
+      {
+        "userId": 1
+      }
+    ]
+  },
+  {
+    "name": "role_lookup_invalid_user",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "User not found"
+    },
+    "input": [
+      {
+        "userId": 9999
+      }
+    ]
+  },
+  {
+    "name": "login_with_special_characters",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "message": "Login successful",
+      "roles": [
+        "user"
+      ]
+    },
+    "input": [
+      {
+        "username": "user!@#",
+        "password": "pass$%^"
+      }
+    ]
+  },
+  {
+    "name": "login_rate_limiting",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Too many login attempts"
+    },
+    "input": [
+      {
+        "username": "rateLimitedUser",
+        "password": "password"
+      }
+    ]
+  }
+]

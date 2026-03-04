@@ -1,0 +1,58 @@
+[
+  {
+    "name": "valid_music_library_selection",
+    "mode": "io",
+    "expected": "success: true, message: 'Overlay applied successfully'",
+    "stdin": "music_library_selection: 'Artist1 - Song1'",
+    "expected_stdout": "success: true, message: 'Overlay applied successfully'"
+  },
+  {
+    "name": "valid_upload_mp3",
+    "mode": "io",
+    "expected": "success: true, message: 'Overlay applied successfully'",
+    "stdin": "uploaded_file: 'test_song.mp3'",
+    "expected_stdout": "success: true, message: 'Overlay applied successfully'"
+  },
+  {
+    "name": "invalid_file_format",
+    "mode": "io",
+    "expected": "success: false, message: 'Invalid file format'",
+    "stdin": "uploaded_file: 'test_song.wav'",
+    "expected_stdout": "success: false, message: 'Invalid file format'"
+  },
+  {
+    "name": "empty_music_library_selection",
+    "mode": "io",
+    "expected": "success: false, message: 'No song selected'",
+    "stdin": "music_library_selection: ''",
+    "expected_stdout": "success: false, message: 'No song selected'"
+  },
+  {
+    "name": "audio_player_display",
+    "mode": "io",
+    "expected": "audio_players: { input: true, output: true, download: true }",
+    "stdin": "music_library_selection: 'Artist1 - Song1'",
+    "expected_stdout": "audio_players: { input: true, output: true, download: true }"
+  },
+  {
+    "name": "spectrograph_display",
+    "mode": "io",
+    "expected": "spectrographs: { before: true, after: true, metrics: true }",
+    "stdin": "music_library_selection: 'Artist1 - Song1'",
+    "expected_stdout": "spectrographs: { before: true, after: true, metrics: true }"
+  },
+  {
+    "name": "large_file_upload",
+    "mode": "io",
+    "expected": "success: true, message: 'Overlay applied successfully'",
+    "stdin": "uploaded_file: 'large_test_song.mp3'",
+    "expected_stdout": "success: true, message: 'Overlay applied successfully'"
+  },
+  {
+    "name": "non_existent_song_selection",
+    "mode": "io",
+    "expected": "success: false, message: 'Song not found'",
+    "stdin": "music_library_selection: 'Artist1 - NonExistentSong'",
+    "expected_stdout": "success: false, message: 'Song not found'"
+  }
+]

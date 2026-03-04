@@ -1,0 +1,90 @@
+[
+  {
+    "name": "merge_branch_and_resolve_conflicts",
+    "mode": "call",
+    "expected": "Merge successful, no conflicts",
+    "input": [
+      {
+        "source_branch": "feat/submissions-api",
+        "target_branch": "develop"
+      }
+    ]
+  },
+  {
+    "name": "apply_resources_api_patch",
+    "mode": "call",
+    "expected": "Patch applied successfully, all features working",
+    "input": [
+      {
+        "branch": "feat/submissions-api",
+        "patch": "resources_api_integration_patch"
+      }
+    ]
+  },
+  {
+    "name": "fix_dependency_warning",
+    "mode": "call",
+    "expected": "No warnings during pnpm install",
+    "input": [
+      {
+        "dependency": "querystring",
+        "replacement": "URLSearchParams"
+      }
+    ]
+  },
+  {
+    "name": "fix_lint_errors",
+    "mode": "call",
+    "expected": "All lint checks passed",
+    "input": [
+      {
+        "branch": "feat/submissions-api"
+      }
+    ]
+  },
+  {
+    "name": "maintain_existing_features",
+    "mode": "call",
+    "expected": "All features operational",
+    "input": [
+      {
+        "features": [
+          "Kafka Consumer",
+          "Gitee Webhook"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "merge_branch_with_conflicts",
+    "mode": "call",
+    "expected": "Merge conflicts detected",
+    "input": [
+      {
+        "source_branch": "feat/submissions-api",
+        "target_branch": "develop_with_conflicts"
+      }
+    ]
+  },
+  {
+    "name": "apply_invalid_patch",
+    "mode": "call",
+    "expected": "Patch application failed",
+    "input": [
+      {
+        "branch": "feat/submissions-api",
+        "patch": "invalid_patch"
+      }
+    ]
+  },
+  {
+    "name": "check_functionality_after_fixes",
+    "mode": "call",
+    "expected": "All functionalities working as expected",
+    "input": [
+      {
+        "branch": "feat/submissions-api"
+      }
+    ]
+  }
+]

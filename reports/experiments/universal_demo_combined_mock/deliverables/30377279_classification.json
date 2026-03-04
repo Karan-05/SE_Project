@@ -1,0 +1,18 @@
+{
+  "task_type": "architecture_doc",
+  "confidence": 0.65,
+  "why": [
+    "mock"
+  ],
+  "missing_info": [],
+  "verification_plan": [
+    "rubric"
+  ],
+  "artifacts_to_generate": [
+    {
+      "name": "architecture.md",
+      "format": "md"
+    }
+  ],
+  "synthesis_policy": "none"
+}

@@ -1,0 +1,53 @@
+`BEGIN_JSON`
+{
+  "task_type": "data_etl",
+  "id": "5bdc4e5f-4ea0-402e-ab20-f6cfd1a49a72",
+  "title": "Topcoder O/R F2F - How to check the payment sent status",
+  "summary": "Create an ETL blueprint to check the payment sent status, including schema definitions, pipeline steps, validation queries, and sample outputs. The implementation must avoid unnecessary changes to existing functions and adhere to the provided design assets.",
+  "assumptions": [
+    "Source data schema and transformation steps are not explicitly provided.",
+    "Validation queries need to be inferred based on the expected output and existing functions.",
+    "No specific database or ETL tool context was provided."
+  ],
+  "plan": [
+    "Define the source data schema based on inferred requirements.",
+    "Outline the ETL pipeline steps including extraction, transformation, and loading.",
+    "Create validation queries to ensure data quality and correctness.",
+    "Draft sample outputs based on the expected results.",
+    "Compile an acceptance checklist to verify the implementation."
+  ],
+  "artifacts": {
+    "pipeline_spec": "The ETL pipeline will extract payment data from the source database, transform it by removing unnecessary links and separators, and load the cleaned data into the target database. The pipeline will run daily with a recovery plan in case of failures.",
+    "sql_snippets": {
+      "extraction": "SELECT * FROM payments WHERE status = 'sent';",
+      "transformation": "UPDATE payments SET view_link = NULL WHERE view_link IS NOT NULL; UPDATE payments SET line_separator = NULL WHERE line_separator IS NOT NULL;",
+      "loading": "INSERT INTO cleaned_payments (columns) SELECT columns FROM payments;"
+    },
+    "python_snippets": "def etl_process():\n    extract_data()\n    transform_data()\n    load_data()",
+    "data_quality_checks": [
+      {
+        "name": "Check for null values in payment status",
+        "column": "status",
+        "threshold": "No null values allowed"
+      },
+      {
+        "name": "Check for duplicates in payment IDs",
+        "column": "payment_id",
+        "threshold": "No duplicates allowed"
+      }
+    ]
+  },
+  "validations": [
+    "Self-check conducted on the schema and pipeline steps.",
+    "Validation queries have been drafted based on the expected outputs."
+  ],
+  "confidence": 0.75,
+  "stop_reason": "completed",
+  "rubric_self_check": {
+    "coverage": 0.8,
+    "specificity": 0.7,
+    "actionability": 0.75,
+    "overall_notes": "Most sections are covered, but some assumptions may need further clarification."
+  }
+}
+END_JSON

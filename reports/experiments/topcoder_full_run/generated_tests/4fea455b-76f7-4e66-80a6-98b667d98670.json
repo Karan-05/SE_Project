@@ -1,0 +1,114 @@
+[
+  {
+    "name": "valid_member_download",
+    "mode": "call",
+    "expected": {
+      "can_download": true
+    },
+    "input": [
+      {
+        "member_id": "12345",
+        "challenge_id": "67890",
+        "submitted": true
+      }
+    ]
+  },
+  {
+    "name": "non_member_download",
+    "mode": "call",
+    "expected": {
+      "can_download": false
+    },
+    "input": [
+      {
+        "member_id": "54321",
+        "challenge_id": "67890",
+        "submitted": false
+      }
+    ]
+  },
+  {
+    "name": "member_without_submission",
+    "mode": "call",
+    "expected": {
+      "can_download": false
+    },
+    "input": [
+      {
+        "member_id": "67890",
+        "challenge_id": "12345",
+        "submitted": false
+      }
+    ]
+  },
+  {
+    "name": "member_with_submission",
+    "mode": "call",
+    "expected": {
+      "can_download": true
+    },
+    "input": [
+      {
+        "member_id": "11111",
+        "challenge_id": "22222",
+        "submitted": true
+      }
+    ]
+  },
+  {
+    "name": "multiple_submissions",
+    "mode": "call",
+    "expected": {
+      "can_download": true
+    },
+    "input": [
+      {
+        "member_id": "33333",
+        "challenge_id": "44444",
+        "submitted": true
+      }
+    ]
+  },
+  {
+    "name": "challenge_not_found",
+    "mode": "call",
+    "expected": {
+      "error": "Challenge not found"
+    },
+    "input": [
+      {
+        "member_id": "55555",
+        "challenge_id": "99999",
+        "submitted": true
+      }
+    ]
+  },
+  {
+    "name": "invalid_member_id",
+    "mode": "call",
+    "expected": {
+      "error": "Invalid member ID"
+    },
+    "input": [
+      {
+        "member_id": "invalid_id",
+        "challenge_id": "67890",
+        "submitted": true
+      }
+    ]
+  },
+  {
+    "name": "no_submission_no_download",
+    "mode": "call",
+    "expected": {
+      "can_download": false
+    },
+    "input": [
+      {
+        "member_id": "22222",
+        "challenge_id": "33333",
+        "submitted": false
+      }
+    ]
+  }
+]

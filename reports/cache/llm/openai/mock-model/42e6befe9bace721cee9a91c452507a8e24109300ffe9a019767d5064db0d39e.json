@@ -1,0 +1,1 @@
+{"content": "The `hash_bucket` pattern is typically used in database design to distribute data across multiple buckets or partitions based on a hash function. This can help with load balancing", "tokens": 85, "elapsed": 1.255157292005606, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

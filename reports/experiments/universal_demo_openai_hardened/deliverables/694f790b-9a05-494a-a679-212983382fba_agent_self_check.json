@@ -1,0 +1,6 @@
+{
+  "coverage": 0.5,
+  "specificity": 0.5,
+  "actionability": 0.5,
+  "overall_notes": "Missing detailed bug descriptions and repository context limits the ability to provide a complete patch."
+}

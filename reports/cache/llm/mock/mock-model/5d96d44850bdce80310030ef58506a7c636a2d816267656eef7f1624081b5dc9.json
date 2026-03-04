@@ -1,0 +1,1 @@
+{"content": "[MOCK] 01df36a9358fb2c2 :: Implement function solve(*args) to solve the described problem. Do not read stdin or write stdout. Draft implementation ", "tokens": 23, "elapsed": 2.3749999999989058e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "contract-solver", "caller": "contract_first"}}

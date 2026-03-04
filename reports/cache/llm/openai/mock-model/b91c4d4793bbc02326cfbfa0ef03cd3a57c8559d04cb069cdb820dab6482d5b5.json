@@ -1,0 +1,1 @@
+{"content": "To extract tasks from Exchange/Outlook 2003 into a CSV file, you can use a script that leverages the Outlook Object Model. The Kadane", "tokens": 96, "elapsed": 1.415075541997794, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

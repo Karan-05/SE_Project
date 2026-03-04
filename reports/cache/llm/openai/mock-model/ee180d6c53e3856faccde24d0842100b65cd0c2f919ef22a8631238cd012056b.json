@@ -1,0 +1,1 @@
+{"content": "To create a script that extracts tasks from Exchange/Outlook 2003 into a CSV file, you can use a combination of Python and the `pywin", "tokens": 96, "elapsed": 1.7973127919976832, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

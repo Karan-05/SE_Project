@@ -1,0 +1,44 @@
+```json
+{
+  "task_type": "architecture_doc",
+  "summary": "Design an architecture document to enhance the tc-review-api by integrating with Challenge API and Resources API for fetching pending reviews based on user roles. The document outlines core requirements, components, interfaces, trade-offs, and risks associated with the implementation.",
+  "artifacts": {
+    "doc_markdown": "## Requirements\n- Enhance GET /api/reviews to fetch pending reviews based on user roles.\n- Integrate with Challenge API to check challenge status.\n- Integrate with Resources API to fetch user roles.\n\n## Architecture Diagram\n```mermaid\ngraph TD;\n    A[Review API] -->|calls| B[Challenge API];\n    A -->|calls| C[Resources API];\n    B --> D[Challenge Status];\n    C --> E[User Roles];\n    A --> F[Frontend];\n```\n\n## Components\n- **ReviewController** – Handles incoming requests and responses.\n- **ChallengeApiService** – Interfaces with the Challenge API to fetch challenge data.\n- **ResourceApiService** – New service to interface with the Resources API.\n\n## Interfaces\n- **ReviewController.getPendingReviews()** – Enhanced method to return reviews based on user roles and challenge status.\n- **ChallengeApiService.getChallengeStatus(challengeId)** – Fetches challenge status.\n- **ResourceApiService.getUserRoles(challengeId)** – Fetches user roles for challenges.\n\n## Trade-offs\n- Using existing services simplifies integration but may limit flexibility.\n- Caching strategies will improve performance but may introduce stale data risks.\n\n## Risks\n- API rate limits could affect performance; implement exponential backoff for retries.\n- Ensure robust error handling to manage failures in external API calls.\n\n## Acceptance Checklist\n- [ ] ReviewController updated.\n- [ ] ResourceApiService implemented.\n- [ ] TypeScript interfaces updated.\n- [ ] Documentation provided for testing.",
+    "components": [
+      {
+        "name": "ReviewController",
+        "responsibility": "Handles requests for pending reviews.",
+        "tech": "Node.js, NestJS"
+      },
+      {
+        "name": "ChallengeApiService",
+        "responsibility": "Fetches challenge data from the Challenge API.",
+        "tech": "Node.js, NestJS"
+      },
+      {
+        "name": "ResourceApiService",
+        "responsibility": "Fetches user roles from the Resources API.",
+        "tech": "Node.js, NestJS"
+      }
+    ],
+    "interfaces": [
+      {
+        "name": "ReviewController.getPendingReviews()",
+        "description": "Fetches pending reviews based on user roles and challenge status."
+      },
+      {
+        "name": "ChallengeApiService.getChallengeStatus(challengeId)",
+        "description": "Fetches the status of a challenge."
+      },
+      {
+        "name": "ResourceApiService.getUserRoles(challengeId)",
+        "description": "Fetches user roles associated with a challenge."
+      }
+    ],
+    "tradeoffs": [
+      "Using existing services simplifies integration but may limit flexibility.",
+      "Caching strategies will improve performance but may introduce stale data risks."
+    ]
+  },
+  "rubric_self_check": {
+    "coverage": 95,

@@ -1,0 +1,1 @@
+{"content": "```python\ndef solve(graph):\n    degree_counts = {}\n    for vertex in graph:\n        degree_counts[vertex] = len(graph[vertex])\n    return degree_counts\n```", "tokens": 166, "elapsed": 1.610369834001176, "budget_exceeded": false, "meta": {"provider": "openai", "model": "repair-loop", "caller": "multi_view:repair"}}

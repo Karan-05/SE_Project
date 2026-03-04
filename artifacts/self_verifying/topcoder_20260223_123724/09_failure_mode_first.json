@@ -1,0 +1,46 @@
+{
+  "task_id": "mixed_matrix_ood",
+  "strategy": "failure_mode_first",
+  "attempt": 9,
+  "pass_rate": 0.0,
+  "plan_subtasks": [
+    "enumerate failure modes",
+    "design tests",
+    "only then implement",
+    "Generate minimal unit tests for critical behaviors",
+    "Add adversarial/edge-case tests",
+    "Run tests and interpret failures"
+  ],
+  "plan_tests": [
+    "[MOCK:failure-scout] d6fef1516df0 :: List three high-risk failure modes for this coding task along with short rationales: Return the sum of the main diagonal.",
+    "max constraints: extremely large inputs",
+    "degenerate: empty or single-element",
+    "adversarial: repeated values or cycles"
+  ],
+  "plan_diagnostics": {
+    "failure_modes": "[MOCK:failure-scout] d6fef1516df0 :: List three high-risk failure modes for this coding task along with short rationales: Return the sum of the main diagonal.;max constraints: extremely large inputs;degenerate: empty or single-element",
+    "planning_tokens": "24",
+    "planning_time": "0.030000"
+  },
+  "patch_summary": {
+    "phase": "repair",
+    "prompt_excerpt": " inputs= kwargs=\nProduce a minimal patch to fix only the failing behavior. Keep public APIs identical and do not refactor unrelated sections. Return the full updated implementation without commentary.",
+    "llm_tokens": "126"
+  },
+  "failing_tests": [
+    "test_0"
+  ],
+  "trace": [
+    "invalid decimal literal (<string>, line 1)"
+  ],
+  "feedback": [
+    "test_0 expected None but saw None"
+  ],
+  "reproduction": "inputs= kwargs=",
+  "tests_run": [
+    {
+      "status": "compile_error",
+      "error": "invalid decimal literal (<string>, line 1)"
+    }
+  ]
+}

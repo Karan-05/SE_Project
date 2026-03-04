@@ -1,0 +1,1 @@
+{"content": "```python\ndef solve(*args):\n    if not args:\n        return None\n    \n    # Assuming the task is to sum the arguments\n    return sum(args)\n```", "tokens": 245, "elapsed": 1.6362409169960301, "budget_exceeded": false, "meta": {"provider": "openai", "model": "repair-loop", "caller": "contract_first:repair"}}

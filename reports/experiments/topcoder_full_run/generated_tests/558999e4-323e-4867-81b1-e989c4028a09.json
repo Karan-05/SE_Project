@@ -1,0 +1,126 @@
+[
+  {
+    "name": "valid_edit_link",
+    "mode": "call",
+    "expected": {
+      "success": true,
+      "message": "Edit link displayed correctly"
+    },
+    "input": [
+      {
+        "project_id": 123,
+        "user_role": "admin"
+      }
+    ]
+  },
+  {
+    "name": "non_admin_user_access",
+    "mode": "call",
+    "expected": {
+      "success": false,
+      "message": "Edit link not displayed for non-admin users"
+    },
+    "input": [
+      {
+        "project_id": 123,
+        "user_role": "viewer"
+      }
+    ]
+  },
+  {
+    "name": "project_not_found",
+    "mode": "call",
+    "expected": {
+      "success": false,
+      "message": "Project not found"
+    },
+    "input": [
+      {
+        "project_id": 999,
+        "user_role": "admin"
+      }
+    ]
+  },
+  {
+    "name": "edit_link_for_multiple_projects",
+    "mode": "call",
+    "expected": [
+      {
+        "success": true,
+        "message": "Edit link displayed for project 123"
+      },
+      {
+        "success": true,
+        "message": "Edit link displayed for project 456"
+      }
+    ],
+    "input": [
+      {
+        "project_id": 123,
+        "user_role": "admin"
+      },
+      {
+        "project_id": 456,
+        "user_role": "admin"
+      }
+    ]
+  },
+  {
+    "name": "edit_link_for_archived_project",
+    "mode": "call",
+    "expected": {
+      "success": false,
+      "message": "Edit link not available for archived projects"
+    },
+    "input": [
+      {
+        "project_id": 789,
+        "user_role": "admin"
+      }
+    ]
+  },
+  {
+    "name": "user_without_project_access",
+    "mode": "call",
+    "expected": {
+      "success": false,
+      "message": "User does not have access to edit this project"
+    },
+    "input": [
+      {
+        "project_id": 123,
+        "user_role": "member",
+        "access_level": "none"
+      }
+    ]
+  },
+  {
+    "name": "edit_link_with_special_characters",
+    "mode": "call",
+    "expected": {
+      "success": true,
+      "message": "Edit link displayed correctly with special characters"
+    },
+    "input": [
+      {
+        "project_id": 321,
+        "user_role": "admin"
+      }
+    ]
+  },
+  {
+    "name": "edit_link_for_inactive_user",
+    "mode": "call",
+    "expected": {
+      "success": false,
+      "message": "Inactive users cannot edit projects"
+    },
+    "input": [
+      {
+        "project_id": 123,
+        "user_role": "admin",
+        "user_status": "inactive"
+      }
+    ]
+  }
+]

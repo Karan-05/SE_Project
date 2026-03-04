@@ -1,0 +1,33 @@
+{
+  "task_id": "4ecc36e0-b1d5-4d9d-81dd-616ad6fbdd8d",
+  "run_id": "universal_demo_openai_hardened",
+  "raw_path": "/Users/karanallagh/Desktop/DataCollector/reports/experiments/universal_demo_openai_hardened/deliverables/4ecc36e0-b1d5-4d9d-81dd-616ad6fbdd8d_agent_raw.txt",
+  "raw_length": 3097,
+  "sentinel_found": false,
+  "attempts": [
+    {
+      "mode": "sentinel",
+      "success": false,
+      "error": "sentinel_block_missing"
+    },
+    {
+      "mode": "balanced",
+      "success": false,
+      "error": "no_balanced_candidate"
+    },
+    {
+      "mode": "repair",
+      "success": true,
+      "length": 3205
+    }
+  ],
+  "errors": [],
+  "repair_attempted": true,
+  "repair_used": true,
+  "max_repairs": 1,
+  "llm_provider": "openai",
+  "repair_path": "/Users/karanallagh/Desktop/DataCollector/reports/experiments/universal_demo_openai_hardened/deliverables/4ecc36e0-b1d5-4d9d-81dd-616ad6fbdd8d_agent_repair.txt",
+  "source": "repair",
+  "parsed_length": 3205,
+  "status": "success"
+}

@@ -1,0 +1,93 @@
+{
+  "task_id": "65b7f3c8-06a6-422b-92d9-6353fa5c3a2d",
+  "tests": [
+    {
+      "name": "fetch_active_reviews_success",
+      "mode": "call",
+      "status": "fail",
+      "expected": "[{'id': '1', 'title': 'Challenge 1', 'status': 'ACTIVE'}, {'id': '2', 'title': 'Challenge 2', 'status': 'ACTIVE'}]",
+      "output": "None",
+      "error": "",
+      "input": "[{'memberId': '12345'}]",
+      "kwargs": "{}",
+      "duration": 4.5409833546727896e-06
+    },
+    {
+      "name": "fetch_active_reviews_no_challenges",
+      "mode": "call",
+      "status": "pass",
+      "expected": "None",
+      "output": "None",
+      "error": "",
+      "input": "[{'memberId': '67890'}]",
+      "kwargs": "{}",
+      "duration": 2.167013008147478e-06
+    },
+    {
+      "name": "fetch_active_reviews_error_handling",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'error': 'Invalid member ID'}",
+      "output": "None",
+      "error": "",
+      "input": "[{'memberId': 'invalid_id'}]",
+      "kwargs": "{}",
+      "duration": 2.4999899324029684e-06
+    },
+    {
+      "name": "fetch_active_reviews_loading_state",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'loading': True}",
+      "output": "None",
+      "error": "",
+      "input": "[{'memberId': '12345'}]",
+      "kwargs": "{}",
+      "duration": 2.1669839043170214e-06
+    },
+    {
+      "name": "fetch_active_reviews_authentication_failure",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'error': 'Authentication required'}",
+      "output": "None",
+      "error": "",
+      "input": "[{'memberId': '12345'}]",
+      "kwargs": "{}",
+      "duration": 2.500019036233425e-06
+    },
+    {
+      "name": "fetch_active_reviews_filter_functionality",
+      "mode": "call",
+      "status": "fail",
+      "expected": "[{'id': '3', 'title': 'Design Challenge', 'status': 'ACTIVE'}]",
+      "output": "None",
+      "error": "",
+      "input": "[{'memberId': '12345', 'filter': 'design'}]",
+      "kwargs": "{}",
+      "duration": 3.2079988159239292e-06
+    },
+    {
+      "name": "fetch_active_reviews_invalid_response_format",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'error': 'Unexpected response format'}",
+      "output": "None",
+      "error": "",
+      "input": "[{'memberId': '12345'}]",
+      "kwargs": "{}",
+      "duration": 2.500019036233425e-06
+    },
+    {
+      "name": "fetch_active_reviews_multiple_challenges",
+      "mode": "call",
+      "status": "fail",
+      "expected": "[{'id': '4', 'title': 'Challenge A', 'status': 'ACTIVE'}, {'id': '5', 'title': 'Challenge B', 'status': 'ACTIVE'}, {'id': '6', 'title': 'Challenge C', 'status': 'ACTIVE'}]",
+      "output": "None",
+      "error": "",
+      "input": "[{'memberId': '54321'}]",
+      "kwargs": "{}",
+      "duration": 4.2079773265868425e-06
+    }
+  ]
+}

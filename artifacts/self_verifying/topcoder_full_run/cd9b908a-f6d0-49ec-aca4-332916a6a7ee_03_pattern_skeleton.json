@@ -1,0 +1,166 @@
+{
+  "task_id": "cd9b908a-f6d0-49ec-aca4-332916a6a7ee",
+  "strategy": "pattern_skeleton",
+  "attempt": 3,
+  "pass_rate": 0.0,
+  "plan_subtasks": [
+    "instantiate skeleton",
+    "fill placeholders",
+    "derive pitfall-specific checks",
+    "verify pitfalls",
+    "Generate minimal unit tests for critical behaviors",
+    "Add adversarial/edge-case tests"
+  ],
+  "plan_tests": [
+    "Verify pitfall: Ensure indices not reused",
+    "Verify pitfall: Handle no-solution case"
+  ],
+  "plan_diagnostics": {
+    "pattern_name": "two_pointers",
+    "confidence": "0.00",
+    "pitfalls": "Ensure indices not reused; Handle no-solution case",
+    "planning_tokens": "265",
+    "planning_time": "5.082307",
+    "skeleton": "def solve(nums, target):\n    left, right = 0, len(nums) - 1\n    while left < right:\n        total = nums[left] + nums[right]\n        if total == target:\n            return left, right\n        if total < target:\n            left += 1\n        else:\n            right -= 1\n    return -1, -1\n"
+  },
+  "patch_summary": {
+    "phase": "initial"
+  },
+  "failing_tests": [
+    "fix_env_variable_typo",
+    "remove_sensitive_token",
+    "check_data_type_consistency",
+    "validate_timestamp_format",
+    "edge_case_empty_env_variable"
+  ],
+  "trace": [
+    "solve() missing 1 required positional argument: 'target'",
+    "solve() missing 1 required positional argument: 'target'",
+    "solve() missing 1 required positional argument: 'target'",
+    "solve() missing 1 required positional argument: 'target'",
+    "solve() missing 1 required positional argument: 'target'"
+  ],
+  "feedback": [
+    "fix_env_variable_typo expected {'M2M_AUTH_PROXY_SERVER_URL': ''} but saw None",
+    "remove_sensitive_token expected {'token': 'Environment variable required'} but saw None",
+    "check_data_type_consistency expected {'opportunityId': 'VARCHAR(14)'} but saw None",
+    "validate_timestamp_format expected {'createdAt': 'Valid format'} but saw None",
+    "edge_case_empty_env_variable expected {'error': 'Proxy server URL cannot be empty'} but saw None"
+  ],
+  "reproduction": "inputs=[{'env': {'M2M_AUTH_DOMAIN': 'topcoder-dev.auth0.com', 'M2M_AUTH_AUDIENCE': 'https://m2m.topcoder-dev.com/', 'M2M_AUTH_PROXY_SEREVR_URL': ''}}] kwargs={}",
+  "tests_run": [
+    {
+      "name": "fix_env_variable_typo",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'M2M_AUTH_PROXY_SERVER_URL': ''}",
+      "output": "None",
+      "error": "solve() missing 1 required positional argument: 'target'",
+      "input": "[{'env': {'M2M_AUTH_DOMAIN': 'topcoder-dev.auth0.com', 'M2M_AUTH_AUDIENCE': 'https://m2m.topcoder-dev.com/', 'M2M_AUTH_PROXY_SEREVR_URL': ''}}]",
+      "kwargs": "{}",
+      "duration": 1.116600469686091e-05
+    },
+    {
+      "name": "remove_sensitive_token",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'token': 'Environment variable required'}",
+      "output": "None",
+      "error": "solve() missing 1 required positional argument: 'target'",
+      "input": "[{'mockApi': {'token': 'xxxx'}}]",
+      "kwargs": "{}",
+      "duration": 5.999987479299307e-06
+    },
+    {
+      "name": "check_data_type_consistency",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'opportunityId': 'VARCHAR(14)'}",
+      "output": "None",
+      "error": "solve() missing 1 required positional argument: 'target'",
+      "input": "[{'migration': {'opportunityId': 'TEXT'}}]",
+      "kwargs": "{}",
+      "duration": 5.415990017354488e-06
+    },
+    {
+      "name": "validate_timestamp_format",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'createdAt': 'Valid format'}",
+      "output": "None",
+      "error": "solve() missing 1 required positional argument: 'target'",
+      "input": "[{'migration': {'createdAt': 'TIMESTAMP(3)'}}]",
+      "kwargs": "{}",
+      "duration": 4.708010237663984e-06
+    },
+    {
+      "name": "edge_case_empty_env_variable",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'error': 'Proxy server URL cannot be empty'}",
+      "output": "None",
+      "error": "solve() missing 1 required positional argument: 'target'",
+      "input": "[{'env': {'M2M_AUTH_PROXY_SERVER_URL': ''}}]",
+      "kwargs": "{}",
+      "duration": 4.791974788531661e-06
+    },
+    {
+      "name": "adversarial_case_invalid_token",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'error': 'Invalid token'}",
+      "output": "None",
+      "error": "solve() missing 1 required positional argument: 'target'",
+      "input": "[{'mockApi': {'token': 'invalid_token'}}]",
+      "kwargs": "{}",
+      "duration": 4.6670029405504465e-06
+    },
+    {
+      "name": "check_migration_sql_syntax",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'valid': True}",
+      "output": "None",
+      "error": "solve() missing 1 required positional argument: 'target'",
+      "input": "[{'migration': {'sql': 'CREATE TABLE review_application (id VARCHAR(14), userId TEXT, handle TEXT, opportunityId TEXT)'}}]",
+      "kwargs": "{}",
+      "duration": 5.04200579598546e-06
+    },
+    {
+      "name": "ensure_no_hardcoded_tokens",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'error': 'Token must be stored in environment variables'}",
+      "output": "None",
+      "error": "solve() missing 1 required positional argument: 'target'",
+      "input": "[{'mockApi': {'token': 'hardcoded_token'}}]",
+      "kwargs": "{}",
+      "duration": 5.125009920448065e-06
+    }
+  ],
+  "llm_calls": 0,
+  "timeline": {
+    "attempt": 3,
+    "strategy": "pattern_skeleton",
+    "phase": "initial",
+    "events": {
+      "decompose": {
+        "start": "2026-02-24T01:33:43.778568",
+        "end": "2026-02-24T01:33:43.780459"
+      },
+      "solve": {
+        "start": "2026-02-24T01:33:43.780473",
+        "end": "2026-02-24T01:33:43.780958"
+      },
+      "tests": {
+        "start": "2026-02-24T01:33:43.780879",
+        "end": "2026-02-24T01:33:43.780940",
+        "duration_seconds": "0.000"
+      }
+    },
+    "meta": {
+      "llm_calls": "0"
+    }
+  },
+  "solution_preview": "def solve(nums, target):\n    left, right = 0, len(nums) - 1\n    while left < right:\n        total = nums[left] + nums[right]\n        if total == target:\n            return left, right\n        if total < target:\n            left += 1\n        else:\n            right -= 1\n    return -1, -1"
+}

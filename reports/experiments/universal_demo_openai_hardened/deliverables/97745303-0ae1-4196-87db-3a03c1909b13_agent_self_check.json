@@ -1,0 +1,6 @@
+{
+  "coverage": 0.7,
+  "specificity": 0.6,
+  "actionability": 0.5,
+  "overall_notes": "The ETL blueprint is partially complete but lacks specific details on source data and transformation steps."
+}

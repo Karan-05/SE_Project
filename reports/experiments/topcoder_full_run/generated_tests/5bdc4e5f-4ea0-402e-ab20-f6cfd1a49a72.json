@@ -1,0 +1,82 @@
+[
+  {
+    "name": "remove_view_link",
+    "mode": "call",
+    "expected": "<div><span>Yes</span></div>",
+    "input": [
+      {
+        "html": "<div><span>Yes</span><a href='view_link'>View</a></div>"
+      }
+    ]
+  },
+  {
+    "name": "remove_line_separator",
+    "mode": "call",
+    "expected": "<div><span>Yes</span><span>No</span></div>",
+    "input": [
+      {
+        "html": "<div><span>Yes</span><hr/><span>No</span></div>"
+      }
+    ]
+  },
+  {
+    "name": "no_paid_status",
+    "mode": "call",
+    "expected": "<div><span></span></div>",
+    "input": [
+      {
+        "html": "<div><span></span></div>"
+      }
+    ]
+  },
+  {
+    "name": "multiple_paid_statuses",
+    "mode": "call",
+    "expected": "<div><span>Yes</span></div><div><span>No</span><span>Yes</span></div>",
+    "input": [
+      {
+        "html": "<div><span>Yes</span><a href='view_link'>View</a></div><div><span>No</span><hr/><span>Yes</span><a href='view_link'>View</a></div>"
+      }
+    ]
+  },
+  {
+    "name": "only_no_status",
+    "mode": "call",
+    "expected": "<div><span>No</span><span>No</span></div>",
+    "input": [
+      {
+        "html": "<div><span>No</span><hr/><span>No</span></div>"
+      }
+    ]
+  },
+  {
+    "name": "mixed_statuses",
+    "mode": "call",
+    "expected": "<div><span>Yes</span></div><div><span>No</span></div>",
+    "input": [
+      {
+        "html": "<div><span>Yes</span><a href='view_link'>View</a></div><div><span>No</span></div>"
+      }
+    ]
+  },
+  {
+    "name": "no_html_input",
+    "mode": "call",
+    "expected": null,
+    "input": [
+      {
+        "html": ""
+      }
+    ]
+  },
+  {
+    "name": "invalid_html_structure",
+    "mode": "call",
+    "expected": "<div><span>Yes</span></div>",
+    "input": [
+      {
+        "html": "<div><span>Yes</span><div><span>No</span>"
+      }
+    ]
+  }
+]

@@ -1,0 +1,1 @@
+{"content": "Kadane's algorithm is primarily used for solving the \"maximum subarray sum\" problem in an array. It is not directly relevant to updating an ASP.NET MVC", "tokens": 90, "elapsed": 1.125002416985808, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

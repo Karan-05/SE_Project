@@ -1,0 +1,125 @@
+[
+  {
+    "name": "createRole_validInput",
+    "mode": "call",
+    "expected": {
+      "success": true,
+      "roleId": "12345"
+    },
+    "input": [
+      {
+        "name": "Admin",
+        "permissions": [
+          "read",
+          "write",
+          "delete"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "createRole_missingName",
+    "mode": "call",
+    "expected": {
+      "success": false,
+      "error": "Role name is required."
+    },
+    "input": [
+      {
+        "permissions": [
+          "read"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "getUser_validUserId",
+    "mode": "call",
+    "expected": {
+      "success": true,
+      "user": {
+        "id": "67890",
+        "username": "testUser",
+        "roles": [
+          "Admin"
+        ]
+      }
+    },
+    "input": [
+      {
+        "userId": "67890"
+      }
+    ]
+  },
+  {
+    "name": "getUser_invalidUserId",
+    "mode": "call",
+    "expected": {
+      "success": false,
+      "error": "User not found."
+    },
+    "input": [
+      {
+        "userId": "invalidId"
+      }
+    ]
+  },
+  {
+    "name": "updateUser_validData",
+    "mode": "call",
+    "expected": {
+      "success": true,
+      "message": "User updated successfully."
+    },
+    "input": [
+      {
+        "userId": "67890",
+        "data": {
+          "username": "updatedUser"
+        }
+      }
+    ]
+  },
+  {
+    "name": "updateUser_invalidData",
+    "mode": "call",
+    "expected": {
+      "success": false,
+      "error": "Username cannot be empty."
+    },
+    "input": [
+      {
+        "userId": "67890",
+        "data": {
+          "username": ""
+        }
+      }
+    ]
+  },
+  {
+    "name": "deleteRole_validRoleId",
+    "mode": "call",
+    "expected": {
+      "success": true,
+      "message": "Role deleted successfully."
+    },
+    "input": [
+      {
+        "roleId": "12345"
+      }
+    ]
+  },
+  {
+    "name": "deleteRole_invalidRoleId",
+    "mode": "call",
+    "expected": {
+      "success": false,
+      "error": "Role not found."
+    },
+    "input": [
+      {
+        "roleId": "nonExistentId"
+      }
+    ]
+  }
+]

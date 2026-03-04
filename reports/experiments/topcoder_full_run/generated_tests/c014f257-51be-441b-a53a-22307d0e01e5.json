@@ -1,0 +1,46 @@
+[
+  {
+    "name": "remove_api_prefix",
+    "mode": "call",
+    "expected": "/v5/review/test",
+    "input": [
+      {
+        "endpoint": "/v5/review/api/test"
+      }
+    ]
+  },
+  {
+    "name": "test_endpoint_accessibility",
+    "mode": "call",
+    "expected": "200 OK",
+    "input": [
+      {
+        "endpoint": "/v5/review/test"
+      }
+    ]
+  },
+  {
+    "name": "check_no_business_logic_changes",
+    "mode": "call",
+    "expected": {
+      "key": "value"
+    },
+    "input": [
+      {
+        "original_data": {
+          "key": "value"
+        }
+      }
+    ]
+  },
+  {
+    "name": "edge_case_invalid_endpoint",
+    "mode": "call",
+    "expected": "404 Not Found",
+    "input": [
+      {
+        "endpoint": "/v5/review/api/invalid"
+      }
+    ]
+  }
+]

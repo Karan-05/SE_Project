@@ -1,0 +1,82 @@
+[
+  {
+    "name": "test_case_1",
+    "mode": "call",
+    "expected": "expectedOutput1",
+    "input": [
+      {
+        "inputData": "validInput1"
+      }
+    ]
+  },
+  {
+    "name": "test_case_2",
+    "mode": "call",
+    "expected": "expectedOutput2",
+    "input": [
+      {
+        "inputData": "validInput2"
+      }
+    ]
+  },
+  {
+    "name": "test_case_3",
+    "mode": "call",
+    "expected": "errorOutput1",
+    "input": [
+      {
+        "inputData": "invalidInput1"
+      }
+    ]
+  },
+  {
+    "name": "test_case_4",
+    "mode": "call",
+    "expected": "expectedOutputEdge1",
+    "input": [
+      {
+        "inputData": "edgeCaseInput1"
+      }
+    ]
+  },
+  {
+    "name": "test_case_5",
+    "mode": "call",
+    "expected": "expectedOutputEdge2",
+    "input": [
+      {
+        "inputData": "edgeCaseInput2"
+      }
+    ]
+  },
+  {
+    "name": "test_case_6",
+    "mode": "call",
+    "expected": "expectedOutputLarge",
+    "input": [
+      {
+        "inputData": "largeInput"
+      }
+    ]
+  },
+  {
+    "name": "test_case_7",
+    "mode": "call",
+    "expected": "errorOutputNull",
+    "input": [
+      {
+        "inputData": "nullInput"
+      }
+    ]
+  },
+  {
+    "name": "test_case_8",
+    "mode": "call",
+    "expected": "expectedOutputSpecial",
+    "input": [
+      {
+        "inputData": "specialCharacterInput"
+      }
+    ]
+  }
+]

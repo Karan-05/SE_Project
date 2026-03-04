@@ -1,0 +1,1 @@
+{"content": "The two-pointer pattern is typically used for problems involving arrays or lists where you need to find pairs or manage two indices moving through the data structure. However, when", "tokens": 59, "elapsed": 1.3884315839968622, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

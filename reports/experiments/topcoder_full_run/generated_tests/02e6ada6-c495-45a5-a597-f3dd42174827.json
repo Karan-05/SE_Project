@@ -1,0 +1,112 @@
+[
+  {
+    "name": "valid_user_login",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "token": "validToken123"
+    },
+    "input": [
+      {
+        "username": "validUser",
+        "password": "validPassword"
+      }
+    ]
+  },
+  {
+    "name": "invalid_user_login",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Invalid username or password."
+    },
+    "input": [
+      {
+        "username": "invalidUser",
+        "password": "invalidPassword"
+      }
+    ]
+  },
+  {
+    "name": "user_role_lookup",
+    "mode": "call",
+    "expected": {
+      "roles": [
+        "admin",
+        "user"
+      ]
+    },
+    "input": [
+      {
+        "userId": 1
+      }
+    ]
+  },
+  {
+    "name": "user_role_lookup_nonexistent",
+    "mode": "call",
+    "expected": {
+      "roles": []
+    },
+    "input": [
+      {
+        "userId": 999
+      }
+    ]
+  },
+  {
+    "name": "create_user",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "userId": 2
+    },
+    "input": [
+      {
+        "username": "newUser",
+        "password": "newPassword"
+      }
+    ]
+  },
+  {
+    "name": "create_user_duplicate",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Username already exists."
+    },
+    "input": [
+      {
+        "username": "validUser",
+        "password": "anotherPassword"
+      }
+    ]
+  },
+  {
+    "name": "update_user_role",
+    "mode": "call",
+    "expected": {
+      "status": "success"
+    },
+    "input": [
+      {
+        "userId": 1,
+        "role": "editor"
+      }
+    ]
+  },
+  {
+    "name": "update_user_role_invalid",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "User not found."
+    },
+    "input": [
+      {
+        "userId": 999,
+        "role": "editor"
+      }
+    ]
+  }
+]

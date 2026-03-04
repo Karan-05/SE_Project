@@ -1,0 +1,97 @@
+[
+  {
+    "name": "valid_rating_calculation",
+    "mode": "call",
+    "expected": {
+      "success": true,
+      "newRating": 150
+    },
+    "input": [
+      {
+        "challengeId": "12345",
+        "legacyChallengeId": "54321",
+        "coderId": "coder1",
+        "ratings": [
+          100,
+          200,
+          150
+        ]
+      }
+    ]
+  },
+  {
+    "name": "load_ratings_with_no_data",
+    "mode": "call",
+    "expected": {
+      "success": false,
+      "message": "No ratings found"
+    },
+    "input": [
+      {
+        "challengeId": "99999",
+        "legacyChallengeId": "88888"
+      }
+    ]
+  },
+  {
+    "name": "load_coders_empty_list",
+    "mode": "call",
+    "expected": {
+      "success": true,
+      "coders": []
+    },
+    "input": [
+      {
+        "challengeId": "12345"
+      }
+    ]
+  },
+  {
+    "name": "rating_calculation_edge_case",
+    "mode": "call",
+    "expected": {
+      "success": false,
+      "message": "No ratings provided"
+    },
+    "input": [
+      {
+        "challengeId": "12345",
+        "legacyChallengeId": "54321",
+        "coderId": "coder2",
+        "ratings": []
+      }
+    ]
+  },
+  {
+    "name": "invalid_challenge_id",
+    "mode": "call",
+    "expected": {
+      "success": false,
+      "message": "Invalid challenge ID"
+    },
+    "input": [
+      {
+        "challengeId": "invalid_id",
+        "legacyChallengeId": "54321"
+      }
+    ]
+  },
+  {
+    "name": "successful_load_ratings",
+    "mode": "call",
+    "expected": {
+      "success": true,
+      "ratings": [
+        100,
+        200,
+        150
+      ]
+    },
+    "input": [
+      {
+        "challengeId": "12345",
+        "legacyChallengeId": "54321"
+      }
+    ]
+  }
+]

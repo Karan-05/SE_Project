@@ -1,0 +1,1 @@
+{"content": "The \"two pointers\" technique is typically used in problems involving arrays or strings where you need to find pairs of elements that meet certain criteria, such as finding a", "tokens": 57, "elapsed": 1.3315902500035008, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

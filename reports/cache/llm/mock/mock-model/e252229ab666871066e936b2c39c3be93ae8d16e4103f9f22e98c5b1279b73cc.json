@@ -1,0 +1,1 @@
+{"content": "[MOCK] 2b5f57c8c84696cc :: You are comparing a new task to base task baseline. List semantic deltas succinctly: Welcome to the Learn AI Challenge s", "tokens": 47, "elapsed": 2.1660000015799596e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "semantic-diff", "caller": "semantic_diff"}}

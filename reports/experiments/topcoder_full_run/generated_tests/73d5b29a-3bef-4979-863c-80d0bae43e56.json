@@ -1,0 +1,42 @@
+[
+  {
+    "name": "custom_schema_configuration",
+    "mode": "call",
+    "expected": "custom_schema",
+    "input": [
+      {
+        "POSTGRES_SCHEMA": "custom_schema"
+      }
+    ]
+  },
+  {
+    "name": "connection_string_without_schema",
+    "mode": "call",
+    "expected": "mydb",
+    "input": [
+      {
+        "DATABASE_URL": "postgresql://user:password@localhost:5432/mydb"
+      }
+    ]
+  },
+  {
+    "name": "migration_with_custom_schema",
+    "mode": "call",
+    "expected": "migrations applied to migration_schema",
+    "input": [
+      {
+        "POSTGRES_SCHEMA": "migration_schema"
+      }
+    ]
+  },
+  {
+    "name": "invalid_schema_name",
+    "mode": "call",
+    "expected": "error",
+    "input": [
+      {
+        "POSTGRES_SCHEMA": "invalid/schema"
+      }
+    ]
+  }
+]

@@ -1,0 +1,37 @@
+{
+  "task_type": "repo_patch",
+  "confidence": 0.9,
+  "why": [
+    "The task involves making changes to an existing codebase.",
+    "Specific requirements for a patch are provided.",
+    "There is a clear commit hash to base the changes on."
+  ],
+  "missing_info": [
+    "No local repository context provided to validate changes."
+  ],
+  "verification_plan": [
+    "Create a patch plan detailing the changes.",
+    "Generate a proposed patch file.",
+    "Outline a test plan for validating the changes.",
+    "Identify risks and mitigation strategies."
+  ],
+  "artifacts_to_generate": [
+    {
+      "name": "patch_plan.md",
+      "format": "md"
+    },
+    {
+      "name": "proposed_patch.diff",
+      "format": "diff"
+    },
+    {
+      "name": "test_plan.md",
+      "format": "md"
+    },
+    {
+      "name": "risks.md",
+      "format": "md"
+    }
+  ],
+  "synthesis_policy": "none"
+}

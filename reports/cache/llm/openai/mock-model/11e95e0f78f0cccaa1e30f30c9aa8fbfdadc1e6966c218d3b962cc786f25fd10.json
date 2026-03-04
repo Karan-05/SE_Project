@@ -1,0 +1,1 @@
+{"content": "```python\ndef solve(matrix):\n    if not matrix or not matrix[0]:\n        return 0\n    return sum(matrix[i][i] for i in range(min(len(matrix), len(matrix[0]))))\n```", "tokens": 176, "elapsed": 1.5399217910016887, "budget_exceeded": false, "meta": {"provider": "openai", "model": "repair-loop", "caller": "semantic_diff:repair"}}

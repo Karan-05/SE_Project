@@ -1,0 +1,118 @@
+[
+  {
+    "name": "fetch_scorecard_details_success",
+    "mode": "call",
+    "expected": {
+      "scorecard": {
+        "id": "1",
+        "challengeId": "12345",
+        "reviewerId": "67890",
+        "score": 85,
+        "comments": "Well done!"
+      }
+    },
+    "input": [
+      {
+        "challengeId": "12345"
+      }
+    ]
+  },
+  {
+    "name": "fetch_scorecard_details_not_found",
+    "mode": "call",
+    "expected": {
+      "error": "Scorecard not found"
+    },
+    "input": [
+      {
+        "challengeId": "99999"
+      }
+    ]
+  },
+  {
+    "name": "create_appeal_success",
+    "mode": "call",
+    "expected": {
+      "appealId": "1001",
+      "status": "created"
+    },
+    "input": [
+      {
+        "scorecardId": "1",
+        "appeal": {
+          "reason": "Need clarification on scoring",
+          "details": "The score seems lower than expected."
+        }
+      }
+    ]
+  },
+  {
+    "name": "create_appeal_invalid_data",
+    "mode": "call",
+    "expected": {
+      "error": "Invalid appeal data"
+    },
+    "input": [
+      {
+        "scorecardId": "1",
+        "appeal": {
+          "reason": "",
+          "details": ""
+        }
+      }
+    ]
+  },
+  {
+    "name": "update_appeal_success",
+    "mode": "call",
+    "expected": {
+      "status": "updated"
+    },
+    "input": [
+      {
+        "appealId": "1001",
+        "update": {
+          "details": "Requesting further clarification on scoring."
+        }
+      }
+    ]
+  },
+  {
+    "name": "delete_appeal_success",
+    "mode": "call",
+    "expected": {
+      "status": "deleted"
+    },
+    "input": [
+      {
+        "appealId": "1001"
+      }
+    ]
+  },
+  {
+    "name": "role_based_access_reviewer",
+    "mode": "call",
+    "expected": {
+      "allowed": true
+    },
+    "input": [
+      {
+        "userRole": "Reviewer",
+        "action": "view"
+      }
+    ]
+  },
+  {
+    "name": "role_based_access_submitter",
+    "mode": "call",
+    "expected": {
+      "allowed": false
+    },
+    "input": [
+      {
+        "userRole": "Submitter",
+        "action": "edit"
+      }
+    ]
+  }
+]

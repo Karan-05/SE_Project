@@ -1,0 +1,1 @@
+{"content": "To create a `Contact` table in PostgreSQL with the specified fields, you would typically define the table structure using SQL. However, it seems like the fields", "tokens": 95, "elapsed": 1.640543458997854, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

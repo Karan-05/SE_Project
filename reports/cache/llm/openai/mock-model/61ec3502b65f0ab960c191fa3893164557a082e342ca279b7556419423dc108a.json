@@ -1,0 +1,1 @@
+{"content": "The problem of returning running prefix sums typically involves calculating the cumulative sum of elements in an array. The two-pointer technique is generally used for problems involving pairs or sub", "tokens": 57, "elapsed": 1.5983870839991141, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

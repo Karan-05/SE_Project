@@ -1,0 +1,141 @@
+[
+  {
+    "name": "valid_navigation_structure",
+    "mode": "call",
+    "expected": {
+      "navigation": [
+        "Home",
+        "Challenges",
+        "Privacy Policy",
+        "Contact"
+      ]
+    },
+    "input": [
+      {
+        "page": "Privacy Policy"
+      }
+    ]
+  },
+  {
+    "name": "missing_navigation_item",
+    "mode": "call",
+    "expected": {
+      "error": "Navigation item 'Privacy Policy' is missing."
+    },
+    "input": [
+      {
+        "page": "Privacy Policy",
+        "navigation": [
+          "Home",
+          "Challenges",
+          "Contact"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "empty_navigation",
+    "mode": "call",
+    "expected": {
+      "error": "Navigation cannot be empty."
+    },
+    "input": [
+      {
+        "page": "Privacy Policy",
+        "navigation": []
+      }
+    ]
+  },
+  {
+    "name": "duplicate_navigation_item",
+    "mode": "call",
+    "expected": {
+      "error": "Duplicate navigation item 'Privacy Policy' found."
+    },
+    "input": [
+      {
+        "page": "Privacy Policy",
+        "navigation": [
+          "Home",
+          "Privacy Policy",
+          "Privacy Policy"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "navigation_order",
+    "mode": "call",
+    "expected": {
+      "navigation": [
+        "Home",
+        "Challenges",
+        "Privacy Policy"
+      ]
+    },
+    "input": [
+      {
+        "page": "Privacy Policy",
+        "navigation": [
+          "Privacy Policy",
+          "Home",
+          "Challenges"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "nonexistent_page",
+    "mode": "call",
+    "expected": {
+      "error": "Page 'Nonexistent Page' does not exist."
+    },
+    "input": [
+      {
+        "page": "Nonexistent Page"
+      }
+    ]
+  },
+  {
+    "name": "navigation_with_special_characters",
+    "mode": "call",
+    "expected": {
+      "navigation": [
+        "Home",
+        "Chall@nges",
+        "Privacy Policy"
+      ]
+    },
+    "input": [
+      {
+        "page": "Privacy Policy",
+        "navigation": [
+          "Home",
+          "Chall@nges",
+          "Privacy Policy"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "long_navigation_items",
+    "mode": "call",
+    "expected": {
+      "navigation": [
+        "Home",
+        "Challenges",
+        "Privacy Policy with a very long title that exceeds typical lengths"
+      ]
+    },
+    "input": [
+      {
+        "page": "Privacy Policy",
+        "navigation": [
+          "Home",
+          "Challenges",
+          "Privacy Policy with a very long title that exceeds typical lengths"
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,117 @@
+[
+  {
+    "name": "fetch_active_reviews_success",
+    "mode": "call",
+    "expected": [
+      {
+        "id": "1",
+        "title": "Active Challenge 1",
+        "status": "ACTIVE"
+      },
+      {
+        "id": "2",
+        "title": "Active Challenge 2",
+        "status": "ACTIVE"
+      }
+    ],
+    "input": [
+      {
+        "memberId": "12345"
+      }
+    ]
+  },
+  {
+    "name": "fetch_active_reviews_no_challenges",
+    "mode": "call",
+    "expected": null,
+    "input": [
+      {
+        "memberId": "67890"
+      }
+    ]
+  },
+  {
+    "name": "fetch_active_reviews_invalid_member",
+    "mode": "call",
+    "expected": {
+      "error": "Invalid member ID"
+    },
+    "input": [
+      {
+        "memberId": "invalid_id"
+      }
+    ]
+  },
+  {
+    "name": "fetch_active_reviews_auth_error",
+    "mode": "call",
+    "expected": {
+      "error": "Authentication required"
+    },
+    "input": [
+      {
+        "memberId": "12345"
+      }
+    ]
+  },
+  {
+    "name": "fetch_active_reviews_loading_state",
+    "mode": "call",
+    "expected": {
+      "loading": true
+    },
+    "input": [
+      {
+        "memberId": "12345"
+      }
+    ]
+  },
+  {
+    "name": "fetch_active_reviews_error_handling",
+    "mode": "call",
+    "expected": {
+      "error": "Failed to fetch data"
+    },
+    "input": [
+      {
+        "memberId": "12345"
+      }
+    ]
+  },
+  {
+    "name": "fetch_active_reviews_filter_functionality",
+    "mode": "call",
+    "expected": [
+      {
+        "id": "1",
+        "title": "Active Challenge 1",
+        "type": "typeA",
+        "status": "ACTIVE"
+      }
+    ],
+    "input": [
+      {
+        "memberId": "12345",
+        "filter": "typeA"
+      }
+    ]
+  },
+  {
+    "name": "fetch_active_reviews_response_format",
+    "mode": "call",
+    "expected": {
+      "challenges": [
+        {
+          "id": "1",
+          "title": "Active Challenge 1",
+          "status": "ACTIVE"
+        }
+      ]
+    },
+    "input": [
+      {
+        "memberId": "12345"
+      }
+    ]
+  }
+]

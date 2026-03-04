@@ -1,0 +1,1 @@
+{"content": "The pattern \"hash_bucket\" is typically associated with data structures and algorithms that involve hashing, such as hash tables. In the context of calculating Fibonacci numbers, this", "tokens": 56, "elapsed": 1.3906072090030648, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

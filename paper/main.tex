@@ -1,0 +1,63 @@
+\documentclass[11pt]{article}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{geometry}
+\geometry{margin=1in}
+
+\title{Agentic AI Competitors in Coding Marketplaces: Supervised, Self-Supervised, and RL Approaches on Crowdsourced Programming Platforms}
+\author{Karan Allagh et al.}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We present a unified empirical framework for modelling agentic AI competitors on Topcoder-style programming marketplaces. Building on a hardened ingestion stack, we curate linked TASK, WORKER, INTERACTION, and MARKET views and release synthetic-but-faithful snapshots to promote reproducibility. On this substrate we study: (i) supervised predictors of marketplace health (starvation, failed outcomes, submission volume), (ii) self-supervised embeddings learned from worker--task interaction graphs, and (iii) reinforcement-learning agents that navigate a strategic task-selection environment. Baseline experiments demonstrate that multimodal models combining text, structured covariates, time-series load, and learned graph embeddings improve F1 on starvation detection by \textasciitilde{}8\% over metadata-only baselines while reducing RMSE on submission forecasts. The CompetitionEnv sandbox highlights how contextual bandits and DQN agents achieve higher cumulative reward and reduce starved tasks relative to random or purely prize-seeking heuristics. We conclude with socio-technical reflections on AI labor displacement, fairness, and transparency obligations for agentic participation in crowdsourced coding economies.
+\end{abstract}
+
+\section{Introduction}
+Crowdsourced coding marketplaces allocate global developer talent via competitive briefs. As AI systems mature, they increasingly act as autonomous contractors. We argue for analysing outcomes across supervised, representation learning, and reinforcement learning pillars to quantify both performance and socio-technical impacts.
+
+\section{Related Work}
+We situate our study against strands on crowdsourcing governance, competitive programming platforms, labor economics for AI-mediated work, and multi-agent decision-making.
+
+\section{Data \& Problem Setup}
+We extend the ingestion pipeline with canonical TASK/WORKER/INTERACTION/MARKET tables, preserving keys noted in Section~\ref{sec:data}. Synthetic generators mimic Topcoder distributions when private data are unavailable.
+
+\section{Supervised Outcome Modeling}
+Logistic regression, random forests, and gradient boosting operate on multimodal feature bundles. With only text and temporal cues, the logistic baseline reaches F1~0.91 on starved/dropped detection and 0.92 on failed challenges; adding structured prize/duration fields, market load, and learned embeddings lifts the same classifier to F1~0.98 and 0.95 respectively (\texttt{reports/tables/supervised\_metrics\_*.csv}). Tree-based models saturate near-perfect accuracy on the synthetic corpus, so we emphasize the more conservative logistic improvements for realistic reporting. Ablations are exported to \texttt{reports/tables/multimodal\_ablation.csv} and visualised in \texttt{reports/figs/}; these CSVs can be converted to \LaTeX{} tables for the camera-ready version.
+
+\section{Self-Supervised \& Graph-Based Representations}
+Node2Vec embeddings over worker--task bipartite graphs are stored under \texttt{embeddings/}. Their downstream impact is captured in \texttt{reports/tables/embeddings\_ablation.csv} and summarised in \texttt{reports/embeddings\_summary.md}. Graph context raises test F1 for failed/no-winner detection from 0.91 to 0.98 and for starved/dropped tasks from 0.964 to 0.988, demonstrating that structural signals complement textual and prize cues.
+
+\section{Agentic RL Competitor \& Simulation}
+CompetitionEnv models an AI worker observing task slates and market context. Random, greedy-prize, skill-matching, contextual bandit, and DQN agents can be compared via \texttt{reports/tables/rl\_metrics.csv}. Contextual bandits already outpace simple heuristics (average reward \$80.2k vs \$69.4k for random) while the DQN policy secures \$109k mean reward, 95\% win-rate, and keeps starved tasks near five per episode versus 24 under random play. Figure~\ref{fig:rl_rewards} depicts the aggregated reward profile.
+
+\begin{figure}[h]
+  \centering
+  \IfFileExists{../reports/figs/rl_rewards.png}{\includegraphics[width=0.7\linewidth]{../reports/figs/rl_rewards.png}}{\fbox{RL rewards figure pending}}
+  \caption{Cumulative reward across RL agents.}
+  \label{fig:rl_rewards}
+\end{figure}
+
+\section{Decomposition Strategies for Agentic Solvers}
+We instrument seven decomposition strategies---contract-first, pattern+skeleton, failure-mode-first, multi-view consistency, semantic diff/case-based, role-decomposed collaboration, and simulation-trace dry runs---under a shared interface (\texttt{src/decomposition/interfaces.py}). Each strategy produces structured plans (contracts, patterns, roles, traces) before emitting code and is evaluated on a curated benchmark (arrays, strings, DP, grid BFS) with canonical tests. Strategy comparison tables (\texttt{reports/decomposition/strategy_comparison.csv}) show contract-first and multi-view workflows sustaining F1 $\geq$ 0.98 while highlighting the planning overhead of role-decomposed and simulation-trace approaches. Integrating the decomposition signals into the RL environment yields 60--70\% higher rewards for strategy-aware agents relative to random play, with meta-strategy policies matching skill-based baselines while keeping starved tasks at zero. The following tables summarize pass-rate vs.\ cost and the RL impact:
+
+\IfFileExists{../reports/decomposition/latex_tables.tex}{\input{../reports/decomposition/latex_tables.tex}}{\typeout{[paper] decomposition latex tables missing}}
+\IfFileExists{../reports/decomposition/latex_snippets.tex}{\input{../reports/decomposition/latex_snippets.tex}}{\typeout{[paper] decomposition latex snippet missing}}
+
+\section{Multimodal Ablations \& Results}
+We benchmark text-only, metadata, temporal, and graph-augmented settings. Aggregate statistics are exported to \texttt{reports/tables/multimodal_ablation.csv} with commentary in \texttt{reports/multimodal_ablation.md}.
+
+\section{Ethical \& Societal Implications}
+We discuss fairness for human competitors, disclosure requirements for AI entrants, and conservation actions (reducing starved tasks) as a public-good incentive embedded in the RL reward design.
+
+\section{Conclusion \& Future Work}
+The project delivers an end-to-end, reproducible scaffold for studying agentic AI participation in crowdsourced coding markets. Future work includes calibrating agents on real challenge logs, incorporating multimodal artifact data, and evaluating cooperative equilibria between AI and human workers.
+
+\bibliographystyle{abbrv}
+\bibliography{references}
+
+\end{document}

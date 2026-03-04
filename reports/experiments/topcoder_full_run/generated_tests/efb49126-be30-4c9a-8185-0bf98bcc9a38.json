@@ -1,0 +1,106 @@
+[
+  {
+    "name": "createUser_success",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "message": "User created successfully",
+      "userId": "12345"
+    },
+    "input": [
+      {
+        "username": "testUser",
+        "email": "test@example.com",
+        "password": "securePassword123"
+      }
+    ]
+  },
+  {
+    "name": "createUser_duplicateEmail",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Email already in use"
+    },
+    "input": [
+      {
+        "username": "testUser2",
+        "email": "test@example.com",
+        "password": "securePassword123"
+      }
+    ]
+  },
+  {
+    "name": "getUser_success",
+    "mode": "call",
+    "expected": {
+      "username": "testUser",
+      "email": "test@example.com"
+    },
+    "input": [
+      "12345"
+    ]
+  },
+  {
+    "name": "getUser_notFound",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "User not found"
+    },
+    "input": [
+      "99999"
+    ]
+  },
+  {
+    "name": "downloadReport_success",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "message": "Report downloaded successfully",
+      "reportData": "base64EncodedReportData"
+    },
+    "input": [
+      "reportId123"
+    ]
+  },
+  {
+    "name": "downloadReport_notFound",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Report not found"
+    },
+    "input": [
+      "reportId999"
+    ]
+  },
+  {
+    "name": "requestConsultation_success",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "message": "Consultation requested successfully"
+    },
+    "input": [
+      {
+        "userId": "12345",
+        "consultationType": "online"
+      }
+    ]
+  },
+  {
+    "name": "requestConsultation_invalidType",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Invalid consultation type"
+    },
+    "input": [
+      {
+        "userId": "12345",
+        "consultationType": "invalidType"
+      }
+    ]
+  }
+]

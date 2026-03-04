@@ -1,0 +1,1 @@
+{"content": "```python\ndef solve(a, b):\n    if not isinstance(a, (int, float)) or not isinstance(b, (int, float)):\n        raise ValueError(\"Inputs must be numbers.\")\n    return a + b\n```", "tokens": 174, "elapsed": 1.9440395419951528, "budget_exceeded": false, "meta": {"provider": "openai", "model": "repair-loop", "caller": "contract_first:repair"}}

@@ -1,0 +1,76 @@
+{
+  "task_id": "91e34246-16b8-417d-8eb6-f7dc38c9b320",
+  "strategy": "semantic_diff",
+  "attempt": 9,
+  "pass_rate": 0.0,
+  "plan_subtasks": [
+    "load base solution",
+    "apply semantic deltas",
+    "re-test",
+    "Generate minimal unit tests for critical behaviors",
+    "Add adversarial/edge-case tests",
+    "Run tests and interpret failures"
+  ],
+  "plan_tests": [
+    "critical unit tests",
+    "edge-case probes"
+  ],
+  "plan_diagnostics": {
+    "base_task": "baseline",
+    "num_deltas": "1",
+    "delta_note": "## Semantic Deltas\n\n1. **Task Rating**: New task is *not* rated; baseline task may have ratings.\n2. **Problem Count**: New task features *one problem*; baseline may include multiple.\n3. **Context**: New task is framed as a practice round; baseline may not specify this.\n4. **Problem Type**: Both are RDM style,",
+    "planning_tokens": "154",
+    "planning_time": "2.455308"
+  },
+  "patch_summary": {
+    "phase": "initial"
+  },
+  "failing_tests": [
+    "io_sample_1"
+  ],
+  "trace": [
+    ""
+  ],
+  "feedback": [
+    "io_sample_1 expected No limitation\n- Docker but saw "
+  ],
+  "reproduction": "inputs= kwargs=",
+  "tests_run": [
+    {
+      "name": "io_sample_1",
+      "mode": "io",
+      "status": "fail",
+      "expected": "No limitation\n- Docker",
+      "output": "",
+      "error": "",
+      "stdin": "1. Add textarea with id `input`. This textarea is the input where user fill the provided characters. \n2. Add button with text `Decipher` below textarea. Click this button needs to run the deciphering process and return the values to another textarea below\n3. Add another textarea with id `",
+      "args": "[]",
+      "duration": 5.8959005400538445e-05
+    }
+  ],
+  "llm_calls": 1,
+  "timeline": {
+    "attempt": 9,
+    "strategy": "semantic_diff",
+    "phase": "initial",
+    "events": {
+      "decompose": {
+        "start": "2026-02-24T12:11:00.796798",
+        "end": "2026-02-24T12:11:03.252257"
+      },
+      "solve": {
+        "start": "2026-02-24T12:11:03.252303",
+        "end": "2026-02-24T12:11:06.420710"
+      },
+      "tests": {
+        "start": "2026-02-24T12:11:06.420582",
+        "end": "2026-02-24T12:11:06.420668",
+        "duration_seconds": "0.000"
+      }
+    },
+    "meta": {
+      "llm_calls": "1"
+    }
+  },
+  "solution_preview": "def solve(*args):\n    return None"
+}

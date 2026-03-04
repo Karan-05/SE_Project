@@ -1,0 +1,126 @@
+[
+  {
+    "name": "processRegistration_valid",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "message": "Registration processed successfully"
+    },
+    "input": [
+      {
+        "challengeId": "12345",
+        "userId": "user1"
+      }
+    ]
+  },
+  {
+    "name": "processReview_valid",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "message": "Review processed successfully"
+    },
+    "input": [
+      {
+        "challengeId": "12345",
+        "reviewData": {
+          "userId": "user1",
+          "rating": 4.5
+        }
+      }
+    ]
+  },
+  {
+    "name": "processReviewSummation_emptyReviews",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "No reviews to summarize"
+    },
+    "input": [
+      {
+        "challengeId": "12345"
+      }
+    ]
+  },
+  {
+    "name": "processReviewEnd_invalidChallengeId",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Invalid challenge ID"
+    },
+    "input": [
+      {
+        "challengeId": "99999"
+      }
+    ]
+  },
+  {
+    "name": "processReviewSummation_multipleReviews",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "averageRating": 4.5
+    },
+    "input": [
+      {
+        "challengeId": "12345",
+        "reviews": [
+          {
+            "userId": "user1",
+            "rating": 4.0
+          },
+          {
+            "userId": "user2",
+            "rating": 5.0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "processRegistration_duplicateUser",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "User already registered"
+    },
+    "input": [
+      {
+        "challengeId": "12345",
+        "userId": "user1"
+      }
+    ]
+  },
+  {
+    "name": "processReviewEnd_noActiveReview",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "No active review found"
+    },
+    "input": [
+      {
+        "challengeId": "12345"
+      }
+    ]
+  },
+  {
+    "name": "processReview_validRatingRange",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Rating must be between 0 and 5"
+    },
+    "input": [
+      {
+        "challengeId": "12345",
+        "reviewData": {
+          "userId": "user1",
+          "rating": 6.0
+        }
+      }
+    ]
+  }
+]

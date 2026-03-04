@@ -1,0 +1,1 @@
+{"content": "In the context of enhancing the Review API (tc-review-api) by fixing TypeScript lint errors and correcting API endpoint paths, the term \"hash_bucket\" might", "tokens": 91, "elapsed": 1.4851835000008577, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

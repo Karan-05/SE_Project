@@ -1,0 +1,1 @@
+{"content": "To address the requirement of fixing the 55 failed test cases and improving line and branch coverage to over 85% for the `epost-rx-phase2", "tokens": 111, "elapsed": 1.3646369589987444, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

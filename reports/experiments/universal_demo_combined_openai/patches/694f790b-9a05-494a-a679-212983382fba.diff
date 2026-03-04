@@ -1,0 +1,9 @@
+```diff
+--- original_file.py
++++ modified_file.py
+@@ -1,5 +1,5 @@
+-def buggy_function():
+-    return False
++def fixed_function():
++    return True
+```

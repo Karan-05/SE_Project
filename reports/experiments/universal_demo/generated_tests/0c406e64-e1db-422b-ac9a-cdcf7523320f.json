@@ -1,0 +1,58 @@
+[
+  {
+    "name": "add_platform_tab",
+    "mode": "io",
+    "expected": "Platform tab is present with Skills link",
+    "stdin": "admin user accesses the system admin app",
+    "expected_stdout": "Platform tab is present with Skills link"
+  },
+  {
+    "name": "skills_link_functionality",
+    "mode": "io",
+    "expected": "Skills Manager app loads successfully",
+    "stdin": "click on Skills link in Platform tab",
+    "expected_stdout": "Skills Manager app loads successfully"
+  },
+  {
+    "name": "roles_required_removal",
+    "mode": "io",
+    "expected": "Access granted without rolesRequired",
+    "stdin": "admin user accesses Skills Manager app",
+    "expected_stdout": "Access granted without rolesRequired"
+  },
+  {
+    "name": "config_cleanup_prod",
+    "mode": "io",
+    "expected": "No rolesRequired configurations found",
+    "stdin": "check configs in production environment",
+    "expected_stdout": "No rolesRequired configurations found"
+  },
+  {
+    "name": "config_cleanup_dev",
+    "mode": "io",
+    "expected": "No rolesRequired configurations found",
+    "stdin": "check configs in development environment",
+    "expected_stdout": "No rolesRequired configurations found"
+  },
+  {
+    "name": "admin_access_without_roles",
+    "mode": "io",
+    "expected": "Access denied",
+    "stdin": "non-admin user accesses Skills Manager app",
+    "expected_stdout": "Access denied"
+  },
+  {
+    "name": "skills_manager_functionality",
+    "mode": "io",
+    "expected": "All features function as expected",
+    "stdin": "admin user interacts with Skills Manager features",
+    "expected_stdout": "All features function as expected"
+  },
+  {
+    "name": "existing_tests_pass",
+    "mode": "io",
+    "expected": "All existing tests pass",
+    "stdin": "run all existing tests in the codebase",
+    "expected_stdout": "All existing tests pass"
+  }
+]

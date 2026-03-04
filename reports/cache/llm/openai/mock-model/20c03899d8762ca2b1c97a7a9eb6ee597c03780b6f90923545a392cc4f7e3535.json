@@ -1,0 +1,1 @@
+{"content": "The problem you're facing involves the deprecation of the `ScriptProperties` class in Google Apps Script, which is used for storing script-level properties. Since this class", "tokens": 88, "elapsed": 1.5425304590025917, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

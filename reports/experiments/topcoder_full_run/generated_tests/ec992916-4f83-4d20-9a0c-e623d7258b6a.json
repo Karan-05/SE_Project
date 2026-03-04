@@ -1,0 +1,118 @@
+[
+  {
+    "name": "valid_submission_scan_complete_event",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "message": "Gitea workflow triggered successfully"
+    },
+    "input": [
+      {
+        "event": "submission.scan.complete",
+        "submissionId": "12345"
+      }
+    ]
+  },
+  {
+    "name": "submission_not_found",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Submission not found"
+    },
+    "input": [
+      {
+        "event": "submission.scan.complete",
+        "submissionId": "99999"
+      }
+    ]
+  },
+  {
+    "name": "invalid_event_type",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Invalid event type"
+    },
+    "input": [
+      {
+        "event": "submission.scan.failed",
+        "submissionId": "12345"
+      }
+    ]
+  },
+  {
+    "name": "gitea_auth_failure",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Gitea authentication failed"
+    },
+    "input": [
+      {
+        "event": "submission.scan.complete",
+        "submissionId": "12345"
+      }
+    ]
+  },
+  {
+    "name": "empty_submission_id",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Submission ID cannot be empty"
+    },
+    "input": [
+      {
+        "event": "submission.scan.complete",
+        "submissionId": ""
+      }
+    ]
+  },
+  {
+    "name": "valid_submission_with_no_workflow",
+    "mode": "call",
+    "expected": {
+      "status": "warning",
+      "message": "No Gitea workflow configured for this submission"
+    },
+    "input": [
+      {
+        "event": "submission.scan.complete",
+        "submissionId": "54321"
+      }
+    ]
+  },
+  {
+    "name": "submission_scan_complete_with_additional_data",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "message": "Gitea workflow triggered successfully with additional data"
+    },
+    "input": [
+      {
+        "event": "submission.scan.complete",
+        "submissionId": "12345",
+        "additionalData": {
+          "userId": "user123",
+          "challengeId": "challenge456"
+        }
+      }
+    ]
+  },
+  {
+    "name": "gitea_workflow_timeout",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Gitea workflow execution timed out"
+    },
+    "input": [
+      {
+        "event": "submission.scan.complete",
+        "submissionId": "12345"
+      }
+    ]
+  }
+]

@@ -1,0 +1,1 @@
+{"content": "The two-pointer technique is typically used in problems involving arrays or lists where you need to traverse elements from both ends towards the center or in a coordinated manner. However", "tokens": 59, "elapsed": 2.1449437500268687, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

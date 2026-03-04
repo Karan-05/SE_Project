@@ -1,0 +1,98 @@
+[
+  {
+    "rmse": 2.9270489886467552,
+    "mae": 2.2120920648038194,
+    "r2": 0.8708465265672056,
+    "target": "submission_count",
+    "model": "ridge",
+    "split": "val"
+  },
+  {
+    "rmse": 3.681263906835892,
+    "mae": 2.404851005068827,
+    "r2": 0.6265873136588231,
+    "target": "submission_count",
+    "model": "ridge",
+    "split": "test"
+  },
+  {
+    "rmse": 5.845433350651649,
+    "mae": 3.138536585365854,
+    "r2": 0.4849142507831743,
+    "target": "submission_count",
+    "model": "random_forest",
+    "split": "val"
+  },
+  {
+    "rmse": 3.4228789448361607,
+    "mae": 2.161463414634146,
+    "r2": 0.6771667613750196,
+    "target": "submission_count",
+    "model": "random_forest",
+    "split": "test"
+  },
+  {
+    "rmse": 3.251867944622529,
+    "mae": 2.34466457393498,
+    "r2": 0.8405913402836285,
+    "target": "submission_count",
+    "model": "huber",
+    "split": "val"
+  },
+  {
+    "rmse": 3.782631638429828,
+    "mae": 2.364313761081741,
+    "r2": 0.6057395034856146,
+    "target": "submission_count",
+    "model": "huber",
+    "split": "test"
+  },
+  {
+    "rmse": 32.25681157907351,
+    "mae": 21.525647238267066,
+    "r2": 0.26509088968502614,
+    "target": "winning_score",
+    "model": "ridge",
+    "split": "val"
+  },
+  {
+    "rmse": 21.667364425125236,
+    "mae": 13.921333614196353,
+    "r2": 0.725976757298084,
+    "target": "winning_score",
+    "model": "ridge",
+    "split": "test"
+  },
+  {
+    "rmse": 4.713182803681756,
+    "mae": 2.024390243902439,
+    "r2": 0.9843101307189542,
+    "target": "winning_score",
+    "model": "random_forest",
+    "split": "val"
+  },
+  {
+    "rmse": 12.836579675979802,
+    "mae": 3.8617886178861784,
+    "r2": 0.9038224151234568,
+    "target": "winning_score",
+    "model": "random_forest",
+    "split": "test"
+  },
+  {
+    "rmse": 32.03035261427512,
+    "mae": 19.18665653027109,
+    "r2": 0.2753735275933359,
+    "target": "winning_score",
+    "model": "huber",
+    "split": "val"
+  },
+  {
+    "rmse": 20.526263569678687,
+    "mae": 12.314548609278166,
+    "r2": 0.7540793329868907,
+    "target": "winning_score",
+    "model": "huber",
+    "split": "test"
+  }
+]

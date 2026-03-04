@@ -1,0 +1,9 @@
+pass_rate,avg_attempts,token_cost,failure_taxonomy,repair_rate,gate_pass_rate,memory_enabled,rl_enabled,repair_enabled
+0.2,1.0,1750,{'insufficient_detail': 4},0.0,0.0,False,False,False
+0.2,1.0,1750,{'insufficient_detail': 4},0.0,0.0,True,False,False
+0.2,1.0,1750,{'insufficient_detail': 4},0.0,0.0,False,True,False
+0.6,2.6,4950,{'insufficient_detail': 2},0.8,1.0,False,False,True
+0.2,1.0,1750,{'insufficient_detail': 4},0.0,0.0,True,True,False
+0.6,2.6,4950,{'insufficient_detail': 2},0.8,1.0,True,False,True
+0.6,2.4,4550,{'insufficient_detail': 2},0.8,1.0,False,True,True
+0.6,2.4,4550,{'insufficient_detail': 2},0.8,1.0,True,True,True

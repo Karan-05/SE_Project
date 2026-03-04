@@ -1,0 +1,1 @@
+{"content": "[MOCK] 1baf8523426fd677 :: You are comparing a new task to base task baseline. List semantic deltas succinctly: Count primes up to N.", "tokens": 19, "elapsed": 1.6659999999557584e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "semantic-diff", "caller": "semantic_diff"}}

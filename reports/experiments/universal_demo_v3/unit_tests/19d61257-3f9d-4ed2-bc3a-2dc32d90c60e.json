@@ -1,0 +1,16 @@
+{
+  "task_id": "19d61257-3f9d-4ed2-bc3a-2dc32d90c60e",
+  "tests": [
+    {
+      "name": "io_sample_1",
+      "mode": "io",
+      "status": "fail",
+      "expected": "Python 3 script Deployment and Verification Guide",
+      "output": "",
+      "error": "",
+      "stdin": "geofencingValidator.py inputFile",
+      "args": "[]",
+      "duration": 1.6790989320725203e-05
+    }
+  ]
+}

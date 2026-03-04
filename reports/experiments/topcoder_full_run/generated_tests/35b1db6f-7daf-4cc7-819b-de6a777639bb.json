@@ -1,0 +1,129 @@
+[
+  {
+    "name": "get_project_members",
+    "mode": "call",
+    "expected": [
+      {
+        "id": "1",
+        "name": "Alice",
+        "role": "admin"
+      },
+      {
+        "id": "2",
+        "name": "Bob",
+        "role": "member"
+      }
+    ],
+    "input": [
+      {
+        "projectId": "123",
+        "fields": "id,name,role"
+      }
+    ]
+  },
+  {
+    "name": "add_project_member",
+    "mode": "call",
+    "expected": {
+      "id": "3",
+      "name": "Charlie",
+      "role": "member"
+    },
+    "input": [
+      {
+        "projectId": "123",
+        "member": {
+          "name": "Charlie",
+          "role": "member"
+        }
+      }
+    ]
+  },
+  {
+    "name": "get_invites",
+    "mode": "call",
+    "expected": [
+      {
+        "id": "1",
+        "email": "invitee@example.com",
+        "status": "pending"
+      }
+    ],
+    "input": [
+      {
+        "projectId": "123",
+        "fields": "id,email,status"
+      }
+    ]
+  },
+  {
+    "name": "accept_invite",
+    "mode": "call",
+    "expected": {
+      "status": "accepted"
+    },
+    "input": [
+      {
+        "projectId": "123",
+        "inviteId": "1"
+      }
+    ]
+  },
+  {
+    "name": "delete_member",
+    "mode": "call",
+    "expected": {
+      "status": "deleted"
+    },
+    "input": [
+      {
+        "projectId": "123",
+        "memberId": "2"
+      }
+    ]
+  },
+  {
+    "name": "duplicate_invite",
+    "mode": "call",
+    "expected": {
+      "error": "Invite already exists"
+    },
+    "input": [
+      {
+        "projectId": "123",
+        "invite": {
+          "email": "invitee@example.com"
+        }
+      }
+    ]
+  },
+  {
+    "name": "primary_member_rule",
+    "mode": "call",
+    "expected": {
+      "error": "Only one primary customer allowed"
+    },
+    "input": [
+      {
+        "projectId": "123",
+        "member": {
+          "name": "David",
+          "role": "customer"
+        }
+      }
+    ]
+  },
+  {
+    "name": "invalid_project_id",
+    "mode": "call",
+    "expected": {
+      "error": "Project not found"
+    },
+    "input": [
+      {
+        "projectId": "999",
+        "fields": "id,name,role"
+      }
+    ]
+  }
+]

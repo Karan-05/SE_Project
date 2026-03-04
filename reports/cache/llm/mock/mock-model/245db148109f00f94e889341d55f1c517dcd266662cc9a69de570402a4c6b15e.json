@@ -1,0 +1,1 @@
+{"content": "[MOCK] 40b1c65e96b1feff :: Given the problem: Return the number of undirected edges., would pattern two_pointers be relevant?", "tokens": 14, "elapsed": 1.8330000000066349e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "pattern-hint", "caller": "pattern_skeleton"}}

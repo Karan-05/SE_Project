@@ -1,0 +1,165 @@
+{
+  "task_id": "156b30ad-dd11-4183-9626-a0daed357c57",
+  "strategy": "semantic_diff",
+  "attempt": 10,
+  "pass_rate": 0.0,
+  "plan_subtasks": [
+    "load base solution",
+    "apply semantic deltas",
+    "re-test",
+    "Generate minimal unit tests for critical behaviors",
+    "Add adversarial/edge-case tests",
+    "Run tests and interpret failures"
+  ],
+  "plan_tests": [
+    "critical unit tests",
+    "edge-case probes"
+  ],
+  "plan_diagnostics": {
+    "base_task": "baseline",
+    "num_deltas": "1",
+    "delta_note": "### Semantic Deltas\n\n#### Design Assets & Downloadable\n- **New Task**: Includes downloadable assets and style guidance in Figma.\n- **Base Task**: Lacks downloadable assets; may not provide comprehensive style guidance.\n\n#### General\n- **New Task**: Enhanced user interface and experience.\n- **Base Task**: Standard interface with limited user engagement features.",
+    "planning_tokens": "163",
+    "planning_time": "2.163425"
+  },
+  "patch_summary": {
+    "phase": "repair",
+    "prompt_excerpt": " inputs= kwargs=\nProduce a minimal patch to fix only the failing behavior. Keep public APIs identical and do not refactor unrelated sections. Return the full updated implementation without commentary.",
+    "llm_tokens": "700"
+  },
+  "failing_tests": [
+    "button_not_overlapping_footer",
+    "button_visibility_on_scroll",
+    "responsive_design_check",
+    "button_click_functionality",
+    "footer_color_check"
+  ],
+  "trace": [
+    "",
+    "",
+    "",
+    "",
+    ""
+  ],
+  "feedback": [
+    "button_not_overlapping_footer expected Back to Home button is displayed above the grey background footer. but saw ",
+    "button_visibility_on_scroll expected Back to Home button remains visible and does not overlap with footer. but saw ",
+    "responsive_design_check expected Back to Home button adjusts its position without overlapping footer. but saw ",
+    "button_click_functionality expected User is redirected to the home page. but saw ",
+    "footer_color_check expected Footer color matches the specified design. but saw "
+  ],
+  "reproduction": "inputs= kwargs=",
+  "tests_run": [
+    {
+      "name": "button_not_overlapping_footer",
+      "mode": "io",
+      "status": "fail",
+      "expected": "Back to Home button is displayed above the grey background footer.",
+      "output": "",
+      "error": "",
+      "stdin": "User navigates to the page with the Back to Home button.",
+      "args": "[]",
+      "duration": 8.915987564250827e-06
+    },
+    {
+      "name": "button_visibility_on_scroll",
+      "mode": "io",
+      "status": "fail",
+      "expected": "Back to Home button remains visible and does not overlap with footer.",
+      "output": "",
+      "error": "",
+      "stdin": "User scrolls down the page.",
+      "args": "[]",
+      "duration": 4.958012141287327e-06
+    },
+    {
+      "name": "responsive_design_check",
+      "mode": "io",
+      "status": "fail",
+      "expected": "Back to Home button adjusts its position without overlapping footer.",
+      "output": "",
+      "error": "",
+      "stdin": "User resizes the browser window to various widths.",
+      "args": "[]",
+      "duration": 4.708999767899513e-06
+    },
+    {
+      "name": "button_click_functionality",
+      "mode": "io",
+      "status": "fail",
+      "expected": "User is redirected to the home page.",
+      "output": "",
+      "error": "",
+      "stdin": "User clicks on the Back to Home button.",
+      "args": "[]",
+      "duration": 4.250003257766366e-06
+    },
+    {
+      "name": "footer_color_check",
+      "mode": "io",
+      "status": "fail",
+      "expected": "Footer color matches the specified design.",
+      "output": "",
+      "error": "",
+      "stdin": "User inspects the footer color.",
+      "args": "[]",
+      "duration": 4.0000013541430235e-06
+    },
+    {
+      "name": "button_style_check",
+      "mode": "io",
+      "status": "fail",
+      "expected": "Button style matches the Figma design specifications.",
+      "output": "",
+      "error": "",
+      "stdin": "User inspects the Back to Home button style.",
+      "args": "[]",
+      "duration": 4.290981451049447e-06
+    },
+    {
+      "name": "edge_case_no_footer",
+      "mode": "io",
+      "status": "fail",
+      "expected": "Back to Home button is displayed correctly.",
+      "output": "",
+      "error": "",
+      "stdin": "User navigates to a page without a footer.",
+      "args": "[]",
+      "duration": 4.1669991333037615e-06
+    },
+    {
+      "name": "edge_case_button_disabled",
+      "mode": "io",
+      "status": "fail",
+      "expected": "No action is taken, button remains disabled.",
+      "output": "",
+      "error": "",
+      "stdin": "User attempts to click a disabled Back to Home button.",
+      "args": "[]",
+      "duration": 4.208006430417299e-06
+    }
+  ],
+  "llm_calls": 0,
+  "timeline": {
+    "attempt": 10,
+    "strategy": "semantic_diff",
+    "phase": "repair",
+    "events": {
+      "repair": {
+        "start": "2026-02-24T01:33:37.794455",
+        "end": "2026-02-24T01:33:37.794795"
+      },
+      "tests": {
+        "start": "2026-02-24T01:33:37.794845",
+        "end": "2026-02-24T01:33:37.794894",
+        "duration_seconds": "0.000"
+      }
+    },
+    "meta": {
+      "prompt_excerpt": " inputs= kwargs=\nProduce a minimal patch to fix only the failing behavior. Keep public APIs identical and do not refactor unrelated sections. Return the full updated implementation without commentary.",
+      "llm_tokens": "700",
+      "llm_calls": "0"
+    }
+  },
+  "solution_preview": "def solve(*args):\n    return None"
+}

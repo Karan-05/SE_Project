@@ -1,0 +1,1 @@
+{"content": "```python\ndef solve():\n    print(\"No limitation\\n- Docker\")\n```", "tokens": 287, "elapsed": 1.0356267089955509, "budget_exceeded": false, "meta": {"provider": "openai", "model": "repair-loop", "caller": "semantic_diff:repair"}}

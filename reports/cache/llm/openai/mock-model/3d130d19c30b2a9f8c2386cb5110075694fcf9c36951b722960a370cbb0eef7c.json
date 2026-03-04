@@ -1,0 +1,1 @@
+{"content": "```python\ndef solve(edges):\n    deg = {}\n    for a, b in edges:\n        deg[a] = deg.get(a, 0) + 1\n        deg[b] = deg.get(b, 0) + 1\n    return {str(k): v for k, v in deg.items()}\n```", "tokens": 353, "elapsed": 1.6309087080007885, "budget_exceeded": false, "meta": {"provider": "openai", "model": "repair-loop", "caller": "semantic_diff:repair"}}

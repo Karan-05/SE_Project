@@ -1,0 +1,459 @@
+[
+  {
+    "dataset_id": "analysis_advancing_agentic_systems_output_agentic_challenge_annotations.json",
+    "path": "/Users/karanallagh/Desktop/DataCollector/analysis/advancing_agentic_systems/output/agentic_challenge_annotations.json",
+    "file_type": "json",
+    "source": "auto",
+    "sheet_name": null,
+    "task_columns": [
+      "challengeid",
+      "legacyid",
+      "name"
+    ],
+    "approx_records": 25
+  },
+  {
+    "dataset_id": "analysis_advancing_agentic_systems_output_agentic_challenge_metrics.csv",
+    "path": "/Users/karanallagh/Desktop/DataCollector/analysis/advancing_agentic_systems/output/agentic_challenge_metrics.csv",
+    "file_type": "csv",
+    "source": "auto",
+    "sheet_name": null,
+    "task_columns": [
+      "baselineid",
+      "challengeid",
+      "name"
+    ],
+    "approx_records": 25
+  },
+  {
+    "dataset_id": "analysis_output_ai_feasibility_analysis.csv",
+    "path": "/Users/karanallagh/Desktop/DataCollector/analysis/output/ai_feasibility_analysis.csv",
+    "file_type": "csv",
+    "source": "auto",
+    "sheet_name": null,
+    "task_columns": [
+      "challengeid",
+      "confidence",
+      "name",
+      "problem_root_cause",
+      "problem_statement"
+    ],
+    "approx_records": 25
+  },
+  {
+    "dataset_id": "analysis_output_ai_super_analysis.csv",
+    "path": "/Users/karanallagh/Desktop/DataCollector/analysis/output/ai_super_analysis.csv",
+    "file_type": "csv",
+    "source": "auto",
+    "sheet_name": null,
+    "task_columns": [
+      "challengeid",
+      "confidence",
+      "name",
+      "oversight_requirements",
+      "problem_root_cause",
+      "problem_statement"
+    ],
+    "approx_records": 25
+  },
+  {
+    "dataset_id": "analysis_output_challenges_summary.csv",
+    "path": "/Users/karanallagh/Desktop/DataCollector/analysis/output/challenges_summary.csv",
+    "file_type": "csv",
+    "source": "auto",
+    "sheet_name": null,
+    "task_columns": [
+      "challengeid",
+      "legacyid",
+      "name"
+    ],
+    "approx_records": 25
+  },
+  {
+    "dataset_id": "analysis_output_legacy_ai_feasibility_analysis.csv",
+    "path": "/Users/karanallagh/Desktop/DataCollector/analysis/output_legacy/ai_feasibility_analysis.csv",
+    "file_type": "csv",
+    "source": "auto",
+    "sheet_name": null,
+    "task_columns": [
+      "challengeid",
+      "confidence",
+      "name",
+      "problem_root_cause",
+      "problem_statement"
+    ],
+    "approx_records": 25
+  },
+  {
+    "dataset_id": "analysis_output_legacy_challenges_summary.csv",
+    "path": "/Users/karanallagh/Desktop/DataCollector/analysis/output_legacy/challenges_summary.csv",
+    "file_type": "csv",
+    "source": "auto",
+    "sheet_name": null,
+    "task_columns": [
+      "challengeid",
+      "legacyid",
+      "name"
+    ],
+    "approx_records": 25
+  },
+  {
+    "dataset_id": "analysis_output_legacy_top_prize_challenges.csv",
+    "path": "/Users/karanallagh/Desktop/DataCollector/analysis/output_legacy/top_prize_challenges.csv",
+    "file_type": "csv",
+    "source": "auto",
+    "sheet_name": null,
+    "task_columns": [
+      "challengeid",
+      "name"
+    ],
+    "approx_records": 10
+  },
+  {
+    "dataset_id": "analysis_output_legacy_top_submissions.csv",
+    "path": "/Users/karanallagh/Desktop/DataCollector/analysis/output_legacy/top_submissions.csv",
+    "file_type": "csv",
+    "source": "auto",
+    "sheet_name": null,
+    "task_columns": [
+      "challengeid",
+      "name"
+    ],
+    "approx_records": 10
+  },
+  {
+    "dataset_id": "analysis_output_submission_analysis.csv",
+    "path": "/Users/karanallagh/Desktop/DataCollector/analysis/output/submission_analysis.csv",
+    "file_type": "csv",
+    "source": "auto",
+    "sheet_name": null,
+    "task_columns": [
+      "challengeid",
+      "submissionid",
+      "tests_detected"
+    ],
+    "approx_records": 25
+  },
+  {
+    "dataset_id": "analysis_output_top_prize_challenges.csv",
+    "path": "/Users/karanallagh/Desktop/DataCollector/analysis/output/top_prize_challenges.csv",
+    "file_type": "csv",
+    "source": "auto",
+    "sheet_name": null,
+    "task_columns": [
+      "challengeid",
+      "name"
+    ],
+    "approx_records": 10
+  },
+  {
+    "dataset_id": "analysis_output_top_submissions.csv",
+    "path": "/Users/karanallagh/Desktop/DataCollector/analysis/output/top_submissions.csv",
+    "file_type": "csv",
+    "source": "auto",
+    "sheet_name": null,
+    "task_columns": [
+      "challengeid",
+      "name"
+    ],
+    "approx_records": 10
+  },
+  {
+    "dataset_id": "challenge_data_challengeData_2023-01-01_2023-01-02_page1.json",
+    "path": "/Users/karanallagh/Desktop/DataCollector/challenge_data/challengeData_2023-01-01_2023-01-02/page1.json",
+    "file_type": "json",
+    "source": "auto",
+    "sheet_name": null,
+    "task_columns": [
+      "challengeid",
+      "description",
+      "directprojectid",
+      "forumid",
+      "legacyid",
+      "name",
+      "technologies"
+    ],
+    "approx_records": 1
+  },
+  {
+    "dataset_id": "challenge_data_challengeData_2023-01-01_2023-01-31_page1.json",
+    "path": "/Users/karanallagh/Desktop/DataCollector/challenge_data/challengeData_2023-01-01_2023-01-31/page1.json",
+    "file_type": "json",
+    "source": "auto",
+    "sheet_name": null,
+    "task_columns": [
+      "challengeid",
+      "description",
+      "directprojectid",
+      "forumid",
+      "legacyid",
+      "name",
+      "technologies"
+    ],
+    "approx_records": 25
+  },
+  {
+    "dataset_id": "challenge_data_challengeData_2023-01-01_2023-01-31_page2.json",
+    "path": "/Users/karanallagh/Desktop/DataCollector/challenge_data/challengeData_2023-01-01_2023-01-31/page2.json",
+    "file_type": "json",
+    "source": "auto",
+    "sheet_name": null,
+    "task_columns": [
+      "challengeid",
+      "description",
+      "directprojectid",
+      "forumid",
+      "legacyid",
+      "name",
+      "technologies"
+    ],
+    "approx_records": 14
+  },
+  {
+    "dataset_id": "challenge_data_challengeData_2025-06-01_2025-10-08_page1.json",
+    "path": "/Users/karanallagh/Desktop/DataCollector/challenge_data/challengeData_2025-06-01_2025-10-08/page1.json",
+    "file_type": "json",
+    "source": "auto",
+    "sheet_name": null,
+    "task_columns": [
+      "challengeid",
+      "description",
+      "directprojectid",
+      "forumid",
+      "legacyid",
+      "name",
+      "technologies"
+    ],
+    "approx_records": 25
+  },
+  {
+    "dataset_id": "challenge_data_challengeData_2025-06-01_2025-10-08_page2.json",
+    "path": "/Users/karanallagh/Desktop/DataCollector/challenge_data/challengeData_2025-06-01_2025-10-08/page2.json",
+    "file_type": "json",
+    "source": "auto",
+    "sheet_name": null,
+    "task_columns": [
+      "challengeid",
+      "description",
+      "directprojectid",
+      "forumid",
+      "legacyid",
+      "name",
+      "technologies"
+    ],
+    "approx_records": 25
+  },
+  {
+    "dataset_id": "challenge_data_challengeData_2025-06-01_2025-10-08_page3.json",
+    "path": "/Users/karanallagh/Desktop/DataCollector/challenge_data/challengeData_2025-06-01_2025-10-08/page3.json",
+    "file_type": "json",
+    "source": "auto",
+    "sheet_name": null,
+    "task_columns": [
+      "challengeid",
+      "description",
+      "directprojectid",
+      "forumid",
+      "legacyid",
+      "name",
+      "technologies"
+    ],
+    "approx_records": 25
+  },
+  {
+    "dataset_id": "challenge_data_demoData.json",
+    "path": "/Users/karanallagh/Desktop/DataCollector/challenge_data/demoData.json",
+    "file_type": "json",
+    "source": "auto",
+    "sheet_name": null,
+    "task_columns": [
+      "currentphasenames",
+      "description",
+      "descriptionformat",
+      "id",
+      "legacyid",
+      "name",
+      "overview",
+      "projectid",
+      "tags",
+      "timelinetemplateid",
+      "trackid",
+      "typeid"
+    ],
+    "approx_records": 25
+  },
+  {
+    "dataset_id": "data_processed_interactions.csv",
+    "path": "/Users/karanallagh/Desktop/DataCollector/data/processed/interactions.csv",
+    "file_type": "csv",
+    "source": "auto",
+    "sheet_name": null,
+    "task_columns": [
+      "task_id",
+      "worker_id"
+    ],
+    "approx_records": 25
+  },
+  {
+    "dataset_id": "data_processed_interactions.parquet",
+    "path": "/Users/karanallagh/Desktop/DataCollector/data/processed/interactions.parquet",
+    "file_type": "parquet",
+    "source": "auto",
+    "sheet_name": null,
+    "task_columns": [
+      "task_id",
+      "worker_id"
+    ],
+    "approx_records": 25
+  },
+  {
+    "dataset_id": "data_processed_tasks.csv",
+    "path": "/Users/karanallagh/Desktop/DataCollector/data/processed/tasks.csv",
+    "file_type": "csv",
+    "source": "auto",
+    "sheet_name": null,
+    "task_columns": [
+      "description",
+      "tags",
+      "tags_vector",
+      "task_id",
+      "title"
+    ],
+    "approx_records": 25
+  },
+  {
+    "dataset_id": "data_processed_tasks.parquet",
+    "path": "/Users/karanallagh/Desktop/DataCollector/data/processed/tasks.parquet",
+    "file_type": "parquet",
+    "source": "auto",
+    "sheet_name": null,
+    "task_columns": [
+      "description",
+      "tags",
+      "tags_vector",
+      "task_id",
+      "title"
+    ],
+    "approx_records": 25
+  },
+  {
+    "dataset_id": "data_processed_workers.csv",
+    "path": "/Users/karanallagh/Desktop/DataCollector/data/processed/workers.csv",
+    "file_type": "csv",
+    "source": "auto",
+    "sheet_name": null,
+    "task_columns": [
+      "domain_tags",
+      "past_tasks_count",
+      "worker_id"
+    ],
+    "approx_records": 25
+  },
+  {
+    "dataset_id": "data_processed_workers.parquet",
+    "path": "/Users/karanallagh/Desktop/DataCollector/data/processed/workers.parquet",
+    "file_type": "parquet",
+    "source": "auto",
+    "sheet_name": null,
+    "task_columns": [
+      "domain_tags",
+      "past_tasks_count",
+      "worker_id"
+    ],
+    "approx_records": 25
+  },
+  {
+    "dataset_id": "data_raw_interactions.csv",
+    "path": "/Users/karanallagh/Desktop/DataCollector/data/raw/interactions.csv",
+    "file_type": "csv",
+    "source": "auto",
+    "sheet_name": null,
+    "task_columns": [
+      "task_id",
+      "worker_id"
+    ],
+    "approx_records": 25
+  },
+  {
+    "dataset_id": "data_raw_tasks.csv",
+    "path": "/Users/karanallagh/Desktop/DataCollector/data/raw/tasks.csv",
+    "file_type": "csv",
+    "source": "auto",
+    "sheet_name": null,
+    "task_columns": [
+      "description",
+      "tags",
+      "task_id",
+      "title"
+    ],
+    "approx_records": 25
+  },
+  {
+    "dataset_id": "data_raw_workers.csv",
+    "path": "/Users/karanallagh/Desktop/DataCollector/data/raw/workers.csv",
+    "file_type": "csv",
+    "source": "auto",
+    "sheet_name": null,
+    "task_columns": [
+      "domain_tags",
+      "past_tasks_count",
+      "worker_id"
+    ],
+    "approx_records": 25
+  },
+  {
+    "dataset_id": "experiments_decomposition_benchmark_tasks.json",
+    "path": "/Users/karanallagh/Desktop/DataCollector/experiments/decomposition/benchmark_tasks.json",
+    "file_type": "json",
+    "source": "auto",
+    "sheet_name": null,
+    "task_columns": [
+      "constraints",
+      "examples",
+      "id",
+      "problem_statement",
+      "statement",
+      "tags",
+      "tests",
+      "title"
+    ],
+    "approx_records": 25
+  },
+  {
+    "dataset_id": "reports_decomposition_meta_selector.csv",
+    "path": "/Users/karanallagh/Desktop/DataCollector/reports/decomposition/meta_selector.csv",
+    "file_type": "csv",
+    "source": "auto",
+    "sheet_name": null,
+    "task_columns": [
+      "task_id"
+    ],
+    "approx_records": 25
+  },
+  {
+    "dataset_id": "reports_decomposition_real_slice_metrics.csv",
+    "path": "/Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_slice_metrics.csv",
+    "file_type": "csv",
+    "source": "auto",
+    "sheet_name": null,
+    "task_columns": [
+      "task_id"
+    ],
+    "approx_records": 20
+  },
+  {
+    "dataset_id": "reports_decomposition_strategy_comparison.csv",
+    "path": "/Users/karanallagh/Desktop/DataCollector/reports/decomposition/strategy_comparison.csv",
+    "file_type": "csv",
+    "source": "auto",
+    "sheet_name": null,
+    "task_columns": [
+      "num_tests",
+      "pattern_confidence",
+      "task_difficulty",
+      "task_id",
+      "task_type"
+    ],
+    "approx_records": 25
+  }
+]

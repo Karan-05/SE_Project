@@ -1,0 +1,132 @@
+{
+  "task_type": "architecture_doc",
+  "summary": "Design an operational support framework for sourcing native language specialists in Japanese, Korean, and French. The framework includes candidate evaluation criteria, onboarding processes, and operational responsibilities to ensure effective communication and collaboration.",
+  "artifacts": {
+    "doc_markdown": "## Requirements\n- Source native speakers in Japanese, Korean, and French for a 3-month contract.\n- Full-time commitment (8 hours/day).\n\n## Architecture Diagram\n```mermaid\ngraph TD;\n    A[Candidate Sourcing] --> B[Screening Process];\n    B --> C[Skill Assessment];\n    C --> D[Onboarding];\n    D --> E[Operational Support];\n```\n\n## Risks\n- High turnover due to contract nature.\n- Misalignment of expectations between candidates and operational needs.\n\n## Rollout\n1. Initiate candidate sourcing immediately.\n2. Implement a streamlined screening and assessment process.\n3. Onboard successful candidates by the weekend.\n4. Monitor performance and gather feedback for future improvements.",
+    "components": [
+      {
+        "name": "Candidate Sourcing",
+        "responsibility": "Identify and attract qualified candidates.",
+        "tech": "Job boards, recruitment platforms"
+      },
+      {
+        "name": "Screening Process",
+        "responsibility": "Evaluate candidate profiles and shortlist for assessments.",
+        "tech": "Applicant Tracking System"
+      },
+      {
+        "name": "Skill Assessment",
+        "responsibility": "Conduct language proficiency and operational aptitude tests.",
+        "tech": "Online assessment tools"
+      },
+      {
+        "name": "Onboarding",
+        "responsibility": "Integrate candidates into operational teams.",
+        "tech": "Collaboration tools, training materials"
+      },
+      {
+        "name": "Operational Support",
+        "responsibility": "Provide ongoing language support and facilitate communication.",
+        "tech": "Communication platforms"
+      }
+    ],
+    "interfaces": [
+      {
+        "source": "Candidate Sourcing",
+        "target": "Screening Process",
+        "contract": "Candidate profiles are sent for evaluation."
+      },
+      {
+        "source": "Screening Process",
+        "target": "Skill Assessment",
+        "contract": "Shortlisted candidates are invited for assessments."
+      },
+      {
+        "source": "Skill Assessment",
+        "target": "Onboarding",
+        "contract": "Successful candidates are onboarded into the team."
+      },
+      {
+        "source": "Onboarding",
+        "target": "Operational Support",
+        "contract": "Candidates begin providing language support."
+      }
+    ],
+    "tradeoffs": [
+      "Remote work allows for a wider talent pool but may complicate team integration.",
+      "Short contract duration may limit deep operational understanding but allows for rapid scaling."
+    ]
+  },
+  "rubric_self_check": {
+    "coverage": 95.0,
+    "specificity": 90.0,
+    "actionability": 92.0,
+    "overall_notes": "All required sections are addressed with clear components and risks outlined."
+  },
+  "raw": {
+    "task_type": "architecture_doc",
+    "summary": "Design an operational support framework for sourcing native language specialists in Japanese, Korean, and French. The framework includes candidate evaluation criteria, onboarding processes, and operational responsibilities to ensure effective communication and collaboration.",
+    "artifacts": {
+      "doc_markdown": "## Requirements\n- Source native speakers in Japanese, Korean, and French for a 3-month contract.\n- Full-time commitment (8 hours/day).\n\n## Architecture Diagram\n```mermaid\ngraph TD;\n    A[Candidate Sourcing] --> B[Screening Process];\n    B --> C[Skill Assessment];\n    C --> D[Onboarding];\n    D --> E[Operational Support];\n```\n\n## Risks\n- High turnover due to contract nature.\n- Misalignment of expectations between candidates and operational needs.\n\n## Rollout\n1. Initiate candidate sourcing immediately.\n2. Implement a streamlined screening and assessment process.\n3. Onboard successful candidates by the weekend.\n4. Monitor performance and gather feedback for future improvements.",
+      "components": [
+        {
+          "name": "Candidate Sourcing",
+          "responsibility": "Identify and attract qualified candidates.",
+          "tech": "Job boards, recruitment platforms"
+        },
+        {
+          "name": "Screening Process",
+          "responsibility": "Evaluate candidate profiles and shortlist for assessments.",
+          "tech": "Applicant Tracking System"
+        },
+        {
+          "name": "Skill Assessment",
+          "responsibility": "Conduct language proficiency and operational aptitude tests.",
+          "tech": "Online assessment tools"
+        },
+        {
+          "name": "Onboarding",
+          "responsibility": "Integrate candidates into operational teams.",
+          "tech": "Collaboration tools, training materials"
+        },
+        {
+          "name": "Operational Support",
+          "responsibility": "Provide ongoing language support and facilitate communication.",
+          "tech": "Communication platforms"
+        }
+      ],
+      "interfaces": [
+        {
+          "source": "Candidate Sourcing",
+          "target": "Screening Process",
+          "contract": "Candidate profiles are sent for evaluation."
+        },
+        {
+          "source": "Screening Process",
+          "target": "Skill Assessment",
+          "contract": "Shortlisted candidates are invited for assessments."
+        },
+        {
+          "source": "Skill Assessment",
+          "target": "Onboarding",
+          "contract": "Successful candidates are onboarded into the team."
+        },
+        {
+          "source": "Onboarding",
+          "target": "Operational Support",
+          "contract": "Candidates begin providing language support."
+        }
+      ],
+      "tradeoffs": [
+        "Remote work allows for a wider talent pool but may complicate team integration.",
+        "Short contract duration may limit deep operational understanding but allows for rapid scaling."
+      ]
+    },
+    "rubric_self_check": {
+      "coverage": 95,
+      "specificity": 90,
+      "actionability": 92,
+      "overall_notes": "All required sections are addressed with clear components and risks outlined."
+    }
+  }
+}

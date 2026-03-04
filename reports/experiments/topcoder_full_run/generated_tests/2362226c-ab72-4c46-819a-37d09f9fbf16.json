@@ -1,0 +1,106 @@
+[
+  {
+    "name": "valid_submission_phase_display",
+    "mode": "call",
+    "expected": {
+      "display": "Submission Phase Active"
+    },
+    "input": [
+      {
+        "challengeId": 123,
+        "phase": "submission"
+      }
+    ]
+  },
+  {
+    "name": "invalid_phase_display",
+    "mode": "call",
+    "expected": {
+      "error": "Invalid phase"
+    },
+    "input": [
+      {
+        "challengeId": 456,
+        "phase": "invalid"
+      }
+    ]
+  },
+  {
+    "name": "no_phase_display",
+    "mode": "call",
+    "expected": {
+      "error": "Phase not specified"
+    },
+    "input": [
+      {
+        "challengeId": 789
+      }
+    ]
+  },
+  {
+    "name": "multiple_rounds_display",
+    "mode": "call",
+    "expected": {
+      "display": "Submission Phase Active for Round 1 and Round 2"
+    },
+    "input": [
+      {
+        "challengeId": 101,
+        "rounds": 2,
+        "phase": "submission"
+      }
+    ]
+  },
+  {
+    "name": "future_phase_display",
+    "mode": "call",
+    "expected": {
+      "error": "Phase not yet started"
+    },
+    "input": [
+      {
+        "challengeId": 202,
+        "phase": "future"
+      }
+    ]
+  },
+  {
+    "name": "completed_phase_display",
+    "mode": "call",
+    "expected": {
+      "error": "Phase has already completed"
+    },
+    "input": [
+      {
+        "challengeId": 303,
+        "phase": "completed"
+      }
+    ]
+  },
+  {
+    "name": "edge_case_empty_challenge_id",
+    "mode": "call",
+    "expected": {
+      "error": "Challenge ID cannot be null"
+    },
+    "input": [
+      {
+        "challengeId": null,
+        "phase": "submission"
+      }
+    ]
+  },
+  {
+    "name": "edge_case_nonexistent_challenge",
+    "mode": "call",
+    "expected": {
+      "error": "Challenge does not exist"
+    },
+    "input": [
+      {
+        "challengeId": 999999,
+        "phase": "submission"
+      }
+    ]
+  }
+]

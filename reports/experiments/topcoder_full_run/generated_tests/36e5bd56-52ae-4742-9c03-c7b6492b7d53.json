@@ -1,0 +1,83 @@
+[
+  {
+    "name": "valid_challenge_id",
+    "mode": "call",
+    "expected": "https://api.topcoder-dev.com/challenges/12345",
+    "input": [
+      {
+        "challenge_id": "12345"
+      }
+    ]
+  },
+  {
+    "name": "valid_challenge_id_with_special_characters",
+    "mode": "call",
+    "expected": "https://api.topcoder-dev.com/challenges/12345-abc",
+    "input": [
+      {
+        "challenge_id": "12345-abc"
+      }
+    ]
+  },
+  {
+    "name": "invalid_challenge_id_format",
+    "mode": "call",
+    "expected": "Error: Invalid challenge ID format",
+    "input": [
+      {
+        "challenge_id": "abcde"
+      }
+    ]
+  },
+  {
+    "name": "empty_challenge_id",
+    "mode": "call",
+    "expected": "Error: Challenge ID cannot be empty",
+    "input": [
+      {
+        "challenge_id": ""
+      }
+    ]
+  },
+  {
+    "name": "nonexistent_challenge_id",
+    "mode": "call",
+    "expected": "Error: Challenge not found",
+    "input": [
+      {
+        "challenge_id": "99999"
+      }
+    ]
+  },
+  {
+    "name": "mobile_layout_check",
+    "mode": "call",
+    "expected": "https://api.topcoder-dev.com/challenges/12345",
+    "input": [
+      {
+        "challenge_id": "12345",
+        "device": "mobile"
+      }
+    ]
+  },
+  {
+    "name": "challenge_details_dropdown",
+    "mode": "call",
+    "expected": "https://topcoder-dev.com/challenges/12345",
+    "input": [
+      {
+        "challenge_id": "12345"
+      }
+    ]
+  },
+  {
+    "name": "invalid_challenge_id_numeric",
+    "mode": "call",
+    "expected": "Error: Invalid challenge ID",
+    "input": [
+      {
+        "challenge_id": "-1"
+      }
+    ]
+  }
+]

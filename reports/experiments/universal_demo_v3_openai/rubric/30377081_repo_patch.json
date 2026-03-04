@@ -1,0 +1,19 @@
+{
+  "score": 40.0,
+  "passes_threshold": false,
+  "reasons": [
+    "Plan present",
+    "Diff snippet detected",
+    "Risks documented",
+    "Validation/tests listed",
+    "Patch/application guidance provided"
+  ],
+  "missing": [
+    "Problem Summary",
+    "Plan",
+    "Risks",
+    "Validation"
+  ],
+  "section_coverage": 0.0,
+  "extra_score": 1.0
+}

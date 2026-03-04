@@ -1,0 +1,166 @@
+{
+  "task_id": "4fea455b-76f7-4e66-80a6-98b667d98670",
+  "strategy": "pattern_skeleton",
+  "attempt": 3,
+  "pass_rate": 0.0,
+  "plan_subtasks": [
+    "instantiate skeleton",
+    "fill placeholders",
+    "derive pitfall-specific checks",
+    "verify pitfalls",
+    "Generate minimal unit tests for critical behaviors",
+    "Add adversarial/edge-case tests"
+  ],
+  "plan_tests": [
+    "Verify pitfall: Ensure indices not reused",
+    "Verify pitfall: Handle no-solution case"
+  ],
+  "plan_diagnostics": {
+    "pattern_name": "two_pointers",
+    "confidence": "0.00",
+    "pitfalls": "Ensure indices not reused; Handle no-solution case",
+    "planning_tokens": "337",
+    "planning_time": "4.603621",
+    "skeleton": "def solve(nums, target):\n    left, right = 0, len(nums) - 1\n    while left < right:\n        total = nums[left] + nums[right]\n        if total == target:\n            return left, right\n        if total < target:\n            left += 1\n        else:\n            right -= 1\n    return -1, -1\n"
+  },
+  "patch_summary": {
+    "phase": "initial"
+  },
+  "failing_tests": [
+    "valid_download_after_submission",
+    "invalid_download_without_submission",
+    "multiple_submissions",
+    "download_from_different_challenge",
+    "edge_case_no_submissions"
+  ],
+  "trace": [
+    "solve() missing 1 required positional argument: 'target'",
+    "solve() missing 1 required positional argument: 'target'",
+    "solve() missing 1 required positional argument: 'target'",
+    "solve() missing 1 required positional argument: 'target'",
+    "solve() missing 1 required positional argument: 'target'"
+  ],
+  "feedback": [
+    "valid_download_after_submission expected {'can_download': True} but saw None",
+    "invalid_download_without_submission expected {'can_download': False} but saw None",
+    "multiple_submissions expected {'can_download': True} but saw None",
+    "download_from_different_challenge expected {'can_download': False} but saw None",
+    "edge_case_no_submissions expected {'can_download': True} but saw None"
+  ],
+  "reproduction": "inputs=[{'user_id': 'user123', 'challenge_id': 'challenge456', 'submitted': True}] kwargs={}",
+  "tests_run": [
+    {
+      "name": "valid_download_after_submission",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'can_download': True}",
+      "output": "None",
+      "error": "solve() missing 1 required positional argument: 'target'",
+      "input": "[{'user_id': 'user123', 'challenge_id': 'challenge456', 'submitted': True}]",
+      "kwargs": "{}",
+      "duration": 2.3625005269423127e-05
+    },
+    {
+      "name": "invalid_download_without_submission",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'can_download': False}",
+      "output": "None",
+      "error": "solve() missing 1 required positional argument: 'target'",
+      "input": "[{'user_id': 'user789', 'challenge_id': 'challenge456', 'submitted': False}]",
+      "kwargs": "{}",
+      "duration": 1.1458003427833319e-05
+    },
+    {
+      "name": "multiple_submissions",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'can_download': True}",
+      "output": "None",
+      "error": "solve() missing 1 required positional argument: 'target'",
+      "input": "[{'user_id': 'user123', 'challenge_id': 'challenge456', 'submitted': True, 'submission_count': 3}]",
+      "kwargs": "{}",
+      "duration": 8.750008419156075e-06
+    },
+    {
+      "name": "download_from_different_challenge",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'can_download': False}",
+      "output": "None",
+      "error": "solve() missing 1 required positional argument: 'target'",
+      "input": "[{'user_id': 'user123', 'challenge_id': 'challenge789', 'submitted': True}]",
+      "kwargs": "{}",
+      "duration": 6.375019438564777e-06
+    },
+    {
+      "name": "edge_case_no_submissions",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'can_download': True}",
+      "output": "None",
+      "error": "solve() missing 1 required positional argument: 'target'",
+      "input": "[{'user_id': 'user456', 'challenge_id': 'challenge456', 'submitted': True, 'submission_count': 0}]",
+      "kwargs": "{}",
+      "duration": 6.417016265913844e-06
+    },
+    {
+      "name": "adversarial_case_invalid_user",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'can_download': False}",
+      "output": "None",
+      "error": "solve() missing 1 required positional argument: 'target'",
+      "input": "[{'user_id': 'invalid_user', 'challenge_id': 'challenge456', 'submitted': False}]",
+      "kwargs": "{}",
+      "duration": 6.333022611215711e-06
+    },
+    {
+      "name": "valid_download_after_multiple_challenges",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'can_download': True}",
+      "output": "None",
+      "error": "solve() missing 1 required positional argument: 'target'",
+      "input": "[{'user_id': 'user123', 'challenge_ids': ['challenge456', 'challenge789'], 'submitted': True}]",
+      "kwargs": "{}",
+      "duration": 6.749993190169334e-06
+    },
+    {
+      "name": "download_attempt_after_challenge_end",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'can_download': True}",
+      "output": "None",
+      "error": "solve() missing 1 required positional argument: 'target'",
+      "input": "[{'user_id': 'user123', 'challenge_id': 'challenge456', 'submitted': True, 'challenge_ended': True}]",
+      "kwargs": "{}",
+      "duration": 6.333022611215711e-06
+    }
+  ],
+  "llm_calls": 1,
+  "timeline": {
+    "attempt": 3,
+    "strategy": "pattern_skeleton",
+    "phase": "initial",
+    "events": {
+      "decompose": {
+        "start": "2026-02-24T11:54:47.785727",
+        "end": "2026-02-24T11:54:52.390134"
+      },
+      "solve": {
+        "start": "2026-02-24T11:54:52.390201",
+        "end": "2026-02-24T11:54:55.462371"
+      },
+      "tests": {
+        "start": "2026-02-24T11:54:55.462127",
+        "end": "2026-02-24T11:54:55.462326",
+        "duration_seconds": "0.000"
+      }
+    },
+    "meta": {
+      "llm_calls": "1"
+    }
+  },
+  "solution_preview": "def solve(nums, target):\n    left, right = 0, len(nums) - 1\n    while left < right:\n        total = nums[left] + nums[right]\n        if total == target:\n            return left, right\n        if total < target:\n            left += 1\n        else:\n            right -= 1\n    return -1, -1"
+}

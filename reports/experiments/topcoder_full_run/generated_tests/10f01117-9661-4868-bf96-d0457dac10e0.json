@@ -1,0 +1,133 @@
+[
+  {
+    "name": "valid_sub_page_configuration",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "message": "Sub page configured successfully."
+    },
+    "input": [
+      {
+        "subPage": {
+          "title": "Challenge Details",
+          "url": "/challenges/details",
+          "icon": "details"
+        }
+      }
+    ]
+  },
+  {
+    "name": "duplicate_sub_page_identifier",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Sub page identifier already exists."
+    },
+    "input": [
+      {
+        "subPage": {
+          "title": "Challenge Details",
+          "url": "/challenges/details",
+          "icon": "details"
+        }
+      }
+    ]
+  },
+  {
+    "name": "missing_title",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Title is required."
+    },
+    "input": [
+      {
+        "subPage": {
+          "url": "/challenges/details",
+          "icon": "details"
+        }
+      }
+    ]
+  },
+  {
+    "name": "invalid_url_format",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Invalid URL format."
+    },
+    "input": [
+      {
+        "subPage": {
+          "title": "Challenge Details",
+          "url": "invalid-url",
+          "icon": "details"
+        }
+      }
+    ]
+  },
+  {
+    "name": "empty_sub_page_configuration",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Sub page configuration cannot be empty."
+    },
+    "input": [
+      {
+        "subPage": {}
+      }
+    ]
+  },
+  {
+    "name": "long_title_exceeds_limit",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Title exceeds maximum length."
+    },
+    "input": [
+      {
+        "subPage": {
+          "title": "A very long title that exceeds the maximum allowed length for a sub page title",
+          "url": "/challenges/details",
+          "icon": "details"
+        }
+      }
+    ]
+  },
+  {
+    "name": "valid_sub_page_with_icon",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "message": "Sub page configured successfully."
+    },
+    "input": [
+      {
+        "subPage": {
+          "title": "Challenge Overview",
+          "url": "/challenges/overview",
+          "icon": "overview"
+        }
+      }
+    ]
+  },
+  {
+    "name": "unsupported_icon_type",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Icon type is not supported."
+    },
+    "input": [
+      {
+        "subPage": {
+          "title": "Challenge Details",
+          "url": "/challenges/details",
+          "icon": "unsupported_icon"
+        }
+      }
+    ]
+  }
+]

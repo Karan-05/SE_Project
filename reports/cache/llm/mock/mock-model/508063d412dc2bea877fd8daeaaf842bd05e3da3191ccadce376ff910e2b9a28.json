@@ -1,0 +1,1 @@
+{"content": "[MOCK] 5c9d693c2132b17c :: Given the problem: Return the number of undirected edges., would pattern hash_bucket be relevant?", "tokens": 14, "elapsed": 1.583000000193735e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "pattern-hint", "caller": "pattern_skeleton"}}

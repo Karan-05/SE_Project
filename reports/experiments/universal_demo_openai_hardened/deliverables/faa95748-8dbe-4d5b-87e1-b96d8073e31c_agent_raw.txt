@@ -1,0 +1,40 @@
+```
+BEGIN_JSON
+{
+  "task_type": "repo_patch",
+  "id": "faa95748-8dbe-4d5b-87e1-b96d8073e31c",
+  "title": "Topcoder Community App - 2 Round Challenge sporadically showing as 1 round",
+  "summary": "The task involves creating a git patch to address an issue in the Topcoder Community App where the 2 Round Challenge is sometimes displayed as a 1 Round Challenge. The patch should be based on commit hash 11a5aa6e in the develop branch.",
+  "assumptions": [
+    "The issue described in the GitHub issue #6778 is well understood and can be addressed with code changes.",
+    "The local repository is not provided, but access to the GitHub repository is available."
+  ],
+  "plan": [
+    "Review the issue details in GitHub issue #6778 to understand the requirements.",
+    "Identify the relevant files and components in the community app that need modification.",
+    "Implement the necessary code changes to resolve the issue.",
+    "Create a git patch file against commit hash 11a5aa6e in the develop branch.",
+    "Prepare a test plan to validate the changes made in the patch.",
+    "Document risks and rollback strategies associated with the changes."
+  ],
+  "artifacts": {
+    "patch_diff_unified": "TBD – missing unified diff of the code changes.",
+    "file_plan": "TBD – missing detailed file/module changes and rationale.",
+    "risks": "TBD – missing documented risks and mitigations.",
+    "test_plan": "TBD – missing commands/tests + expected results."
+  },
+  "validations": [
+    "Self-check indicates that the plan aligns with the task requirements.",
+    "Validation of the patch will be performed once the code changes are implemented."
+  ],
+  "confidence": 0.5,
+  "stop_reason": "blocked_partial_context",
+  "rubric_self_check": {
+    "coverage": 0.5,
+    "specificity": 0.5,
+    "actionability": 0.5,
+    "overall_notes": "The plan is outlined, but detailed artifacts are missing."
+  }
+}
+END_JSON
+```

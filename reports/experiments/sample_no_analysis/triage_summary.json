@@ -1,0 +1,92 @@
+{
+  "run_id": "sample_no_analysis",
+  "sample_size": 3,
+  "cluster_counts": {
+    "real_algorithm_wrong": 3
+  },
+  "samples": [
+    {
+      "task_id": "355a5497-71c3-4e3a-b200-f53d62564667",
+      "dataset_id": "data_processed_tasks.csv",
+      "strategy_initial": "contract_first",
+      "strategy_final": "simulation_trace",
+      "attempts": 7.0,
+      "failure_signature": "1bdefa4eb9e58442ac049f5dcd39961273a8974e4b17d951fd0a4b673f5d1f50",
+      "tests_source": "statement",
+      "tests_modes": [
+        "io"
+      ],
+      "entry_point": "solve",
+      "problem_statement": "Welcome to the Learn AI Challenge series\\! Your mission is to explore AI and the Model Context Protocol (MCP) by building an innovative AI Agent application that leverages the Topcoder MCP server.\n\nThe agent can take many forms\u2014chatbot, automation tool, research assistant, code generator, data visualization tool, or something entirely unique.\n\nYou are free to use open-source agents or develop y...",
+      "failing_tests": [
+        {
+          "name": "io_sample_1",
+          "expected": "Refine the Use Case & Design the Agent (Days 1\u20132)**",
+          "output": "",
+          "error": ""
+        },
+        {
+          "name": "io_sample_2",
+          "expected": "** A stable, polished, and bug-free agent that reliably handles diverse inputs and edge scenarios",
+          "output": "",
+          "error": ""
+        }
+      ],
+      "failure_note": "",
+      "code_snippet": "def solve(*args):\n    return None",
+      "category": "real_algorithm_wrong",
+      "tests_path": "/Users/karanallagh/Desktop/DataCollector/reports/experiments/sample_no_analysis/extracted_tests/355a5497-71c3-4e3a-b200-f53d62564667.json"
+    },
+    {
+      "task_id": "graph_edges_stress",
+      "dataset_id": "experiments_decomposition_benchmark_tasks.json",
+      "strategy_initial": "contract_first",
+      "strategy_final": "contract_first",
+      "attempts": 1.0,
+      "failure_signature": "",
+      "tests_source": "provided",
+      "tests_modes": [
+        "call"
+      ],
+      "entry_point": "solve",
+      "problem_statement": "Return the number of undirected edges.",
+      "failing_tests": [],
+      "failure_note": "sample_0: pass",
+      "code_snippet": "def solve(edges):\n                return len(edges)",
+      "category": "real_algorithm_wrong",
+      "tests_path": "/Users/karanallagh/Desktop/DataCollector/reports/experiments/sample_no_analysis/extracted_tests/graph_edges_stress.json"
+    },
+    {
+      "task_id": "graph_degree_test",
+      "dataset_id": "experiments_decomposition_benchmark_tasks.json",
+      "strategy_initial": "contract_first",
+      "strategy_final": "simulation_trace",
+      "attempts": 7.0,
+      "failure_signature": "28bb4b22b791d684c93165572bd028c9665c7812af1096de8f618191ff494d2e",
+      "tests_source": "provided",
+      "tests_modes": [
+        "call"
+      ],
+      "entry_point": "solve",
+      "problem_statement": "Return degree counts for each vertex.",
+      "failing_tests": [
+        {
+          "name": "sample_0",
+          "expected": "{'0': 1, '1': 2, '2': 1}",
+          "output": "{0: 1, 1: 2, 2: 1}",
+          "error": ""
+        },
+        {
+          "name": "sample_1",
+          "expected": "{'1': 2}",
+          "output": "{1: 2}",
+          "error": ""
+        }
+      ],
+      "failure_note": "",
+      "code_snippet": "def solve(edges):\n                deg = {}\n                for a,b in edges:\n                    deg[a] = deg.get(a,0)+1\n                    deg[b] = deg.get(b,0)+1\n                return deg",
+      "category": "real_algorithm_wrong",
+      "tests_path": "/Users/karanallagh/Desktop/DataCollector/reports/experiments/sample_no_analysis/extracted_tests/graph_degree_test.json"
+    }
+  ]
+}

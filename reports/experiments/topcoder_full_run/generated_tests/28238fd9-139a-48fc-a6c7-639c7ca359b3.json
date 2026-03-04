@@ -1,0 +1,74 @@
+[
+  {
+    "name": "create_challenge_admin",
+    "mode": "call",
+    "expected": {
+      "id": 3,
+      "name": "New Challenge",
+      "type": "ADMIN"
+    },
+    "input": [
+      {
+        "name": "New Challenge",
+        "type": "ADMIN"
+      }
+    ]
+  },
+  {
+    "name": "get_challenge_statistics_valid",
+    "mode": "call",
+    "expected": {
+      "id": 1,
+      "statistics": {
+        "submissions": 10,
+        "winners": 2
+      }
+    },
+    "input": [
+      {
+        "challenge_id": 1
+      }
+    ]
+  },
+  {
+    "name": "get_challenge_statistics_invalid",
+    "mode": "call",
+    "expected": "Challenge not found",
+    "input": [
+      {
+        "challenge_id": 999
+      }
+    ]
+  },
+  {
+    "name": "post_challenge_notification",
+    "mode": "call",
+    "expected": "Notification sent",
+    "input": [
+      {
+        "challenge_id": 1,
+        "message": "New update available"
+      }
+    ]
+  },
+  {
+    "name": "create_challenge_missing_fields",
+    "mode": "call",
+    "expected": "Missing required fields",
+    "input": [
+      {
+        "type": "ADMIN"
+      }
+    ]
+  },
+  {
+    "name": "get_challenge_statistics_edge_case",
+    "mode": "call",
+    "expected": "Invalid challenge ID",
+    "input": [
+      {
+        "challenge_id": 0
+      }
+    ]
+  }
+]

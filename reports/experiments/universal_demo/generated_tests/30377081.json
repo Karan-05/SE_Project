@@ -1,0 +1,127 @@
+[
+  {
+    "name": "basic_integration_workflow",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "result": "integration_completed"
+    },
+    "input": [
+      {
+        "workflow": "simple_integration",
+        "data": {
+          "input1": "value1",
+          "input2": "value2"
+        }
+      }
+    ]
+  },
+  {
+    "name": "error_handling_integration",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "invalid input"
+    },
+    "input": [
+      {
+        "workflow": "error_prone_integration",
+        "data": {
+          "input1": "invalid_value"
+        }
+      }
+    ]
+  },
+  {
+    "name": "event_driven_workflow",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "result": "order_processed"
+    },
+    "input": [
+      {
+        "event": "new_order",
+        "data": {
+          "order_id": "12345"
+        }
+      }
+    ]
+  },
+  {
+    "name": "service_bus_integration",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "result": "message_sent"
+    },
+    "input": [
+      {
+        "service": "service_bus",
+        "data": {
+          "message": "test_message"
+        }
+      }
+    ]
+  },
+  {
+    "name": "ci_cd_pipeline_execution",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "result": "pipeline_executed"
+    },
+    "input": [
+      {
+        "pipeline": "integration_pipeline",
+        "trigger": "manual"
+      }
+    ]
+  },
+  {
+    "name": "high_load_integration",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "result": "integration_completed"
+    },
+    "input": [
+      {
+        "workflow": "high_load_integration",
+        "data": {
+          "load": "high"
+        }
+      }
+    ]
+  },
+  {
+    "name": "timeout_handling",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "timeout occurred"
+    },
+    "input": [
+      {
+        "workflow": "long_running_integration",
+        "data": {
+          "timeout": "true"
+        }
+      }
+    ]
+  },
+  {
+    "name": "invalid_event_format",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "invalid event format"
+    },
+    "input": [
+      {
+        "event": "invalid_format_event",
+        "data": {}
+      }
+    ]
+  }
+]

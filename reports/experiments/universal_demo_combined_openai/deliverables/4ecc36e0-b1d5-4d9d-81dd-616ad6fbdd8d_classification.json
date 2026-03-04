@@ -1,0 +1,35 @@
+{
+  "task_type": "data_etl",
+  "confidence": 0.9,
+  "why": [
+    "The task involves fixing issues in a UserController, which suggests a need for data transformation and validation.",
+    "The requirements include ensuring data consistency and validation logic, which are typical in ETL processes."
+  ],
+  "missing_info": [
+    "Specific details about the existing database schema and the current implementation of UserController.",
+    "Sample data for testing the ETL process."
+  ],
+  "verification_plan": [
+    "Run validation queries to ensure data integrity.",
+    "Test the updated UserController functionalities against expected outputs."
+  ],
+  "artifacts_to_generate": [
+    {
+      "name": "schema.md",
+      "format": "md"
+    },
+    {
+      "name": "pipeline.py",
+      "format": "code"
+    },
+    {
+      "name": "validation.sql",
+      "format": "sql"
+    },
+    {
+      "name": "sample_inputs_outputs.md",
+      "format": "md"
+    }
+  ],
+  "synthesis_policy": "self_check"
+}

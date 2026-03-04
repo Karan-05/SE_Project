@@ -1,0 +1,165 @@
+{
+  "task_id": "30377081",
+  "strategy": "semantic_diff",
+  "attempt": 9,
+  "pass_rate": 0.0,
+  "plan_subtasks": [
+    "load base solution",
+    "apply semantic deltas",
+    "re-test",
+    "Generate minimal unit tests for critical behaviors",
+    "Add adversarial/edge-case tests",
+    "Run tests and interpret failures"
+  ],
+  "plan_tests": [
+    "critical unit tests",
+    "edge-case probes"
+  ],
+  "plan_diagnostics": {
+    "base_task": "baseline",
+    "num_deltas": "1",
+    "delta_note": "### Semantic Deltas\n\n1. **Role**: Azure Integration Developer\n2. **Work Arrangement**: Remote\n3. **Engagement Type**: Full-time\n4. **Duration**: 6 months\n5. **Extension Potential**: Based on performance and project needs",
+    "planning_tokens": "123",
+    "planning_time": "1.941024"
+  },
+  "patch_summary": {
+    "phase": "initial"
+  },
+  "failing_tests": [
+    "basic_integration_workflow",
+    "error_handling_integration",
+    "event_driven_workflow",
+    "service_bus_integration",
+    "ci_cd_pipeline_execution"
+  ],
+  "trace": [
+    "",
+    "",
+    "",
+    "",
+    ""
+  ],
+  "feedback": [
+    "basic_integration_workflow expected {'status': 'success', 'result': 'integration_completed'} but saw None",
+    "error_handling_integration expected {'status': 'error', 'message': 'invalid input'} but saw None",
+    "event_driven_workflow expected {'status': 'success', 'result': 'order_processed'} but saw None",
+    "service_bus_integration expected {'status': 'success', 'result': 'message_sent'} but saw None",
+    "ci_cd_pipeline_execution expected {'status': 'success', 'result': 'pipeline_executed'} but saw None"
+  ],
+  "reproduction": "inputs=[{'workflow': 'simple_integration', 'data': {'input1': 'value1', 'input2': 'value2'}}] kwargs={}",
+  "tests_run": [
+    {
+      "name": "basic_integration_workflow",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'status': 'success', 'result': 'integration_completed'}",
+      "output": "None",
+      "error": "",
+      "input": "[{'workflow': 'simple_integration', 'data': {'input1': 'value1', 'input2': 'value2'}}]",
+      "kwargs": "{}",
+      "duration": 1.8916995031759143e-05
+    },
+    {
+      "name": "error_handling_integration",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'status': 'error', 'message': 'invalid input'}",
+      "output": "None",
+      "error": "",
+      "input": "[{'workflow': 'error_prone_integration', 'data': {'input1': 'invalid_value'}}]",
+      "kwargs": "{}",
+      "duration": 9.625015081837773e-06
+    },
+    {
+      "name": "event_driven_workflow",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'status': 'success', 'result': 'order_processed'}",
+      "output": "None",
+      "error": "",
+      "input": "[{'event': 'new_order', 'data': {'order_id': '12345'}}]",
+      "kwargs": "{}",
+      "duration": 7.875001756474376e-06
+    },
+    {
+      "name": "service_bus_integration",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'status': 'success', 'result': 'message_sent'}",
+      "output": "None",
+      "error": "",
+      "input": "[{'service': 'service_bus', 'data': {'message': 'test_message'}}]",
+      "kwargs": "{}",
+      "duration": 8.208007784560323e-06
+    },
+    {
+      "name": "ci_cd_pipeline_execution",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'status': 'success', 'result': 'pipeline_executed'}",
+      "output": "None",
+      "error": "",
+      "input": "[{'pipeline': 'integration_pipeline', 'trigger': 'manual'}]",
+      "kwargs": "{}",
+      "duration": 7.124996045604348e-06
+    },
+    {
+      "name": "high_load_integration",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'status': 'success', 'result': 'integration_completed'}",
+      "output": "None",
+      "error": "",
+      "input": "[{'workflow': 'high_load_integration', 'data': {'load': 'high'}}]",
+      "kwargs": "{}",
+      "duration": 8.834002073854208e-06
+    },
+    {
+      "name": "timeout_handling",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'status': 'error', 'message': 'timeout occurred'}",
+      "output": "None",
+      "error": "",
+      "input": "[{'workflow': 'long_running_integration', 'data': {'timeout': 'true'}}]",
+      "kwargs": "{}",
+      "duration": 7.875001756474376e-06
+    },
+    {
+      "name": "invalid_event_format",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'status': 'error', 'message': 'invalid event format'}",
+      "output": "None",
+      "error": "",
+      "input": "[{'event': 'invalid_format_event', 'data': {}}]",
+      "kwargs": "{}",
+      "duration": 6.750022293999791e-06
+    }
+  ],
+  "llm_calls": 1,
+  "timeline": {
+    "attempt": 9,
+    "strategy": "semantic_diff",
+    "phase": "initial",
+    "events": {
+      "decompose": {
+        "start": "2026-02-24T12:10:20.245041",
+        "end": "2026-02-24T12:10:22.186226"
+      },
+      "solve": {
+        "start": "2026-02-24T12:10:22.186272",
+        "end": "2026-02-24T12:10:24.941091"
+      },
+      "tests": {
+        "start": "2026-02-24T12:10:24.940940",
+        "end": "2026-02-24T12:10:24.941051",
+        "duration_seconds": "0.000"
+      }
+    },
+    "meta": {
+      "llm_calls": "1"
+    }
+  },
+  "solution_preview": "def solve(*args):\n    return None"
+}

@@ -1,0 +1,39 @@
+{
+  "horizon": 50,
+  "variants": [
+    {
+      "name": "full",
+      "description": "Full stack with multi-agent RL allocation and graph-aware decomposition.",
+      "rl_source": "multi",
+      "agent": "skill_match",
+      "strategy": "contract_first"
+    },
+    {
+      "name": "no_graph_embeddings",
+      "description": "Disable graph embeddings in decomposition planner.",
+      "rl_source": "single",
+      "agent": "meta_strategy",
+      "strategy": "contract_first",
+      "embedding_profile": "no_graph"
+    },
+    {
+      "name": "no_rl_allocation",
+      "description": "Replace skill-based RL agent with random allocation.",
+      "rl_source": "single",
+      "agent": "random",
+      "strategy": "contract_first"
+    },
+    {
+      "name": "no_multi_agent",
+      "description": "Single planner-solver without verifier consensus.",
+      "rl_source": "single",
+      "agent": "meta_strategy",
+      "strategy": "pattern_skeleton"
+    },
+    {
+      "name": "predictor_only",
+      "description": "Predictive model only, no RL or decomposition loop.",
+      "type": "predictor"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+```json
+{
+  "task_type": "architecture_doc",
+  "summary": "Design an architecture document for deploying and maintaining the FICO Falcon Fraud Manager suite in AWS, focusing on system deployment, configuration, and performance optimization. The document includes components, interfaces, risks, and a rollout plan.",
+  "artifacts": {
+    "doc_markdown": "## Requirements\n- Deploy FICO Falcon applications on AWS.\n- Support multi-tenant configurations.\n- Optimize performance for high throughput.\n\n## Architecture Diagram\n```mermaid\ngraph TD;\n    A[FICO Falcon Suite] --> B[Scoring]\n    A --> C[MUX]\n    A --> D[Case Manager]\n    A --> E[Rule Expert]\n    B --> F[Database]\n    C --> F\n    D --> F\n    E --> F\n```  \n\n## Components\n- **FICO Falcon Suite** – Central application suite for fraud management.\n- **Scoring** – Application for scoring transactions.\n- **MUX** – Multi-user experience management.\n- **Case Manager** – Manages fraud cases.\n- **Rule Expert** – Deploys business rules.\n- **Database** – Stores application data (Oracle, SQL Server, Couchbase).\n\n## Interfaces\n- **FICO Falcon Suite ↔ Database** (SQL queries for data retrieval and storage).\n- **Scoring ↔ Rule Expert** (API calls for rule evaluation).\n\n## Risks\n- **Performance Bottlenecks** – High transaction volumes may lead to latency.\n- **Configuration Errors** – Misconfigurations in multi-tenant setups can cause data leaks.\n- **Dependency on AWS Services** – Outages in AWS could impact application availability.\n\n## Rollout Plan\n1. Deploy FICO Falcon Suite in a staging environment.\n2. Configure applications for performance testing.\n3. Conduct user acceptance testing (UAT).\n4. Roll out to production with monitoring in place.\n5. Optimize based on feedback and performance metrics.\n\n## Acceptance Checklist\n- [ ] All components deployed.\n- [ ] Performance metrics established.\n- [ ] Security configurations validated.\n- [ ] User documentation completed.",
+    "components": [
+      {"name": "FICO Falcon Suite", "responsibility": "Central application suite for fraud management", "tech": "AWS"},
+      {"name": "Scoring", "responsibility": "Application for scoring transactions", "tech": "AWS"},
+      {"name": "MUX", "responsibility": "Multi-user experience management", "tech": "AWS"},
+      {"name": "Case Manager", "responsibility": "Manages fraud cases", "tech": "AWS"},
+      {"name": "Rule Expert", "responsibility": "Deploys business rules", "tech": "AWS"},
+      {"name": "Database", "responsibility": "Stores application data", "tech": "Oracle, SQL Server, Couchbase"}
+    ],
+    "interfaces": [
+      {"source": "FICO Falcon Suite", "target": "Database", "type": "SQL queries"},
+      {"source": "Scoring", "target": "Rule Expert", "type": "API calls"}
+    ],
+    "tradeoffs": [
+      "Using AWS services for scalability vs potential vendor lock-in.",
+      "Multi-

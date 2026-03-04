@@ -1,0 +1,1 @@
+[MOCK] 130622fd3c88fc9a :: You are generating a patch for a software repository task. Return ONLY JSON with keys 'plan' (Markdown summary) and 'dif

@@ -1,0 +1,1 @@
+{"content": "```python\ndef solve(*args):\n    return sum(args)\n```", "tokens": 145, "elapsed": 1.4207547910045832, "budget_exceeded": false, "meta": {"provider": "openai", "model": "repair-loop", "caller": "failure_mode_first:repair"}}

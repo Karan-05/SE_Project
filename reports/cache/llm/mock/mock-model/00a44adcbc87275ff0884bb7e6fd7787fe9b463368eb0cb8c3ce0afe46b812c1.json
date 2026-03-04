@@ -1,0 +1,1 @@
+{"content": "[MOCK] e2f6b3a0cd443e18 :: Given the problem: Return the number of undirected edges., would pattern kadane be relevant?", "tokens": 14, "elapsed": 1.6249999998940723e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "pattern-hint", "caller": "pattern_skeleton"}}

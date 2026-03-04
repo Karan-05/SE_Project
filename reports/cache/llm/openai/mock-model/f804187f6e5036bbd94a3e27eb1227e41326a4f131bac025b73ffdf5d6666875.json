@@ -1,0 +1,1 @@
+{"content": "```python\ndef solve(*args):\n    if not args:\n        return None\n    return sum(args)  # Example implementation that sums the input arguments\n```", "tokens": 236, "elapsed": 1.7369811670214403, "budget_exceeded": false, "meta": {"provider": "openai", "model": "repair-loop", "caller": "failure_mode_first:repair"}}

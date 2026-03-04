@@ -1,0 +1,1 @@
+{"content": "[MOCK] 68ec919835b632e7 :: List three high-risk failure modes for this coding task along with short rationales: Return the number of undirected edg", "tokens": 19, "elapsed": 2.083999999902275e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "failure-scout", "caller": "failure_mode_first"}}

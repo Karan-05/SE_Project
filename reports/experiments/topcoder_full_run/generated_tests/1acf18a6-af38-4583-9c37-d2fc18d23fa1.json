@@ -1,0 +1,122 @@
+[
+  {
+    "name": "get_terms_with_valid_title",
+    "mode": "call",
+    "expected": {
+      "terms": [
+        {
+          "id": "0375a1e9-ed7d-4683-bcf3-f21114bd26c9",
+          "title": "User Agreement",
+          "content": "Terms of use for users."
+        }
+      ],
+      "total": 1
+    },
+    "input": [
+      {
+        "page": 1,
+        "perPage": 25,
+        "title": "User Agreement"
+      }
+    ]
+  },
+  {
+    "name": "get_terms_with_empty_title",
+    "mode": "call",
+    "expected": {
+      "terms": [],
+      "total": 0
+    },
+    "input": [
+      {
+        "page": 1,
+        "perPage": 25,
+        "title": ""
+      }
+    ]
+  },
+  {
+    "name": "save_term_with_valid_data",
+    "mode": "call",
+    "expected": {
+      "success": true,
+      "id": "new-term-id"
+    },
+    "input": [
+      {
+        "title": "Privacy Policy",
+        "content": "<p>Privacy terms...</p>",
+        "type": "standard",
+        "agreeabilityType": "mandatory"
+      }
+    ]
+  },
+  {
+    "name": "save_term_with_missing_title",
+    "mode": "call",
+    "expected": {
+      "success": false,
+      "error": "Title is required."
+    },
+    "input": [
+      {
+        "title": "",
+        "content": "<p>Privacy terms...</p>",
+        "type": "standard",
+        "agreeabilityType": "mandatory"
+      }
+    ]
+  },
+  {
+    "name": "delete_term_with_valid_id",
+    "mode": "call",
+    "expected": {
+      "success": true
+    },
+    "input": [
+      {
+        "id": "0375a1e9-ed7d-4683-bcf3-f21114bd26c9"
+      }
+    ]
+  },
+  {
+    "name": "delete_term_with_invalid_id",
+    "mode": "call",
+    "expected": {
+      "success": false,
+      "error": "Term not found."
+    },
+    "input": [
+      {
+        "id": "invalid-id"
+      }
+    ]
+  },
+  {
+    "name": "add_user_to_term_with_valid_handle",
+    "mode": "call",
+    "expected": {
+      "success": true
+    },
+    "input": [
+      {
+        "termId": "0375a1e9-ed7d-4683-bcf3-f21114bd26c9",
+        "handle": "validUserHandle"
+      }
+    ]
+  },
+  {
+    "name": "add_user_to_term_with_invalid_handle",
+    "mode": "call",
+    "expected": {
+      "success": false,
+      "error": "User not found."
+    },
+    "input": [
+      {
+        "termId": "0375a1e9-ed7d-4683-bcf3-f21114bd26c9",
+        "handle": "invalidUserHandle"
+      }
+    ]
+  }
+]

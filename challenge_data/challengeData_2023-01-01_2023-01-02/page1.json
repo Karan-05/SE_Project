@@ -1,0 +1,24 @@
+[
+    {
+        "challengeId": "0c9d344e-6452-4d0c-a474-34d203f04f6c",
+        "legacyId": 30327139,
+        "directProjectId": 37733,
+        "status": "Completed",
+        "trackType": "Development",
+        "type": "First2Finish",
+        "name": "Topcoder Community App - Support LaTex formulas in Markdown rendering",
+        "description": "### Overview\n\nThe Topcoder Community App is the main application used to display challenges, handle registration, and accept submissions on the Topcoder platform.\n\nYou can find the source code here:\n\nhttps://github.com/topcoder-platform/community-app\n\n### Local deployment\n\nInstructions for deploying and building the community app locally can be found here:\n\nhttps://platform-ui.topcoder.com/dev-center/getting-started\n\n### Issue\nThe full requirements can be found here:\n\nhttps://github.com/topcoder-platform/community-app/issues/6761\n\n### Submission\n\nYour submission should be a git patch file against commit hash 47be786c in the `latex_support` branch\n\n",
+        "totalPrizeCost": 165,
+        "winners": "nursoltan-s",
+        "registrationStartDate": "2023-01-01 03:00:13",
+        "registrationEndDate": "2023-01-02 10:57:49",
+        "submissionStartDate": "2023-01-01 03:08:22",
+        "submissionEndDate": "2023-01-02 10:57:49",
+        "startDate": "2023-01-01 03:00:13",
+        "endDate": "2023-01-02 10:24:41",
+        "technologies": "HTML,JavaScript,CSS",
+        "numOfSubmissions": 5,
+        "numOfRegistrants": 17,
+        "forumId": 0
+    }
+]

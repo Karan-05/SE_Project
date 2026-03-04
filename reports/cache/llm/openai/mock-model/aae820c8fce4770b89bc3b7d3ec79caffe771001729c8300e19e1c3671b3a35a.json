@@ -1,0 +1,1 @@
+{"content": "The pattern `hash_bucket` can be relevant in the context of loading historical documents from a legacy system into a new system, especially when dealing with a large volume", "tokens": 93, "elapsed": 1.6832466659834608, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

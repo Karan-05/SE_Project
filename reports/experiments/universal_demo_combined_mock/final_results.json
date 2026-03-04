@@ -1,0 +1,89 @@
+{
+  "run_id": "universal_demo_combined_mock",
+  "total_rows": 30,
+  "total_unique_task_ids": 29,
+  "manifest_unique_task_ids": 29,
+  "llm_provider": "mock",
+  "attempted": 29,
+  "actionable_attempted_total": 29,
+  "attempted_success_total": 29,
+  "attempted_failed_total": 0,
+  "parse_failures_total": 0,
+  "non_actionable_total": 0,
+  "solved_pass_final": 5,
+  "algo_verified_attempted": 5,
+  "pass_at_final": 1.0,
+  "pass_at_final_extracted_only": 1.0,
+  "attempted_algo": 5,
+  "solved_algo": 5,
+  "attempted_non_coding": 24,
+  "completed_deliverables": 24,
+  "deliverable_success_rate": 1.0,
+  "deliverable_artifacts": 24,
+  "task_type_breakdown": {
+    "data_etl": {
+      "attempted": 12,
+      "success": 12,
+      "failed": 0
+    },
+    "api_backend": {
+      "attempted": 7,
+      "success": 7,
+      "failed": 0
+    },
+    "architecture_doc": {
+      "attempted": 4,
+      "success": 4,
+      "failed": 0
+    },
+    "repo_patch": {
+      "attempted": 1,
+      "success": 1,
+      "failed": 0
+    },
+    "algo_coding": {
+      "attempted": 5,
+      "success": 5,
+      "failed": 0
+    }
+  },
+  "skipped_counts": {},
+  "attempted_with_extracted_tests": 29,
+  "attempted_with_synthesized_tests": 0,
+  "success_rate_extracted": 0.1724137931034483,
+  "success_rate_synthesized": 0.0,
+  "self_check_attempted": 0,
+  "self_check_pass_rate": 0.0,
+  "avg_attempts": 0.1724137931034483,
+  "median_attempts": 0.0,
+  "p90_attempts": 1.0,
+  "fallback_rate": 0.0,
+  "stagnation_rate": 0.0,
+  "retries_exhausted_count": 0,
+  "llm_calls_total": 10.0,
+  "llm_calls_avg_per_task": 0.3448275862068966,
+  "llm_calls_per_attempted": 0.3448275862068966,
+  "llm_available": true,
+  "runtime": {
+    "start_time": "2026-02-24T18:41:15.499708",
+    "end_time": "2026-02-24T18:41:21.508378",
+    "wall_time_seconds": 6.00867,
+    "avg_wall_time_per_attempted": 0.20719551724137933
+  },
+  "reconciliation": {
+    "discovered_rows": 30,
+    "unique_tasks": 29,
+    "duplicates": 1,
+    "filtered_out": 0,
+    "manifest_total": 30,
+    "dataset_files": 8
+  },
+  "progress_fraction": 1.0,
+  "evaluation_coverage": 1.0,
+  "pipeline_status": "COMPLETE",
+  "validity": "DEMO_ONLY_MOCK",
+  "presentation_mode": true,
+  "sample_size": 30,
+  "sample_strategy": "random",
+  "sample_seed": 42
+}

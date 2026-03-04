@@ -1,0 +1,1 @@
+{"content": "The two-pointer technique is typically used in scenarios involving sorted arrays or lists where you want to compare elements or find pairs that meet certain criteria. In the context of", "tokens": 92, "elapsed": 1.7989434999908553, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

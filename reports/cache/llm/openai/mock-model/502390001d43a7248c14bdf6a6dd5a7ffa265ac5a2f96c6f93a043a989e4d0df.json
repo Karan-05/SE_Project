@@ -1,0 +1,1 @@
+{"content": "The problem you've described involves building an ASP.NET Core Web API with specific requirements, including support for Swagger documentation, unit testing, and sample data in SQL. The", "tokens": 92, "elapsed": 1.4311659579980187, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

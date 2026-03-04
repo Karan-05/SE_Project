@@ -1,0 +1,53 @@
+{
+  "task_id": "mixed_matrix_hard",
+  "strategy": "semantic_diff",
+  "attempt": 5,
+  "pass_rate": 0.0,
+  "plan_subtasks": [
+    "load base solution",
+    "apply semantic deltas",
+    "re-test",
+    "Generate minimal unit tests for critical behaviors",
+    "Add adversarial/edge-case tests",
+    "Run tests and interpret failures"
+  ],
+  "plan_tests": [
+    "critical unit tests",
+    "edge-case probes"
+  ],
+  "plan_diagnostics": {
+    "base_task": "baseline",
+    "num_deltas": "1",
+    "delta_note": "[MOCK] 9f00e999f07db240 :: You are comparing a new task to base task baseline. List semantic deltas succinctly: Return the sum of the main diagonal",
+    "planning_tokens": "21",
+    "planning_time": "0.000002"
+  },
+  "patch_summary": {
+    "phase": "initial"
+  },
+  "failing_tests": [],
+  "trace": [],
+  "feedback": [],
+  "reproduction": "",
+  "tests_run": [],
+  "llm_calls": 0,
+  "timeline": {
+    "attempt": 5,
+    "strategy": "semantic_diff",
+    "phase": "initial",
+    "events": {
+      "decompose": {
+        "start": "2026-02-24T00:15:40.392507",
+        "end": "2026-02-24T00:15:40.392548"
+      },
+      "solve": {
+        "start": "2026-02-24T00:15:40.392551",
+        "end": "2026-02-24T00:15:40.392596"
+      }
+    },
+    "meta": {
+      "llm_calls": "0"
+    }
+  },
+  "solution_preview": "def solve(*args):\n    return None"
+}

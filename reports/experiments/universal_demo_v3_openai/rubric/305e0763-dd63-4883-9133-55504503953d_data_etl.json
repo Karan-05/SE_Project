@@ -1,0 +1,16 @@
+{
+  "score": 74.9,
+  "passes_threshold": false,
+  "reasons": [
+    "Schema defined",
+    "Pipeline steps listed",
+    "Data quality or invariants addressed",
+    "Validation queries present"
+  ],
+  "missing": [
+    "Sample Outputs",
+    "Acceptance Checklist"
+  ],
+  "section_coverage": 0.7142857142857143,
+  "extra_score": 0.8
+}

@@ -1,0 +1,27 @@
+{
+  "task_id": "array_prefix_ood",
+  "tests": [
+    {
+      "name": "sample_0",
+      "mode": "call",
+      "status": "pass",
+      "expected": "[1, 3, 6]",
+      "output": "[1, 3, 6]",
+      "error": "",
+      "input": "[[1, 2, 3]]",
+      "kwargs": "{}",
+      "duration": 2.0540988771244884e-05
+    },
+    {
+      "name": "sample_1",
+      "mode": "call",
+      "status": "pass",
+      "expected": "[0]",
+      "output": "[0]",
+      "error": "",
+      "input": "[[0]]",
+      "kwargs": "{}",
+      "duration": 4.95798303745687e-06
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+```json
+{
+  "task_type": "data_etl",
+  "summary": "Design an ETL pipeline to update the Topgear Scorecard data, ensuring consistency with the old application and validating against specified requirements. The pipeline will include SQL updates and data quality checks.",
+  "artifacts": {
+    "pipeline_overview": "Extract data from the existing scorecard database, transform it to match the new requirements, and load it back into the database while ensuring consistent dropdown options.",
+    "sql_or_pseudocode": "UPDATE scorecard_table SET option = new_value WHERE condition;\nSELECT * FROM scorecard_table WHERE option = old_value;",
+    "tables": [
+      "scorecard_table(id INT PRIMARY KEY, option VARCHAR(255), updated_at TIMESTAMP)",
+      "dq_checks(id INT, check_type VARCHAR(255), status BOOLEAN)"
+    ],
+    "dq_checks": [
+      "Check for NULL values in 'option' column.",
+      "Ensure that all dropdown options match the old application."
+    ],
+    "tests": [
+      "SELECT COUNT(*) FROM scorecard_table WHERE option IS NULL;",
+      "SELECT COUNT(DISTINCT option) FROM scorecard_table;"
+    ]
+  },
+  "rubric_self_check": {
+    "coverage": 90,
+    "specificity": 85,
+    "actionability": 88,
+    "overall_notes": "The ETL blueprint covers schema, pipeline overview, and data quality checks, but could benefit from more explicit validation queries."
+  }
+}
+```

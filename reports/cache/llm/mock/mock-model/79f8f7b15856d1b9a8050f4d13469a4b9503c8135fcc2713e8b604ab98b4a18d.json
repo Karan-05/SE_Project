@@ -1,0 +1,1 @@
+{"content": "[MOCK] 35dcf16deb0ae20d :: List three high-risk failure modes for this coding task along with short rationales: Welcome to the Learn AI Challenge s", "tokens": 59, "elapsed": 4.875000000126306e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "failure-scout", "caller": "failure_mode_first"}}

@@ -1,0 +1,118 @@
+[
+  {
+    "name": "standard_template_creation",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "message": "Template created successfully."
+    },
+    "input": [
+      {
+        "template_name": "Standard Contract",
+        "template_content": "This is a standard contract template."
+      }
+    ]
+  },
+  {
+    "name": "special_paragraph_inclusion",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "message": "Template created with special paragraphs."
+    },
+    "input": [
+      {
+        "template_name": "Special Contract",
+        "template_content": "This contract includes special terms.",
+        "special_paragraphs": [
+          "Confidentiality Clause",
+          "Termination Clause"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "template_update",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "message": "Template updated successfully."
+    },
+    "input": [
+      {
+        "template_id": 1,
+        "new_content": "Updated contract template content."
+      }
+    ]
+  },
+  {
+    "name": "one_off_template_creation",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "message": "One-off template created successfully."
+    },
+    "input": [
+      {
+        "template_name": "One-off Contract",
+        "template_content": "This is a one-off contract."
+      }
+    ]
+  },
+  {
+    "name": "invalid_template_creation",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Template name and content cannot be empty."
+    },
+    "input": [
+      {
+        "template_name": "",
+        "template_content": ""
+      }
+    ]
+  },
+  {
+    "name": "missing_special_paragraphs",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "message": "Template created without special paragraphs."
+    },
+    "input": [
+      {
+        "template_name": "Contract Without Special Paragraphs",
+        "template_content": "This contract has no special terms.",
+        "special_paragraphs": []
+      }
+    ]
+  },
+  {
+    "name": "template_deletion",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "message": "Template deleted successfully."
+    },
+    "input": [
+      {
+        "template_id": 1
+      }
+    ]
+  },
+  {
+    "name": "duplicate_template_creation",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Template with this name already exists."
+    },
+    "input": [
+      {
+        "template_name": "Standard Contract",
+        "template_content": "This is a standard contract template."
+      }
+    ]
+  }
+]

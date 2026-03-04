@@ -1,0 +1,90 @@
+{
+  "task_id": "graph_degree_hard",
+  "strategy": "semantic_diff",
+  "attempt": 5,
+  "pass_rate": 0.0,
+  "plan_subtasks": [
+    "load base solution",
+    "apply semantic deltas",
+    "re-test",
+    "Generate minimal unit tests for critical behaviors",
+    "Add adversarial/edge-case tests",
+    "Run tests and interpret failures"
+  ],
+  "plan_tests": [
+    "critical unit tests",
+    "edge-case probes"
+  ],
+  "plan_diagnostics": {
+    "base_task": "baseline",
+    "num_deltas": "1",
+    "delta_note": "[MOCK] 475acbe93b9752d7 :: You are comparing a new task to base task baseline. List semantic deltas succinctly: Return degree counts for each verte",
+    "planning_tokens": "20",
+    "planning_time": "0.000002"
+  },
+  "patch_summary": {
+    "phase": "initial"
+  },
+  "failing_tests": [
+    "sample_0",
+    "sample_1"
+  ],
+  "trace": [
+    "",
+    ""
+  ],
+  "feedback": [
+    "sample_0 expected {'0': 1, '1': 2, '2': 1} but saw {0: 1, 1: 2, 2: 1}",
+    "sample_1 expected {'1': 2} but saw {1: 2}"
+  ],
+  "reproduction": "inputs=[[[0, 1], [1, 2]]] kwargs={}",
+  "tests_run": [
+    {
+      "name": "sample_0",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'0': 1, '1': 2, '2': 1}",
+      "output": "{0: 1, 1: 2, 2: 1}",
+      "error": "",
+      "input": "[[[0, 1], [1, 2]]]",
+      "kwargs": "{}",
+      "duration": 2.1249999999639613e-06
+    },
+    {
+      "name": "sample_1",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'1': 2}",
+      "output": "{1: 2}",
+      "error": "",
+      "input": "[[[1, 1]]]",
+      "kwargs": "{}",
+      "duration": 1.125000000046228e-06
+    }
+  ],
+  "llm_calls": 0,
+  "timeline": {
+    "attempt": 5,
+    "strategy": "semantic_diff",
+    "phase": "initial",
+    "events": {
+      "decompose": {
+        "start": "2026-02-24T00:19:21.375117",
+        "end": "2026-02-24T00:19:21.375154"
+      },
+      "solve": {
+        "start": "2026-02-24T00:19:21.375156",
+        "end": "2026-02-24T00:19:21.375219"
+      },
+      "tests": {
+        "start": "2026-02-24T00:19:21.375211",
+        "end": "2026-02-24T00:19:21.375216",
+        "duration_seconds": "0.000"
+      }
+    },
+    "meta": {
+      "llm_calls": "0"
+    }
+  },
+  "solution_preview": "def solve(edges):\n                deg = {}\n                for a,b in edges:\n                    deg[a] = deg.get(a,0)+1\n                    deg[b] = deg.get(b,0)+1\n                return deg"
+}

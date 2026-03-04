@@ -1,0 +1,1 @@
+{"content": "[MOCK] 714fbc1bc49d08eb :: Given the problem: Return the running prefix sums., would pattern kadane be relevant?", "tokens": 13, "elapsed": 1.4170000000035543e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "pattern-hint", "caller": "pattern_skeleton"}}

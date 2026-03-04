@@ -1,0 +1,1 @@
+{"content": "To create an initial schema definition and TypeScript skeleton for a new version of the Topcoder Project Service, we need to consider the requirements of the service, the", "tokens": 86, "elapsed": 2.8677812079986325, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

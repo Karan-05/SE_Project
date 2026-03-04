@@ -1,0 +1,90 @@
+{
+  "task_id": "graph_degree",
+  "strategy": "contract_first",
+  "attempt": 1,
+  "pass_rate": 0.0,
+  "plan_subtasks": [
+    "Validate inputs vs contract",
+    "Implement core logic",
+    "Check edge cases",
+    "Generate minimal unit tests for critical behaviors",
+    "Add adversarial/edge-case tests",
+    "Run tests and interpret failures"
+  ],
+  "plan_tests": [
+    "",
+    ""
+  ],
+  "plan_diagnostics": {
+    "missing_fields": "constraints",
+    "contract_length": "34",
+    "audit_note": "To review the contract for completeness and identify any missing guarantees, let's break down the components:\n\n### Contract Components\n\n1. **Inputs**: \n   - Currently listed as \"Underspecified.\" \n   - **Missing Guarantees**: \n     - What format are the inputs in? (e.g., adjacency list, edge list)\n     - Are there any constraints on the number of vertices or edges?\n     - Are there any specific types of graphs (e.g., directed",
+    "planning_tokens": "153",
+    "planning_time": "2.215682"
+  },
+  "patch_summary": {
+    "phase": "initial"
+  },
+  "failing_tests": [
+    "sample_0",
+    "sample_1"
+  ],
+  "trace": [
+    "",
+    ""
+  ],
+  "feedback": [
+    "sample_0 expected {'0': 1, '1': 2, '2': 1} but saw {0: 1, 1: 2, 2: 1}",
+    "sample_1 expected {'1': 2} but saw {1: 2}"
+  ],
+  "reproduction": "inputs=[[[0, 1], [1, 2]]] kwargs={}",
+  "tests_run": [
+    {
+      "name": "sample_0",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'0': 1, '1': 2, '2': 1}",
+      "output": "{0: 1, 1: 2, 2: 1}",
+      "error": "",
+      "input": "[[[0, 1], [1, 2]]]",
+      "kwargs": "{}",
+      "duration": 8.833012543618679e-06
+    },
+    {
+      "name": "sample_1",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'1': 2}",
+      "output": "{1: 2}",
+      "error": "",
+      "input": "[[[1, 1]]]",
+      "kwargs": "{}",
+      "duration": 2.042012056335807e-06
+    }
+  ],
+  "llm_calls": 1,
+  "timeline": {
+    "attempt": 1,
+    "strategy": "contract_first",
+    "phase": "initial",
+    "events": {
+      "decompose": {
+        "start": "2026-02-24T01:34:18.260198",
+        "end": "2026-02-24T01:34:18.261352"
+      },
+      "solve": {
+        "start": "2026-02-24T01:34:18.261382",
+        "end": "2026-02-24T01:34:20.251311"
+      },
+      "tests": {
+        "start": "2026-02-24T01:34:20.251273",
+        "end": "2026-02-24T01:34:20.251294",
+        "duration_seconds": "0.000"
+      }
+    },
+    "meta": {
+      "llm_calls": "1"
+    }
+  },
+  "solution_preview": "def solve(edges):\n                deg = {}\n                for a,b in edges:\n                    deg[a] = deg.get(a,0)+1\n                    deg[b] = deg.get(b,0)+1\n                return deg"
+}

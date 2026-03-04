@@ -1,0 +1,26 @@
+\begin{tabular}{lllllllllll}
+\toprule
+feature\_mode & target & f1 & accuracy & precision & recall & roc\_auc & log\_loss & rmse & mae & r2 \\
+\midrule
+multimodal & dropped & 0.988 & 0.997 & 1.000 & 0.977 & 1.000 & 0.040 & -- & -- & -- \\
+multimodal & failed & 0.976 & 0.989 & 0.984 & 0.968 & 0.999 & 0.099 & -- & -- & -- \\
+multimodal & has\_winner & 0.995 & 0.993 & 0.992 & 0.999 & 0.999 & 0.097 & -- & -- & -- \\
+multimodal & num\_submissions & -- & -- & -- & -- & -- & -- & 1.153 & 0.899 & 0.926 \\
+multimodal & starved & 0.988 & 0.997 & 1.000 & 0.977 & 1.000 & 0.040 & -- & -- & -- \\
+multimodal & winning\_score & -- & -- & -- & -- & -- & -- & 7.451 & 5.927 & 0.914 \\
+text\_metadata & num\_submissions & -- & -- & -- & -- & -- & -- & 0.393 & 0.331 & 0.992 \\
+text\_metadata & starved & 1.000 & 1.000 & 1.000 & 1.000 & 1.000 & 0.031 & -- & -- & -- \\
+text\_only & dropped & 0.831 & 0.968 & 1.000 & 0.730 & 1.000 & 0.093 & -- & -- & -- \\
+text\_only & failed & 0.829 & 0.943 & 1.000 & 0.760 & 0.995 & 0.177 & -- & -- & -- \\
+text\_only & has\_winner & 0.969 & 0.949 & 0.941 & 1.000 & 1.000 & 0.170 & -- & -- & -- \\
+text\_only & num\_submissions & -- & -- & -- & -- & -- & -- & 2.100 & 1.776 & 0.748 \\
+text\_only & starved & 0.831 & 0.968 & 1.000 & 0.730 & 1.000 & 0.093 & -- & -- & -- \\
+text\_only & winning\_score & -- & -- & -- & -- & -- & -- & 12.372 & 10.052 & 0.761 \\
+text\_time & dropped & 0.964 & 0.992 & 1.000 & 0.933 & 1.000 & 0.058 & -- & -- & -- \\
+text\_time & failed & 0.908 & 0.962 & 1.000 & 0.841 & 0.997 & 0.140 & -- & -- & -- \\
+text\_time & has\_winner & 0.986 & 0.978 & 0.974 & 0.999 & 0.999 & 0.130 & -- & -- & -- \\
+text\_time & num\_submissions & -- & -- & -- & -- & -- & -- & 1.517 & 1.200 & 0.871 \\
+text\_time & starved & 0.964 & 0.992 & 1.000 & 0.933 & 1.000 & 0.058 & -- & -- & -- \\
+text\_time & winning\_score & -- & -- & -- & -- & -- & -- & 10.773 & 8.616 & 0.817 \\
+\bottomrule
+\end{tabular}

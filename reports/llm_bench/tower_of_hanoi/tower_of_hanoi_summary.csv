@@ -1,0 +1,15 @@
+n_disks,strategy,success_rate,mean_tokens,median_tokens,mean_moves,median_moves
+4,full_decomposition,1.0,90.0,90.0,15.0,15.0
+4,select_then_decompose,1.0,49.0,49.0,15.0,15.0
+5,full_decomposition,1.0,186.0,186.0,31.0,31.0
+5,select_then_decompose,1.0,101.0,101.0,31.0,31.0
+6,full_decomposition,1.0,378.0,378.0,63.0,63.0
+6,select_then_decompose,0.0,398.0,398.0,189.0,189.0
+7,full_decomposition,1.0,762.0,762.0,127.0,127.0
+7,select_then_decompose,0.0,802.0,802.0,381.0,381.0
+8,full_decomposition,1.0,1530.0,1530.0,255.0,255.0
+8,select_then_decompose,0.0,1592.0,1592.0,765.0,765.0
+9,full_decomposition,1.0,3066.0,3066.0,511.0,511.0
+9,select_then_decompose,0.0,3128.0,3128.0,1533.0,1533.0
+10,full_decomposition,1.0,6138.0,6138.0,1023.0,1023.0
+10,select_then_decompose,0.0,6200.0,6200.0,3069.0,3069.0

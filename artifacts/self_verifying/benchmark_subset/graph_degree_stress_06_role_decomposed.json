@@ -1,0 +1,89 @@
+{
+  "task_id": "graph_degree_stress",
+  "strategy": "role_decomposed",
+  "attempt": 6,
+  "pass_rate": 0.0,
+  "plan_subtasks": [
+    "Architect proposal",
+    "Critic review",
+    "Coder implementation",
+    "Fuzzer tests",
+    "Generate minimal unit tests for critical behaviors",
+    "Add adversarial/edge-case tests"
+  ],
+  "plan_tests": [
+    "critical unit tests",
+    "edge-case probes"
+  ],
+  "plan_diagnostics": {
+    "critic_comments": "1",
+    "fuzzer_tests": "3",
+    "planning_tokens": "22",
+    "planning_time": "0.000003"
+  },
+  "patch_summary": {
+    "phase": "initial"
+  },
+  "failing_tests": [
+    "sample_0",
+    "sample_1"
+  ],
+  "trace": [
+    "",
+    ""
+  ],
+  "feedback": [
+    "sample_0 expected {'0': 1, '1': 2, '2': 1} but saw {0: 1, 1: 2, 2: 1}",
+    "sample_1 expected {'1': 2} but saw {1: 2}"
+  ],
+  "reproduction": "inputs=[[[0, 1], [1, 2]]] kwargs={}",
+  "tests_run": [
+    {
+      "name": "sample_0",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'0': 1, '1': 2, '2': 1}",
+      "output": "{0: 1, 1: 2, 2: 1}",
+      "error": "",
+      "input": "[[[0, 1], [1, 2]]]",
+      "kwargs": "{}",
+      "duration": 2.1670000001083878e-06
+    },
+    {
+      "name": "sample_1",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'1': 2}",
+      "output": "{1: 2}",
+      "error": "",
+      "input": "[[[1, 1]]]",
+      "kwargs": "{}",
+      "duration": 1.2920000000971044e-06
+    }
+  ],
+  "llm_calls": 0,
+  "timeline": {
+    "attempt": 6,
+    "strategy": "role_decomposed",
+    "phase": "initial",
+    "events": {
+      "decompose": {
+        "start": "2026-02-24T00:19:21.377344",
+        "end": "2026-02-24T00:19:21.377412"
+      },
+      "solve": {
+        "start": "2026-02-24T00:19:21.377414",
+        "end": "2026-02-24T00:19:21.377474"
+      },
+      "tests": {
+        "start": "2026-02-24T00:19:21.377466",
+        "end": "2026-02-24T00:19:21.377470",
+        "duration_seconds": "0.000"
+      }
+    },
+    "meta": {
+      "llm_calls": "0"
+    }
+  },
+  "solution_preview": "def solve(edges):\n                deg = {}\n                for a,b in edges:\n                    deg[a] = deg.get(a,0)+1\n                    deg[b] = deg.get(b,0)+1\n                return deg"
+}

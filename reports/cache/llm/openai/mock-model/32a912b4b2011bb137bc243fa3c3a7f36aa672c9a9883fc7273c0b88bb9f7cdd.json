@@ -1,0 +1,1 @@
+{"content": "The \"two pointers\" pattern is primarily a technique used in algorithm design, particularly for solving problems related to arrays or linked lists. It involves using two pointers to", "tokens": 93, "elapsed": 1.6384628329979023, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

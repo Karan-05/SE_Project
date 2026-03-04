@@ -1,0 +1,1 @@
+[MOCK] 235290ad22e6cf5c :: You are a senior analytics engineer designing an ETL/data pipeline. Respond in Markdown and include the following sectio

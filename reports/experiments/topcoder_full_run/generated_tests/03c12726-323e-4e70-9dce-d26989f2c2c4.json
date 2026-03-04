@@ -1,0 +1,141 @@
+[
+  {
+    "name": "valid_candidate",
+    "mode": "call",
+    "expected": "true",
+    "input": [
+      {
+        "years_of_experience": 12,
+        "languages": [
+          "English",
+          "Portuguese"
+        ],
+        "certifications": [
+          "LSA"
+        ],
+        "availability": "immediate",
+        "time_zone": "US/Brazil"
+      }
+    ]
+  },
+  {
+    "name": "missing_language",
+    "mode": "call",
+    "expected": "false",
+    "input": [
+      {
+        "years_of_experience": 10,
+        "languages": [
+          "English"
+        ],
+        "certifications": [],
+        "availability": "immediate",
+        "time_zone": "US/Brazil"
+      }
+    ]
+  },
+  {
+    "name": "insufficient_experience",
+    "mode": "call",
+    "expected": "false",
+    "input": [
+      {
+        "years_of_experience": 5,
+        "languages": [
+          "English",
+          "Portuguese"
+        ],
+        "certifications": [],
+        "availability": "immediate",
+        "time_zone": "US/Brazil"
+      }
+    ]
+  },
+  {
+    "name": "excessive_availability",
+    "mode": "call",
+    "expected": "false",
+    "input": [
+      {
+        "years_of_experience": 15,
+        "languages": [
+          "English",
+          "Portuguese"
+        ],
+        "certifications": [
+          "LSA"
+        ],
+        "availability": "not immediate",
+        "time_zone": "US/Brazil"
+      }
+    ]
+  },
+  {
+    "name": "valid_candidate_no_certification",
+    "mode": "call",
+    "expected": "true",
+    "input": [
+      {
+        "years_of_experience": 11,
+        "languages": [
+          "English",
+          "Portuguese"
+        ],
+        "certifications": [],
+        "availability": "immediate",
+        "time_zone": "US/Brazil"
+      }
+    ]
+  },
+  {
+    "name": "valid_candidate_with_edge_time_zone",
+    "mode": "call",
+    "expected": "true",
+    "input": [
+      {
+        "years_of_experience": 10,
+        "languages": [
+          "English",
+          "Portuguese"
+        ],
+        "certifications": [],
+        "availability": "immediate",
+        "time_zone": "Brazil"
+      }
+    ]
+  },
+  {
+    "name": "invalid_time_zone",
+    "mode": "call",
+    "expected": "false",
+    "input": [
+      {
+        "years_of_experience": 10,
+        "languages": [
+          "English",
+          "Portuguese"
+        ],
+        "certifications": [],
+        "availability": "immediate",
+        "time_zone": "Europe"
+      }
+    ]
+  },
+  {
+    "name": "edge_case_zero_experience",
+    "mode": "call",
+    "expected": "false",
+    "input": [
+      {
+        "years_of_experience": 0,
+        "languages": [
+          "English",
+          "Portuguese"
+        ],
+        "certifications": [],
+        "availability": "immediate",
+        "time_zone": "US/Brazil"
+      }
+    ]
+  }
+]

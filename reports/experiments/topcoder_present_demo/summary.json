@@ -1,0 +1,51 @@
+{
+  "run_id": "topcoder_present_demo",
+  "total_problems": 10,
+  "attempted": 8,
+  "completed_successfully": 0,
+  "success_rate": 0.0,
+  "pass_at_final": 0.0,
+  "avg_attempts_to_success": 0.0,
+  "median_attempts_to_success": 0.0,
+  "max_attempts_to_success": 0.0,
+  "fallback_count": 8,
+  "fallback_rate": 1.0,
+  "stagnation_count": 7,
+  "stagnation_rate": 0.875,
+  "attempted_with_extracted_tests": 8,
+  "attempted_with_synthesized_tests": 0,
+  "success_rate_extracted": 0.0,
+  "success_rate_synthesized": 0.0,
+  "strategy_distribution_initial": {
+    "contract_first": 8
+  },
+  "strategy_distribution_final": {
+    "multi_view": 8
+  },
+  "runtime": {
+    "start_time": "2026-02-23T15:00:09.456419",
+    "end_time": "2026-02-23T15:00:11.299569",
+    "total_wall_time_seconds": 1.84315,
+    "avg_time_per_task": 0.012789499999999999
+  },
+  "error_taxonomy": {
+    "timeout": 8,
+    "synthesis_failure": 2
+  },
+  "artifact_dir": "/Users/karanallagh/Desktop/DataCollector/artifacts/self_verifying/topcoder_present_demo",
+  "tasks_by_dataset": {
+    "analysis_output_ai_feasibility_analysis.csv": 5,
+    "analysis_output_ai_super_analysis.csv": 3,
+    "analysis_output_legacy_ai_feasibility_analysis.csv": 2
+  },
+  "solve_attempts_total": 80.0,
+  "llm_calls_total": 0,
+  "llm_calls_avg_per_task": 0.0,
+  "llm_available": true,
+  "llm_reason": "mock",
+  "stop_reason": "",
+  "presentation_mode": true,
+  "sample_size": 10,
+  "sample_strategy": "stratified",
+  "sample_seed": 42
+}

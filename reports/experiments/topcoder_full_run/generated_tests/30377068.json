@@ -1,0 +1,129 @@
+[
+  {
+    "name": "valid_quote_negotiation_workflow",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "message": "Quote negotiation initiated."
+    },
+    "input": [
+      {
+        "quoteId": "Q123",
+        "buyerId": "B456",
+        "sellerId": "S789",
+        "discount": 10,
+        "approvalStatus": "pending"
+      }
+    ]
+  },
+  {
+    "name": "quote_negotiation_with_invalid_discount",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Invalid discount value."
+    },
+    "input": [
+      {
+        "quoteId": "Q124",
+        "buyerId": "B457",
+        "sellerId": "S790",
+        "discount": -5,
+        "approvalStatus": "pending"
+      }
+    ]
+  },
+  {
+    "name": "successful_api_integration_flow",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "message": "Integration flow executed successfully."
+    },
+    "input": [
+      {
+        "integrationId": "I101",
+        "payload": {
+          "orderId": "O202",
+          "status": "completed"
+        }
+      }
+    ]
+  },
+  {
+    "name": "api_integration_with_missing_payload",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Payload is required."
+    },
+    "input": [
+      {
+        "integrationId": "I102",
+        "payload": null
+      }
+    ]
+  },
+  {
+    "name": "custom_workflow_template_extension",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "message": "Workflow template extended."
+    },
+    "input": [
+      {
+        "templateId": "T303",
+        "newSteps": [
+          "step1",
+          "step2"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "workflow_extension_with_invalid_steps",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Invalid steps provided."
+    },
+    "input": [
+      {
+        "templateId": "T304",
+        "newSteps": [
+          "step1",
+          null
+        ]
+      }
+    ]
+  },
+  {
+    "name": "role_based_task_routing",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "message": "Task routed to manager."
+    },
+    "input": [
+      {
+        "taskId": "T405",
+        "role": "manager"
+      }
+    ]
+  },
+  {
+    "name": "task_routing_with_invalid_role",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Invalid role specified."
+    },
+    "input": [
+      {
+        "taskId": "T406",
+        "role": "unknown"
+      }
+    ]
+  }
+]

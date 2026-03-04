@@ -1,0 +1,1 @@
+{"content": "[MOCK] 32261dd546075fd1 :: Critic: find two weaknesses in the architect plan.", "tokens": 8, "elapsed": 1.3329999999367459e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "role-critic", "caller": "role_decomposed"}}

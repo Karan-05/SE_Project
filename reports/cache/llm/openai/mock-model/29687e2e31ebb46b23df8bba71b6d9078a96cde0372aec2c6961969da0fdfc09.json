@@ -1,0 +1,1 @@
+{"content": "The issue you're facing with the font of the chart in the output file not matching the input file is likely related to how the chart is being generated or exported in", "tokens": 93, "elapsed": 1.5317511250032112, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

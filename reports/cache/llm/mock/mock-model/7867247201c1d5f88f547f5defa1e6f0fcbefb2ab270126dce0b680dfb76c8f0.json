@@ -1,0 +1,1 @@
+{"content": "[MOCK] 32b5597625df2898 :: Architect: propose a phased plan for task mixed_matrix_stress: Return the sum of the main diagonal.", "tokens": 15, "elapsed": 2.083999999902275e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "role-architect", "caller": "role_decomposed"}}

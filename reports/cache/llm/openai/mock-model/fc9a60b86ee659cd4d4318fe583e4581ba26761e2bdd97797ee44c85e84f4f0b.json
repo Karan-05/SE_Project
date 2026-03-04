@@ -1,0 +1,1 @@
+{"content": "In the context of developing a .NET REST API that returns company locations based on a given business name, the concept of a \"hash bucket\" can be relevant", "tokens": 90, "elapsed": 1.5362071660056245, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

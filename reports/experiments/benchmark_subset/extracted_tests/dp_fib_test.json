@@ -1,0 +1,10 @@
+[
+  {
+    "name": "sample_1",
+    "mode": "call",
+    "expected": 5,
+    "input": [
+      5
+    ]
+  }
+]

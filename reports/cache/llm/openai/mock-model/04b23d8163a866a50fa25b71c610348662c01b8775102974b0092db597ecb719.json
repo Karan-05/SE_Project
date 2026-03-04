@@ -1,0 +1,1 @@
+{"content": "```python\ndef solve(*args):\n    if not args:\n        return None\n    # Assuming the function is meant to process a list of numbers\n    return sum(args) / len(args)\n```", "tokens": 243, "elapsed": 1.635720082995249, "budget_exceeded": false, "meta": {"provider": "openai", "model": "repair-loop", "caller": "semantic_diff:repair"}}

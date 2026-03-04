@@ -1,0 +1,115 @@
+[
+  {
+    "name": "valid_user_login",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "token": "valid_jwt_token"
+    },
+    "input": [
+      {
+        "username": "testuser",
+        "password": "securepassword"
+      }
+    ]
+  },
+  {
+    "name": "invalid_user_login",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Invalid credentials"
+    },
+    "input": [
+      {
+        "username": "testuser",
+        "password": "wrongpassword"
+      }
+    ]
+  },
+  {
+    "name": "user_not_found",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "User not found"
+    },
+    "input": [
+      {
+        "username": "nonexistentuser",
+        "password": "anyPassword"
+      }
+    ]
+  },
+  {
+    "name": "role_assignment",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "message": "Role assigned successfully"
+    },
+    "input": [
+      {
+        "userId": "12345",
+        "role": "admin"
+      }
+    ]
+  },
+  {
+    "name": "duplicate_role_assignment",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Role already assigned"
+    },
+    "input": [
+      {
+        "userId": "12345",
+        "role": "admin"
+      }
+    ]
+  },
+  {
+    "name": "e2e_test_user_creation",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "message": "User created successfully"
+    },
+    "input": [
+      {
+        "username": "newuser",
+        "password": "newpassword"
+      }
+    ]
+  },
+  {
+    "name": "e2e_test_user_deletion",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "message": "User deleted successfully"
+    },
+    "input": [
+      {
+        "userId": "12345"
+      }
+    ]
+  },
+  {
+    "name": "e2e_test_role_retrieval",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "roles": [
+        "admin",
+        "user"
+      ]
+    },
+    "input": [
+      {
+        "userId": "12345"
+      }
+    ]
+  }
+]

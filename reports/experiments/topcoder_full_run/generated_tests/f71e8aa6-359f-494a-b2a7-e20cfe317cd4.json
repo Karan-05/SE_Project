@@ -1,0 +1,111 @@
+[
+  {
+    "name": "successful_reskin_check",
+    "mode": "call",
+    "expected": "reskin_success",
+    "input": [
+      {
+        "submission_status": "failed",
+        "action": "advance"
+      }
+    ]
+  },
+  {
+    "name": "failed_reskin_check",
+    "mode": "call",
+    "expected": "reskin_failed",
+    "input": [
+      {
+        "submission_status": "failed",
+        "action": "advance"
+      }
+    ]
+  },
+  {
+    "name": "no_submission_to_advance",
+    "mode": "call",
+    "expected": "no_submission_error",
+    "input": [
+      {
+        "submission_status": "none",
+        "action": "advance"
+      }
+    ]
+  },
+  {
+    "name": "multiple_failed_submissions",
+    "mode": "call",
+    "expected": "multiple_reskin_success",
+    "input": [
+      {
+        "submission_status": "failed",
+        "action": "advance"
+      },
+      {
+        "submission_status": "failed",
+        "action": "advance"
+      }
+    ]
+  },
+  {
+    "name": "invalid_action",
+    "mode": "call",
+    "expected": "invalid_action_error",
+    "input": [
+      {
+        "submission_status": "failed",
+        "action": "invalid"
+      }
+    ]
+  },
+  {
+    "name": "reskin_on_successful_submission",
+    "mode": "call",
+    "expected": "reskin_not_applicable",
+    "input": [
+      {
+        "submission_status": "successful",
+        "action": "advance"
+      }
+    ]
+  },
+  {
+    "name": "edge_case_large_submission_list",
+    "mode": "call",
+    "expected": "large_submission_reskin_success",
+    "input": [
+      {
+        "submission_status": "failed",
+        "action": "advance"
+      },
+      {
+        "submission_status": "failed",
+        "action": "advance"
+      },
+      {
+        "submission_status": "failed",
+        "action": "advance"
+      },
+      {
+        "submission_status": "failed",
+        "action": "advance"
+      },
+      {
+        "submission_status": "failed",
+        "action": "advance"
+      },
+      {
+        "submission_status": "failed",
+        "action": "advance"
+      },
+      {
+        "submission_status": "failed",
+        "action": "advance"
+      },
+      {
+        "submission_status": "failed",
+        "action": "advance"
+      }
+    ]
+  }
+]

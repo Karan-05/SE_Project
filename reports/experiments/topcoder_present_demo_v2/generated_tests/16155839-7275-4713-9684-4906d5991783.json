@@ -1,0 +1,85 @@
+[
+  {
+    "name": "responsive_design_768px",
+    "mode": "call",
+    "expected": "true",
+    "input": [
+      {
+        "viewport": "768px",
+        "html": "<div class='landing-page'></div>"
+      }
+    ]
+  },
+  {
+    "name": "responsive_design_1366px",
+    "mode": "call",
+    "expected": "true",
+    "input": [
+      {
+        "viewport": "1366px",
+        "html": "<div class='landing-page'></div>"
+      }
+    ]
+  },
+  {
+    "name": "html_validation",
+    "mode": "call",
+    "expected": "true",
+    "input": [
+      {
+        "html": "<div class='landing-page'></div>"
+      }
+    ]
+  },
+  {
+    "name": "scss_quality",
+    "mode": "call",
+    "expected": "true",
+    "input": [
+      {
+        "scss": ".landing-page { color: $primary-color; }"
+      }
+    ]
+  },
+  {
+    "name": "clean_css",
+    "mode": "call",
+    "expected": "true",
+    "input": [
+      {
+        "scss": ".landing-page { color: #fff; } .landing-page { color: #fff; }"
+      }
+    ]
+  },
+  {
+    "name": "non_mobile_viewport",
+    "mode": "call",
+    "expected": "false",
+    "input": [
+      {
+        "viewport": "500px",
+        "html": "<div class='landing-page'></div>"
+      }
+    ]
+  },
+  {
+    "name": "excessive_nesting",
+    "mode": "call",
+    "expected": "false",
+    "input": [
+      {
+        "scss": ".outer { .inner { .deep { color: $primary-color; } } }"
+      }
+    ]
+  },
+  {
+    "name": "us_english_text",
+    "mode": "call",
+    "expected": "true",
+    "input": [
+      {
+        "text": "Welcome to Topcoder Connect!"
+      }
+    ]
+  }
+]

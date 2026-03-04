@@ -1,0 +1,1 @@
+{"content": "[MOCK] 97b2628f4725a034 :: Given the problem: Return degree counts for each vertex., would pattern two_pointers be relevant?", "tokens": 14, "elapsed": 1.6659999999557584e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "pattern-hint", "caller": "pattern_skeleton"}}

@@ -1,0 +1,23 @@
+{
+  "task_id": "30377279",
+  "run_id": "universal_demo_mock_hardened",
+  "raw_path": "/Users/karanallagh/Desktop/DataCollector/reports/experiments/universal_demo_mock_hardened/deliverables/30377279_agent_raw.txt",
+  "raw_length": 2947,
+  "sentinel_found": true,
+  "attempts": [
+    {
+      "mode": "sentinel",
+      "success": true,
+      "length": 2927
+    }
+  ],
+  "errors": [],
+  "repair_attempted": false,
+  "repair_used": false,
+  "max_repairs": 0,
+  "llm_provider": "mock",
+  "source": "sentinel",
+  "parsed_length": 2927,
+  "repair_path": "",
+  "status": "success"
+}

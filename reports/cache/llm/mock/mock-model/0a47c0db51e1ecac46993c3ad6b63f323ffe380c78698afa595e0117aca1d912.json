@@ -1,0 +1,1 @@
+{"content": "[MOCK] 07de1a2fdc35bcd1 :: Coder: summarize the approved plan before coding.", "tokens": 7, "elapsed": 1.3750000000811724e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "role-coder", "caller": "role_decomposed"}}

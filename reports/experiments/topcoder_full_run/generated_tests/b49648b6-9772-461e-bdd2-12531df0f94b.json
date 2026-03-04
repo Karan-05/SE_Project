@@ -1,0 +1,82 @@
+[
+  {
+    "name": "valid_progress_calculation",
+    "mode": "call",
+    "expected": 50,
+    "input": [
+      {
+        "challengeId": "12345"
+      }
+    ]
+  },
+  {
+    "name": "no_reviews_submitted",
+    "mode": "call",
+    "expected": null,
+    "input": [
+      {
+        "challengeId": "67890"
+      }
+    ]
+  },
+  {
+    "name": "no_reviewers",
+    "mode": "call",
+    "expected": null,
+    "input": [
+      {
+        "challengeId": "54321"
+      }
+    ]
+  },
+  {
+    "name": "all_reviews_submitted",
+    "mode": "call",
+    "expected": 100,
+    "input": [
+      {
+        "challengeId": "98765"
+      }
+    ]
+  },
+  {
+    "name": "edge_case_one_reviewer_one_submission",
+    "mode": "call",
+    "expected": 100,
+    "input": [
+      {
+        "challengeId": "11111"
+      }
+    ]
+  },
+  {
+    "name": "edge_case_no_submissions",
+    "mode": "call",
+    "expected": null,
+    "input": [
+      {
+        "challengeId": "22222"
+      }
+    ]
+  },
+  {
+    "name": "multiple_reviewers_multiple_submissions",
+    "mode": "call",
+    "expected": 66.67,
+    "input": [
+      {
+        "challengeId": "33333"
+      }
+    ]
+  },
+  {
+    "name": "invalid_challenge_id",
+    "mode": "call",
+    "expected": "Error: Challenge not found",
+    "input": [
+      {
+        "challengeId": "invalid_id"
+      }
+    ]
+  }
+]

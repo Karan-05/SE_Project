@@ -1,0 +1,1 @@
+{"content": "[LOCAL_STUB] ff347748ec536770 :: Fill in the two_pointers skeleton respecting pitfalls Ensure indices not reused; Handle no-solution case", "tokens": 14, "elapsed": 1.4999968698248267e-06, "budget_exceeded": false, "meta": {"provider": "local_stub", "model": "pattern-codegen"}}

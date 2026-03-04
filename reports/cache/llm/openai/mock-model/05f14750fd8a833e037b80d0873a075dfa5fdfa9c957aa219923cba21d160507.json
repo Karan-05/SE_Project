@@ -1,0 +1,1 @@
+{"content": "In the context of the Topcoder Community App, the term \"hash_bucket\" typically refers to a data structure used in hash tables to manage collisions. When multiple", "tokens": 88, "elapsed": 1.655281625004136, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

@@ -1,0 +1,1 @@
+{"content": "The two-pointer technique is typically used in algorithms that involve traversing arrays or lists, particularly for problems like finding pairs, merging sorted arrays, or partitioning.", "tokens": 93, "elapsed": 1.2871337500109803, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

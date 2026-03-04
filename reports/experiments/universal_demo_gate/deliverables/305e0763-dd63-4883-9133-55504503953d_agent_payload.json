@@ -1,0 +1,60 @@
+{
+  "task_type": "data_etl",
+  "summary": "Design a data pipeline for creating and managing learning spaces, posts, comments, and annotations in a ReactJS application. The pipeline will ensure data integrity and quality through validation checks and will document the schema, transformation steps, and testing strategies.",
+  "artifacts": {
+    "pipeline_overview": "Extract data from user inputs via React forms, transform data into structured formats for storage, and load into a database (e.g., Firebase or Supabase). The pipeline will also handle annotations and upvotes/downvotes for posts and comments.",
+    "sql_or_pseudocode": "function createLearningSpace(title, description, prerequisites, thumbnail) {\n    // Validate inputs\n    if (!title || !description) throw new Error('Title and description are required');\n    // Save to database\n    return db.collection('learning_spaces').add({ title, description, prerequisites, thumbnail });\n}\n\nfunction createPost(spaceId, title, body) {\n    // Validate inputs\n    if (!title || !body) throw new Error('Title and body are required');\n    return db.collection('posts').add({ spaceId, title, body });\n}",
+    "tables": [
+      "learning_spaces(id STRING PK, title STRING, description TEXT, prerequisites TEXT[], thumbnail STRING)",
+      "posts(id STRING PK, space_id STRING FK, title STRING, body TEXT, created_at TIMESTAMP)",
+      "comments(id STRING PK, post_id STRING FK, body TEXT, created_at TIMESTAMP)",
+      "annotations(id STRING PK, post_id STRING FK, highlighted_text TEXT, user_annotation TEXT)"
+    ],
+    "dq_checks": [
+      "Ensure no NULL values in required fields (title, description for learning spaces and posts).",
+      "Validate that prerequisites are in a valid format (array of strings).",
+      "Check for duplicate titles in learning spaces."
+    ],
+    "tests": [
+      "db.collection('learning_spaces').get().then(data => assert(data.length > 0));",
+      "db.collection('posts').get().then(data => assert(data.length > 0));",
+      "db.collection('comments').get().then(data => assert(data.length > 0));"
+    ]
+  },
+  "rubric_self_check": {
+    "coverage": 90.0,
+    "specificity": 88.0,
+    "actionability": 85.0,
+    "overall_notes": "Pipeline overview and schema are well-defined; validation checks and testing strategies are included."
+  },
+  "raw": {
+    "task_type": "data_etl",
+    "summary": "Design a data pipeline for creating and managing learning spaces, posts, comments, and annotations in a ReactJS application. The pipeline will ensure data integrity and quality through validation checks and will document the schema, transformation steps, and testing strategies.",
+    "artifacts": {
+      "pipeline_overview": "Extract data from user inputs via React forms, transform data into structured formats for storage, and load into a database (e.g., Firebase or Supabase). The pipeline will also handle annotations and upvotes/downvotes for posts and comments.",
+      "sql_or_pseudocode": "function createLearningSpace(title, description, prerequisites, thumbnail) {\n    // Validate inputs\n    if (!title || !description) throw new Error('Title and description are required');\n    // Save to database\n    return db.collection('learning_spaces').add({ title, description, prerequisites, thumbnail });\n}\n\nfunction createPost(spaceId, title, body) {\n    // Validate inputs\n    if (!title || !body) throw new Error('Title and body are required');\n    return db.collection('posts').add({ spaceId, title, body });\n}",
+      "tables": [
+        "learning_spaces(id STRING PK, title STRING, description TEXT, prerequisites TEXT[], thumbnail STRING)",
+        "posts(id STRING PK, space_id STRING FK, title STRING, body TEXT, created_at TIMESTAMP)",
+        "comments(id STRING PK, post_id STRING FK, body TEXT, created_at TIMESTAMP)",
+        "annotations(id STRING PK, post_id STRING FK, highlighted_text TEXT, user_annotation TEXT)"
+      ],
+      "dq_checks": [
+        "Ensure no NULL values in required fields (title, description for learning spaces and posts).",
+        "Validate that prerequisites are in a valid format (array of strings).",
+        "Check for duplicate titles in learning spaces."
+      ],
+      "tests": [
+        "db.collection('learning_spaces').get().then(data => assert(data.length > 0));",
+        "db.collection('posts').get().then(data => assert(data.length > 0));",
+        "db.collection('comments').get().then(data => assert(data.length > 0));"
+      ]
+    },
+    "rubric_self_check": {
+      "coverage": 90,
+      "specificity": 88,
+      "actionability": 85,
+      "overall_notes": "Pipeline overview and schema are well-defined; validation checks and testing strategies are included."
+    }
+  }
+}

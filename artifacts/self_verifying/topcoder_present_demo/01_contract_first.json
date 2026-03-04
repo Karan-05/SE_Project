@@ -1,0 +1,32 @@
+{
+  "task_id": "a29ef147-15c4-4e2c-9afc-737403db74eb",
+  "strategy": "contract_first",
+  "attempt": 1,
+  "pass_rate": 0.0,
+  "plan_subtasks": [
+    "Validate inputs vs contract",
+    "Implement core logic",
+    "Check edge cases",
+    "Generate minimal unit tests for critical behaviors",
+    "Add adversarial/edge-case tests",
+    "Run tests and interpret failures"
+  ],
+  "plan_tests": [
+    ""
+  ],
+  "plan_diagnostics": {
+    "missing_fields": "constraints,edge_cases",
+    "contract_length": "32",
+    "audit_note": "[LOCAL_STUB] 35c03ac5cd406819 :: Review this contract for completeness and note any missing guarantees. Contract: {'inputs': 'Underspecified', 'outputs':",
+    "planning_tokens": "63",
+    "planning_time": "0.000030"
+  },
+  "patch_summary": {
+    "phase": "initial"
+  },
+  "failing_tests": [],
+  "trace": [],
+  "feedback": [],
+  "reproduction": "",
+  "tests_run": []
+}

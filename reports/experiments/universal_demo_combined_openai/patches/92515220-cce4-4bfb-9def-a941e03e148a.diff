@@ -1,0 +1,14 @@
+```diff
+--- a/src/components/AccountSettings.js
++++ b/src/components/AccountSettings.js
+@@ -1,5 +1,7 @@
+ import React from 'react';
+ import UniversalNav from './UniversalNav';
+ 
+ const AccountSettings = () => {
++  // Integrate universal navigation
++  return <UniversalNav />;
+   return (
+     <div>
+       <h1>Account Settings</h1>
+```

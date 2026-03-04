@@ -1,0 +1,111 @@
+[
+  {
+    "name": "button_visibility_generic_spec",
+    "mode": "call",
+    "expected": {
+      "button_visible": true,
+      "footer_overlapping": false
+    },
+    "input": [
+      {
+        "page": "generic_spec_review_scorecard"
+      }
+    ]
+  },
+  {
+    "name": "button_visibility_generic_approval",
+    "mode": "call",
+    "expected": {
+      "button_visible": true,
+      "footer_overlapping": false
+    },
+    "input": [
+      {
+        "page": "generic_approval_scorecard"
+      }
+    ]
+  },
+  {
+    "name": "button_spacing_edge_case",
+    "mode": "call",
+    "expected": {
+      "button_visible": true,
+      "footer_overlapping": false
+    },
+    "input": [
+      {
+        "page": "generic_spec_review_scorecard",
+        "footer_height": 100,
+        "button_height": 50
+      }
+    ]
+  },
+  {
+    "name": "button_spacing_adversarial_case",
+    "mode": "call",
+    "expected": {
+      "button_visible": false,
+      "footer_overlapping": true
+    },
+    "input": [
+      {
+        "page": "generic_approval_scorecard",
+        "footer_height": 200,
+        "button_height": 75
+      }
+    ]
+  },
+  {
+    "name": "button_reskin_check",
+    "mode": "call",
+    "expected": {
+      "button_style": "updated",
+      "footer_style": "consistent"
+    },
+    "input": [
+      {
+        "page": "generic_spec_review_scorecard",
+        "reskin_version": "latest"
+      }
+    ]
+  },
+  {
+    "name": "button_functionality_check",
+    "mode": "call",
+    "expected": {
+      "action_success": true
+    },
+    "input": [
+      {
+        "page": "generic_approval_scorecard",
+        "button_action": "submit"
+      }
+    ]
+  },
+  {
+    "name": "button_no_unnecessary_updates",
+    "mode": "call",
+    "expected": {
+      "changes_applied": false
+    },
+    "input": [
+      {
+        "page": "generic_spec_review_scorecard",
+        "unnecessary_changes": true
+      }
+    ]
+  },
+  {
+    "name": "footer_spacing_check",
+    "mode": "call",
+    "expected": {
+      "footer_spacing_correct": true
+    },
+    "input": [
+      {
+        "page": "generic_approval_scorecard",
+        "footer_spacing": 20
+      }
+    ]
+  }
+]

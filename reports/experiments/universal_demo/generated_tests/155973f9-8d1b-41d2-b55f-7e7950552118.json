@@ -1,0 +1,99 @@
+[
+  {
+    "name": "basic_configuration",
+    "mode": "call",
+    "expected": "Configuration successful",
+    "input": [
+      {
+        "application": "Scoring",
+        "environment": "AWS",
+        "tenant": "Tenant1"
+      }
+    ]
+  },
+  {
+    "name": "multi_tenant_setup",
+    "mode": "call",
+    "expected": "Multi-tenant setup successful",
+    "input": [
+      {
+        "application": "Case Manager",
+        "environment": "AWS",
+        "tenants": [
+          "Tenant1",
+          "Tenant2"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "rule_deployment",
+    "mode": "call",
+    "expected": "Rules deployed successfully",
+    "input": [
+      {
+        "rules": [
+          "UDV1",
+          "UDP1"
+        ],
+        "application": "Rule Expert"
+      }
+    ]
+  },
+  {
+    "name": "performance_optimization",
+    "mode": "call",
+    "expected": "Performance optimized",
+    "input": [
+      {
+        "logs": "PMAX",
+        "application": "Scoring"
+      }
+    ]
+  },
+  {
+    "name": "issue_resolution",
+    "mode": "call",
+    "expected": "Issue resolved",
+    "input": [
+      {
+        "issue": "Database connection error",
+        "application": "Falcon"
+      }
+    ]
+  },
+  {
+    "name": "edge_case_empty_rules",
+    "mode": "call",
+    "expected": "No rules to deploy",
+    "input": [
+      {
+        "rules": [],
+        "application": "Rule Expert"
+      }
+    ]
+  },
+  {
+    "name": "adversarial_case_invalid_tenant",
+    "mode": "call",
+    "expected": "Tenant not found",
+    "input": [
+      {
+        "application": "Case Manager",
+        "environment": "AWS",
+        "tenant": "InvalidTenant"
+      }
+    ]
+  },
+  {
+    "name": "model_installation",
+    "mode": "call",
+    "expected": "Model installed successfully",
+    "input": [
+      {
+        "model_type": "credit",
+        "application": "Falcon"
+      }
+    ]
+  }
+]

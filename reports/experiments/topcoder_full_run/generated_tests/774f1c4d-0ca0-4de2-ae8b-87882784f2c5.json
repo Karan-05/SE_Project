@@ -1,0 +1,122 @@
+[
+  {
+    "name": "test_save_for_later_no_submission",
+    "mode": "call",
+    "expected": {
+      "submitted": false,
+      "score": 5
+    },
+    "input": [
+      {
+        "action": "save_for_later",
+        "review_score": 5,
+        "submission_id": "12345"
+      }
+    ]
+  },
+  {
+    "name": "test_save_for_later_with_empty_score",
+    "mode": "call",
+    "expected": {
+      "submitted": false,
+      "score": null
+    },
+    "input": [
+      {
+        "action": "save_for_later",
+        "review_score": null,
+        "submission_id": "12346"
+      }
+    ]
+  },
+  {
+    "name": "test_save_for_later_multiple_clicks",
+    "mode": "call",
+    "expected": {
+      "submitted": false,
+      "score": 4
+    },
+    "input": [
+      {
+        "action": "save_for_later",
+        "review_score": 4,
+        "submission_id": "12347"
+      }
+    ]
+  },
+  {
+    "name": "test_save_for_later_with_invalid_submission_id",
+    "mode": "call",
+    "expected": {
+      "submitted": false,
+      "score": 3
+    },
+    "input": [
+      {
+        "action": "save_for_later",
+        "review_score": 3,
+        "submission_id": ""
+      }
+    ]
+  },
+  {
+    "name": "test_save_for_later_with_negative_score",
+    "mode": "call",
+    "expected": {
+      "submitted": false,
+      "score": -1
+    },
+    "input": [
+      {
+        "action": "save_for_later",
+        "review_score": -1,
+        "submission_id": "12348"
+      }
+    ]
+  },
+  {
+    "name": "test_save_for_later_with_high_score",
+    "mode": "call",
+    "expected": {
+      "submitted": false,
+      "score": 10
+    },
+    "input": [
+      {
+        "action": "save_for_later",
+        "review_score": 10,
+        "submission_id": "12349"
+      }
+    ]
+  },
+  {
+    "name": "test_save_for_later_with_non_numeric_score",
+    "mode": "call",
+    "expected": {
+      "submitted": false,
+      "score": "five"
+    },
+    "input": [
+      {
+        "action": "save_for_later",
+        "review_score": "five",
+        "submission_id": "12350"
+      }
+    ]
+  },
+  {
+    "name": "test_save_for_later_with_valid_score_and_submission",
+    "mode": "call",
+    "expected": {
+      "submitted": false,
+      "score": 7
+    },
+    "input": [
+      {
+        "action": "save_for_later",
+        "review_score": 7,
+        "submission_id": "12351"
+      }
+    ]
+  }
+]

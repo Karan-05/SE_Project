@@ -1,0 +1,93 @@
+{
+  "task_id": "305e0763-dd63-4883-9133-55504503953d",
+  "tests": [
+    {
+      "name": "create_learning_space_valid",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'success': True, 'message': 'Learning space created successfully.'}",
+      "output": "None",
+      "error": "",
+      "input": "[{'title': 'ReactJS Basics', 'description': 'A space to learn the basics of ReactJS.', 'prerequisites': ['React', 'JavaScript'], 'thumbnail': 'url_to_thumbnail_image'}]",
+      "kwargs": "{}",
+      "duration": 3.641602233983576e-05
+    },
+    {
+      "name": "create_learning_space_missing_fields",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'success': False, 'message': 'Title is required.'}",
+      "output": "None",
+      "error": "",
+      "input": "[{'title': '', 'description': 'A space without a title.', 'prerequisites': ['React'], 'thumbnail': 'url_to_thumbnail_image'}]",
+      "kwargs": "{}",
+      "duration": 1.2542004697024822e-05
+    },
+    {
+      "name": "create_post_valid",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'success': True, 'message': 'Post created successfully.'}",
+      "output": "None",
+      "error": "",
+      "input": "[{'learningSpaceId': 'space123', 'title': 'Understanding JSX', 'body': 'JSX is a syntax extension for JavaScript.'}]",
+      "kwargs": "{}",
+      "duration": 9.874987881630659e-06
+    },
+    {
+      "name": "create_post_invalid_markdown",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'success': False, 'message': 'Invalid markdown format.'}",
+      "output": "None",
+      "error": "",
+      "input": "[{'learningSpaceId': 'space123', 'title': 'Invalid Markdown Post', 'body': 'This is an invalid markdown **text'}]",
+      "kwargs": "{}",
+      "duration": 8.834002073854208e-06
+    },
+    {
+      "name": "add_comment_valid",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'success': True, 'message': 'Comment added successfully.'}",
+      "output": "None",
+      "error": "",
+      "input": "[{'postId': 'post456', 'body': 'Great post! Very informative.'}]",
+      "kwargs": "{}",
+      "duration": 7.750000804662704e-06
+    },
+    {
+      "name": "add_comment_empty_body",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'success': False, 'message': 'Comment body cannot be empty.'}",
+      "output": "None",
+      "error": "",
+      "input": "[{'postId': 'post456', 'body': ''}]",
+      "kwargs": "{}",
+      "duration": 7.124996045604348e-06
+    },
+    {
+      "name": "upvote_post",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'success': True, 'message': 'Post upvoted successfully.'}",
+      "output": "None",
+      "error": "",
+      "input": "[{'postId': 'post456', 'userId': 'user789'}]",
+      "kwargs": "{}",
+      "duration": 7.708003977313638e-06
+    },
+    {
+      "name": "downvote_comment",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'success': True, 'message': 'Comment downvoted successfully.'}",
+      "output": "None",
+      "error": "",
+      "input": "[{'commentId': 'comment321', 'userId': 'user789'}]",
+      "kwargs": "{}",
+      "duration": 8.95801349543035e-06
+    }
+  ]
+}

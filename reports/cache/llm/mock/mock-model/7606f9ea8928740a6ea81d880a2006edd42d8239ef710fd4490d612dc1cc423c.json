@@ -1,0 +1,1 @@
+{"content": "[MOCK] 5d362573eec875bc :: Check whether these views disagree. Spec: ['Summarize goal', 'List required outputs', 'State constraints']. Examples: ['", "tokens": 17, "elapsed": 1.7500000000225668e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "view-checker", "caller": "multi_view"}}

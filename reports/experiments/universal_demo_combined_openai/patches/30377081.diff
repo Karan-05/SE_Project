@@ -1,0 +1,13 @@
+```diff
+--- original_file.cs
++++ modified_file.cs
+@@ -1,5 +1,10 @@
+ // Original code
+
++// New integration workflow for Azure Logic Apps
++public void CreateIntegrationWorkflow() {
++    // Logic to create workflow
++}
++
+ // More modifications
+```

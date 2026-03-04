@@ -1,0 +1,67 @@
+[
+  {
+    "name": "update_code_to_member_api",
+    "mode": "call",
+    "expected": "Valid member data retrieved",
+    "input": [
+      {
+        "query": "SELECT * FROM member"
+      }
+    ]
+  },
+  {
+    "name": "add_member_db_url_config",
+    "mode": "call",
+    "expected": "Configuration updated successfully",
+    "input": [
+      {
+        "config": {
+          "MEMBER_DB_URL": "postgres://user:password@localhost:5432/member-api-v6"
+        }
+      }
+    ]
+  },
+  {
+    "name": "test_data_migration",
+    "mode": "call",
+    "expected": "Data migration completed successfully",
+    "input": [
+      {
+        "source": "DynamoDB",
+        "target": "Postgres"
+      }
+    ]
+  },
+  {
+    "name": "edge_case_empty_member_table",
+    "mode": "call",
+    "expected": "No members found",
+    "input": [
+      {
+        "query": "SELECT * FROM member"
+      }
+    ]
+  },
+  {
+    "name": "adversarial_case_invalid_db_url",
+    "mode": "call",
+    "expected": "Database connection failed",
+    "input": [
+      {
+        "config": {
+          "MEMBER_DB_URL": "invalid_db_url"
+        }
+      }
+    ]
+  },
+  {
+    "name": "test_local_docker_setup",
+    "mode": "call",
+    "expected": "Docker setup completed successfully",
+    "input": [
+      {
+        "docker": "resources-api-v6"
+      }
+    ]
+  }
+]

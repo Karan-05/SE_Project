@@ -1,0 +1,112 @@
+[
+  {
+    "name": "add_platform_success",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "message": "Platform added successfully."
+    },
+    "input": [
+      {
+        "platform_name": "Instagram"
+      }
+    ]
+  },
+  {
+    "name": "delete_format_not_found",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Format not found."
+    },
+    "input": [
+      {
+        "format_id": "non_existing_format"
+      }
+    ]
+  },
+  {
+    "name": "edit_platform_invalid_data",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Invalid platform name."
+    },
+    "input": [
+      {
+        "platform_id": "valid_platform_id",
+        "platform_name": ""
+      }
+    ]
+  },
+  {
+    "name": "set_default_aspect_ratio_success",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "message": "Aspect ratio set successfully."
+    },
+    "input": [
+      {
+        "format_id": "valid_format_id",
+        "aspect_ratio": "16:9"
+      }
+    ]
+  },
+  {
+    "name": "define_cropping_logic_success",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "message": "Cropping logic defined successfully."
+    },
+    "input": [
+      {
+        "format_id": "valid_format_id",
+        "cropping_logic": "face-centric"
+      }
+    ]
+  },
+  {
+    "name": "enable_manual_editing_success",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "message": "Manual editing enabled."
+    },
+    "input": [
+      {
+        "platform_id": "valid_platform_id",
+        "enable": true
+      }
+    ]
+  },
+  {
+    "name": "add_resizing_format_duplicate",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Resizing format already exists."
+    },
+    "input": [
+      {
+        "format_name": "Square",
+        "platform_id": "valid_platform_id"
+      }
+    ]
+  },
+  {
+    "name": "adaptation_strategy_invalid",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Invalid adaptation strategy."
+    },
+    "input": [
+      {
+        "platform_id": "valid_platform_id",
+        "strategy": "invalid_strategy"
+      }
+    ]
+  }
+]

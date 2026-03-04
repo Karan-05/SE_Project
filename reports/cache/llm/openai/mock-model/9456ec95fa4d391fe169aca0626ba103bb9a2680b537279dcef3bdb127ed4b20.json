@@ -1,0 +1,1 @@
+{"content": "To create a script that extracts tasks from Exchange/Outlook 2003 into a CSV file, you can use VBA (Visual Basic for Applications) within Outlook", "tokens": 97, "elapsed": 1.1688630830030888, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

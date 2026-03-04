@@ -1,0 +1,102 @@
+{
+  "task_type": "data_etl",
+  "id": "ac7837cd-349d-4a6a-aa97-82f1d19ad557",
+  "title": "Topcoder Review API - Branch Merge and Code Fixes for Review API",
+  "summary": "This task involves performing maintenance on the TC Review API codebase, including merging branches, applying patches, fixing dependency warnings, and resolving lint errors. The final output should ensure all existing features remain functional.",
+  "artifacts": {
+    "pipeline_spec": "The pipeline will involve merging branches, applying patches, and running lint checks. The orchestration will be manual through Git commands and local testing.",
+    "sql_snippets": "TBD \u2013 missing SQL snippets for validation.",
+    "python_snippets": "TBD \u2013 missing Python snippets for testing the integration.",
+    "data_quality_checks": [
+      {
+        "name": "Dependency Warning Check",
+        "column(s)": "N/A",
+        "threshold/action": "Ensure no deprecated modules are used."
+      },
+      {
+        "name": "Lint Check",
+        "column(s)": "N/A",
+        "threshold/action": "All lint errors must be resolved."
+      }
+    ]
+  },
+  "assumptions": [
+    "Access to the review-api-v6 repository is available.",
+    "The Resources API integration patch is accessible in the forum.",
+    "Existing features and their functionality are well-documented."
+  ],
+  "plan": [
+    "Clone the review-api-v6 repository.",
+    "Checkout the feat/submissions-api branch.",
+    "Merge the develop branch into feat/submissions-api and resolve any conflicts.",
+    "Apply the Resources API integration patch to the feat/submissions-api branch.",
+    "Identify and fix the dependency warning related to the deprecated querystring module.",
+    "Run the linter to identify and fix all lint errors.",
+    "Test all existing features to ensure they work as expected.",
+    "Prepare a git patch for submission."
+  ],
+  "validations": [
+    "Self-check completed for merging branches and resolving conflicts.",
+    "Lint checks passed after fixes.",
+    "Functionality of existing features verified."
+  ],
+  "confidence": 0.75,
+  "stop_reason": "blocked_partial_context",
+  "rubric_self_check": {
+    "coverage": 0.8,
+    "specificity": 0.7,
+    "actionability": 0.75,
+    "overall_notes": "Plan is comprehensive but lacks specific SQL and Python snippets."
+  },
+  "raw": {
+    "task_type": "data_etl",
+    "id": "ac7837cd-349d-4a6a-aa97-82f1d19ad557",
+    "title": "Topcoder Review API - Branch Merge and Code Fixes for Review API",
+    "summary": "This task involves performing maintenance on the TC Review API codebase, including merging branches, applying patches, fixing dependency warnings, and resolving lint errors. The final output should ensure all existing features remain functional.",
+    "assumptions": [
+      "Access to the review-api-v6 repository is available.",
+      "The Resources API integration patch is accessible in the forum.",
+      "Existing features and their functionality are well-documented."
+    ],
+    "plan": [
+      "Clone the review-api-v6 repository.",
+      "Checkout the feat/submissions-api branch.",
+      "Merge the develop branch into feat/submissions-api and resolve any conflicts.",
+      "Apply the Resources API integration patch to the feat/submissions-api branch.",
+      "Identify and fix the dependency warning related to the deprecated querystring module.",
+      "Run the linter to identify and fix all lint errors.",
+      "Test all existing features to ensure they work as expected.",
+      "Prepare a git patch for submission."
+    ],
+    "artifacts": {
+      "pipeline_spec": "The pipeline will involve merging branches, applying patches, and running lint checks. The orchestration will be manual through Git commands and local testing.",
+      "sql_snippets": "TBD \u2013 missing SQL snippets for validation.",
+      "python_snippets": "TBD \u2013 missing Python snippets for testing the integration.",
+      "data_quality_checks": [
+        {
+          "name": "Dependency Warning Check",
+          "column(s)": "N/A",
+          "threshold/action": "Ensure no deprecated modules are used."
+        },
+        {
+          "name": "Lint Check",
+          "column(s)": "N/A",
+          "threshold/action": "All lint errors must be resolved."
+        }
+      ]
+    },
+    "validations": [
+      "Self-check completed for merging branches and resolving conflicts.",
+      "Lint checks passed after fixes.",
+      "Functionality of existing features verified."
+    ],
+    "confidence": 0.75,
+    "stop_reason": "blocked_partial_context",
+    "rubric_self_check": {
+      "coverage": 0.8,
+      "specificity": 0.7,
+      "actionability": 0.75,
+      "overall_notes": "Plan is comprehensive but lacks specific SQL and Python snippets."
+    }
+  }
+}

@@ -1,0 +1,145 @@
+[
+  {
+    "name": "valid_api_integration",
+    "mode": "call",
+    "expected": {
+      "status": 200,
+      "data": {
+        "message": "API integration successful"
+      }
+    },
+    "input": [
+      {
+        "api_name": "TestAPI",
+        "method": "GET",
+        "url": "/test",
+        "headers": {
+          "Authorization": "Bearer token"
+        }
+      }
+    ]
+  },
+  {
+    "name": "invalid_api_key",
+    "mode": "call",
+    "expected": {
+      "status": 401,
+      "error": "Unauthorized"
+    },
+    "input": [
+      {
+        "api_name": "TestAPI",
+        "method": "GET",
+        "url": "/test",
+        "headers": {
+          "Authorization": "Bearer invalid_token"
+        }
+      }
+    ]
+  },
+  {
+    "name": "high_volume_request",
+    "mode": "call",
+    "expected": {
+      "status": 202,
+      "data": {
+        "message": "Request accepted for processing"
+      }
+    },
+    "input": [
+      {
+        "api_name": "HighVolumeAPI",
+        "method": "POST",
+        "url": "/data",
+        "payload": {
+          "items": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "name": "missing_required_fields",
+    "mode": "call",
+    "expected": {
+      "status": 400,
+      "error": "Missing required fields"
+    },
+    "input": [
+      {
+        "api_name": "TestAPI",
+        "method": "POST",
+        "url": "/data",
+        "payload": {}
+      }
+    ]
+  },
+  {
+    "name": "performance_tuning",
+    "mode": "call",
+    "expected": {
+      "status": 200,
+      "data": {
+        "response_time": "50ms"
+      }
+    },
+    "input": [
+      {
+        "api_name": "PerformanceAPI",
+        "method": "GET",
+        "url": "/performance"
+      }
+    ]
+  },
+  {
+    "name": "api_documentation_check",
+    "mode": "call",
+    "expected": {
+      "status": 200,
+      "data": {
+        "documentation": "OpenAPI specification available"
+      }
+    },
+    "input": [
+      {
+        "api_name": "TestAPI",
+        "method": "GET",
+        "url": "/docs"
+      }
+    ]
+  },
+  {
+    "name": "cicd_pipeline_execution",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "message": "Pipeline executed successfully"
+    },
+    "input": [
+      {
+        "pipeline_name": "DeployPipeline",
+        "trigger": "manual"
+      }
+    ]
+  },
+  {
+    "name": "invalid_url_access",
+    "mode": "call",
+    "expected": {
+      "status": 404,
+      "error": "Not Found"
+    },
+    "input": [
+      {
+        "api_name": "TestAPI",
+        "method": "GET",
+        "url": "/invalid"
+      }
+    ]
+  }
+]

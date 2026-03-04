@@ -1,0 +1,1 @@
+{"content": "Kadane's algorithm is primarily used for finding the maximum sum of a contiguous subarray in an array of integers. It is not directly applicable to problems involving coin", "tokens": 59, "elapsed": 1.33100870900671, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

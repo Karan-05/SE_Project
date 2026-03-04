@@ -1,0 +1,1 @@
+{"content": "[MOCK] 55a4effc9fa459d1 :: Architect: propose a phased plan for task string_freq_ood: Return counts of characters as a dict sorted by key.", "tokens": 18, "elapsed": 2.2499999998704112e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "role-architect", "caller": "role_decomposed"}}

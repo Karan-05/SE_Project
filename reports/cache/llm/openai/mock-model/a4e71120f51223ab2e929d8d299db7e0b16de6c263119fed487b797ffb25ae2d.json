@@ -1,0 +1,1 @@
+{"content": "```python\ndef solve(numbers):\n    prefix_sums = []\n    current_sum = 0\n    for number in numbers:\n        current_sum += number\n        prefix_sums.append(current_sum)\n    return prefix_sums\n```", "tokens": 176, "elapsed": 2.058679250010755, "budget_exceeded": false, "meta": {"provider": "openai", "model": "repair-loop", "caller": "semantic_diff:repair"}}

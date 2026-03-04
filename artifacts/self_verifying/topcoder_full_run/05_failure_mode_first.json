@@ -1,0 +1,52 @@
+{
+  "task_id": "mixed_matrix_ood",
+  "strategy": "failure_mode_first",
+  "attempt": 5,
+  "pass_rate": 0.0,
+  "plan_subtasks": [
+    "enumerate failure modes",
+    "design tests",
+    "only then implement",
+    "Generate minimal unit tests for critical behaviors",
+    "Add adversarial/edge-case tests",
+    "Run tests and interpret failures"
+  ],
+  "plan_tests": [
+    "Here are three high-risk failure modes for the coding task of returning the sum of the main diagonal of a matrix, along with rationales:\n\n1. **Index Out of Bounds**:\n   - **Rationale**: If the code does not properly check the dimensions of the matrix, it may attempt to access indices that do not exist, leading to runtime errors. For example, if the matrix is not square (e.g., 3x2), accessing the diagonal elements could",
+    "max constraints: extremely large inputs",
+    "degenerate: empty or single-element",
+    "adversarial: repeated values or cycles"
+  ],
+  "plan_diagnostics": {
+    "failure_modes": "Here are three high-risk failure modes for the coding task of returning the sum of the main diagonal of a matrix, along with rationales:\n\n1. **Index Out of Bounds**:\n   - **Rationale**: If the code does not properly check the dimensions of the matrix, it may attempt to access indices that do not exist, leading to runtime errors. For example, if the matrix is not square (e.g., 3x2), accessing the diagonal elements could;max constraints: extremely large inputs;degenerate: empty or single-element",
+    "planning_tokens": "127",
+    "planning_time": "2.456832"
+  },
+  "patch_summary": {
+    "phase": "initial"
+  },
+  "failing_tests": [],
+  "trace": [],
+  "feedback": [],
+  "reproduction": "",
+  "tests_run": [],
+  "llm_calls": 0,
+  "timeline": {
+    "attempt": 5,
+    "strategy": "failure_mode_first",
+    "phase": "initial",
+    "events": {
+      "decompose": {
+        "start": "2026-02-23T23:30:37.670792",
+        "end": "2026-02-23T23:30:37.671082"
+      },
+      "solve": {
+        "start": "2026-02-23T23:30:37.671092",
+        "end": "2026-02-23T23:30:37.671439"
+      }
+    },
+    "meta": {
+      "llm_calls": "0"
+    }
+  }
+}

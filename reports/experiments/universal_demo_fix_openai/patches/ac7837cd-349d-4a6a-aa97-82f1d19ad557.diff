@@ -1,0 +1,5 @@
+--- a/service/handler.py
++++ b/service/handler.py
+@@
+-    result = legacy_api(payload)
++    result = modern_api(payload)

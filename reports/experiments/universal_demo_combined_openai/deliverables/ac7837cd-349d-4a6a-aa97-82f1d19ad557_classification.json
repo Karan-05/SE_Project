@@ -1,0 +1,37 @@
+{
+  "task_type": "repo_patch",
+  "confidence": 0.95,
+  "why": [
+    "The task involves merging branches, applying patches, and fixing issues in a codebase.",
+    "Clear instructions for maintaining existing features and resolving conflicts indicate a structured approach typical of repo patch tasks."
+  ],
+  "missing_info": [
+    "Specific details about the Resources API integration patch are not provided.",
+    "The exact linting rules or errors are not specified."
+  ],
+  "verification_plan": [
+    "Merge the develop branch into feat/submissions-api and resolve conflicts.",
+    "Apply the Resources API patch and verify functionality.",
+    "Run pnpm install to check for dependency warnings and fix them.",
+    "Run the linter and fix any errors, ensuring all tests pass."
+  ],
+  "artifacts_to_generate": [
+    {
+      "name": "patch_plan.md",
+      "format": "md"
+    },
+    {
+      "name": "proposed_patch.diff",
+      "format": "diff"
+    },
+    {
+      "name": "test_plan.md",
+      "format": "md"
+    },
+    {
+      "name": "risks.md",
+      "format": "md"
+    }
+  ],
+  "synthesis_policy": "none"
+}

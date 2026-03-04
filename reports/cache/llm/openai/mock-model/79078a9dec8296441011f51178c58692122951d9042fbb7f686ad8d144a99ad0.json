@@ -1,0 +1,1 @@
+{"content": "In the context of Informix Testing, the term \"hash_bucket\" typically refers to a data structure used in hash tables to store and retrieve data efficiently. If", "tokens": 54, "elapsed": 1.4354326669999864, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

@@ -1,0 +1,78 @@
+{
+  "task_type": "architecture_doc",
+  "id": "c8bb4b8f-d9c5-48d8-b37e-e165cf4cd5f6",
+  "title": "Test challenge",
+  "summary": "Test challenge",
+  "artifacts": {
+    "design_doc_md": "## Problem Summary\nTest challenge\n\n## Proposed Approach\n- Derived from statement: Test challenge\n\n## File-Level Plan\n- Derived from statement: Test challenge\n\n## API / Interface Changes\n- Derived from statement: Test challenge\n\n## Constraints & SLAs\n- Latency < 500ms\n- Availability 99.5%\n- Budget: reuse existing services\n\n## Risks & Trade-offs\n- Limited observability when reusing legacy APIs\n- Trade-off between cost and performance\n\n## Edge Cases\n- Stress test under bursty load\n- Handle malformed payloads gracefully\n- Why it failed: Trade-offs discussed; Diagram reference present; Risks and mitigations described; Component mapping provided | Missing: Proposed Approach, File-Level Plan, API / Interface Changes, Constraints & SLAs, Risks & Trade-offs, Edge Cases.\nNext steps: address each missing rubric/finding, add explicit risks/test plans, and tighten acceptance criteria.\n- Why it failed: Missing advanced architecture signals | Missing: Problem Summary, Proposed Approach, File-Level Plan, API / Interface Changes, Constraints & SLAs, Risks & Trade-offs, Edge Cases, Acceptance Checklist.\nNext steps: address each missing rubric/finding, add explicit risks/test plans, and tighten acceptance criteria.\n- Why it failed: Diagram reference present; Risks and mitigations described; Component mapping provided | Missing: Problem Summary, Proposed Approach, File-Level Plan, API / Interface Changes, Constraints & SLAs, Risks & Trade-offs, Edge Cases.\nNext steps: address each missing rubric/finding, add explicit risks/test plans, and tighten acceptance criteria.\n\n## Acceptance Checklist\n- Architecture diagrams reviewed\n- APIs documented\n- Smoke tests executed",
+    "mermaid_diagram": "graph TD;\n    A[Problem] --> B[Proposed Approach];\n    B --> C[Components];\n    C --> D[Interfaces];\n    D --> E[Risks];",
+    "interfaces": [
+      "Ingress Gateway \u2013 AuthN/AuthZ, rate limiting",
+      "Recommendation Service \u2013 stateless API using feature store",
+      "Gateway -> Recommendation Service (gRPC, proto v2)",
+      "Recommendation Service -> Feature Store (Redis Cluster)"
+    ],
+    "tradeoffs": [
+      "Server-side rendering vs SPA for personalization UX",
+      "Managed message bus vs self-hosted Kafka"
+    ]
+  },
+  "assumptions": [
+    "Mock payload emitted because provider=mock."
+  ],
+  "plan": [
+    "Summarize router rationale and challenge context.",
+    "Describe architecture sections with risks + constraints.",
+    "Provide acceptance checklist with validation guidance."
+  ],
+  "validations": [
+    "SELF_CHECK: Confirmed required sections present in mock output."
+  ],
+  "confidence": 0.5,
+  "stop_reason": "completed",
+  "rubric_self_check": {
+    "coverage": 90.0,
+    "specificity": 88.0,
+    "actionability": 87.0,
+    "overall_notes": "Mock provider emitted full doc + component traceability."
+  },
+  "raw": {
+    "task_type": "architecture_doc",
+    "id": "c8bb4b8f-d9c5-48d8-b37e-e165cf4cd5f6",
+    "title": "Test challenge",
+    "summary": "Test challenge",
+    "assumptions": [
+      "Mock payload emitted because provider=mock."
+    ],
+    "plan": [
+      "Summarize router rationale and challenge context.",
+      "Describe architecture sections with risks + constraints.",
+      "Provide acceptance checklist with validation guidance."
+    ],
+    "artifacts": {
+      "design_doc_md": "## Problem Summary\nTest challenge\n\n## Proposed Approach\n- Derived from statement: Test challenge\n\n## File-Level Plan\n- Derived from statement: Test challenge\n\n## API / Interface Changes\n- Derived from statement: Test challenge\n\n## Constraints & SLAs\n- Latency < 500ms\n- Availability 99.5%\n- Budget: reuse existing services\n\n## Risks & Trade-offs\n- Limited observability when reusing legacy APIs\n- Trade-off between cost and performance\n\n## Edge Cases\n- Stress test under bursty load\n- Handle malformed payloads gracefully\n- Why it failed: Trade-offs discussed; Diagram reference present; Risks and mitigations described; Component mapping provided | Missing: Proposed Approach, File-Level Plan, API / Interface Changes, Constraints & SLAs, Risks & Trade-offs, Edge Cases.\nNext steps: address each missing rubric/finding, add explicit risks/test plans, and tighten acceptance criteria.\n- Why it failed: Missing advanced architecture signals | Missing: Problem Summary, Proposed Approach, File-Level Plan, API / Interface Changes, Constraints & SLAs, Risks & Trade-offs, Edge Cases, Acceptance Checklist.\nNext steps: address each missing rubric/finding, add explicit risks/test plans, and tighten acceptance criteria.\n- Why it failed: Diagram reference present; Risks and mitigations described; Component mapping provided | Missing: Problem Summary, Proposed Approach, File-Level Plan, API / Interface Changes, Constraints & SLAs, Risks & Trade-offs, Edge Cases.\nNext steps: address each missing rubric/finding, add explicit risks/test plans, and tighten acceptance criteria.\n\n## Acceptance Checklist\n- Architecture diagrams reviewed\n- APIs documented\n- Smoke tests executed",
+      "mermaid_diagram": "graph TD;\n    A[Problem] --> B[Proposed Approach];\n    B --> C[Components];\n    C --> D[Interfaces];\n    D --> E[Risks];",
+      "interfaces": [
+        "Ingress Gateway \u2013 AuthN/AuthZ, rate limiting",
+        "Recommendation Service \u2013 stateless API using feature store",
+        "Gateway -> Recommendation Service (gRPC, proto v2)",
+        "Recommendation Service -> Feature Store (Redis Cluster)"
+      ],
+      "tradeoffs": [
+        "Server-side rendering vs SPA for personalization UX",
+        "Managed message bus vs self-hosted Kafka"
+      ]
+    },
+    "validations": [
+      "SELF_CHECK: Confirmed required sections present in mock output."
+    ],
+    "confidence": 0.5,
+    "stop_reason": "completed",
+    "rubric_self_check": {
+      "coverage": 90,
+      "specificity": 88,
+      "actionability": 87,
+      "overall_notes": "Mock provider emitted full doc + component traceability."
+    }
+  }
+}

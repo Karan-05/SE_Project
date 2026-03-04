@@ -1,0 +1,52 @@
+`BEGIN_JSON`
+{
+  "task_type": "architecture_doc",
+  "id": "65b7f3c8-06a6-422b-92d9-6353fa5c3a2d",
+  "title": "72 Hours!! - Topcoder Review App - API Integration for My Active Challenge Page",
+  "summary": "This architecture document outlines the integration of the Challenge API into the Topcoder Review App's My Active Challenge Page. It details the frontend updates required for API calls, error handling, data transformation, and overall service architecture.",
+  "assumptions": [
+    "Access to the specified GitHub repositories is available.",
+    "The Challenge API is functioning and accessible.",
+    "The frontend stack (React, TypeScript, SCSS) is set up correctly."
+  ],
+  "plan": [
+    "Review the existing ActiveReviewsPage component and identify areas for API integration.",
+    "Implement API calls in fetchActiveReviews() to replace mock data.",
+    "Update useFetchActiveReviews() to handle the API response format.",
+    "Add error handling and loading states to the component.",
+    "Transform the Challenge API response to match the ChallengeInfo model.",
+    "Create an authentication service to manage user tokens and memberId.",
+    "Implement data transformation functions for derived fields.",
+    "Establish a clean API service architecture with TypeScript interfaces.",
+    "Document the integration process, data transformation, and testing methods."
+  ],
+  "artifacts": {
+    "design_doc_md": "# Topcoder Review App API Integration\n\n## Requirements\n- Integrate Challenge API into My Active Challenge Page.\n\n## Approach\n- Replace mock data with real API calls.\n- Implement error handling and loading states.\n- Transform API response data.\n\n## Rollout\n- Deploy changes to the feat/review branch.\n\n## Observability\n- Monitor API call performance and error rates.\n\n## Acceptance Checklist\n- [ ] API calls integrated\n- [ ] Error handling implemented\n- [ ] Data transformation verified\n- [ ] Documentation completed\n",
+    "mermaid_diagram": "graph TD;\n    A[ActiveReviewsPage] -->|fetches| B[Challenge API];\n    B -->|returns data| C[ChallengeInfo Model];\n    C --> D[UI Components];",
+    "interfaces": [
+      {
+        "producer": "Challenge API",
+        "consumer": "ActiveReviewsPage",
+        "protocol": "HTTP",
+        "payload": "Challenge data in JSON format"
+      }
+    ],
+    "tradeoffs": [
+      "Using real API data improves accuracy but may introduce latency.",
+      "Implementing comprehensive error handling increases complexity but enhances user experience."
+    ]
+  },
+  "validations": [
+    "Architecture document covers all required sections.",
+    "Plan aligns with the integration requirements."
+  ],
+  "confidence": 0.9,
+  "stop_reason": "completed",
+  "rubric_self_check": {
+    "coverage": 4,
+    "specificity": 4,
+    "actionability": 4,
+    "overall_notes": "The document meets all requirements and provides clear guidance for implementation."
+  }
+}
+END_JSON

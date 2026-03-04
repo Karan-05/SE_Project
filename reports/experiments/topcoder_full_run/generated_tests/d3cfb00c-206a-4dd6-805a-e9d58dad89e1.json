@@ -1,0 +1,72 @@
+[
+  {
+    "name": "basic_case",
+    "mode": "call",
+    "expected": 6,
+    "input": [
+      1,
+      2,
+      3
+    ]
+  },
+  {
+    "name": "negative_numbers",
+    "mode": "call",
+    "expected": -6,
+    "input": [
+      -1,
+      -2,
+      -3
+    ]
+  },
+  {
+    "name": "mixed_numbers",
+    "mode": "call",
+    "expected": -2,
+    "input": [
+      -1,
+      2,
+      -3
+    ]
+  },
+  {
+    "name": "zero_case",
+    "mode": "call",
+    "expected": null,
+    "input": [
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "name": "large_numbers",
+    "mode": "call",
+    "expected": 6000000,
+    "input": [
+      1000000,
+      2000000,
+      3000000
+    ]
+  },
+  {
+    "name": "single_element",
+    "mode": "call",
+    "expected": 42,
+    "input": [
+      42
+    ]
+  },
+  {
+    "name": "adversarial_case",
+    "mode": "call",
+    "expected": 1,
+    "input": [
+      1,
+      -1,
+      1,
+      -1,
+      1
+    ]
+  }
+]

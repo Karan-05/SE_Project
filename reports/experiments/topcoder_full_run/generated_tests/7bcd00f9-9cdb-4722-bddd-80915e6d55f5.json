@@ -1,0 +1,54 @@
+[
+  {
+    "name": "unique_role_creation",
+    "mode": "call",
+    "expected": {
+      "success": true,
+      "message": "Role created successfully"
+    },
+    "input": [
+      {
+        "name": "Admin"
+      }
+    ]
+  },
+  {
+    "name": "duplicate_role_creation",
+    "mode": "call",
+    "expected": {
+      "success": false,
+      "message": "Role name must be unique"
+    },
+    "input": [
+      {
+        "name": "Admin"
+      }
+    ]
+  },
+  {
+    "name": "invalid_role_name",
+    "mode": "call",
+    "expected": {
+      "success": false,
+      "message": "Role name cannot be empty"
+    },
+    "input": [
+      {
+        "name": ""
+      }
+    ]
+  },
+  {
+    "name": "long_role_name",
+    "mode": "call",
+    "expected": {
+      "success": false,
+      "message": "Role name exceeds maximum length"
+    },
+    "input": [
+      {
+        "name": "A very long role name that exceeds the maximum length"
+      }
+    ]
+  }
+]

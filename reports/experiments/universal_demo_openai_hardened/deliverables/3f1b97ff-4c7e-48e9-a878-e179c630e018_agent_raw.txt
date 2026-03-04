@@ -1,0 +1,42 @@
+```json
+BEGIN_JSON
+{
+  "task_type": "repo_patch",
+  "id": "3f1b97ff-4c7e-48e9-a878-e179c630e018",
+  "title": "Topcoder Community App - Universal Nav: Different \"type\" for /thrive path",
+  "summary": "The task involves creating a patch for the Topcoder Community App to implement a different type for the /thrive path as per the requirements outlined in issue #6783. The patch must be based on the specified commit hash in the universal_nav branch.",
+  "assumptions": [
+    "Access to the repository is available via the provided GitHub link.",
+    "The patch must be compatible with the latest changes in the universal_nav branch after commit hash 62130da9.",
+    "The requirements from issue #6783 are complete and clear."
+  ],
+  "plan": [
+    "Review the requirements in issue #6783 to understand the necessary changes for the /thrive path.",
+    "Identify the files that need modifications based on the requirements.",
+    "Implement the necessary changes in the identified files.",
+    "Create a unified diff patch file for the changes made.",
+    "Document the changes in a patch_plan.md file, outlining the problem summary, plan, test plan, risks, and validation.",
+    "Create a test_plan.md with commands to validate the changes.",
+    "Document risks and mitigations in risks.md."
+  ],
+  "artifacts": {
+    "patch_diff_unified": "TBD – missing unified diff of the changes made.",
+    "file_plan": "TBD – missing detailed file/module impact analysis.",
+    "risks": "TBD – missing risks associated with the changes.",
+    "test_plan": "TBD – missing commands/tests + expected results."
+  },
+  "validations": [
+    "Self-check performed to ensure all required artifacts are planned.",
+    "Review of issue #6783 to confirm understanding of requirements."
+  ],
+  "confidence": 0.7,
+  "stop_reason": "blocked_partial_context",
+  "rubric_self_check": {
+    "coverage": 0.5,
+    "specificity": 0.5,
+    "actionability": 0.5,
+    "overall_notes": "Missing detailed patch and file impact analysis, which are necessary for complete execution."
+  }
+}
+END_JSON
+```

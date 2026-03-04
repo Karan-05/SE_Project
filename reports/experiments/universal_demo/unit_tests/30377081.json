@@ -1,0 +1,93 @@
+{
+  "task_id": "30377081",
+  "tests": [
+    {
+      "name": "basic_integration_workflow",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'status': 'success', 'result': 'integration_completed'}",
+      "output": "None",
+      "error": "",
+      "input": "[{'workflow': 'simple_integration', 'data': {'input1': 'value1', 'input2': 'value2'}}]",
+      "kwargs": "{}",
+      "duration": 1.750001683831215e-05
+    },
+    {
+      "name": "error_handling_integration",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'status': 'error', 'message': 'invalid input'}",
+      "output": "None",
+      "error": "",
+      "input": "[{'workflow': 'error_prone_integration', 'data': {'input1': 'invalid_value'}}]",
+      "kwargs": "{}",
+      "duration": 8.917006198316813e-06
+    },
+    {
+      "name": "event_driven_workflow",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'status': 'success', 'result': 'order_processed'}",
+      "output": "None",
+      "error": "",
+      "input": "[{'event': 'new_order', 'data': {'order_id': '12345'}}]",
+      "kwargs": "{}",
+      "duration": 8.333008736371994e-06
+    },
+    {
+      "name": "service_bus_integration",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'status': 'success', 'result': 'message_sent'}",
+      "output": "None",
+      "error": "",
+      "input": "[{'service': 'service_bus', 'data': {'message': 'test_message'}}]",
+      "kwargs": "{}",
+      "duration": 7.499998901039362e-06
+    },
+    {
+      "name": "ci_cd_pipeline_execution",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'status': 'success', 'result': 'pipeline_executed'}",
+      "output": "None",
+      "error": "",
+      "input": "[{'pipeline': 'integration_pipeline', 'trigger': 'manual'}]",
+      "kwargs": "{}",
+      "duration": 6.707996362820268e-06
+    },
+    {
+      "name": "high_load_integration",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'status': 'success', 'result': 'integration_completed'}",
+      "output": "None",
+      "error": "",
+      "input": "[{'workflow': 'high_load_integration', 'data': {'load': 'high'}}]",
+      "kwargs": "{}",
+      "duration": 8.333008736371994e-06
+    },
+    {
+      "name": "timeout_handling",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'status': 'error', 'message': 'timeout occurred'}",
+      "output": "None",
+      "error": "",
+      "input": "[{'workflow': 'long_running_integration', 'data': {'timeout': 'true'}}]",
+      "kwargs": "{}",
+      "duration": 6.832997314631939e-06
+    },
+    {
+      "name": "invalid_event_format",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'status': 'error', 'message': 'invalid event format'}",
+      "output": "None",
+      "error": "",
+      "input": "[{'event': 'invalid_format_event', 'data': {}}]",
+      "kwargs": "{}",
+      "duration": 6.04201341047883e-06
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+{"content": "[MOCK] a4e5b0f0f8748c24 :: List three high-risk failure modes for this coding task along with short rationales: Return the minimum coins needed to ", "tokens": 21, "elapsed": 1.957999999913085e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "failure-scout", "caller": "failure_mode_first"}}

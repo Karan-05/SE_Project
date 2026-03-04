@@ -1,0 +1,56 @@
+BEGIN_JSON
+{
+  "task_type": "architecture_doc",
+  "id": 30377081,
+  "title": "[GIG] Azure Integration Developer",
+  "summary": "This architecture document outlines the design and implementation plan for integrating various enterprise systems using Microsoft Azure services, focusing on Logic Apps, Functions, and API Management. It includes requirements, approach, rollout, observability, and acceptance criteria.",
+  "assumptions": [
+    "The integration workflows will primarily use Azure Logic Apps, Functions, and API Management.",
+    "The architecture must support scalability and maintainability.",
+    "Integration components will connect various enterprise systems and services."
+  ],
+  "plan": [
+    "Define the architecture requirements based on the integration needs.",
+    "Design integration workflows using Azure Logic Apps and Functions.",
+    "Outline the API Management strategy for exposing services.",
+    "Identify and document the use of Azure Service Bus and Event Grid for event-driven workflows.",
+    "Create a CI/CD pipeline for deployment and testing of integration components.",
+    "Draft the observability plan for monitoring integration workflows."
+  ],
+  "artifacts": {
+    "design_doc_md": "# Azure Integration Architecture\n\n## Requirements\n- Integration workflows using Azure Logic Apps, Functions, and API Management.\n- Scalability and maintainability of components.\n\n## Approach\n- Utilize Azure Logic Apps for orchestration and Azure Functions for custom logic.\n- Implement API Management for secure and scalable API exposure.\n\n## Rollout\n- Implement CI/CD pipelines for automated deployment.\n\n## Observability\n- Use Azure Monitor and Application Insights for monitoring.\n\n## Acceptance Checklist\n- All workflows are documented and tested.\n- CI/CD pipeline is operational.",
+    "mermaid_diagram": "graph TD;\n    A[Azure Logic Apps] --> B[Azure Functions];\n    B --> C[API Management];\n    C --> D[Azure Service Bus];\n    D --> E[Event Grid];",
+    "interfaces": [
+      {
+        "producer": "Azure Logic Apps",
+        "consumer": "Azure Functions",
+        "protocol": "HTTP",
+        "payload": "JSON"
+      },
+      {
+        "producer": "Azure Functions",
+        "consumer": "API Management",
+        "protocol": "HTTP",
+        "payload": "JSON"
+      }
+    ],
+    "tradeoffs": [
+      "Using Azure Logic Apps simplifies workflow design but may have performance limitations compared to custom solutions.",
+      "API Management provides security and monitoring features but adds additional latency."
+    ]
+  },
+  "validations": [
+    "Checked section coverage against the rubric.",
+    "Ensured all required components are documented.",
+    "No live tests run, but the architecture is designed to be testable."
+  ],
+  "confidence": 0.85,
+  "stop_reason": "completed",
+  "rubric_self_check": {
+    "coverage": 4,
+    "specificity": 4,
+    "actionability": 4,
+    "overall_notes": "All required sections are covered and actionable."
+  }
+}
+END_JSON

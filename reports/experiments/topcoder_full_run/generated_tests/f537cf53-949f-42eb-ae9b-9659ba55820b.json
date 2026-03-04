@@ -1,0 +1,97 @@
+[
+  {
+    "name": "test_console_logging_development",
+    "mode": "call",
+    "expected": "Console log: Development log message",
+    "input": [
+      {
+        "environment": "development",
+        "logLevel": "info",
+        "message": "Development log message"
+      }
+    ]
+  },
+  {
+    "name": "test_file_logging_development",
+    "mode": "call",
+    "expected": "File log created with message: File log message",
+    "input": [
+      {
+        "environment": "development",
+        "logLevel": "info",
+        "message": "File log message"
+      }
+    ]
+  },
+  {
+    "name": "test_console_logging_production",
+    "mode": "call",
+    "expected": "Console log: Production error log",
+    "input": [
+      {
+        "environment": "production",
+        "logLevel": "error",
+        "message": "Production error log"
+      }
+    ]
+  },
+  {
+    "name": "test_no_file_logging_production",
+    "mode": "call",
+    "expected": "No file log created",
+    "input": [
+      {
+        "environment": "production",
+        "logLevel": "info",
+        "message": "Should not create file log"
+      }
+    ]
+  },
+  {
+    "name": "test_file_logging_override_production",
+    "mode": "call",
+    "expected": "File log created with message: Production log with file override",
+    "input": [
+      {
+        "environment": "production",
+        "logLevel": "info",
+        "message": "Production log with file override",
+        "enableFileLogging": true
+      }
+    ]
+  },
+  {
+    "name": "test_error_handling_invalid_log_level",
+    "mode": "call",
+    "expected": "Error: Invalid log level",
+    "input": [
+      {
+        "environment": "production",
+        "logLevel": "invalid",
+        "message": "Invalid log level test"
+      }
+    ]
+  },
+  {
+    "name": "test_startup_without_logs_directory",
+    "mode": "call",
+    "expected": "Application started successfully",
+    "input": [
+      {
+        "environment": "production"
+      }
+    ]
+  },
+  {
+    "name": "test_logging_formatting",
+    "mode": "call",
+    "expected": "Formatted log: [INFO] Formatted log message",
+    "input": [
+      {
+        "environment": "development",
+        "logLevel": "info",
+        "message": "Formatted log message"
+      }
+    ]
+  }
+]

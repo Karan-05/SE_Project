@@ -1,0 +1,36 @@
+{
+  "task_type": "repo_patch",
+  "confidence": 0.9,
+  "why": [
+    "The task involves making changes to an existing codebase based on a specific issue.",
+    "The provided links and descriptions indicate a need for a patch against a specific commit."
+  ],
+  "missing_info": [
+    "The exact nature of the changes needed to resolve the issue is not fully detailed in the provided context."
+  ],
+  "verification_plan": [
+    "Create a patch plan detailing the changes to be made.",
+    "Generate a proposed patch file based on the identified changes.",
+    "Outline a test plan to validate the changes.",
+    "Document potential risks and rollback strategies."
+  ],
+  "artifacts_to_generate": [
+    {
+      "name": "patch_plan.md",
+      "format": "md"
+    },
+    {
+      "name": "proposed_patch.diff",
+      "format": "diff"
+    },
+    {
+      "name": "test_plan.md",
+      "format": "md"
+    },
+    {
+      "name": "risks.md",
+      "format": "md"
+    }
+  ],
+  "synthesis_policy": "none"
+}

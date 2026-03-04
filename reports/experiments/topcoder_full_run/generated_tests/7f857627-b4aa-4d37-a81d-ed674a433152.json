@@ -1,0 +1,108 @@
+[
+  {
+    "name": "test_layout_fix",
+    "mode": "call",
+    "expected": {
+      "padding_left": false,
+      "extra_back_button": false,
+      "content_fluid": true
+    },
+    "input": [
+      {
+        "commit": "reskin-or-only",
+        "url": "https://software.topcoder-dev.com/review/actions/EditProjectLinks?pid=30030731"
+      }
+    ]
+  },
+  {
+    "name": "test_no_unnecessary_changes",
+    "mode": "call",
+    "expected": {
+      "unnecessary_changes": false
+    },
+    "input": [
+      {
+        "commit": "reskin-or-only",
+        "url": "https://software.topcoder-dev.com/review/actions/EditProjectLinks?pid=30030731"
+      }
+    ]
+  },
+  {
+    "name": "test_edge_case_empty_commit",
+    "mode": "call",
+    "expected": {
+      "error": "Invalid commit"
+    },
+    "input": [
+      {
+        "commit": "",
+        "url": "https://software.topcoder-dev.com/review/actions/EditProjectLinks?pid=30030731"
+      }
+    ]
+  },
+  {
+    "name": "test_edge_case_invalid_url",
+    "mode": "call",
+    "expected": {
+      "error": "Invalid URL"
+    },
+    "input": [
+      {
+        "commit": "reskin-or-only",
+        "url": "invalid_url"
+      }
+    ]
+  },
+  {
+    "name": "test_commit_not_found",
+    "mode": "call",
+    "expected": {
+      "error": "Commit not found"
+    },
+    "input": [
+      {
+        "commit": "nonexistent-branch",
+        "url": "https://software.topcoder-dev.com/review/actions/EditProjectLinks?pid=30030731"
+      }
+    ]
+  },
+  {
+    "name": "test_fluid_content_check",
+    "mode": "call",
+    "expected": {
+      "content_fluid": true
+    },
+    "input": [
+      {
+        "commit": "reskin-or-only",
+        "url": "https://software.topcoder-dev.com/review/actions/EditProjectLinks?pid=30030731"
+      }
+    ]
+  },
+  {
+    "name": "test_extra_back_button_check",
+    "mode": "call",
+    "expected": {
+      "extra_back_button": false
+    },
+    "input": [
+      {
+        "commit": "reskin-or-only",
+        "url": "https://software.topcoder-dev.com/review/actions/EditProjectLinks?pid=30030731"
+      }
+    ]
+  },
+  {
+    "name": "test_padding_left_check",
+    "mode": "call",
+    "expected": {
+      "padding_left": false
+    },
+    "input": [
+      {
+        "commit": "reskin-or-only",
+        "url": "https://software.topcoder-dev.com/review/actions/EditProjectLinks?pid=30030731"
+      }
+    ]
+  }
+]

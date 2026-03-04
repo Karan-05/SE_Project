@@ -1,0 +1,1 @@
+{"content": "```python\ndef solve(*args):\n    if not args:\n        return None\n    # Assuming the contract requires at least one argument\n    return sum(args)  # Example core logic: summing the input arguments\n```", "tokens": 173, "elapsed": 1.814579167010379, "budget_exceeded": false, "meta": {"provider": "openai", "model": "repair-loop", "caller": "contract_first:repair"}}

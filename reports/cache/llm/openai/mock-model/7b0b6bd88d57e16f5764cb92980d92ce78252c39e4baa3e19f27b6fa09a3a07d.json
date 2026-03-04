@@ -1,0 +1,1 @@
+{"content": "To address your problem of replacing static data with a JSON-server in a desktop native app while ensuring that unit tests remain intact, let's break down the requirements and considerations", "tokens": 82, "elapsed": 1.5329893750022165, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

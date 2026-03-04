@@ -1,0 +1,81 @@
+[
+  {
+    "name": "test_navigation_to_my_profile",
+    "mode": "call",
+    "expected": "success",
+    "input": [
+      "navigate",
+      "my_profile"
+    ]
+  },
+  {
+    "name": "test_navigation_to_nonexistent_page",
+    "mode": "call",
+    "expected": "error",
+    "input": [
+      "navigate",
+      "nonexistent_page"
+    ]
+  },
+  {
+    "name": "test_profile_data_load",
+    "mode": "call",
+    "expected": "profile_data",
+    "input": [
+      "load_profile_data"
+    ]
+  },
+  {
+    "name": "test_profile_update",
+    "mode": "call",
+    "expected": "update_success",
+    "input": [
+      "update_profile",
+      {
+        "name": "New Name"
+      }
+    ]
+  },
+  {
+    "name": "test_navigation_with_invalid_token",
+    "mode": "call",
+    "expected": "unauthorized",
+    "input": [
+      "navigate",
+      "my_profile",
+      "invalid_token"
+    ]
+  },
+  {
+    "name": "test_profile_data_empty",
+    "mode": "call",
+    "expected": "no_data",
+    "input": [
+      "load_profile_data",
+      {
+        "user_id": "empty_user"
+      }
+    ]
+  },
+  {
+    "name": "test_navigation_to_settings",
+    "mode": "call",
+    "expected": "success",
+    "input": [
+      "navigate",
+      "settings"
+    ]
+  },
+  {
+    "name": "test_profile_data_format",
+    "mode": "call",
+    "expected": {
+      "name": "string",
+      "email": "string",
+      "bio": "string"
+    },
+    "input": [
+      "load_profile_data"
+    ]
+  }
+]

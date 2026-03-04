@@ -1,0 +1,65 @@
+{
+  "task_id": "number_primes_ood",
+  "strategy": "contract_first",
+  "attempt": 1,
+  "pass_rate": 1.0,
+  "plan_subtasks": [
+    "Validate inputs vs contract",
+    "Implement core logic",
+    "Check edge cases",
+    "Generate minimal unit tests for critical behaviors",
+    "Add adversarial/edge-case tests",
+    "Run tests and interpret failures"
+  ],
+  "plan_tests": [
+    ""
+  ],
+  "plan_diagnostics": {
+    "missing_fields": "constraints,edge_cases",
+    "contract_length": "32",
+    "audit_note": "[MOCK] 88d70ef92b55da05 :: Review this contract for completeness and note any missing guarantees. Contract: {'inputs': 'Underspecified', 'outputs':",
+    "planning_tokens": "25",
+    "planning_time": "0.000002"
+  },
+  "patch_summary": {
+    "phase": "initial"
+  },
+  "tests_run": [
+    {
+      "name": "sample_0",
+      "mode": "call",
+      "status": "pass",
+      "expected": "4",
+      "output": "4",
+      "error": "",
+      "input": "[10]",
+      "kwargs": "{}",
+      "duration": 2.250000000092456e-06
+    }
+  ],
+  "llm_calls": 0,
+  "timeline": {
+    "attempt": 1,
+    "strategy": "contract_first",
+    "phase": "initial",
+    "events": {
+      "decompose": {
+        "start": "2026-02-24T00:19:21.384770",
+        "end": "2026-02-24T00:19:21.384817"
+      },
+      "solve": {
+        "start": "2026-02-24T00:19:21.384819",
+        "end": "2026-02-24T00:19:21.384892"
+      },
+      "tests": {
+        "start": "2026-02-24T00:19:21.384885",
+        "end": "2026-02-24T00:19:21.384888",
+        "duration_seconds": "0.000"
+      }
+    },
+    "meta": {
+      "llm_calls": "0"
+    }
+  },
+  "solution_preview": "def solve(n):\n                if n < 2:\n                    return 0\n                sieve = [True]*(n+1)\n                sieve[0]=sieve[1]=False\n                p=2\n                while p*p<=n:\n                    if sieve[p]:\n                        for m in range(p*p,n+1,p):\n                            sieve[m]=False\n                    p+=1\n                return sum(sieve)"
+}

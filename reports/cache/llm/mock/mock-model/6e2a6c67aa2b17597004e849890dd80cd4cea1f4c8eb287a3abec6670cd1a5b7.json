@@ -1,0 +1,1 @@
+{"content": "[MOCK] 85f3236e4e2fe9aa :: Given the problem: Count primes up to N., would pattern kadane be relevant?", "tokens": 13, "elapsed": 1.4170000000035543e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "pattern-hint", "caller": "pattern_skeleton"}}

@@ -1,0 +1,120 @@
+[
+  {
+    "name": "valid_download_after_submission",
+    "mode": "call",
+    "expected": {
+      "can_download": true
+    },
+    "input": [
+      {
+        "user_id": "user123",
+        "challenge_id": "challenge456",
+        "submitted": true
+      }
+    ]
+  },
+  {
+    "name": "invalid_download_without_submission",
+    "mode": "call",
+    "expected": {
+      "can_download": false
+    },
+    "input": [
+      {
+        "user_id": "user789",
+        "challenge_id": "challenge456",
+        "submitted": false
+      }
+    ]
+  },
+  {
+    "name": "multiple_submissions",
+    "mode": "call",
+    "expected": {
+      "can_download": true
+    },
+    "input": [
+      {
+        "user_id": "user123",
+        "challenge_id": "challenge456",
+        "submitted": true,
+        "submission_count": 3
+      }
+    ]
+  },
+  {
+    "name": "download_from_different_challenge",
+    "mode": "call",
+    "expected": {
+      "can_download": false
+    },
+    "input": [
+      {
+        "user_id": "user123",
+        "challenge_id": "challenge789",
+        "submitted": true
+      }
+    ]
+  },
+  {
+    "name": "edge_case_no_submissions",
+    "mode": "call",
+    "expected": {
+      "can_download": true
+    },
+    "input": [
+      {
+        "user_id": "user456",
+        "challenge_id": "challenge456",
+        "submitted": true,
+        "submission_count": 0
+      }
+    ]
+  },
+  {
+    "name": "adversarial_case_invalid_user",
+    "mode": "call",
+    "expected": {
+      "can_download": false
+    },
+    "input": [
+      {
+        "user_id": "invalid_user",
+        "challenge_id": "challenge456",
+        "submitted": false
+      }
+    ]
+  },
+  {
+    "name": "valid_download_after_multiple_challenges",
+    "mode": "call",
+    "expected": {
+      "can_download": true
+    },
+    "input": [
+      {
+        "user_id": "user123",
+        "challenge_ids": [
+          "challenge456",
+          "challenge789"
+        ],
+        "submitted": true
+      }
+    ]
+  },
+  {
+    "name": "download_attempt_after_challenge_end",
+    "mode": "call",
+    "expected": {
+      "can_download": true
+    },
+    "input": [
+      {
+        "user_id": "user123",
+        "challenge_id": "challenge456",
+        "submitted": true,
+        "challenge_ended": true
+      }
+    ]
+  }
+]

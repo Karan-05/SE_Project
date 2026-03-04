@@ -1,0 +1,58 @@
+[
+  {
+    "name": "valid_user_login",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "token": "valid_token_string"
+    },
+    "input": [
+      {
+        "username": "testuser",
+        "password": "securepassword"
+      }
+    ]
+  },
+  {
+    "name": "invalid_user_login",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Invalid credentials"
+    },
+    "input": [
+      {
+        "username": "testuser",
+        "password": "wrongpassword"
+      }
+    ]
+  },
+  {
+    "name": "edge_case_empty_username",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Username cannot be empty"
+    },
+    "input": [
+      {
+        "username": "",
+        "password": "securepassword"
+      }
+    ]
+  },
+  {
+    "name": "edge_case_empty_password",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Password cannot be empty"
+    },
+    "input": [
+      {
+        "username": "testuser",
+        "password": ""
+      }
+    ]
+  }
+]

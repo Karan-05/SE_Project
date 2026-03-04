@@ -1,0 +1,1 @@
+{"content": "```python\ndef solve(edges):\n    return len(edges)\n\n# Example usage:\n# edges = [(1, 2), (2, 3), (3, 4)]\n# print(solve(edges))  # Output: 3\n```", "tokens": 182, "elapsed": 1.6084200839977711, "budget_exceeded": false, "meta": {"provider": "openai", "model": "repair-loop", "caller": "multi_view:repair"}}

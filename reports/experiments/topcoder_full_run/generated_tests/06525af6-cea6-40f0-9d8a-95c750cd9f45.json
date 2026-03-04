@@ -1,0 +1,110 @@
+[
+  {
+    "name": "valid_user_authentication",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "message": "Authentication successful"
+    },
+    "input": [
+      {
+        "username": "testUser",
+        "password": "correctPassword"
+      }
+    ]
+  },
+  {
+    "name": "invalid_password_authentication",
+    "mode": "call",
+    "expected": {
+      "status": "failure",
+      "message": "Invalid credentials"
+    },
+    "input": [
+      {
+        "username": "testUser",
+        "password": "wrongPassword"
+      }
+    ]
+  },
+  {
+    "name": "nonexistent_user_authentication",
+    "mode": "call",
+    "expected": {
+      "status": "failure",
+      "message": "User not found"
+    },
+    "input": [
+      {
+        "username": "nonexistentUser",
+        "password": "anyPassword"
+      }
+    ]
+  },
+  {
+    "name": "empty_password_authentication",
+    "mode": "call",
+    "expected": {
+      "status": "failure",
+      "message": "Password cannot be empty"
+    },
+    "input": [
+      {
+        "username": "testUser",
+        "password": ""
+      }
+    ]
+  },
+  {
+    "name": "password_encryption_consistency",
+    "mode": "call",
+    "expected": {
+      "encryptedPassword": "expectedEncryptedValue"
+    },
+    "input": [
+      "UserService.encodePasswordLegacy"
+    ]
+  },
+  {
+    "name": "special_character_password",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "message": "Authentication successful"
+    },
+    "input": [
+      {
+        "username": "testUser",
+        "password": "P@ssw0rd!"
+      }
+    ]
+  },
+  {
+    "name": "sql_injection_attempt",
+    "mode": "call",
+    "expected": {
+      "status": "failure",
+      "message": "Invalid credentials"
+    },
+    "input": [
+      {
+        "username": "testUser",
+        "password": "' OR '1'='1"
+      }
+    ]
+  },
+  {
+    "name": "long_username_authentication",
+    "mode": "call",
+    "expected": {
+      "status": "failure",
+      "message": "Username too long"
+    },
+    "input": [
+      {
+        "username": "aVeryLongUsernameThatExceedsNormalLength",
+        "password": "correctPassword"
+      }
+    ]
+  }
+]

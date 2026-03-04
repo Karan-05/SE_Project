@@ -1,0 +1,58 @@
+[
+  {
+    "name": "basic_case",
+    "mode": "io",
+    "expected": "{\"status\": \"success\", \"message\": \"Golive initiated\"}",
+    "stdin": "{\"task\": \"Golive\", \"support\": \"CLM enhancements\"}",
+    "expected_stdout": "{\"status\": \"success\", \"message\": \"Golive initiated\"}"
+  },
+  {
+    "name": "missing_task",
+    "mode": "io",
+    "expected": "{\"status\": \"error\", \"message\": \"Task not specified\"}",
+    "stdin": "{\"support\": \"CLM enhancements\"}",
+    "expected_stdout": "{\"status\": \"error\", \"message\": \"Task not specified\"}"
+  },
+  {
+    "name": "missing_support",
+    "mode": "io",
+    "expected": "{\"status\": \"error\", \"message\": \"Support details missing\"}",
+    "stdin": "{\"task\": \"Golive\"}",
+    "expected_stdout": "{\"status\": \"error\", \"message\": \"Support details missing\"}"
+  },
+  {
+    "name": "invalid_task",
+    "mode": "io",
+    "expected": "{\"status\": \"error\", \"message\": \"Invalid task specified\"}",
+    "stdin": "{\"task\": \"InvalidTask\", \"support\": \"CLM enhancements\"}",
+    "expected_stdout": "{\"status\": \"error\", \"message\": \"Invalid task specified\"}"
+  },
+  {
+    "name": "empty_input",
+    "mode": "io",
+    "expected": "{\"status\": \"error\", \"message\": \"Input cannot be empty\"}",
+    "stdin": "{}",
+    "expected_stdout": "{\"status\": \"error\", \"message\": \"Input cannot be empty\"}"
+  },
+  {
+    "name": "large_input",
+    "mode": "io",
+    "expected": "{\"status\": \"success\", \"message\": \"Golive initiated\"}",
+    "stdin": "{\"task\": \"Golive\", \"support\": \"CLM enhancements\", \"details\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vel...\"}",
+    "expected_stdout": "{\"status\": \"success\", \"message\": \"Golive initiated\"}"
+  },
+  {
+    "name": "special_characters",
+    "mode": "io",
+    "expected": "{\"status\": \"error\", \"message\": \"Invalid characters in task or support\"}",
+    "stdin": "{\"task\": \"Golive!@#\", \"support\": \"CLM enhancements$%^\"}",
+    "expected_stdout": "{\"status\": \"error\", \"message\": \"Invalid characters in task or support\"}"
+  },
+  {
+    "name": "valid_support_without_task",
+    "mode": "io",
+    "expected": "{\"status\": \"error\", \"message\": \"Task not specified\"}",
+    "stdin": "{\"support\": \"CLM enhancements\"}",
+    "expected_stdout": "{\"status\": \"error\", \"message\": \"Task not specified\"}"
+  }
+]

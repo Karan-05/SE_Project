@@ -1,0 +1,1 @@
+{"content": "[LOCAL_STUB] 459054a124172b0f :: Review this contract for completeness and note any missing guarantees. Contract: {'inputs': 'Underspecified', 'outputs':", "tokens": 66, "elapsed": 2.8250011382624507e-05, "budget_exceeded": false, "meta": {"provider": "local_stub", "model": "contract-auditor"}}

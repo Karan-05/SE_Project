@@ -1,0 +1,140 @@
+[
+  {
+    "name": "basic_azure_setup",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "message": "Resources provisioned successfully"
+    },
+    "input": [
+      {
+        "resources": {
+          "vm": 2,
+          "storage": 1,
+          "network": 1
+        },
+        "region": "eastus"
+      }
+    ]
+  },
+  {
+    "name": "terraform_integration",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "message": "Terraform applied successfully"
+    },
+    "input": [
+      {
+        "terraform_code": "resource \"azurerm_virtual_machine\" \"example\" { ... }"
+      }
+    ]
+  },
+  {
+    "name": "ci_cd_pipeline_creation",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "message": "CI/CD pipeline created successfully"
+    },
+    "input": [
+      {
+        "pipeline_config": {
+          "steps": [
+            "build",
+            "test",
+            "deploy"
+          ],
+          "environment": "production"
+        }
+      }
+    ]
+  },
+  {
+    "name": "policy_enforcement",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "message": "Policy enforced successfully"
+    },
+    "input": [
+      {
+        "policy": {
+          "name": "enforce_tags",
+          "rules": {
+            "required_tags": [
+              "environment",
+              "owner"
+            ]
+          }
+        }
+      }
+    ]
+  },
+  {
+    "name": "edge_case_no_resources",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "No resources specified"
+    },
+    "input": [
+      {
+        "resources": {}
+      }
+    ]
+  },
+  {
+    "name": "adversarial_case_invalid_region",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Invalid region specified"
+    },
+    "input": [
+      {
+        "resources": {
+          "vm": 1
+        },
+        "region": "invalid-region"
+      }
+    ]
+  },
+  {
+    "name": "monitoring_setup",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "message": "Monitoring setup completed"
+    },
+    "input": [
+      {
+        "monitoring": {
+          "enabled": true,
+          "services": [
+            "Azure Monitor",
+            "Azure Backup"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "name": "remote_collaboration",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "message": "Collaboration established successfully"
+    },
+    "input": [
+      {
+        "team_members": [
+          "architect",
+          "security",
+          "operations"
+        ],
+        "availability": "overlap"
+      }
+    ]
+  }
+]

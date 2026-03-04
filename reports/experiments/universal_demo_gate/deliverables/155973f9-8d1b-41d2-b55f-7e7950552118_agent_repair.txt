@@ -1,0 +1,6 @@
+```json
+{
+  "task_type": "architecture_doc",
+  "summary": "Design an architecture document for deploying and maintaining the FICO Falcon Fraud Manager suite in AWS, focusing on system deployment, configuration, and performance optimization. The document includes components, interfaces, risks, and a rollout plan.",
+  "artifacts": {
+    "doc_markdown": "## Requirements\n- Deploy FICO Falcon applications on AWS.\n- Support multi-tenant configurations.\n- Optimize performance for high throughput.\n\n## Architecture Diagram\n```mermaid\ngraph TD;\n    A[FICO Falcon Suite] --> B[Scoring]\n    A --> C[MUX]\n    A --> D[Case Manager]\n    A --> E[Rule Expert]\n    B --> F[Database]\n    C --> F\n    D --> F\n    E --> F\n```  \n\n## Components\n- **FICO Falcon Suite** – Central application suite for fraud management.\n- **Scoring** – Application for scoring transactions.\n- **MUX** – Multi-user experience management.\n- **Case Manager** – Manages fraud cases.\n- **Rule Expert** – Deploys business rules.\n- **Database** –

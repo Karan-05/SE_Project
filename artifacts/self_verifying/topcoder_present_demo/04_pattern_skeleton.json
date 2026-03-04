@@ -1,0 +1,34 @@
+{
+  "task_id": "a29ef147-15c4-4e2c-9afc-737403db74eb",
+  "strategy": "pattern_skeleton",
+  "attempt": 4,
+  "pass_rate": 0.0,
+  "plan_subtasks": [
+    "instantiate skeleton",
+    "fill placeholders",
+    "derive pitfall-specific checks",
+    "verify pitfalls",
+    "Generate minimal unit tests for critical behaviors",
+    "Add adversarial/edge-case tests"
+  ],
+  "plan_tests": [
+    "Verify pitfall: Ensure indices not reused",
+    "Verify pitfall: Handle no-solution case"
+  ],
+  "plan_diagnostics": {
+    "pattern_name": "two_pointers",
+    "confidence": "1.00",
+    "pitfalls": "Ensure indices not reused; Handle no-solution case",
+    "planning_tokens": "111",
+    "planning_time": "0.000020",
+    "skeleton": "def solve(nums, target):\n    left, right = 0, len(nums) - 1\n    while left < right:\n        total = nums[left] + nums[right]\n        if total == target:\n            return left, right\n        if total < target:\n            left += 1\n        else:\n            right -= 1\n    return -1, -1\n"
+  },
+  "patch_summary": {
+    "phase": "initial"
+  },
+  "failing_tests": [],
+  "trace": [],
+  "feedback": [],
+  "reproduction": "",
+  "tests_run": []
+}

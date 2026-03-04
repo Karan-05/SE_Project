@@ -1,0 +1,1 @@
+{"content": "[MOCK] 5f5ad66af5a5b08e :: List three high-risk failure modes for this coding task along with short rationales: Return the reversed string.", "tokens": 17, "elapsed": 1.8749999999290168e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "failure-scout", "caller": "failure_mode_first"}}

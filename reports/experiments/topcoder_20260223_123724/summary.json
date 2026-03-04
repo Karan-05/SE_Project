@@ -1,0 +1,46 @@
+{
+  "run_id": "topcoder_20260223_123724",
+  "total_problems": 66712,
+  "attempted": 50,
+  "completed_successfully": 0,
+  "success_rate": 0.0,
+  "pass_at_final": 0.0,
+  "avg_attempts_to_success": 0.0,
+  "median_attempts_to_success": 0.0,
+  "max_attempts_to_success": 0.0,
+  "fallback_rate": 50,
+  "stagnation_count": 35,
+  "strategy_distribution_initial": {
+    "contract_first": 50
+  },
+  "strategy_distribution_final": {
+    "multi_view": 50
+  },
+  "runtime": {
+    "start_time": "2026-02-23T12:37:35.093557",
+    "end_time": "2026-02-23T12:37:35.815100",
+    "total_wall_time_seconds": 0.721543,
+    "avg_time_per_task": 0.00138602
+  },
+  "error_taxonomy": {
+    "missing_tests": 66662,
+    "test_failure": 50
+  },
+  "artifact_dir": "/Users/karanallagh/Desktop/DataCollector/artifacts/self_verifying/topcoder_20260223_123724",
+  "tasks_by_dataset": {
+    "analysis_output_ai_feasibility_analysis.csv": 22023,
+    "analysis_output_ai_super_analysis.csv": 22018,
+    "analysis_output_legacy_ai_feasibility_analysis.csv": 21819,
+    "challenge_data_challengeData_2023-01-01_2023-01-02_page1.json": 1,
+    "challenge_data_challengeData_2023-01-01_2023-01-31_page1.json": 50,
+    "challenge_data_challengeData_2023-01-01_2023-01-31_page2.json": 14,
+    "challenge_data_challengeData_2025-06-01_2025-10-08_page1.json": 45,
+    "challenge_data_challengeData_2025-06-01_2025-10-08_page2.json": 43,
+    "challenge_data_challengeData_2025-06-01_2025-10-08_page3.json": 37,
+    "challenge_data_demoData.json": 45,
+    "data_processed_tasks.csv": 189,
+    "data_processed_tasks.parquet": 189,
+    "data_raw_tasks.csv": 189,
+    "experiments_decomposition_benchmark_tasks.json": 50
+  }
+}

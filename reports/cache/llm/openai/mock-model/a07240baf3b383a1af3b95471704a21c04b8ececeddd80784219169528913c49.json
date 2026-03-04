@@ -1,0 +1,1 @@
+{"content": "The term \"hash bucket\" typically refers to a data structure used in hash tables, where multiple keys that hash to the same index are stored in a list or", "tokens": 52, "elapsed": 1.3268813330068951, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

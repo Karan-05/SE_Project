@@ -1,0 +1,1 @@
+{"content": "The \"two pointers\" pattern is typically used in algorithms that involve searching or comparing elements in a list or array, such as finding pairs that sum to a specific", "tokens": 88, "elapsed": 1.424563250009669, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

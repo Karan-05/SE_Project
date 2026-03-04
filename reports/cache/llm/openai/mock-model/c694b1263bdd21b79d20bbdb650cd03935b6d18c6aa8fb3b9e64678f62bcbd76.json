@@ -1,0 +1,1 @@
+{"content": "The pattern \"hash_bucket\" is typically used in contexts where you want to efficiently group or categorize items based on a hash function. In the case of counting characters", "tokens": 61, "elapsed": 3.686109125002986, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

@@ -1,0 +1,65 @@
+{
+  "run_id": "universal_demo_v3_openai",
+  "total_problems": 30,
+  "attempted": 30,
+  "completed_successfully": 15,
+  "success_rate": 0.5,
+  "pass_at_final": 0.5,
+  "avg_attempts_to_success": 0.3333333333333333,
+  "median_attempts_to_success": 0.0,
+  "max_attempts_to_success": 1.0,
+  "fallback_count": 0,
+  "fallback_rate": 0.0,
+  "stagnation_count": 0,
+  "stagnation_rate": 0.0,
+  "attempted_with_extracted_tests": 30,
+  "attempted_with_synthesized_tests": 0,
+  "success_rate_extracted": 0.5,
+  "success_rate_synthesized": 0.0,
+  "self_check_attempted": 0,
+  "self_check_pass_rate": 0.0,
+  "strategy_distribution_initial": {
+    "contract_first": 5
+  },
+  "strategy_distribution_final": {
+    "contract_first": 5
+  },
+  "runtime": {
+    "start_time": "2026-02-24T13:08:51.246736",
+    "end_time": "2026-02-24T13:14:21.421041",
+    "total_wall_time_seconds": 330.174305,
+    "avg_time_per_task": 10.998556066666668
+  },
+  "error_taxonomy": {
+    "success": 15,
+    "failed_rubric": 15
+  },
+  "artifact_dir": "/Users/karanallagh/Desktop/DataCollector/artifacts/self_verifying/universal_demo_v3_openai",
+  "tasks_by_dataset": {
+    "experiments_decomposition_benchmark_tasks.json": 5,
+    "challenge_data_challengeData_2025-06-01_2025-10-08_page2.json": 2,
+    "challenge_data_challengeData_2023-01-01_2023-01-31_page1.json": 4,
+    "data_processed_tasks.csv": 4,
+    "challenge_data_challengeData_2025-06-01_2025-10-08_page1.json": 3,
+    "data_raw_tasks.csv": 8,
+    "challenge_data_demoData.json": 3,
+    "challenge_data_challengeData_2025-06-01_2025-10-08_page3.json": 1
+  },
+  "solve_attempts_total": 5.0,
+  "llm_calls_total": 29.0,
+  "llm_calls_avg_per_task": 0.9666666666666667,
+  "llm_available": true,
+  "run_validity": "VALID",
+  "attempted_algo": 5,
+  "solved_algo": 5,
+  "attempted_non_coding": 25,
+  "completed_deliverables": 10,
+  "deliverable_success_rate": 0.4,
+  "pass_at_final_extracted_only": 1.0,
+  "llm_reason": "env:OPENAI_API_KEY",
+  "stop_reason": "",
+  "presentation_mode": true,
+  "sample_size": 30,
+  "sample_strategy": "random",
+  "sample_seed": 42
+}

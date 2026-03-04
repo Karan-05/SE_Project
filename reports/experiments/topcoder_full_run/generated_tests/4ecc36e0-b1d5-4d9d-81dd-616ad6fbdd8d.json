@@ -1,0 +1,115 @@
+[
+  {
+    "name": "valid_user_login",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "message": "Login successful"
+    },
+    "input": [
+      {
+        "username": "testuser",
+        "password": "correctpassword"
+      }
+    ]
+  },
+  {
+    "name": "invalid_user_login",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Invalid credentials"
+    },
+    "input": [
+      {
+        "username": "testuser",
+        "password": "wrongpassword"
+      }
+    ]
+  },
+  {
+    "name": "delete_user_without_ssoId",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "message": "User deleted"
+    },
+    "input": [
+      {
+        "userId": "12345"
+      }
+    ]
+  },
+  {
+    "name": "check_permission_with_allowed_scope",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "message": "Permission granted"
+    },
+    "input": [
+      {
+        "userId": "12345",
+        "action": "view",
+        "allowedScope": "machine"
+      }
+    ]
+  },
+  {
+    "name": "check_permission_without_allowed_scope",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Permission denied"
+    },
+    "input": [
+      {
+        "userId": "12345",
+        "action": "edit",
+        "allowedScope": "none"
+      }
+    ]
+  },
+  {
+    "name": "delete_nonexistent_user",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "User not found"
+    },
+    "input": [
+      {
+        "userId": "99999"
+      }
+    ]
+  },
+  {
+    "name": "login_with_empty_credentials",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Credentials cannot be empty"
+    },
+    "input": [
+      {
+        "username": "",
+        "password": ""
+      }
+    ]
+  },
+  {
+    "name": "check_permission_for_admin",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "message": "Permission granted"
+    },
+    "input": [
+      {
+        "userId": "admin",
+        "action": "delete",
+        "allowedScope": "admin"
+      }
+    ]
+  }
+]

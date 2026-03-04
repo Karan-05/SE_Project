@@ -1,0 +1,58 @@
+[
+  {
+    "name": "button_not_overlapping_footer",
+    "mode": "io",
+    "expected": "Back to Home button is displayed above the grey background footer.",
+    "stdin": "User navigates to the page with the Back to Home button.",
+    "expected_stdout": "Back to Home button is displayed above the grey background footer."
+  },
+  {
+    "name": "button_visibility_on_scroll",
+    "mode": "io",
+    "expected": "Back to Home button remains visible and does not overlap with footer.",
+    "stdin": "User scrolls down the page.",
+    "expected_stdout": "Back to Home button remains visible and does not overlap with footer."
+  },
+  {
+    "name": "responsive_design_check",
+    "mode": "io",
+    "expected": "Back to Home button adjusts its position without overlapping footer.",
+    "stdin": "User resizes the browser window to various widths.",
+    "expected_stdout": "Back to Home button adjusts its position without overlapping footer."
+  },
+  {
+    "name": "button_click_functionality",
+    "mode": "io",
+    "expected": "User is redirected to the home page.",
+    "stdin": "User clicks on the Back to Home button.",
+    "expected_stdout": "User is redirected to the home page."
+  },
+  {
+    "name": "footer_color_check",
+    "mode": "io",
+    "expected": "Footer color matches the specified design.",
+    "stdin": "User inspects the footer color.",
+    "expected_stdout": "Footer color matches the specified design."
+  },
+  {
+    "name": "button_style_check",
+    "mode": "io",
+    "expected": "Button style matches the Figma design specifications.",
+    "stdin": "User inspects the Back to Home button style.",
+    "expected_stdout": "Button style matches the Figma design specifications."
+  },
+  {
+    "name": "edge_case_no_footer",
+    "mode": "io",
+    "expected": "Back to Home button is displayed correctly.",
+    "stdin": "User navigates to a page without a footer.",
+    "expected_stdout": "Back to Home button is displayed correctly."
+  },
+  {
+    "name": "edge_case_button_disabled",
+    "mode": "io",
+    "expected": "No action is taken, button remains disabled.",
+    "stdin": "User attempts to click a disabled Back to Home button.",
+    "expected_stdout": "No action is taken, button remains disabled."
+  }
+]

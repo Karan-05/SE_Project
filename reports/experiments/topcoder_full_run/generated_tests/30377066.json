@@ -1,0 +1,110 @@
+[
+  {
+    "name": "custom_signature_loads_inline_reply",
+    "mode": "call",
+    "expected": {
+      "signatureLoaded": true
+    },
+    "input": [
+      {
+        "action": "reply",
+        "inline": true,
+        "signature": "Best regards, John Doe"
+      }
+    ]
+  },
+  {
+    "name": "custom_signature_not_loaded_popout",
+    "mode": "call",
+    "expected": {
+      "signatureLoaded": true
+    },
+    "input": [
+      {
+        "action": "reply",
+        "inline": false,
+        "signature": "Best regards, John Doe"
+      }
+    ]
+  },
+  {
+    "name": "signature_modification_triggers_alert",
+    "mode": "call",
+    "expected": {
+      "smartAlertTriggered": true
+    },
+    "input": [
+      {
+        "action": "modify_signature",
+        "newContent": "Best regards, John Doe\nP.S. See you soon!"
+      }
+    ]
+  },
+  {
+    "name": "signature_modification_no_alert",
+    "mode": "call",
+    "expected": {
+      "smartAlertTriggered": false
+    },
+    "input": [
+      {
+        "action": "modify_signature",
+        "newContent": "Best regards, John Doe"
+      }
+    ]
+  },
+  {
+    "name": "empty_signature_on_reply",
+    "mode": "call",
+    "expected": {
+      "signatureLoaded": false
+    },
+    "input": [
+      {
+        "action": "reply",
+        "inline": true,
+        "signature": ""
+      }
+    ]
+  },
+  {
+    "name": "signature_insertion_failure",
+    "mode": "call",
+    "expected": {
+      "signatureLoaded": false
+    },
+    "input": [
+      {
+        "action": "insert_signature",
+        "error": "signature_insertion_failed"
+      }
+    ]
+  },
+  {
+    "name": "multiple_modifications_triggers_alert",
+    "mode": "call",
+    "expected": {
+      "smartAlertTriggered": true
+    },
+    "input": [
+      {
+        "action": "modify_signature",
+        "newContent": "Best regards, John Doe\nP.S. See you soon!",
+        "additionalContent": "Looking forward to our meeting."
+      }
+    ]
+  },
+  {
+    "name": "signature_loads_after_modification",
+    "mode": "call",
+    "expected": {
+      "signatureLoaded": true
+    },
+    "input": [
+      {
+        "action": "modify_signature",
+        "newContent": "Best regards, John Doe"
+      }
+    ]
+  }
+]

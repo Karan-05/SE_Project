@@ -1,0 +1,66 @@
+[
+  {
+    "name": "simple_latex_formula",
+    "mode": "call",
+    "expected": "<span class='latex'>E=mc^2</span>",
+    "input": [
+      "$E=mc^2$"
+    ]
+  },
+  {
+    "name": "complex_latex_formula",
+    "mode": "call",
+    "expected": "<div class='latex'>\\frac{a}{b} = c</div>",
+    "input": [
+      "$$\\frac{a}{b} = c$$"
+    ]
+  },
+  {
+    "name": "inline_latex_with_text",
+    "mode": "call",
+    "expected": "The formula <span class='latex'>x^2 + y^2 = z^2</span> is famous.",
+    "input": [
+      "The formula $x^2 + y^2 = z^2$ is famous."
+    ]
+  },
+  {
+    "name": "multiple_latex_in_text",
+    "mode": "call",
+    "expected": "<span class='latex'>a^2 + b^2 = c^2</span> and <span class='latex'>E=mc^2</span>",
+    "input": [
+      "$a^2 + b^2 = c^2$ and $E=mc^2$"
+    ]
+  },
+  {
+    "name": "empty_input",
+    "mode": "call",
+    "expected": null,
+    "input": [
+      ""
+    ]
+  },
+  {
+    "name": "invalid_latex",
+    "mode": "call",
+    "expected": "Error: Invalid LaTeX syntax.",
+    "input": [
+      "$invalid_latex$"
+    ]
+  },
+  {
+    "name": "large_formula",
+    "mode": "call",
+    "expected": "<div class='latex'>\\sum_{i=1}^{n} i^2 = \\frac{n(n+1)(2n+1)}{6}</div>",
+    "input": [
+      "$$\\sum_{i=1}^{n} i^2 = \\frac{n(n+1)(2n+1)}{6}$$"
+    ]
+  },
+  {
+    "name": "nested_latex",
+    "mode": "call",
+    "expected": "<span class='latex'>\\sqrt{a^2 + b^2}</span>",
+    "input": [
+      "$\\sqrt{a^2 + b^2}$"
+    ]
+  }
+]

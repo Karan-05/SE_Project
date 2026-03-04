@@ -1,0 +1,19 @@
+{
+  "score": 0.0,
+  "passes_threshold": false,
+  "reasons": [
+    "Missing advanced architecture signals"
+  ],
+  "missing": [
+    "Problem Summary",
+    "Proposed Approach",
+    "File-Level Plan",
+    "API / Interface Changes",
+    "Constraints & SLAs",
+    "Risks & Trade-offs",
+    "Edge Cases",
+    "Acceptance Checklist"
+  ],
+  "section_coverage": 0.0,
+  "extra_score": 0.0
+}

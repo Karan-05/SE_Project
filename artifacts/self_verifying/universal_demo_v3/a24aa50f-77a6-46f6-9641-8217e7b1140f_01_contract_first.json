@@ -1,0 +1,75 @@
+{
+  "task_id": "a24aa50f-77a6-46f6-9641-8217e7b1140f",
+  "strategy": "contract_first",
+  "attempt": 1,
+  "pass_rate": 0.0,
+  "plan_subtasks": [
+    "Validate inputs vs contract",
+    "Implement core logic",
+    "Check edge cases",
+    "Generate minimal unit tests for critical behaviors",
+    "Add adversarial/edge-case tests",
+    "Run tests and interpret failures"
+  ],
+  "plan_tests": [
+    ""
+  ],
+  "plan_diagnostics": {
+    "missing_fields": "constraints,edge_cases",
+    "contract_length": "32",
+    "audit_note": "[MOCK] dcc7efea619dca79 :: Review this contract for completeness and note any missing guarantees. Contract: {'inputs': 'Underspecified', 'outputs':",
+    "planning_tokens": "65",
+    "planning_time": "0.000010"
+  },
+  "patch_summary": {
+    "phase": "initial"
+  },
+  "failing_tests": [
+    "io_sample_1"
+  ],
+  "trace": [
+    ""
+  ],
+  "feedback": [
+    "io_sample_1 expected \"int\", \"className\": \"LumberjackExam\", \"method\": \"examineForest\" } For the above example results would be: { \"error\": null, // compile errors, \"statistics\": { \"time\": { \"mean\": 1020, \"max\": 1100, \"min\": 900 }, \"memory\": { \"mean\": 1020, \"max\": 1100, \"min\": 900 } }, \"results\": [ { \"error\": null, // running error of input value 1 \"statistics\": { \"time\": 1000, // (ms), running time of input value 1 \"memory\": 1000, // Kbytes, memory usage of input value 1 }, \"output\": 20 // output of input value 1 }, { \"error\": \"out of memory\", // running error of input value 1 \"statistics\": { \"time\": 1000, // (ms), running time of input value 1 \"memory\": 1000, // Kbytes, memory usage of input value 1 }, \"output\": null // output of input value 1 }, ... ] } 6. The runSubmission will use CLING to run the submission source code using the input data and produce the results. 7. Accepted input and output parameters types are int , double , std::string, vector , vector , vector 8. Could should compile in Linux and Mac OS. For linux use g++ 7+. Standard C++11 must be used. 9. Create a test program to verify the application for different signatures and source codes (must cover all the types in item 7). Deployment guide and validation document You will need to create a deployment guide (README.md) and validation document (Validation.md). The README.md created must show how to: Configure and Build application The Validation.md created must show all the steps necessary to verify the application: Verify the code for different test cases Final Submission Guidelines Zip File With Submission Documentation Required but saw "
+  ],
+  "reproduction": "inputs= kwargs=",
+  "tests_run": [
+    {
+      "name": "io_sample_1",
+      "mode": "io",
+      "status": "fail",
+      "expected": "\"int\", \"className\": \"LumberjackExam\", \"method\": \"examineForest\" } For the above example results would be: { \"error\": null, // compile errors, \"statistics\": { \"time\": { \"mean\": 1020, \"max\": 1100, \"min\": 900 }, \"memory\": { \"mean\": 1020, \"max\": 1100, \"min\": 900 } }, \"results\": [ { \"error\": null, // running error of input value 1 \"statistics\": { \"time\": 1000, // (ms), running time of input value 1 \"memory\": 1000, // Kbytes, memory usage of input value 1 }, \"output\": 20 // output of input value 1 }, { \"error\": \"out of memory\", // running error of input value 1 \"statistics\": { \"time\": 1000, // (ms), running time of input value 1 \"memory\": 1000, // Kbytes, memory usage of input value 1 }, \"output\": null // output of input value 1 }, ... ] } 6. The runSubmission will use CLING to run the submission source code using the input data and produce the results. 7. Accepted input and output parameters types are int , double , std::string, vector , vector , vector 8. Could should compile in Linux and Mac OS. For linux use g++ 7+. Standard C++11 must be used. 9. Create a test program to verify the application for different signatures and source codes (must cover all the types in item 7). Deployment guide and validation document You will need to create a deployment guide (README.md) and validation document (Validation.md). The README.md created must show how to: Configure and Build application The Validation.md created must show all the steps necessary to verify the application: Verify the code for different test cases Final Submission Guidelines Zip File With Submission Documentation Required",
+      "output": "",
+      "error": "",
+      "stdin": "- Runner constructor : - Runner(json signature ) public methods : - json runSubmission(json data, std::string & submissionCode ) signature will hold the defintion of the public method signature that the submitted code should expose. data will be any arbitrary json array. Each entry of the array must match the provided input parameters for public method. submissionCode is a string that holds the code submitted by user, which should define the class and public method defined in signature . In the above provided statement we have the following definition: Class: LumberjackExam Method: examineForest Parameters: int, int, int, double Returns: int Method signature:int examineForest(int height, int width, int time, double density) For the above example data would be: [ { \"input\": [ 10, 10, 10, 0.5 ] } ... ] For the above example signature would be: { \"input\": [ \"int\", \"int\", \"int\", \"double\" ], \"",
+      "args": "[]",
+      "duration": 2.6583002181723714e-05
+    }
+  ],
+  "llm_calls": 1,
+  "timeline": {
+    "attempt": 1,
+    "strategy": "contract_first",
+    "phase": "initial",
+    "events": {
+      "decompose": {
+        "start": "2026-02-24T12:55:03.480652",
+        "end": "2026-02-24T12:55:03.480802"
+      },
+      "solve": {
+        "start": "2026-02-24T12:55:03.480820",
+        "end": "2026-02-24T12:55:03.481063"
+      },
+      "tests": {
+        "start": "2026-02-24T12:55:03.480993",
+        "end": "2026-02-24T12:55:03.481029",
+        "duration_seconds": "0.000"
+      }
+    },
+    "meta": {
+      "llm_calls": "1"
+    }
+  },
+  "solution_preview": "def solve(*args):\n    return None"
+}

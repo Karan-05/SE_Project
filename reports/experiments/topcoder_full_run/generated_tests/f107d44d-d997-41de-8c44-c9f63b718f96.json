@@ -1,0 +1,58 @@
+[
+  {
+    "name": "basic_case",
+    "mode": "io",
+    "expected": "success\n",
+    "stdin": "customer1, service1\ncustomer2, service2\n",
+    "expected_stdout": "success\n"
+  },
+  {
+    "name": "single_customer_multiple_services",
+    "mode": "io",
+    "expected": "success\n",
+    "stdin": "customer1, service1\ncustomer1, service2\n",
+    "expected_stdout": "success\n"
+  },
+  {
+    "name": "multiple_customers_single_service",
+    "mode": "io",
+    "expected": "success\n",
+    "stdin": "customer1, service1\ncustomer2, service1\n",
+    "expected_stdout": "success\n"
+  },
+  {
+    "name": "no_customers",
+    "mode": "io",
+    "expected": "no customers\n",
+    "stdin": "\n",
+    "expected_stdout": "no customers\n"
+  },
+  {
+    "name": "invalid_format",
+    "mode": "io",
+    "expected": "error: invalid format\n",
+    "stdin": "customer1 service1\ncustomer2, service2\n",
+    "expected_stdout": "error: invalid format\n"
+  },
+  {
+    "name": "duplicate_entries",
+    "mode": "io",
+    "expected": "error: duplicate entry\n",
+    "stdin": "customer1, service1\ncustomer1, service1\n",
+    "expected_stdout": "error: duplicate entry\n"
+  },
+  {
+    "name": "long_input",
+    "mode": "io",
+    "expected": "success\n",
+    "stdin": "customer1, service1\ncustomer2, service2\ncustomer3, service3\ncustomer4, service4\ncustomer5, service5\ncustomer6, service6\ncustomer7, service7\ncustomer8, service8\n",
+    "expected_stdout": "success\n"
+  },
+  {
+    "name": "special_characters",
+    "mode": "io",
+    "expected": "success\n",
+    "stdin": "customer1!, service1@\ncustomer2#, service2$\n",
+    "expected_stdout": "success\n"
+  }
+]

@@ -1,0 +1,1 @@
+{"content": "In the context of an event-driven integration that listens to the Kafka event `submission.scan.complete`, the term \"hash_bucket\" could be relevant depending on the specific", "tokens": 87, "elapsed": 1.3285746250039665, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

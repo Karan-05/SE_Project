@@ -1,0 +1,52 @@
+[
+  {
+    "name": "download_submission",
+    "mode": "call",
+    "expected": "Download initiated for submission 123.",
+    "input": [
+      {
+        "submissionId": "123"
+      }
+    ]
+  },
+  {
+    "name": "av_rescan_submission",
+    "mode": "call",
+    "expected": "AV rescan initiated for submission 124.",
+    "input": [
+      {
+        "submissionId": "124"
+      }
+    ]
+  },
+  {
+    "name": "invalid_submission_id_download",
+    "mode": "call",
+    "expected": "Error: Submission not found.",
+    "input": [
+      {
+        "submissionId": "999"
+      }
+    ]
+  },
+  {
+    "name": "invalid_submission_id_av_rescan",
+    "mode": "call",
+    "expected": "Error: Submission not found.",
+    "input": [
+      {
+        "submissionId": "999"
+      }
+    ]
+  },
+  {
+    "name": "submission_id_format_validation",
+    "mode": "call",
+    "expected": "Error: Invalid submission ID format.",
+    "input": [
+      {
+        "submissionId": "abc"
+      }
+    ]
+  }
+]

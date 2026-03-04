@@ -1,0 +1,38 @@
+{
+  "task_type": "data_etl",
+  "confidence": 0.9,
+  "why": [
+    "The task involves creating an ETL blueprint with specific requirements for data processing.",
+    "There are explicit instructions for validation and sample outputs.",
+    "The task is related to data transformation and quality checks."
+  ],
+  "missing_info": [
+    "Specific source data details and schemas.",
+    "Transformation steps and SQL or code snippets.",
+    "Sample outputs and acceptance checklist."
+  ],
+  "verification_plan": [
+    "Check if the schema is correctly defined.",
+    "Validate the pipeline steps and data quality checks.",
+    "Ensure validation queries are present and executable."
+  ],
+  "artifacts_to_generate": [
+    {
+      "name": "schema.md",
+      "format": "md"
+    },
+    {
+      "name": "pipeline.py",
+      "format": "python"
+    },
+    {
+      "name": "validation.sql",
+      "format": "sql"
+    },
+    {
+      "name": "sample_inputs_outputs.md",
+      "format": "md"
+    }
+  ],
+  "synthesis_policy": "self_check"
+}

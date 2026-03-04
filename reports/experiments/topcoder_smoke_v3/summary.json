@@ -1,0 +1,38 @@
+{
+  "run_id": "topcoder_smoke_v3",
+  "total_problems": 5,
+  "attempted": 0,
+  "completed_successfully": 0,
+  "success_rate": 0.0,
+  "pass_at_final": 0.0,
+  "avg_attempts_to_success": 0.0,
+  "median_attempts_to_success": 0.0,
+  "max_attempts_to_success": 0.0,
+  "fallback_count": 0,
+  "fallback_rate": 0.0,
+  "stagnation_count": 0,
+  "stagnation_rate": 0.0,
+  "attempted_with_extracted_tests": 0,
+  "attempted_with_synthesized_tests": 0,
+  "success_rate_extracted": 0.0,
+  "success_rate_synthesized": 0.0,
+  "strategy_distribution_initial": {},
+  "strategy_distribution_final": {},
+  "runtime": {
+    "start_time": "2026-02-23T14:10:28.158550",
+    "end_time": "2026-02-23T14:10:28.576323",
+    "total_wall_time_seconds": 0.417773,
+    "avg_time_per_task": 0.0
+  },
+  "error_taxonomy": {
+    "synthesis_failure": 5
+  },
+  "artifact_dir": "/Users/karanallagh/Desktop/DataCollector/artifacts/self_verifying/topcoder_smoke_v3",
+  "tasks_by_dataset": {
+    "analysis_output_ai_feasibility_analysis.csv": 5
+  },
+  "solve_attempts_total": 0,
+  "llm_calls_total": 5.0,
+  "llm_calls_avg_per_task": 0.0,
+  "llm_available": true
+}

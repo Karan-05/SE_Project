@@ -1,0 +1,1 @@
+{"content": "The \"two pointers\" technique is often used in problems involving arrays or strings where you need to compare elements or find specific conditions. It can be particularly useful for", "tokens": 54, "elapsed": 1.6342463749897433, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

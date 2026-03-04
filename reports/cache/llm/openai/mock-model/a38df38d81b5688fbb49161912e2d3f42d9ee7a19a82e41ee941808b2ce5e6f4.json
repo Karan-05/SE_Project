@@ -1,0 +1,1 @@
+{"content": "The pattern \"hash_bucket\" typically refers to a method of organizing data in a hash table, which is useful for efficiently storing and retrieving data. However, when", "tokens": 58, "elapsed": 1.768106582982, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

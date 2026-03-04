@@ -1,0 +1,1 @@
+{"content": "[MOCK] d58e570df4af7379 :: Given the problem: Count primes up to N., would pattern hash_bucket be relevant?", "tokens": 13, "elapsed": 1.4999999999876223e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "pattern-hint", "caller": "pattern_skeleton"}}

@@ -1,0 +1,16 @@
+[
+  {
+    "name": "io_sample_1",
+    "mode": "io",
+    "expected": "Refine the Use Case & Design the Agent (Days 1\u20132)**",
+    "stdin": "**\n\n* [Topcoder MCP Inspector GitHub](https://github.com/modelcontextprotocol/inspector)\n* [SSE and HTTP Streaming \\- MDN Reference](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events)\n\n**Deliverable:**\n\n* A table listing at least 3 MCP tools or endpoints with their purpose, input, and",
+    "expected_stdout": "Refine the Use Case & Design the Agent (Days 1\u20132)**"
+  },
+  {
+    "name": "io_sample_2",
+    "mode": "io",
+    "expected": "** A stable, polished, and bug-free agent that reliably handles diverse inputs and edge scenarios",
+    "stdin": "** A lightweight, working UI prototype that allows users to interact with your agent and see live responses from the MCP server\n\n### **Module 7: End-to-End Testing & Debugging (Days 1\u20132)**\n\n**Objective:** Ensure your agent is production-ready through comprehensive testing and optimization.\n\n* Perform full end-to-end testing: UI \u2192 backend \u2192 MCP \u2192 backend \u2192 UI\n* Simulate real user interactions and input variations\n* Identify and handle edge cases, un",
+    "expected_stdout": "** A stable, polished, and bug-free agent that reliably handles diverse inputs and edge scenarios"
+  }
+]

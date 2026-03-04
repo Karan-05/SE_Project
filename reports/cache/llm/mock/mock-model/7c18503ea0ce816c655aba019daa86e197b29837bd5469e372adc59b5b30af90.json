@@ -1,0 +1,1 @@
+{"content": "[MOCK] 9c58d2ad1ed7c5b9 :: List three high-risk failure modes for this coding task along with short rationales: Return the sum of all integers.", "tokens": 19, "elapsed": 1.7089999999608807e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "failure-scout", "caller": "failure_mode_first"}}

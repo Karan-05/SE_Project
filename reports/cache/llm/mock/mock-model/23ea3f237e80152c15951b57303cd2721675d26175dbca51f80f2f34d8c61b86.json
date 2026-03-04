@@ -1,0 +1,1 @@
+{"content": "[MOCK] 53082aa7b0bffc71 :: Architect: propose a phased plan for task graph_edges: Return the number of undirected edges.", "tokens": 14, "elapsed": 1.708000000100185e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "role-architect", "caller": "role_decomposed"}}

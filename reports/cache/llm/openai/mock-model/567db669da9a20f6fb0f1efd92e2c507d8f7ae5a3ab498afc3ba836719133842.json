@@ -1,0 +1,1 @@
+{"content": "The two-pointer technique is typically used in problems involving arrays or strings where you need to find pairs or subarrays that meet certain conditions. In the context of implementing", "tokens": 98, "elapsed": 1.5338569169980474, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

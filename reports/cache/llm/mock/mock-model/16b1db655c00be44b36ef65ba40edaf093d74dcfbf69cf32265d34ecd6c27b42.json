@@ -1,0 +1,1 @@
+{"content": "[MOCK] 178fa12948b21e9f :: Implement function solve(arg1:list[int]) -> int. Do NOT read from stdin or write to stdout; rely solely on the provided ", "tokens": 28, "elapsed": 3.0829999999593127e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "contract-solver", "caller": "contract_first"}}

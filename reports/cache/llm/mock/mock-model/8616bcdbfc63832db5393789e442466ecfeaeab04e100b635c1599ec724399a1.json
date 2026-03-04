@@ -1,0 +1,1 @@
+{"content": "[MOCK] a9c24d12b49d8929 :: Summarize consensus from tri-view before coding.", "tokens": 6, "elapsed": 1.3340000000194863e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "multi-view-notes", "caller": "multi_view"}}

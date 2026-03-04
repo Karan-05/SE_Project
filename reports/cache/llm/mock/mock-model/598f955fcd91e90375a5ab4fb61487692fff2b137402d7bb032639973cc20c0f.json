@@ -1,0 +1,1 @@
+{"content": "[MOCK] 52d70d5c9885f7e8 :: Given the problem: Return the sum of the main diagonal., would pattern two_pointers be relevant?", "tokens": 15, "elapsed": 1.958999999995825e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "pattern-hint", "caller": "pattern_skeleton"}}

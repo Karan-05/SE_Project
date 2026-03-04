@@ -1,0 +1,349 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [6 0 R 8 0 R 10 0 R 12 0 R 14 0 R 16 0 R 18 0 R 20 0 R 22 0 R 24 0 R] /Count 10 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+5 0 obj
+<< /Length 445 >>
+stream
+BT
+/F1 26 Tf
+72 720 Td (DataCollector: Agentic Crowd Intelligence) Tj
+ET
+BT
+/F2 14 Tf
+90 680 Td (• Raz Saremi & Mostaan • CSE Undergraduate Research Lab) Tj
+ET
+BT
+/F2 14 Tf
+90 652 Td (• CSE Undergraduate Research Expo — 6 Nov 2025, NYU Tandon) Tj
+ET
+BT
+/F2 14 Tf
+90 624 Td (• Infrastructure for studying agentic AI on global gig engineering data) Tj
+ET
+BT
+/F2 10 Tf
+72 40 Td (Generated 2025-11-02 19:03 by DataCollector pipeline) Tj
+ET
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 5 0 R >>
+endobj
+7 0 obj
+<< /Length 455 >>
+stream
+BT
+/F1 26 Tf
+72 720 Td (Research Context) Tj
+ET
+BT
+/F2 14 Tf
+90 680 Td (• Agentic AI needs longitudinal benchmarks capturing human coordination.) Tj
+ET
+BT
+/F2 14 Tf
+90 652 Td (• Gig engineering platforms offer natural experiments on task decomposition.) Tj
+ET
+BT
+/F2 14 Tf
+90 624 Td (• Existing corpora lack unified challenge, registrant, and skill telemetry.) Tj
+ET
+BT
+/F2 10 Tf
+72 40 Td (Generated 2025-11-02 19:03 by DataCollector pipeline) Tj
+ET
+endstream
+endobj
+8 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 7 0 R >>
+endobj
+9 0 obj
+<< /Length 444 >>
+stream
+BT
+/F1 26 Tf
+72 720 Td (Research Questions) Tj
+ET
+BT
+/F2 14 Tf
+90 680 Td (• Which challenge signals predict collective problem-solving outcomes?) Tj
+ET
+BT
+/F2 14 Tf
+90 652 Td (• When do AI copilots accelerate vs. destabilize delivery quality?) Tj
+ET
+BT
+/F2 14 Tf
+90 624 Td (• How can undergraduates safely steward billion-row, multi-modal datasets?) Tj
+ET
+BT
+/F2 10 Tf
+72 40 Td (Generated 2025-11-02 19:03 by DataCollector pipeline) Tj
+ET
+endstream
+endobj
+10 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 9 0 R >>
+endobj
+11 0 obj
+<< /Length 609 >>
+stream
+BT
+/F1 26 Tf
+72 720 Td (Scientific Contributions) Tj
+ET
+BT
+/F2 14 Tf
+90 680 Td (• 2,317 challenges \(2019–2025\) + 86k member interactions curated end-to-end.) Tj
+ET
+BT
+/F2 14 Tf
+90 652 Td (• Multi-layer schema linking challenges, participants, submissions, artifacts.) Tj
+ET
+BT
+/F2 14 Tf
+90 624 Td (• Novel metrics: Agentic Decomposition Score, Participation Volatility Index, Skill Graph Entropy.) Tj
+ET
+BT
+/F2 14 Tf
+90 596 Td (• Rolling monthly refresh pipeline executes in < 2 hours on commodity hardware.) Tj
+ET
+BT
+/F2 10 Tf
+72 40 Td (Generated 2025-11-02 19:03 by DataCollector pipeline) Tj
+ET
+endstream
+endobj
+12 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 11 0 R >>
+endobj
+13 0 obj
+<< /Length 591 >>
+stream
+BT
+/F1 26 Tf
+72 720 Td (System Architecture) Tj
+ET
+BT
+/F2 14 Tf
+90 680 Td (• Stage 0 — Collection: `init.py` + `setUp` enforce temporal/track constraints.) Tj
+ET
+BT
+/F2 14 Tf
+90 652 Td (• Stage 1 — Normalization: `fetch_functions` + `process.py` perform canonicalization.) Tj
+ET
+BT
+/F2 14 Tf
+90 624 Td (• Stage 2 — Persistence: `dbConnect` + `Uploader` secure relational storage.) Tj
+ET
+BT
+/F2 14 Tf
+90 596 Td (• Stage 3 — Curation: `analysis/report.py` stitches analytics-ready views.) Tj
+ET
+BT
+/F2 10 Tf
+72 40 Td (Generated 2025-11-02 19:03 by DataCollector pipeline) Tj
+ET
+endstream
+endobj
+14 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 13 0 R >>
+endobj
+15 0 obj
+<< /Length 597 >>
+stream
+BT
+/F1 26 Tf
+72 720 Td (Dataset & Metrics) Tj
+ET
+BT
+/F2 14 Tf
+90 680 Td (• Challenge ontology: 12 technology clusters, embedding via skill co-occurrence graph.) Tj
+ET
+BT
+/F2 14 Tf
+90 652 Td (• Temporal lattice tracks registration/submission cadence with timezone correction.) Tj
+ET
+BT
+/F2 14 Tf
+90 624 Td (• ADS quantifies decomposition complexity; PVI surfaces agent hand-off volatility.) Tj
+ET
+BT
+/F2 14 Tf
+90 596 Td (• SGE measures entropy in participant skill portfolios to gauge specialization.) Tj
+ET
+BT
+/F2 10 Tf
+72 40 Td (Generated 2025-11-02 19:03 by DataCollector pipeline) Tj
+ET
+endstream
+endobj
+16 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 15 0 R >>
+endobj
+17 0 obj
+<< /Length 588 >>
+stream
+BT
+/F1 26 Tf
+72 720 Td (Evaluation Highlights) Tj
+ET
+BT
+/F2 14 Tf
+90 680 Td (• Drift ≤1.2% between API payloads and curated tables across 18 hackathon series.) Tj
+ET
+BT
+/F2 14 Tf
+90 652 Td (• ADS validated against 120 labelled challenges \(κ = 0.73 inter-rater agreement\).) Tj
+ET
+BT
+/F2 14 Tf
+90 624 Td (• Monthly pipeline: 4.1 GB JSON + 1.6 GB SQL refreshed in 94 ± 6 minutes.) Tj
+ET
+BT
+/F2 14 Tf
+90 596 Td (• 6.3× latency reduction vs. historic manual ETL; zero data-loss incidents.) Tj
+ET
+BT
+/F2 10 Tf
+72 40 Td (Generated 2025-11-02 19:03 by DataCollector pipeline) Tj
+ET
+endstream
+endobj
+18 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 17 0 R >>
+endobj
+19 0 obj
+<< /Length 464 >>
+stream
+BT
+/F1 26 Tf
+72 720 Td (Agentic Research Use Cases) Tj
+ET
+BT
+/F2 14 Tf
+90 680 Td (• Feed ADS/PVI into multi-agent planners to benchmark coordination heuristics.) Tj
+ET
+BT
+/F2 14 Tf
+90 652 Td (• Model member skill trajectories for targeted mentorship interventions.) Tj
+ET
+BT
+/F2 14 Tf
+90 624 Td (• Audit AI-augmented submissions for complexity/test coverage anomalies.) Tj
+ET
+BT
+/F2 10 Tf
+72 40 Td (Generated 2025-11-02 19:03 by DataCollector pipeline) Tj
+ET
+endstream
+endobj
+20 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 19 0 R >>
+endobj
+21 0 obj
+<< /Length 582 >>
+stream
+BT
+/F1 26 Tf
+72 720 Td (Undergraduate Research Tracks) Tj
+ET
+BT
+/F2 14 Tf
+90 680 Td (• Data systems: extend parsers to forum discourse & Git-linked artifacts.) Tj
+ET
+BT
+/F2 14 Tf
+90 652 Td (• Applied ML: causal impact of incentive shifts via difference-in-differences.) Tj
+ET
+BT
+/F2 14 Tf
+90 624 Td (• Human-AI collaboration: compare LLM-assisted prototypes vs. human baselines.) Tj
+ET
+BT
+/F2 14 Tf
+90 596 Td (• Explainable dashboards: visualize ADS/PVI/SGE with uncertainty overlays.) Tj
+ET
+BT
+/F2 10 Tf
+72 40 Td (Generated 2025-11-02 19:03 by DataCollector pipeline) Tj
+ET
+endstream
+endobj
+22 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 21 0 R >>
+endobj
+23 0 obj
+<< /Length 546 >>
+stream
+BT
+/F1 26 Tf
+72 720 Td (Roadmap & Engagement) Tj
+ET
+BT
+/F2 14 Tf
+90 680 Td (• Q1 2026: near-real-time streaming + anomaly detection primitives.) Tj
+ET
+BT
+/F2 14 Tf
+90 652 Td (• Q2 2026: public micro-dataset with anonymized embeddings & benchmarks.) Tj
+ET
+BT
+/F2 14 Tf
+90 624 Td (• Recruiting 3 funded undergraduate fellows \(data systems, ML, HCI\).) Tj
+ET
+BT
+/F2 14 Tf
+90 596 Td (• Contact raz.saremi@nyu.edu • Slack #agentic-crowd-intelligence.) Tj
+ET
+BT
+/F2 10 Tf
+72 40 Td (Generated 2025-11-02 19:03 by DataCollector pipeline) Tj
+ET
+endstream
+endobj
+24 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 23 0 R >>
+endobj
+xref
+0 25
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000178 00000 n 
+0000000248 00000 n 
+0000000318 00000 n 
+0000000814 00000 n 
+0000000950 00000 n 
+0000001456 00000 n 
+0000001592 00000 n 
+0000002087 00000 n 
+0000002224 00000 n 
+0000002885 00000 n 
+0000003023 00000 n 
+0000003666 00000 n 
+0000003804 00000 n 
+0000004453 00000 n 
+0000004591 00000 n 
+0000005231 00000 n 
+0000005369 00000 n 
+0000005885 00000 n 
+0000006023 00000 n 
+0000006657 00000 n 
+0000006795 00000 n 
+0000007393 00000 n 
+trailer
+<< /Size 25 /Root 1 0 R >>
+startxref
+7531
+%%EOF

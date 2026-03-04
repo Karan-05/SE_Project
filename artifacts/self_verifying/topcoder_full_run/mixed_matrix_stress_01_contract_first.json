@@ -1,0 +1,77 @@
+{
+  "task_id": "mixed_matrix_stress",
+  "strategy": "contract_first",
+  "attempt": 1,
+  "pass_rate": 1.0,
+  "plan_subtasks": [
+    "Validate inputs vs contract",
+    "Implement core logic",
+    "Check edge cases",
+    "Generate minimal unit tests for critical behaviors",
+    "Add adversarial/edge-case tests",
+    "Run tests and interpret failures"
+  ],
+  "plan_tests": [
+    "",
+    ""
+  ],
+  "plan_diagnostics": {
+    "missing_fields": "constraints",
+    "contract_length": "34",
+    "audit_note": "To review the contract for completeness, let's break down the components:\n\n1. **Inputs**: The contract states \"Underspecified.\" This means the expected input format, type, and constraints are not clearly defined. For example, it should specify whether the input is a matrix, its dimensions, and whether it contains only numerical values.\n\n2. **Outputs**: Similarly, \"Underspecified\" indicates that the expected output is not clearly defined. It should specify the type of",
+    "planning_tokens": "154",
+    "planning_time": "2.542598"
+  },
+  "patch_summary": {
+    "phase": "initial"
+  },
+  "tests_run": [
+    {
+      "name": "sample_0",
+      "mode": "call",
+      "status": "pass",
+      "expected": "5",
+      "output": "5",
+      "error": "",
+      "input": "[[[1, 2], [3, 4]]]",
+      "kwargs": "{}",
+      "duration": 1.766698551364243e-05
+    },
+    {
+      "name": "sample_1",
+      "mode": "call",
+      "status": "pass",
+      "expected": "5",
+      "output": "5",
+      "error": "",
+      "input": "[[[5]]]",
+      "kwargs": "{}",
+      "duration": 6.665999535471201e-06
+    }
+  ],
+  "llm_calls": 0,
+  "timeline": {
+    "attempt": 1,
+    "strategy": "contract_first",
+    "phase": "initial",
+    "events": {
+      "decompose": {
+        "start": "2026-02-24T01:34:44.280207",
+        "end": "2026-02-24T01:34:44.280731"
+      },
+      "solve": {
+        "start": "2026-02-24T01:34:44.280762",
+        "end": "2026-02-24T01:34:44.281510"
+      },
+      "tests": {
+        "start": "2026-02-24T01:34:44.281443",
+        "end": "2026-02-24T01:34:44.281480",
+        "duration_seconds": "0.000"
+      }
+    },
+    "meta": {
+      "llm_calls": "0"
+    }
+  },
+  "solution_preview": "def solve(matrix):\n                return sum(matrix[i][i] for i in range(min(len(matrix), len(matrix[0]))))"
+}

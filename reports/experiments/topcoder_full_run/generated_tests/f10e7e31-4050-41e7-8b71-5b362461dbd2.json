@@ -1,0 +1,58 @@
+[
+  {
+    "name": "basic_case",
+    "mode": "io",
+    "expected": "6\n",
+    "stdin": "1\n2\n3\n",
+    "expected_stdout": "6\n"
+  },
+  {
+    "name": "negative_numbers",
+    "mode": "io",
+    "expected": "-6\n",
+    "stdin": "-1\n-2\n-3\n",
+    "expected_stdout": "-6\n"
+  },
+  {
+    "name": "zero_case",
+    "mode": "io",
+    "expected": "0\n",
+    "stdin": "0\n0\n0\n",
+    "expected_stdout": "0\n"
+  },
+  {
+    "name": "large_numbers",
+    "mode": "io",
+    "expected": "6000000\n",
+    "stdin": "1000000\n2000000\n3000000\n",
+    "expected_stdout": "6000000\n"
+  },
+  {
+    "name": "mixed_numbers",
+    "mode": "io",
+    "expected": "4\n",
+    "stdin": "-1\n2\n3\n",
+    "expected_stdout": "4\n"
+  },
+  {
+    "name": "edge_case_one",
+    "mode": "io",
+    "expected": "0\n",
+    "stdin": "1\n-1\n0\n",
+    "expected_stdout": "0\n"
+  },
+  {
+    "name": "edge_case_two",
+    "mode": "io",
+    "expected": "2\n",
+    "stdin": "999999999\n-999999998\n1\n",
+    "expected_stdout": "2\n"
+  },
+  {
+    "name": "all_positive_large",
+    "mode": "io",
+    "expected": "6000000000\n",
+    "stdin": "1000000000\n2000000000\n3000000000\n",
+    "expected_stdout": "6000000000\n"
+  }
+]

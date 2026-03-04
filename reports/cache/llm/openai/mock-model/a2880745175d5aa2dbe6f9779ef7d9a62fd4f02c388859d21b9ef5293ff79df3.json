@@ -1,0 +1,1 @@
+{"content": "```python\ndef solve(arg1: str, arg2: int) -> dict:\n    intensity = arg2\n    listenability = True if intensity > 0 else False\n    return {'intensity': intensity, 'listenability': listenability}\n```", "tokens": 541, "elapsed": 1.6330355409882031, "budget_exceeded": false, "meta": {"provider": "openai", "model": "repair-loop", "caller": "pattern_skeleton:repair"}}

@@ -1,0 +1,10 @@
+[
+  {
+    "name": "check_edge_case_large_text_input",
+    "mode": "call",
+    "expected": "transparent",
+    "input": [
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    ]
+  }
+]

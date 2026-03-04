@@ -1,0 +1,1 @@
+{"content": "[MOCK] fce756d945b41b82 :: Review this contract for completeness and note any missing guarantees. Contract: {'inputs': 'Underspecified', 'outputs':", "tokens": 67, "elapsed": 4.667000000679877e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "contract-auditor", "caller": "contract_first"}}

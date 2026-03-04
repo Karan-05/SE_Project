@@ -1,0 +1,1 @@
+{"content": "[MOCK] b90d0df77b9eaf5d :: Implement function solve(arg1:list[list[int]]) -> dict. Do NOT read from stdin or write to stdout; rely solely on the pr", "tokens": 34, "elapsed": 1.957999999913085e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "pattern-codegen", "caller": "pattern_skeleton"}}

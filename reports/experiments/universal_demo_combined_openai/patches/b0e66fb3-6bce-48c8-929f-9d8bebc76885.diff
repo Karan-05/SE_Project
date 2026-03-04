@@ -1,0 +1,25 @@
+```diff
+--- a/src/components/ActivityFeed.js
++++ b/src/components/ActivityFeed.js
+@@ -1,5 +1,6 @@
+ import React from 'react';
+ import { connect } from 'react-redux';
+ 
++const isLoggedIn = (user) => user && user.isLoggedIn;
+ const ActivityFeed = ({ user }) => {
+   return (
+     <div>
+@@ -10,6 +11,8 @@
+         {/* Render activity feed items */}
+       </div>
+     );
+   };
++
++  // Disable perpetual scrolling for logged out users
+   if (!isLoggedIn(user)) {
+     // Logic to disable perpetual scrolling
+   }
+ 
+   return <div>{/* Render feed items */}</div>;
+ }
+```

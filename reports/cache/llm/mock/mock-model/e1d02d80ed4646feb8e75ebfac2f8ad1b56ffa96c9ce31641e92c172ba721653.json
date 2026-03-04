@@ -1,0 +1,1 @@
+{"content": "[MOCK] bad89921dd5d2a13 :: Architect: propose a phased plan for task string_reverse_hard: Return the reversed string.", "tokens": 12, "elapsed": 1.7089999999608807e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "role-architect", "caller": "role_decomposed"}}

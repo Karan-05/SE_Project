@@ -1,0 +1,1 @@
+{"content": "In the context of developing a software module to reduce the frame rate of a live video stream from a CCTV IP camera, the two-pointer technique is not directly applicable", "tokens": 94, "elapsed": 1.3229045410116669, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

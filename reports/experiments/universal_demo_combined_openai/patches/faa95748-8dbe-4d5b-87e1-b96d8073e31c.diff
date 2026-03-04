@@ -1,0 +1,16 @@
+```diff
+--- a/src/components/ChallengeRounds.jsx
++++ b/src/components/ChallengeRounds.jsx
+@@ -1,5 +1,5 @@
+ import React from 'react';
+ 
+-function ChallengeRounds({ rounds }) {
++function ChallengeRounds({ rounds, displayRounds }) {
+   return (
+     <div>
+-      {rounds.map(round => <Round key={round.id} {...round} />)}
++      {displayRounds.map(round => <Round key={round.id} {...round} />)}
+     </div>
+   );
+ }
+```

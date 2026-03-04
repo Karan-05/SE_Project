@@ -1,0 +1,121 @@
+[
+  {
+    "name": "create_submission_valid",
+    "mode": "call",
+    "expected": {
+      "id": "submission_1",
+      "title": "Test Submission",
+      "content": "This is a test submission.",
+      "userId": "user_123",
+      "reviewId": "review_456",
+      "status": "created"
+    },
+    "input": [
+      {
+        "title": "Test Submission",
+        "content": "This is a test submission.",
+        "userId": "user_123",
+        "reviewId": "review_456"
+      }
+    ]
+  },
+  {
+    "name": "get_submission_valid",
+    "mode": "call",
+    "expected": {
+      "id": "submission_1",
+      "title": "Test Submission",
+      "content": "This is a test submission.",
+      "userId": "user_123",
+      "reviewId": "review_456",
+      "status": "created"
+    },
+    "input": [
+      {
+        "id": "submission_1"
+      }
+    ]
+  },
+  {
+    "name": "update_submission_valid",
+    "mode": "call",
+    "expected": {
+      "id": "submission_1",
+      "title": "Updated Submission",
+      "content": "This is a test submission.",
+      "userId": "user_123",
+      "reviewId": "review_456",
+      "status": "updated"
+    },
+    "input": [
+      {
+        "id": "submission_1",
+        "title": "Updated Submission"
+      }
+    ]
+  },
+  {
+    "name": "delete_submission_valid",
+    "mode": "call",
+    "expected": {
+      "message": "Submission deleted successfully."
+    },
+    "input": [
+      {
+        "id": "submission_1"
+      }
+    ]
+  },
+  {
+    "name": "create_submission_invalid_user",
+    "mode": "call",
+    "expected": {
+      "error": "User not found."
+    },
+    "input": [
+      {
+        "title": "Test Submission",
+        "content": "This is a test submission.",
+        "userId": "invalid_user",
+        "reviewId": "review_456"
+      }
+    ]
+  },
+  {
+    "name": "get_submission_not_found",
+    "mode": "call",
+    "expected": {
+      "error": "Submission not found."
+    },
+    "input": [
+      {
+        "id": "invalid_submission"
+      }
+    ]
+  },
+  {
+    "name": "update_submission_invalid_id",
+    "mode": "call",
+    "expected": {
+      "error": "Submission not found."
+    },
+    "input": [
+      {
+        "id": "invalid_submission",
+        "title": "Updated Submission"
+      }
+    ]
+  },
+  {
+    "name": "delete_submission_not_found",
+    "mode": "call",
+    "expected": {
+      "error": "Submission not found."
+    },
+    "input": [
+      {
+        "id": "invalid_submission"
+      }
+    ]
+  }
+]

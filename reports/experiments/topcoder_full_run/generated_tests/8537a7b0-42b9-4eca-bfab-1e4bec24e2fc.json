@@ -1,0 +1,126 @@
+[
+  {
+    "name": "test_iterative_reviewer_access",
+    "mode": "call",
+    "expected": {
+      "phases_title": "Phase 1",
+      "sections": []
+    },
+    "input": [
+      {
+        "role": "Iterative Reviewer",
+        "challenge_id": 12345
+      }
+    ]
+  },
+  {
+    "name": "test_non_iterative_reviewer_access",
+    "mode": "call",
+    "expected": {
+      "phases_title": "Phase 1",
+      "sections": [
+        "Details",
+        "Submissions"
+      ]
+    },
+    "input": [
+      {
+        "role": "Non-Reviewer",
+        "challenge_id": 12345
+      }
+    ]
+  },
+  {
+    "name": "test_invalid_role_access",
+    "mode": "call",
+    "expected": {
+      "error": "Access Denied"
+    },
+    "input": [
+      {
+        "role": "Invalid Role",
+        "challenge_id": 12345
+      }
+    ]
+  },
+  {
+    "name": "test_empty_challenge_id",
+    "mode": "call",
+    "expected": {
+      "error": "Challenge ID cannot be null"
+    },
+    "input": [
+      {
+        "role": "Iterative Reviewer",
+        "challenge_id": null
+      }
+    ]
+  },
+  {
+    "name": "test_challenge_not_found",
+    "mode": "call",
+    "expected": {
+      "error": "Challenge not found"
+    },
+    "input": [
+      {
+        "role": "Iterative Reviewer",
+        "challenge_id": 99999
+      }
+    ]
+  },
+  {
+    "name": "test_multiple_roles_access",
+    "mode": "call",
+    "expected": [
+      {
+        "phases_title": "Phase 1",
+        "sections": []
+      },
+      {
+        "phases_title": "Phase 1",
+        "sections": [
+          "Details",
+          "Submissions"
+        ]
+      }
+    ],
+    "input": [
+      {
+        "role": "Iterative Reviewer",
+        "challenge_id": 12345
+      },
+      {
+        "role": "Admin",
+        "challenge_id": 12345
+      }
+    ]
+  },
+  {
+    "name": "test_role_with_no_access",
+    "mode": "call",
+    "expected": {
+      "error": "Access Denied"
+    },
+    "input": [
+      {
+        "role": "Guest",
+        "challenge_id": 12345
+      }
+    ]
+  },
+  {
+    "name": "test_challenge_details_structure",
+    "mode": "call",
+    "expected": {
+      "phases_title": "Phase 1",
+      "sections": []
+    },
+    "input": [
+      {
+        "role": "Iterative Reviewer",
+        "challenge_id": 12345
+      }
+    ]
+  }
+]

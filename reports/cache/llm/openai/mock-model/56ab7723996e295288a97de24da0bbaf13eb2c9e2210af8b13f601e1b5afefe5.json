@@ -1,0 +1,1 @@
+{"content": "```python\ndef solve(edges):\n    return len(edges)\n\n```", "tokens": 144, "elapsed": 1.061356624995824, "budget_exceeded": false, "meta": {"provider": "openai", "model": "repair-loop", "caller": "semantic_diff:repair"}}

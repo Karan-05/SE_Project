@@ -1,0 +1,113 @@
+[
+  {
+    "name": "test_checkpoint_screening_not_visible_before_activation",
+    "mode": "call",
+    "expected": {
+      "checkpointScreeningVisible": false,
+      "screeningPhasesVisible": false
+    },
+    "input": [
+      {
+        "challengeStatus": "inactive"
+      }
+    ]
+  },
+  {
+    "name": "test_checkpoint_screening_visible_after_activation",
+    "mode": "call",
+    "expected": {
+      "checkpointScreeningVisible": true,
+      "screeningPhasesVisible": true
+    },
+    "input": [
+      {
+        "challengeStatus": "active"
+      }
+    ]
+  },
+  {
+    "name": "test_multiple_challenges_inactive",
+    "mode": "call",
+    "expected": [
+      {
+        "checkpointScreeningVisible": false,
+        "screeningPhasesVisible": false
+      },
+      {
+        "checkpointScreeningVisible": false,
+        "screeningPhasesVisible": false
+      }
+    ],
+    "input": [
+      {
+        "challengeStatus": "inactive"
+      },
+      {
+        "challengeStatus": "inactive"
+      }
+    ]
+  },
+  {
+    "name": "test_multiple_challenges_active",
+    "mode": "call",
+    "expected": [
+      {
+        "checkpointScreeningVisible": true,
+        "screeningPhasesVisible": true
+      },
+      {
+        "checkpointScreeningVisible": true,
+        "screeningPhasesVisible": true
+      }
+    ],
+    "input": [
+      {
+        "challengeStatus": "active"
+      },
+      {
+        "challengeStatus": "active"
+      }
+    ]
+  },
+  {
+    "name": "test_edge_case_invalid_status",
+    "mode": "call",
+    "expected": {
+      "checkpointScreeningVisible": false,
+      "screeningPhasesVisible": false
+    },
+    "input": [
+      {
+        "challengeStatus": "unknown"
+      }
+    ]
+  },
+  {
+    "name": "test_transition_from_inactive_to_active",
+    "mode": "call",
+    "expected": {
+      "checkpointScreeningVisible": true,
+      "screeningPhasesVisible": true
+    },
+    "input": [
+      {
+        "initialStatus": "inactive",
+        "newStatus": "active"
+      }
+    ]
+  },
+  {
+    "name": "test_transition_from_active_to_inactive",
+    "mode": "call",
+    "expected": {
+      "checkpointScreeningVisible": false,
+      "screeningPhasesVisible": false
+    },
+    "input": [
+      {
+        "initialStatus": "active",
+        "newStatus": "inactive"
+      }
+    ]
+  }
+]

@@ -1,0 +1,58 @@
+[
+  {
+    "name": "basic_case",
+    "mode": "io",
+    "expected": "10\n",
+    "stdin": "1 2\n3 4\n",
+    "expected_stdout": "10\n"
+  },
+  {
+    "name": "negative_numbers",
+    "mode": "io",
+    "expected": "-10\n",
+    "stdin": "-1 -2\n-3 -4\n",
+    "expected_stdout": "-10\n"
+  },
+  {
+    "name": "zero_case",
+    "mode": "io",
+    "expected": "0\n",
+    "stdin": "0 0\n0 0\n",
+    "expected_stdout": "0\n"
+  },
+  {
+    "name": "large_numbers",
+    "mode": "io",
+    "expected": "10000000\n",
+    "stdin": "1000000 2000000\n3000000 4000000\n",
+    "expected_stdout": "10000000\n"
+  },
+  {
+    "name": "single_pair",
+    "mode": "io",
+    "expected": "10\n",
+    "stdin": "5 5\n",
+    "expected_stdout": "10\n"
+  },
+  {
+    "name": "mixed_signs",
+    "mode": "io",
+    "expected": "0\n",
+    "stdin": "5 -5\n-3 3\n",
+    "expected_stdout": "0\n"
+  },
+  {
+    "name": "multiple_pairs",
+    "mode": "io",
+    "expected": "20\n",
+    "stdin": "1 1\n2 2\n3 3\n4 4\n",
+    "expected_stdout": "20\n"
+  },
+  {
+    "name": "adversarial_case",
+    "mode": "io",
+    "expected": "4000000000\n",
+    "stdin": "1000000000 1000000000\n1000000000 1000000000\n",
+    "expected_stdout": "4000000000\n"
+  }
+]

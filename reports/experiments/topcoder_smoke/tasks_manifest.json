@@ -1,0 +1,42 @@
+{
+  "run_id": "topcoder_smoke",
+  "generated_at": "2026-02-23T12:37:04.189976",
+  "task_count": 5,
+  "tasks": [
+    {
+      "id": "0c9d344e-6452-4d0c-a474-34d203f04f6c",
+      "title": "Topcoder Community App - Support LaTex formulas in Markdown rendering",
+      "dataset_id": "analysis_output_ai_feasibility_analysis.csv",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/analysis/output/ai_feasibility_analysis.csv",
+      "has_tests": false
+    },
+    {
+      "id": "a47ab6c2-23fa-47d3-862d-f4c725245bea",
+      "title": "Easy | Topcoder Skill Builder Competition | ReactJS | Getting Started",
+      "dataset_id": "analysis_output_ai_feasibility_analysis.csv",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/analysis/output/ai_feasibility_analysis.csv",
+      "has_tests": false
+    },
+    {
+      "id": "a4826c63-5e86-45f7-899b-6ed2a3aa60f4",
+      "title": "Topcoder Skill Builder Competition | ReactJS",
+      "dataset_id": "analysis_output_ai_feasibility_analysis.csv",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/analysis/output/ai_feasibility_analysis.csv",
+      "has_tests": false
+    },
+    {
+      "id": "305e0763-dd63-4883-9133-55504503953d",
+      "title": "Hard | Topcoder Skill Builder Competition | ReactJS  | Annotations",
+      "dataset_id": "analysis_output_ai_feasibility_analysis.csv",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/analysis/output/ai_feasibility_analysis.csv",
+      "has_tests": false
+    },
+    {
+      "id": "c686d72a-f0da-4e30-9eca-b75f317e5931",
+      "title": "Medium | Topcoder Skill Builder Competition | ReactJS | Co-learning",
+      "dataset_id": "analysis_output_ai_feasibility_analysis.csv",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/analysis/output/ai_feasibility_analysis.csv",
+      "has_tests": false
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+[
+  {
+    "name": "get_sso_logins_for_existing_user",
+    "mode": "call",
+    "expected": [
+      {
+        "loginType": "google",
+        "loginValue": "user@example.com"
+      },
+      {
+        "loginType": "facebook",
+        "loginValue": "user_fb@example.com"
+      }
+    ],
+    "input": [
+      "GET",
+      "/users/12345/ssoUserLogins"
+    ]
+  },
+  {
+    "name": "get_sso_logins_for_nonexistent_user",
+    "mode": "call",
+    "expected": "User not found",
+    "input": [
+      "GET",
+      "/users/99999/ssoUserLogins"
+    ]
+  },
+  {
+    "name": "add_sso_login_for_existing_user",
+    "mode": "call",
+    "expected": "SSO Login added successfully",
+    "input": [
+      "POST",
+      "/users/12345/ssoUserLogin"
+    ]
+  },
+  {
+    "name": "add_sso_login_for_nonexistent_user",
+    "mode": "call",
+    "expected": "User not found",
+    "input": [
+      "POST",
+      "/users/99999/ssoUserLogin"
+    ]
+  },
+  {
+    "name": "delete_sso_login_for_existing_user",
+    "mode": "call",
+    "expected": "SSO Login deleted successfully",
+    "input": [
+      "DELETE",
+      "/users/12345/ssoUserLogin"
+    ]
+  },
+  {
+    "name": "delete_sso_login_for_nonexistent_user",
+    "mode": "call",
+    "expected": "User not found",
+    "input": [
+      "DELETE",
+      "/users/99999/ssoUserLogin"
+    ]
+  },
+  {
+    "name": "add_duplicate_sso_login",
+    "mode": "call",
+    "expected": "SSO Login already exists",
+    "input": [
+      "POST",
+      "/users/12345/ssoUserLogin"
+    ]
+  },
+  {
+    "name": "get_sso_logins_empty_list",
+    "mode": "call",
+    "expected": null,
+    "input": [
+      "GET",
+      "/users/67890/ssoUserLogins"
+    ]
+  }
+]

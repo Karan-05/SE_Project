@@ -1,0 +1,1 @@
+{"content": "[MOCK] e9242dab7cb1280e :: Architect: propose a phased plan for task graph_degree_stress: Return degree counts for each vertex.", "tokens": 14, "elapsed": 1.5829999999716904e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "role-architect", "caller": "role_decomposed"}}

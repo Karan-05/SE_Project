@@ -1,0 +1,16 @@
+{
+  "task_id": "5a953c7c-482a-4643-aad1-f7a093da7fb9",
+  "tests": [
+    {
+      "name": "check_edge_case_large_text_input",
+      "mode": "call",
+      "status": "fail",
+      "expected": "'transparent'",
+      "output": "None",
+      "error": "",
+      "input": "['Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.']",
+      "kwargs": "{}",
+      "duration": 1.6291014617308974e-05
+    }
+  ]
+}

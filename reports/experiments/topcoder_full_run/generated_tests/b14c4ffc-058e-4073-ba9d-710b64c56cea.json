@@ -1,0 +1,58 @@
+[
+  {
+    "name": "valid_request_v6",
+    "mode": "io",
+    "expected": "{\"status\": 200, \"data\": {\"distribution\": [...]}}",
+    "stdin": "GET /v6/members/stats/distribution?subTrack=SRM&track=DATA_SCIENCE",
+    "expected_stdout": "{\"status\": 200, \"data\": {\"distribution\": [...]}}"
+  },
+  {
+    "name": "valid_request_v5",
+    "mode": "io",
+    "expected": "{\"status\": 200, \"data\": {\"distribution\": [...]}}",
+    "stdin": "GET /v5/members/stats/distribution?subTrack=SRM&track=DATA_SCIENCE",
+    "expected_stdout": "{\"status\": 200, \"data\": {\"distribution\": [...]}}"
+  },
+  {
+    "name": "invalid_subTrack",
+    "mode": "io",
+    "expected": "{\"status\": 404, \"error\": \"Not Found\"}",
+    "stdin": "GET /v6/members/stats/distribution?subTrack=INVALID&track=DATA_SCIENCE",
+    "expected_stdout": "{\"status\": 404, \"error\": \"Not Found\"}"
+  },
+  {
+    "name": "invalid_track",
+    "mode": "io",
+    "expected": "{\"status\": 404, \"error\": \"Not Found\"}",
+    "stdin": "GET /v6/members/stats/distribution?subTrack=SRM&track=INVALID",
+    "expected_stdout": "{\"status\": 404, \"error\": \"Not Found\"}"
+  },
+  {
+    "name": "missing_parameters",
+    "mode": "io",
+    "expected": "{\"status\": 400, \"error\": \"Bad Request\"}",
+    "stdin": "GET /v6/members/stats/distribution",
+    "expected_stdout": "{\"status\": 400, \"error\": \"Bad Request\"}"
+  },
+  {
+    "name": "empty_distribution_data",
+    "mode": "io",
+    "expected": "{\"status\": 200, \"data\": {\"distribution\": []}}",
+    "stdin": "GET /v6/members/stats/distribution?subTrack=SRM&track=DATA_SCIENCE",
+    "expected_stdout": "{\"status\": 200, \"data\": {\"distribution\": []}}"
+  },
+  {
+    "name": "performance_test",
+    "mode": "io",
+    "expected": "{\"status\": 200, \"data\": {\"distribution\": [...]}}",
+    "stdin": "GET /v6/members/stats/distribution?subTrack=SRM&track=DATA_SCIENCE",
+    "expected_stdout": "{\"status\": 200, \"data\": {\"distribution\": [...]}}"
+  },
+  {
+    "name": "cross_version_consistency",
+    "mode": "io",
+    "expected": "{\"status\": 200, \"data\": {\"distribution\": [...]}}",
+    "stdin": "GET /v6/members/stats/distribution?subTrack=SRM&track=DATA_SCIENCE",
+    "expected_stdout": "{\"status\": 200, \"data\": {\"distribution\": [...]}}"
+  }
+]

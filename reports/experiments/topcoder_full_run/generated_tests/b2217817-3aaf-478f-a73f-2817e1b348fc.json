@@ -1,0 +1,58 @@
+[
+  {
+    "name": "list_challenges_user",
+    "mode": "io",
+    "expected": "{\"challenges\": [\"TC-002-COPILOT\", \"TC-002-USER\"]}",
+    "stdin": "{\"action\": \"list_challenges\", \"user_type\": \"USER\"}",
+    "expected_stdout": "{\"challenges\": [\"TC-002-COPILOT\", \"TC-002-USER\"]}"
+  },
+  {
+    "name": "create_challenges_admin",
+    "mode": "io",
+    "expected": "{\"status\": \"success\", \"challenge_id\": \"TC-006-ADMIN\"}",
+    "stdin": "{\"action\": \"create_challenge\", \"user_type\": \"ADMIN\", \"challenge_data\": {\"name\": \"New Challenge\"}}",
+    "expected_stdout": "{\"status\": \"success\", \"challenge_id\": \"TC-006-ADMIN\"}"
+  },
+  {
+    "name": "get_challenges_user",
+    "mode": "io",
+    "expected": "{\"challenges\": [\"TC-020-USER\", \"TC-021-USER\"]}",
+    "stdin": "{\"action\": \"get_challenges\", \"user_type\": \"USER\"}",
+    "expected_stdout": "{\"challenges\": [\"TC-020-USER\", \"TC-021-USER\"]}"
+  },
+  {
+    "name": "update_challenge_admin",
+    "mode": "io",
+    "expected": "{\"status\": \"updated\", \"challenge_id\": \"PUT-001-ADM\"}",
+    "stdin": "{\"action\": \"update_challenge\", \"user_type\": \"ADMIN\", \"challenge_id\": \"PUT-001-ADM\", \"update_data\": {\"status\": \"active\"}}",
+    "expected_stdout": "{\"status\": \"updated\", \"challenge_id\": \"PUT-001-ADM\"}"
+  },
+  {
+    "name": "get_challenge_statistics",
+    "mode": "io",
+    "expected": "{\"statistics\": {\"views\": 100, \"submissions\": 10}}",
+    "stdin": "{\"action\": \"get_statistics\", \"challenge_id\": \"STAT-TC-001\"}",
+    "expected_stdout": "{\"statistics\": {\"views\": 100, \"submissions\": 10}}"
+  },
+  {
+    "name": "post_challenge_notification",
+    "mode": "io",
+    "expected": "{\"status\": \"notification_sent\"}",
+    "stdin": "{\"action\": \"post_notification\", \"user_type\": \"ADMIN\", \"notification_data\": {\"message\": \"New Challenge Created\"}}",
+    "expected_stdout": "{\"status\": \"notification_sent\"}"
+  },
+  {
+    "name": "edge_case_invalid_user",
+    "mode": "io",
+    "expected": "{\"error\": \"Invalid user type\"}",
+    "stdin": "{\"action\": \"list_challenges\", \"user_type\": \"INVALID\"}",
+    "expected_stdout": "{\"error\": \"Invalid user type\"}"
+  },
+  {
+    "name": "edge_case_empty_challenge_data",
+    "mode": "io",
+    "expected": "{\"error\": \"Challenge data cannot be empty\"}",
+    "stdin": "{\"action\": \"create_challenge\", \"user_type\": \"ADMIN\", \"challenge_data\": {}}",
+    "expected_stdout": "{\"error\": \"Challenge data cannot be empty\"}"
+  }
+]

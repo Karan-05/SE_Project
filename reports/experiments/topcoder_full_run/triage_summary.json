@@ -1,0 +1,104 @@
+{
+  "run_id": "topcoder_full_run",
+  "sample_size": 5,
+  "cluster_counts": {
+    "real_algorithm_wrong": 5
+  },
+  "samples": [
+    {
+      "task_id": "mixed_matrix_ood",
+      "dataset_id": "experiments_decomposition_benchmark_tasks.json",
+      "strategy_initial": "contract_first",
+      "strategy_final": "semantic_diff",
+      "attempts": 10.0,
+      "failure_signature": "8244b816d54149a57c45046abaa0b3d280e533ff5342c4694a49cd834148f764",
+      "tests_source": "provided",
+      "tests_modes": [
+        "call"
+      ],
+      "entry_point": "solve",
+      "problem_statement": "Return the sum of the main diagonal.",
+      "failing_tests": [],
+      "failure_note": "",
+      "code_snippet": "<not captured>",
+      "category": "real_algorithm_wrong",
+      "tests_path": ""
+    },
+    {
+      "task_id": "mixed_matrix_stress",
+      "dataset_id": "experiments_decomposition_benchmark_tasks.json",
+      "strategy_initial": "contract_first",
+      "strategy_final": "semantic_diff",
+      "attempts": 10.0,
+      "failure_signature": "8244b816d54149a57c45046abaa0b3d280e533ff5342c4694a49cd834148f764",
+      "tests_source": "provided",
+      "tests_modes": [
+        "call"
+      ],
+      "entry_point": "solve",
+      "problem_statement": "Return the sum of the main diagonal.",
+      "failing_tests": [],
+      "failure_note": "",
+      "code_snippet": "<not captured>",
+      "category": "real_algorithm_wrong",
+      "tests_path": ""
+    },
+    {
+      "task_id": "mixed_matrix_hard",
+      "dataset_id": "experiments_decomposition_benchmark_tasks.json",
+      "strategy_initial": "contract_first",
+      "strategy_final": "semantic_diff",
+      "attempts": 10.0,
+      "failure_signature": "8244b816d54149a57c45046abaa0b3d280e533ff5342c4694a49cd834148f764",
+      "tests_source": "provided",
+      "tests_modes": [
+        "call"
+      ],
+      "entry_point": "solve",
+      "problem_statement": "Return the sum of the main diagonal.",
+      "failing_tests": [],
+      "failure_note": "",
+      "code_snippet": "<not captured>",
+      "category": "real_algorithm_wrong",
+      "tests_path": ""
+    },
+    {
+      "task_id": "mixed_matrix_test",
+      "dataset_id": "experiments_decomposition_benchmark_tasks.json",
+      "strategy_initial": "contract_first",
+      "strategy_final": "semantic_diff",
+      "attempts": 10.0,
+      "failure_signature": "8244b816d54149a57c45046abaa0b3d280e533ff5342c4694a49cd834148f764",
+      "tests_source": "provided",
+      "tests_modes": [
+        "call"
+      ],
+      "entry_point": "solve",
+      "problem_statement": "Return the sum of the main diagonal.",
+      "failing_tests": [],
+      "failure_note": "",
+      "code_snippet": "<not captured>",
+      "category": "real_algorithm_wrong",
+      "tests_path": ""
+    },
+    {
+      "task_id": "mixed_matrix",
+      "dataset_id": "experiments_decomposition_benchmark_tasks.json",
+      "strategy_initial": "contract_first",
+      "strategy_final": "semantic_diff",
+      "attempts": 10.0,
+      "failure_signature": "8244b816d54149a57c45046abaa0b3d280e533ff5342c4694a49cd834148f764",
+      "tests_source": "provided",
+      "tests_modes": [
+        "call"
+      ],
+      "entry_point": "solve",
+      "problem_statement": "Return the sum of the main diagonal.",
+      "failing_tests": [],
+      "failure_note": "",
+      "code_snippet": "<not captured>",
+      "category": "real_algorithm_wrong",
+      "tests_path": ""
+    }
+  ]
+}

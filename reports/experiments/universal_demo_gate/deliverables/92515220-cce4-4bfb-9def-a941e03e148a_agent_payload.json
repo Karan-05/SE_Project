@@ -1,0 +1,32 @@
+{
+  "task_type": "repo_patch",
+  "summary": "Implement universal navigation on the account settings page of the Topcoder Community App, ensuring a consistent user experience across the application. The patch will be based on the requirements detailed in issue #6780.",
+  "artifacts": {
+    "patch_plan.md": "# Problem Summary\nThe account settings page lacks the universal navigation component, leading to a disjointed user experience.\n\n# Plan\n1. Integrate the universal navigation component into the account settings page.\n2. Ensure proper routing and state management.\n3. Test for responsiveness and accessibility.\n\n# Test Plan\n- Verify that the universal navigation appears on the account settings page.\n- Check that all links in the navigation function correctly.\n- Ensure the layout is responsive across devices.\n\n# Risks\n- Potential conflicts with existing styles or scripts.\n- Navigation may not behave as expected if state management is not correctly implemented.\n\n# Validation\n- Review UI changes in the browser.\n- Conduct user testing to gather feedback.",
+    "proposed_patch.diff": "diff --git a/src/components/AccountSettings.jsx b/src/components/AccountSettings.jsx\n@@ -1,5 +1,7 @@\n import React from 'react';\n import UniversalNav from './UniversalNav';\n \n const AccountSettings = () => {\n+  return (\n+    <UniversalNav />\n     <div>\n       <h1>Account Settings</h1>\n       {/* Other settings components */}\n     </div>\n   );\n };",
+    "test_plan.md": "1. Run `npm start` to launch the application.\n2. Navigate to the account settings page.\n3. Verify that the universal navigation is displayed correctly.\n4. Click on each navigation link and ensure they route to the correct pages.\n5. Test on different screen sizes to confirm responsiveness.",
+    "risks.md": "- Risk of style conflicts with existing CSS.\n- If the navigation component fails to load, the user experience will degrade.\n- Rollback by reverting the commit if significant issues arise."
+  },
+  "rubric_self_check": {
+    "coverage": 90.0,
+    "specificity": 85.0,
+    "actionability": 88.0,
+    "overall_notes": "The plan is comprehensive, covering problem summary, implementation steps, risks, and validation strategies."
+  },
+  "raw": {
+    "task_type": "repo_patch",
+    "summary": "Implement universal navigation on the account settings page of the Topcoder Community App, ensuring a consistent user experience across the application. The patch will be based on the requirements detailed in issue #6780.",
+    "artifacts": {
+      "patch_plan.md": "# Problem Summary\nThe account settings page lacks the universal navigation component, leading to a disjointed user experience.\n\n# Plan\n1. Integrate the universal navigation component into the account settings page.\n2. Ensure proper routing and state management.\n3. Test for responsiveness and accessibility.\n\n# Test Plan\n- Verify that the universal navigation appears on the account settings page.\n- Check that all links in the navigation function correctly.\n- Ensure the layout is responsive across devices.\n\n# Risks\n- Potential conflicts with existing styles or scripts.\n- Navigation may not behave as expected if state management is not correctly implemented.\n\n# Validation\n- Review UI changes in the browser.\n- Conduct user testing to gather feedback.",
+      "proposed_patch.diff": "diff --git a/src/components/AccountSettings.jsx b/src/components/AccountSettings.jsx\n@@ -1,5 +1,7 @@\n import React from 'react';\n import UniversalNav from './UniversalNav';\n \n const AccountSettings = () => {\n+  return (\n+    <UniversalNav />\n     <div>\n       <h1>Account Settings</h1>\n       {/* Other settings components */}\n     </div>\n   );\n };",
+      "test_plan.md": "1. Run `npm start` to launch the application.\n2. Navigate to the account settings page.\n3. Verify that the universal navigation is displayed correctly.\n4. Click on each navigation link and ensure they route to the correct pages.\n5. Test on different screen sizes to confirm responsiveness.",
+      "risks.md": "- Risk of style conflicts with existing CSS.\n- If the navigation component fails to load, the user experience will degrade.\n- Rollback by reverting the commit if significant issues arise."
+    },
+    "rubric_self_check": {
+      "coverage": 90,
+      "specificity": 85,
+      "actionability": 88,
+      "overall_notes": "The plan is comprehensive, covering problem summary, implementation steps, risks, and validation strategies."
+    }
+  }
+}

@@ -1,0 +1,99 @@
+[
+  {
+    "name": "valid_candidate_japanese",
+    "mode": "call",
+    "expected": "success",
+    "input": [
+      {
+        "language": "Japanese",
+        "experience": "operations",
+        "availability": "full-time"
+      }
+    ]
+  },
+  {
+    "name": "valid_candidate_korean",
+    "mode": "call",
+    "expected": "success",
+    "input": [
+      {
+        "language": "Korean",
+        "experience": "translation",
+        "availability": "full-time"
+      }
+    ]
+  },
+  {
+    "name": "valid_candidate_french",
+    "mode": "call",
+    "expected": "success",
+    "input": [
+      {
+        "language": "French",
+        "experience": "interpretation",
+        "availability": "full-time"
+      }
+    ]
+  },
+  {
+    "name": "invalid_candidate_no_language",
+    "mode": "call",
+    "expected": "failure",
+    "input": [
+      {
+        "language": "",
+        "experience": "operations",
+        "availability": "full-time"
+      }
+    ]
+  },
+  {
+    "name": "invalid_candidate_part_time",
+    "mode": "call",
+    "expected": "failure",
+    "input": [
+      {
+        "language": "Japanese",
+        "experience": "operations",
+        "availability": "part-time"
+      }
+    ]
+  },
+  {
+    "name": "edge_case_no_experience",
+    "mode": "call",
+    "expected": "failure",
+    "input": [
+      {
+        "language": "Korean",
+        "experience": "",
+        "availability": "full-time"
+      }
+    ]
+  },
+  {
+    "name": "edge_case_invalid_language",
+    "mode": "call",
+    "expected": "failure",
+    "input": [
+      {
+        "language": "Spanish",
+        "experience": "operations",
+        "availability": "full-time"
+      }
+    ]
+  },
+  {
+    "name": "valid_candidate_high_pressure",
+    "mode": "call",
+    "expected": "success",
+    "input": [
+      {
+        "language": "French",
+        "experience": "operations",
+        "availability": "full-time",
+        "ability_to_work_under_pressure": true
+      }
+    ]
+  }
+]

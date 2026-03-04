@@ -1,0 +1,125 @@
+[
+  {
+    "name": "add_platform_tab",
+    "mode": "call",
+    "expected": {
+      "tabs": [
+        "Permission Management",
+        "Platform"
+      ]
+    },
+    "input": [
+      {
+        "admin": true,
+        "existing_tabs": [
+          "Permission Management"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "remove_roles_required",
+    "mode": "call",
+    "expected": {
+      "rolesRequired": []
+    },
+    "input": [
+      {
+        "admin": true,
+        "rolesRequired": [
+          "admin",
+          "superadmin"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "skills_link_functionality",
+    "mode": "call",
+    "expected": {
+      "loadedApp": "Skills Manager"
+    },
+    "input": [
+      {
+        "admin": true,
+        "tab": "Platform"
+      }
+    ]
+  },
+  {
+    "name": "non_admin_access",
+    "mode": "call",
+    "expected": {
+      "error": "Access Denied"
+    },
+    "input": [
+      {
+        "admin": false,
+        "existing_tabs": [
+          "Permission Management"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "cleanup_configs",
+    "mode": "call",
+    "expected": {
+      "configs": []
+    },
+    "input": [
+      {
+        "environment": "prod",
+        "configs": [
+          "http://manage.topcoder.com"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "existing_tests_pass",
+    "mode": "call",
+    "expected": {
+      "results": [
+        "pass",
+        "pass"
+      ]
+    },
+    "input": [
+      {
+        "existing_tests": [
+          "test1",
+          "test2"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "missing_platform_tab",
+    "mode": "call",
+    "expected": {
+      "tabs": [
+        "Platform"
+      ]
+    },
+    "input": [
+      {
+        "admin": true,
+        "existing_tabs": []
+      }
+    ]
+  },
+  {
+    "name": "multiple_admins_access",
+    "mode": "call",
+    "expected": {
+      "access": "granted"
+    },
+    "input": [
+      {
+        "admin": true,
+        "admin_count": 5
+      }
+    ]
+  }
+]

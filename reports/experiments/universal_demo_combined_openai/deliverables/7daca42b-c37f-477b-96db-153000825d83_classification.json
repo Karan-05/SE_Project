@@ -1,0 +1,37 @@
+{
+  "task_type": "data_etl",
+  "confidence": 0.9,
+  "why": [
+    "The task involves updating SQL files and ensuring data consistency, which aligns with ETL processes.",
+    "Specific requirements for data transformation and validation are provided."
+  ],
+  "missing_info": [
+    "Detailed schema of the existing database.",
+    "Specific transformation steps required for the SQL update.",
+    "Sample input and output data for validation."
+  ],
+  "verification_plan": [
+    "Check if the SQL update maintains data integrity.",
+    "Validate that the dropdown options are consistent with the old application.",
+    "Run data quality checks to ensure no data is lost or corrupted."
+  ],
+  "artifacts_to_generate": [
+    {
+      "name": "schema.md",
+      "format": "md"
+    },
+    {
+      "name": "pipeline.sql",
+      "format": "sql"
+    },
+    {
+      "name": "validation.sql",
+      "format": "sql"
+    },
+    {
+      "name": "sample_inputs_outputs.md",
+      "format": "md"
+    }
+  ],
+  "synthesis_policy": "self_check"
+}

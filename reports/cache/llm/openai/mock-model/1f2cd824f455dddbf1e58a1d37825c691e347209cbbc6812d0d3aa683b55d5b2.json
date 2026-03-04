@@ -1,0 +1,1 @@
+{"content": "Kadane's algorithm is primarily used for finding the maximum sum subarray in a one-dimensional array of numbers. It is not directly applicable to the Identity Service project", "tokens": 95, "elapsed": 1.5375664160237648, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

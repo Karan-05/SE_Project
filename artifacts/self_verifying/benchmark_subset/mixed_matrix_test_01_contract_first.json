@@ -1,0 +1,77 @@
+{
+  "task_id": "mixed_matrix_test",
+  "strategy": "contract_first",
+  "attempt": 1,
+  "pass_rate": 1.0,
+  "plan_subtasks": [
+    "Validate inputs vs contract",
+    "Implement core logic",
+    "Check edge cases",
+    "Generate minimal unit tests for critical behaviors",
+    "Add adversarial/edge-case tests",
+    "Run tests and interpret failures"
+  ],
+  "plan_tests": [
+    "",
+    ""
+  ],
+  "plan_diagnostics": {
+    "missing_fields": "constraints",
+    "contract_length": "34",
+    "audit_note": "[MOCK] a96255ed250f2a8a :: Review this contract for completeness and note any missing guarantees. Contract: {'inputs': 'Underspecified', 'outputs':",
+    "planning_tokens": "28",
+    "planning_time": "0.000003"
+  },
+  "patch_summary": {
+    "phase": "initial"
+  },
+  "tests_run": [
+    {
+      "name": "sample_0",
+      "mode": "call",
+      "status": "pass",
+      "expected": "5",
+      "output": "5",
+      "error": "",
+      "input": "[[[1, 2], [3, 4]]]",
+      "kwargs": "{}",
+      "duration": 2.3339999999372196e-06
+    },
+    {
+      "name": "sample_1",
+      "mode": "call",
+      "status": "pass",
+      "expected": "5",
+      "output": "5",
+      "error": "",
+      "input": "[[[5]]]",
+      "kwargs": "{}",
+      "duration": 1.0409999999794195e-06
+    }
+  ],
+  "llm_calls": 0,
+  "timeline": {
+    "attempt": 1,
+    "strategy": "contract_first",
+    "phase": "initial",
+    "events": {
+      "decompose": {
+        "start": "2026-02-24T00:19:21.385487",
+        "end": "2026-02-24T00:19:21.385531"
+      },
+      "solve": {
+        "start": "2026-02-24T00:19:21.385533",
+        "end": "2026-02-24T00:19:21.385606"
+      },
+      "tests": {
+        "start": "2026-02-24T00:19:21.385597",
+        "end": "2026-02-24T00:19:21.385602",
+        "duration_seconds": "0.000"
+      }
+    },
+    "meta": {
+      "llm_calls": "0"
+    }
+  },
+  "solution_preview": "def solve(matrix):\n                return sum(matrix[i][i] for i in range(min(len(matrix), len(matrix[0]))))"
+}

@@ -1,0 +1,1 @@
+{"content": "Kadane's algorithm is primarily used to find the maximum sum of a contiguous subarray in an array of numbers. It is particularly useful in problems related to optimization", "tokens": 83, "elapsed": 1.2287303749762941, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

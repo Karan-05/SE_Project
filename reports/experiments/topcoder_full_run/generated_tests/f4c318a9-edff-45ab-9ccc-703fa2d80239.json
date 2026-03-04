@@ -1,0 +1,90 @@
+[
+  {
+    "name": "valid_approval_submission",
+    "mode": "call",
+    "expected": "Approval submitted successfully",
+    "input": [
+      {
+        "challenge_id": 30092513,
+        "response": "Yes"
+      }
+    ]
+  },
+  {
+    "name": "valid_rejection_submission",
+    "mode": "call",
+    "expected": "Rejection submitted successfully",
+    "input": [
+      {
+        "challenge_id": 30092513,
+        "response": "No"
+      }
+    ]
+  },
+  {
+    "name": "dropdown_not_selectable",
+    "mode": "call",
+    "expected": "Error: Response dropdown not selectable",
+    "input": [
+      {
+        "challenge_id": 30092513,
+        "response": null
+      }
+    ]
+  },
+  {
+    "name": "invalid_challenge_id",
+    "mode": "call",
+    "expected": "Error: Challenge not found",
+    "input": [
+      {
+        "challenge_id": 99999999,
+        "response": "Yes"
+      }
+    ]
+  },
+  {
+    "name": "no_response_selected",
+    "mode": "call",
+    "expected": "Error: No response selected",
+    "input": [
+      {
+        "challenge_id": 30092513,
+        "response": ""
+      }
+    ]
+  },
+  {
+    "name": "multiple_submissions",
+    "mode": "call",
+    "expected": "Error: Already submitted",
+    "input": [
+      {
+        "challenge_id": 30092513,
+        "response": "Yes"
+      }
+    ]
+  },
+  {
+    "name": "session_timeout",
+    "mode": "call",
+    "expected": "Error: Session expired",
+    "input": [
+      {
+        "challenge_id": 30092513,
+        "response": "Yes"
+      }
+    ]
+  },
+  {
+    "name": "network_failure",
+    "mode": "call",
+    "expected": "Error: Network failure",
+    "input": [
+      {
+        "challenge_id": 30092513,
+        "response": "Yes"
+      }
+    ]
+  }
+]

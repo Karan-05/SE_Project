@@ -1,0 +1,38 @@
+{
+  "task_type": "repo_patch",
+  "confidence": 0.9,
+  "why": [
+    "The task involves modifying an existing codebase based on specified requirements.",
+    "The provided links and descriptions indicate a clear need for a patch to be applied to a specific commit.",
+    "The task requires a structured approach to document the changes and their implications."
+  ],
+  "missing_info": [
+    "Specific details on the changes required in the account settings page.",
+    "Access to the repository to validate the patch."
+  ],
+  "verification_plan": [
+    "Create a patch plan detailing the changes to be made.",
+    "Generate a proposed patch file based on the requirements.",
+    "Outline a test plan to validate the changes.",
+    "Document potential risks and rollback strategies."
+  ],
+  "artifacts_to_generate": [
+    {
+      "name": "patch_plan.md",
+      "format": "md"
+    },
+    {
+      "name": "proposed_patch.diff",
+      "format": "diff"
+    },
+    {
+      "name": "test_plan.md",
+      "format": "md"
+    },
+    {
+      "name": "risks.md",
+      "format": "md"
+    }
+  ],
+  "synthesis_policy": "none"
+}

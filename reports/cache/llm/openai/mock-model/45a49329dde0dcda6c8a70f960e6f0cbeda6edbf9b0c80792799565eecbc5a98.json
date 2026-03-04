@@ -1,0 +1,1 @@
+{"content": "In the context of converting a genomic annotation pipeline to a Nextflow-based execution model, the two-pointer technique may not be directly relevant. The two-pointer technique is", "tokens": 91, "elapsed": 1.2323039170005359, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

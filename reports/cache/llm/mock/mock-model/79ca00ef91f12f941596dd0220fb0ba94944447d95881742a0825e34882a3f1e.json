@@ -1,0 +1,1 @@
+{"content": "[MOCK] ec59b8052866df36 :: You are comparing a new task to base task baseline. List semantic deltas succinctly: Return the minimum coins needed to ", "tokens": 22, "elapsed": 1.7919999999449487e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "semantic-diff", "caller": "semantic_diff"}}

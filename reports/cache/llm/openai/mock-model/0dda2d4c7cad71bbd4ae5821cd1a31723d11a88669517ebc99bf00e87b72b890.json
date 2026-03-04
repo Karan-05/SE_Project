@@ -1,0 +1,1 @@
+{"content": "The two-pointer pattern is typically used in algorithms, particularly for problems involving arrays or linked lists, where you need to traverse data from both ends towards the center or", "tokens": 99, "elapsed": 1.3270344590127934, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

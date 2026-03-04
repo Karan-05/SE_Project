@@ -1,0 +1,7 @@
+task_type,accuracy,num_tasks,num_rows
+array,1.0,10,70
+dp,1.0,10,70
+graph,1.0,10,70
+mixed,1.0,5,35
+number_theory,1.0,5,35
+string,1.0,10,70

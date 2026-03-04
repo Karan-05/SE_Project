@@ -1,0 +1,118 @@
+[
+  {
+    "name": "test_user_login_success",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "message": "Login successful",
+      "session_token": "abc123xyz"
+    },
+    "input": [
+      {
+        "username": "test_user",
+        "password": "secure_password"
+      }
+    ]
+  },
+  {
+    "name": "test_user_login_failure",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Invalid credentials"
+    },
+    "input": [
+      {
+        "username": "test_user",
+        "password": "wrong_password"
+      }
+    ]
+  },
+  {
+    "name": "test_asset_upload_success",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "message": "Asset uploaded successfully",
+      "asset_id": "asset_123"
+    },
+    "input": [
+      {
+        "file": "image.png",
+        "project_id": "project_1"
+      }
+    ]
+  },
+  {
+    "name": "test_asset_upload_invalid_file_type",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Invalid file type"
+    },
+    "input": [
+      {
+        "file": "document.pdf",
+        "project_id": "project_1"
+      }
+    ]
+  },
+  {
+    "name": "test_content_moderation_nsfw_check",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Content flagged as NSFW"
+    },
+    "input": [
+      {
+        "file": "nsfw_image.png"
+      }
+    ]
+  },
+  {
+    "name": "test_ai_strategy_execution_face_centric_crop",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "message": "AI strategy executed successfully",
+      "generated_asset_id": "generated_asset_456"
+    },
+    "input": [
+      {
+        "asset_id": "asset_123",
+        "strategy": "face_centric_crop"
+      }
+    ]
+  },
+  {
+    "name": "test_admin_editing_color_adjustment",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "message": "Color adjustments applied successfully"
+    },
+    "input": [
+      {
+        "asset_id": "asset_123",
+        "adjustments": {
+          "brightness": 1.2,
+          "contrast": 1.5
+        }
+      }
+    ]
+  },
+  {
+    "name": "test_asset_generation_job_queue",
+    "mode": "call",
+    "expected": {
+      "status": "queued",
+      "message": "Asset generation job added to queue"
+    },
+    "input": [
+      {
+        "asset_id": "asset_123"
+      }
+    ]
+  }
+]

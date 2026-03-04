@@ -1,0 +1,1 @@
+{"content": "```python\ndef solve(n, k, a):\n    a.sort()\n    total = 0\n    for i in range(n):\n        if i < k:\n            total += a[i]\n        else:\n            total += a[k - 1]\n    return total\n```", "tokens": 263, "elapsed": 1.8431878339906689, "budget_exceeded": false, "meta": {"provider": "openai", "model": "repair-loop", "caller": "failure_mode_first:repair"}}

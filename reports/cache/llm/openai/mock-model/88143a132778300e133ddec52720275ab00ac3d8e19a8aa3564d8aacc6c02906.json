@@ -1,0 +1,1 @@
+{"content": "The problem you're describing involves comparing metadata files between two Salesforce orgs and generating a third output folder with the differences. This task is primarily about file comparison and does", "tokens": 91, "elapsed": 1.4047042919992236, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

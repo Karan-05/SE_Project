@@ -1,0 +1,13 @@
+{
+  "data_config": {
+    "seed": 42,
+    "num_tasks": 400,
+    "num_workers": 250,
+    "max_registrations_per_task": 40,
+    "max_submissions_per_task": 20,
+    "market_bucket": "M"
+  },
+  "num_tasks": 204,
+  "num_workers": 4170,
+  "num_interactions": 4300
+}

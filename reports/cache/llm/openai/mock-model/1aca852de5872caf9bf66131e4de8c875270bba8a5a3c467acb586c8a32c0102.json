@@ -1,0 +1,1 @@
+{"content": "The two-pointer technique is typically used in problems involving arrays or sequences where you need to find pairs or subarrays that meet certain criteria. However, counting primes up", "tokens": 57, "elapsed": 1.324672541988548, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

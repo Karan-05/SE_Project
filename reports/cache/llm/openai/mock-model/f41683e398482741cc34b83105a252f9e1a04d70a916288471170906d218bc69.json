@@ -1,0 +1,1 @@
+{"content": "The problem of returning running prefix sums typically involves calculating the cumulative sum of a sequence of numbers. The prefix sum at each index \\( i \\) is the sum", "tokens": 56, "elapsed": 1.223102584015578, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

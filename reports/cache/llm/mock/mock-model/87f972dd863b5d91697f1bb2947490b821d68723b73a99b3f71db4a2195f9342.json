@@ -1,0 +1,1 @@
+{"content": "[MOCK] 04a01ea5078f4eab :: Architect: propose a phased plan for task dp_fib_ood: Return the nth Fibonacci number.", "tokens": 13, "elapsed": 1.7909999998622084e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "role-architect", "caller": "role_decomposed"}}

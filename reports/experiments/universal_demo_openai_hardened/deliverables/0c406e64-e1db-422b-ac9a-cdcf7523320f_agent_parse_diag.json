@@ -1,0 +1,36 @@
+{
+  "task_id": "0c406e64-e1db-422b-ac9a-cdcf7523320f",
+  "run_id": "universal_demo_openai_hardened",
+  "raw_path": "/Users/karanallagh/Desktop/DataCollector/reports/experiments/universal_demo_openai_hardened/deliverables/0c406e64-e1db-422b-ac9a-cdcf7523320f_agent_raw.txt",
+  "raw_length": 3227,
+  "sentinel_found": false,
+  "attempts": [
+    {
+      "mode": "sentinel",
+      "success": false,
+      "error": "sentinel_block_missing"
+    },
+    {
+      "mode": "balanced",
+      "success": false,
+      "error": "no_balanced_candidate"
+    },
+    {
+      "mode": "repair",
+      "success": false,
+      "error": "rubric_self_check.specificity must be numeric."
+    }
+  ],
+  "errors": [
+    {
+      "stage": "repair",
+      "message": "rubric_self_check.specificity must be numeric."
+    }
+  ],
+  "repair_attempted": true,
+  "repair_used": false,
+  "max_repairs": 1,
+  "llm_provider": "openai",
+  "repair_path": "/Users/karanallagh/Desktop/DataCollector/reports/experiments/universal_demo_openai_hardened/deliverables/0c406e64-e1db-422b-ac9a-cdcf7523320f_agent_repair.txt",
+  "status": "failed"
+}

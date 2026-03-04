@@ -1,0 +1,11 @@
+accuracy,precision,recall,f1,log_loss,roc_auc,target,split,model,feature_mode,rmse,mae,r2
+1.0,1.0,1.0,1.0,0.06779230275377328,1.0,starved,val,log_reg,text_metadata,,,
+1.0,1.0,1.0,1.0,0.08279439789047124,1.0,starved,test,log_reg,text_metadata,,,
+1.0,1.0,1.0,1.0,0.008627824573315653,1.0,starved,val,rf,text_metadata,,,
+1.0,1.0,1.0,1.0,0.006637907283704994,1.0,starved,test,rf,text_metadata,,,
+1.0,1.0,1.0,1.0,0.004567535555142486,1.0,starved,val,gb,text_metadata,,,
+1.0,1.0,1.0,1.0,0.004402667223968484,1.0,starved,test,gb,text_metadata,,,
+,,,,,,num_submissions,val,rf_reg,text_metadata,0.05892743997339597,0.02943181818181823,0.9999010078457539
+,,,,,,num_submissions,test,rf_reg,text_metadata,0.05699575406760726,0.02805936073059368,0.9999083684298745
+,,,,,,num_submissions,val,gb_reg,text_metadata,0.6860857738706382,0.6056701271292142,0.9865809288509314
+,,,,,,num_submissions,test,gb_reg,text_metadata,0.7288252300895606,0.6344706977464939,0.9850167192416087

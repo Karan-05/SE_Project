@@ -1,0 +1,83 @@
+[
+  {
+    "name": "role_consolidation",
+    "mode": "call",
+    "expected": "Topcoder User",
+    "input": [
+      {
+        "userRole": "Submitter"
+      }
+    ]
+  },
+  {
+    "name": "role_consolidation_talent",
+    "mode": "call",
+    "expected": "Topcoder User",
+    "input": [
+      {
+        "userRole": "Talent"
+      }
+    ]
+  },
+  {
+    "name": "admin_role_access",
+    "mode": "call",
+    "expected": "access granted",
+    "input": [
+      {
+        "userRole": "administrator"
+      }
+    ]
+  },
+  {
+    "name": "copilot_role_access",
+    "mode": "call",
+    "expected": "access granted",
+    "input": [
+      {
+        "userRole": "copilot"
+      }
+    ]
+  },
+  {
+    "name": "reviewer_role_access",
+    "mode": "call",
+    "expected": "access granted",
+    "input": [
+      {
+        "userRole": "reviewer"
+      }
+    ]
+  },
+  {
+    "name": "invalid_role_access",
+    "mode": "call",
+    "expected": "access denied",
+    "input": [
+      {
+        "userRole": "invalidRole"
+      }
+    ]
+  },
+  {
+    "name": "database_migration_check",
+    "mode": "call",
+    "expected": "Topcoder User",
+    "input": [
+      {
+        "oldRole": "Submitter"
+      }
+    ]
+  },
+  {
+    "name": "swagger_documentation_update",
+    "mode": "call",
+    "expected": "User roles: [administrator, copilot, reviewer, Topcoder User]",
+    "input": [
+      {
+        "endpoint": "/api/users",
+        "method": "GET"
+      }
+    ]
+  }
+]

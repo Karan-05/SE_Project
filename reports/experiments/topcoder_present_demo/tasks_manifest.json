@@ -1,0 +1,77 @@
+{
+  "run_id": "topcoder_present_demo",
+  "generated_at": "2026-02-23T15:00:09.455841",
+  "task_count": 10,
+  "tasks": [
+    {
+      "id": "c4a49444-109e-41d5-b83a-ef23c8c46800",
+      "title": "ABB RCS Angular Prototype - Harmonised Data Tooling",
+      "dataset_id": "analysis_output_ai_feasibility_analysis.csv",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/analysis/output/ai_feasibility_analysis.csv",
+      "has_tests": true
+    },
+    {
+      "id": "b18487fb-e080-4220-bc97-0e535c7d3bd1",
+      "title": "Introduce Templates for Special Config Data processing to the Google Spreadsheet Connector Tool for Salesforce",
+      "dataset_id": "analysis_output_ai_feasibility_analysis.csv",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/analysis/output/ai_feasibility_analysis.csv",
+      "has_tests": true
+    },
+    {
+      "id": "1046b416-9c4a-434d-ab1f-3fd00c601acc",
+      "title": "Quartz Energy - Offset Operator Frac Schedule REST API Code Challenge",
+      "dataset_id": "analysis_output_ai_super_analysis.csv",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/analysis/output/ai_super_analysis.csv",
+      "has_tests": true
+    },
+    {
+      "id": "d1b626af-ade0-43fa-94a3-a54031608f29",
+      "title": "Bonus Provided!!! - Kafka Queue Parser",
+      "dataset_id": "analysis_output_ai_super_analysis.csv",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/analysis/output/ai_super_analysis.csv",
+      "has_tests": true
+    },
+    {
+      "id": "74ae7cb2-852f-4b3e-8372-d0b24f9e9d3c",
+      "title": "Project Gwalldata - Python Utility GUI",
+      "dataset_id": "analysis_output_ai_super_analysis.csv",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/analysis/output/ai_super_analysis.csv",
+      "has_tests": true
+    },
+    {
+      "id": "d70735a7-ec17-48f8-a8a0-59d8dd300f5b",
+      "title": "72Hrs - Novus Component Modularization Challenge Part2",
+      "dataset_id": "analysis_output_ai_feasibility_analysis.csv",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/analysis/output/ai_feasibility_analysis.csv",
+      "has_tests": true
+    },
+    {
+      "id": "f7f8b255-8403-4cd9-b2f1-20f3c2c00e83",
+      "title": "Dragonet - Worksheet Angular UI Prototype Challenge",
+      "dataset_id": "analysis_output_ai_feasibility_analysis.csv",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/analysis/output/ai_feasibility_analysis.csv",
+      "has_tests": true
+    },
+    {
+      "id": "a29ef147-15c4-4e2c-9afc-737403db74eb",
+      "title": "TC Website - Local Deployment Documentation",
+      "dataset_id": "analysis_output_legacy_ai_feasibility_analysis.csv",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/analysis/output_legacy/ai_feasibility_analysis.csv",
+      "has_tests": true
+    },
+    {
+      "id": "2cdb240c-2417-4cd8-b257-c35e96ce017b",
+      "title": "John Hancock - Project Snapshot Multiple Updates UI Prototype Challenge",
+      "dataset_id": "analysis_output_ai_feasibility_analysis.csv",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/analysis/output/ai_feasibility_analysis.csv",
+      "has_tests": false
+    },
+    {
+      "id": "e9b8dc6b-050b-440b-81fe-c24ea34019a8",
+      "title": "Hercules React Native to XRE - Finish Layout support",
+      "dataset_id": "analysis_output_legacy_ai_feasibility_analysis.csv",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/analysis/output_legacy/ai_feasibility_analysis.csv",
+      "has_tests": false
+    }
+  ]
+}

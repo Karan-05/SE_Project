@@ -1,0 +1,115 @@
+[
+  {
+    "name": "valid_create_challenge",
+    "mode": "call",
+    "expected": {
+      "id": "string",
+      "title": "New Challenge",
+      "description": "This is a test challenge.",
+      "type": "development",
+      "status": "active"
+    },
+    "input": [
+      {
+        "title": "New Challenge",
+        "description": "This is a test challenge.",
+        "type": "development"
+      }
+    ]
+  },
+  {
+    "name": "valid_get_challenge",
+    "mode": "call",
+    "expected": {
+      "id": "existing_challenge_id",
+      "title": "Existing Challenge",
+      "description": "This is an existing challenge.",
+      "type": "development",
+      "status": "active"
+    },
+    "input": [
+      {
+        "id": "existing_challenge_id"
+      }
+    ]
+  },
+  {
+    "name": "invalid_create_challenge_missing_title",
+    "mode": "call",
+    "expected": {
+      "error": "Title is required."
+    },
+    "input": [
+      {
+        "description": "This is a test challenge without a title.",
+        "type": "development"
+      }
+    ]
+  },
+  {
+    "name": "invalid_get_challenge_nonexistent_id",
+    "mode": "call",
+    "expected": {
+      "error": "Challenge not found."
+    },
+    "input": [
+      {
+        "id": "nonexistent_challenge_id"
+      }
+    ]
+  },
+  {
+    "name": "valid_update_challenge",
+    "mode": "call",
+    "expected": {
+      "id": "existing_challenge_id",
+      "title": "Updated Challenge Title",
+      "description": "This is an existing challenge.",
+      "type": "development",
+      "status": "active"
+    },
+    "input": [
+      {
+        "id": "existing_challenge_id",
+        "title": "Updated Challenge Title"
+      }
+    ]
+  },
+  {
+    "name": "invalid_update_challenge_invalid_id",
+    "mode": "call",
+    "expected": {
+      "error": "Challenge not found."
+    },
+    "input": [
+      {
+        "id": "invalid_challenge_id",
+        "title": "Updated Challenge Title"
+      }
+    ]
+  },
+  {
+    "name": "valid_delete_challenge",
+    "mode": "call",
+    "expected": {
+      "message": "Challenge deleted successfully."
+    },
+    "input": [
+      {
+        "id": "existing_challenge_id"
+      }
+    ]
+  },
+  {
+    "name": "invalid_delete_challenge_nonexistent_id",
+    "mode": "call",
+    "expected": {
+      "error": "Challenge not found."
+    },
+    "input": [
+      {
+        "id": "nonexistent_challenge_id"
+      }
+    ]
+  }
+]

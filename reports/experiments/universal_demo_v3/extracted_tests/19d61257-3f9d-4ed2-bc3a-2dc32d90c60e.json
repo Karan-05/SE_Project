@@ -1,0 +1,9 @@
+[
+  {
+    "name": "io_sample_1",
+    "mode": "io",
+    "expected": "Python 3 script Deployment and Verification Guide",
+    "stdin": "geofencingValidator.py inputFile",
+    "expected_stdout": "Python 3 script Deployment and Verification Guide"
+  }
+]

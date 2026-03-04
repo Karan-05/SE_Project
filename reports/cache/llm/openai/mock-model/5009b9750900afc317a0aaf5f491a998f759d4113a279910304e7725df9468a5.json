@@ -1,0 +1,1 @@
+{"content": "The BLAST (Basic Local Alignment Search Tool) component in a genomic annotation pipeline is primarily focused on sequence alignment and similarity searching. It identifies regions of local similarity", "tokens": 97, "elapsed": 2.251912417006679, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

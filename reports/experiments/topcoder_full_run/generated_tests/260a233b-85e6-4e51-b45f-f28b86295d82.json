@@ -1,0 +1,58 @@
+[
+  {
+    "name": "basic_case",
+    "mode": "io",
+    "expected": "3\n",
+    "stdin": "5 3\n1 2 3 4 5\n",
+    "expected_stdout": "3\n"
+  },
+  {
+    "name": "all_identical",
+    "mode": "io",
+    "expected": "2\n",
+    "stdin": "4 2\n2 2 2 2\n",
+    "expected_stdout": "2\n"
+  },
+  {
+    "name": "single_disk",
+    "mode": "io",
+    "expected": "10\n",
+    "stdin": "1 1\n10\n",
+    "expected_stdout": "10\n"
+  },
+  {
+    "name": "no_disks",
+    "mode": "io",
+    "expected": "0\n",
+    "stdin": "0 0\n\n",
+    "expected_stdout": "0\n"
+  },
+  {
+    "name": "large_numbers",
+    "mode": "io",
+    "expected": "300000\n",
+    "stdin": "5 3\n100000 200000 300000 400000 500000\n",
+    "expected_stdout": "300000\n"
+  },
+  {
+    "name": "more_disks_than_needed",
+    "mode": "io",
+    "expected": "4\n",
+    "stdin": "6 4\n1 2 3 4 5 6\n",
+    "expected_stdout": "4\n"
+  },
+  {
+    "name": "descending_order",
+    "mode": "io",
+    "expected": "3\n",
+    "stdin": "5 3\n5 4 3 2 1\n",
+    "expected_stdout": "3\n"
+  },
+  {
+    "name": "negative_sizes",
+    "mode": "io",
+    "expected": "-1\n",
+    "stdin": "3 2\n-1 -2 -3\n",
+    "expected_stdout": "-1\n"
+  }
+]

@@ -1,0 +1,53 @@
+{
+  "task_id": "dp_fib",
+  "strategy": "semantic_diff",
+  "attempt": 5,
+  "pass_rate": 0.0,
+  "plan_subtasks": [
+    "load base solution",
+    "apply semantic deltas",
+    "re-test",
+    "Generate minimal unit tests for critical behaviors",
+    "Add adversarial/edge-case tests",
+    "Run tests and interpret failures"
+  ],
+  "plan_tests": [
+    "critical unit tests",
+    "edge-case probes"
+  ],
+  "plan_diagnostics": {
+    "base_task": "baseline",
+    "num_deltas": "1",
+    "delta_note": "[MOCK] 1f7cfd6408ffc6e6 :: You are comparing a new task to base task baseline. List semantic deltas succinctly: Return the nth Fibonacci number.",
+    "planning_tokens": "19",
+    "planning_time": "0.000002"
+  },
+  "patch_summary": {
+    "phase": "initial"
+  },
+  "failing_tests": [],
+  "trace": [],
+  "feedback": [],
+  "reproduction": "",
+  "tests_run": [],
+  "llm_calls": 0,
+  "timeline": {
+    "attempt": 5,
+    "strategy": "semantic_diff",
+    "phase": "initial",
+    "events": {
+      "decompose": {
+        "start": "2026-02-24T00:15:40.357522",
+        "end": "2026-02-24T00:15:40.357633"
+      },
+      "solve": {
+        "start": "2026-02-24T00:15:40.357635",
+        "end": "2026-02-24T00:15:40.357683"
+      }
+    },
+    "meta": {
+      "llm_calls": "0"
+    }
+  },
+  "solution_preview": "def solve(*args):\n    return None"
+}

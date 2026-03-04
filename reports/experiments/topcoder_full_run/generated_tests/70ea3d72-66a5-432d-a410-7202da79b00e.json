@@ -1,0 +1,115 @@
+[
+  {
+    "name": "valid_navigation_elements",
+    "mode": "call",
+    "expected": {
+      "header": true,
+      "footer": true
+    },
+    "input": [
+      {
+        "page": "challenge_details",
+        "user_role": "member"
+      }
+    ]
+  },
+  {
+    "name": "admin_navigation_elements",
+    "mode": "call",
+    "expected": {
+      "header": true,
+      "footer": true
+    },
+    "input": [
+      {
+        "page": "challenge_details",
+        "user_role": "admin"
+      }
+    ]
+  },
+  {
+    "name": "unauthenticated_user_navigation_elements",
+    "mode": "call",
+    "expected": {
+      "header": true,
+      "footer": true
+    },
+    "input": [
+      {
+        "page": "challenge_details",
+        "user_role": "guest"
+      }
+    ]
+  },
+  {
+    "name": "missing_header",
+    "mode": "call",
+    "expected": {
+      "header": false,
+      "footer": true
+    },
+    "input": [
+      {
+        "page": "challenge_details",
+        "user_role": "member",
+        "simulate_error": "header"
+      }
+    ]
+  },
+  {
+    "name": "missing_footer",
+    "mode": "call",
+    "expected": {
+      "header": true,
+      "footer": false
+    },
+    "input": [
+      {
+        "page": "challenge_details",
+        "user_role": "member",
+        "simulate_error": "footer"
+      }
+    ]
+  },
+  {
+    "name": "navigation_elements_on_other_pages",
+    "mode": "call",
+    "expected": {
+      "header": true,
+      "footer": true
+    },
+    "input": [
+      {
+        "page": "home",
+        "user_role": "member"
+      }
+    ]
+  },
+  {
+    "name": "challenge_details_page_load_time",
+    "mode": "call",
+    "expected": {
+      "load_time": "< 2s"
+    },
+    "input": [
+      {
+        "page": "challenge_details",
+        "user_role": "member"
+      }
+    ]
+  },
+  {
+    "name": "navigation_elements_for_nonexistent_page",
+    "mode": "call",
+    "expected": {
+      "header": false,
+      "footer": false
+    },
+    "input": [
+      {
+        "page": "nonexistent_page",
+        "user_role": "member"
+      }
+    ]
+  }
+]

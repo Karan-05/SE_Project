@@ -1,0 +1,1 @@
+{"content": "The deprecation of the `ScriptProperties` class in Google Apps Script means you'll need to find an alternative way to store and manage properties or settings in your application", "tokens": 89, "elapsed": 2.452570833003847, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

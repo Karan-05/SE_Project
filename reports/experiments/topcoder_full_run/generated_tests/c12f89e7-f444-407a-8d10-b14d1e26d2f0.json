@@ -1,0 +1,136 @@
+[
+  {
+    "name": "footer_alignment_short_description",
+    "mode": "call",
+    "expected": {
+      "footer_aligned": true,
+      "table_visible": true
+    },
+    "input": [
+      {
+        "description": "Short description",
+        "table_data": [
+          "Row 1",
+          "Row 2"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "footer_alignment_long_description",
+    "mode": "call",
+    "expected": {
+      "footer_aligned": false,
+      "table_visible": false
+    },
+    "input": [
+      {
+        "description": "This is a long description that should test the alignment of the footer and the visibility of the table.",
+        "table_data": [
+          "Row 1",
+          "Row 2",
+          "Row 3"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "footer_alignment_no_description",
+    "mode": "call",
+    "expected": {
+      "footer_aligned": true,
+      "table_visible": true
+    },
+    "input": [
+      {
+        "description": "",
+        "table_data": [
+          "Row 1"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "footer_alignment_empty_table",
+    "mode": "call",
+    "expected": {
+      "footer_aligned": true,
+      "table_visible": false
+    },
+    "input": [
+      {
+        "description": "Description with no table data.",
+        "table_data": []
+      }
+    ]
+  },
+  {
+    "name": "footer_alignment_special_characters",
+    "mode": "call",
+    "expected": {
+      "footer_aligned": true,
+      "table_visible": true
+    },
+    "input": [
+      {
+        "description": "Description with special characters !@#$%^&*()",
+        "table_data": [
+          "Row 1",
+          "Row 2"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "footer_alignment_html_tags",
+    "mode": "call",
+    "expected": {
+      "footer_aligned": true,
+      "table_visible": true
+    },
+    "input": [
+      {
+        "description": "<p>HTML description with tags</p>",
+        "table_data": [
+          "Row 1",
+          "Row 2"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "footer_alignment_multiple_rows",
+    "mode": "call",
+    "expected": {
+      "footer_aligned": false,
+      "table_visible": false
+    },
+    "input": [
+      {
+        "description": "Description with multiple lines\nSecond line of description",
+        "table_data": [
+          "Row 1",
+          "Row 2",
+          "Row 3",
+          "Row 4"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "footer_alignment_edge_case",
+    "mode": "call",
+    "expected": {
+      "footer_aligned": false,
+      "table_visible": false
+    },
+    "input": [
+      {
+        "description": "A very very long description that exceeds normal limits and should be tested for overflow handling.",
+        "table_data": [
+          "Row 1"
+        ]
+      }
+    ]
+  }
+]

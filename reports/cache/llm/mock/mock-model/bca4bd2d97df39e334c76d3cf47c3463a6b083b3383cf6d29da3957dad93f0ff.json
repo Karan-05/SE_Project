@@ -1,0 +1,1 @@
+{"content": "[MOCK] d4d391ae11d6a078 :: Architect: propose a phased plan for task dp_coin_stress: Return the minimum coins needed to reach target.", "tokens": 16, "elapsed": 1.791000000084253e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "role-architect", "caller": "role_decomposed"}}

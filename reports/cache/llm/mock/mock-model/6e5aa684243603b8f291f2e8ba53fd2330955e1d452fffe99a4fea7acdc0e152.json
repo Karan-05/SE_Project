@@ -1,0 +1,1 @@
+{"content": "[MOCK] 1532c787bddac71c :: Architect: propose a phased plan for task array_prefix_hard: Return the running prefix sums.", "tokens": 13, "elapsed": 1.5840000000544308e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "role-architect", "caller": "role_decomposed"}}

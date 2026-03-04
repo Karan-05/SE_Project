@@ -1,0 +1,42 @@
+[
+  {
+    "name": "config_cleanup_prod",
+    "mode": "call",
+    "expected": "Configuration cleaned up",
+    "input": [
+      {
+        "environment": "prod"
+      }
+    ]
+  },
+  {
+    "name": "config_cleanup_dev",
+    "mode": "call",
+    "expected": "Configuration cleaned up",
+    "input": [
+      {
+        "environment": "dev"
+      }
+    ]
+  },
+  {
+    "name": "admin_access",
+    "mode": "call",
+    "expected": "Access granted",
+    "input": [
+      {
+        "user_role": "admin"
+      }
+    ]
+  },
+  {
+    "name": "non_admin_access",
+    "mode": "call",
+    "expected": "Access denied",
+    "input": [
+      {
+        "user_role": "guest"
+      }
+    ]
+  }
+]

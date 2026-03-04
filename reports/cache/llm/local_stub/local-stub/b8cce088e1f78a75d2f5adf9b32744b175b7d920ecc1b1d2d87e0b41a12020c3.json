@@ -1,0 +1,1 @@
+{"content": "[LOCAL_STUB] eaf74d52173ef27a :: You are repairing code produced by strategy 'contract_first'. Problem statement: Project Background Our customer has a l", "tokens": 182, "elapsed": 3.512500552460551e-05, "budget_exceeded": false, "meta": {"provider": "local_stub", "model": "repair-loop"}}

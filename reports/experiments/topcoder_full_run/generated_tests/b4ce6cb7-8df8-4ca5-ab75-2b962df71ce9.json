@@ -1,0 +1,107 @@
+[
+  {
+    "name": "valid_challenge_details",
+    "mode": "call",
+    "expected": {
+      "phase": "Submission",
+      "myRole": "Reviewer",
+      "phaseEndDate": "2023-10-15T12:00:00Z",
+      "timeLeft": "2 days 5 hours",
+      "phaseStatus": "Active"
+    },
+    "input": [
+      {
+        "challengeId": "12345"
+      }
+    ]
+  },
+  {
+    "name": "expired_phase_details",
+    "mode": "call",
+    "expected": {
+      "phase": "Review",
+      "myRole": "Submitter",
+      "phaseEndDate": "2023-10-01T12:00:00Z",
+      "timeLeft": "Phase Ended",
+      "phaseStatus": "Expired"
+    },
+    "input": [
+      {
+        "challengeId": "67890"
+      }
+    ]
+  },
+  {
+    "name": "no_data_case",
+    "mode": "call",
+    "expected": {
+      "message": "No records found"
+    },
+    "input": [
+      {
+        "challengeId": "99999"
+      }
+    ]
+  },
+  {
+    "name": "invalid_challenge_id",
+    "mode": "call",
+    "expected": {
+      "error": "Challenge not found"
+    },
+    "input": [
+      {
+        "challengeId": "invalid_id"
+      }
+    ]
+  },
+  {
+    "name": "loading_state",
+    "mode": "call",
+    "expected": {
+      "loading": true
+    },
+    "input": [
+      {
+        "challengeId": "12345"
+      }
+    ]
+  },
+  {
+    "name": "error_handling",
+    "mode": "call",
+    "expected": {
+      "error": "Internal server error"
+    },
+    "input": [
+      {
+        "challengeId": "error_case"
+      }
+    ]
+  },
+  {
+    "name": "responsive_design_check",
+    "mode": "call",
+    "expected": {
+      "isResponsive": true
+    },
+    "input": [
+      {
+        "challengeId": "12345",
+        "viewport": "mobile"
+      }
+    ]
+  },
+  {
+    "name": "api_typing_validation",
+    "mode": "call",
+    "expected": {
+      "type": "ChallengeDetails"
+    },
+    "input": [
+      {
+        "challengeId": "12345"
+      }
+    ]
+  }
+]

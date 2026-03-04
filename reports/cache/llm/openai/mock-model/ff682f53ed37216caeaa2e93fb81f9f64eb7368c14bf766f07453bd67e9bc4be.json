@@ -1,0 +1,1 @@
+{"content": "The hash bucket pattern is typically used in scenarios where you need to efficiently manage and retrieve data, especially in distributed systems or when dealing with large datasets. In the", "tokens": 90, "elapsed": 1.3319987079885323, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

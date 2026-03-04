@@ -1,0 +1,1 @@
+{"content": "[MOCK] fa279ad425af2c9f :: Architect: propose a phased plan for task number_primes_ood: Count primes up to N.", "tokens": 13, "elapsed": 2.7499999999403e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "role-architect", "caller": "role_decomposed"}}

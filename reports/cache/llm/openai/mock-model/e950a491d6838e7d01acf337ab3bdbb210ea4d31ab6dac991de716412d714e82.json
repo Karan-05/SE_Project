@@ -1,0 +1,1 @@
+{"content": "The phrase \"TEST NEW DISK\" doesn't directly suggest a problem that would typically be solved using Kadane's algorithm, which is primarily used for finding the maximum", "tokens": 55, "elapsed": 1.6540645000059158, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

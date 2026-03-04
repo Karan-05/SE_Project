@@ -1,0 +1,2 @@
+- pytest
+- npm run test:ci

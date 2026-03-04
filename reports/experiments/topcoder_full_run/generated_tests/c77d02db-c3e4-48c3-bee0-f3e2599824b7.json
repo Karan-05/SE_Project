@@ -1,0 +1,125 @@
+[
+  {
+    "name": "test_member_creation",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "memberId": "12345"
+    },
+    "input": [
+      {
+        "name": "John Doe",
+        "email": "john.doe@example.com",
+        "role": "member"
+      }
+    ]
+  },
+  {
+    "name": "test_member_retrieval",
+    "mode": "call",
+    "expected": {
+      "name": "John Doe",
+      "email": "john.doe@example.com",
+      "role": "member"
+    },
+    "input": [
+      {
+        "memberId": "12345"
+      }
+    ]
+  },
+  {
+    "name": "test_member_update_optional_fields",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "updatedFields": [
+        "updatedBy"
+      ]
+    },
+    "input": [
+      {
+        "memberId": "12345",
+        "updatedBy": "admin"
+      }
+    ]
+  },
+  {
+    "name": "test_member_creation_duplicate_email",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Email already exists"
+    },
+    "input": [
+      {
+        "name": "Jane Doe",
+        "email": "john.doe@example.com",
+        "role": "member"
+      }
+    ]
+  },
+  {
+    "name": "test_member_retrieval_nonexistent",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Member not found"
+    },
+    "input": [
+      {
+        "memberId": "99999"
+      }
+    ]
+  },
+  {
+    "name": "test_member_update_invalid_role",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Invalid role specified"
+    },
+    "input": [
+      {
+        "memberId": "12345",
+        "role": "invalid_role"
+      }
+    ]
+  },
+  {
+    "name": "test_bulk_member_creation",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "memberIds": [
+        "12346",
+        "12347"
+      ]
+    },
+    "input": [
+      {
+        "name": "Alice",
+        "email": "alice@example.com",
+        "role": "member"
+      },
+      {
+        "name": "Bob",
+        "email": "bob@example.com",
+        "role": "member"
+      }
+    ]
+  },
+  {
+    "name": "test_member_update_without_required_fields",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Required fields missing"
+    },
+    "input": [
+      {
+        "memberId": "12345"
+      }
+    ]
+  }
+]

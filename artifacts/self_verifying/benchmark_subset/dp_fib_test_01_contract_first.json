@@ -1,0 +1,65 @@
+{
+  "task_id": "dp_fib_test",
+  "strategy": "contract_first",
+  "attempt": 1,
+  "pass_rate": 1.0,
+  "plan_subtasks": [
+    "Validate inputs vs contract",
+    "Implement core logic",
+    "Check edge cases",
+    "Generate minimal unit tests for critical behaviors",
+    "Add adversarial/edge-case tests",
+    "Run tests and interpret failures"
+  ],
+  "plan_tests": [
+    ""
+  ],
+  "plan_diagnostics": {
+    "missing_fields": "constraints,edge_cases",
+    "contract_length": "32",
+    "audit_note": "[MOCK] 2148e3db1c39b102 :: Review this contract for completeness and note any missing guarantees. Contract: {'inputs': 'Underspecified', 'outputs':",
+    "planning_tokens": "25",
+    "planning_time": "0.000002"
+  },
+  "patch_summary": {
+    "phase": "initial"
+  },
+  "tests_run": [
+    {
+      "name": "sample_1",
+      "mode": "call",
+      "status": "pass",
+      "expected": "5",
+      "output": "5",
+      "error": "",
+      "input": "[5]",
+      "kwargs": "{}",
+      "duration": 1.7920000001669933e-06
+    }
+  ],
+  "llm_calls": 0,
+  "timeline": {
+    "attempt": 1,
+    "strategy": "contract_first",
+    "phase": "initial",
+    "events": {
+      "decompose": {
+        "start": "2026-02-24T00:19:21.380324",
+        "end": "2026-02-24T00:19:21.380380"
+      },
+      "solve": {
+        "start": "2026-02-24T00:19:21.380383",
+        "end": "2026-02-24T00:19:21.380455"
+      },
+      "tests": {
+        "start": "2026-02-24T00:19:21.380448",
+        "end": "2026-02-24T00:19:21.380451",
+        "duration_seconds": "0.000"
+      }
+    },
+    "meta": {
+      "llm_calls": "0"
+    }
+  },
+  "solution_preview": "def solve(n):\n                if n <= 1:\n                    return n\n                a,b = 0,1\n                for _ in range(2,n+1):\n                    a,b = b,a+b\n                return b"
+}

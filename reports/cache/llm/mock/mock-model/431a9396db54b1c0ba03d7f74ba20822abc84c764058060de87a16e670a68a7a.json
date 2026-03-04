@@ -1,0 +1,1 @@
+{"content": "[MOCK] c8357080f94f4bdb :: Implement function solve() that reads all required input from stdin and writes the exact expected output to stdout. Do n", "tokens": 43, "elapsed": 1.7499999991343884e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "pattern-codegen", "caller": "pattern_skeleton"}}

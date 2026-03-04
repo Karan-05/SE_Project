@@ -1,0 +1,18 @@
+{
+  "score": 0.0,
+  "passes_threshold": false,
+  "reasons": [
+    "Missing ETL blueprint details"
+  ],
+  "missing": [
+    "Problem Summary",
+    "Source Data and Schemas",
+    "Transformation Steps",
+    "SQL or Code Snippets",
+    "Validation Queries",
+    "Sample Outputs",
+    "Acceptance Checklist"
+  ],
+  "section_coverage": 0.0,
+  "extra_score": 0.0
+}

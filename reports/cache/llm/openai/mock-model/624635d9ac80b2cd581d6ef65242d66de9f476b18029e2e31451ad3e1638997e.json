@@ -1,0 +1,1 @@
+{"content": "In the context of predicting likely buyer companies from a list of first-round buyers, using a pattern hash bucket approach can be relevant, depending on the specific characteristics of", "tokens": 85, "elapsed": 1.8419259160000365, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

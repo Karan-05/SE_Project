@@ -1,0 +1,57 @@
+```json
+BEGIN_JSON
+{
+  "task_type": "data_etl",
+  "id": "7daca42b-c37f-477b-96db-153000825d83",
+  "title": "Topcoder O/R F2F - Topgear Scorecard Issue",
+  "summary": "Create an ETL blueprint to update the SQL file for the Topgear Scorecard Issue, ensuring dropdown options are consistent with the old app. The solution must include validation queries and a comprehensive pipeline specification.",
+  "assumptions": [
+    "Access to the existing SQL schema and data sources is available.",
+    "The specific transformation steps required to align the dropdown options are not detailed in the prompt.",
+    "The provided Figma and Google Docs links contain all necessary design and setup information."
+  ],
+  "plan": [
+    "Review the existing SQL schema and identify the necessary changes to align with the Topgear Scorecard.",
+    "Draft the ETL pipeline specification including data sources, transformation steps, and loading procedures.",
+    "Write SQL snippets for the required transformations and validations.",
+    "Develop Python pseudo-code to implement the ETL process.",
+    "Create a list of data quality checks to ensure the integrity of the transformed data.",
+    "Compile all findings and code into a markdown document for submission."
+  ],
+  "artifacts": {
+    "pipeline_spec": "## ETL Pipeline Specification\n1. **Source**: Existing SQL database containing scorecard data.\n2. **Transformation**: Align dropdown options with the previous application version.\n3. **Load**: Update the SQL file to reflect these changes.\n4. **Schedule**: Daily updates to ensure data consistency.\n5. **Recovery Plan**: Rollback to previous state if errors occur during the load phase.",
+    "sql_snippets": [
+      "UPDATE scorecard SET dropdown_option = 'new_value' WHERE condition;",
+      "SELECT * FROM scorecard WHERE dropdown_option IS NOT NULL;"
+    ],
+    "python_snippets": [
+      "def etl_process():\n    # Fetch data from the source\n    data = fetch_data()\n    # Transform data\n    transformed_data = transform_data(data)\n    # Load data into the target\n    load_data(transformed_data)\n    # Validate data\n    validate_data(transformed_data)"
+    ],
+    "data_quality_checks": [
+      {
+        "name": "Check for NULL values",
+        "column": "dropdown_option",
+        "threshold": "No NULL values allowed"
+      },
+      {
+        "name": "Check for consistent options",
+        "column": "dropdown_option",
+        "threshold": "Options must match those in the old app"
+      }
+    ]
+  },
+  "validations": [
+    "Self-check performed on SQL snippets for syntax correctness.",
+    "Validation queries designed to ensure data integrity post-transformation."
+  ],
+  "confidence": 0.85,
+  "stop_reason": "completed",
+  "rubric_self_check": {
+    "coverage": 4,
+    "specificity": 3,
+    "actionability": 4,
+    "overall_notes": "The plan covers all necessary aspects of the ETL process, but further details on specific dropdown options may be required."
+  }
+}
+END_JSON
+```

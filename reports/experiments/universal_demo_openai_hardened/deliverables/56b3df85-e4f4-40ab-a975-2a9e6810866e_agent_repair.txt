@@ -1,0 +1,55 @@
+BEGIN_JSON
+{
+  "task_type": "architecture_doc",
+  "id": "56b3df85-e4f4-40ab-a975-2a9e6810866e",
+  "title": "Topcoder Review API - Challenge and Resource API Integration",
+  "summary": "This document outlines the architecture for enhancing the Review API to integrate with the Challenge API and Resources API. The goal is to ensure the correct pending reviews are fetched for users with different roles, along with proper response formatting.",
+  "assumptions": [
+    "Access to the existing tc-review-api repository is available.",
+    "The Challenge API and Resources API are operational and accessible.",
+    "Existing patterns in the ChallengeApiService can be followed for the new ResourceApiService."
+  ],
+  "plan": [
+    "Analyze the existing ReviewController and identify the changes needed for getPendingReviews().",
+    "Implement the ResourceApiService following the structure of ChallengeApiService.",
+    "Integrate the Challenge API and Resources API calls within the getPendingReviews() method.",
+    "Update TypeScript interfaces for the new response structure.",
+    "Implement error handling and caching strategies for API responses.",
+    "Document the changes and provide testing instructions."
+  ],
+  "artifacts": {
+    "design_doc_md": "# Topcoder Review API Enhancement\n\n## Requirements\n- Enhance the Review API to integrate with Challenge API and Resources API.\n\n## Approach\n1. **Update GET /api/reviews Endpoint**\n   - Modify `ReviewController.getPendingReviews()` to fetch reviews based on user roles and challenge status.\n\n2. **Challenge API Integration**\n   - Utilize `ChallengeApiService` to check challenge status.\n\n3. **Resources API Integration**\n   - Create `ResourceApiService` to fetch user roles for challenges.\n\n4. **Response Format Enhancement**\n   - Include user role information and ensure consistent data structure.\n\n## Rollout\n- Deploy changes to the `feat/review-opportunities` branch.\n\n## Observability\n- Monitor API performance and error rates post-deployment.\n\n## Acceptance Checklist\n- Ensure all integrations are functioning as expected and documented.",
+    "mermaid_diagram": "graph TD;\n    A[Review API] -->|Fetches| B[Challenge API];\n    A -->|Fetches| C[Resources API];\n    B -->|Returns| D[Challenge Status];\n    C -->|Returns| E[User Roles];",
+    "interfaces": [
+      {
+        "producer": "ChallengeApiService",
+        "consumer": "ReviewController",
+        "protocol": "HTTP",
+        "payload": "{ challengeId: string }"
+      },
+      {
+        "producer": "ResourceApiService",
+        "consumer": "ReviewController",
+        "protocol": "HTTP",
+        "payload": "{ challengeId: string }"
+      }
+    ],
+    "tradeoffs": [
+      "Using TypeScript for type safety vs. potential overhead in development time.",
+      "Integrating multiple APIs for a single endpoint vs. complexity in error handling."
+    ]
+  },
+  "validations": [
+    "Checked section coverage against the rubric.",
+    "Ensured all required architecture components are included."
+  ],
+  "confidence": 0.85,
+  "stop_reason": "completed",
+  "rubric_self_check": {
+    "coverage": "All sections covered.",
+    "specificity": "Detailed integration steps provided.",
+    "actionability": "Clear implementation plan outlined.",
+    "overall_notes": "Document is comprehensive and actionable."
+  }
+}
+END_JSON

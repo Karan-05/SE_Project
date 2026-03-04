@@ -1,0 +1,1 @@
+{"content": "[MOCK] c7f3d6320bcf2399 :: List three high-risk failure modes for this coding task along with short rationales: Count primes up to N.", "tokens": 18, "elapsed": 1.6669999998164542e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "failure-scout", "caller": "failure_mode_first"}}

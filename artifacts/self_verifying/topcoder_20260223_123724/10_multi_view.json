@@ -1,0 +1,33 @@
+{
+  "task_id": "mixed_matrix_ood",
+  "strategy": "multi_view",
+  "attempt": 10,
+  "pass_rate": 0.0,
+  "plan_subtasks": [
+    "align spec-view",
+    "align example-view",
+    "align constraint-view",
+    "Generate minimal unit tests for critical behaviors",
+    "Add adversarial/edge-case tests",
+    "Run tests and interpret failures"
+  ],
+  "plan_tests": [
+    "",
+    ""
+  ],
+  "plan_diagnostics": {
+    "consistent": "True",
+    "views": "6",
+    "consistency_note": "[MOCK:view-checker] c6511898bc4c :: Check whether these views disagree. Spec: ['Summarize goal', 'List required outputs', 'State constraints']. Examples: ['', '']. Constraints: [None].",
+    "planning_tokens": "21",
+    "planning_time": "0.026250"
+  },
+  "patch_summary": {
+    "phase": "initial"
+  },
+  "failing_tests": [],
+  "trace": [],
+  "feedback": [],
+  "reproduction": "",
+  "tests_run": []
+}

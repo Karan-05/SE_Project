@@ -1,0 +1,6 @@
+{
+  "coverage": 90.0,
+  "specificity": 88.0,
+  "actionability": 87.0,
+  "overall_notes": "Mock provider produced schema, DQ checks, and validation commands."
+}

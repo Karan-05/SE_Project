@@ -1,0 +1,47 @@
+{
+  "run_id": "topcoder_present_demo_v2",
+  "total_rows": 10,
+  "total_unique_task_ids": 10,
+  "manifest_unique_task_ids": 10,
+  "attempted": 9,
+  "solved_pass_final": 0,
+  "pass_at_final": 0.0,
+  "skipped_counts": {
+    "skipped_failed_synthesis": 1
+  },
+  "attempted_with_extracted_tests": 0,
+  "attempted_with_synthesized_tests": 9,
+  "success_rate_extracted": 0.0,
+  "success_rate_synthesized": 0.0,
+  "avg_attempts": 10.0,
+  "median_attempts": 10.0,
+  "p90_attempts": 10.0,
+  "fallback_rate": 1.0,
+  "stagnation_rate": 1.0,
+  "retries_exhausted_count": 9,
+  "llm_calls_total": 116.0,
+  "llm_calls_avg_per_task": 12.88888888888889,
+  "llm_available": true,
+  "runtime": {
+    "start_time": "2026-02-23T16:21:12.262071",
+    "end_time": "2026-02-23T16:28:19.579866",
+    "wall_time_seconds": 427.317795,
+    "avg_wall_time_per_attempted": 47.479755
+  },
+  "reconciliation": {
+    "discovered_rows": 10,
+    "unique_tasks": 10,
+    "duplicates": 0,
+    "filtered_out": 0,
+    "manifest_total": 10,
+    "dataset_files": 3
+  },
+  "progress_fraction": 1.0,
+  "evaluation_coverage": 0.9,
+  "pipeline_status": "COMPLETE",
+  "validity": "VALID",
+  "presentation_mode": true,
+  "sample_size": 10,
+  "sample_strategy": "random",
+  "sample_seed": 42
+}

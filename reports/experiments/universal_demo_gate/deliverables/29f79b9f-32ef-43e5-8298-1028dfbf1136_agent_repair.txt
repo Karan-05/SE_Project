@@ -1,0 +1,6 @@
+```json
+{
+  "task_type": "architecture_doc",
+  "summary": "Develop an architecture document for the Topcoder Identity Service focusing on improving testing for RoleController and UserController APIs. The document will outline requirements, components, interfaces, trade-offs, and risks associated with the transition to TypeScript and PostgreSQL.",
+  "artifacts": {
+    "doc_markdown": "## Requirements\n- Ensure overall, branch, and line coverage >= 90% for RoleController and UserController.\n- Implement unit tests targeting database data, not just mocks.\n- Create a comprehensive README for setup and deployment.\n\n## Architecture Diagram\n```mermaid\ngraph TD;\n    A[RoleController] -->|calls| B[RoleService];\n    A -->|auth| C[AuthFlowService];\n    D[UserController] -->|calls| E[UserService];\n    D -->|auth| F[TwoFactorAuthService];\n    G[ValidationService];\n    H[PostgreSQL DB];\n    I[Redis Cache];\n    J[Kafka Event Bus];\n```\n\n## Components\n- **RoleController** – Handles requests related to

@@ -1,0 +1,165 @@
+{
+  "task_id": "305e0763-dd63-4883-9133-55504503953d",
+  "strategy": "semantic_diff",
+  "attempt": 10,
+  "pass_rate": 0.0,
+  "plan_subtasks": [
+    "load base solution",
+    "apply semantic deltas",
+    "re-test",
+    "Generate minimal unit tests for critical behaviors",
+    "Add adversarial/edge-case tests",
+    "Run tests and interpret failures"
+  ],
+  "plan_tests": [
+    "critical unit tests",
+    "edge-case probes"
+  ],
+  "plan_diagnostics": {
+    "base_task": "baseline",
+    "num_deltas": "1",
+    "delta_note": "### Semantic Deltas for HARD 1000 Points Competition\n\n1. **Enhanced Functionality**: Introduce new features beyond the baseline.\n2. **User Interface Improvements**: Refine UI components for better user experience.\n3. **State Management**: Implement advanced state management techniques (e.g., Redux, Context API).\n4. **Performance Optimization**: Optimize rendering and loading times.\n5",
+    "planning_tokens": "149",
+    "planning_time": "2.556412"
+  },
+  "patch_summary": {
+    "phase": "repair",
+    "prompt_excerpt": "age'}] kwargs={}\nProduce a minimal patch to fix only the failing behavior. Keep public APIs identical and do not refactor unrelated sections. Return the full updated implementation without commentary.",
+    "llm_tokens": "626"
+  },
+  "failing_tests": [
+    "create_learning_space_valid",
+    "create_learning_space_missing_fields",
+    "create_post_valid",
+    "create_post_invalid_markdown",
+    "add_comment_valid"
+  ],
+  "trace": [
+    "",
+    "",
+    "",
+    "",
+    ""
+  ],
+  "feedback": [
+    "create_learning_space_valid expected {'success': True, 'message': 'Learning space created successfully.'} but saw None",
+    "create_learning_space_missing_fields expected {'success': False, 'message': 'Title is required.'} but saw None",
+    "create_post_valid expected {'success': True, 'message': 'Post created successfully.'} but saw None",
+    "create_post_invalid_markdown expected {'success': False, 'message': 'Invalid markdown format.'} but saw None",
+    "add_comment_valid expected {'success': True, 'message': 'Comment added successfully.'} but saw None"
+  ],
+  "reproduction": "inputs=[{'title': 'ReactJS Basics', 'description': 'A space to learn the basics of ReactJS.', 'prerequisites': ['React', 'JavaScript'], 'thumbnail': 'url_to_thumbnail_image'}] kwargs={}",
+  "tests_run": [
+    {
+      "name": "create_learning_space_valid",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'success': True, 'message': 'Learning space created successfully.'}",
+      "output": "None",
+      "error": "",
+      "input": "[{'title': 'ReactJS Basics', 'description': 'A space to learn the basics of ReactJS.', 'prerequisites': ['React', 'JavaScript'], 'thumbnail': 'url_to_thumbnail_image'}]",
+      "kwargs": "{}",
+      "duration": 3.641602233983576e-05
+    },
+    {
+      "name": "create_learning_space_missing_fields",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'success': False, 'message': 'Title is required.'}",
+      "output": "None",
+      "error": "",
+      "input": "[{'title': '', 'description': 'A space without a title.', 'prerequisites': ['React'], 'thumbnail': 'url_to_thumbnail_image'}]",
+      "kwargs": "{}",
+      "duration": 1.2542004697024822e-05
+    },
+    {
+      "name": "create_post_valid",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'success': True, 'message': 'Post created successfully.'}",
+      "output": "None",
+      "error": "",
+      "input": "[{'learningSpaceId': 'space123', 'title': 'Understanding JSX', 'body': 'JSX is a syntax extension for JavaScript.'}]",
+      "kwargs": "{}",
+      "duration": 9.874987881630659e-06
+    },
+    {
+      "name": "create_post_invalid_markdown",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'success': False, 'message': 'Invalid markdown format.'}",
+      "output": "None",
+      "error": "",
+      "input": "[{'learningSpaceId': 'space123', 'title': 'Invalid Markdown Post', 'body': 'This is an invalid markdown **text'}]",
+      "kwargs": "{}",
+      "duration": 8.834002073854208e-06
+    },
+    {
+      "name": "add_comment_valid",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'success': True, 'message': 'Comment added successfully.'}",
+      "output": "None",
+      "error": "",
+      "input": "[{'postId': 'post456', 'body': 'Great post! Very informative.'}]",
+      "kwargs": "{}",
+      "duration": 7.750000804662704e-06
+    },
+    {
+      "name": "add_comment_empty_body",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'success': False, 'message': 'Comment body cannot be empty.'}",
+      "output": "None",
+      "error": "",
+      "input": "[{'postId': 'post456', 'body': ''}]",
+      "kwargs": "{}",
+      "duration": 7.124996045604348e-06
+    },
+    {
+      "name": "upvote_post",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'success': True, 'message': 'Post upvoted successfully.'}",
+      "output": "None",
+      "error": "",
+      "input": "[{'postId': 'post456', 'userId': 'user789'}]",
+      "kwargs": "{}",
+      "duration": 7.708003977313638e-06
+    },
+    {
+      "name": "downvote_comment",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'success': True, 'message': 'Comment downvoted successfully.'}",
+      "output": "None",
+      "error": "",
+      "input": "[{'commentId': 'comment321', 'userId': 'user789'}]",
+      "kwargs": "{}",
+      "duration": 8.95801349543035e-06
+    }
+  ],
+  "llm_calls": 1,
+  "timeline": {
+    "attempt": 10,
+    "strategy": "semantic_diff",
+    "phase": "repair",
+    "events": {
+      "repair": {
+        "start": "2026-02-24T12:07:57.097719",
+        "end": "2026-02-24T12:08:04.254529"
+      },
+      "tests": {
+        "start": "2026-02-24T12:08:04.254846",
+        "end": "2026-02-24T12:08:04.254971",
+        "duration_seconds": "0.000"
+      }
+    },
+    "meta": {
+      "prompt_excerpt": "age'}] kwargs={}\nProduce a minimal patch to fix only the failing behavior. Keep public APIs identical and do not refactor unrelated sections. Return the full updated implementation without commentary.",
+      "llm_tokens": "626",
+      "llm_calls": "1"
+    }
+  },
+  "solution_preview": "def solve(*args):\n    return None"
+}

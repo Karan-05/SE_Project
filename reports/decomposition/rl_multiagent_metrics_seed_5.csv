@@ -1,0 +1,6 @@
+seed,policy,avg_reward,std_reward,win_rate,starved_tasks,dropped_tasks,deadline_misses,market_starved,market_dropped
+5,random,7432.3,6336.424485464969,0.352,21.0,9.8,0.0,92.2,70.6
+5,skill_match,29296.0,11951.491706059123,0.524,7.0,15.2,0.0,92.2,70.6
+5,contract_first,-29964.1,24134.435900596476,0.1,28.2,15.2,0.0,92.2,70.6
+5,pattern_skeleton,10133.9,27305.582777886284,0.40800000000000003,12.8,15.2,0.0,92.2,70.6
+5,meta_strategy,-13083.1,35542.14335742852,0.2,23.2,15.2,0.0,92.2,70.6

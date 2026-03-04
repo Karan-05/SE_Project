@@ -1,0 +1,1 @@
+{"content": "In the context of your task to compare metadata files between two Salesforce orgs and generate a third output folder containing just the differences, the concept of a \"pattern", "tokens": 91, "elapsed": 1.4391412080003647, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

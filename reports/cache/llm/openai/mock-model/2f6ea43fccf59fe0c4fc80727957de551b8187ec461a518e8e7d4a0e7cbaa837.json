@@ -1,0 +1,1 @@
+{"content": "Kadane's algorithm is primarily used for finding the maximum sum subarray in a one-dimensional array. It is a dynamic programming technique that efficiently solves problems related to", "tokens": 92, "elapsed": 1.7879258330067387, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

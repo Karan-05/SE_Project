@@ -1,0 +1,58 @@
+[
+  {
+    "name": "valid_manual_payment",
+    "mode": "io",
+    "expected": "{\"status\": \"success\", \"message\": \"Payment saved successfully\"}",
+    "stdin": "{\"challengeId\": 30096991, \"submitterId\": 12345, \"amount\": 100.00}",
+    "expected_stdout": "{\"status\": \"success\", \"message\": \"Payment saved successfully\"}"
+  },
+  {
+    "name": "missing_amount",
+    "mode": "io",
+    "expected": "{\"status\": \"error\", \"message\": \"Amount is required\"}",
+    "stdin": "{\"challengeId\": 30096991, \"submitterId\": 12345}",
+    "expected_stdout": "{\"status\": \"error\", \"message\": \"Amount is required\"}"
+  },
+  {
+    "name": "invalid_challenge_id",
+    "mode": "io",
+    "expected": "{\"status\": \"error\", \"message\": \"Challenge not found\"}",
+    "stdin": "{\"challengeId\": 99999, \"submitterId\": 12345, \"amount\": 100.00}",
+    "expected_stdout": "{\"status\": \"error\", \"message\": \"Challenge not found\"}"
+  },
+  {
+    "name": "negative_amount",
+    "mode": "io",
+    "expected": "{\"status\": \"error\", \"message\": \"Amount must be positive\"}",
+    "stdin": "{\"challengeId\": 30096991, \"submitterId\": 12345, \"amount\": -50.00}",
+    "expected_stdout": "{\"status\": \"error\", \"message\": \"Amount must be positive\"}"
+  },
+  {
+    "name": "duplicate_payment",
+    "mode": "io",
+    "expected": "{\"status\": \"error\", \"message\": \"Payment already exists\"}",
+    "stdin": "{\"challengeId\": 30096991, \"submitterId\": 12345, \"amount\": 100.00}",
+    "expected_stdout": "{\"status\": \"error\", \"message\": \"Payment already exists\"}"
+  },
+  {
+    "name": "valid_payment_for_reviewer",
+    "mode": "io",
+    "expected": "{\"status\": \"success\", \"message\": \"Payment saved successfully\"}",
+    "stdin": "{\"challengeId\": 30096991, \"reviewerId\": 54321, \"amount\": 150.00}",
+    "expected_stdout": "{\"status\": \"success\", \"message\": \"Payment saved successfully\"}"
+  },
+  {
+    "name": "invalid_submitter_id",
+    "mode": "io",
+    "expected": "{\"status\": \"error\", \"message\": \"Submitter not found\"}",
+    "stdin": "{\"challengeId\": 30096991, \"submitterId\": 99999, \"amount\": 100.00}",
+    "expected_stdout": "{\"status\": \"error\", \"message\": \"Submitter not found\"}"
+  },
+  {
+    "name": "empty_input",
+    "mode": "io",
+    "expected": "{\"status\": \"error\", \"message\": \"Challenge ID, submitter/reviewer ID, and amount are required\"}",
+    "stdin": "{}",
+    "expected_stdout": "{\"status\": \"error\", \"message\": \"Challenge ID, submitter/reviewer ID, and amount are required\"}"
+  }
+]

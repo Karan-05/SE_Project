@@ -1,0 +1,1 @@
+{"content": "[MOCK] 4c7622d1eb11e2db :: List three high-risk failure modes for this coding task along with short rationales: Return degree counts for each verte", "tokens": 19, "elapsed": 1.8749999999290168e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "failure-scout", "caller": "failure_mode_first"}}

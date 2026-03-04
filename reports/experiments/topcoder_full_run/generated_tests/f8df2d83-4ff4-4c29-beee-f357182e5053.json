@@ -1,0 +1,117 @@
+[
+  {
+    "name": "mcp_http_connection",
+    "mode": "call",
+    "expected": {
+      "status": 200,
+      "data": "valid response"
+    },
+    "input": [
+      {
+        "url": "https://api.topcoder.com/v6/mcp/mcp",
+        "method": "GET"
+      }
+    ]
+  },
+  {
+    "name": "mcp_https_connection",
+    "mode": "call",
+    "expected": {
+      "status": 200,
+      "data": "valid response"
+    },
+    "input": [
+      {
+        "url": "https://hf.co/mcp",
+        "method": "GET"
+      }
+    ]
+  },
+  {
+    "name": "mcp_http_timeout",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "timeout"
+    },
+    "input": [
+      {
+        "url": "https://api.topcoder.com/v6/mcp/mcp",
+        "method": "GET",
+        "timeout": 1
+      }
+    ]
+  },
+  {
+    "name": "mcp_https_invalid_cert",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "invalid certificate"
+    },
+    "input": [
+      {
+        "url": "https://invalid.huggingface.com/mcp",
+        "method": "GET"
+      }
+    ]
+  },
+  {
+    "name": "log_retention_configuration",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "message": "logs retained for 30 days"
+    },
+    "input": [
+      {
+        "logRetentionDays": 30
+      }
+    ]
+  },
+  {
+    "name": "log_retention_exceed_limit",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "exceeds maximum retention limit"
+    },
+    "input": [
+      {
+        "logRetentionDays": 366
+      }
+    ]
+  },
+  {
+    "name": "rbac_authentication_success",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "permissions": [
+        "read",
+        "write",
+        "delete"
+      ]
+    },
+    "input": [
+      {
+        "user": "admin",
+        "role": "admin"
+      }
+    ]
+  },
+  {
+    "name": "rbac_authentication_failure",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "access denied"
+    },
+    "input": [
+      {
+        "user": "guest",
+        "role": "guest"
+      }
+    ]
+  }
+]

@@ -1,0 +1,112 @@
+[
+  {
+    "name": "test_user_login_success",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "token": "validToken123"
+    },
+    "input": [
+      {
+        "username": "validUser",
+        "password": "validPassword"
+      }
+    ]
+  },
+  {
+    "name": "test_user_login_failure",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Invalid credentials"
+    },
+    "input": [
+      {
+        "username": "invalidUser",
+        "password": "invalidPassword"
+      }
+    ]
+  },
+  {
+    "name": "test_asset_upload_success",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "asset_id": 101
+    },
+    "input": [
+      {
+        "project_id": 1,
+        "file": "validImage.jpg"
+      }
+    ]
+  },
+  {
+    "name": "test_asset_upload_invalid_file_type",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Unsupported file type"
+    },
+    "input": [
+      {
+        "project_id": 1,
+        "file": "invalidFile.txt"
+      }
+    ]
+  },
+  {
+    "name": "test_content_moderation_nsfw_check",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "NSFW content detected"
+    },
+    "input": [
+      {
+        "file": "nsfwImage.jpg"
+      }
+    ]
+  },
+  {
+    "name": "test_ai_strategy_execution_face_centric_crop",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "generated_asset_id": 201
+    },
+    "input": [
+      {
+        "asset_id": 101,
+        "strategy": "face_centric_crop"
+      }
+    ]
+  },
+  {
+    "name": "test_ai_strategy_execution_invalid_strategy",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Invalid AI strategy"
+    },
+    "input": [
+      {
+        "asset_id": 101,
+        "strategy": "invalid_strategy"
+      }
+    ]
+  },
+  {
+    "name": "test_asset_generation_retrieval",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "generated_asset_url": "http://localhost/assets/generated/201.jpg"
+    },
+    "input": [
+      {
+        "asset_id": 201
+      }
+    ]
+  }
+]

@@ -1,0 +1,58 @@
+[
+  {
+    "name": "basic_case",
+    "mode": "io",
+    "expected": "3\n",
+    "stdin": "1\n2\n",
+    "expected_stdout": "3\n"
+  },
+  {
+    "name": "negative_numbers",
+    "mode": "io",
+    "expected": "-3\n",
+    "stdin": "-1\n-2\n",
+    "expected_stdout": "-3\n"
+  },
+  {
+    "name": "zero_case",
+    "mode": "io",
+    "expected": "0\n",
+    "stdin": "0\n0\n",
+    "expected_stdout": "0\n"
+  },
+  {
+    "name": "large_numbers",
+    "mode": "io",
+    "expected": "3000000\n",
+    "stdin": "1000000\n2000000\n",
+    "expected_stdout": "3000000\n"
+  },
+  {
+    "name": "edge_case_one",
+    "mode": "io",
+    "expected": "0\n",
+    "stdin": "1\n-1\n",
+    "expected_stdout": "0\n"
+  },
+  {
+    "name": "edge_case_two",
+    "mode": "io",
+    "expected": "2147483648\n",
+    "stdin": "2147483647\n1\n",
+    "expected_stdout": "2147483648\n"
+  },
+  {
+    "name": "decimal_case",
+    "mode": "io",
+    "expected": "4.0\n",
+    "stdin": "1.5\n2.5\n",
+    "expected_stdout": "4.0\n"
+  },
+  {
+    "name": "string_input_case",
+    "mode": "io",
+    "expected": "Error: Invalid input\n",
+    "stdin": "1\n'2'\n",
+    "expected_stdout": "Error: Invalid input\n"
+  }
+]

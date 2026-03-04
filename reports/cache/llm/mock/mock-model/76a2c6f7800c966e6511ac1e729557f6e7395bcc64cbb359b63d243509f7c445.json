@@ -1,0 +1,1 @@
+{"content": "[MOCK] c7f4925806e8b5b5 :: Given the problem: Return the nth Fibonacci number., would pattern two_pointers be relevant?", "tokens": 13, "elapsed": 1.8330000000066349e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "pattern-hint", "caller": "pattern_skeleton"}}

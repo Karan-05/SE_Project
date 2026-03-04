@@ -1,0 +1,626 @@
+{
+  "run_id": "universal_demo",
+  "sample_size": 17,
+  "cluster_counts": {
+    "real_algorithm_wrong": 2,
+    "bad_test_parsing": 15
+  },
+  "samples": [
+    {
+      "task_id": "91e34246-16b8-417d-8eb6-f7dc38c9b320",
+      "dataset_id": "challenge_data_challengeData_2023-01-01_2023-01-31_page1.json",
+      "strategy_initial": "contract_first",
+      "strategy_final": "semantic_diff",
+      "attempts": 10.0,
+      "failure_signature": "6cd47f87e0cfbd57cf67f3001d19f3f31c2fac496e73804c5c0af469ef532fb3",
+      "tests_source": "statement",
+      "tests_modes": [
+        "io"
+      ],
+      "entry_point": "solve",
+      "problem_statement": "## Overview\nThis is an old problem, related to TCO20. It is a great example of an RDM style problem. The only difference is that this practice round is *not* rated, and there is only one problem. Normal rated RDM rounds usually have three problems. A practice round is a great way to get started with RDM competitions without risking your rank and without the pressure of the live competition.\n\nYo...",
+      "failing_tests": [
+        {
+          "name": "io_sample_1",
+          "expected": "No limitation\n- Docker",
+          "output": "",
+          "error": ""
+        }
+      ],
+      "failure_note": "",
+      "code_snippet": "def solve(*args):\n    return None",
+      "category": "real_algorithm_wrong",
+      "tests_path": "/Users/karanallagh/Desktop/DataCollector/reports/experiments/universal_demo/extracted_tests/91e34246-16b8-417d-8eb6-f7dc38c9b320.json"
+    },
+    {
+      "task_id": "30377081",
+      "dataset_id": "challenge_data_demoData.json",
+      "strategy_initial": "contract_first",
+      "strategy_final": "semantic_diff",
+      "attempts": 10.0,
+      "failure_signature": "ed3d38c257f82b488a5149fc6160ac7019f956f26e77eea2afb7fc9fde6694f1",
+      "tests_source": "synthesized",
+      "tests_modes": [
+        "call"
+      ],
+      "entry_point": "solve",
+      "problem_statement": "We\u2019re seeking a highly skilled **Azure Integration Developer** for a **remote** full-time engagement. This is a 6-month opportunity, with the possibility of extension based on performance and project needs.. This role is ideal for a developer with solid experience designing and building enterprise-grade integrations using Microsoft Azure services such as Logic Apps, Functions, and API Managemen...",
+      "failing_tests": [
+        {
+          "name": "basic_integration_workflow",
+          "expected": "{'status': 'success', 'result': 'integration_completed'}",
+          "output": "None",
+          "error": ""
+        },
+        {
+          "name": "event_driven_workflow",
+          "expected": "{'status': 'success', 'result': 'event_processed'}",
+          "output": "None",
+          "error": ""
+        },
+        {
+          "name": "error_handling_integration",
+          "expected": "{'status': 'error', 'message': 'integration_failed'}",
+          "output": "None",
+          "error": ""
+        }
+      ],
+      "failure_note": "",
+      "code_snippet": "def solve(*args):\n    return None",
+      "category": "bad_test_parsing",
+      "tests_path": "/Users/karanallagh/Desktop/DataCollector/reports/experiments/universal_demo/generated_tests/30377081.json"
+    },
+    {
+      "task_id": "155973f9-8d1b-41d2-b55f-7e7950552118",
+      "dataset_id": "data_processed_tasks.parquet",
+      "strategy_initial": "contract_first",
+      "strategy_final": "semantic_diff",
+      "attempts": 10.0,
+      "failure_signature": "15bc755a2165ad446c063795abd7bf7ecf75d7d209a575eb83478ba300bf8efb",
+      "tests_source": "synthesized",
+      "tests_modes": [
+        "call"
+      ],
+      "entry_point": "solve",
+      "problem_statement": "Developer Opportunity for FICO Falcon Engineer",
+      "failing_tests": [
+        {
+          "name": "basic_deployment",
+          "expected": "'Deployment successful'",
+          "output": "None",
+          "error": ""
+        },
+        {
+          "name": "multi_tenant_setup",
+          "expected": "'Multi-tenant setup successful'",
+          "output": "None",
+          "error": ""
+        },
+        {
+          "name": "rule_deployment",
+          "expected": "'Rules deployed successfully'",
+          "output": "None",
+          "error": ""
+        }
+      ],
+      "failure_note": "",
+      "code_snippet": "def solve(*args):\n    return None",
+      "category": "bad_test_parsing",
+      "tests_path": "/Users/karanallagh/Desktop/DataCollector/reports/experiments/universal_demo/generated_tests/155973f9-8d1b-41d2-b55f-7e7950552118.json"
+    },
+    {
+      "task_id": "305e0763-dd63-4883-9133-55504503953d",
+      "dataset_id": "data_raw_tasks.csv",
+      "strategy_initial": "contract_first",
+      "strategy_final": "semantic_diff",
+      "attempts": 10.0,
+      "failure_signature": "005c973bc62df6599b59a10586e414beaa87358587e6f292f9048f969924fb7f",
+      "tests_source": "synthesized",
+      "tests_modes": [
+        "call"
+      ],
+      "entry_point": "solve",
+      "problem_statement": "This is the **HARD 1000 Points Competition**\n\nBy now you have built the base of the application. It's time to add more and complete the existing functionality \\\n \\\n \\\n**You are required to use ReactJS as the frontend technology. You may use any Backend of your choice. **If you are not familiar with the backend, you can use Backend as a Service technologies like Firebase or Supabase (both are fr...",
+      "failing_tests": [
+        {
+          "name": "create_learning_space_valid",
+          "expected": "{'success': True, 'message': 'Learning space created successfully.'}",
+          "output": "None",
+          "error": ""
+        },
+        {
+          "name": "create_learning_space_missing_fields",
+          "expected": "{'success': False, 'message': 'Title is required.'}",
+          "output": "None",
+          "error": ""
+        },
+        {
+          "name": "create_post_valid",
+          "expected": "{'success': True, 'message': 'Post created successfully.'}",
+          "output": "None",
+          "error": ""
+        }
+      ],
+      "failure_note": "",
+      "code_snippet": "def solve(*args):\n    return None",
+      "category": "bad_test_parsing",
+      "tests_path": "/Users/karanallagh/Desktop/DataCollector/reports/experiments/universal_demo/generated_tests/305e0763-dd63-4883-9133-55504503953d.json"
+    },
+    {
+      "task_id": "305e0763-dd63-4883-9133-55504503953d",
+      "dataset_id": "data_raw_tasks.csv",
+      "strategy_initial": "contract_first",
+      "strategy_final": "semantic_diff",
+      "attempts": 10.0,
+      "failure_signature": "005c973bc62df6599b59a10586e414beaa87358587e6f292f9048f969924fb7f",
+      "tests_source": "synthesized",
+      "tests_modes": [
+        "call"
+      ],
+      "entry_point": "solve",
+      "problem_statement": "This is the **HARD 1000 Points Competition**\n\nBy now you have built the base of the application. It's time to add more and complete the existing functionality \\\n \\\n \\\n**You are required to use ReactJS as the frontend technology. You may use any Backend of your choice. **If you are not familiar with the backend, you can use Backend as a Service technologies like Firebase or Supabase (both are fr...",
+      "failing_tests": [
+        {
+          "name": "create_learning_space_valid",
+          "expected": "{'success': True, 'message': 'Learning space created successfully.'}",
+          "output": "None",
+          "error": ""
+        },
+        {
+          "name": "create_learning_space_missing_fields",
+          "expected": "{'success': False, 'message': 'Title is required.'}",
+          "output": "None",
+          "error": ""
+        },
+        {
+          "name": "create_post_valid",
+          "expected": "{'success': True, 'message': 'Post created successfully.'}",
+          "output": "None",
+          "error": ""
+        }
+      ],
+      "failure_note": "",
+      "code_snippet": "def solve(*args):\n    return None",
+      "category": "bad_test_parsing",
+      "tests_path": "/Users/karanallagh/Desktop/DataCollector/reports/experiments/universal_demo/generated_tests/305e0763-dd63-4883-9133-55504503953d.json"
+    },
+    {
+      "task_id": "56b3df85-e4f4-40ab-a975-2a9e6810866e",
+      "dataset_id": "data_processed_tasks.parquet",
+      "strategy_initial": "contract_first",
+      "strategy_final": "semantic_diff",
+      "attempts": 10.0,
+      "failure_signature": "0c2b6a1381a1cc4f6b69cfb3d077fe880e19b37dabe79fb838c54ed6b66158db",
+      "tests_source": "synthesized",
+      "tests_modes": [
+        "call"
+      ],
+      "entry_point": "solve",
+      "problem_statement": "Topcoder Review API - Challenge and Resource API Integration",
+      "failing_tests": [
+        {
+          "name": "valid_user_with_active_challenges",
+          "expected": "[{'challengeId': 'challenge1', 'status': 'ACTIVE', 'userRole': 'reviewer', 'reviewId': 'review1'}, {'challengeId': 'challenge2', 'status': 'ACTIVE', 'userRole': 'reviewer', 'reviewId': 'review2'}]",
+          "output": "None",
+          "error": ""
+        },
+        {
+          "name": "user_with_multiple_roles",
+          "expected": "[{'challengeId': 'challenge3', 'status': 'ACTIVE', 'userRole': 'submitter', 'reviewId': 'review3'}]",
+          "output": "None",
+          "error": ""
+        },
+        {
+          "name": "invalid_user_id",
+          "expected": "'User not found'",
+          "output": "None",
+          "error": ""
+        }
+      ],
+      "failure_note": "",
+      "code_snippet": "def solve(*args):\n    return None",
+      "category": "bad_test_parsing",
+      "tests_path": "/Users/karanallagh/Desktop/DataCollector/reports/experiments/universal_demo/generated_tests/56b3df85-e4f4-40ab-a975-2a9e6810866e.json"
+    },
+    {
+      "task_id": "0c406e64-e1db-422b-ac9a-cdcf7523320f",
+      "dataset_id": "challenge_data_challengeData_2025-06-01_2025-10-08_page1.json",
+      "strategy_initial": "contract_first",
+      "strategy_final": "semantic_diff",
+      "attempts": 10.0,
+      "failure_signature": "bdfb4f0ed13e24ed2b4786f4dcbe517a54b3ccb42010697fd2de2349cb2bbf28",
+      "tests_source": "synthesized",
+      "tests_modes": [
+        "io"
+      ],
+      "entry_point": "solve",
+      "problem_statement": "### Project overview\n\nCurrently, all resources on the Topcoder platform can be managed by admin-app\n\nWe are going to be pull some functionality out of the current admin tool and get that moved into platform-ui.\n\n### Individual Requirements\n\nIn this challenge, we want to consolidate current skills manager app  (https://manage.topcoder.com/skills)  into system-admin app.\n1. Create a new tab named...",
+      "failing_tests": [
+        {
+          "name": "add_platform_tab",
+          "expected": "{\"status\": \"success\", \"message\": \"Tab added successfully\"}",
+          "output": "",
+          "error": ""
+        },
+        {
+          "name": "remove_roles_required",
+          "expected": "{\"status\": \"success\", \"message\": \"Roles removed successfully\"}",
+          "output": "",
+          "error": ""
+        },
+        {
+          "name": "load_skills_manager",
+          "expected": "{\"status\": \"success\", \"app_loaded\": \"Skills Manager\"}",
+          "output": "",
+          "error": ""
+        }
+      ],
+      "failure_note": "",
+      "code_snippet": "def solve(*args):\n    return None",
+      "category": "bad_test_parsing",
+      "tests_path": "/Users/karanallagh/Desktop/DataCollector/reports/experiments/universal_demo/generated_tests/0c406e64-e1db-422b-ac9a-cdcf7523320f.json"
+    },
+    {
+      "task_id": "5bdc4e5f-4ea0-402e-ab20-f6cfd1a49a72",
+      "dataset_id": "challenge_data_challengeData_2023-01-01_2023-01-31_page1.json",
+      "strategy_initial": "contract_first",
+      "strategy_final": "semantic_diff",
+      "attempts": 10.0,
+      "failure_signature": "1daa9354b41dbfb9d94cdb2e61d859152ad5c61c004247a4c21b6b546d0e49d1",
+      "tests_source": "synthesized",
+      "tests_modes": [
+        "call"
+      ],
+      "entry_point": "solve",
+      "problem_statement": "#### Design Assets & Downloadable\n* Figma contains downloadable assets and style guidance:  https://www.figma.com/file/WDmII42s0WSC3PMyKohrot/Payments-Track-Reskin?node-id=4157%3A11532 \n\n#### General Requirements & How to Setup\n* https://docs.google.com/document/d/15Bk8daay8FDAsKeWPhv4fUx6eMtMq5Jn9aezlVNqfqw/edit?usp=sharing  \n\n#### F2F Requirements\n* Remove View link & the line separator next ...",
+      "failing_tests": [
+        {
+          "name": "remove_view_link",
+          "expected": "\"<div class='paid-column'><span>Yes</span></div>\"",
+          "output": "None",
+          "error": ""
+        },
+        {
+          "name": "remove_line_separator",
+          "expected": "\"<div class='paid-column'><span>No</span></div>\"",
+          "output": "None",
+          "error": ""
+        },
+        {
+          "name": "no_changes_to_other_elements",
+          "expected": "\"<div class='other-column'><span>Other Info</span></div>\"",
+          "output": "None",
+          "error": ""
+        }
+      ],
+      "failure_note": "",
+      "code_snippet": "def solve(*args):\n    return None",
+      "category": "bad_test_parsing",
+      "tests_path": "/Users/karanallagh/Desktop/DataCollector/reports/experiments/universal_demo/generated_tests/5bdc4e5f-4ea0-402e-ab20-f6cfd1a49a72.json"
+    },
+    {
+      "task_id": "e8231040-e63f-40c4-980c-eb815062aeec",
+      "dataset_id": "data_processed_tasks.parquet",
+      "strategy_initial": "contract_first",
+      "strategy_final": "semantic_diff",
+      "attempts": 10.0,
+      "failure_signature": "c6150094755ac5d0e7296bb33e6b505126828abb1af6acb62507e89f901cee5f",
+      "tests_source": "synthesized",
+      "tests_modes": [
+        "call"
+      ],
+      "entry_point": "solve",
+      "problem_statement": "Topcoder Online Review - Logged out user is not shown as logged out in the uni nav on the List Project page",
+      "failing_tests": [
+        {
+          "name": "logged_out_user_display",
+          "expected": "{'nav_display': 'logged_in'}",
+          "output": "None",
+          "error": ""
+        },
+        {
+          "name": "logged_in_user_display",
+          "expected": "{'nav_display': 'logged_in'}",
+          "output": "None",
+          "error": ""
+        },
+        {
+          "name": "session_timeout",
+          "expected": "{'nav_display': 'logged_out'}",
+          "output": "None",
+          "error": ""
+        }
+      ],
+      "failure_note": "",
+      "code_snippet": "def solve(*args):\n    return None",
+      "category": "bad_test_parsing",
+      "tests_path": "/Users/karanallagh/Desktop/DataCollector/reports/experiments/universal_demo/generated_tests/e8231040-e63f-40c4-980c-eb815062aeec.json"
+    },
+    {
+      "task_id": "ac7837cd-349d-4a6a-aa97-82f1d19ad557",
+      "dataset_id": "data_processed_tasks.parquet",
+      "strategy_initial": "contract_first",
+      "strategy_final": "semantic_diff",
+      "attempts": 10.0,
+      "failure_signature": "fcfd8539ad56c327ae484a2b49370450d8b67bea963d18ccc673d6bee63d965b",
+      "tests_source": "synthesized",
+      "tests_modes": [
+        "call"
+      ],
+      "entry_point": "solve",
+      "problem_statement": "Topcoder Review API - Branch Merge and Code Fixes for Review API",
+      "failing_tests": [
+        {
+          "name": "merge_branch_and_resolve_conflicts",
+          "expected": "'Merge successful, no conflicts'",
+          "output": "None",
+          "error": ""
+        },
+        {
+          "name": "apply_resources_api_patch",
+          "expected": "'Patch applied successfully, all features functional'",
+          "output": "None",
+          "error": ""
+        },
+        {
+          "name": "fix_dependency_warning",
+          "expected": "'No warnings during pnpm install'",
+          "output": "None",
+          "error": ""
+        }
+      ],
+      "failure_note": "",
+      "code_snippet": "def solve(*args):\n    return None",
+      "category": "bad_test_parsing",
+      "tests_path": "/Users/karanallagh/Desktop/DataCollector/reports/experiments/universal_demo/generated_tests/ac7837cd-349d-4a6a-aa97-82f1d19ad557.json"
+    },
+    {
+      "task_id": "5f695f88-8075-4e83-8727-100bf12c516e",
+      "dataset_id": "data_raw_tasks.csv",
+      "strategy_initial": "contract_first",
+      "strategy_final": "semantic_diff",
+      "attempts": 10.0,
+      "failure_signature": "3bed5c728553985d87fb06c06e076105e33075c74855bd061352400c2a449bc1",
+      "tests_source": "synthesized",
+      "tests_modes": [
+        "call"
+      ],
+      "entry_point": "solve",
+      "problem_statement": "## Project Overview\nThe Identity Service project is used  to validate username / password logins, lookuap roles, etc...  It's currently implemented in Java and targets MySQL/Informix.\nWe want to revise the project to use **TypeScript** and point to **Postgres** via **Prisma**, but **keep the functionalities untouched, such as redis cache, Kafka event bus, etc**.  \n\nIn previous challenges: [Topc...",
+      "failing_tests": [
+        {
+          "name": "valid_login_response",
+          "expected": "{'status': 'success', 'roles': ['user', 'admin']}",
+          "output": "None",
+          "error": ""
+        },
+        {
+          "name": "invalid_login_response",
+          "expected": "{'status': 'error', 'message': 'Invalid username or password.'}",
+          "output": "None",
+          "error": ""
+        },
+        {
+          "name": "missing_username",
+          "expected": "{'status': 'error', 'message': 'Username is required.'}",
+          "output": "None",
+          "error": ""
+        }
+      ],
+      "failure_note": "",
+      "code_snippet": "def solve(*args):\n    return None",
+      "category": "bad_test_parsing",
+      "tests_path": "/Users/karanallagh/Desktop/DataCollector/reports/experiments/universal_demo/generated_tests/5f695f88-8075-4e83-8727-100bf12c516e.json"
+    },
+    {
+      "task_id": "65b7f3c8-06a6-422b-92d9-6353fa5c3a2d",
+      "dataset_id": "challenge_data_challengeData_2025-06-01_2025-10-08_page1.json",
+      "strategy_initial": "contract_first",
+      "strategy_final": "semantic_diff",
+      "attempts": 10.0,
+      "failure_signature": "0bebea2dc812ddf64d860519c2ba90704080d9b48ea21c01949b0d2caed9db81",
+      "tests_source": "synthesized",
+      "tests_modes": [
+        "call"
+      ],
+      "entry_point": "solve",
+      "problem_statement": "**Note: this is a fast challenge with shorter submission phase, review phase, you only need to integrate an API endpoint for a single page.** \n\n\nThe Topcoder Review App currently uses mock data for displaying active challenges in the My Active Challenge Page. This challenge focuses on integrating real API functionality into this page by replacing the mock data with actual API calls to the Chall...",
+      "failing_tests": [
+        {
+          "name": "fetch_active_reviews_success",
+          "expected": "[{'id': '1', 'title': 'Challenge 1', 'status': 'ACTIVE'}, {'id': '2', 'title': 'Challenge 2', 'status': 'ACTIVE'}]",
+          "output": "None",
+          "error": ""
+        },
+        {
+          "name": "fetch_active_reviews_error_handling",
+          "expected": "{'error': 'Invalid member ID'}",
+          "output": "None",
+          "error": ""
+        },
+        {
+          "name": "fetch_active_reviews_loading_state",
+          "expected": "{'loading': True}",
+          "output": "None",
+          "error": ""
+        }
+      ],
+      "failure_note": "",
+      "code_snippet": "def solve(*args):\n    return None",
+      "category": "bad_test_parsing",
+      "tests_path": "/Users/karanallagh/Desktop/DataCollector/reports/experiments/universal_demo/generated_tests/65b7f3c8-06a6-422b-92d9-6353fa5c3a2d.json"
+    },
+    {
+      "task_id": "graph_degree_test",
+      "dataset_id": "experiments_decomposition_benchmark_tasks.json",
+      "strategy_initial": "contract_first",
+      "strategy_final": "semantic_diff",
+      "attempts": 10.0,
+      "failure_signature": "28bb4b22b791d684c93165572bd028c9665c7812af1096de8f618191ff494d2e",
+      "tests_source": "provided",
+      "tests_modes": [
+        "call"
+      ],
+      "entry_point": "solve",
+      "problem_statement": "Return degree counts for each vertex.",
+      "failing_tests": [
+        {
+          "name": "sample_0",
+          "expected": "{'0': 1, '1': 2, '2': 1}",
+          "output": "{0: 1, 1: 2, 2: 1}",
+          "error": ""
+        },
+        {
+          "name": "sample_1",
+          "expected": "{'1': 2}",
+          "output": "{1: 2}",
+          "error": ""
+        }
+      ],
+      "failure_note": "",
+      "code_snippet": "def solve(edges):\n                deg = {}\n                for a,b in edges:\n                    deg[a] = deg.get(a,0)+1\n                    deg[b] = deg.get(b,0)+1\n                return deg",
+      "category": "real_algorithm_wrong",
+      "tests_path": "/Users/karanallagh/Desktop/DataCollector/reports/experiments/universal_demo/extracted_tests/graph_degree_test.json"
+    },
+    {
+      "task_id": "29f79b9f-32ef-43e5-8298-1028dfbf1136",
+      "dataset_id": "challenge_data_challengeData_2025-06-01_2025-10-08_page2.json",
+      "strategy_initial": "contract_first",
+      "strategy_final": "semantic_diff",
+      "attempts": 10.0,
+      "failure_signature": "3f3c3a2f7e731eecd8d39557c90f0d28cbc68e7c32347b5644e2230f714d8682",
+      "tests_source": "synthesized",
+      "tests_modes": [
+        "call"
+      ],
+      "entry_point": "solve",
+      "problem_statement": "## Project Overview\nThe Identity Service project is used  to validate username / password logins, lookup roles, etc...  It's currently implemented in Java and targets MySQL/Informix.\nWe want to revise the project to use **TypeScript** and point to **Postgres** via **Prisma**, but **keep the functionalities untouched, such as redis cache, Kafka event bus, etc**.  \n\nIn previous challenges: [Topco...",
+      "failing_tests": [
+        {
+          "name": "valid_user_login",
+          "expected": "{'status': 'success', 'token': 'valid_token_string'}",
+          "output": "None",
+          "error": ""
+        },
+        {
+          "name": "invalid_user_login",
+          "expected": "{'status': 'error', 'message': 'Invalid credentials'}",
+          "output": "None",
+          "error": ""
+        },
+        {
+          "name": "user_role_lookup",
+          "expected": "{'roles': ['admin', 'user']}",
+          "output": "None",
+          "error": ""
+        }
+      ],
+      "failure_note": "",
+      "code_snippet": "def solve(*args):\n    return None",
+      "category": "bad_test_parsing",
+      "tests_path": "/Users/karanallagh/Desktop/DataCollector/reports/experiments/universal_demo/generated_tests/29f79b9f-32ef-43e5-8298-1028dfbf1136.json"
+    },
+    {
+      "task_id": "4fea455b-76f7-4e66-80a6-98b667d98670",
+      "dataset_id": "data_processed_tasks.csv",
+      "strategy_initial": "contract_first",
+      "strategy_final": "semantic_diff",
+      "attempts": 10.0,
+      "failure_signature": "d59b00983682dccaa2893794ad3d20c96d4518b4f5821c76c184721aa21ede3a",
+      "tests_source": "synthesized",
+      "tests_modes": [
+        "call"
+      ],
+      "entry_point": "solve",
+      "problem_statement": "#### Design Assets & Downloadable\n* Figma contains downloadable assets and style guidance:  https://www.figma.com/file/WDmII42s0WSC3PMyKohrot/Payments-Track-Reskin?node-id=4157%3A11532 \n\n#### General Requirements & How to Setup\n* https://docs.google.com/document/d/15Bk8daay8FDAsKeWPhv4fUx6eMtMq5Jn9aezlVNqfqw/edit?usp=sharing  \n\n#### F2F Requirements\n* We need update the download function for ch...",
+      "failing_tests": [
+        {
+          "name": "valid_download_after_submission",
+          "expected": "{'can_download': True}",
+          "output": "None",
+          "error": ""
+        },
+        {
+          "name": "invalid_download_without_submission",
+          "expected": "{'can_download': False}",
+          "output": "None",
+          "error": ""
+        },
+        {
+          "name": "multiple_submissions_download",
+          "expected": "{'can_download': True, 'downloadable_submissions': ['submission1', 'submission2', 'submission3']}",
+          "output": "None",
+          "error": ""
+        }
+      ],
+      "failure_note": "",
+      "code_snippet": "def solve(*args):\n    return None",
+      "category": "bad_test_parsing",
+      "tests_path": "/Users/karanallagh/Desktop/DataCollector/reports/experiments/universal_demo/generated_tests/4fea455b-76f7-4e66-80a6-98b667d98670.json"
+    },
+    {
+      "task_id": "7db8d519-d5c9-48b6-8c1d-d8430f7f09ee",
+      "dataset_id": "data_raw_tasks.csv",
+      "strategy_initial": "contract_first",
+      "strategy_final": "semantic_diff",
+      "attempts": 10.0,
+      "failure_signature": "743c7b88f22b5d46ba34b8d9313cb68a9d532bc0935d93111c268e7d604e2d14",
+      "tests_source": "synthesized",
+      "tests_modes": [
+        "call"
+      ],
+      "entry_point": "solve",
+      "problem_statement": "### Challenge Overview\n\nThe platform architecture is now defined (see previous Architecture Challenge deliverables). This challenge is the first backend implementation step, focusing on **AI-related APIs** for asset processing.\n\nThe backend service will provide endpoints for:\n\n* Asset adaptation (resize, crop, repurpose)\n* Manual editing (cropping, text, logo, color adjustments \u2014 controlled by ...",
+      "failing_tests": [
+        {
+          "name": "test_user_login_success",
+          "expected": "{'status': 'success', 'token': 'validToken123'}",
+          "output": "None",
+          "error": ""
+        },
+        {
+          "name": "test_user_login_failure",
+          "expected": "{'status': 'error', 'message': 'Invalid credentials'}",
+          "output": "None",
+          "error": ""
+        },
+        {
+          "name": "test_asset_upload_success",
+          "expected": "{'status': 'success', 'asset_id': 101}",
+          "output": "None",
+          "error": ""
+        }
+      ],
+      "failure_note": "",
+      "code_snippet": "def solve(*args):\n    return None",
+      "category": "bad_test_parsing",
+      "tests_path": "/Users/karanallagh/Desktop/DataCollector/reports/experiments/universal_demo/generated_tests/7db8d519-d5c9-48b6-8c1d-d8430f7f09ee.json"
+    },
+    {
+      "task_id": "5a953c7c-482a-4643-aad1-f7a093da7fb9",
+      "dataset_id": "data_raw_tasks.csv",
+      "strategy_initial": "contract_first",
+      "strategy_final": "semantic_diff",
+      "attempts": 10.0,
+      "failure_signature": "2e03a6962cba374ec4d84a4046662e5c7ae3c9cc99d2c516248efdf2a53d7237",
+      "tests_source": "synthesized",
+      "tests_modes": [
+        "call"
+      ],
+      "entry_point": "solve",
+      "problem_statement": "#### Design Assets & Downloadable\n* Figma contains downloadable assets and style guidance:  https://www.figma.com/file/WDmII42s0WSC3PMyKohrot/Payments-Track-Reskin?node-id=4157%3A11532 \n\n#### General Requirements & How to Setup\n* https://docs.google.com/document/d/15Bk8daay8FDAsKeWPhv4fUx6eMtMq5Jn9aezlVNqfqw/edit?usp=sharing  \n\n#### F2F Requirements\n* Check Review Scorecard page in Firefox\n* Th...",
+      "failing_tests": [
+        {
+          "name": "check_edge_case_large_input",
+          "expected": "'transparent'",
+          "output": "None",
+          "error": ""
+        }
+      ],
+      "failure_note": "",
+      "code_snippet": "def solve(*args):\n    return None",
+      "category": "bad_test_parsing",
+      "tests_path": "/Users/karanallagh/Desktop/DataCollector/reports/experiments/universal_demo/generated_tests/5a953c7c-482a-4643-aad1-f7a093da7fb9.json"
+    }
+  ]
+}

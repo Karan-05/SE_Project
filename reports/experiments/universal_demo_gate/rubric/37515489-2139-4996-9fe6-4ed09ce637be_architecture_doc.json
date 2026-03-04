@@ -1,0 +1,19 @@
+{
+  "score": 77.5,
+  "passes_threshold": false,
+  "reasons": [
+    "Includes constraints/SLAs",
+    "Trade-offs discussed",
+    "Diagram reference present",
+    "Risks and mitigations described",
+    "Component mapping provided"
+  ],
+  "missing": [
+    "File-Level Plan",
+    "API / Interface Changes",
+    "Edge Cases"
+  ],
+  "section_coverage": 0.625,
+  "extra_score": 1.0,
+  "relaxed_due_to_context_missing": false
+}

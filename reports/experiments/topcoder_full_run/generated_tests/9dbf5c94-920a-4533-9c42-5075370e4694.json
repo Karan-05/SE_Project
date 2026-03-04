@@ -1,0 +1,108 @@
+[
+  {
+    "name": "buttons_visible_on_large_screen",
+    "mode": "call",
+    "expected": {
+      "buttons_visible": true
+    },
+    "input": [
+      {
+        "screen_size": "1920x1080",
+        "footer_height": 100
+      }
+    ]
+  },
+  {
+    "name": "buttons_visible_on_small_screen",
+    "mode": "call",
+    "expected": {
+      "buttons_visible": false
+    },
+    "input": [
+      {
+        "screen_size": "480x800",
+        "footer_height": 100
+      }
+    ]
+  },
+  {
+    "name": "buttons_visible_with_dynamic_footer",
+    "mode": "call",
+    "expected": {
+      "buttons_visible": false
+    },
+    "input": [
+      {
+        "screen_size": "1366x768",
+        "footer_height": 200
+      }
+    ]
+  },
+  {
+    "name": "buttons_visible_with_no_footer",
+    "mode": "call",
+    "expected": {
+      "buttons_visible": true
+    },
+    "input": [
+      {
+        "screen_size": "1280x720",
+        "footer_height": 0
+      }
+    ]
+  },
+  {
+    "name": "buttons_visible_with_responsive_design",
+    "mode": "call",
+    "expected": {
+      "buttons_visible": true
+    },
+    "input": [
+      {
+        "screen_size": "768x1024",
+        "footer_height": 50
+      }
+    ]
+  },
+  {
+    "name": "buttons_overlap_with_footer_on_scroll",
+    "mode": "call",
+    "expected": {
+      "buttons_visible": false
+    },
+    "input": [
+      {
+        "screen_size": "1366x768",
+        "footer_height": 100,
+        "scroll_position": 200
+      }
+    ]
+  },
+  {
+    "name": "buttons_visible_on_high_res",
+    "mode": "call",
+    "expected": {
+      "buttons_visible": true
+    },
+    "input": [
+      {
+        "screen_size": "3840x2160",
+        "footer_height": 150
+      }
+    ]
+  },
+  {
+    "name": "buttons_visible_with_fixed_footer",
+    "mode": "call",
+    "expected": {
+      "buttons_visible": false
+    },
+    "input": [
+      {
+        "screen_size": "1024x768",
+        "footer_height": 100,
+        "footer_fixed": true
+      }
+    ]
+  }
+]

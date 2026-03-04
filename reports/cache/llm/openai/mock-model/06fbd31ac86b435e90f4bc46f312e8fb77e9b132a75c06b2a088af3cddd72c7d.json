@@ -1,0 +1,1 @@
+{"content": "The problem you've described involves creating a Microsoft Teams tab-based application that integrates an AI agent using AWS Bedrock LLMs and orchestrates tool execution through the Top", "tokens": 94, "elapsed": 1.7397414580045734, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

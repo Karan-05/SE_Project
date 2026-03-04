@@ -1,0 +1,1 @@
+{"content": "In the context of SAP Commerce (Hybris) development, the term \"hash_bucket\" typically refers to a method of distributing data across multiple buckets or partitions,", "tokens": 86, "elapsed": 1.4068709170096554, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

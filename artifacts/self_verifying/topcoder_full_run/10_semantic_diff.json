@@ -1,0 +1,52 @@
+{
+  "task_id": "mixed_matrix_ood",
+  "strategy": "semantic_diff",
+  "attempt": 10,
+  "pass_rate": 0.0,
+  "plan_subtasks": [
+    "load base solution",
+    "apply semantic deltas",
+    "re-test",
+    "Generate minimal unit tests for critical behaviors",
+    "Add adversarial/edge-case tests",
+    "Run tests and interpret failures"
+  ],
+  "plan_tests": [
+    "critical unit tests",
+    "edge-case probes"
+  ],
+  "plan_diagnostics": {
+    "base_task": "baseline",
+    "num_deltas": "1",
+    "delta_note": "To compare a new task to a baseline task and focus on the semantic deltas, consider the following points:\n\n1. **Objective**: \n   - New Task: [Specify new objective]\n   - Baseline Task: [Specify baseline objective]\n\n2. **Scope**: \n   - New Task: [Define new scope]\n   - Baseline Task: [Define baseline scope]\n\n3.",
+    "planning_tokens": "113",
+    "planning_time": "2.957028"
+  },
+  "patch_summary": {
+    "phase": "repair",
+    "prompt_excerpt": "roduction hint: \nProduce a minimal patch to fix only the failing behavior. Keep public APIs identical and do not refactor unrelated sections. Return the full updated implementation without commentary.",
+    "llm_tokens": "176"
+  },
+  "failing_tests": [],
+  "trace": [],
+  "feedback": [],
+  "reproduction": "",
+  "tests_run": [],
+  "llm_calls": 0,
+  "timeline": {
+    "attempt": 10,
+    "strategy": "semantic_diff",
+    "phase": "repair",
+    "events": {
+      "repair": {
+        "start": "2026-02-23T23:30:37.677024",
+        "end": "2026-02-23T23:30:37.677313"
+      }
+    },
+    "meta": {
+      "prompt_excerpt": "roduction hint: \nProduce a minimal patch to fix only the failing behavior. Keep public APIs identical and do not refactor unrelated sections. Return the full updated implementation without commentary.",
+      "llm_tokens": "176",
+      "llm_calls": "0"
+    }
+  }
+}

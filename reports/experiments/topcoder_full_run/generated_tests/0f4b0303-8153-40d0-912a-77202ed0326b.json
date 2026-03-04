@@ -1,0 +1,58 @@
+[
+  {
+    "name": "valid_user_authentication",
+    "mode": "io",
+    "expected": "{'status': 'success', 'message': 'User authenticated successfully'}",
+    "stdin": "{'token': 'valid_auth_token'}",
+    "expected_stdout": "{'status': 'success', 'message': 'User authenticated successfully'}"
+  },
+  {
+    "name": "invalid_user_authentication",
+    "mode": "io",
+    "expected": "{'status': 'error', 'message': 'Authentication failed'}",
+    "stdin": "{'token': 'invalid_auth_token'}",
+    "expected_stdout": "{'status': 'error', 'message': 'Authentication failed'}"
+  },
+  {
+    "name": "llm_inference_success",
+    "mode": "io",
+    "expected": "{'response': 'The weather today is sunny with a high of 75\u00b0F.'}",
+    "stdin": "{'query': 'What is the weather today?'}",
+    "expected_stdout": "{'response': 'The weather today is sunny with a high of 75\u00b0F.'}"
+  },
+  {
+    "name": "llm_inference_timeout",
+    "mode": "io",
+    "expected": "{'status': 'error', 'message': 'Request timed out'}",
+    "stdin": "{'query': 'Generate a long response.'}",
+    "expected_stdout": "{'status': 'error', 'message': 'Request timed out'}"
+  },
+  {
+    "name": "mcp_gateway_integration_success",
+    "mode": "io",
+    "expected": "{'status': 'success', 'result': 'Data analysis completed successfully'}",
+    "stdin": "{'tool': 'data_analysis', 'parameters': {'data': [1, 2, 3, 4, 5]}}",
+    "expected_stdout": "{'status': 'success', 'result': 'Data analysis completed successfully'}"
+  },
+  {
+    "name": "mcp_gateway_integration_failure",
+    "mode": "io",
+    "expected": "{'status': 'error', 'message': 'Tool not found'}",
+    "stdin": "{'tool': 'invalid_tool', 'parameters': {}}",
+    "expected_stdout": "{'status': 'error', 'message': 'Tool not found'}"
+  },
+  {
+    "name": "conversation_memory_functionality",
+    "mode": "io",
+    "expected": "{'response': 'I am an AI agent designed to assist you.'}",
+    "stdin": "{'previous_query': 'What is your name?', 'current_query': 'And what do you do?'}",
+    "expected_stdout": "{'response': 'I am an AI agent designed to assist you.'}"
+  },
+  {
+    "name": "sso_token_expiry",
+    "mode": "io",
+    "expected": "{'status': 'error', 'message': 'Token has expired'}",
+    "stdin": "{'token': 'expired_auth_token'}",
+    "expected_stdout": "{'status': 'error', 'message': 'Token has expired'}"
+  }
+]

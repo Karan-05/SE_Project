@@ -1,0 +1,112 @@
+[
+  {
+    "name": "valid_user_with_active_challenges",
+    "mode": "call",
+    "expected": [
+      {
+        "challengeId": "1",
+        "reviewId": "101",
+        "status": "pending",
+        "userRole": "reviewer"
+      },
+      {
+        "challengeId": "2",
+        "reviewId": "102",
+        "status": "pending",
+        "userRole": "reviewer"
+      }
+    ],
+    "input": [
+      {
+        "userId": "12345",
+        "role": "reviewer"
+      }
+    ]
+  },
+  {
+    "name": "user_with_no_active_challenges",
+    "mode": "call",
+    "expected": null,
+    "input": [
+      {
+        "userId": "67890",
+        "role": "reviewer"
+      }
+    ]
+  },
+  {
+    "name": "user_with_inactive_challenges",
+    "mode": "call",
+    "expected": null,
+    "input": [
+      {
+        "userId": "54321",
+        "role": "reviewer"
+      }
+    ]
+  },
+  {
+    "name": "user_with_multiple_roles",
+    "mode": "call",
+    "expected": [
+      {
+        "challengeId": "3",
+        "reviewId": "103",
+        "status": "pending",
+        "userRole": "submitter"
+      }
+    ],
+    "input": [
+      {
+        "userId": "13579",
+        "role": "submitter"
+      }
+    ]
+  },
+  {
+    "name": "invalid_user_id",
+    "mode": "call",
+    "expected": {
+      "error": "User not found"
+    },
+    "input": [
+      {
+        "userId": "invalid_id",
+        "role": "reviewer"
+      }
+    ]
+  },
+  {
+    "name": "user_with_no_reviews",
+    "mode": "call",
+    "expected": null,
+    "input": [
+      {
+        "userId": "24680",
+        "role": "reviewer"
+      }
+    ]
+  },
+  {
+    "name": "user_with_completed_reviews",
+    "mode": "call",
+    "expected": null,
+    "input": [
+      {
+        "userId": "11223",
+        "role": "reviewer"
+      }
+    ]
+  },
+  {
+    "name": "user_with_pending_reviews_for_different_role",
+    "mode": "call",
+    "expected": null,
+    "input": [
+      {
+        "userId": "33445",
+        "role": "observer"
+      }
+    ]
+  }
+]

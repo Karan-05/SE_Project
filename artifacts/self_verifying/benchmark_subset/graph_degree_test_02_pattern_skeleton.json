@@ -1,0 +1,91 @@
+{
+  "task_id": "graph_degree_test",
+  "strategy": "pattern_skeleton",
+  "attempt": 2,
+  "pass_rate": 0.0,
+  "plan_subtasks": [
+    "instantiate skeleton",
+    "fill placeholders",
+    "derive pitfall-specific checks",
+    "verify pitfalls",
+    "Generate minimal unit tests for critical behaviors",
+    "Add adversarial/edge-case tests"
+  ],
+  "plan_tests": [
+    "Verify pitfall: Ensure indices not reused",
+    "Verify pitfall: Handle no-solution case"
+  ],
+  "plan_diagnostics": {
+    "pattern_name": "two_pointers",
+    "confidence": "0.00",
+    "pitfalls": "Ensure indices not reused; Handle no-solution case",
+    "planning_tokens": "42",
+    "planning_time": "0.000004",
+    "skeleton": "def solve(nums, target):\n    left, right = 0, len(nums) - 1\n    while left < right:\n        total = nums[left] + nums[right]\n        if total == target:\n            return left, right\n        if total < target:\n            left += 1\n        else:\n            right -= 1\n    return -1, -1\n"
+  },
+  "patch_summary": {
+    "phase": "initial"
+  },
+  "failing_tests": [
+    "sample_0",
+    "sample_1"
+  ],
+  "trace": [
+    "",
+    ""
+  ],
+  "feedback": [
+    "sample_0 expected {'0': 1, '1': 2, '2': 1} but saw {0: 1, 1: 2, 2: 1}",
+    "sample_1 expected {'1': 2} but saw {1: 2}"
+  ],
+  "reproduction": "inputs=[[[0, 1], [1, 2]]] kwargs={}",
+  "tests_run": [
+    {
+      "name": "sample_0",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'0': 1, '1': 2, '2': 1}",
+      "output": "{0: 1, 1: 2, 2: 1}",
+      "error": "",
+      "input": "[[[0, 1], [1, 2]]]",
+      "kwargs": "{}",
+      "duration": 2.2920000000148377e-06
+    },
+    {
+      "name": "sample_1",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'1': 2}",
+      "output": "{1: 2}",
+      "error": "",
+      "input": "[[[1, 1]]]",
+      "kwargs": "{}",
+      "duration": 1.208000000030296e-06
+    }
+  ],
+  "llm_calls": 0,
+  "timeline": {
+    "attempt": 2,
+    "strategy": "pattern_skeleton",
+    "phase": "initial",
+    "events": {
+      "decompose": {
+        "start": "2026-02-24T00:19:21.372415",
+        "end": "2026-02-24T00:19:21.372521"
+      },
+      "solve": {
+        "start": "2026-02-24T00:19:21.372523",
+        "end": "2026-02-24T00:19:21.372593"
+      },
+      "tests": {
+        "start": "2026-02-24T00:19:21.372585",
+        "end": "2026-02-24T00:19:21.372590",
+        "duration_seconds": "0.000"
+      }
+    },
+    "meta": {
+      "llm_calls": "0"
+    }
+  },
+  "solution_preview": "def solve(edges):\n                deg = {}\n                for a,b in edges:\n                    deg[a] = deg.get(a,0)+1\n                    deg[b] = deg.get(b,0)+1\n                return deg"
+}

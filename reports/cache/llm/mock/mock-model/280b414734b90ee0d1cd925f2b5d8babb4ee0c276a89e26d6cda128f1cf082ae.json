@@ -1,0 +1,1 @@
+{"content": "[MOCK] 14caadc8f09f41c0 :: Given the problem: Return degree counts for each vertex., would pattern kadane be relevant?", "tokens": 14, "elapsed": 1.3330000001587905e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "pattern-hint", "caller": "pattern_skeleton"}}

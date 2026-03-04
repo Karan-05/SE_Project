@@ -1,0 +1,93 @@
+{
+  "task_id": "56b3df85-e4f4-40ab-a975-2a9e6810866e",
+  "tests": [
+    {
+      "name": "valid_user_with_active_challenges",
+      "mode": "call",
+      "status": "fail",
+      "expected": "[{'challengeId': '1', 'reviewId': '101', 'status': 'pending', 'userRole': 'reviewer'}, {'challengeId': '2', 'reviewId': '102', 'status': 'pending', 'userRole': 'reviewer'}]",
+      "output": "None",
+      "error": "",
+      "input": "[{'userId': '12345', 'role': 'reviewer'}]",
+      "kwargs": "{}",
+      "duration": 2.470900653861463e-05
+    },
+    {
+      "name": "user_with_no_active_challenges",
+      "mode": "call",
+      "status": "pass",
+      "expected": "None",
+      "output": "None",
+      "error": "",
+      "input": "[{'userId': '67890', 'role': 'reviewer'}]",
+      "kwargs": "{}",
+      "duration": 6.082991603761911e-06
+    },
+    {
+      "name": "user_with_inactive_challenges",
+      "mode": "call",
+      "status": "pass",
+      "expected": "None",
+      "output": "None",
+      "error": "",
+      "input": "[{'userId': '54321', 'role': 'reviewer'}]",
+      "kwargs": "{}",
+      "duration": 4.499976057559252e-06
+    },
+    {
+      "name": "user_with_multiple_roles",
+      "mode": "call",
+      "status": "fail",
+      "expected": "[{'challengeId': '3', 'reviewId': '103', 'status': 'pending', 'userRole': 'submitter'}]",
+      "output": "None",
+      "error": "",
+      "input": "[{'userId': '13579', 'role': 'submitter'}]",
+      "kwargs": "{}",
+      "duration": 9.25001222640276e-06
+    },
+    {
+      "name": "invalid_user_id",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'error': 'User not found'}",
+      "output": "None",
+      "error": "",
+      "input": "[{'userId': 'invalid_id', 'role': 'reviewer'}]",
+      "kwargs": "{}",
+      "duration": 6.62502134218812e-06
+    },
+    {
+      "name": "user_with_no_reviews",
+      "mode": "call",
+      "status": "pass",
+      "expected": "None",
+      "output": "None",
+      "error": "",
+      "input": "[{'userId': '24680', 'role': 'reviewer'}]",
+      "kwargs": "{}",
+      "duration": 4.958012141287327e-06
+    },
+    {
+      "name": "user_with_completed_reviews",
+      "mode": "call",
+      "status": "pass",
+      "expected": "None",
+      "output": "None",
+      "error": "",
+      "input": "[{'userId': '11223', 'role': 'reviewer'}]",
+      "kwargs": "{}",
+      "duration": 4.542001988738775e-06
+    },
+    {
+      "name": "user_with_pending_reviews_for_different_role",
+      "mode": "call",
+      "status": "pass",
+      "expected": "None",
+      "output": "None",
+      "error": "",
+      "input": "[{'userId': '33445', 'role': 'observer'}]",
+      "kwargs": "{}",
+      "duration": 4.792003892362118e-06
+    }
+  ]
+}

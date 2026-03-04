@@ -1,0 +1,1 @@
+{"content": "The \"hash_bucket\" pattern is typically used in the context of data structures and algorithms, particularly for organizing and managing collections of data efficiently. It involves using a", "tokens": 90, "elapsed": 1.348428541998146, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

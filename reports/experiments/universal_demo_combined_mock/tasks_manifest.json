@@ -1,0 +1,217 @@
+{
+  "run_id": "universal_demo_combined_mock",
+  "generated_at": "2026-02-24T18:41:15.499368",
+  "task_count": 30,
+  "tasks": [
+    {
+      "id": "number_primes_test",
+      "title": "Prime Count (test)",
+      "dataset_id": "experiments_decomposition_benchmark_tasks.json",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/experiments/decomposition/benchmark_tasks.json",
+      "has_tests": true
+    },
+    {
+      "id": "694f790b-9a05-494a-a679-212983382fba",
+      "title": "Message Center - QA and bug fixes",
+      "dataset_id": "challenge_data_challengeData_2025-06-01_2025-10-08_page2.json",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/challenge_data/challengeData_2025-06-01_2025-10-08/page2.json",
+      "has_tests": false
+    },
+    {
+      "id": "97745303-0ae1-4196-87db-3a03c1909b13",
+      "title": "Topcoder O/R F2F - Submissions Tab has Winners Marked in it but shouldn't",
+      "dataset_id": "challenge_data_challengeData_2023-01-01_2023-01-31_page1.json",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/challenge_data/challengeData_2023-01-01_2023-01-31/page1.json",
+      "has_tests": false
+    },
+    {
+      "id": "4fea455b-76f7-4e66-80a6-98b667d98670",
+      "title": "Topcoder O/R F2F - Members cannot download submissions anymore",
+      "dataset_id": "data_processed_tasks.csv",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/data/processed/tasks.csv",
+      "has_tests": false
+    },
+    {
+      "id": "string_freq",
+      "title": "Char Frequency",
+      "dataset_id": "experiments_decomposition_benchmark_tasks.json",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/experiments/decomposition/benchmark_tasks.json",
+      "has_tests": true
+    },
+    {
+      "id": "array_prefix_ood",
+      "title": "Prefix Sum (ood)",
+      "dataset_id": "experiments_decomposition_benchmark_tasks.json",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/experiments/decomposition/benchmark_tasks.json",
+      "has_tests": true
+    },
+    {
+      "id": "29f79b9f-32ef-43e5-8298-1028dfbf1136",
+      "title": "Topcoder Identity Service Tests Improvement Part 1",
+      "dataset_id": "challenge_data_challengeData_2025-06-01_2025-10-08_page2.json",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/challenge_data/challengeData_2025-06-01_2025-10-08/page2.json",
+      "has_tests": false
+    },
+    {
+      "id": "65b7f3c8-06a6-422b-92d9-6353fa5c3a2d",
+      "title": "72 Hours!! - Topcoder Review App - API Integration for My Active Challenge Page",
+      "dataset_id": "challenge_data_challengeData_2025-06-01_2025-10-08_page1.json",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/challenge_data/challengeData_2025-06-01_2025-10-08/page1.json",
+      "has_tests": false
+    },
+    {
+      "id": "ac7837cd-349d-4a6a-aa97-82f1d19ad557",
+      "title": "Topcoder Review API - Branch Merge and Code Fixes for Review API",
+      "dataset_id": "data_raw_tasks.csv",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/data/raw/tasks.csv",
+      "has_tests": false
+    },
+    {
+      "id": "b094c72f-4e9c-4582-9f00-4eec70d7c687",
+      "title": "Test",
+      "dataset_id": "challenge_data_challengeData_2025-06-01_2025-10-08_page1.json",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/challenge_data/challengeData_2025-06-01_2025-10-08/page1.json",
+      "has_tests": false
+    },
+    {
+      "id": "37515489-2139-4996-9fe6-4ed09ce637be",
+      "title": "test chlng",
+      "dataset_id": "data_raw_tasks.csv",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/data/raw/tasks.csv",
+      "has_tests": false
+    },
+    {
+      "id": "e8231040-e63f-40c4-980c-eb815062aeec",
+      "title": "Topcoder Online Review - Logged out user is not shown as logged out in the uni nav on the List Project page",
+      "dataset_id": "data_raw_tasks.csv",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/data/raw/tasks.csv",
+      "has_tests": false
+    },
+    {
+      "id": "92515220-cce4-4bfb-9def-a941e03e148a",
+      "title": "Topcoder Community App - Apply universal navigation to account settings page",
+      "dataset_id": "challenge_data_challengeData_2023-01-01_2023-01-31_page1.json",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/challenge_data/challengeData_2023-01-01_2023-01-31/page1.json",
+      "has_tests": false
+    },
+    {
+      "id": "5bdc4e5f-4ea0-402e-ab20-f6cfd1a49a72",
+      "title": "Topcoder O/R F2F - How to check the payment sent status",
+      "dataset_id": "challenge_data_challengeData_2023-01-01_2023-01-31_page1.json",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/challenge_data/challengeData_2023-01-01_2023-01-31/page1.json",
+      "has_tests": false
+    },
+    {
+      "id": "0c406e64-e1db-422b-ac9a-cdcf7523320f",
+      "title": "Topcoder Admin App - Consolidate Skills Manager",
+      "dataset_id": "challenge_data_challengeData_2025-06-01_2025-10-08_page1.json",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/challenge_data/challengeData_2025-06-01_2025-10-08/page1.json",
+      "has_tests": false
+    },
+    {
+      "id": "30377279",
+      "title": "Test challenge 26_06",
+      "dataset_id": "challenge_data_demoData.json",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/challenge_data/demoData.json",
+      "has_tests": false
+    },
+    {
+      "id": "305e0763-dd63-4883-9133-55504503953d",
+      "title": "Hard | Topcoder Skill Builder Competition | ReactJS  | Annotations",
+      "dataset_id": "data_processed_tasks.csv",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/data/processed/tasks.csv",
+      "has_tests": false
+    },
+    {
+      "id": "56b3df85-e4f4-40ab-a975-2a9e6810866e",
+      "title": "Topcoder Review API - Challenge and Resource API Integration",
+      "dataset_id": "data_raw_tasks.csv",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/data/raw/tasks.csv",
+      "has_tests": false
+    },
+    {
+      "id": "array_sum_stress",
+      "title": "Array Sum (stress)",
+      "dataset_id": "experiments_decomposition_benchmark_tasks.json",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/experiments/decomposition/benchmark_tasks.json",
+      "has_tests": true
+    },
+    {
+      "id": "faa95748-8dbe-4d5b-87e1-b96d8073e31c",
+      "title": "Topcoder Community App - 2 Round Challenge sporadically showing as 1 round",
+      "dataset_id": "challenge_data_challengeData_2023-01-01_2023-01-31_page1.json",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/challenge_data/challengeData_2023-01-01_2023-01-31/page1.json",
+      "has_tests": false
+    },
+    {
+      "id": "155973f9-8d1b-41d2-b55f-7e7950552118",
+      "title": "Developer Opportunity for FICO Falcon Engineer",
+      "dataset_id": "data_raw_tasks.csv",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/data/raw/tasks.csv",
+      "has_tests": false
+    },
+    {
+      "id": "30377081",
+      "title": "[GIG] Azure Integration Developer",
+      "dataset_id": "challenge_data_demoData.json",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/challenge_data/demoData.json",
+      "has_tests": false
+    },
+    {
+      "id": "b0e66fb3-6bce-48c8-929f-9d8bebc76885",
+      "title": "Topcoder Community App - Remove perpetual scrolling on Activity Feed page while logged out",
+      "dataset_id": "data_raw_tasks.csv",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/data/raw/tasks.csv",
+      "has_tests": false
+    },
+    {
+      "id": "30377290",
+      "title": "Native Language Specialists \u2013 Japanese, Korean, and French (3-Month GIG Contract)",
+      "dataset_id": "challenge_data_demoData.json",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/challenge_data/demoData.json",
+      "has_tests": false
+    },
+    {
+      "id": "3f1b97ff-4c7e-48e9-a878-e179c630e018",
+      "title": "Topcoder Community App - Universal Nav: Different \"type\" for /thrive path",
+      "dataset_id": "data_raw_tasks.csv",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/data/raw/tasks.csv",
+      "has_tests": false
+    },
+    {
+      "id": "c8bb4b8f-d9c5-48d8-b37e-e165cf4cd5f6",
+      "title": "Test challenge",
+      "dataset_id": "data_raw_tasks.csv",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/data/raw/tasks.csv",
+      "has_tests": false
+    },
+    {
+      "id": "7daca42b-c37f-477b-96db-153000825d83",
+      "title": "Topcoder O/R F2F - Topgear Scorecard Issue",
+      "dataset_id": "data_processed_tasks.csv",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/data/processed/tasks.csv",
+      "has_tests": false
+    },
+    {
+      "id": "array_prefix",
+      "title": "Prefix Sum",
+      "dataset_id": "experiments_decomposition_benchmark_tasks.json",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/experiments/decomposition/benchmark_tasks.json",
+      "has_tests": true
+    },
+    {
+      "id": "4ecc36e0-b1d5-4d9d-81dd-616ad6fbdd8d",
+      "title": "96 Hours Topcoder Identity Service Fixing issues found in UserController",
+      "dataset_id": "challenge_data_challengeData_2025-06-01_2025-10-08_page3.json",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/challenge_data/challengeData_2025-06-01_2025-10-08/page3.json",
+      "has_tests": false
+    },
+    {
+      "id": "694f790b-9a05-494a-a679-212983382fba",
+      "title": "Message Center - QA and bug fixes",
+      "dataset_id": "data_processed_tasks.csv",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/data/processed/tasks.csv",
+      "has_tests": false
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "score": 92.5,
+  "passes_threshold": false,
+  "reasons": [
+    "Includes constraints/SLAs",
+    "Trade-offs discussed",
+    "Diagram reference present",
+    "Risks and mitigations described",
+    "Component mapping provided"
+  ],
+  "missing": [
+    "Edge Cases"
+  ],
+  "section_coverage": 0.875,
+  "extra_score": 1.0,
+  "relaxed_due_to_context_missing": false
+}

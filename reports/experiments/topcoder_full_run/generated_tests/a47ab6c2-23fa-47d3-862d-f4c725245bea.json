@@ -1,0 +1,124 @@
+[
+  {
+    "name": "valid_signup",
+    "mode": "call",
+    "expected": {
+      "success": true,
+      "message": "Signup successful"
+    },
+    "input": [
+      {
+        "name": "John Doe",
+        "email": "john@example.com",
+        "password": "securePassword123"
+      }
+    ]
+  },
+  {
+    "name": "valid_login",
+    "mode": "call",
+    "expected": {
+      "success": true,
+      "message": "Login successful"
+    },
+    "input": [
+      {
+        "email": "john@example.com",
+        "password": "securePassword123"
+      }
+    ]
+  },
+  {
+    "name": "signup_with_existing_email",
+    "mode": "call",
+    "expected": {
+      "success": false,
+      "message": "Email already in use"
+    },
+    "input": [
+      {
+        "name": "Jane Doe",
+        "email": "john@example.com",
+        "password": "anotherPassword456"
+      }
+    ]
+  },
+  {
+    "name": "login_with_incorrect_password",
+    "mode": "call",
+    "expected": {
+      "success": false,
+      "message": "Invalid credentials"
+    },
+    "input": [
+      {
+        "email": "john@example.com",
+        "password": "wrongPassword"
+      }
+    ]
+  },
+  {
+    "name": "profile_display",
+    "mode": "call",
+    "expected": {
+      "name": "John Doe",
+      "biography": "Software Developer",
+      "country": "USA",
+      "interests": [
+        "ReactJS",
+        "JavaScript"
+      ],
+      "photo": "placeholder.jpg"
+    },
+    "input": [
+      {
+        "email": "john@example.com"
+      }
+    ]
+  },
+  {
+    "name": "signup_with_missing_fields",
+    "mode": "call",
+    "expected": {
+      "success": false,
+      "message": "Name and password are required"
+    },
+    "input": [
+      {
+        "name": "",
+        "email": "missing@example.com",
+        "password": ""
+      }
+    ]
+  },
+  {
+    "name": "login_with_nonexistent_email",
+    "mode": "call",
+    "expected": {
+      "success": false,
+      "message": "Email not found"
+    },
+    "input": [
+      {
+        "email": "nonexistent@example.com",
+        "password": "somePassword"
+      }
+    ]
+  },
+  {
+    "name": "profile_with_no_interests",
+    "mode": "call",
+    "expected": {
+      "name": "John Doe",
+      "biography": "Software Developer",
+      "country": "USA",
+      "interests": [],
+      "photo": "placeholder.jpg"
+    },
+    "input": [
+      {
+        "email": "john@example.com"
+      }
+    ]
+  }
+]

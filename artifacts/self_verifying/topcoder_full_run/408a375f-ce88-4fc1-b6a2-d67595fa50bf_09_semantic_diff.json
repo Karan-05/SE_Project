@@ -1,0 +1,165 @@
+{
+  "task_id": "408a375f-ce88-4fc1-b6a2-d67595fa50bf",
+  "strategy": "semantic_diff",
+  "attempt": 9,
+  "pass_rate": 0.0,
+  "plan_subtasks": [
+    "load base solution",
+    "apply semantic deltas",
+    "re-test",
+    "Generate minimal unit tests for critical behaviors",
+    "Add adversarial/edge-case tests",
+    "Run tests and interpret failures"
+  ],
+  "plan_tests": [
+    "critical unit tests",
+    "edge-case probes"
+  ],
+  "plan_diagnostics": {
+    "base_task": "baseline",
+    "num_deltas": "1",
+    "delta_note": "## **Eligibility Criteria \u2013 Apply Only If You Meet the Following Requirements**\n\n### **Location:**\n- **New Task:** Must be based in or willing to relocate to Bangalore or Chennai.\n- **Base Task:** Client location specifics not provided.\n\n### **Client Location:**\n- **New Task:** Specific client location requirements not mentioned.\n- **Base Task:** Client location details may differ or be unspecified.",
+    "planning_tokens": "142",
+    "planning_time": "2.165705"
+  },
+  "patch_summary": {
+    "phase": "initial"
+  },
+  "failing_tests": [
+    "valid_application_bangalore",
+    "valid_application_chennai",
+    "invalid_application_outside_location",
+    "invalid_application_duration_too_short",
+    "invalid_application_duration_too_long"
+  ],
+  "trace": [
+    "",
+    "",
+    "",
+    "",
+    ""
+  ],
+  "feedback": [
+    "valid_application_bangalore expected 'Application accepted' but saw None",
+    "valid_application_chennai expected 'Application accepted' but saw None",
+    "invalid_application_outside_location expected 'Application rejected' but saw None",
+    "invalid_application_duration_too_short expected 'Application rejected' but saw None",
+    "invalid_application_duration_too_long expected 'Application rejected' but saw None"
+  ],
+  "reproduction": "inputs=[{'location': 'Bangalore', 'duration': 12, 'working_hours': 8.5}] kwargs={}",
+  "tests_run": [
+    {
+      "name": "valid_application_bangalore",
+      "mode": "call",
+      "status": "fail",
+      "expected": "'Application accepted'",
+      "output": "None",
+      "error": "",
+      "input": "[{'location': 'Bangalore', 'duration': 12, 'working_hours': 8.5}]",
+      "kwargs": "{}",
+      "duration": 2.4999899324029684e-06
+    },
+    {
+      "name": "valid_application_chennai",
+      "mode": "call",
+      "status": "fail",
+      "expected": "'Application accepted'",
+      "output": "None",
+      "error": "",
+      "input": "[{'location': 'Chennai', 'duration': 8, 'working_hours': 8.5}]",
+      "kwargs": "{}",
+      "duration": 1.7920101527124643e-06
+    },
+    {
+      "name": "invalid_application_outside_location",
+      "mode": "call",
+      "status": "fail",
+      "expected": "'Application rejected'",
+      "output": "None",
+      "error": "",
+      "input": "[{'location': 'Mumbai', 'duration': 10, 'working_hours': 8.5}]",
+      "kwargs": "{}",
+      "duration": 1.7079873941838741e-06
+    },
+    {
+      "name": "invalid_application_duration_too_short",
+      "mode": "call",
+      "status": "fail",
+      "expected": "'Application rejected'",
+      "output": "None",
+      "error": "",
+      "input": "[{'location': 'Bangalore', 'duration': 3, 'working_hours': 8.5}]",
+      "kwargs": "{}",
+      "duration": 1.7499842215329409e-06
+    },
+    {
+      "name": "invalid_application_duration_too_long",
+      "mode": "call",
+      "status": "fail",
+      "expected": "'Application rejected'",
+      "output": "None",
+      "error": "",
+      "input": "[{'location': 'Chennai', 'duration': 20, 'working_hours': 8.5}]",
+      "kwargs": "{}",
+      "duration": 1.667009200900793e-06
+    },
+    {
+      "name": "valid_application_relocation",
+      "mode": "call",
+      "status": "fail",
+      "expected": "'Application accepted'",
+      "output": "None",
+      "error": "",
+      "input": "[{'location': 'Delhi', 'willing_to_relocate': True, 'duration': 10, 'working_hours': 8.5}]",
+      "kwargs": "{}",
+      "duration": 1.7079873941838741e-06
+    },
+    {
+      "name": "invalid_application_no_relocation",
+      "mode": "call",
+      "status": "fail",
+      "expected": "'Application rejected'",
+      "output": "None",
+      "error": "",
+      "input": "[{'location': 'Delhi', 'willing_to_relocate': False, 'duration': 10, 'working_hours': 8.5}]",
+      "kwargs": "{}",
+      "duration": 1.834006980061531e-06
+    },
+    {
+      "name": "valid_application_edge_case_max_duration",
+      "mode": "call",
+      "status": "fail",
+      "expected": "'Application accepted'",
+      "output": "None",
+      "error": "",
+      "input": "[{'location': 'Bangalore', 'duration': 16, 'working_hours': 8.5}]",
+      "kwargs": "{}",
+      "duration": 1.7500133253633976e-06
+    }
+  ],
+  "llm_calls": 0,
+  "timeline": {
+    "attempt": 9,
+    "strategy": "semantic_diff",
+    "phase": "initial",
+    "events": {
+      "decompose": {
+        "start": "2026-02-24T01:33:59.652499",
+        "end": "2026-02-24T01:33:59.652605"
+      },
+      "solve": {
+        "start": "2026-02-24T01:33:59.652610",
+        "end": "2026-02-24T01:33:59.652729"
+      },
+      "tests": {
+        "start": "2026-02-24T01:33:59.652701",
+        "end": "2026-02-24T01:33:59.652722",
+        "duration_seconds": "0.000"
+      }
+    },
+    "meta": {
+      "llm_calls": "0"
+    }
+  },
+  "solution_preview": "def solve(*args):\n    return None"
+}

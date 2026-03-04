@@ -1,0 +1,1 @@
+{"content": "[MOCK] adac2c301c2bf191 :: Given the problem: Return the running prefix sums., would pattern two_pointers be relevant?", "tokens": 13, "elapsed": 1.5829999999716904e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "pattern-hint", "caller": "pattern_skeleton"}}

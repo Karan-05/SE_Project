@@ -1,0 +1,69 @@
+{
+  "task_id": "graph_degree_test",
+  "strategy": "failure_mode_first",
+  "attempt": 7,
+  "pass_rate": 0.0,
+  "plan_subtasks": [
+    "enumerate failure modes",
+    "design tests",
+    "only then implement",
+    "Generate minimal unit tests for critical behaviors",
+    "Add adversarial/edge-case tests",
+    "Run tests and interpret failures"
+  ],
+  "plan_tests": [
+    "[MOCK] b16d7f88b026fbfd :: List three high-risk failure modes for this coding task along with short rationales: Return degree counts for each verte",
+    "max constraints: extremely large inputs",
+    "degenerate: empty or single-element",
+    "adversarial: repeated values or cycles"
+  ],
+  "plan_diagnostics": {
+    "failure_modes": "[MOCK] b16d7f88b026fbfd :: List three high-risk failure modes for this coding task along with short rationales: Return degree counts for each verte;max constraints: extremely large inputs;degenerate: empty or single-element",
+    "planning_tokens": "58",
+    "planning_time": "0.000006"
+  },
+  "patch_summary": {
+    "phase": "initial"
+  },
+  "failing_tests": [
+    "test_0"
+  ],
+  "trace": [
+    "invalid decimal literal (<string>, line 1)"
+  ],
+  "feedback": [
+    "test_0 expected None but saw None"
+  ],
+  "reproduction": "inputs= kwargs=",
+  "tests_run": [
+    {
+      "status": "compile_error",
+      "error": "invalid decimal literal (<string>, line 1)"
+    }
+  ],
+  "llm_calls": 2,
+  "timeline": {
+    "attempt": 7,
+    "strategy": "failure_mode_first",
+    "phase": "initial",
+    "events": {
+      "decompose": {
+        "start": "2026-02-24T12:55:48.468564",
+        "end": "2026-02-24T12:55:48.468627"
+      },
+      "solve": {
+        "start": "2026-02-24T12:55:48.468635",
+        "end": "2026-02-24T12:55:48.468978"
+      },
+      "tests": {
+        "start": "2026-02-24T12:55:48.468833",
+        "end": "2026-02-24T12:55:48.468853",
+        "duration_seconds": "0.000"
+      }
+    },
+    "meta": {
+      "llm_calls": "2"
+    }
+  },
+  "solution_preview": "[MOCK] 18157b66e7805eee :: You are repairing code produced by strategy 'failure_mode_first'. Problem statement: Return degree counts for each verte"
+}

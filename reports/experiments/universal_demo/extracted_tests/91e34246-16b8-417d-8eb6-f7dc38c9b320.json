@@ -1,0 +1,9 @@
+[
+  {
+    "name": "io_sample_1",
+    "mode": "io",
+    "expected": "No limitation\n- Docker",
+    "stdin": "1. Add textarea with id `input`. This textarea is the input where user fill the provided characters. \n2. Add button with text `Decipher` below textarea. Click this button needs to run the deciphering process and return the values to another textarea below\n3. Add another textarea with id `",
+    "expected_stdout": "No limitation\n- Docker"
+  }
+]

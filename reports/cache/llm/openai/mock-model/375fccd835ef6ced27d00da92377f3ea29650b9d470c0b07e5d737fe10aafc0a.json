@@ -1,0 +1,1 @@
+{"content": "```python\ndef solve(*args):\n    if not args:\n        return None\n    return [arg for arg in args if isinstance(arg, str) and arg.strip() != '']\n```", "tokens": 256, "elapsed": 2.668063874996733, "budget_exceeded": false, "meta": {"provider": "openai", "model": "repair-loop", "caller": "semantic_diff:repair"}}

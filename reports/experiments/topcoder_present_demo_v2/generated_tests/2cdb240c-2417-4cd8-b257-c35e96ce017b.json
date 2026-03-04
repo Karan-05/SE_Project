@@ -1,0 +1,94 @@
+[
+  {
+    "name": "desktop_view_responsive",
+    "mode": "call",
+    "expected": "responsive",
+    "input": [
+      {
+        "width": 1280,
+        "min_width": 1025,
+        "viewport": "desktop"
+      }
+    ]
+  },
+  {
+    "name": "tablet_view_responsive",
+    "mode": "call",
+    "expected": "responsive",
+    "input": [
+      {
+        "width": 768,
+        "viewport": "tablet"
+      }
+    ]
+  },
+  {
+    "name": "mobile_view_responsive",
+    "mode": "call",
+    "expected": "responsive",
+    "input": [
+      {
+        "width": 750,
+        "viewport": "mobile"
+      }
+    ]
+  },
+  {
+    "name": "hover_state_consistency",
+    "mode": "call",
+    "expected": "consistent",
+    "input": [
+      {
+        "button_states": [
+          "default",
+          "hover"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "tooltip_functionality",
+    "mode": "call",
+    "expected": "tooltip_visible",
+    "input": [
+      {
+        "button_id": "submit",
+        "tooltip": "Submit your data"
+      }
+    ]
+  },
+  {
+    "name": "json_data_loading",
+    "mode": "call",
+    "expected": "data_loaded",
+    "input": [
+      {
+        "page": "dashboard",
+        "data_source": "dashboard_data.json"
+      }
+    ]
+  },
+  {
+    "name": "sass_usage_check",
+    "mode": "call",
+    "expected": "sass_used",
+    "input": [
+      {
+        "css_files": [
+          "styles.scss"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "edge_case_min_width",
+    "mode": "call",
+    "expected": "responsive",
+    "input": [
+      {
+        "width": 1025,
+        "viewport": "desktop"
+      }
+    ]
+  }
+]

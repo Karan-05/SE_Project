@@ -1,0 +1,104 @@
+[
+  {
+    "name": "logged_out_user_display",
+    "mode": "call",
+    "expected": {
+      "nav_display": "logged_in"
+    },
+    "input": [
+      {
+        "user_status": "logged_out"
+      }
+    ]
+  },
+  {
+    "name": "logged_in_user_display",
+    "mode": "call",
+    "expected": {
+      "nav_display": "logged_in"
+    },
+    "input": [
+      {
+        "user_status": "logged_in"
+      }
+    ]
+  },
+  {
+    "name": "session_timeout",
+    "mode": "call",
+    "expected": {
+      "nav_display": "logged_in"
+    },
+    "input": [
+      {
+        "user_status": "logged_in",
+        "session": "expired"
+      }
+    ]
+  },
+  {
+    "name": "multiple_logins",
+    "mode": "call",
+    "expected": {
+      "nav_display": "logged_in"
+    },
+    "input": [
+      {
+        "user_status": "logged_out",
+        "previous_sessions": 5
+      }
+    ]
+  },
+  {
+    "name": "refresh_page_logged_out",
+    "mode": "call",
+    "expected": {
+      "nav_display": "logged_in"
+    },
+    "input": [
+      {
+        "user_status": "logged_out",
+        "action": "refresh"
+      }
+    ]
+  },
+  {
+    "name": "navigate_away_and_back",
+    "mode": "call",
+    "expected": {
+      "nav_display": "logged_in"
+    },
+    "input": [
+      {
+        "user_status": "logged_out",
+        "navigate": "away"
+      }
+    ]
+  },
+  {
+    "name": "simultaneous_requests",
+    "mode": "call",
+    "expected": {
+      "nav_display": "logged_in"
+    },
+    "input": [
+      {
+        "user_status": "logged_out",
+        "requests": 10
+      }
+    ]
+  },
+  {
+    "name": "user_status_change",
+    "mode": "call",
+    "expected": {
+      "nav_display": "logged_in"
+    },
+    "input": [
+      {
+        "user_status": "logged_out",
+        "change": "to_logged_in"
+      }
+    ]
+  }
+]

@@ -1,0 +1,1 @@
+{"content": "[MOCK] c1350194dee9771a :: Implement function solve() that reads all required input from stdin and writes the exact expected output to stdout. Do n", "tokens": 37, "elapsed": 2.3339999994931304e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "contract-solver", "caller": "contract_first"}}

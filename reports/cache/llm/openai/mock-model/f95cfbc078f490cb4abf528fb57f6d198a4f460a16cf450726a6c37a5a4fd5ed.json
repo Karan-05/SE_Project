@@ -1,0 +1,1 @@
+{"content": "In the context of returning degree counts for each vertex in a graph, the pattern `hash_bucket` may not be directly relevant. The degree of a vertex is", "tokens": 57, "elapsed": 1.6195810829813126, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

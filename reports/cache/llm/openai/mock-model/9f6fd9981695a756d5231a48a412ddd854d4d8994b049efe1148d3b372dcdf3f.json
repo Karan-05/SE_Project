@@ -1,0 +1,1 @@
+{"content": "Kadane's algorithm is relevant if the problem involves finding the maximum sum of a contiguous subarray within a one-dimensional array of numbers. If the existing Python algorithm", "tokens": 91, "elapsed": 1.5125400419929065, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

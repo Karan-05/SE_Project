@@ -1,0 +1,23 @@
+{
+  "task_id": "305e0763-dd63-4883-9133-55504503953d",
+  "run_id": "universal_demo_mock_hardened",
+  "raw_path": "/Users/karanallagh/Desktop/DataCollector/reports/experiments/universal_demo_mock_hardened/deliverables/305e0763-dd63-4883-9133-55504503953d_agent_raw.txt",
+  "raw_length": 3913,
+  "sentinel_found": true,
+  "attempts": [
+    {
+      "mode": "sentinel",
+      "success": true,
+      "length": 3893
+    }
+  ],
+  "errors": [],
+  "repair_attempted": false,
+  "repair_used": false,
+  "max_repairs": 0,
+  "llm_provider": "mock",
+  "source": "sentinel",
+  "parsed_length": 3893,
+  "repair_path": "",
+  "status": "success"
+}

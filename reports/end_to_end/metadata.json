@@ -1,0 +1,30 @@
+{
+  "timestamp_utc": "2025-11-29T12:04:41.355215+00:00",
+  "python_version": "3.14.0",
+  "platform": "macOS-26.1-arm64-arm-64bit-Mach-O",
+  "machine": "Karans-MacBook-Air.local",
+  "git_commit": "3abfe9511641b195ee6ff98886080bf09ac7af9d",
+  "seeds": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+  ],
+  "config": {
+    "config_path": "configs/end_to_end.yaml",
+    "num_seeds": 10,
+    "base_seed": 1,
+    "bootstrap_seed": 99
+  },
+  "inputs": [
+    "/Users/karanallagh/Downloads/DataCollector/reports/decomposition/rl_decomposition_metrics_seed_1.csv",
+    "/Users/karanallagh/Downloads/DataCollector/reports/decomposition/rl_multiagent_metrics_seed_1.csv",
+    "configs/end_to_end.yaml"
+  ]
+}

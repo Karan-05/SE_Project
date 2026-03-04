@@ -1,0 +1,118 @@
+{
+  "task_id": "30377257",
+  "strategy": "contract_first",
+  "attempt": 2,
+  "pass_rate": 0.0,
+  "plan_subtasks": [
+    "Validate inputs vs contract",
+    "Implement core logic",
+    "Check edge cases",
+    "Generate minimal unit tests for critical behaviors",
+    "Add adversarial/edge-case tests",
+    "Run tests and interpret failures"
+  ],
+  "plan_tests": [
+    "critical unit tests",
+    "edge-case probes"
+  ],
+  "plan_diagnostics": {
+    "missing_fields": "constraints",
+    "contract_length": "36",
+    "audit_note": "Based on the provided contract details, here are some observations regarding completeness and potential missing guarantees:\n\n### Completeness Review\n\n1. **Inputs and Outputs**:\n   - **Underspecified**: The contract does not clearly define what inputs are expected (e.g., schema names, configuration parameters) and what outputs are expected (e.g., success messages, error codes). This needs to be explicitly stated.\n\n2. **Constraints**:\n   - **None**: There are no",
+    "planning_tokens": "196",
+    "planning_time": "3.480648"
+  },
+  "patch_summary": {
+    "phase": "repair",
+    "prompt_excerpt": "ema'}] kwargs={}\nProduce a minimal patch to fix only the failing behavior. Keep public APIs identical and do not refactor unrelated sections. Return the full updated implementation without commentary.",
+    "llm_tokens": "453"
+  },
+  "failing_tests": [
+    "custom_schema_configuration",
+    "connection_string_without_schema",
+    "migration_with_custom_schema",
+    "invalid_schema_name"
+  ],
+  "trace": [
+    "",
+    "",
+    "",
+    ""
+  ],
+  "feedback": [
+    "custom_schema_configuration expected 'custom_schema' but saw None",
+    "connection_string_without_schema expected 'mydb' but saw None",
+    "migration_with_custom_schema expected 'migrations applied to migration_schema' but saw None",
+    "invalid_schema_name expected 'error' but saw None"
+  ],
+  "reproduction": "inputs=[{'POSTGRES_SCHEMA': 'custom_schema'}] kwargs={}",
+  "tests_run": [
+    {
+      "name": "custom_schema_configuration",
+      "mode": "call",
+      "status": "fail",
+      "expected": "'custom_schema'",
+      "output": "None",
+      "error": "",
+      "input": "[{'POSTGRES_SCHEMA': 'custom_schema'}]",
+      "kwargs": "{}",
+      "duration": 5.125009920448065e-06
+    },
+    {
+      "name": "connection_string_without_schema",
+      "mode": "call",
+      "status": "fail",
+      "expected": "'mydb'",
+      "output": "None",
+      "error": "",
+      "input": "[{'DATABASE_URL': 'postgresql://user:password@localhost:5432/mydb'}]",
+      "kwargs": "{}",
+      "duration": 3.249995643272996e-06
+    },
+    {
+      "name": "migration_with_custom_schema",
+      "mode": "call",
+      "status": "fail",
+      "expected": "'migrations applied to migration_schema'",
+      "output": "None",
+      "error": "",
+      "input": "[{'POSTGRES_SCHEMA': 'migration_schema'}]",
+      "kwargs": "{}",
+      "duration": 3.374996595084667e-06
+    },
+    {
+      "name": "invalid_schema_name",
+      "mode": "call",
+      "status": "fail",
+      "expected": "'error'",
+      "output": "None",
+      "error": "",
+      "input": "[{'POSTGRES_SCHEMA': 'invalid/schema'}]",
+      "kwargs": "{}",
+      "duration": 2.91600008495152e-06
+    }
+  ],
+  "llm_calls": 0,
+  "timeline": {
+    "attempt": 2,
+    "strategy": "contract_first",
+    "phase": "repair",
+    "events": {
+      "repair": {
+        "start": "2026-02-24T01:32:02.946825",
+        "end": "2026-02-24T01:32:02.947276"
+      },
+      "tests": {
+        "start": "2026-02-24T01:32:02.947343",
+        "end": "2026-02-24T01:32:02.947367",
+        "duration_seconds": "0.000"
+      }
+    },
+    "meta": {
+      "prompt_excerpt": "ema'}] kwargs={}\nProduce a minimal patch to fix only the failing behavior. Keep public APIs identical and do not refactor unrelated sections. Return the full updated implementation without commentary.",
+      "llm_tokens": "453",
+      "llm_calls": "0"
+    }
+  },
+  "solution_preview": "def solve(*args):\n    return None"
+}

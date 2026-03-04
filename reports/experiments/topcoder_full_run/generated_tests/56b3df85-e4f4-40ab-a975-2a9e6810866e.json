@@ -1,0 +1,137 @@
+[
+  {
+    "name": "valid_pending_reviews_for_admin",
+    "mode": "call",
+    "expected": [
+      {
+        "reviewId": "1",
+        "challengeId": "101",
+        "status": "pending",
+        "userRole": "admin"
+      },
+      {
+        "reviewId": "2",
+        "challengeId": "102",
+        "status": "pending",
+        "userRole": "admin"
+      }
+    ],
+    "input": [
+      {
+        "userId": "admin_user",
+        "role": "admin"
+      }
+    ]
+  },
+  {
+    "name": "valid_pending_reviews_for_participant",
+    "mode": "call",
+    "expected": [
+      {
+        "reviewId": "3",
+        "challengeId": "103",
+        "status": "pending",
+        "userRole": "participant"
+      }
+    ],
+    "input": [
+      {
+        "userId": "participant_user",
+        "role": "participant"
+      }
+    ]
+  },
+  {
+    "name": "no_pending_reviews_for_nonexistent_user",
+    "mode": "call",
+    "expected": null,
+    "input": [
+      {
+        "userId": "nonexistent_user",
+        "role": "participant"
+      }
+    ]
+  },
+  {
+    "name": "active_challenge_filtering",
+    "mode": "call",
+    "expected": [
+      {
+        "reviewId": "4",
+        "challengeId": "104",
+        "status": "pending",
+        "userRole": "reviewer"
+      }
+    ],
+    "input": [
+      {
+        "userId": "reviewer_user",
+        "role": "reviewer"
+      }
+    ]
+  },
+  {
+    "name": "inactive_challenge_exclusion",
+    "mode": "call",
+    "expected": null,
+    "input": [
+      {
+        "userId": "reviewer_user",
+        "role": "reviewer"
+      }
+    ]
+  },
+  {
+    "name": "role_based_review_access",
+    "mode": "call",
+    "expected": null,
+    "input": [
+      {
+        "userId": "role_based_user",
+        "role": "observer"
+      }
+    ]
+  },
+  {
+    "name": "multiple_roles_for_single_challenge",
+    "mode": "call",
+    "expected": [
+      {
+        "reviewId": "5",
+        "challengeId": "105",
+        "status": "pending",
+        "userRole": "participant"
+      },
+      {
+        "reviewId": "6",
+        "challengeId": "105",
+        "status": "pending",
+        "userRole": "reviewer"
+      }
+    ],
+    "input": [
+      {
+        "userId": "multi_role_user",
+        "role": "participant"
+      }
+    ]
+  },
+  {
+    "name": "format_validation",
+    "mode": "call",
+    "expected": [
+      {
+        "reviewId": "7",
+        "challengeId": "106",
+        "status": "pending",
+        "userRole": "admin"
+      }
+    ],
+    "input": [
+      {
+        "userId": "format_user",
+        "role": "admin"
+      }
+    ]
+  }
+]

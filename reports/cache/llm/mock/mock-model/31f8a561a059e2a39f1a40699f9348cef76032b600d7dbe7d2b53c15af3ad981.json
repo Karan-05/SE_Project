@@ -1,0 +1,1 @@
+{"content": "[MOCK] 600f36480e5a82f0 :: Given the problem: Return the minimum coins needed to reach target., would pattern two_pointers be relevant?", "tokens": 16, "elapsed": 1.8340000000893752e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "pattern-hint", "caller": "pattern_skeleton"}}

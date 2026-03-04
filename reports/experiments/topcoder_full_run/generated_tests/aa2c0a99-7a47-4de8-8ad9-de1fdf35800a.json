@@ -1,0 +1,58 @@
+[
+  {
+    "name": "music_library_selection",
+    "mode": "io",
+    "expected": "Audio players display original and infused songs; spectrographs shown.",
+    "stdin": "select Artist \u2013 Song Title from Music Library",
+    "expected_stdout": "Audio players display original and infused songs; spectrographs shown."
+  },
+  {
+    "name": "upload_mp3_file",
+    "mode": "io",
+    "expected": "Audio players display original and infused songs; spectrographs shown.",
+    "stdin": "upload valid MP3 file",
+    "expected_stdout": "Audio players display original and infused songs; spectrographs shown."
+  },
+  {
+    "name": "empty_music_library_selection",
+    "mode": "io",
+    "expected": "Error message: 'No songs available in the library.'",
+    "stdin": "select from empty Music Library",
+    "expected_stdout": "Error message: 'No songs available in the library.'"
+  },
+  {
+    "name": "invalid_mp3_upload",
+    "mode": "io",
+    "expected": "Error message: 'Invalid file type. Please upload an MP3 file.'",
+    "stdin": "upload non-MP3 file",
+    "expected_stdout": "Error message: 'Invalid file type. Please upload an MP3 file.'"
+  },
+  {
+    "name": "apply_overlay_no_selection",
+    "mode": "io",
+    "expected": "Error message: 'Please select a song or upload an MP3 file.'",
+    "stdin": "click 'Apply Overlay' without selecting a song or uploading a file",
+    "expected_stdout": "Error message: 'Please select a song or upload an MP3 file.'"
+  },
+  {
+    "name": "large_mp3_file_upload",
+    "mode": "io",
+    "expected": "Processing message displayed; audio players and spectrographs shown after processing.",
+    "stdin": "upload large MP3 file (e.g., 1GB)",
+    "expected_stdout": "Processing message displayed; audio players and spectrographs shown after processing."
+  },
+  {
+    "name": "apply_overlay_on_processed_song",
+    "mode": "io",
+    "expected": "Audio players display original and infused songs; spectrographs shown.",
+    "stdin": "select a song already infused and click 'Apply Overlay'",
+    "expected_stdout": "Audio players display original and infused songs; spectrographs shown."
+  },
+  {
+    "name": "view_overlay_data",
+    "mode": "io",
+    "expected": "Spectrographs A and B displayed; metrics slide shown.",
+    "stdin": "click 'View Overlay Data' after processing",
+    "expected_stdout": "Spectrographs A and B displayed; metrics slide shown."
+  }
+]

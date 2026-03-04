@@ -1,0 +1,165 @@
+{
+  "task_id": "78b3768b-8665-48f5-90fb-3d8b728dccf6",
+  "strategy": "contract_first",
+  "attempt": 1,
+  "pass_rate": 0.0,
+  "plan_subtasks": [
+    "Validate inputs vs contract",
+    "Implement core logic",
+    "Check edge cases",
+    "Generate minimal unit tests for critical behaviors",
+    "Add adversarial/edge-case tests",
+    "Run tests and interpret failures"
+  ],
+  "plan_tests": [
+    "critical unit tests",
+    "edge-case probes"
+  ],
+  "plan_diagnostics": {
+    "missing_fields": "constraints",
+    "contract_length": "36",
+    "audit_note": "To review the provided contract for completeness and identify any missing guarantees, let's break down the components mentioned:\n\n### Contract Review\n\n1. **Inputs**: \n   - **Status**: Underspecified\n   - **Missing Guarantees**: \n     - Clear definition of what inputs are expected (data types, formats, validation rules).\n     - Examples of valid and invalid inputs.\n     - Constraints on input size or limits.\n\n2. **Outputs**: \n   - **",
+    "planning_tokens": "200",
+    "planning_time": "3.373281"
+  },
+  "patch_summary": {
+    "phase": "initial"
+  },
+  "failing_tests": [
+    "valid_project_creation",
+    "project_member_association",
+    "project_attachment_upload",
+    "invalid_project_creation_missing_fields",
+    "duplicate_project_creation"
+  ],
+  "trace": [
+    "",
+    "",
+    "",
+    "",
+    ""
+  ],
+  "feedback": [
+    "valid_project_creation expected {'id': '1', 'name': 'New Project', 'description': 'A project to modernize the service.', 'status': 'active'} but saw None",
+    "project_member_association expected {'projectId': '1', 'userId': 'user123', 'role': 'admin', 'isPrimary': True} but saw None",
+    "project_attachment_upload expected {'projectId': '1', 'fileName': 'document.pdf', 'fileType': 'application/pdf', 'attachmentId': 'attach1'} but saw None",
+    "invalid_project_creation_missing_fields expected {'error': 'Project name is required.'} but saw None",
+    "duplicate_project_creation expected {'error': 'Project with this name already exists.'} but saw None"
+  ],
+  "reproduction": "inputs=[{'name': 'New Project', 'description': 'A project to modernize the service.', 'status': 'active'}] kwargs={}",
+  "tests_run": [
+    {
+      "name": "valid_project_creation",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'id': '1', 'name': 'New Project', 'description': 'A project to modernize the service.', 'status': 'active'}",
+      "output": "None",
+      "error": "",
+      "input": "[{'name': 'New Project', 'description': 'A project to modernize the service.', 'status': 'active'}]",
+      "kwargs": "{}",
+      "duration": 1.2459000572562218e-05
+    },
+    {
+      "name": "project_member_association",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'projectId': '1', 'userId': 'user123', 'role': 'admin', 'isPrimary': True}",
+      "output": "None",
+      "error": "",
+      "input": "[{'projectId': '1', 'userId': 'user123', 'role': 'admin', 'isPrimary': True}]",
+      "kwargs": "{}",
+      "duration": 7.08398874849081e-06
+    },
+    {
+      "name": "project_attachment_upload",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'projectId': '1', 'fileName': 'document.pdf', 'fileType': 'application/pdf', 'attachmentId': 'attach1'}",
+      "output": "None",
+      "error": "",
+      "input": "[{'projectId': '1', 'fileName': 'document.pdf', 'fileType': 'application/pdf'}]",
+      "kwargs": "{}",
+      "duration": 5.791982403025031e-06
+    },
+    {
+      "name": "invalid_project_creation_missing_fields",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'error': 'Project name is required.'}",
+      "output": "None",
+      "error": "",
+      "input": "[{'name': '', 'description': 'Missing name.', 'status': 'active'}]",
+      "kwargs": "{}",
+      "duration": 4.62500611320138e-06
+    },
+    {
+      "name": "duplicate_project_creation",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'error': 'Project with this name already exists.'}",
+      "output": "None",
+      "error": "",
+      "input": "[{'name': 'New Project', 'description': 'A project to modernize the service.', 'status': 'active'}]",
+      "kwargs": "{}",
+      "duration": 4.583998816087842e-06
+    },
+    {
+      "name": "project_member_invalid_role",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'error': 'Invalid role specified.'}",
+      "output": "None",
+      "error": "",
+      "input": "[{'projectId': '1', 'userId': 'user123', 'role': 'invalid_role', 'isPrimary': True}]",
+      "kwargs": "{}",
+      "duration": 4.8330111894756556e-06
+    },
+    {
+      "name": "attachment_upload_invalid_file_type",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'error': 'Invalid file type.'}",
+      "output": "None",
+      "error": "",
+      "input": "[{'projectId': '1', 'fileName': 'script.exe', 'fileType': 'application/x-msdownload'}]",
+      "kwargs": "{}",
+      "duration": 4.292000085115433e-06
+    },
+    {
+      "name": "project_retrieval_by_id",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'id': '1', 'name': 'New Project', 'description': 'A project to modernize the service.', 'status': 'active'}",
+      "output": "None",
+      "error": "",
+      "input": "[{'projectId': '1'}]",
+      "kwargs": "{}",
+      "duration": 4.915986210107803e-06
+    }
+  ],
+  "llm_calls": 0,
+  "timeline": {
+    "attempt": 1,
+    "strategy": "contract_first",
+    "phase": "initial",
+    "events": {
+      "decompose": {
+        "start": "2026-02-24T01:33:47.890199",
+        "end": "2026-02-24T01:33:47.890819"
+      },
+      "solve": {
+        "start": "2026-02-24T01:33:47.890844",
+        "end": "2026-02-24T01:33:47.891301"
+      },
+      "tests": {
+        "start": "2026-02-24T01:33:47.891205",
+        "end": "2026-02-24T01:33:47.891269",
+        "duration_seconds": "0.000"
+      }
+    },
+    "meta": {
+      "llm_calls": "0"
+    }
+  },
+  "solution_preview": "def solve(*args):\n    return None"
+}

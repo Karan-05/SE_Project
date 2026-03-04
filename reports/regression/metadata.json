@@ -1,0 +1,21 @@
+{
+  "timestamp_utc": "2025-11-29T12:04:40.538928+00:00",
+  "python_version": "3.14.0",
+  "platform": "macOS-26.1-arm64-arm-64bit-Mach-O",
+  "machine": "Karans-MacBook-Air.local",
+  "git_commit": "3abfe9511641b195ee6ff98886080bf09ac7af9d",
+  "seeds": [
+    42
+  ],
+  "config": {
+    "seed": 42,
+    "targets": [
+      "submission_count",
+      "winning_score"
+    ]
+  },
+  "inputs": [
+    "/Users/karanallagh/Downloads/DataCollector/src/regression/build_dataset.py",
+    "/Users/karanallagh/Downloads/DataCollector/src/regression/run_regression.py"
+  ]
+}

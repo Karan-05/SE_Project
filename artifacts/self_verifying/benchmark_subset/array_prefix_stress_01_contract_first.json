@@ -1,0 +1,77 @@
+{
+  "task_id": "array_prefix_stress",
+  "strategy": "contract_first",
+  "attempt": 1,
+  "pass_rate": 1.0,
+  "plan_subtasks": [
+    "Validate inputs vs contract",
+    "Implement core logic",
+    "Check edge cases",
+    "Generate minimal unit tests for critical behaviors",
+    "Add adversarial/edge-case tests",
+    "Run tests and interpret failures"
+  ],
+  "plan_tests": [
+    "",
+    ""
+  ],
+  "plan_diagnostics": {
+    "missing_fields": "constraints",
+    "contract_length": "34",
+    "audit_note": "[MOCK] 56bafd44ad241c07 :: Review this contract for completeness and note any missing guarantees. Contract: {'inputs': 'Underspecified', 'outputs':",
+    "planning_tokens": "26",
+    "planning_time": "0.000002"
+  },
+  "patch_summary": {
+    "phase": "initial"
+  },
+  "tests_run": [
+    {
+      "name": "sample_0",
+      "mode": "call",
+      "status": "pass",
+      "expected": "[1, 3, 6]",
+      "output": "[1, 3, 6]",
+      "error": "",
+      "input": "[[1, 2, 3]]",
+      "kwargs": "{}",
+      "duration": 1.791000000084253e-06
+    },
+    {
+      "name": "sample_1",
+      "mode": "call",
+      "status": "pass",
+      "expected": "[0]",
+      "output": "[0]",
+      "error": "",
+      "input": "[[0]]",
+      "kwargs": "{}",
+      "duration": 1.125000000046228e-06
+    }
+  ],
+  "llm_calls": 0,
+  "timeline": {
+    "attempt": 1,
+    "strategy": "contract_first",
+    "phase": "initial",
+    "events": {
+      "decompose": {
+        "start": "2026-02-24T00:19:21.364759",
+        "end": "2026-02-24T00:19:21.364807"
+      },
+      "solve": {
+        "start": "2026-02-24T00:19:21.364809",
+        "end": "2026-02-24T00:19:21.364878"
+      },
+      "tests": {
+        "start": "2026-02-24T00:19:21.364869",
+        "end": "2026-02-24T00:19:21.364874",
+        "duration_seconds": "0.000"
+      }
+    },
+    "meta": {
+      "llm_calls": "0"
+    }
+  },
+  "solution_preview": "def solve(nums):\n                out = []\n                total = 0\n                for num in nums:\n                    total += num\n                    out.append(total)\n                return out"
+}

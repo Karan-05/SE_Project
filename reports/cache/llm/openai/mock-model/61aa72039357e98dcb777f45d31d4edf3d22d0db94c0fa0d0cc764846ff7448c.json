@@ -1,0 +1,1 @@
+{"content": "The two-pointer pattern is typically used for problems involving arrays or lists where you need to find pairs or subarrays that meet certain conditions. In the context of integrating", "tokens": 94, "elapsed": 1.5267602499807253, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

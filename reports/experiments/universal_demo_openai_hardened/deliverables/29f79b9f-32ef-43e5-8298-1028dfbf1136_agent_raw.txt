@@ -1,0 +1,41 @@
+`BEGIN_JSON`
+{
+  "task_type": "architecture_doc",
+  "id": "29f79b9f-32ef-43e5-8298-1028dfbf1136",
+  "title": "Topcoder Identity Service Tests Improvement Part 1",
+  "summary": "This architecture document outlines the requirements and approach for improving end-to-end and unit tests for the RoleController and UserController in the Topcoder Identity Service, which is being migrated to TypeScript and Postgres. The goal is to achieve >= 90% coverage across all tests while ensuring the existing functionalities remain intact.",
+  "assumptions": [
+    "Access to the revised identity service code repository is available.",
+    "Data for testing will be provided in the forum.",
+    "The data migration tool for importing data for tests is functional.",
+    "Clarifications can be sought in the challenge forum."
+  ],
+  "plan": [
+    "Review the existing RoleController and UserController implementations.",
+    "Identify and document the key functionalities that need coverage.",
+    "Write end-to-end tests for each API endpoint with a focus on achieving >= 90% coverage.",
+    "Update and rewrite unit tests for RoleService, AuthFlowService, TwoFactorAuthService, UserProfileService, UserService, and ValidationService with a similar coverage goal.",
+    "Ensure all unit tests target actual database data using the provided data migration tool.",
+    "Log any bugs encountered during the testing process.",
+    "Draft a comprehensive README file detailing setup, environment variables, data migration, local deployment, and verification methods.",
+    "Conduct a code review to ensure adherence to best practices and successful lint checks."
+  ],
+  "artifacts": {
+    "design_doc_md": "# Topcoder Identity Service Tests Improvement\n\n## Overview\nThis document outlines the improvements to the testing framework for the Topcoder Identity Service, focusing on RoleController and UserController.\n\n## Requirements\n- Achieve >= 90% coverage for both unit and end-to-end tests.\n- Maintain existing functionalities during migration.\n\n## Approach\n1. **Testing Framework**: Utilize the existing testing framework with TypeScript.\n2. **Data Migration**: Use the provided data migration tool for unit tests.\n3. **Documentation**: Update README with setup instructions.\n\n## Rollout\n- Implement tests in phases, starting with RoleController and UserController.\n\n## Observability\n- Monitor test coverage using tools like Istanbul.\n\n## Acceptance Checklist\n- All tests pass with the required coverage.",
+    "mermaid_diagram": "graph TD;\n    A[RoleController] -->|calls| B[RoleService];\n    A -->|calls| C[AuthFlowService];\n    D[UserController] -->|calls| E[UserService];\n    D -->|calls| F[ValidationService];",
+    "interfaces": [
+      {
+        "producer": "RoleController",
+        "consumer": "RoleService",
+        "protocol": "HTTP",
+        "payload": "{ roleId, roleName }"
+      },
+      {
+        "producer": "UserController",
+        "consumer": "UserService",
+        "protocol": "HTTP",
+        "payload": "{ userId, userData }"
+      }
+    ],
+    "tradeoffs": [
+      "Choosing TypeScript over Java for better type safety and modern development practices

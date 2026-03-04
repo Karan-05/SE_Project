@@ -1,0 +1,165 @@
+{
+  "task_id": "4fea455b-76f7-4e66-80a6-98b667d98670",
+  "strategy": "semantic_diff",
+  "attempt": 9,
+  "pass_rate": 0.0,
+  "plan_subtasks": [
+    "load base solution",
+    "apply semantic deltas",
+    "re-test",
+    "Generate minimal unit tests for critical behaviors",
+    "Add adversarial/edge-case tests",
+    "Run tests and interpret failures"
+  ],
+  "plan_tests": [
+    "critical unit tests",
+    "edge-case probes"
+  ],
+  "plan_diagnostics": {
+    "base_task": "baseline",
+    "num_deltas": "1",
+    "delta_note": "### Semantic Deltas\n\n#### Design Assets & Downloadable\n- **New Task**: Includes downloadable assets and style guidance in Figma.\n- **Base Task**: Lacks downloadable assets; no centralized style guidance.\n\n#### General\n- **New Task**: Enhanced user interface and experience.\n- **Base Task**: Standard interface with limited user engagement features.",
+    "planning_tokens": "161",
+    "planning_time": "2.258350"
+  },
+  "patch_summary": {
+    "phase": "initial"
+  },
+  "failing_tests": [
+    "valid_download_after_submission",
+    "invalid_download_without_submission",
+    "multiple_submissions",
+    "download_from_different_challenge",
+    "edge_case_no_submissions"
+  ],
+  "trace": [
+    "",
+    "",
+    "",
+    "",
+    ""
+  ],
+  "feedback": [
+    "valid_download_after_submission expected {'can_download': True} but saw None",
+    "invalid_download_without_submission expected {'can_download': False} but saw None",
+    "multiple_submissions expected {'can_download': True} but saw None",
+    "download_from_different_challenge expected {'can_download': False} but saw None",
+    "edge_case_no_submissions expected {'can_download': True} but saw None"
+  ],
+  "reproduction": "inputs=[{'user_id': 'user123', 'challenge_id': 'challenge456', 'submitted': True}] kwargs={}",
+  "tests_run": [
+    {
+      "name": "valid_download_after_submission",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'can_download': True}",
+      "output": "None",
+      "error": "",
+      "input": "[{'user_id': 'user123', 'challenge_id': 'challenge456', 'submitted': True}]",
+      "kwargs": "{}",
+      "duration": 2.2167019778862596e-05
+    },
+    {
+      "name": "invalid_download_without_submission",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'can_download': False}",
+      "output": "None",
+      "error": "",
+      "input": "[{'user_id': 'user789', 'challenge_id': 'challenge456', 'submitted': False}]",
+      "kwargs": "{}",
+      "duration": 6.791990017518401e-06
+    },
+    {
+      "name": "multiple_submissions",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'can_download': True}",
+      "output": "None",
+      "error": "",
+      "input": "[{'user_id': 'user123', 'challenge_id': 'challenge456', 'submitted': True, 'submission_count': 3}]",
+      "kwargs": "{}",
+      "duration": 7.95800588093698e-06
+    },
+    {
+      "name": "download_from_different_challenge",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'can_download': False}",
+      "output": "None",
+      "error": "",
+      "input": "[{'user_id': 'user123', 'challenge_id': 'challenge789', 'submitted': True}]",
+      "kwargs": "{}",
+      "duration": 6.500020390376449e-06
+    },
+    {
+      "name": "edge_case_no_submissions",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'can_download': True}",
+      "output": "None",
+      "error": "",
+      "input": "[{'user_id': 'user456', 'challenge_id': 'challenge456', 'submitted': True, 'submission_count': 0}]",
+      "kwargs": "{}",
+      "duration": 6.292015314102173e-06
+    },
+    {
+      "name": "adversarial_case_invalid_user",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'can_download': False}",
+      "output": "None",
+      "error": "",
+      "input": "[{'user_id': 'invalid_user', 'challenge_id': 'challenge456', 'submitted': False}]",
+      "kwargs": "{}",
+      "duration": 6.667018169537187e-06
+    },
+    {
+      "name": "valid_download_after_multiple_challenges",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'can_download': True}",
+      "output": "None",
+      "error": "",
+      "input": "[{'user_id': 'user123', 'challenge_ids': ['challenge456', 'challenge789'], 'submitted': True}]",
+      "kwargs": "{}",
+      "duration": 1.4874996850267053e-05
+    },
+    {
+      "name": "download_attempt_after_challenge_end",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'can_download': True}",
+      "output": "None",
+      "error": "",
+      "input": "[{'user_id': 'user123', 'challenge_id': 'challenge456', 'submitted': True, 'challenge_ended': True}]",
+      "kwargs": "{}",
+      "duration": 6.541988113895059e-06
+    }
+  ],
+  "llm_calls": 1,
+  "timeline": {
+    "attempt": 9,
+    "strategy": "semantic_diff",
+    "phase": "initial",
+    "events": {
+      "decompose": {
+        "start": "2026-02-24T11:55:14.753410",
+        "end": "2026-02-24T11:55:17.011947"
+      },
+      "solve": {
+        "start": "2026-02-24T11:55:17.011986",
+        "end": "2026-02-24T11:55:20.014563"
+      },
+      "tests": {
+        "start": "2026-02-24T11:55:20.014389",
+        "end": "2026-02-24T11:55:20.014512",
+        "duration_seconds": "0.000"
+      }
+    },
+    "meta": {
+      "llm_calls": "1"
+    }
+  },
+  "solution_preview": "def solve(*args):\n    return None"
+}

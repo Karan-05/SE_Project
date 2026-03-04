@@ -1,0 +1,1 @@
+{"content": "The two-pointer technique is a common algorithmic strategy used primarily in problems involving arrays or lists, particularly for tasks like finding pairs that meet certain criteria, merging sorted", "tokens": 83, "elapsed": 1.425552291009808, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

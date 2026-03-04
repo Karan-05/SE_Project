@@ -1,0 +1,1 @@
+{"content": "The \"two pointers\" pattern is typically used in algorithmic problems, particularly in scenarios involving arrays or lists where you need to traverse the data in a specific way", "tokens": 86, "elapsed": 1.737485709018074, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

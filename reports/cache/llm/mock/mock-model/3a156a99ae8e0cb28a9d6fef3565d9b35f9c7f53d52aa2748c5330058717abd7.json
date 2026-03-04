@@ -1,0 +1,1 @@
+{"content": "[MOCK] cf7189b8898ee4f3 :: You are comparing a new task to base task baseline. List semantic deltas succinctly: Return the sum of all integers.", "tokens": 20, "elapsed": 1.6249999998940723e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "semantic-diff", "caller": "semantic_diff"}}

@@ -1,0 +1,13 @@
+\begin{tabular}{llllllll}
+\toprule
+variant & pass\_rate & failure\_rate & avg\_reward & win\_rate & starved\_tasks & notes & embedding\_score \\
+\midrule
+full & 0.900 & 0.100 & 17746.263 & 0.782 & 4.671 & contract\_first + contract\_first (single\_agent) & -- \\
+no\_rl\_allocation & 0.900 & 0.100 & 8782.065 & 0.598 & 11.290 & Random agent allocation & -- \\
+no\_multi\_agent & 0.900 & 0.100 & 17746.263 & 0.782 & 4.671 & Best single-agent: contract\_first & -- \\
+predictor\_only & 0.900 & 0.100 & 14512.735 & 0.684 & 3.445 & Skill-match heuristic & -- \\
+no\_graph\_embeddings & 0.900 & 0.100 & -- & -- & -- & Baseline embedding configuration & 0.954 \\
+graph\_embeddings & 0.900 & 0.100 & -- & -- & -- & Best embedding configuration & 0.987 \\
+predictor\_only\_performance & -- & -- & -- & -- & -- & Best supervised feature mode: text\_metadata & 1.000 \\
+\bottomrule
+\end{tabular}

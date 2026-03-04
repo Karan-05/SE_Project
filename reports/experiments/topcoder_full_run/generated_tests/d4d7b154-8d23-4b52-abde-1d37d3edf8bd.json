@@ -1,0 +1,125 @@
+[
+  {
+    "name": "test_member_creation_success",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "memberId": "12345"
+    },
+    "input": [
+      {
+        "name": "John Doe",
+        "email": "john.doe@example.com"
+      }
+    ]
+  },
+  {
+    "name": "test_member_creation_duplicate_email",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Email already exists"
+    },
+    "input": [
+      {
+        "name": "Jane Doe",
+        "email": "john.doe@example.com"
+      }
+    ]
+  },
+  {
+    "name": "test_member_retrieval_success",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "member": {
+        "name": "John Doe",
+        "email": "john.doe@example.com"
+      }
+    },
+    "input": [
+      {
+        "memberId": "12345"
+      }
+    ]
+  },
+  {
+    "name": "test_member_retrieval_nonexistent",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Member not found"
+    },
+    "input": [
+      {
+        "memberId": "99999"
+      }
+    ]
+  },
+  {
+    "name": "test_member_update_success",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "memberId": "12345"
+    },
+    "input": [
+      {
+        "memberId": "12345",
+        "updates": {
+          "name": "John Smith"
+        }
+      }
+    ]
+  },
+  {
+    "name": "test_member_update_invalid_email",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Invalid email format"
+    },
+    "input": [
+      {
+        "memberId": "12345",
+        "updates": {
+          "email": "invalid-email"
+        }
+      }
+    ]
+  },
+  {
+    "name": "test_member_trait_creation_success",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "traitId": "54321"
+    },
+    "input": [
+      {
+        "memberId": "12345",
+        "trait": {
+          "type": "skill",
+          "value": "JavaScript"
+        }
+      }
+    ]
+  },
+  {
+    "name": "test_member_trait_creation_invalid_type",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Invalid trait type"
+    },
+    "input": [
+      {
+        "memberId": "12345",
+        "trait": {
+          "type": "invalid-type",
+          "value": "JavaScript"
+        }
+      }
+    ]
+  }
+]

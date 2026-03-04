@@ -1,0 +1,1 @@
+{"content": "[MOCK] 2fc36b4d457cd54a :: Given the problem: Return the nth Fibonacci number., would pattern kadane be relevant?", "tokens": 13, "elapsed": 1.3340000000194863e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "pattern-hint", "caller": "pattern_skeleton"}}

@@ -1,0 +1,47 @@
+{
+  "run_id": "benchmark_subset",
+  "total_problems": 50,
+  "attempted": 50,
+  "completed_successfully": 45,
+  "success_rate": 0.9,
+  "pass_at_final": 0.9,
+  "avg_attempts_to_success": 1.0,
+  "median_attempts_to_success": 1.0,
+  "max_attempts_to_success": 1.0,
+  "fallback_count": 5,
+  "fallback_rate": 0.1,
+  "stagnation_count": 0,
+  "stagnation_rate": 0.0,
+  "attempted_with_extracted_tests": 50,
+  "attempted_with_synthesized_tests": 0,
+  "success_rate_extracted": 0.9,
+  "success_rate_synthesized": 0.0,
+  "strategy_distribution_initial": {
+    "contract_first": 50
+  },
+  "strategy_distribution_final": {
+    "contract_first": 45,
+    "simulation_trace": 5
+  },
+  "runtime": {
+    "start_time": "2026-02-24T00:19:21.361694",
+    "end_time": "2026-02-24T00:19:21.386684",
+    "total_wall_time_seconds": 0.02499,
+    "avg_time_per_task": 0.00048358
+  },
+  "error_taxonomy": {
+    "success": 45,
+    "failed_tests": 5
+  },
+  "artifact_dir": "/Users/karanallagh/Desktop/DataCollector/artifacts/self_verifying/benchmark_subset",
+  "tasks_by_dataset": {
+    "experiments_decomposition_benchmark_tasks.json": 50
+  },
+  "solve_attempts_total": 80.0,
+  "llm_calls_total": 0,
+  "llm_calls_avg_per_task": 0.0,
+  "llm_available": false,
+  "run_validity": "VALID",
+  "llm_reason": "missing_config",
+  "stop_reason": ""
+}

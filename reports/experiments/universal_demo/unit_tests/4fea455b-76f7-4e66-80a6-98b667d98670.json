@@ -1,0 +1,93 @@
+{
+  "task_id": "4fea455b-76f7-4e66-80a6-98b667d98670",
+  "tests": [
+    {
+      "name": "valid_download_after_submission",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'can_download': True}",
+      "output": "None",
+      "error": "",
+      "input": "[{'user_id': 'user123', 'challenge_id': 'challenge456', 'submitted': True}]",
+      "kwargs": "{}",
+      "duration": 2.1624990040436387e-05
+    },
+    {
+      "name": "invalid_download_without_submission",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'can_download': False}",
+      "output": "None",
+      "error": "",
+      "input": "[{'user_id': 'user789', 'challenge_id': 'challenge456', 'submitted': False}]",
+      "kwargs": "{}",
+      "duration": 7.832975825294852e-06
+    },
+    {
+      "name": "multiple_submissions",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'can_download': True}",
+      "output": "None",
+      "error": "",
+      "input": "[{'user_id': 'user123', 'challenge_id': 'challenge456', 'submitted': True, 'submission_count': 3}]",
+      "kwargs": "{}",
+      "duration": 7.95800588093698e-06
+    },
+    {
+      "name": "download_from_different_challenge",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'can_download': False}",
+      "output": "None",
+      "error": "",
+      "input": "[{'user_id': 'user123', 'challenge_id': 'challenge789', 'submitted': True}]",
+      "kwargs": "{}",
+      "duration": 6.4159976318478584e-06
+    },
+    {
+      "name": "edge_case_no_submissions",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'can_download': True}",
+      "output": "None",
+      "error": "",
+      "input": "[{'user_id': 'user456', 'challenge_id': 'challenge456', 'submitted': True, 'submission_count': 0}]",
+      "kwargs": "{}",
+      "duration": 6.249989382922649e-06
+    },
+    {
+      "name": "adversarial_case_invalid_user",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'can_download': False}",
+      "output": "None",
+      "error": "",
+      "input": "[{'user_id': 'invalid_user', 'challenge_id': 'challenge456', 'submitted': False}]",
+      "kwargs": "{}",
+      "duration": 6.95799826644361e-06
+    },
+    {
+      "name": "valid_download_after_multiple_challenges",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'can_download': True}",
+      "output": "None",
+      "error": "",
+      "input": "[{'user_id': 'user123', 'challenge_ids': ['challenge456', 'challenge789'], 'submitted': True}]",
+      "kwargs": "{}",
+      "duration": 6.332993507385254e-06
+    },
+    {
+      "name": "download_attempt_after_challenge_end",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'can_download': True}",
+      "output": "None",
+      "error": "",
+      "input": "[{'user_id': 'user123', 'challenge_id': 'challenge456', 'submitted': True, 'challenge_ended': True}]",
+      "kwargs": "{}",
+      "duration": 5.832989700138569e-06
+    }
+  ]
+}

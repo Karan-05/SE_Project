@@ -1,0 +1,90 @@
+[
+  {
+    "name": "valid_reskin_submission",
+    "mode": "call",
+    "expected": "success",
+    "input": [
+      {
+        "patch": "valid_patch_data",
+        "style_guide": "Figma_style_guide"
+      }
+    ]
+  },
+  {
+    "name": "missing_style_guide",
+    "mode": "call",
+    "expected": "error: missing style guide",
+    "input": [
+      {
+        "patch": "valid_patch_data",
+        "style_guide": null
+      }
+    ]
+  },
+  {
+    "name": "invalid_patch_format",
+    "mode": "call",
+    "expected": "error: invalid patch format",
+    "input": [
+      {
+        "patch": "invalid_format_patch",
+        "style_guide": "Figma_style_guide"
+      }
+    ]
+  },
+  {
+    "name": "functionality_check",
+    "mode": "call",
+    "expected": "functions_working",
+    "input": [
+      {
+        "patch": "valid_patch_data",
+        "style_guide": "Figma_style_guide"
+      }
+    ]
+  },
+  {
+    "name": "unnecessary_file_changes",
+    "mode": "call",
+    "expected": "error: unnecessary file changes",
+    "input": [
+      {
+        "patch": "patch_with_unnecessary_changes",
+        "style_guide": "Figma_style_guide"
+      }
+    ]
+  },
+  {
+    "name": "edge_case_large_patch",
+    "mode": "call",
+    "expected": "success",
+    "input": [
+      {
+        "patch": "large_valid_patch_data",
+        "style_guide": "Figma_style_guide"
+      }
+    ]
+  },
+  {
+    "name": "edge_case_empty_patch",
+    "mode": "call",
+    "expected": "error: empty patch",
+    "input": [
+      {
+        "patch": "",
+        "style_guide": "Figma_style_guide"
+      }
+    ]
+  },
+  {
+    "name": "valid_patch_with_comments",
+    "mode": "call",
+    "expected": "success",
+    "input": [
+      {
+        "patch": "valid_patch_with_comments",
+        "style_guide": "Figma_style_guide"
+      }
+    ]
+  }
+]

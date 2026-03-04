@@ -1,0 +1,35 @@
+{
+  "task_type": "data_etl",
+  "confidence": 0.85,
+  "why": [
+    "The task involves updating a download function, which suggests data handling and transformation.",
+    "The requirements indicate a need for schema and validation, typical in ETL processes."
+  ],
+  "missing_info": [
+    "Specific details on the current data schema and download function implementation.",
+    "Examples of expected input and output data."
+  ],
+  "verification_plan": [
+    "Check if the new download function meets the requirements outlined.",
+    "Validate the ETL process with sample data."
+  ],
+  "artifacts_to_generate": [
+    {
+      "name": "schema.md",
+      "format": "md"
+    },
+    {
+      "name": "pipeline.py",
+      "format": "code"
+    },
+    {
+      "name": "validation.sql",
+      "format": "sql"
+    },
+    {
+      "name": "sample_inputs_outputs.md",
+      "format": "md"
+    }
+  ],
+  "synthesis_policy": "self_check"
+}

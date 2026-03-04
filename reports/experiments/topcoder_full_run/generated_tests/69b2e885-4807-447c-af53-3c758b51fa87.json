@@ -1,0 +1,58 @@
+[
+  {
+    "name": "footer_expanded",
+    "mode": "io",
+    "expected": "bottom bar is moved up",
+    "stdin": "footer expanded",
+    "expected_stdout": "bottom bar is moved up"
+  },
+  {
+    "name": "footer_collapsed",
+    "mode": "io",
+    "expected": "bottom bar is moved up",
+    "stdin": "footer collapsed",
+    "expected_stdout": "bottom bar is moved up"
+  },
+  {
+    "name": "footer_no_overlap",
+    "mode": "io",
+    "expected": "no overlap between footer and buttons",
+    "stdin": "footer expanded with buttons visible",
+    "expected_stdout": "no overlap between footer and buttons"
+  },
+  {
+    "name": "footer_with_buttons",
+    "mode": "io",
+    "expected": "buttons are visible above footer",
+    "stdin": "footer expanded with buttons hidden",
+    "expected_stdout": "buttons are visible above footer"
+  },
+  {
+    "name": "footer_responsive_design",
+    "mode": "io",
+    "expected": "footer and buttons adjust correctly",
+    "stdin": "resize window to mobile",
+    "expected_stdout": "footer and buttons adjust correctly"
+  },
+  {
+    "name": "footer_no_change",
+    "mode": "io",
+    "expected": "existing functions remain intact",
+    "stdin": "no changes made",
+    "expected_stdout": "existing functions remain intact"
+  },
+  {
+    "name": "footer_edge_case",
+    "mode": "io",
+    "expected": "bottom bar is moved up without overlap",
+    "stdin": "footer with maximum content",
+    "expected_stdout": "bottom bar is moved up without overlap"
+  },
+  {
+    "name": "footer_empty_state",
+    "mode": "io",
+    "expected": "bottom bar is visible",
+    "stdin": "footer with no content",
+    "expected_stdout": "bottom bar is visible"
+  }
+]

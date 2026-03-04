@@ -1,0 +1,92 @@
+{
+  "task_type": "architecture_doc",
+  "id": "30377290",
+  "title": "Native Language Specialists \u2013 Japanese, Korean, and French (3-Month GIG Contract)",
+  "summary": "This document outlines the architecture and operational framework for sourcing native language specialists in Japanese, Korean, and French for a 3-month contract. The initiative aims to enhance communication and operational efficiency across global projects.",
+  "artifacts": {
+    "design_doc_md": "# Architecture Document for Native Language Specialists\n\n## Requirements\n- **Languages Required:** Japanese, Korean, French\n- **Contract Duration:** 3 months\n- **Full-time Commitment:** 8 hours/day\n\n## Approach\n- Source candidates through global recruitment channels.\n- Implement standardized skill assessments for candidate evaluation.\n- Ensure flexibility in work hours to align with team needs.\n\n## Rollout\n- Immediate onboarding of selected candidates.\n- Continuous evaluation of operational effectiveness.\n\n## Observability\n- Track candidate performance through regular feedback sessions.\n- Adjust operational processes based on feedback and performance metrics.\n\n## Acceptance Checklist\n- Candidates meet language proficiency requirements.\n- Successful completion of skill assessments.",
+    "mermaid_diagram": "graph TD;\n    A[Candidate Sourcing] --> B[Skill Assessment];\n    B --> C[Onboarding];\n    C --> D[Operational Support];\n    D --> E[Performance Evaluation];",
+    "interfaces": [
+      {
+        "producer": "Recruitment Team",
+        "consumer": "Operational Managers",
+        "protocol": "Standardized Assessment Protocol",
+        "payload": "Candidate Profiles, Assessment Results"
+      }
+    ],
+    "tradeoffs": [
+      "Remote work allows for a broader talent pool but may complicate team integration.",
+      "Standardized assessments ensure fairness but may not capture all nuances of candidate capabilities."
+    ]
+  },
+  "assumptions": [
+    "Candidates will be sourced from a global talent pool.",
+    "Operational processes will be adapted to accommodate remote work.",
+    "Skill assessments will be standardized for consistency."
+  ],
+  "plan": [
+    "Define the operational requirements for language specialists.",
+    "Establish a candidate evaluation framework focusing on language proficiency and operational aptitude.",
+    "Create a communication plan for engaging with candidates and stakeholders.",
+    "Outline onboarding processes and timelines for selected candidates.",
+    "Develop a feedback mechanism to assess candidate performance and operational impact."
+  ],
+  "validations": [
+    "Document structure aligns with rubric requirements.",
+    "All key sections are covered and actionable."
+  ],
+  "confidence": 0.9,
+  "stop_reason": "completed",
+  "rubric_self_check": {
+    "coverage": 4.0,
+    "specificity": 4.0,
+    "actionability": 4.0,
+    "overall_notes": "All required sections are addressed with clear, actionable content."
+  },
+  "raw": {
+    "task_type": "architecture_doc",
+    "id": 30377290,
+    "title": "Native Language Specialists \u2013 Japanese, Korean, and French (3-Month GIG Contract)",
+    "summary": "This document outlines the architecture and operational framework for sourcing native language specialists in Japanese, Korean, and French for a 3-month contract. The initiative aims to enhance communication and operational efficiency across global projects.",
+    "assumptions": [
+      "Candidates will be sourced from a global talent pool.",
+      "Operational processes will be adapted to accommodate remote work.",
+      "Skill assessments will be standardized for consistency."
+    ],
+    "plan": [
+      "Define the operational requirements for language specialists.",
+      "Establish a candidate evaluation framework focusing on language proficiency and operational aptitude.",
+      "Create a communication plan for engaging with candidates and stakeholders.",
+      "Outline onboarding processes and timelines for selected candidates.",
+      "Develop a feedback mechanism to assess candidate performance and operational impact."
+    ],
+    "artifacts": {
+      "design_doc_md": "# Architecture Document for Native Language Specialists\n\n## Requirements\n- **Languages Required:** Japanese, Korean, French\n- **Contract Duration:** 3 months\n- **Full-time Commitment:** 8 hours/day\n\n## Approach\n- Source candidates through global recruitment channels.\n- Implement standardized skill assessments for candidate evaluation.\n- Ensure flexibility in work hours to align with team needs.\n\n## Rollout\n- Immediate onboarding of selected candidates.\n- Continuous evaluation of operational effectiveness.\n\n## Observability\n- Track candidate performance through regular feedback sessions.\n- Adjust operational processes based on feedback and performance metrics.\n\n## Acceptance Checklist\n- Candidates meet language proficiency requirements.\n- Successful completion of skill assessments.",
+      "mermaid_diagram": "graph TD;\n    A[Candidate Sourcing] --> B[Skill Assessment];\n    B --> C[Onboarding];\n    C --> D[Operational Support];\n    D --> E[Performance Evaluation];",
+      "interfaces": [
+        {
+          "producer": "Recruitment Team",
+          "consumer": "Operational Managers",
+          "protocol": "Standardized Assessment Protocol",
+          "payload": "Candidate Profiles, Assessment Results"
+        }
+      ],
+      "tradeoffs": [
+        "Remote work allows for a broader talent pool but may complicate team integration.",
+        "Standardized assessments ensure fairness but may not capture all nuances of candidate capabilities."
+      ]
+    },
+    "validations": [
+      "Document structure aligns with rubric requirements.",
+      "All key sections are covered and actionable."
+    ],
+    "confidence": 0.9,
+    "stop_reason": "completed",
+    "rubric_self_check": {
+      "coverage": 4,
+      "specificity": 4,
+      "actionability": 4,
+      "overall_notes": "All required sections are addressed with clear, actionable content."
+    }
+  }
+}

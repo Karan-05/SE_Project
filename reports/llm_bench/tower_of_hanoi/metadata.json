@@ -1,0 +1,35 @@
+{
+  "timestamp_utc": "2025-11-29T12:04:37.178603+00:00",
+  "python_version": "3.14.0",
+  "platform": "macOS-26.1-arm64-arm-64bit-Mach-O",
+  "machine": "Karans-MacBook-Air.local",
+  "git_commit": "3abfe9511641b195ee6ff98886080bf09ac7af9d",
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "config": {
+    "min_disks": 4,
+    "max_disks": 10,
+    "strategies": [
+      "full_decomposition",
+      "select_then_decompose"
+    ],
+    "token_budget": 150,
+    "max_steps_multiplier": 3.0,
+    "token_proxy": "word-count of planner instructions (prompt + response) per move"
+  },
+  "inputs": [
+    "/Users/karanallagh/Downloads/DataCollector/src/benchmarks/toh/env.py",
+    "/Users/karanallagh/Downloads/DataCollector/src/benchmarks/toh/run.py",
+    "/Users/karanallagh/Downloads/DataCollector/src/benchmarks/toh/strategies.py"
+  ]
+}

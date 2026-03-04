@@ -1,0 +1,82 @@
+[
+  {
+    "name": "valid_reskin_patch",
+    "mode": "call",
+    "expected": "success",
+    "input": [
+      {
+        "patch": "valid_patch_data"
+      }
+    ]
+  },
+  {
+    "name": "invalid_patch_structure",
+    "mode": "call",
+    "expected": "error",
+    "input": [
+      {
+        "patch": "invalid_structure_data"
+      }
+    ]
+  },
+  {
+    "name": "no_changes_made",
+    "mode": "call",
+    "expected": "no_changes",
+    "input": [
+      {
+        "patch": "no_changes_data"
+      }
+    ]
+  },
+  {
+    "name": "excessive_file_changes",
+    "mode": "call",
+    "expected": "error",
+    "input": [
+      {
+        "patch": "excessive_changes_data"
+      }
+    ]
+  },
+  {
+    "name": "missing_required_assets",
+    "mode": "call",
+    "expected": "error",
+    "input": [
+      {
+        "patch": "missing_assets_data"
+      }
+    ]
+  },
+  {
+    "name": "valid_functionality_check",
+    "mode": "call",
+    "expected": "functionality_ok",
+    "input": [
+      {
+        "patch": "valid_functionality_data"
+      }
+    ]
+  },
+  {
+    "name": "patch_with_unnecessary_updates",
+    "mode": "call",
+    "expected": "error",
+    "input": [
+      {
+        "patch": "unnecessary_updates_data"
+      }
+    ]
+  },
+  {
+    "name": "edge_case_large_patch",
+    "mode": "call",
+    "expected": "success",
+    "input": [
+      {
+        "patch": "large_patch_data"
+      }
+    ]
+  }
+]

@@ -1,0 +1,126 @@
+[
+  {
+    "name": "valid_project_creation",
+    "mode": "call",
+    "expected": {
+      "id": "1",
+      "name": "New Project",
+      "description": "A project to modernize the service.",
+      "status": "active"
+    },
+    "input": [
+      {
+        "name": "New Project",
+        "description": "A project to modernize the service.",
+        "status": "active"
+      }
+    ]
+  },
+  {
+    "name": "project_member_association",
+    "mode": "call",
+    "expected": {
+      "projectId": "1",
+      "userId": "user123",
+      "role": "admin",
+      "isPrimary": true
+    },
+    "input": [
+      {
+        "projectId": "1",
+        "userId": "user123",
+        "role": "admin",
+        "isPrimary": true
+      }
+    ]
+  },
+  {
+    "name": "project_attachment_upload",
+    "mode": "call",
+    "expected": {
+      "projectId": "1",
+      "fileName": "document.pdf",
+      "fileType": "application/pdf",
+      "attachmentId": "attach1"
+    },
+    "input": [
+      {
+        "projectId": "1",
+        "fileName": "document.pdf",
+        "fileType": "application/pdf"
+      }
+    ]
+  },
+  {
+    "name": "invalid_project_creation_missing_fields",
+    "mode": "call",
+    "expected": {
+      "error": "Project name is required."
+    },
+    "input": [
+      {
+        "name": "",
+        "description": "Missing name.",
+        "status": "active"
+      }
+    ]
+  },
+  {
+    "name": "duplicate_project_creation",
+    "mode": "call",
+    "expected": {
+      "error": "Project with this name already exists."
+    },
+    "input": [
+      {
+        "name": "New Project",
+        "description": "A project to modernize the service.",
+        "status": "active"
+      }
+    ]
+  },
+  {
+    "name": "project_member_invalid_role",
+    "mode": "call",
+    "expected": {
+      "error": "Invalid role specified."
+    },
+    "input": [
+      {
+        "projectId": "1",
+        "userId": "user123",
+        "role": "invalid_role",
+        "isPrimary": true
+      }
+    ]
+  },
+  {
+    "name": "attachment_upload_invalid_file_type",
+    "mode": "call",
+    "expected": {
+      "error": "Invalid file type."
+    },
+    "input": [
+      {
+        "projectId": "1",
+        "fileName": "script.exe",
+        "fileType": "application/x-msdownload"
+      }
+    ]
+  },
+  {
+    "name": "project_retrieval_by_id",
+    "mode": "call",
+    "expected": {
+      "id": "1",
+      "name": "New Project",
+      "description": "A project to modernize the service.",
+      "status": "active"
+    },
+    "input": [
+      {
+        "projectId": "1"
+      }
+    ]
+  }
+]

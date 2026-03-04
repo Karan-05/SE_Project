@@ -1,0 +1,1 @@
+{"content": "The two-pointer technique is typically used in algorithms that involve searching or sorting, particularly in problems related to arrays or linked lists. It is often applied in scenarios like", "tokens": 88, "elapsed": 1.5313794999965467, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

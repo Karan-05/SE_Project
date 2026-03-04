@@ -1,0 +1,1 @@
+{"content": "[MOCK] 68a00d201257d315 :: You are comparing a new task to base task baseline. List semantic deltas succinctly: Return the number of undirected edg", "tokens": 20, "elapsed": 1.9580000001351294e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "semantic-diff", "caller": "semantic_diff"}}

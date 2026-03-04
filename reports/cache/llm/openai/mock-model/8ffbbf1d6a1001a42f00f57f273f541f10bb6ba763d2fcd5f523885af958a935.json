@@ -1,0 +1,1 @@
+{"content": "```python\ndef solve(challenges):\n    return [{\"id\": challenge[\"id\"], \"link\": f\"https://api.example.com/challenges/{challenge['id']}\"} for challenge in challenges]\n```", "tokens": 244, "elapsed": 1.6915115419978974, "budget_exceeded": false, "meta": {"provider": "openai", "model": "repair-loop", "caller": "multi_view:repair"}}

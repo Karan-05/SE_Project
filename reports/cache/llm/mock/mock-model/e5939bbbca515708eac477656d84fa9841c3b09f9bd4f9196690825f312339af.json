@@ -1,0 +1,1 @@
+{"content": "[MOCK] 4a50f15672d457a0 :: Given the problem: Return counts of characters as a dict sorted by key., would pattern kadane be relevant?", "tokens": 18, "elapsed": 1.6250000001161169e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "pattern-hint", "caller": "pattern_skeleton"}}

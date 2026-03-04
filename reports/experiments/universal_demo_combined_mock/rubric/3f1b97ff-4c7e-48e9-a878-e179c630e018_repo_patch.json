@@ -1,0 +1,15 @@
+{
+  "score": 69.0,
+  "passes_threshold": true,
+  "reasons": [
+    "Plan present",
+    "Risks documented",
+    "Validation/tests listed"
+  ],
+  "missing": [
+    "Plan"
+  ],
+  "section_coverage": 0.75,
+  "extra_score": 0.6,
+  "relaxed_due_to_context_missing": true
+}

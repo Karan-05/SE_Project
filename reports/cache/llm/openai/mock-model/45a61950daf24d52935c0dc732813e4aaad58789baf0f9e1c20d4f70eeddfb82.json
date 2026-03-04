@@ -1,0 +1,1 @@
+{"content": "To create a script that extracts tasks from Exchange/Outlook into a CSV file, you can use Python with the `pywin32` library, which allows", "tokens": 99, "elapsed": 1.5226317500055302, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

@@ -1,0 +1,1 @@
+{"content": "[MOCK] 49f669f79488963c :: Given the problem: Return degree counts for each vertex., would pattern hash_bucket be relevant?", "tokens": 14, "elapsed": 1.4589999999259362e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "pattern-hint", "caller": "pattern_skeleton"}}

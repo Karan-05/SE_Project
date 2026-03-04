@@ -1,0 +1,6 @@
+{
+  "coverage": 90.0,
+  "specificity": 88.0,
+  "actionability": 92.0,
+  "overall_notes": "The ETL blueprint includes schema, transformation logic, and validation queries, addressing the requirements effectively."
+}

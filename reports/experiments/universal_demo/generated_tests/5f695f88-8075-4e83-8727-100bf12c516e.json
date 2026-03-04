@@ -1,0 +1,58 @@
+[
+  {
+    "name": "valid_login_response",
+    "mode": "io",
+    "expected": "{\"status\": \"success\", \"roles\": [\"user\", \"admin\"]}",
+    "stdin": "{\"username\": \"validUser\", \"password\": \"validPassword\"}",
+    "expected_stdout": "{\"status\": \"success\", \"roles\": [\"user\", \"admin\"]}"
+  },
+  {
+    "name": "invalid_login_response",
+    "mode": "io",
+    "expected": "{\"status\": \"error\", \"message\": \"Invalid credentials\"}",
+    "stdin": "{\"username\": \"invalidUser\", \"password\": \"invalidPassword\"}",
+    "expected_stdout": "{\"status\": \"error\", \"message\": \"Invalid credentials\"}"
+  },
+  {
+    "name": "role_lookup_valid_user",
+    "mode": "io",
+    "expected": "{\"status\": \"success\", \"roles\": [\"user\"]}",
+    "stdin": "{\"username\": \"roleUser\"}",
+    "expected_stdout": "{\"status\": \"success\", \"roles\": [\"user\"]}"
+  },
+  {
+    "name": "role_lookup_nonexistent_user",
+    "mode": "io",
+    "expected": "{\"status\": \"error\", \"message\": \"User not found\"}",
+    "stdin": "{\"username\": \"nonexistentUser\"}",
+    "expected_stdout": "{\"status\": \"error\", \"message\": \"User not found\"}"
+  },
+  {
+    "name": "login_with_empty_credentials",
+    "mode": "io",
+    "expected": "{\"status\": \"error\", \"message\": \"Credentials cannot be empty\"}",
+    "stdin": "{\"username\": \"\", \"password\": \"\"}",
+    "expected_stdout": "{\"status\": \"error\", \"message\": \"Credentials cannot be empty\"}"
+  },
+  {
+    "name": "role_lookup_with_empty_username",
+    "mode": "io",
+    "expected": "{\"status\": \"error\", \"message\": \"Username cannot be empty\"}",
+    "stdin": "{\"username\": \"\"}",
+    "expected_stdout": "{\"status\": \"error\", \"message\": \"Username cannot be empty\"}"
+  },
+  {
+    "name": "login_with_special_characters",
+    "mode": "io",
+    "expected": "{\"status\": \"success\", \"roles\": [\"user\"]}",
+    "stdin": "{\"username\": \"user!@#\", \"password\": \"pass$%^\"}",
+    "expected_stdout": "{\"status\": \"success\", \"roles\": [\"user\"]}"
+  },
+  {
+    "name": "role_lookup_with_special_characters",
+    "mode": "io",
+    "expected": "{\"status\": \"success\", \"roles\": [\"user\"]}",
+    "stdin": "{\"username\": \"user!@#\"}",
+    "expected_stdout": "{\"status\": \"success\", \"roles\": [\"user\"]}"
+  }
+]

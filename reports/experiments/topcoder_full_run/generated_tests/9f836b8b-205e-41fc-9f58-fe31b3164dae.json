@@ -1,0 +1,99 @@
+[
+  {
+    "name": "valid_country_creation",
+    "mode": "call",
+    "expected": {
+      "id": "1",
+      "name": "United States",
+      "code": "US"
+    },
+    "input": [
+      {
+        "name": "United States",
+        "code": "US"
+      }
+    ]
+  },
+  {
+    "name": "valid_educational_institution_creation",
+    "mode": "call",
+    "expected": {
+      "id": "1",
+      "name": "Harvard University",
+      "type": "University"
+    },
+    "input": [
+      {
+        "name": "Harvard University",
+        "type": "University"
+      }
+    ]
+  },
+  {
+    "name": "duplicate_country_creation",
+    "mode": "call",
+    "expected": {
+      "error": "Country already exists"
+    },
+    "input": [
+      {
+        "name": "United States",
+        "code": "US"
+      }
+    ]
+  },
+  {
+    "name": "invalid_country_code",
+    "mode": "call",
+    "expected": {
+      "error": "Invalid country code format"
+    },
+    "input": [
+      {
+        "name": "Invalid Country",
+        "code": "123"
+      }
+    ]
+  },
+  {
+    "name": "valid_device_creation",
+    "mode": "call",
+    "expected": {
+      "id": "1",
+      "name": "iPhone",
+      "type": "Mobile"
+    },
+    "input": [
+      {
+        "name": "iPhone",
+        "type": "Mobile"
+      }
+    ]
+  },
+  {
+    "name": "unauthorized_access",
+    "mode": "call",
+    "expected": {
+      "error": "Unauthorized"
+    },
+    "input": [
+      {
+        "token": "invalid_token"
+      }
+    ]
+  },
+  {
+    "name": "pagination_functionality",
+    "mode": "call",
+    "expected": {
+      "total": 100,
+      "data": []
+    },
+    "input": [
+      {
+        "page": 1,
+        "limit": 10
+      }
+    ]
+  }
+]

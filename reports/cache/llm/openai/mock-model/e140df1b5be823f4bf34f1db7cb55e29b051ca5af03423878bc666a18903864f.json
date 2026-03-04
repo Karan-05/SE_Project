@@ -1,0 +1,1 @@
+{"content": "In the context of maintaining a codebase like the TC Review API, the term \"hash_bucket\" typically refers to a data structure used in hash tables to manage", "tokens": 90, "elapsed": 1.4342473330034409, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

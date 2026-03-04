@@ -1,0 +1,16 @@
+{
+  "task_id": "array_sum_stress",
+  "tests": [
+    {
+      "name": "sample_0",
+      "mode": "call",
+      "status": "pass",
+      "expected": "6",
+      "output": "6",
+      "error": "",
+      "input": "[[1, 2, 3]]",
+      "kwargs": "{}",
+      "duration": 1.2167001841589808e-05
+    }
+  ]
+}

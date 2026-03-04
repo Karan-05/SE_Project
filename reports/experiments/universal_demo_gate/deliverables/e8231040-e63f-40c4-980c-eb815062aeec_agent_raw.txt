@@ -1,0 +1,28 @@
+```json
+{
+  "task_type": "data_etl",
+  "summary": "Create an ETL blueprint for fixing the logged-out user display issue in the Topcoder Online Review system. This includes defining the schema, pipeline steps, validation queries, and an acceptance checklist.",
+  "artifacts": {
+    "pipeline_overview": "Extract user session data from the authentication service, transform to identify logged-out users, and load the updated user state into the frontend navigation component.",
+    "sql_or_pseudocode": "def update_user_navigation(user_session):\n    if not user_session.is_logged_in:\n        navigation.show_logged_out_state()\n    else:\n        navigation.show_logged_in_state(user_session.user_id)",
+    "tables": [
+      "user_sessions(user_id STRING, is_logged_in BOOLEAN, last_active TIMESTAMP)",
+      "navigation_state(user_id STRING, state ENUM('logged_in', 'logged_out'))"
+    ],
+    "dq_checks": [
+      "Check that all users have a valid state in navigation_state table.",
+      "Ensure no logged-out users are incorrectly displayed as logged-in."
+    ],
+    "tests": [
+      "pytest tests/test_navigation.py",
+      "curl -X GET /api/navigation/state -H 'Authorization: Bearer token' | jq '.state'"
+    ]
+  },
+  "rubric_self_check": {
+    "coverage": 90,
+    "specificity": 88,
+    "actionability": 85,
+    "overall_notes": "ETL blueprint covers all required sections, with clear validation queries and tests outlined."
+  }
+}
+```

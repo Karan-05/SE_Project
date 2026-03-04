@@ -1,0 +1,107 @@
+[
+  {
+    "name": "test_navigation_structure",
+    "mode": "call",
+    "expected": true,
+    "input": [
+      {
+        "currentPage": "accountSettings",
+        "expectedNavigation": [
+          "home",
+          "challenges",
+          "submissions",
+          "accountSettings"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "test_navigation_redirect",
+    "mode": "call",
+    "expected": "home",
+    "input": [
+      {
+        "currentPage": "accountSettings",
+        "action": "navigateTo",
+        "targetPage": "home"
+      }
+    ]
+  },
+  {
+    "name": "test_missing_navigation_item",
+    "mode": "call",
+    "expected": null,
+    "input": [
+      {
+        "currentPage": "accountSettings",
+        "expectedNavigation": [
+          "home",
+          "challenges",
+          "submissions"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "test_empty_navigation",
+    "mode": "call",
+    "expected": null,
+    "input": [
+      {
+        "currentPage": "accountSettings",
+        "expectedNavigation": []
+      }
+    ]
+  },
+  {
+    "name": "test_invalid_navigation_target",
+    "mode": "call",
+    "expected": "error",
+    "input": [
+      {
+        "currentPage": "accountSettings",
+        "action": "navigateTo",
+        "targetPage": "invalidPage"
+      }
+    ]
+  },
+  {
+    "name": "test_user_role_navigation",
+    "mode": "call",
+    "expected": true,
+    "input": [
+      {
+        "currentPage": "accountSettings",
+        "userRole": "admin",
+        "expectedNavigation": [
+          "home",
+          "challenges",
+          "submissions",
+          "adminPanel"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "test_navigation_state_persistence",
+    "mode": "call",
+    "expected": "accountSettings",
+    "input": [
+      {
+        "currentPage": "accountSettings",
+        "previousPage": "home"
+      }
+    ]
+  },
+  {
+    "name": "test_navigation_on_mobile",
+    "mode": "call",
+    "expected": "mobileNavigation",
+    "input": [
+      {
+        "currentPage": "accountSettings",
+        "deviceType": "mobile"
+      }
+    ]
+  }
+]

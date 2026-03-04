@@ -1,0 +1,1 @@
+{"content": "[MOCK] cf6cc7d3d41f0b22 :: Given the problem: Return the sum of all integers., would pattern two_pointers be relevant?", "tokens": 14, "elapsed": 1.957999999913085e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "pattern-hint", "caller": "pattern_skeleton"}}

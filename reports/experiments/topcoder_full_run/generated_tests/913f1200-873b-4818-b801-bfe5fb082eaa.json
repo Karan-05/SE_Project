@@ -1,0 +1,118 @@
+[
+  {
+    "name": "create_project_success",
+    "mode": "call",
+    "expected": {
+      "id": "1",
+      "name": "New Project",
+      "status": "active"
+    },
+    "input": [
+      {
+        "name": "New Project",
+        "description": "A new project for testing",
+        "type": "development",
+        "templateId": "12345"
+      }
+    ]
+  },
+  {
+    "name": "get_project_success",
+    "mode": "call",
+    "expected": {
+      "id": "1",
+      "name": "New Project",
+      "description": "A new project for testing",
+      "status": "active"
+    },
+    "input": [
+      "1"
+    ]
+  },
+  {
+    "name": "update_project_success",
+    "mode": "call",
+    "expected": {
+      "id": "1",
+      "name": "New Project",
+      "description": "Updated project description",
+      "status": "active"
+    },
+    "input": [
+      {
+        "projectId": "1",
+        "updates": {
+          "description": "Updated project description"
+        }
+      }
+    ]
+  },
+  {
+    "name": "delete_project_success",
+    "mode": "call",
+    "expected": {
+      "message": "Project soft-deleted successfully."
+    },
+    "input": [
+      "1"
+    ]
+  },
+  {
+    "name": "list_projects_with_pagination",
+    "mode": "call",
+    "expected": [
+      {
+        "id": "1",
+        "name": "New Project"
+      },
+      {
+        "id": "2",
+        "name": "Another Project"
+      }
+    ],
+    "input": [
+      {
+        "page": 1,
+        "limit": 2
+      }
+    ]
+  },
+  {
+    "name": "get_project_not_found",
+    "mode": "call",
+    "expected": {
+      "error": "Project not found."
+    },
+    "input": [
+      "999"
+    ]
+  },
+  {
+    "name": "create_project_invalid_data",
+    "mode": "call",
+    "expected": {
+      "error": "Project name is required."
+    },
+    "input": [
+      {
+        "name": "",
+        "description": "Invalid project with no name"
+      }
+    ]
+  },
+  {
+    "name": "list_projects_with_filter",
+    "mode": "call",
+    "expected": [
+      {
+        "id": "1",
+        "name": "New Project"
+      }
+    ],
+    "input": [
+      {
+        "status": "active"
+      }
+    ]
+  }
+]

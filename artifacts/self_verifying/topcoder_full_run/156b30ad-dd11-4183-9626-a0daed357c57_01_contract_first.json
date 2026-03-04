@@ -1,0 +1,165 @@
+{
+  "task_id": "156b30ad-dd11-4183-9626-a0daed357c57",
+  "strategy": "contract_first",
+  "attempt": 1,
+  "pass_rate": 0.0,
+  "plan_subtasks": [
+    "Validate inputs vs contract",
+    "Implement core logic",
+    "Check edge cases",
+    "Generate minimal unit tests for critical behaviors",
+    "Add adversarial/edge-case tests",
+    "Run tests and interpret failures"
+  ],
+  "plan_tests": [
+    "critical unit tests",
+    "edge-case probes"
+  ],
+  "plan_diagnostics": {
+    "missing_fields": "constraints",
+    "contract_length": "36",
+    "audit_note": "Based on the provided contract details, here are some observations regarding completeness and potential missing guarantees:\n\n### Completeness Review\n\n1. **Inputs and Outputs**:\n   - The contract states that both inputs and outputs are \"Underspecified.\" This is a significant gap, as it is crucial to clearly define what inputs are expected and what outputs are to be produced. \n\n2. **Constraints**:\n   - The absence of constraints is concerning. Constraints help define the boundaries within which the",
+    "planning_tokens": "246",
+    "planning_time": "3.076774"
+  },
+  "patch_summary": {
+    "phase": "initial"
+  },
+  "failing_tests": [
+    "button_not_overlapping_footer",
+    "button_visibility_on_scroll",
+    "responsive_design_check",
+    "button_click_functionality",
+    "footer_color_check"
+  ],
+  "trace": [
+    "",
+    "",
+    "",
+    "",
+    ""
+  ],
+  "feedback": [
+    "button_not_overlapping_footer expected Back to Home button is displayed above the grey background footer. but saw ",
+    "button_visibility_on_scroll expected Back to Home button remains visible and does not overlap with footer. but saw ",
+    "responsive_design_check expected Back to Home button adjusts its position without overlapping footer. but saw ",
+    "button_click_functionality expected User is redirected to the home page. but saw ",
+    "footer_color_check expected Footer color matches the specified design. but saw "
+  ],
+  "reproduction": "inputs= kwargs=",
+  "tests_run": [
+    {
+      "name": "button_not_overlapping_footer",
+      "mode": "io",
+      "status": "fail",
+      "expected": "Back to Home button is displayed above the grey background footer.",
+      "output": "",
+      "error": "",
+      "stdin": "User navigates to the page with the Back to Home button.",
+      "args": "[]",
+      "duration": 3.7416990380734205e-05
+    },
+    {
+      "name": "button_visibility_on_scroll",
+      "mode": "io",
+      "status": "fail",
+      "expected": "Back to Home button remains visible and does not overlap with footer.",
+      "output": "",
+      "error": "",
+      "stdin": "User scrolls down the page.",
+      "args": "[]",
+      "duration": 8.95801349543035e-06
+    },
+    {
+      "name": "responsive_design_check",
+      "mode": "io",
+      "status": "fail",
+      "expected": "Back to Home button adjusts its position without overlapping footer.",
+      "output": "",
+      "error": "",
+      "stdin": "User resizes the browser window to various widths.",
+      "args": "[]",
+      "duration": 7.583992555737495e-06
+    },
+    {
+      "name": "button_click_functionality",
+      "mode": "io",
+      "status": "fail",
+      "expected": "User is redirected to the home page.",
+      "output": "",
+      "error": "",
+      "stdin": "User clicks on the Back to Home button.",
+      "args": "[]",
+      "duration": 8.665985660627484e-06
+    },
+    {
+      "name": "footer_color_check",
+      "mode": "io",
+      "status": "fail",
+      "expected": "Footer color matches the specified design.",
+      "output": "",
+      "error": "",
+      "stdin": "User inspects the footer color.",
+      "args": "[]",
+      "duration": 7.041002390906215e-06
+    },
+    {
+      "name": "button_style_check",
+      "mode": "io",
+      "status": "fail",
+      "expected": "Button style matches the Figma design specifications.",
+      "output": "",
+      "error": "",
+      "stdin": "User inspects the Back to Home button style.",
+      "args": "[]",
+      "duration": 1.0416988516226411e-05
+    },
+    {
+      "name": "edge_case_no_footer",
+      "mode": "io",
+      "status": "fail",
+      "expected": "Back to Home button is displayed correctly.",
+      "output": "",
+      "error": "",
+      "stdin": "User navigates to a page without a footer.",
+      "args": "[]",
+      "duration": 6.04201341047883e-06
+    },
+    {
+      "name": "edge_case_button_disabled",
+      "mode": "io",
+      "status": "fail",
+      "expected": "No action is taken, button remains disabled.",
+      "output": "",
+      "error": "",
+      "stdin": "User attempts to click a disabled Back to Home button.",
+      "args": "[]",
+      "duration": 7.499998901039362e-06
+    }
+  ],
+  "llm_calls": 0,
+  "timeline": {
+    "attempt": 1,
+    "strategy": "contract_first",
+    "phase": "initial",
+    "events": {
+      "decompose": {
+        "start": "2026-02-24T01:33:37.783833",
+        "end": "2026-02-24T01:33:37.784280"
+      },
+      "solve": {
+        "start": "2026-02-24T01:33:37.784323",
+        "end": "2026-02-24T01:33:37.784791"
+      },
+      "tests": {
+        "start": "2026-02-24T01:33:37.784652",
+        "end": "2026-02-24T01:33:37.784762",
+        "duration_seconds": "0.000"
+      }
+    },
+    "meta": {
+      "llm_calls": "0"
+    }
+  },
+  "solution_preview": "def solve(*args):\n    return None"
+}

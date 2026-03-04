@@ -1,0 +1,1 @@
+{"content": "The two-pointer pattern is typically used in algorithms that involve searching or sorting, particularly in arrays or lists. In the context of creating an AngularJS directive to parse", "tokens": 96, "elapsed": 1.8312653339817189, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

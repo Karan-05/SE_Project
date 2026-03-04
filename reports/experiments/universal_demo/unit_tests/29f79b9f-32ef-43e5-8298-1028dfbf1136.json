@@ -1,0 +1,93 @@
+{
+  "task_id": "29f79b9f-32ef-43e5-8298-1028dfbf1136",
+  "tests": [
+    {
+      "name": "createRole_validInput",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'success': True, 'roleId': '12345'}",
+      "output": "None",
+      "error": "",
+      "input": "[{'name': 'Admin', 'permissions': ['read', 'write', 'delete']}]",
+      "kwargs": "{}",
+      "duration": 1.7874990589916706e-05
+    },
+    {
+      "name": "createRole_missingName",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'success': False, 'error': 'Role name is required.'}",
+      "output": "None",
+      "error": "",
+      "input": "[{'permissions': ['read']}]",
+      "kwargs": "{}",
+      "duration": 7.415976142510772e-06
+    },
+    {
+      "name": "getUser_validUserId",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'success': True, 'user': {'id': '67890', 'username': 'testUser', 'roles': ['Admin']}}",
+      "output": "None",
+      "error": "",
+      "input": "[{'userId': '67890'}]",
+      "kwargs": "{}",
+      "duration": 9.417010005563498e-06
+    },
+    {
+      "name": "getUser_invalidUserId",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'success': False, 'error': 'User not found.'}",
+      "output": "None",
+      "error": "",
+      "input": "[{'userId': 'invalidId'}]",
+      "kwargs": "{}",
+      "duration": 5.958019755780697e-06
+    },
+    {
+      "name": "updateUser_validData",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'success': True, 'message': 'User updated successfully.'}",
+      "output": "None",
+      "error": "",
+      "input": "[{'userId': '67890', 'data': {'username': 'updatedUser'}}]",
+      "kwargs": "{}",
+      "duration": 7.5830030255019665e-06
+    },
+    {
+      "name": "updateUser_invalidData",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'success': False, 'error': 'Username cannot be empty.'}",
+      "output": "None",
+      "error": "",
+      "input": "[{'userId': '67890', 'data': {'username': ''}}]",
+      "kwargs": "{}",
+      "duration": 6.95799826644361e-06
+    },
+    {
+      "name": "deleteRole_validRoleId",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'success': True, 'message': 'Role deleted successfully.'}",
+      "output": "None",
+      "error": "",
+      "input": "[{'roleId': '12345'}]",
+      "kwargs": "{}",
+      "duration": 5.0000089686363935e-06
+    },
+    {
+      "name": "deleteRole_invalidRoleId",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'success': False, 'error': 'Role not found.'}",
+      "output": "None",
+      "error": "",
+      "input": "[{'roleId': 'nonExistentId'}]",
+      "kwargs": "{}",
+      "duration": 4.542001988738775e-06
+    }
+  ]
+}

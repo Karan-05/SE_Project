@@ -1,0 +1,1 @@
+{"content": "To determine if the two-pointer pattern is relevant for a given problem, consider the following criteria:\n\n1. **Array or List**: The problem typically involves a", "tokens": 53, "elapsed": 1.4703622500092024, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

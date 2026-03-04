@@ -1,0 +1,16 @@
+{
+  "task_id": "91e34246-16b8-417d-8eb6-f7dc38c9b320",
+  "tests": [
+    {
+      "name": "io_sample_1",
+      "mode": "io",
+      "status": "fail",
+      "expected": "No limitation\n- Docker",
+      "output": "",
+      "error": "",
+      "stdin": "1. Add textarea with id `input`. This textarea is the input where user fill the provided characters. \n2. Add button with text `Decipher` below textarea. Click this button needs to run the deciphering process and return the values to another textarea below\n3. Add another textarea with id `",
+      "args": "[]",
+      "duration": 3.7291989428922534e-05
+    }
+  ]
+}

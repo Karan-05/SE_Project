@@ -1,0 +1,33 @@
+challengeId,status,name,startDate,endDate,registrationEndDate
+7d9b723d-d2b0-4142-8ba2-47f885eba425,Draft,Test challenge 18_07,2025-07-19 01:39:58,2025-07-20 01:44:58,2025-08-18 01:39:58
+92190348-b60b-4928-8ea8-55148d8f65dc,New,Test,2025-07-19 10:18:10,2025-07-27 22:23:10,2025-07-24 10:18:10
+33826bed-396d-43dc-8f0f-353e6a7baf4e,Active,Senior DevOps Engineer – Multi-Cloud Infrastructure Automation (Azure + AWS),2025-07-23 06:37:59,2025-07-31 04:38:00,2025-07-28 06:38:54
+5783bde3-cc95-4711-af27-274af7b19e5d,New,test,2025-07-29 05:12:01,2025-08-19 05:17:01,2025-08-12 05:12:01
+b69aef29-e2e4-4d5c-8ced-c94528e3308c,New,Test,2025-07-29 05:12:26,2025-08-06 17:17:26,2025-08-03 05:12:26
+0ab3daf4-5ea4-4210-a224-7739ff23bfb5,Draft,Topcoder Rating Processor - Integrated with existing schema,2025-07-29 07:05:10,2025-08-06 19:10:10,2025-08-03 07:05:10
+a648845e-6312-4940-bc37-d452cef4d442,New,Test,2025-08-06 05:49:26,2025-08-27 05:54:26,2025-08-20 05:49:26
+74aa8039-d18b-499b-b92c-fa571ed1e1e0,New,PieceFinder Computer Vision Proof of Concept Challenge (Repost),2025-08-06 07:21:23,2025-08-14 19:26:23,2025-08-11 07:21:23
+181e5a18-8f46-4366-9aa7-4550a25adceb,Draft,Learn AI Build and Deploy an AI Agent with Topcoder MCP on Hugging Face,2025-08-13 11:54:22,2025-08-21 23:59:22,2025-08-18 11:54:22
+03c12726-323e-4e70-9dce-d26989f2c2c4,Active,Pega LSA Lead System Architect  Remote US OR Brazil Time Zone,2025-08-21 09:52:31,2025-08-29 21:52:00,2025-08-26 09:52:37
+2b766b96-1f1e-40cd-8ecb-37d23adc6e9b,Active,Phase 2 Guided AI Onboarding Wizard for Innovation Challenges,2025-08-29 11:46:32,2025-09-12 18:42:00,2025-09-06 19:47:23
+146b2d34-49f8-4d5e-a393-5888b1f56852,Draft,Removed Cognitive Audio Challenge Gamma  Theta Frequency Infusion ,2025-09-10 06:05:00,2025-09-20 18:10:00,2025-09-17 06:05:00
+cca1e60c-2744-4555-b86e-6207bd44560c,New,TestTask ,2025-09-11 11:22:16,2025-09-12 11:27:16,2025-09-21 11:22:16
+adb67ff0-ea4e-484b-8d60-a08887b73713,New,Test Task 11_09,2025-09-11 18:09:22,2025-09-12 18:14:22,2025-09-21 18:09:22
+408a375f-ce88-4fc1-b6a2-d67595fa50bf,Active,Development Opportunity for AI Engineers Location Restricted,2025-09-12 04:32:08,2025-09-19 16:47:00,2025-09-15 04:39:02
+f8df2d83-4ff4-4c29-beee-f357182e5053,Active,AgentGateway Configuration Cookbook and Demos,2025-09-23 12:02:21,2025-10-10 06:25:00,2025-09-30 12:11:40
+c8bb4b8f-d9c5-48d8-b37e-e165cf4cd5f6,Draft,Test challenge,2025-09-27 07:04:48,2025-09-28 07:09:48,2025-10-27 07:04:48
+02d2fc13-2597-4b37-9a3a-2fee4e09f2f0,Draft,test,2025-09-27 07:32:31,2025-10-05 19:37:31,2025-10-02 07:32:31
+431aad17-75b3-4d5b-a190-1fec2f7eb4fd,Draft,test challenge 26 Sep 25,2025-09-27 11:13:14,2025-09-28 11:18:14,2025-10-27 11:13:14
+b7723a12-b8f7-4ca4-93e3-ffb9c2bc8221,Draft,Topcoder Ratings Calculation Service Postgres Schema Design,2025-09-28 04:32:00,2025-10-06 16:37:00,2025-10-03 04:32:00
+54df4e6d-43c5-44da-8f4a-e4ee94c5ed1b,Active,Gamma Theta Frequency Infusion Visualization Scoring UI Challenge,2025-10-07 06:24:51,2025-10-12 18:25:00,2025-10-09 06:25:00
+d4ab1d17-1f9e-4d06-b758-862bb57e62ef,New,Test123,2025-06-10 06:03:31,2025-06-18 18:08:31,2025-06-15 06:03:31
+b094c72f-4e9c-4582-9f00-4eec70d7c687,New,Test,2025-06-20 11:56:56,2025-06-29 00:01:56,2025-06-25 11:56:56
+d1c8505f-e0eb-4026-b7f8-3c5e991e9e20,New,TEST INFORMIX,2025-06-20 16:56:59,2025-06-29 05:01:59,2025-06-25 16:56:59
+260a233b-85e6-4e51-b45f-f28b86295d82,New,INFORMIX NEW DISK,2025-06-20 19:27:11,2025-06-29 07:32:11,2025-06-25 19:27:11
+9e799e04-3e67-407c-8f7a-b35f493fc131,New,INFORMIX FINAL,2025-06-20 19:34:56,2025-06-29 07:39:56,2025-06-25 19:34:56
+072dc3aa-cd62-4257-8156-04783340e292,New,Justin Outage Test 1,2025-06-20 21:11:36,2025-06-29 09:16:36,2025-06-25 21:11:36
+d3cfb00c-206a-4dd6-805a-e9d58dad89e1,New,Justin Outage Test 2,2025-06-20 21:13:28,2025-06-29 09:18:28,2025-06-25 21:13:28
+aa9ac11c-4bcc-47ea-a38b-3e23ab692d6a,New,Justin Outage Test 3,2025-06-20 21:13:56,2025-06-29 09:18:56,2025-06-25 21:13:56
+ddeb3d88-2817-45d9-8f93-ea3b4fa9eb9e,Active,Native Language Specialists – Japanese, Korean, and French (3-Month GIG Contract),2025-06-27 05:37:25,2025-07-01 16:41:00,2025-06-30 05:41:10
+b4d1a858-955a-4e61-9a9c-0ebbe92decf0,Draft,Informix Testing 6th July,2025-07-07 08:52:53,2025-07-15 20:57:53,2025-07-12 08:52:53
+e9b766e3-df0e-414d-9ac0-d39e1d7d7093,Draft,Informix Testing 6th July New,2025-07-07 08:57:52,2025-07-15 21:02:52,2025-07-12 08:57:52

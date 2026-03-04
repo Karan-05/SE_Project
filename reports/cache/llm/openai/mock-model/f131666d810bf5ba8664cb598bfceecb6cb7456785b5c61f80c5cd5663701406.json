@@ -1,0 +1,1 @@
+{"content": "To determine if Kadane's algorithm is relevant to your project, let's first clarify what Kadane's algorithm does. It is primarily used to find the maximum sum", "tokens": 94, "elapsed": 1.1250269589945674, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

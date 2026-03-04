@@ -1,0 +1,36 @@
+{
+  "task_type": "data_etl",
+  "confidence": 0.9,
+  "why": [
+    "The task involves consolidating functionalities and managing configurations, which aligns with data transformation and integration.",
+    "The requirements specify creating a new tab and integrating existing functionalities, indicating a need for data handling."
+  ],
+  "missing_info": [
+    "Specific details on the existing data structure of the Skills Manager app.",
+    "Examples of the configurations that need to be cleaned up."
+  ],
+  "verification_plan": [
+    "Ensure the new tab is created and functions correctly.",
+    "Verify that the rolesRequired has been removed and all admins can access the Skills Manager.",
+    "Check that the configurations for both production and development environments are cleaned up."
+  ],
+  "artifacts_to_generate": [
+    {
+      "name": "schema.md",
+      "format": "md"
+    },
+    {
+      "name": "pipeline.py",
+      "format": "python"
+    },
+    {
+      "name": "validation.sql",
+      "format": "sql"
+    },
+    {
+      "name": "sample_inputs_outputs.md",
+      "format": "md"
+    }
+  ],
+  "synthesis_policy": "none"
+}

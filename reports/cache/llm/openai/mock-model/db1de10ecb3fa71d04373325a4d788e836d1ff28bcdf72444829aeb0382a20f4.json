@@ -1,0 +1,1 @@
+{"content": "In the context of building a genomic annotation pipeline, the \"two pointers\" technique is often used in algorithms that involve searching or comparing sequences, which can be relevant", "tokens": 90, "elapsed": 1.2215134590223897, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

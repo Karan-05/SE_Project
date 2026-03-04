@@ -1,0 +1,1 @@
+{"content": "[MOCK] 9f00e999f07db240 :: You are comparing a new task to base task baseline. List semantic deltas succinctly: Return the sum of the main diagonal", "tokens": 21, "elapsed": 2.1249999999639613e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "semantic-diff", "caller": "semantic_diff"}}

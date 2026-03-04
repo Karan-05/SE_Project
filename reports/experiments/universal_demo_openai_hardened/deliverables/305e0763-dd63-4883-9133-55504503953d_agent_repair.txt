@@ -1,0 +1,58 @@
+BEGIN_JSON
+{
+  "task_type": "data_etl",
+  "id": "305e0763-dd63-4883-9133-55504503953d",
+  "title": "Hard | Topcoder Skill Builder Competition | ReactJS  | Annotations",
+  "summary": "This task involves creating a comprehensive ETL blueprint for a ReactJS application that includes functionalities for creating learning spaces, posts, comments, and annotations. The implementation should also ensure data quality checks and validation queries are in place.",
+  "assumptions": [
+    "The backend technology choice is not specified, assuming a common backend like Firebase or Supabase will be used.",
+    "The data model for posts, comments, and annotations is not provided, assuming standard structures will be used.",
+    "No specific data sources are mentioned; assuming data will be collected from user interactions within the application."
+  ],
+  "plan": [
+    "Define the schema for learning spaces, posts, comments, and annotations.",
+    "Outline the ETL pipeline including data extraction from user inputs, transformation for storage, and loading into the chosen backend.",
+    "Create SQL snippets for data validation and transformation.",
+    "Develop Python snippets for the ETL process, including logging and checkpoints.",
+    "Establish data quality checks to validate the integrity of the data."
+  ],
+  "artifacts": {
+    "pipeline_spec": "The ETL pipeline will extract data from user inputs in the ReactJS app, transform it into a suitable format for storage in Firebase/Supabase, and load it into the database. The pipeline will run on user actions such as creating a learning space or posting a comment.",
+    "sql_snippets": {
+      "create_learning_space": "INSERT INTO learning_spaces (title, description, prerequisites, thumbnail) VALUES (?, ?, ?, ?);",
+      "create_post": "INSERT INTO posts (space_id, title, body) VALUES (?, ?, ?);",
+      "create_comment": "INSERT INTO comments (post_id, body) VALUES (?, ?);"
+    },
+    "python_snippets": {
+      "extract_data": "def extract_data(): return {'title': title, 'description': description, 'prerequisites': prerequisites, 'thumbnail': thumbnail}",
+      "transform_data": "def transform_data(data): return data",
+      "load_data": "def load_data(data): # Logic to load data into Firebase/Supabase"
+    },
+    "data_quality_checks": [
+      {
+        "name": "Check for empty fields",
+        "column(s)": ["title", "description"],
+        "threshold/action": "Raise error if any field is empty."
+      },
+      {
+        "name": "Validate thumbnail URL",
+        "column(s)": ["thumbnail"],
+        "threshold/action": "Ensure thumbnail is a valid URL."
+      }
+    ]
+  },
+  "validations": [
+    "Schema defined for learning spaces, posts, comments, and annotations.",
+    "Pipeline steps outlined with clear extraction, transformation, and loading processes.",
+    "Data quality checks specified to ensure data integrity."
+  ],
+  "confidence": 0.85,
+  "stop_reason": "completed",
+  "rubric_self_check": {
+    "coverage": 0.9,
+    "specificity": 0.8,
+    "actionability": 0.85,
+    "overall_notes": "The ETL blueprint covers all necessary aspects."
+  }
+}
+END_JSON

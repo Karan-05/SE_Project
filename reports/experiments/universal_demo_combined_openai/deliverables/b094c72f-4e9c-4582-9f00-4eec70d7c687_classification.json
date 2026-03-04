@@ -1,0 +1,24 @@
+{
+  "task_type": "architecture_doc",
+  "confidence": 0.9,
+  "why": [
+    "The task requires a comprehensive architecture document.",
+    "The provided description suggests a need for structured documentation.",
+    "The previous attempts highlighted missing elements typically found in architecture documentation."
+  ],
+  "missing_info": [
+    "Specific requirements or constraints for the architecture.",
+    "Detailed problem summary and proposed approach."
+  ],
+  "verification_plan": [
+    "Ensure all required sections are included in the architecture document.",
+    "Check for clarity and completeness of each section."
+  ],
+  "artifacts_to_generate": [
+    {
+      "name": "architecture.md",
+      "format": "md"
+    }
+  ],
+  "synthesis_policy": "none"
+}

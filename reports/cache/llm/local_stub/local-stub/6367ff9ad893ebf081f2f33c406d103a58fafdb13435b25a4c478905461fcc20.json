@@ -1,0 +1,1 @@
+{"content": "[LOCAL_STUB] adc2ea780a0921c0 :: Generate targeted tests for the enumerated failure modes.", "tokens": 8, "elapsed": 1.4590041246265173e-06, "budget_exceeded": false, "meta": {"provider": "local_stub", "model": "failure-tests"}}

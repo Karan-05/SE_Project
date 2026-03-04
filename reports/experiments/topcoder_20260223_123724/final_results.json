@@ -1,0 +1,43 @@
+{
+  "run_id": "topcoder_20260223_123724",
+  "total_rows": 66712,
+  "total_unique_task_ids": 22115,
+  "manifest_unique_task_ids": 22115,
+  "attempted": 50,
+  "solved_pass_final": 0,
+  "pass_at_final": 0.0,
+  "skipped_counts": {
+    "skipped_missing_tests": 22065
+  },
+  "attempted_with_extracted_tests": 50,
+  "attempted_with_synthesized_tests": 0,
+  "success_rate_extracted": 0.0,
+  "success_rate_synthesized": 0.0,
+  "avg_attempts": 10.0,
+  "median_attempts": 10.0,
+  "p90_attempts": 10.0,
+  "fallback_rate": 1.0,
+  "stagnation_rate": 0.7,
+  "retries_exhausted_count": 50,
+  "llm_calls_total": 0.0,
+  "llm_calls_avg_per_task": 0.0,
+  "llm_available": true,
+  "runtime": {
+    "start_time": "2026-02-23T12:37:35.093557",
+    "end_time": "2026-02-23T12:37:35.815100",
+    "wall_time_seconds": 0.721543,
+    "avg_wall_time_per_attempted": 0.01443086
+  },
+  "reconciliation": {
+    "discovered_rows": 66712,
+    "unique_tasks": 22115,
+    "duplicates": 44597,
+    "filtered_out": 0,
+    "manifest_total": 66712,
+    "dataset_files": 14
+  },
+  "progress_fraction": 1.0,
+  "evaluation_coverage": 0.0022609088853719197,
+  "pipeline_status": "COMPLETE",
+  "validity": "INVALID_NO_LLM"
+}

@@ -1,0 +1,1 @@
+{"content": "[MOCK] 4f9a40e57cb15dd6 :: Implement function solve() that reads all required input from stdin and writes the exact expected output to stdout. Do n", "tokens": 37, "elapsed": 2.0830000000415794e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "failure-tests", "caller": "failure_mode_first"}}

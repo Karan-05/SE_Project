@@ -1,0 +1,112 @@
+[
+  {
+    "name": "valid_login",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "token": "validToken123"
+    },
+    "input": [
+      {
+        "username": "validUser",
+        "password": "validPassword"
+      }
+    ]
+  },
+  {
+    "name": "invalid_login",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Invalid credentials"
+    },
+    "input": [
+      {
+        "username": "invalidUser",
+        "password": "invalidPassword"
+      }
+    ]
+  },
+  {
+    "name": "empty_username",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Username cannot be empty"
+    },
+    "input": [
+      {
+        "username": "",
+        "password": "somePassword"
+      }
+    ]
+  },
+  {
+    "name": "empty_password",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Password cannot be empty"
+    },
+    "input": [
+      {
+        "username": "someUser",
+        "password": ""
+      }
+    ]
+  },
+  {
+    "name": "user_not_found",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "User not found"
+    },
+    "input": [
+      {
+        "username": "nonExistentUser",
+        "password": "anyPassword"
+      }
+    ]
+  },
+  {
+    "name": "password_too_short",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Password must be at least 8 characters"
+    },
+    "input": [
+      {
+        "username": "validUser",
+        "password": "short"
+      }
+    ]
+  },
+  {
+    "name": "successful_logout",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "message": "Logged out successfully"
+    },
+    "input": [
+      {
+        "token": "validToken123"
+      }
+    ]
+  },
+  {
+    "name": "expired_token",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Token has expired"
+    },
+    "input": [
+      {
+        "token": "expiredToken123"
+      }
+    ]
+  }
+]

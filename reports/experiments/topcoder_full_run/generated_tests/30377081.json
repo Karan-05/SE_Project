@@ -1,0 +1,142 @@
+[
+  {
+    "name": "basic_integration_workflow",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "result": "integration_completed"
+    },
+    "input": [
+      {
+        "workflow": "simple_integration",
+        "data": {
+          "input1": "value1",
+          "input2": "value2"
+        }
+      }
+    ]
+  },
+  {
+    "name": "event_driven_workflow",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "result": "event_processed"
+    },
+    "input": [
+      {
+        "event": "new_order",
+        "data": {
+          "orderId": "12345",
+          "customer": "John Doe"
+        }
+      }
+    ]
+  },
+  {
+    "name": "error_handling_integration",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "integration_failed"
+    },
+    "input": [
+      {
+        "workflow": "faulty_integration",
+        "data": {
+          "input1": "invalid_value"
+        }
+      }
+    ]
+  },
+  {
+    "name": "large_data_payload",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "result": "bulk_integration_completed"
+    },
+    "input": [
+      {
+        "workflow": "bulk_data_integration",
+        "data": {
+          "items": [
+            "item1",
+            "item2",
+            "item3",
+            "item4",
+            "item5",
+            "item6",
+            "item7",
+            "item8",
+            "item9",
+            "item10"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "name": "circular_dependency_detection",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "circular_dependency_detected"
+    },
+    "input": [
+      {
+        "workflow": "circular_dependency",
+        "data": {}
+      }
+    ]
+  },
+  {
+    "name": "timeout_handling",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "timeout_occurred"
+    },
+    "input": [
+      {
+        "workflow": "long_running_task",
+        "data": {}
+      }
+    ]
+  },
+  {
+    "name": "api_management_access",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "data": {
+        "userId": "user123",
+        "name": "Alice"
+      }
+    },
+    "input": [
+      {
+        "api": "get_user_info",
+        "params": {
+          "userId": "user123"
+        }
+      }
+    ]
+  },
+  {
+    "name": "ci_cd_pipeline_integration",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "result": "deployment_completed"
+    },
+    "input": [
+      {
+        "pipeline": "deploy_integration",
+        "data": {
+          "version": "1.0.0"
+        }
+      }
+    ]
+  }
+]

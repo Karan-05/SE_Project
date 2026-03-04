@@ -1,0 +1,1 @@
+{"content": "In the context of using Logstash to read data from a log file and store it in a data store, the `hash_bucket` pattern can be relevant depending", "tokens": 93, "elapsed": 1.269008292001672, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

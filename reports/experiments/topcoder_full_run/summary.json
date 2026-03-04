@@ -1,0 +1,59 @@
+{
+  "run_id": "topcoder_full_run",
+  "total_problems": 852,
+  "attempted": 191,
+  "completed_successfully": 45,
+  "success_rate": 0.0528169014084507,
+  "pass_at_final": 0.2356020942408377,
+  "avg_attempts_to_success": 1.0,
+  "median_attempts_to_success": 1.0,
+  "max_attempts_to_success": 1.0,
+  "fallback_count": 146,
+  "fallback_rate": 0.7643979057591623,
+  "stagnation_count": 146,
+  "stagnation_rate": 0.7643979057591623,
+  "attempted_with_extracted_tests": 62,
+  "attempted_with_synthesized_tests": 129,
+  "success_rate_extracted": 0.7258064516129032,
+  "success_rate_synthesized": 0.0,
+  "strategy_distribution_initial": {
+    "contract_first": 191
+  },
+  "strategy_distribution_final": {
+    "semantic_diff": 146,
+    "contract_first": 45
+  },
+  "runtime": {
+    "start_time": "2026-02-24T01:04:03.683450",
+    "end_time": "2026-02-24T01:34:44.492745",
+    "total_wall_time_seconds": 1840.809295,
+    "avg_time_per_task": 7.678288246073298
+  },
+  "error_taxonomy": {
+    "non_coding": 591,
+    "failed_tests": 146,
+    "synthesis_failure": 70,
+    "success": 45
+  },
+  "artifact_dir": "/Users/karanallagh/Desktop/DataCollector/artifacts/self_verifying/topcoder_full_run",
+  "tasks_by_dataset": {
+    "challenge_data_challengeData_2023-01-01_2023-01-02_page1.json": 1,
+    "challenge_data_challengeData_2023-01-01_2023-01-31_page1.json": 50,
+    "challenge_data_challengeData_2023-01-01_2023-01-31_page2.json": 14,
+    "challenge_data_challengeData_2025-06-01_2025-10-08_page1.json": 45,
+    "challenge_data_challengeData_2025-06-01_2025-10-08_page2.json": 43,
+    "challenge_data_challengeData_2025-06-01_2025-10-08_page3.json": 37,
+    "challenge_data_demoData.json": 45,
+    "data_processed_tasks.csv": 189,
+    "data_processed_tasks.parquet": 189,
+    "data_raw_tasks.csv": 189,
+    "experiments_decomposition_benchmark_tasks.json": 50
+  },
+  "solve_attempts_total": 1505.0,
+  "llm_calls_total": 329.0,
+  "llm_calls_avg_per_task": 1.7225130890052356,
+  "llm_available": true,
+  "run_validity": "VALID",
+  "llm_reason": "env:OPENAI_API_KEY",
+  "stop_reason": ""
+}

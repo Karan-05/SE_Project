@@ -1,0 +1,1 @@
+{"content": "To address the issue with the `algo_rating` table not properly storing the historical data, we need to consider a few key points:\n\n1. **Understanding the", "tokens": 88, "elapsed": 1.514131042000372, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

@@ -1,0 +1,1 @@
+{"content": "[MOCK] 36f6ff754fe64cc5 :: Architect: propose a phased plan for task string_reverse_stress: Return the reversed string.", "tokens": 12, "elapsed": 1.5829999999716904e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "role-architect", "caller": "role_decomposed"}}

@@ -1,0 +1,166 @@
+{
+  "task_id": "e8231040-e63f-40c4-980c-eb815062aeec",
+  "strategy": "pattern_skeleton",
+  "attempt": 3,
+  "pass_rate": 0.0,
+  "plan_subtasks": [
+    "instantiate skeleton",
+    "fill placeholders",
+    "derive pitfall-specific checks",
+    "verify pitfalls",
+    "Generate minimal unit tests for critical behaviors",
+    "Add adversarial/edge-case tests"
+  ],
+  "plan_tests": [
+    "Verify pitfall: Ensure indices not reused",
+    "Verify pitfall: Handle no-solution case"
+  ],
+  "plan_diagnostics": {
+    "pattern_name": "two_pointers",
+    "confidence": "0.00",
+    "pitfalls": "Ensure indices not reused; Handle no-solution case",
+    "planning_tokens": "292",
+    "planning_time": "5.524289",
+    "skeleton": "def solve(nums, target):\n    left, right = 0, len(nums) - 1\n    while left < right:\n        total = nums[left] + nums[right]\n        if total == target:\n            return left, right\n        if total < target:\n            left += 1\n        else:\n            right -= 1\n    return -1, -1\n"
+  },
+  "patch_summary": {
+    "phase": "initial"
+  },
+  "failing_tests": [
+    "logged_out_user_display",
+    "logged_in_user_display",
+    "session_timeout",
+    "multiple_logins",
+    "refresh_page_logged_out"
+  ],
+  "trace": [
+    "solve() missing 1 required positional argument: 'target'",
+    "solve() missing 1 required positional argument: 'target'",
+    "solve() missing 1 required positional argument: 'target'",
+    "solve() missing 1 required positional argument: 'target'",
+    "solve() missing 1 required positional argument: 'target'"
+  ],
+  "feedback": [
+    "logged_out_user_display expected {'nav_display': 'logged_in'} but saw None",
+    "logged_in_user_display expected {'nav_display': 'logged_in'} but saw None",
+    "session_timeout expected {'nav_display': 'logged_in'} but saw None",
+    "multiple_logins expected {'nav_display': 'logged_in'} but saw None",
+    "refresh_page_logged_out expected {'nav_display': 'logged_in'} but saw None"
+  ],
+  "reproduction": "inputs=[{'user_status': 'logged_out'}] kwargs={}",
+  "tests_run": [
+    {
+      "name": "logged_out_user_display",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'nav_display': 'logged_in'}",
+      "output": "None",
+      "error": "solve() missing 1 required positional argument: 'target'",
+      "input": "[{'user_status': 'logged_out'}]",
+      "kwargs": "{}",
+      "duration": 2.9999995604157448e-05
+    },
+    {
+      "name": "logged_in_user_display",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'nav_display': 'logged_in'}",
+      "output": "None",
+      "error": "solve() missing 1 required positional argument: 'target'",
+      "input": "[{'user_status': 'logged_in'}]",
+      "kwargs": "{}",
+      "duration": 1.2665987014770508e-05
+    },
+    {
+      "name": "session_timeout",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'nav_display': 'logged_in'}",
+      "output": "None",
+      "error": "solve() missing 1 required positional argument: 'target'",
+      "input": "[{'user_status': 'logged_in', 'session': 'expired'}]",
+      "kwargs": "{}",
+      "duration": 1.1916999937966466e-05
+    },
+    {
+      "name": "multiple_logins",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'nav_display': 'logged_in'}",
+      "output": "None",
+      "error": "solve() missing 1 required positional argument: 'target'",
+      "input": "[{'user_status': 'logged_out', 'previous_sessions': 5}]",
+      "kwargs": "{}",
+      "duration": 1.2833013897761703e-05
+    },
+    {
+      "name": "refresh_page_logged_out",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'nav_display': 'logged_in'}",
+      "output": "None",
+      "error": "solve() missing 1 required positional argument: 'target'",
+      "input": "[{'user_status': 'logged_out', 'action': 'refresh'}]",
+      "kwargs": "{}",
+      "duration": 1.18750031106174e-05
+    },
+    {
+      "name": "navigate_away_and_back",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'nav_display': 'logged_in'}",
+      "output": "None",
+      "error": "solve() missing 1 required positional argument: 'target'",
+      "input": "[{'user_status': 'logged_out', 'navigate': 'away'}]",
+      "kwargs": "{}",
+      "duration": 1.2417003745213151e-05
+    },
+    {
+      "name": "simultaneous_requests",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'nav_display': 'logged_in'}",
+      "output": "None",
+      "error": "solve() missing 1 required positional argument: 'target'",
+      "input": "[{'user_status': 'logged_out', 'requests': 10}]",
+      "kwargs": "{}",
+      "duration": 1.129199517890811e-05
+    },
+    {
+      "name": "user_status_change",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'nav_display': 'logged_in'}",
+      "output": "None",
+      "error": "solve() missing 1 required positional argument: 'target'",
+      "input": "[{'user_status': 'logged_out', 'change': 'to_logged_in'}]",
+      "kwargs": "{}",
+      "duration": 1.170899486169219e-05
+    }
+  ],
+  "llm_calls": 1,
+  "timeline": {
+    "attempt": 3,
+    "strategy": "pattern_skeleton",
+    "phase": "initial",
+    "events": {
+      "decompose": {
+        "start": "2026-02-24T12:01:03.800225",
+        "end": "2026-02-24T12:01:09.325137"
+      },
+      "solve": {
+        "start": "2026-02-24T12:01:09.325189",
+        "end": "2026-02-24T12:01:14.295250"
+      },
+      "tests": {
+        "start": "2026-02-24T12:01:14.295027",
+        "end": "2026-02-24T12:01:14.295195",
+        "duration_seconds": "0.000"
+      }
+    },
+    "meta": {
+      "llm_calls": "1"
+    }
+  },
+  "solution_preview": "def solve(nums, target):\n    left, right = 0, len(nums) - 1\n    while left < right:\n        total = nums[left] + nums[right]\n        if total == target:\n            return left, right\n        if total < target:\n            left += 1\n        else:\n            right -= 1\n    return -1, -1"
+}

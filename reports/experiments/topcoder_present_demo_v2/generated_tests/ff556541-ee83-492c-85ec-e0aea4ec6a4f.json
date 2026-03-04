@@ -1,0 +1,58 @@
+[
+  {
+    "name": "test_issue_38",
+    "mode": "io",
+    "expected": "{\"status\": \"success\", \"message\": \"Content aggregated correctly.\"}",
+    "stdin": "{\"issue\": 38, \"description\": \"Check for content aggregation from multiple sources.\"}",
+    "expected_stdout": "{\"status\": \"success\", \"message\": \"Content aggregated correctly.\"}"
+  },
+  {
+    "name": "test_issue_39",
+    "mode": "io",
+    "expected": "{\"status\": \"success\", \"message\": \"Images displayed correctly in portrait mode.\"}",
+    "stdin": "{\"issue\": 39, \"description\": \"Verify display of images in portrait mode on iPad.\"}",
+    "expected_stdout": "{\"status\": \"success\", \"message\": \"Images displayed correctly in portrait mode.\"}"
+  },
+  {
+    "name": "test_issue_59",
+    "mode": "io",
+    "expected": "{\"status\": \"success\", \"message\": \"App responsive in landscape mode.\"}",
+    "stdin": "{\"issue\": 59, \"description\": \"Test app responsiveness in landscape mode on iPad.\"}",
+    "expected_stdout": "{\"status\": \"success\", \"message\": \"App responsive in landscape mode.\"}"
+  },
+  {
+    "name": "test_issue_64",
+    "mode": "io",
+    "expected": "{\"status\": \"error\", \"message\": \"Broken links found.\"}",
+    "stdin": "{\"issue\": 64, \"description\": \"Check for broken links in content.\"}",
+    "expected_stdout": "{\"status\": \"error\", \"message\": \"Broken links found.\"}"
+  },
+  {
+    "name": "test_issue_70",
+    "mode": "io",
+    "expected": "{\"status\": \"success\", \"message\": \"UI elements displayed correctly.\"}",
+    "stdin": "{\"issue\": 70, \"description\": \"Validate user interface elements on iPhone in portrait mode.\"}",
+    "expected_stdout": "{\"status\": \"success\", \"message\": \"UI elements displayed correctly.\"}"
+  },
+  {
+    "name": "test_edge_case_empty_content",
+    "mode": "io",
+    "expected": "{\"status\": \"error\", \"message\": \"No content available.\"}",
+    "stdin": "{\"issue\": 82, \"description\": \"Test behavior with empty content response.\"}",
+    "expected_stdout": "{\"status\": \"error\", \"message\": \"No content available.\"}"
+  },
+  {
+    "name": "test_edge_case_large_content",
+    "mode": "io",
+    "expected": "{\"status\": \"success\", \"message\": \"App handles large content efficiently.\"}",
+    "stdin": "{\"issue\": 85, \"description\": \"Test app performance with large content payload.\"}",
+    "expected_stdout": "{\"status\": \"success\", \"message\": \"App handles large content efficiently.\"}"
+  },
+  {
+    "name": "test_issue_90",
+    "mode": "io",
+    "expected": "{\"status\": \"error\", \"message\": \"API failure handled correctly.\"}",
+    "stdin": "{\"issue\": 90, \"description\": \"Check for proper error handling on API failure.\"}",
+    "expected_stdout": "{\"status\": \"error\", \"message\": \"API failure handled correctly.\"}"
+  }
+]

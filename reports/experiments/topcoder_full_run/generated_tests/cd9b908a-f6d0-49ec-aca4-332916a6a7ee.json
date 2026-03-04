@@ -1,0 +1,116 @@
+[
+  {
+    "name": "fix_env_variable_typo",
+    "mode": "call",
+    "expected": {
+      "M2M_AUTH_PROXY_SERVER_URL": ""
+    },
+    "input": [
+      {
+        "env": {
+          "M2M_AUTH_DOMAIN": "topcoder-dev.auth0.com",
+          "M2M_AUTH_AUDIENCE": "https://m2m.topcoder-dev.com/",
+          "M2M_AUTH_PROXY_SEREVR_URL": ""
+        }
+      }
+    ]
+  },
+  {
+    "name": "remove_sensitive_token",
+    "mode": "call",
+    "expected": {
+      "token": "Environment variable required"
+    },
+    "input": [
+      {
+        "mockApi": {
+          "token": "xxxx"
+        }
+      }
+    ]
+  },
+  {
+    "name": "check_data_type_consistency",
+    "mode": "call",
+    "expected": {
+      "opportunityId": "VARCHAR(14)"
+    },
+    "input": [
+      {
+        "migration": {
+          "opportunityId": "TEXT"
+        }
+      }
+    ]
+  },
+  {
+    "name": "validate_timestamp_format",
+    "mode": "call",
+    "expected": {
+      "createdAt": "Valid format"
+    },
+    "input": [
+      {
+        "migration": {
+          "createdAt": "TIMESTAMP(3)"
+        }
+      }
+    ]
+  },
+  {
+    "name": "edge_case_empty_env_variable",
+    "mode": "call",
+    "expected": {
+      "error": "Proxy server URL cannot be empty"
+    },
+    "input": [
+      {
+        "env": {
+          "M2M_AUTH_PROXY_SERVER_URL": ""
+        }
+      }
+    ]
+  },
+  {
+    "name": "adversarial_case_invalid_token",
+    "mode": "call",
+    "expected": {
+      "error": "Invalid token"
+    },
+    "input": [
+      {
+        "mockApi": {
+          "token": "invalid_token"
+        }
+      }
+    ]
+  },
+  {
+    "name": "check_migration_sql_syntax",
+    "mode": "call",
+    "expected": {
+      "valid": true
+    },
+    "input": [
+      {
+        "migration": {
+          "sql": "CREATE TABLE review_application (id VARCHAR(14), userId TEXT, handle TEXT, opportunityId TEXT)"
+        }
+      }
+    ]
+  },
+  {
+    "name": "ensure_no_hardcoded_tokens",
+    "mode": "call",
+    "expected": {
+      "error": "Token must be stored in environment variables"
+    },
+    "input": [
+      {
+        "mockApi": {
+          "token": "hardcoded_token"
+        }
+      }
+    ]
+  }
+]

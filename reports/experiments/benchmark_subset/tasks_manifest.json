@@ -1,0 +1,357 @@
+{
+  "run_id": "benchmark_subset",
+  "generated_at": "2026-02-24T00:19:21.361296",
+  "task_count": 50,
+  "tasks": [
+    {
+      "id": "array_sum",
+      "title": "Array Sum",
+      "dataset_id": "experiments_decomposition_benchmark_tasks.json",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/experiments/decomposition/benchmark_tasks.json",
+      "has_tests": true
+    },
+    {
+      "id": "array_sum_test",
+      "title": "Array Sum (test)",
+      "dataset_id": "experiments_decomposition_benchmark_tasks.json",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/experiments/decomposition/benchmark_tasks.json",
+      "has_tests": true
+    },
+    {
+      "id": "array_sum_hard",
+      "title": "Array Sum (hard)",
+      "dataset_id": "experiments_decomposition_benchmark_tasks.json",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/experiments/decomposition/benchmark_tasks.json",
+      "has_tests": true
+    },
+    {
+      "id": "array_sum_stress",
+      "title": "Array Sum (stress)",
+      "dataset_id": "experiments_decomposition_benchmark_tasks.json",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/experiments/decomposition/benchmark_tasks.json",
+      "has_tests": true
+    },
+    {
+      "id": "array_sum_ood",
+      "title": "Array Sum (ood)",
+      "dataset_id": "experiments_decomposition_benchmark_tasks.json",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/experiments/decomposition/benchmark_tasks.json",
+      "has_tests": true
+    },
+    {
+      "id": "array_prefix",
+      "title": "Prefix Sum",
+      "dataset_id": "experiments_decomposition_benchmark_tasks.json",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/experiments/decomposition/benchmark_tasks.json",
+      "has_tests": true
+    },
+    {
+      "id": "array_prefix_test",
+      "title": "Prefix Sum (test)",
+      "dataset_id": "experiments_decomposition_benchmark_tasks.json",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/experiments/decomposition/benchmark_tasks.json",
+      "has_tests": true
+    },
+    {
+      "id": "array_prefix_hard",
+      "title": "Prefix Sum (hard)",
+      "dataset_id": "experiments_decomposition_benchmark_tasks.json",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/experiments/decomposition/benchmark_tasks.json",
+      "has_tests": true
+    },
+    {
+      "id": "array_prefix_stress",
+      "title": "Prefix Sum (stress)",
+      "dataset_id": "experiments_decomposition_benchmark_tasks.json",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/experiments/decomposition/benchmark_tasks.json",
+      "has_tests": true
+    },
+    {
+      "id": "array_prefix_ood",
+      "title": "Prefix Sum (ood)",
+      "dataset_id": "experiments_decomposition_benchmark_tasks.json",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/experiments/decomposition/benchmark_tasks.json",
+      "has_tests": true
+    },
+    {
+      "id": "string_reverse",
+      "title": "Reverse String",
+      "dataset_id": "experiments_decomposition_benchmark_tasks.json",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/experiments/decomposition/benchmark_tasks.json",
+      "has_tests": true
+    },
+    {
+      "id": "string_reverse_test",
+      "title": "Reverse String (test)",
+      "dataset_id": "experiments_decomposition_benchmark_tasks.json",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/experiments/decomposition/benchmark_tasks.json",
+      "has_tests": true
+    },
+    {
+      "id": "string_reverse_hard",
+      "title": "Reverse String (hard)",
+      "dataset_id": "experiments_decomposition_benchmark_tasks.json",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/experiments/decomposition/benchmark_tasks.json",
+      "has_tests": true
+    },
+    {
+      "id": "string_reverse_stress",
+      "title": "Reverse String (stress)",
+      "dataset_id": "experiments_decomposition_benchmark_tasks.json",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/experiments/decomposition/benchmark_tasks.json",
+      "has_tests": true
+    },
+    {
+      "id": "string_reverse_ood",
+      "title": "Reverse String (ood)",
+      "dataset_id": "experiments_decomposition_benchmark_tasks.json",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/experiments/decomposition/benchmark_tasks.json",
+      "has_tests": true
+    },
+    {
+      "id": "string_freq",
+      "title": "Char Frequency",
+      "dataset_id": "experiments_decomposition_benchmark_tasks.json",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/experiments/decomposition/benchmark_tasks.json",
+      "has_tests": true
+    },
+    {
+      "id": "string_freq_test",
+      "title": "Char Frequency (test)",
+      "dataset_id": "experiments_decomposition_benchmark_tasks.json",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/experiments/decomposition/benchmark_tasks.json",
+      "has_tests": true
+    },
+    {
+      "id": "string_freq_hard",
+      "title": "Char Frequency (hard)",
+      "dataset_id": "experiments_decomposition_benchmark_tasks.json",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/experiments/decomposition/benchmark_tasks.json",
+      "has_tests": true
+    },
+    {
+      "id": "string_freq_stress",
+      "title": "Char Frequency (stress)",
+      "dataset_id": "experiments_decomposition_benchmark_tasks.json",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/experiments/decomposition/benchmark_tasks.json",
+      "has_tests": true
+    },
+    {
+      "id": "string_freq_ood",
+      "title": "Char Frequency (ood)",
+      "dataset_id": "experiments_decomposition_benchmark_tasks.json",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/experiments/decomposition/benchmark_tasks.json",
+      "has_tests": true
+    },
+    {
+      "id": "graph_edges",
+      "title": "Edge Count",
+      "dataset_id": "experiments_decomposition_benchmark_tasks.json",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/experiments/decomposition/benchmark_tasks.json",
+      "has_tests": true
+    },
+    {
+      "id": "graph_edges_test",
+      "title": "Edge Count (test)",
+      "dataset_id": "experiments_decomposition_benchmark_tasks.json",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/experiments/decomposition/benchmark_tasks.json",
+      "has_tests": true
+    },
+    {
+      "id": "graph_edges_hard",
+      "title": "Edge Count (hard)",
+      "dataset_id": "experiments_decomposition_benchmark_tasks.json",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/experiments/decomposition/benchmark_tasks.json",
+      "has_tests": true
+    },
+    {
+      "id": "graph_edges_stress",
+      "title": "Edge Count (stress)",
+      "dataset_id": "experiments_decomposition_benchmark_tasks.json",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/experiments/decomposition/benchmark_tasks.json",
+      "has_tests": true
+    },
+    {
+      "id": "graph_edges_ood",
+      "title": "Edge Count (ood)",
+      "dataset_id": "experiments_decomposition_benchmark_tasks.json",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/experiments/decomposition/benchmark_tasks.json",
+      "has_tests": true
+    },
+    {
+      "id": "graph_degree",
+      "title": "Degree Map",
+      "dataset_id": "experiments_decomposition_benchmark_tasks.json",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/experiments/decomposition/benchmark_tasks.json",
+      "has_tests": true
+    },
+    {
+      "id": "graph_degree_test",
+      "title": "Degree Map (test)",
+      "dataset_id": "experiments_decomposition_benchmark_tasks.json",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/experiments/decomposition/benchmark_tasks.json",
+      "has_tests": true
+    },
+    {
+      "id": "graph_degree_hard",
+      "title": "Degree Map (hard)",
+      "dataset_id": "experiments_decomposition_benchmark_tasks.json",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/experiments/decomposition/benchmark_tasks.json",
+      "has_tests": true
+    },
+    {
+      "id": "graph_degree_stress",
+      "title": "Degree Map (stress)",
+      "dataset_id": "experiments_decomposition_benchmark_tasks.json",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/experiments/decomposition/benchmark_tasks.json",
+      "has_tests": true
+    },
+    {
+      "id": "graph_degree_ood",
+      "title": "Degree Map (ood)",
+      "dataset_id": "experiments_decomposition_benchmark_tasks.json",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/experiments/decomposition/benchmark_tasks.json",
+      "has_tests": true
+    },
+    {
+      "id": "dp_fib",
+      "title": "Nth Fibonacci",
+      "dataset_id": "experiments_decomposition_benchmark_tasks.json",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/experiments/decomposition/benchmark_tasks.json",
+      "has_tests": true
+    },
+    {
+      "id": "dp_fib_test",
+      "title": "Nth Fibonacci (test)",
+      "dataset_id": "experiments_decomposition_benchmark_tasks.json",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/experiments/decomposition/benchmark_tasks.json",
+      "has_tests": true
+    },
+    {
+      "id": "dp_fib_hard",
+      "title": "Nth Fibonacci (hard)",
+      "dataset_id": "experiments_decomposition_benchmark_tasks.json",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/experiments/decomposition/benchmark_tasks.json",
+      "has_tests": true
+    },
+    {
+      "id": "dp_fib_stress",
+      "title": "Nth Fibonacci (stress)",
+      "dataset_id": "experiments_decomposition_benchmark_tasks.json",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/experiments/decomposition/benchmark_tasks.json",
+      "has_tests": true
+    },
+    {
+      "id": "dp_fib_ood",
+      "title": "Nth Fibonacci (ood)",
+      "dataset_id": "experiments_decomposition_benchmark_tasks.json",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/experiments/decomposition/benchmark_tasks.json",
+      "has_tests": true
+    },
+    {
+      "id": "dp_coin",
+      "title": "Coin Change",
+      "dataset_id": "experiments_decomposition_benchmark_tasks.json",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/experiments/decomposition/benchmark_tasks.json",
+      "has_tests": true
+    },
+    {
+      "id": "dp_coin_test",
+      "title": "Coin Change (test)",
+      "dataset_id": "experiments_decomposition_benchmark_tasks.json",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/experiments/decomposition/benchmark_tasks.json",
+      "has_tests": true
+    },
+    {
+      "id": "dp_coin_hard",
+      "title": "Coin Change (hard)",
+      "dataset_id": "experiments_decomposition_benchmark_tasks.json",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/experiments/decomposition/benchmark_tasks.json",
+      "has_tests": true
+    },
+    {
+      "id": "dp_coin_stress",
+      "title": "Coin Change (stress)",
+      "dataset_id": "experiments_decomposition_benchmark_tasks.json",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/experiments/decomposition/benchmark_tasks.json",
+      "has_tests": true
+    },
+    {
+      "id": "dp_coin_ood",
+      "title": "Coin Change (ood)",
+      "dataset_id": "experiments_decomposition_benchmark_tasks.json",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/experiments/decomposition/benchmark_tasks.json",
+      "has_tests": true
+    },
+    {
+      "id": "number_primes",
+      "title": "Prime Count",
+      "dataset_id": "experiments_decomposition_benchmark_tasks.json",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/experiments/decomposition/benchmark_tasks.json",
+      "has_tests": true
+    },
+    {
+      "id": "number_primes_test",
+      "title": "Prime Count (test)",
+      "dataset_id": "experiments_decomposition_benchmark_tasks.json",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/experiments/decomposition/benchmark_tasks.json",
+      "has_tests": true
+    },
+    {
+      "id": "number_primes_hard",
+      "title": "Prime Count (hard)",
+      "dataset_id": "experiments_decomposition_benchmark_tasks.json",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/experiments/decomposition/benchmark_tasks.json",
+      "has_tests": true
+    },
+    {
+      "id": "number_primes_stress",
+      "title": "Prime Count (stress)",
+      "dataset_id": "experiments_decomposition_benchmark_tasks.json",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/experiments/decomposition/benchmark_tasks.json",
+      "has_tests": true
+    },
+    {
+      "id": "number_primes_ood",
+      "title": "Prime Count (ood)",
+      "dataset_id": "experiments_decomposition_benchmark_tasks.json",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/experiments/decomposition/benchmark_tasks.json",
+      "has_tests": true
+    },
+    {
+      "id": "mixed_matrix",
+      "title": "Matrix Trace",
+      "dataset_id": "experiments_decomposition_benchmark_tasks.json",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/experiments/decomposition/benchmark_tasks.json",
+      "has_tests": true
+    },
+    {
+      "id": "mixed_matrix_test",
+      "title": "Matrix Trace (test)",
+      "dataset_id": "experiments_decomposition_benchmark_tasks.json",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/experiments/decomposition/benchmark_tasks.json",
+      "has_tests": true
+    },
+    {
+      "id": "mixed_matrix_hard",
+      "title": "Matrix Trace (hard)",
+      "dataset_id": "experiments_decomposition_benchmark_tasks.json",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/experiments/decomposition/benchmark_tasks.json",
+      "has_tests": true
+    },
+    {
+      "id": "mixed_matrix_stress",
+      "title": "Matrix Trace (stress)",
+      "dataset_id": "experiments_decomposition_benchmark_tasks.json",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/experiments/decomposition/benchmark_tasks.json",
+      "has_tests": true
+    },
+    {
+      "id": "mixed_matrix_ood",
+      "title": "Matrix Trace (ood)",
+      "dataset_id": "experiments_decomposition_benchmark_tasks.json",
+      "dataset_path": "/Users/karanallagh/Desktop/DataCollector/experiments/decomposition/benchmark_tasks.json",
+      "has_tests": true
+    }
+  ]
+}

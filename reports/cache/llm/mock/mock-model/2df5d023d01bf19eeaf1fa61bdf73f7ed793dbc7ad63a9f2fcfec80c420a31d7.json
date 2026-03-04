@@ -1,0 +1,1 @@
+{"content": "[MOCK] f9db9394b5a1ff7e :: Implement function solve(arg1:list[list[int]]) -> dict. Do NOT read from stdin or write to stdout; rely solely on the pr", "tokens": 28, "elapsed": 1.8750000001510614e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "failure-tests", "caller": "failure_mode_first"}}

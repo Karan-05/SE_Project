@@ -1,0 +1,1 @@
+{"content": "The hash_bucket pattern is typically used in scenarios where you want to distribute data across multiple storage locations or processes, often to improve performance or manageability. In your", "tokens": 91, "elapsed": 1.887110165989725, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

@@ -1,0 +1,82 @@
+[
+  {
+    "name": "remove_view_link",
+    "mode": "call",
+    "expected": "<div class='paid-column'><span>Yes</span></div>",
+    "input": [
+      {
+        "html": "<div class='paid-column'><span>Yes</span><a href='#'>View</a></div>"
+      }
+    ]
+  },
+  {
+    "name": "remove_line_separator",
+    "mode": "call",
+    "expected": "<div class='paid-column'><span>No</span></div>",
+    "input": [
+      {
+        "html": "<div class='paid-column'><span>No</span><hr/></div>"
+      }
+    ]
+  },
+  {
+    "name": "no_change_to_other_elements",
+    "mode": "call",
+    "expected": "<div class='other-column'><span>Other Content</span></div>",
+    "input": [
+      {
+        "html": "<div class='other-column'><span>Other Content</span></div>"
+      }
+    ]
+  },
+  {
+    "name": "empty_paid_column",
+    "mode": "call",
+    "expected": "<div class='paid-column'></div>",
+    "input": [
+      {
+        "html": "<div class='paid-column'></div>"
+      }
+    ]
+  },
+  {
+    "name": "multiple_paid_columns",
+    "mode": "call",
+    "expected": "<div class='paid-column'><span>Yes</span></div><div class='paid-column'><span>No</span></div>",
+    "input": [
+      {
+        "html": "<div class='paid-column'><span>Yes</span><a href='#'>View</a></div><div class='paid-column'><span>No</span><hr/></div>"
+      }
+    ]
+  },
+  {
+    "name": "non_standard_html_structure",
+    "mode": "call",
+    "expected": "<div class='paid-column'><span>Yes</span></div>",
+    "input": [
+      {
+        "html": "<div class='paid-column'><span>Yes</span><span>View</span></div>"
+      }
+    ]
+  },
+  {
+    "name": "whitespace_handling",
+    "mode": "call",
+    "expected": "<div class='paid-column'>   <span>Yes</span>   </div>",
+    "input": [
+      {
+        "html": "<div class='paid-column'>   <span>Yes</span>   <a href='#'>View</a>   </div>"
+      }
+    ]
+  },
+  {
+    "name": "invalid_html_structure",
+    "mode": "call",
+    "expected": "<div class='paid-column'><span>Yes</span></div>",
+    "input": [
+      {
+        "html": "<div class='paid-column'><span>Yes</span><a>View</a></div>"
+      }
+    ]
+  }
+]

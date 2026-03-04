@@ -1,0 +1,10 @@
+task_id,dataset_id,status,error_type,failure_signature,failing_tests,last_error,artifact_path,tests_source
+694f790b-9a05-494a-a679-212983382fba,challenge_data_challengeData_2025-06-01_2025-10-08_page2.json,failed_patch,failed_rubric,,,,/Users/karanallagh/Desktop/DataCollector/artifacts/self_verifying/universal_demo_v3,
+ac7837cd-349d-4a6a-aa97-82f1d19ad557,data_raw_tasks.csv,failed_patch,failed_rubric,,,,/Users/karanallagh/Desktop/DataCollector/artifacts/self_verifying/universal_demo_v3,
+92515220-cce4-4bfb-9def-a941e03e148a,challenge_data_challengeData_2023-01-01_2023-01-31_page1.json,failed_patch,failed_rubric,,,,/Users/karanallagh/Desktop/DataCollector/artifacts/self_verifying/universal_demo_v3,
+faa95748-8dbe-4d5b-87e1-b96d8073e31c,challenge_data_challengeData_2023-01-01_2023-01-31_page1.json,failed_patch,failed_rubric,,,,/Users/karanallagh/Desktop/DataCollector/artifacts/self_verifying/universal_demo_v3,
+30377081,challenge_data_demoData.json,failed_patch,failed_rubric,,,,/Users/karanallagh/Desktop/DataCollector/artifacts/self_verifying/universal_demo_v3,
+b0e66fb3-6bce-48c8-929f-9d8bebc76885,data_raw_tasks.csv,failed_patch,failed_rubric,,,,/Users/karanallagh/Desktop/DataCollector/artifacts/self_verifying/universal_demo_v3,
+30377290,challenge_data_demoData.json,failed_patch,failed_rubric,,,,/Users/karanallagh/Desktop/DataCollector/artifacts/self_verifying/universal_demo_v3,
+3f1b97ff-4c7e-48e9-a878-e179c630e018,data_raw_tasks.csv,failed_patch,failed_rubric,,,,/Users/karanallagh/Desktop/DataCollector/artifacts/self_verifying/universal_demo_v3,
+694f790b-9a05-494a-a679-212983382fba,data_processed_tasks.csv,failed_patch,failed_rubric,,,,/Users/karanallagh/Desktop/DataCollector/artifacts/self_verifying/universal_demo_v3,

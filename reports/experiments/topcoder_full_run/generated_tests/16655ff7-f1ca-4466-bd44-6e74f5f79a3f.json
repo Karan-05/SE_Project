@@ -1,0 +1,109 @@
+[
+  {
+    "name": "custom_option_class_present",
+    "mode": "call",
+    "expected": true,
+    "input": [
+      {
+        "css_files": [
+          "style1.css",
+          "style2.css"
+        ],
+        "html": "<span class='custom-option'>Option 1</span>"
+      }
+    ]
+  },
+  {
+    "name": "custom_option_class_absent",
+    "mode": "call",
+    "expected": null,
+    "input": [
+      {
+        "css_files": [
+          "style1.css",
+          "style2.css"
+        ],
+        "html": "<span class='custom-option'>Option 1</span>"
+      }
+    ]
+  },
+  {
+    "name": "dropdown_rendering",
+    "mode": "call",
+    "expected": "Yes/No dropdown appears",
+    "input": [
+      {
+        "css_files": [
+          "style1.css",
+          "style2.css"
+        ],
+        "html": "<select class='dropdown'><option>Yes</option><option>No</option></select>"
+      }
+    ]
+  },
+  {
+    "name": "no_css_files",
+    "mode": "call",
+    "expected": null,
+    "input": [
+      {
+        "css_files": [],
+        "html": "<span class='custom-option'>Option 1</span>"
+      }
+    ]
+  },
+  {
+    "name": "valid_css_file",
+    "mode": "call",
+    "expected": true,
+    "input": [
+      {
+        "css_files": [
+          "valid_style.css"
+        ],
+        "html": "<span class='custom-option'>Option 1</span>"
+      }
+    ]
+  },
+  {
+    "name": "invalid_css_file",
+    "mode": "call",
+    "expected": null,
+    "input": [
+      {
+        "css_files": [
+          "invalid_style.css"
+        ],
+        "html": "<span class='custom-option'>Option 1</span>"
+      }
+    ]
+  },
+  {
+    "name": "multiple_options",
+    "mode": "call",
+    "expected": "Yes/No/Maybe dropdown appears",
+    "input": [
+      {
+        "css_files": [
+          "style1.css",
+          "style2.css"
+        ],
+        "html": "<select class='dropdown'><option>Yes</option><option>No</option><option>Maybe</option></select>"
+      }
+    ]
+  },
+  {
+    "name": "empty_option",
+    "mode": "call",
+    "expected": "Empty option appears",
+    "input": [
+      {
+        "css_files": [
+          "style1.css",
+          "style2.css"
+        ],
+        "html": "<select class='dropdown'><option></option></select>"
+      }
+    ]
+  }
+]

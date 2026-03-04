@@ -1,0 +1,98 @@
+[
+  {
+    "name": "valid_submission_download",
+    "mode": "call",
+    "expected": "download_not_allowed",
+    "input": [
+      {
+        "member_id": "12345",
+        "submission_id": "abcde12345"
+      }
+    ]
+  },
+  {
+    "name": "invalid_submission_id",
+    "mode": "call",
+    "expected": "submission_not_found",
+    "input": [
+      {
+        "member_id": "12345",
+        "submission_id": "invalid_id"
+      }
+    ]
+  },
+  {
+    "name": "non_member_download_attempt",
+    "mode": "call",
+    "expected": "access_denied",
+    "input": [
+      {
+        "member_id": "67890",
+        "submission_id": "abcde12345"
+      }
+    ]
+  },
+  {
+    "name": "multiple_download_attempts",
+    "mode": "call",
+    "expected": [
+      "download_not_allowed",
+      "download_not_allowed"
+    ],
+    "input": [
+      {
+        "member_id": "12345",
+        "submission_id": "abcde12345"
+      },
+      {
+        "member_id": "12345",
+        "submission_id": "fghij67890"
+      }
+    ]
+  },
+  {
+    "name": "download_after_challenge_end",
+    "mode": "call",
+    "expected": "download_not_allowed",
+    "input": [
+      {
+        "member_id": "12345",
+        "submission_id": "abcde12345",
+        "challenge_status": "ended"
+      }
+    ]
+  },
+  {
+    "name": "valid_member_download_request",
+    "mode": "call",
+    "expected": "download_not_allowed",
+    "input": [
+      {
+        "member_id": "12345",
+        "submission_id": "abcde12345"
+      }
+    ]
+  },
+  {
+    "name": "edge_case_empty_submission_id",
+    "mode": "call",
+    "expected": "submission_id_required",
+    "input": [
+      {
+        "member_id": "12345",
+        "submission_id": ""
+      }
+    ]
+  },
+  {
+    "name": "edge_case_nonexistent_member",
+    "mode": "call",
+    "expected": "member_not_found",
+    "input": [
+      {
+        "member_id": "00000",
+        "submission_id": "abcde12345"
+      }
+    ]
+  }
+]

@@ -1,0 +1,1 @@
+{"content": "The \"two pointers\" technique is typically used in algorithmic problems, particularly in array or string manipulation scenarios, to optimize the process of finding pairs or subarrays", "tokens": 92, "elapsed": 1.2300832079927204, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

@@ -1,0 +1,1 @@
+{"content": "[MOCK] 5bd48f66568e880d :: Explain how to adapt the base solution for listed deltas.", "tokens": 10, "elapsed": 1.2499999999526779e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "semantic-adapt", "caller": "semantic_diff"}}

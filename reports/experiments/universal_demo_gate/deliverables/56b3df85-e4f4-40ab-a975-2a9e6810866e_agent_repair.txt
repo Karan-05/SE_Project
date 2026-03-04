@@ -1,0 +1,6 @@
+```json
+{
+  "task_type": "architecture_doc",
+  "summary": "Create an architecture document for enhancing the tc-review-api by integrating with Challenge API and Resources API to fetch pending reviews based on user roles. The document should detail requirements, components, interfaces, trade-offs, and associated risks.",
+  "artifacts": {
+    "doc_markdown": "## Requirements\n- Enhance GET /api/reviews to fetch pending reviews based on user roles.\n- Integrate with Challenge API to check challenge status.\n- Integrate with Resources API to fetch user roles.\n\n## Architecture Diagram\n```mermaid\ngraph TD;\n    A[Review API] -->|calls| B[Challenge API];\n    A -->|calls| C[Resources API];\n    B --> D[Challenge Status];\n    C --> E[User Roles];\n    A --> F[Frontend];\n```\n\n## Components\n- **ReviewController** – Handles incoming requests and responses.\n- **ChallengeApiService** – Interfaces with the Challenge API to fetch challenge data.\n- **ResourceApiService** – New service to interface with the Resources API.\n\n## Interfaces\n- **ReviewController.get

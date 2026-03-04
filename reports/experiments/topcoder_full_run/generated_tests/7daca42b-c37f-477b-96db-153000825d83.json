@@ -1,0 +1,122 @@
+[
+  {
+    "name": "consistent_dropdown_options",
+    "mode": "call",
+    "expected": true,
+    "input": [
+      {
+        "new_options": [
+          "Option A",
+          "Option B",
+          "Option C"
+        ],
+        "old_options": [
+          "Option A",
+          "Option B",
+          "Option C"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "dropdown_options_mismatch",
+    "mode": "call",
+    "expected": null,
+    "input": [
+      {
+        "new_options": [
+          "Option A",
+          "Option D"
+        ],
+        "old_options": [
+          "Option A",
+          "Option B",
+          "Option C"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "sql_file_update_check",
+    "mode": "call",
+    "expected": true,
+    "input": [
+      {
+        "sql_file": "topgear_scorecard.sql",
+        "expected_data": [
+          "Data1",
+          "Data2",
+          "Data3"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "sql_file_data_inconsistency",
+    "mode": "call",
+    "expected": null,
+    "input": [
+      {
+        "sql_file": "topgear_scorecard.sql",
+        "expected_data": [
+          "Data1",
+          "Data4"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "no_unnecessary_changes",
+    "mode": "call",
+    "expected": true,
+    "input": [
+      {
+        "file_changes": [
+          "file1.js",
+          "file2.css"
+        ],
+        "unnecessary_changes": false
+      }
+    ]
+  },
+  {
+    "name": "functionality_preserved",
+    "mode": "call",
+    "expected": 30,
+    "input": [
+      {
+        "function_name": "calculateScore",
+        "input_data": [
+          10,
+          20
+        ]
+      }
+    ]
+  },
+  {
+    "name": "edge_case_empty_dropdown",
+    "mode": "call",
+    "expected": true,
+    "input": [
+      {
+        "new_options": [],
+        "old_options": []
+      }
+    ]
+  },
+  {
+    "name": "edge_case_single_option",
+    "mode": "call",
+    "expected": true,
+    "input": [
+      {
+        "new_options": [
+          "Only Option"
+        ],
+        "old_options": [
+          "Only Option"
+        ]
+      }
+    ]
+  }
+]

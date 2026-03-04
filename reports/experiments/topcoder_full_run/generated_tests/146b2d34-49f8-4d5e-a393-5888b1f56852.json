@@ -1,0 +1,106 @@
+[
+  {
+    "name": "basic_infusion",
+    "mode": "call",
+    "expected": {
+      "intensity": 30,
+      "listenability": true
+    },
+    "input": [
+      "track1.mp3",
+      30
+    ]
+  },
+  {
+    "name": "high_intensity_infusion",
+    "mode": "call",
+    "expected": {
+      "intensity": 70,
+      "listenability": true
+    },
+    "input": [
+      "track2.mp3",
+      70
+    ]
+  },
+  {
+    "name": "low_intensity_infusion",
+    "mode": "call",
+    "expected": {
+      "intensity": 10,
+      "listenability": true
+    },
+    "input": [
+      "track3.mp3",
+      10
+    ]
+  },
+  {
+    "name": "edge_case_silent_track",
+    "mode": "call",
+    "expected": {
+      "intensity": 0,
+      "listenability": true
+    },
+    "input": [
+      "silent_track.mp3",
+      50
+    ]
+  },
+  {
+    "name": "edge_case_noisy_track",
+    "mode": "call",
+    "expected": {
+      "intensity": 50,
+      "listenability": false
+    },
+    "input": [
+      "noisy_track.mp3",
+      50
+    ]
+  },
+  {
+    "name": "long_track_infusion",
+    "mode": "call",
+    "expected": {
+      "intensity": 40,
+      "listenability": true
+    },
+    "input": [
+      "long_track.mp3",
+      40
+    ]
+  },
+  {
+    "name": "multiple_tracks_infusion",
+    "mode": "call",
+    "expected": [
+      {
+        "intensity": 50,
+        "listenability": true
+      },
+      {
+        "intensity": 50,
+        "listenability": true
+      }
+    ],
+    "input": [
+      [
+        "track1.mp3",
+        "track2.mp3"
+      ],
+      50
+    ]
+  },
+  {
+    "name": "invalid_track_format",
+    "mode": "call",
+    "expected": {
+      "error": "Invalid format"
+    },
+    "input": [
+      "track_invalid.txt",
+      50
+    ]
+  }
+]

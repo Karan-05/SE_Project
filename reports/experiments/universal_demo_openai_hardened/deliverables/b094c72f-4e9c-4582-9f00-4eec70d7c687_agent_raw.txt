@@ -1,0 +1,42 @@
+```json
+BEGIN_JSON
+{
+  "task_type": "architecture_doc",
+  "id": "b094c72f-4e9c-4582-9f00-4eec70d7c687",
+  "title": "Test",
+  "summary": "This architecture document outlines the design and implementation plan for the project, covering key components, risks, and acceptance criteria.",
+  "assumptions": [
+    "The project scope and requirements are not clearly defined.",
+    "Specific API/interface changes are not provided.",
+    "Constraints and SLAs are not detailed."
+  ],
+  "plan": [
+    "Define the problem summary and project goals.",
+    "Outline the proposed architecture and components.",
+    "Detail the file-level plan for implementation.",
+    "Identify API/interface changes needed.",
+    "Establish constraints and SLAs for the architecture.",
+    "List risks and trade-offs associated with the design.",
+    "Create an acceptance checklist for project validation."
+  ],
+  "artifacts": {
+    "design_doc_md": "# Architecture Document\n\n## Problem Summary\nTBD – missing details\n\n## Proposed Approach\nTBD – missing details\n\n## File-Level Plan\nTBD – missing details\n\n## API / Interface Changes\nTBD – missing details\n\n## Constraints & SLAs\nTBD – missing details\n\n## Risks & Trade-offs\nTBD – missing details\n\n## Acceptance Checklist\nTBD – missing details",
+    "mermaid_diagram": "graph TD;\n    A[Start] --> B[Define Problem];\n    B --> C[Outline Architecture];\n    C --> D[Detail Implementation];\n    D --> E[Identify API Changes];\n    E --> F[Establish Constraints];\n    F --> G[List Risks];\n    G --> H[Create Acceptance Checklist];\n    H --> I[End];",
+    "interfaces": [],
+    "tradeoffs": []
+  },
+  "validations": [
+    "Coverage of required sections is incomplete.",
+    "No live tests have been run due to missing details."
+  ],
+  "confidence": 0.3,
+  "stop_reason": "blocked_partial_context",
+  "rubric_self_check": {
+    "coverage": 0.4,
+    "specificity": 0.2,
+    "actionability": 0.3,
+    "overall_notes": "Significant sections are missing, making the document incomplete."
+  }
+}
+END_JSON
+```

@@ -1,0 +1,1 @@
+{"content": "The Kadane's algorithm is primarily used for finding the maximum sum of a contiguous subarray within a one-dimensional numeric array. It is not directly relevant to the", "tokens": 87, "elapsed": 1.4297998330002883, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

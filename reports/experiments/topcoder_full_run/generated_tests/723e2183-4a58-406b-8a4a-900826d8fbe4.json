@@ -1,0 +1,108 @@
+[
+  {
+    "name": "valid_phase_end_time_monitoring",
+    "mode": "call",
+    "expected": {
+      "phaseEndTime": "2023-10-15T12:00:00Z"
+    },
+    "input": [
+      {
+        "challengeId": "12345"
+      }
+    ]
+  },
+  {
+    "name": "invalid_challenge_id",
+    "mode": "call",
+    "expected": {
+      "error": "Challenge not found"
+    },
+    "input": [
+      {
+        "challengeId": "invalid_id"
+      }
+    ]
+  },
+  {
+    "name": "empty_challenge_id",
+    "mode": "call",
+    "expected": {
+      "error": "Challenge ID cannot be empty"
+    },
+    "input": [
+      {
+        "challengeId": ""
+      }
+    ]
+  },
+  {
+    "name": "phase_end_time_for_nonexistent_challenge",
+    "mode": "call",
+    "expected": {
+      "error": "Challenge not found"
+    },
+    "input": [
+      {
+        "challengeId": "99999"
+      }
+    ]
+  },
+  {
+    "name": "valid_multiple_phase_end_times",
+    "mode": "call",
+    "expected": [
+      {
+        "challengeId": "12345",
+        "phaseEndTime": "2023-10-15T12:00:00Z"
+      },
+      {
+        "challengeId": "67890",
+        "phaseEndTime": "2023-10-20T12:00:00Z"
+      }
+    ],
+    "input": [
+      {
+        "challengeIds": [
+          "12345",
+          "67890"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "timeout_on_api_call",
+    "mode": "call",
+    "expected": {
+      "error": "Request timed out"
+    },
+    "input": [
+      {
+        "challengeId": "12345"
+      }
+    ]
+  },
+  {
+    "name": "rate_limit_exceeded",
+    "mode": "call",
+    "expected": {
+      "error": "Rate limit exceeded"
+    },
+    "input": [
+      {
+        "challengeId": "12345"
+      }
+    ]
+  },
+  {
+    "name": "valid_phase_end_time_with_different_timezones",
+    "mode": "call",
+    "expected": {
+      "phaseEndTime": "2023-10-15T07:00:00-05:00"
+    },
+    "input": [
+      {
+        "challengeId": "54321"
+      }
+    ]
+  }
+]

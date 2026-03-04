@@ -1,0 +1,1 @@
+{"content": "In the context of an event-driven integration that listens to a Kafka event like **submission.scan.complete**, the two-pointer technique may not be directly relevant. The two", "tokens": 88, "elapsed": 1.4922045409912243, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

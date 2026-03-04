@@ -1,0 +1,24 @@
+{
+  "task_type": "architecture_doc",
+  "confidence": 0.9,
+  "why": [
+    "The task involves creating a comprehensive architecture document, which is aligned with the requirements of an architecture doc.",
+    "The title and description suggest a need for structured documentation, typical of architecture tasks."
+  ],
+  "missing_info": [
+    "Specific requirements or constraints for the architecture are not provided.",
+    "Details on the components or services involved are absent."
+  ],
+  "verification_plan": [
+    "Check for completeness of required sections in the architecture document.",
+    "Ensure that risks and trade-offs are clearly articulated.",
+    "Verify that the acceptance checklist is present and actionable."
+  ],
+  "artifacts_to_generate": [
+    {
+      "name": "architecture.md",
+      "format": "md"
+    }
+  ],
+  "synthesis_policy": "none"
+}

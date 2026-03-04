@@ -1,0 +1,74 @@
+[
+  {
+    "name": "valid_registration",
+    "mode": "call",
+    "expected": true,
+    "input": [
+      "user123",
+      "password123"
+    ]
+  },
+  {
+    "name": "duplicate_registration",
+    "mode": "call",
+    "expected": null,
+    "input": [
+      "user123",
+      "password123"
+    ]
+  },
+  {
+    "name": "empty_username",
+    "mode": "call",
+    "expected": null,
+    "input": [
+      "",
+      "password123"
+    ]
+  },
+  {
+    "name": "empty_password",
+    "mode": "call",
+    "expected": null,
+    "input": [
+      "user123",
+      ""
+    ]
+  },
+  {
+    "name": "short_username",
+    "mode": "call",
+    "expected": null,
+    "input": [
+      "us",
+      "password123"
+    ]
+  },
+  {
+    "name": "short_password",
+    "mode": "call",
+    "expected": null,
+    "input": [
+      "user123",
+      "pass"
+    ]
+  },
+  {
+    "name": "special_characters_in_username",
+    "mode": "call",
+    "expected": null,
+    "input": [
+      "user@123",
+      "password123"
+    ]
+  },
+  {
+    "name": "long_username",
+    "mode": "call",
+    "expected": null,
+    "input": [
+      "user12345678901234567890",
+      "password123"
+    ]
+  }
+]

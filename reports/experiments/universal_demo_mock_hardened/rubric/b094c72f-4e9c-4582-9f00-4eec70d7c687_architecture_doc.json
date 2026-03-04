@@ -1,0 +1,15 @@
+{
+  "score": 100.0,
+  "passes_threshold": true,
+  "reasons": [
+    "Includes constraints/SLAs",
+    "Trade-offs discussed",
+    "Diagram reference present",
+    "Risks and mitigations described",
+    "Component mapping provided"
+  ],
+  "missing": [],
+  "section_coverage": 1.0,
+  "extra_score": 1.0,
+  "relaxed_due_to_context_missing": false
+}

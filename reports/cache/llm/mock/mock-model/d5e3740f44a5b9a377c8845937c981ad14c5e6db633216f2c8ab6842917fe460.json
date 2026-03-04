@@ -1,0 +1,1 @@
+{"content": "[MOCK] 22d93e6946df903c :: List three high-risk failure modes for this coding task along with short rationales: Return the nth Fibonacci number.", "tokens": 18, "elapsed": 1.7500000000225668e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "failure-scout", "caller": "failure_mode_first"}}

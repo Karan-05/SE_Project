@@ -1,0 +1,1 @@
+{"content": "[MOCK] 79e50fa314e120af :: Implement function solve(*args) to solve the described problem. Do not read stdin or write stdout. Fill in the two_point", "tokens": 29, "elapsed": 2.0000000000575113e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "pattern-codegen", "caller": "pattern_skeleton"}}

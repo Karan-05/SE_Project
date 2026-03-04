@@ -1,0 +1,1 @@
+{"content": "A LAS (Log ASCII Standard) file is a text file format commonly used in the oil and gas industry to store well log data. It consists of multiple sections", "tokens": 97, "elapsed": 1.3896612910029944, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

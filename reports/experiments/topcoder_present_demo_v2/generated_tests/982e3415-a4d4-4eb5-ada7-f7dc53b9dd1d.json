@@ -1,0 +1,91 @@
+[
+  {
+    "name": "valid_configuration",
+    "mode": "call",
+    "expected": "Configuration validated successfully.",
+    "input": [
+      {
+        "deployment": "iOS 10.x",
+        "swift_version": "4",
+        "api": "Rest API"
+      }
+    ]
+  },
+  {
+    "name": "missing_dependency",
+    "mode": "call",
+    "expected": "Error: Missing dependencies.",
+    "input": [
+      {
+        "deployment": "iOS 10.x",
+        "swift_version": "4",
+        "api": "Rest API",
+        "dependencies": []
+      }
+    ]
+  },
+  {
+    "name": "successful_build",
+    "mode": "call",
+    "expected": "Build successful.",
+    "input": [
+      {
+        "source_code": "valid_source_code"
+      }
+    ]
+  },
+  {
+    "name": "invalid_source_code",
+    "mode": "call",
+    "expected": "Error: Build failed due to syntax errors.",
+    "input": [
+      {
+        "source_code": "invalid_source_code"
+      }
+    ]
+  },
+  {
+    "name": "api_response_validation",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "data": {}
+    },
+    "input": [
+      {
+        "api_call": "get_user_data"
+      }
+    ]
+  },
+  {
+    "name": "api_error_handling",
+    "mode": "call",
+    "expected": "Error: Unable to fetch user data.",
+    "input": [
+      {
+        "api_call": "get_user_data",
+        "response": "error"
+      }
+    ]
+  },
+  {
+    "name": "readme_documentation_check",
+    "mode": "call",
+    "expected": "README.md validated successfully.",
+    "input": [
+      {
+        "readme": "valid_readme_content"
+      }
+    ]
+  },
+  {
+    "name": "validation_documentation_check",
+    "mode": "call",
+    "expected": "Validation.md validated successfully.",
+    "input": [
+      {
+        "validation_doc": "valid_validation_content"
+      }
+    ]
+  }
+]

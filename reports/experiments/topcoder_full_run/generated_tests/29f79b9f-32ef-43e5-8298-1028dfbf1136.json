@@ -1,0 +1,119 @@
+[
+  {
+    "name": "valid_user_login",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "token": "jwt_token_here"
+    },
+    "input": [
+      {
+        "username": "validUser",
+        "password": "validPassword"
+      }
+    ]
+  },
+  {
+    "name": "invalid_user_login",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Invalid username or password."
+    },
+    "input": [
+      {
+        "username": "invalidUser",
+        "password": "wrongPassword"
+      }
+    ]
+  },
+  {
+    "name": "role_creation",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "roleId": "new_role_id"
+    },
+    "input": [
+      {
+        "roleName": "newRole"
+      }
+    ]
+  },
+  {
+    "name": "duplicate_role_creation",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Role already exists."
+    },
+    "input": [
+      {
+        "roleName": "existingRole"
+      }
+    ]
+  },
+  {
+    "name": "user_profile_update",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "message": "Profile updated successfully."
+    },
+    "input": [
+      {
+        "userId": "user_id_here",
+        "profileData": {
+          "email": "newemail@example.com",
+          "name": "New Name"
+        }
+      }
+    ]
+  },
+  {
+    "name": "user_profile_update_invalid_email",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Invalid email format."
+    },
+    "input": [
+      {
+        "userId": "user_id_here",
+        "profileData": {
+          "email": "invalid_email",
+          "name": "New Name"
+        }
+      }
+    ]
+  },
+  {
+    "name": "get_user_roles",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "roles": [
+        "role1",
+        "role2"
+      ]
+    },
+    "input": [
+      {
+        "userId": "user_id_here"
+      }
+    ]
+  },
+  {
+    "name": "get_user_roles_nonexistent_user",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "User not found."
+    },
+    "input": [
+      {
+        "userId": "nonexistent_user_id"
+      }
+    ]
+  }
+]

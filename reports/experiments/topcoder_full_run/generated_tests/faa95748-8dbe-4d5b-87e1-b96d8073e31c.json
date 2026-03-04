@@ -1,0 +1,106 @@
+[
+  {
+    "name": "valid_round_display",
+    "mode": "call",
+    "expected": {
+      "round_displayed": 2
+    },
+    "input": [
+      {
+        "challenge_id": 12345,
+        "expected_rounds": 2
+      }
+    ]
+  },
+  {
+    "name": "single_round_display",
+    "mode": "call",
+    "expected": {
+      "round_displayed": 1
+    },
+    "input": [
+      {
+        "challenge_id": 67890,
+        "expected_rounds": 1
+      }
+    ]
+  },
+  {
+    "name": "no_rounds_display",
+    "mode": "call",
+    "expected": {
+      "round_displayed": 0
+    },
+    "input": [
+      {
+        "challenge_id": 11111,
+        "expected_rounds": 0
+      }
+    ]
+  },
+  {
+    "name": "multiple_rounds_display",
+    "mode": "call",
+    "expected": {
+      "round_displayed": 3
+    },
+    "input": [
+      {
+        "challenge_id": 22222,
+        "expected_rounds": 3
+      }
+    ]
+  },
+  {
+    "name": "invalid_challenge_id",
+    "mode": "call",
+    "expected": {
+      "error": "Invalid challenge ID"
+    },
+    "input": [
+      {
+        "challenge_id": -1,
+        "expected_rounds": null
+      }
+    ]
+  },
+  {
+    "name": "edge_case_large_id",
+    "mode": "call",
+    "expected": {
+      "round_displayed": 2
+    },
+    "input": [
+      {
+        "challenge_id": 999999999,
+        "expected_rounds": 2
+      }
+    ]
+  },
+  {
+    "name": "edge_case_zero_rounds",
+    "mode": "call",
+    "expected": {
+      "round_displayed": 0
+    },
+    "input": [
+      {
+        "challenge_id": 33333,
+        "expected_rounds": 0
+      }
+    ]
+  },
+  {
+    "name": "edge_case_negative_rounds",
+    "mode": "call",
+    "expected": {
+      "error": "Invalid round count"
+    },
+    "input": [
+      {
+        "challenge_id": 44444,
+        "expected_rounds": -1
+      }
+    ]
+  }
+]

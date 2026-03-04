@@ -1,0 +1,53 @@
+{
+  "run_id": "universal_demo",
+  "total_rows": 30,
+  "total_unique_task_ids": 29,
+  "manifest_unique_task_ids": 29,
+  "attempted": 25,
+  "solved_pass_final": 10,
+  "pass_at_final": 0.4,
+  "attempted_algo": 18,
+  "solved_algo": 3,
+  "attempted_non_coding": 7,
+  "completed_deliverables": 7,
+  "pass_at_final_extracted_only": 0.6,
+  "deliverable_success_rate": 1.0,
+  "skipped_counts": {
+    "skipped_failed_synthesis": 4
+  },
+  "attempted_with_extracted_tests": 12,
+  "attempted_with_synthesized_tests": 13,
+  "success_rate_extracted": 0.8333333333333334,
+  "success_rate_synthesized": 0.0,
+  "avg_attempts": 6.12,
+  "median_attempts": 10.0,
+  "p90_attempts": 10.0,
+  "fallback_rate": 0.6,
+  "stagnation_rate": 0.6,
+  "retries_exhausted_count": 15,
+  "llm_calls_total": 326.0,
+  "llm_calls_avg_per_task": 13.04,
+  "llm_available": true,
+  "runtime": {
+    "start_time": "2026-02-24T11:51:38.539169",
+    "end_time": "2026-02-24T12:11:35.689538",
+    "wall_time_seconds": 1197.150369,
+    "avg_wall_time_per_attempted": 47.886014759999995
+  },
+  "reconciliation": {
+    "discovered_rows": 30,
+    "unique_tasks": 29,
+    "duplicates": 1,
+    "filtered_out": 0,
+    "manifest_total": 30,
+    "dataset_files": 8
+  },
+  "progress_fraction": 1.0,
+  "evaluation_coverage": 0.8620689655172413,
+  "pipeline_status": "COMPLETE",
+  "validity": "VALID",
+  "presentation_mode": true,
+  "sample_size": 30,
+  "sample_strategy": "random",
+  "sample_seed": 42
+}

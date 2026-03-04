@@ -1,0 +1,102 @@
+[
+  {
+    "name": "landing_page_display",
+    "mode": "call",
+    "expected": "Landing page displayed correctly with slideshow and active dots.",
+    "input": [
+      {
+        "viewportWidth": 1280,
+        "page": "landing"
+      }
+    ]
+  },
+  {
+    "name": "modal_window_display",
+    "mode": "call",
+    "expected": "Modal window displayed in center with input fields.",
+    "input": [
+      {
+        "action": "click",
+        "element": "signUpButton"
+      }
+    ]
+  },
+  {
+    "name": "responsive_layout_min_width",
+    "mode": "call",
+    "expected": "Landing page maintains fluid layout.",
+    "input": [
+      {
+        "viewportWidth": 992,
+        "page": "landing"
+      }
+    ]
+  },
+  {
+    "name": "font_replacement",
+    "mode": "call",
+    "expected": [
+      "Nunito",
+      "Source Sans Pro"
+    ],
+    "input": [
+      {
+        "page": "landing",
+        "fonts": [
+          "Avenir",
+          "Source Sans Pro"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "sign_in_modal_fields",
+    "mode": "call",
+    "expected": "All fields are present and functional.",
+    "input": [
+      {
+        "modal": "signIn",
+        "fields": [
+          "username",
+          "password",
+          "rememberMe"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "active_state_dots",
+    "mode": "call",
+    "expected": "Active state for dots pagination is visible.",
+    "input": [
+      {
+        "page": "landing",
+        "slideshow": true
+      }
+    ]
+  },
+  {
+    "name": "edge_case_empty_username",
+    "mode": "call",
+    "expected": "Error message for empty username.",
+    "input": [
+      {
+        "modal": "signIn",
+        "username": "",
+        "password": "validPassword"
+      }
+    ]
+  },
+  {
+    "name": "edge_case_empty_password",
+    "mode": "call",
+    "expected": "Error message for empty password.",
+    "input": [
+      {
+        "modal": "signIn",
+        "username": "validUser",
+        "password": ""
+      }
+    ]
+  }
+]

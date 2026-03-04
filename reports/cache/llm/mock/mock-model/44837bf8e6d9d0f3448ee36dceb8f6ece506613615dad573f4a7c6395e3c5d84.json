@@ -1,0 +1,1 @@
+{"content": "[MOCK] 417755f0aaedce8c :: You are comparing a new task to base task baseline. List semantic deltas succinctly: Return the reversed string.", "tokens": 18, "elapsed": 1.7919999999449487e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "semantic-diff", "caller": "semantic_diff"}}

@@ -1,0 +1,16 @@
+{
+  "task_id": "string_freq",
+  "tests": [
+    {
+      "name": "sample_0",
+      "mode": "call",
+      "status": "pass",
+      "expected": "{'a': 2, 'b': 1}",
+      "output": "{'a': 2, 'b': 1}",
+      "error": "",
+      "input": "['aba']",
+      "kwargs": "{}",
+      "duration": 2.9417016776278615e-05
+    }
+  ]
+}

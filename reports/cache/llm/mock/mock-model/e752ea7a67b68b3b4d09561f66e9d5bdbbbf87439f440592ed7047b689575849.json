@@ -1,0 +1,1 @@
+{"content": "[MOCK] ecd222e8a6701121 :: Verify trace consistency before coding.", "tokens": 5, "elapsed": 1.2919999998750598e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "trace-check", "caller": "simulation_trace"}}

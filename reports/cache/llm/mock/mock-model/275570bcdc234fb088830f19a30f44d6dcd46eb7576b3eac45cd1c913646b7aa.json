@@ -1,0 +1,1 @@
+{"content": "[MOCK] 1f7cfd6408ffc6e6 :: You are comparing a new task to base task baseline. List semantic deltas succinctly: Return the nth Fibonacci number.", "tokens": 19, "elapsed": 1.7919999999449487e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "semantic-diff", "caller": "semantic_diff"}}

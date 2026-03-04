@@ -1,0 +1,1 @@
+{"content": "In the context of implementing a Kafka events consumer module, the \"two pointers\" pattern is generally not directly applicable. The two pointers technique is typically used in algorithms", "tokens": 89, "elapsed": 1.4340013339970028, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

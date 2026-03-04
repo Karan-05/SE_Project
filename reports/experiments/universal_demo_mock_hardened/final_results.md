@@ -1,0 +1,55 @@
+# TopCoder Experiment Final Results — universal_demo_mock_hardened
+
+> **Pipeline Status:** COMPLETE (100.00% processed)
+> **Evaluation Coverage:** 100.00% of unique tasks attempted
+> **Run Validity:** DEMO_ONLY_MOCK — Gates relaxed for mock provider; not comparable to real-provider results.
+
+> **Sample Estimate:** sample_size=30 seed=42 strategy=random
+
+- Total unique tasks: **29** (manifest target 29)
+- Actionable attempted: **29** (success 29, failed 0)
+- Non-actionable (insufficient context): 0
+- Evaluation coverage: 100.00% | Parse failures captured: 0
+- Algo pass@final (extracted/provided tests only): 100.00% (5/5)
+- Algorithmic coding attempts: 5 | Unit-test verified solves: 5
+- Self-checks (excluded from pass@final): attempted 0 (pass 0.00%)
+- Non-coding deliverables: attempted 24 completed 24 (success 100.00%)
+
+## Test Source Breakdown
+- Extracted: attempted 29, success 17.24%
+- Synthesized: attempted 0, success 0.00%
+- Self-checks (not counted toward pass@final): attempted 0, pass 0.00%
+
+## Self-Verify Loop Stats
+- Avg/Median/P90 attempts: 0.17 / 0.00 / 1.00
+- Fallback rate: 0.00%
+- Stagnation rate: 0.00%
+- Retries exhausted (>=10 attempts & failed): 0
+
+## LLM Usage
+- Total calls: 0
+- Avg calls per attempted task: 0.00
+- Calls per actionable attempted: 0.00
+
+## Runtime
+- Start: 2026-02-25T00:04:18.765981
+- End: 2026-02-25T00:04:24.692623
+- Wall-clock: 5.93s
+- Avg per attempted: 0.20s
+
+## Dataset Reconciliation vs ~22k Memories
+Modern discovery sweeps multiple analytics exports and challenge snapshots, which inflates row counts beyond the historical ~22k challenges. Rows represent per-dataset challenge slices; deduplication reduces them to unique task IDs.
+
+| Metric | Count |
+| --- | --- |
+| Discovered rows | 30 |
+| Unique tasks | 29 |
+| Duplicates | 1 |
+| Filtered out | 0 |
+| Dataset files/sheets | 8 |
+
+## Files
+- summary.json: `/Users/karanallagh/Desktop/DataCollector/reports/experiments/universal_demo_mock_hardened/summary.json`
+- per_problem.csv: `/Users/karanallagh/Desktop/DataCollector/reports/experiments/universal_demo_mock_hardened/per_problem.csv`
+- failures.csv: `/Users/karanallagh/Desktop/DataCollector/reports/experiments/universal_demo_mock_hardened/failures.csv`
+- checkpoint.jsonl: `/Users/karanallagh/Desktop/DataCollector/reports/experiments/universal_demo_mock_hardened/checkpoint.jsonl`

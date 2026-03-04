@@ -1,0 +1,23 @@
+{
+  "task_type": "architecture_doc",
+  "confidence": 0.9,
+  "why": [
+    "The task involves creating an architecture document which aligns with the provided title and description.",
+    "The task requires a structured approach to document architecture, including various sections outlined in the requirements."
+  ],
+  "missing_info": [
+    "Specific details on the system being designed.",
+    "Requirements for functional and non-functional aspects."
+  ],
+  "verification_plan": [
+    "Check for completeness against the required sections.",
+    "Ensure clarity and conciseness in the proposed architecture."
+  ],
+  "artifacts_to_generate": [
+    {
+      "name": "architecture.md",
+      "format": "md"
+    }
+  ],
+  "synthesis_policy": "none"
+}

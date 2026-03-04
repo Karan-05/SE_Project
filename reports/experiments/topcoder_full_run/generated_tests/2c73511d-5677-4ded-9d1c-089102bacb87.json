@@ -1,0 +1,97 @@
+[
+  {
+    "name": "valid_document_upload",
+    "mode": "call",
+    "expected": "success",
+    "input": [
+      {
+        "document_id": "12345",
+        "reviewer_id": "reviewer_1"
+      }
+    ]
+  },
+  {
+    "name": "document_not_available",
+    "mode": "call",
+    "expected": "error: document not available",
+    "input": [
+      {
+        "document_id": "67890",
+        "reviewer_id": "reviewer_2"
+      }
+    ]
+  },
+  {
+    "name": "invalid_reviewer_id",
+    "mode": "call",
+    "expected": "error: invalid reviewer",
+    "input": [
+      {
+        "document_id": "12345",
+        "reviewer_id": "invalid_reviewer"
+      }
+    ]
+  },
+  {
+    "name": "empty_document_id",
+    "mode": "call",
+    "expected": "error: document ID cannot be empty",
+    "input": [
+      {
+        "document_id": "",
+        "reviewer_id": "reviewer_1"
+      }
+    ]
+  },
+  {
+    "name": "multiple_document_uploads",
+    "mode": "call",
+    "expected": [
+      "success",
+      "success"
+    ],
+    "input": [
+      {
+        "document_id": "12345",
+        "reviewer_id": "reviewer_1"
+      },
+      {
+        "document_id": "67890",
+        "reviewer_id": "reviewer_2"
+      }
+    ]
+  },
+  {
+    "name": "document_id_not_found",
+    "mode": "call",
+    "expected": "error: document ID not found",
+    "input": [
+      {
+        "document_id": "99999",
+        "reviewer_id": "reviewer_1"
+      }
+    ]
+  },
+  {
+    "name": "reviewer_not_authorized",
+    "mode": "call",
+    "expected": "error: reviewer not authorized",
+    "input": [
+      {
+        "document_id": "12345",
+        "reviewer_id": "unauthorized_reviewer"
+      }
+    ]
+  },
+  {
+    "name": "large_document_upload",
+    "mode": "call",
+    "expected": "success",
+    "input": [
+      {
+        "document_id": "large_doc",
+        "reviewer_id": "reviewer_1"
+      }
+    ]
+  }
+]

@@ -1,0 +1,32 @@
+{
+  "task_id": "a29ef147-15c4-4e2c-9afc-737403db74eb",
+  "strategy": "multi_view",
+  "attempt": 10,
+  "pass_rate": 0.0,
+  "plan_subtasks": [
+    "align spec-view",
+    "align example-view",
+    "align constraint-view",
+    "Generate minimal unit tests for critical behaviors",
+    "Add adversarial/edge-case tests",
+    "Run tests and interpret failures"
+  ],
+  "plan_tests": [
+    ""
+  ],
+  "plan_diagnostics": {
+    "consistent": "True",
+    "views": "5",
+    "consistency_note": "[LOCAL_STUB] 5d362573eec875bc :: Check whether these views disagree. Spec: ['Summarize goal', 'List required outputs', 'State constraints']. Examples: ['",
+    "planning_tokens": "17",
+    "planning_time": "0.000002"
+  },
+  "patch_summary": {
+    "phase": "initial"
+  },
+  "failing_tests": [],
+  "trace": [],
+  "feedback": [],
+  "reproduction": "",
+  "tests_run": []
+}

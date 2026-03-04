@@ -1,0 +1,125 @@
+[
+  {
+    "name": "create_learning_space_valid",
+    "mode": "call",
+    "expected": {
+      "success": true,
+      "message": "Learning space created successfully."
+    },
+    "input": [
+      {
+        "title": "ReactJS Basics",
+        "description": "A space to learn the basics of ReactJS.",
+        "prerequisites": [
+          "React",
+          "JavaScript"
+        ],
+        "thumbnail": "url_to_thumbnail_image"
+      }
+    ]
+  },
+  {
+    "name": "create_learning_space_missing_fields",
+    "mode": "call",
+    "expected": {
+      "success": false,
+      "message": "Title is required."
+    },
+    "input": [
+      {
+        "title": "",
+        "description": "A space without a title.",
+        "prerequisites": [
+          "React"
+        ],
+        "thumbnail": "url_to_thumbnail_image"
+      }
+    ]
+  },
+  {
+    "name": "create_post_valid",
+    "mode": "call",
+    "expected": {
+      "success": true,
+      "message": "Post created successfully."
+    },
+    "input": [
+      {
+        "learningSpaceId": "space123",
+        "title": "Understanding JSX",
+        "body": "JSX is a syntax extension for JavaScript."
+      }
+    ]
+  },
+  {
+    "name": "create_post_invalid_markdown",
+    "mode": "call",
+    "expected": {
+      "success": false,
+      "message": "Invalid markdown format."
+    },
+    "input": [
+      {
+        "learningSpaceId": "space123",
+        "title": "Invalid Markdown Post",
+        "body": "This is an invalid markdown **text"
+      }
+    ]
+  },
+  {
+    "name": "add_comment_valid",
+    "mode": "call",
+    "expected": {
+      "success": true,
+      "message": "Comment added successfully."
+    },
+    "input": [
+      {
+        "postId": "post456",
+        "body": "Great post! Very informative."
+      }
+    ]
+  },
+  {
+    "name": "add_comment_empty_body",
+    "mode": "call",
+    "expected": {
+      "success": false,
+      "message": "Comment body cannot be empty."
+    },
+    "input": [
+      {
+        "postId": "post456",
+        "body": ""
+      }
+    ]
+  },
+  {
+    "name": "upvote_post",
+    "mode": "call",
+    "expected": {
+      "success": true,
+      "message": "Post upvoted successfully."
+    },
+    "input": [
+      {
+        "postId": "post456",
+        "userId": "user789"
+      }
+    ]
+  },
+  {
+    "name": "downvote_comment",
+    "mode": "call",
+    "expected": {
+      "success": true,
+      "message": "Comment downvoted successfully."
+    },
+    "input": [
+      {
+        "commentId": "comment321",
+        "userId": "user789"
+      }
+    ]
+  }
+]

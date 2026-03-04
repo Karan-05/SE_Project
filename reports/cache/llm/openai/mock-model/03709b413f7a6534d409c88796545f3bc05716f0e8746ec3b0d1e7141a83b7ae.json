@@ -1,0 +1,1 @@
+{"content": "In the context of deploying or destructing metadata in Salesforce using the Metadata API, the `package.xml` file is crucial as it defines the components you want to", "tokens": 87, "elapsed": 2.2737399579928024, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

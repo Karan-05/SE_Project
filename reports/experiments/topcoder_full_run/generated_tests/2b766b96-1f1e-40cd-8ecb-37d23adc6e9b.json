@@ -1,0 +1,58 @@
+[
+  {
+    "name": "basic_onboarding_flow",
+    "mode": "io",
+    "expected": "{\"response\": \"Great! What is the main goal of your app?\"}",
+    "stdin": "{\"user_input\": \"I want to launch a new app challenge.\"}",
+    "expected_stdout": "{\"response\": \"Great! What is the main goal of your app?\"}"
+  },
+  {
+    "name": "challenge_scope_clarification",
+    "mode": "io",
+    "expected": "{\"response\": \"Can you describe the target audience for your challenge?\"}",
+    "stdin": "{\"user_input\": \"I need help defining the problem statement.\"}",
+    "expected_stdout": "{\"response\": \"Can you describe the target audience for your challenge?\"}"
+  },
+  {
+    "name": "duplicate_conversation_check",
+    "mode": "io",
+    "expected": "{\"response\": \"Let's summarize what we discussed before proceeding.\"}",
+    "stdin": "{\"previous_conversation\": true, \"user_input\": \"I already discussed this with the AI.\"}",
+    "expected_stdout": "{\"response\": \"Let's summarize what we discussed before proceeding.\"}"
+  },
+  {
+    "name": "input_validation_empty",
+    "mode": "io",
+    "expected": "{\"error\": \"Input cannot be empty.\"}",
+    "stdin": "{\"user_input\": \"\"}",
+    "expected_stdout": "{\"error\": \"Input cannot be empty.\"}"
+  },
+  {
+    "name": "input_validation_special_characters",
+    "mode": "io",
+    "expected": "{\"error\": \"Invalid input. Please provide a valid challenge description.\"}",
+    "stdin": "{\"user_input\": \"@#$%^&*()\"}",
+    "expected_stdout": "{\"error\": \"Invalid input. Please provide a valid challenge description.\"}"
+  },
+  {
+    "name": "contextual_adaptation",
+    "mode": "io",
+    "expected": "{\"response\": \"What specific healthcare issue are you addressing?\"}",
+    "stdin": "{\"user_input\": \"I want to create a challenge for healthcare innovation.\"}",
+    "expected_stdout": "{\"response\": \"What specific healthcare issue are you addressing?\"}"
+  },
+  {
+    "name": "multi-step_flow",
+    "mode": "io",
+    "expected": "{\"response\": \"Step 1: Define your challenge. What is the main objective?\"}",
+    "stdin": "{\"user_input\": \"Let's start the onboarding process.\"}",
+    "expected_stdout": "{\"response\": \"Step 1: Define your challenge. What is the main objective?\"}"
+  },
+  {
+    "name": "unexpected_input_handling",
+    "mode": "io",
+    "expected": "{\"error\": \"This wizard is for challenge onboarding only.\"}",
+    "stdin": "{\"user_input\": \"Tell me a joke.\"}",
+    "expected_stdout": "{\"error\": \"This wizard is for challenge onboarding only.\"}"
+  }
+]

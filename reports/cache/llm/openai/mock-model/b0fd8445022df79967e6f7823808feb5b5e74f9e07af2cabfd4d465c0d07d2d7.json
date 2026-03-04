@@ -1,0 +1,1 @@
+{"content": "The two-pointer technique is typically used in problems involving arrays or strings where you need to traverse the data from both ends or maintain a dynamic window. In the context", "tokens": 89, "elapsed": 1.3033080830064137, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

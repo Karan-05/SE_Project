@@ -1,0 +1,96 @@
+[
+  {
+    "name": "admin_view_link_present",
+    "mode": "call",
+    "expected": true,
+    "input": [
+      {
+        "role": "admin",
+        "challenge_id": 123
+      }
+    ]
+  },
+  {
+    "name": "non_admin_view_link_absent",
+    "mode": "call",
+    "expected": null,
+    "input": [
+      {
+        "role": "user",
+        "challenge_id": 123
+      }
+    ]
+  },
+  {
+    "name": "edit_payments_functionality",
+    "mode": "call",
+    "expected": "Payments edited successfully",
+    "input": [
+      {
+        "role": "admin",
+        "challenge_id": 123,
+        "action": "edit_payments"
+      }
+    ]
+  },
+  {
+    "name": "view_link_functionality",
+    "mode": "call",
+    "expected": "Payment status details",
+    "input": [
+      {
+        "role": "admin",
+        "challenge_id": 123,
+        "action": "view_payment_status"
+      }
+    ]
+  },
+  {
+    "name": "challenge_not_found",
+    "mode": "call",
+    "expected": "Challenge not found",
+    "input": [
+      {
+        "role": "admin",
+        "challenge_id": 999
+      }
+    ]
+  },
+  {
+    "name": "edit_payments_invalid_role",
+    "mode": "call",
+    "expected": "Permission denied",
+    "input": [
+      {
+        "role": "guest",
+        "challenge_id": 123,
+        "action": "edit_payments"
+      }
+    ]
+  },
+  {
+    "name": "view_link_no_payments",
+    "mode": "call",
+    "expected": "No payment records found",
+    "input": [
+      {
+        "role": "admin",
+        "challenge_id": 456
+      }
+    ]
+  },
+  {
+    "name": "view_link_multiple_payments",
+    "mode": "call",
+    "expected": [
+      "Payment 1 details",
+      "Payment 2 details"
+    ],
+    "input": [
+      {
+        "role": "admin",
+        "challenge_id": 789
+      }
+    ]
+  }
+]

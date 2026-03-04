@@ -1,0 +1,1 @@
+{"content": "The two-pointer pattern is typically used in algorithms that involve searching or manipulating arrays or lists, such as finding pairs that sum to a specific value, or reversing a", "tokens": 87, "elapsed": 1.6358962079975754, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

@@ -1,0 +1,54 @@
+{
+  "task_type": "data_etl",
+  "summary": "Design an ETL pipeline to filter out winners from the submissions tab in the Online Review system, ensuring only valid submissions are displayed. The pipeline will include schema definitions, transformation steps, and validation queries.",
+  "artifacts": {
+    "pipeline_overview": "Extract data from the submissions database, filter out winners and invalid placements, transform the data for the submissions tab, and load the cleaned data back into the system.",
+    "sql_or_pseudocode": "SELECT * FROM submissions WHERE status != 'winner' AND placement NOT IN (4, 5);",
+    "tables": [
+      "submissions(submission_id STRING, user_id STRING, status ENUM, placement INT)",
+      "filtered_submissions(submission_id STRING, user_id STRING, status ENUM, placement INT)"
+    ],
+    "dq_checks": [
+      "Check that the count of filtered_submissions matches expected non-winner submissions.",
+      "Ensure no entries in filtered_submissions have status 'winner'.",
+      "Validate that placement values are within expected ranges."
+    ],
+    "tests": [
+      "SELECT COUNT(*) FROM filtered_submissions WHERE status = 'winner'; -- Should return 0",
+      "SELECT COUNT(*) FROM filtered_submissions WHERE placement IN (4, 5); -- Should return 0"
+    ]
+  },
+  "rubric_self_check": {
+    "coverage": 90.0,
+    "specificity": 85.0,
+    "actionability": 88.0,
+    "overall_notes": "The ETL blueprint includes schema definitions, transformation logic, and validation checks, addressing the requirements effectively."
+  },
+  "raw": {
+    "task_type": "data_etl",
+    "summary": "Design an ETL pipeline to filter out winners from the submissions tab in the Online Review system, ensuring only valid submissions are displayed. The pipeline will include schema definitions, transformation steps, and validation queries.",
+    "artifacts": {
+      "pipeline_overview": "Extract data from the submissions database, filter out winners and invalid placements, transform the data for the submissions tab, and load the cleaned data back into the system.",
+      "sql_or_pseudocode": "SELECT * FROM submissions WHERE status != 'winner' AND placement NOT IN (4, 5);",
+      "tables": [
+        "submissions(submission_id STRING, user_id STRING, status ENUM, placement INT)",
+        "filtered_submissions(submission_id STRING, user_id STRING, status ENUM, placement INT)"
+      ],
+      "dq_checks": [
+        "Check that the count of filtered_submissions matches expected non-winner submissions.",
+        "Ensure no entries in filtered_submissions have status 'winner'.",
+        "Validate that placement values are within expected ranges."
+      ],
+      "tests": [
+        "SELECT COUNT(*) FROM filtered_submissions WHERE status = 'winner'; -- Should return 0",
+        "SELECT COUNT(*) FROM filtered_submissions WHERE placement IN (4, 5); -- Should return 0"
+      ]
+    },
+    "rubric_self_check": {
+      "coverage": 90,
+      "specificity": 85,
+      "actionability": 88,
+      "overall_notes": "The ETL blueprint includes schema definitions, transformation logic, and validation checks, addressing the requirements effectively."
+    }
+  }
+}

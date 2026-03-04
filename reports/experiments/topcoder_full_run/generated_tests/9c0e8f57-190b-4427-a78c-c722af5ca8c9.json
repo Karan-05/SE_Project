@@ -1,0 +1,141 @@
+[
+  {
+    "name": "initial_review_submission",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "message": "Review submitted successfully."
+    },
+    "input": [
+      {
+        "reviewer_id": "reviewer123",
+        "submission_id": "submission456",
+        "scores": [
+          5,
+          4,
+          3
+        ],
+        "comments": "Good work!"
+      }
+    ]
+  },
+  {
+    "name": "reopen_review_and_submit",
+    "mode": "call",
+    "expected": {
+      "scores": [
+        5,
+        4,
+        3
+      ],
+      "comments": "Good work!"
+    },
+    "input": [
+      {
+        "reviewer_id": "reviewer123",
+        "submission_id": "submission456",
+        "action": "reopen"
+      }
+    ]
+  },
+  {
+    "name": "submit_review_after_reopen",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Cannot submit review with existing scores."
+    },
+    "input": [
+      {
+        "reviewer_id": "reviewer123",
+        "submission_id": "submission456",
+        "action": "submit"
+      }
+    ]
+  },
+  {
+    "name": "multiple_reopen_attempts",
+    "mode": "call",
+    "expected": {
+      "scores": [
+        5,
+        4,
+        3
+      ],
+      "comments": "Good work!"
+    },
+    "input": [
+      {
+        "reviewer_id": "reviewer123",
+        "submission_id": "submission456",
+        "action": "reopen"
+      }
+    ]
+  },
+  {
+    "name": "empty_scorecard_submission",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Scorecard cannot be empty."
+    },
+    "input": [
+      {
+        "reviewer_id": "reviewer123",
+        "submission_id": "submission456",
+        "scores": [],
+        "comments": ""
+      }
+    ]
+  },
+  {
+    "name": "invalid_reviewer_id",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Reviewer ID not found."
+    },
+    "input": [
+      {
+        "reviewer_id": "invalid_reviewer",
+        "submission_id": "submission456",
+        "action": "reopen"
+      }
+    ]
+  },
+  {
+    "name": "nonexistent_submission_id",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Submission ID not found."
+    },
+    "input": [
+      {
+        "reviewer_id": "reviewer123",
+        "submission_id": "nonexistent_submission",
+        "action": "reopen"
+      }
+    ]
+  },
+  {
+    "name": "submit_after_editing_scores",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "message": "Review submitted successfully."
+    },
+    "input": [
+      {
+        "reviewer_id": "reviewer123",
+        "submission_id": "submission456",
+        "scores": [
+          4,
+          5,
+          3
+        ],
+        "comments": "Updated review."
+      }
+    ]
+  }
+]

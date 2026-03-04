@@ -1,0 +1,58 @@
+[
+  {
+    "name": "logged_out_user_navigation",
+    "mode": "io",
+    "expected": "User is not shown as logged out in the uni nav",
+    "stdin": "GET /projects",
+    "expected_stdout": "User is not shown as logged out in the uni nav"
+  },
+  {
+    "name": "logged_in_user_navigation",
+    "mode": "io",
+    "expected": "User is shown as logged in in the uni nav",
+    "stdin": "GET /projects?user=logged_in",
+    "expected_stdout": "User is shown as logged in in the uni nav"
+  },
+  {
+    "name": "session_timeout",
+    "mode": "io",
+    "expected": "User is not shown as logged out in the uni nav",
+    "stdin": "GET /projects?session=expired",
+    "expected_stdout": "User is not shown as logged out in the uni nav"
+  },
+  {
+    "name": "multiple_user_sessions",
+    "mode": "io",
+    "expected": "User is shown as logged in in the uni nav",
+    "stdin": "GET /projects?user=logged_in&session=active",
+    "expected_stdout": "User is shown as logged in in the uni nav"
+  },
+  {
+    "name": "refresh_page_logged_out",
+    "mode": "io",
+    "expected": "User is not shown as logged out in the uni nav",
+    "stdin": "GET /projects?user=logged_out",
+    "expected_stdout": "User is not shown as logged out in the uni nav"
+  },
+  {
+    "name": "navigate_after_logout",
+    "mode": "io",
+    "expected": "User is not shown as logged out in the uni nav",
+    "stdin": "GET /projects?user=logged_out&action=navigate",
+    "expected_stdout": "User is not shown as logged out in the uni nav"
+  },
+  {
+    "name": "direct_access_logged_out",
+    "mode": "io",
+    "expected": "User is not shown as logged out in the uni nav",
+    "stdin": "GET /projects?user=logged_out&direct_access=true",
+    "expected_stdout": "User is not shown as logged out in the uni nav"
+  },
+  {
+    "name": "logged_out_user_with_cache",
+    "mode": "io",
+    "expected": "User is not shown as logged out in the uni nav",
+    "stdin": "GET /projects?user=logged_out&cache=true",
+    "expected_stdout": "User is not shown as logged out in the uni nav"
+  }
+]

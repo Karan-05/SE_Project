@@ -1,0 +1,1 @@
+{"content": "[MOCK] bb7c15b308705e11 :: Implement function solve(arg1:list[list[int]]) -> dict. Do NOT read from stdin or write to stdout; rely solely on the pr", "tokens": 28, "elapsed": 2.0000000000575113e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "contract-solver", "caller": "contract_first"}}

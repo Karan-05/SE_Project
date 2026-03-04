@@ -1,0 +1,165 @@
+{
+  "task_id": "30377081",
+  "strategy": "failure_mode_first",
+  "attempt": 5,
+  "pass_rate": 0.0,
+  "plan_subtasks": [
+    "enumerate failure modes",
+    "design tests",
+    "only then implement",
+    "Generate minimal unit tests for critical behaviors",
+    "Add adversarial/edge-case tests",
+    "Run tests and interpret failures"
+  ],
+  "plan_tests": [
+    "Here are three high-risk failure modes for the Azure Integration Developer coding task:\n\n1. **Inadequate Understanding of Azure Services**:\n   - **Rationale**: If the developer lacks deep knowledge of Azure services (like Azure Logic Apps, Azure Functions, or Azure Service Bus), they may implement inefficient or incorrect solutions. This can lead to performance issues, increased costs, and project delays.\n\n2. **Poor Integration Design**:\n   - **Rationale**: A flawed",
+    "max constraints: extremely large inputs",
+    "degenerate: empty or single-element",
+    "adversarial: repeated values or cycles"
+  ],
+  "plan_diagnostics": {
+    "failure_modes": "Here are three high-risk failure modes for the Azure Integration Developer coding task:\n\n1. **Inadequate Understanding of Azure Services**:\n   - **Rationale**: If the developer lacks deep knowledge of Azure services (like Azure Logic Apps, Azure Functions, or Azure Service Bus), they may implement inefficient or incorrect solutions. This can lead to performance issues, increased costs, and project delays.\n\n2. **Poor Integration Design**:\n   - **Rationale**: A flawed;max constraints: extremely large inputs;degenerate: empty or single-element",
+    "planning_tokens": "174",
+    "planning_time": "2.173015"
+  },
+  "patch_summary": {
+    "phase": "initial"
+  },
+  "failing_tests": [
+    "basic_integration_workflow",
+    "error_handling_integration",
+    "event_driven_workflow",
+    "service_bus_integration",
+    "ci_cd_pipeline_execution"
+  ],
+  "trace": [
+    "",
+    "",
+    "",
+    "",
+    ""
+  ],
+  "feedback": [
+    "basic_integration_workflow expected {'status': 'success', 'result': 'integration_completed'} but saw None",
+    "error_handling_integration expected {'status': 'error', 'message': 'invalid input'} but saw None",
+    "event_driven_workflow expected {'status': 'success', 'result': 'order_processed'} but saw None",
+    "service_bus_integration expected {'status': 'success', 'result': 'message_sent'} but saw None",
+    "ci_cd_pipeline_execution expected {'status': 'success', 'result': 'pipeline_executed'} but saw None"
+  ],
+  "reproduction": "inputs=[{'workflow': 'simple_integration', 'data': {'input1': 'value1', 'input2': 'value2'}}] kwargs={}",
+  "tests_run": [
+    {
+      "name": "basic_integration_workflow",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'status': 'success', 'result': 'integration_completed'}",
+      "output": "None",
+      "error": "",
+      "input": "[{'workflow': 'simple_integration', 'data': {'input1': 'value1', 'input2': 'value2'}}]",
+      "kwargs": "{}",
+      "duration": 2.1417014067992568e-05
+    },
+    {
+      "name": "error_handling_integration",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'status': 'error', 'message': 'invalid input'}",
+      "output": "None",
+      "error": "",
+      "input": "[{'workflow': 'error_prone_integration', 'data': {'input1': 'invalid_value'}}]",
+      "kwargs": "{}",
+      "duration": 9.624985978007317e-06
+    },
+    {
+      "name": "event_driven_workflow",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'status': 'success', 'result': 'order_processed'}",
+      "output": "None",
+      "error": "",
+      "input": "[{'event': 'new_order', 'data': {'order_id': '12345'}}]",
+      "kwargs": "{}",
+      "duration": 8.1659818533808e-06
+    },
+    {
+      "name": "service_bus_integration",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'status': 'success', 'result': 'message_sent'}",
+      "output": "None",
+      "error": "",
+      "input": "[{'service': 'service_bus', 'data': {'message': 'test_message'}}]",
+      "kwargs": "{}",
+      "duration": 8.166010957211256e-06
+    },
+    {
+      "name": "ci_cd_pipeline_execution",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'status': 'success', 'result': 'pipeline_executed'}",
+      "output": "None",
+      "error": "",
+      "input": "[{'pipeline': 'integration_pipeline', 'trigger': 'manual'}]",
+      "kwargs": "{}",
+      "duration": 6.499991286545992e-06
+    },
+    {
+      "name": "high_load_integration",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'status': 'success', 'result': 'integration_completed'}",
+      "output": "None",
+      "error": "",
+      "input": "[{'workflow': 'high_load_integration', 'data': {'load': 'high'}}]",
+      "kwargs": "{}",
+      "duration": 8.37500556372106e-06
+    },
+    {
+      "name": "timeout_handling",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'status': 'error', 'message': 'timeout occurred'}",
+      "output": "None",
+      "error": "",
+      "input": "[{'workflow': 'long_running_integration', 'data': {'timeout': 'true'}}]",
+      "kwargs": "{}",
+      "duration": 8.125003660097718e-06
+    },
+    {
+      "name": "invalid_event_format",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'status': 'error', 'message': 'invalid event format'}",
+      "output": "None",
+      "error": "",
+      "input": "[{'event': 'invalid_format_event', 'data': {}}]",
+      "kwargs": "{}",
+      "duration": 7.124996045604348e-06
+    }
+  ],
+  "llm_calls": 2,
+  "timeline": {
+    "attempt": 5,
+    "strategy": "failure_mode_first",
+    "phase": "initial",
+    "events": {
+      "decompose": {
+        "start": "2026-02-24T12:09:57.383355",
+        "end": "2026-02-24T12:09:59.556528"
+      },
+      "solve": {
+        "start": "2026-02-24T12:09:59.556583",
+        "end": "2026-02-24T12:10:06.625886"
+      },
+      "tests": {
+        "start": "2026-02-24T12:10:01.505728",
+        "end": "2026-02-24T12:10:06.625822",
+        "duration_seconds": "0.000"
+      }
+    },
+    "meta": {
+      "llm_calls": "2"
+    }
+  },
+  "solution_preview": "def solve(*args):\n    return None"
+}

@@ -1,0 +1,14 @@
+```diff
+--- a/src/components/Navigation.js
++++ b/src/components/Navigation.js
+@@ -1,5 +1,6 @@
+ import React from 'react';
+ import { Link } from 'react-router-dom';
+ 
+ const Navigation = () => {
+- return <Link to='/thrive'>Thrive</Link>;
++ return <Link to='/thrive/type'>Thrive</Link>;
+ };
+ 
+ export default Navigation;
+```

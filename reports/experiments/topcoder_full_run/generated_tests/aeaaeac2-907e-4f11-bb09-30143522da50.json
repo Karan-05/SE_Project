@@ -1,0 +1,110 @@
+[
+  {
+    "name": "header_menu_visibility",
+    "mode": "call",
+    "expected": "header should be visible",
+    "input": [
+      {
+        "screen_elements": [
+          "header",
+          "content",
+          "footer"
+        ],
+        "header_position": "fixed"
+      }
+    ]
+  },
+  {
+    "name": "header_menu_z_index",
+    "mode": "call",
+    "expected": "header should overlay content",
+    "input": [
+      {
+        "screen_elements": [
+          "header",
+          "content"
+        ],
+        "z_index_header": 100,
+        "z_index_content": 50
+      }
+    ]
+  },
+  {
+    "name": "responsive_design",
+    "mode": "call",
+    "expected": "header should adapt to mobile view",
+    "input": [
+      {
+        "viewport_size": "mobile",
+        "screen_elements": [
+          "header",
+          "content"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "header_menu_interaction",
+    "mode": "call",
+    "expected": "dropdown should appear on header click",
+    "input": [
+      {
+        "screen_elements": [
+          "header",
+          "dropdown"
+        ],
+        "dropdown_visible": false
+      }
+    ]
+  },
+  {
+    "name": "header_menu_scroll_behavior",
+    "mode": "call",
+    "expected": "header should remain fixed",
+    "input": [
+      {
+        "scroll_position": "down",
+        "header_position": "fixed"
+      }
+    ]
+  },
+  {
+    "name": "header_menu_edge_case_1",
+    "mode": "call",
+    "expected": "header should be behind content",
+    "input": [
+      {
+        "screen_elements": [
+          "header",
+          "content"
+        ],
+        "z_index_header": 0,
+        "z_index_content": 100
+      }
+    ]
+  },
+  {
+    "name": "header_menu_edge_case_2",
+    "mode": "call",
+    "expected": "header should be hidden behind modal",
+    "input": [
+      {
+        "screen_elements": [
+          "header",
+          "modal"
+        ],
+        "modal_visible": true
+      }
+    ]
+  },
+  {
+    "name": "header_menu_no_elements",
+    "mode": "call",
+    "expected": "no header to display",
+    "input": [
+      {
+        "screen_elements": []
+      }
+    ]
+  }
+]

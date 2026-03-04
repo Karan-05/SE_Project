@@ -1,0 +1,119 @@
+[
+  {
+    "name": "valid_authorization_update",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "message": "Authorization updated successfully"
+    },
+    "input": [
+      {
+        "userId": "12345",
+        "permissions": [
+          "read",
+          "write"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "invalid_user_id",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "User not found"
+    },
+    "input": [
+      {
+        "userId": "invalid_id",
+        "permissions": [
+          "read"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "empty_permissions",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Permissions cannot be empty"
+    },
+    "input": [
+      {
+        "userId": "12345",
+        "permissions": []
+      }
+    ]
+  },
+  {
+    "name": "unauthorized_access",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "User does not have permission to delete"
+    },
+    "input": [
+      {
+        "userId": "67890",
+        "permissions": [
+          "delete"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "successful_login_after_migration",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "message": "Login successful"
+    },
+    "input": [
+      {
+        "username": "testUser",
+        "password": "encryptedPassword"
+      }
+    ]
+  },
+  {
+    "name": "password_migration_check",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "message": "Password migrated successfully"
+    },
+    "input": [
+      {
+        "username": "testUser"
+      }
+    ]
+  },
+  {
+    "name": "swagger_file_update",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "message": "Swagger file updated"
+    },
+    "input": [
+      {
+        "apiVersion": "1.0",
+        "resource": "AuthorizationResource"
+      }
+    ]
+  },
+  {
+    "name": "postman_collection_update",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "message": "Postman collection updated"
+    },
+    "input": [
+      {
+        "resource": "AuthorizationResource"
+      }
+    ]
+  }
+]

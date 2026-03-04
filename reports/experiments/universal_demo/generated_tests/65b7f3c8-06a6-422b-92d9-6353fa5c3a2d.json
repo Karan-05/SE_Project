@@ -1,0 +1,124 @@
+[
+  {
+    "name": "fetch_active_reviews_success",
+    "mode": "call",
+    "expected": [
+      {
+        "id": "1",
+        "title": "Challenge 1",
+        "status": "ACTIVE"
+      },
+      {
+        "id": "2",
+        "title": "Challenge 2",
+        "status": "ACTIVE"
+      }
+    ],
+    "input": [
+      {
+        "memberId": "12345"
+      }
+    ]
+  },
+  {
+    "name": "fetch_active_reviews_no_challenges",
+    "mode": "call",
+    "expected": null,
+    "input": [
+      {
+        "memberId": "67890"
+      }
+    ]
+  },
+  {
+    "name": "fetch_active_reviews_error_handling",
+    "mode": "call",
+    "expected": {
+      "error": "Invalid member ID"
+    },
+    "input": [
+      {
+        "memberId": "invalid_id"
+      }
+    ]
+  },
+  {
+    "name": "fetch_active_reviews_loading_state",
+    "mode": "call",
+    "expected": {
+      "loading": true
+    },
+    "input": [
+      {
+        "memberId": "12345"
+      }
+    ]
+  },
+  {
+    "name": "fetch_active_reviews_authentication_failure",
+    "mode": "call",
+    "expected": {
+      "error": "Authentication required"
+    },
+    "input": [
+      {
+        "memberId": "12345"
+      }
+    ]
+  },
+  {
+    "name": "fetch_active_reviews_filter_functionality",
+    "mode": "call",
+    "expected": [
+      {
+        "id": "3",
+        "title": "Design Challenge",
+        "status": "ACTIVE"
+      }
+    ],
+    "input": [
+      {
+        "memberId": "12345",
+        "filter": "design"
+      }
+    ]
+  },
+  {
+    "name": "fetch_active_reviews_invalid_response_format",
+    "mode": "call",
+    "expected": {
+      "error": "Unexpected response format"
+    },
+    "input": [
+      {
+        "memberId": "12345"
+      }
+    ]
+  },
+  {
+    "name": "fetch_active_reviews_multiple_challenges",
+    "mode": "call",
+    "expected": [
+      {
+        "id": "4",
+        "title": "Challenge A",
+        "status": "ACTIVE"
+      },
+      {
+        "id": "5",
+        "title": "Challenge B",
+        "status": "ACTIVE"
+      },
+      {
+        "id": "6",
+        "title": "Challenge C",
+        "status": "ACTIVE"
+      }
+    ],
+    "input": [
+      {
+        "memberId": "54321"
+      }
+    ]
+  }
+]

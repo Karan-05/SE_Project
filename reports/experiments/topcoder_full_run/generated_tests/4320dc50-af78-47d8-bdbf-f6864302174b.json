@@ -1,0 +1,122 @@
+[
+  {
+    "name": "restore_original_interfaces",
+    "mode": "call",
+    "expected": {
+      "success": true,
+      "message": "Interfaces restored successfully."
+    },
+    "input": [
+      {
+        "challengeUpdatePayload": {
+          "id": "123",
+          "name": "Test Challenge"
+        },
+        "commandPayload": {
+          "command": "update",
+          "data": {}
+        }
+      }
+    ]
+  },
+  {
+    "name": "cancel_specific_phase",
+    "mode": "call",
+    "expected": {
+      "success": true,
+      "message": "Phase 789 cancelled successfully."
+    },
+    "input": [
+      {
+        "projectId": "456",
+        "phaseId": "789"
+      }
+    ]
+  },
+  {
+    "name": "cancel_all_phases",
+    "mode": "call",
+    "expected": {
+      "success": true,
+      "message": "All phases cancelled successfully."
+    },
+    "input": [
+      {
+        "projectId": "456"
+      }
+    ]
+  },
+  {
+    "name": "handle_past_date_transition",
+    "mode": "call",
+    "expected": {
+      "success": true,
+      "message": "Transition processed immediately."
+    },
+    "input": [
+      {
+        "projectId": "456",
+        "transitionDate": "2022-01-01T00:00:00Z"
+      }
+    ]
+  },
+  {
+    "name": "mock_api_service_fetch_phase_details",
+    "mode": "call",
+    "expected": {
+      "success": true,
+      "phaseDetails": {
+        "phaseId": "789",
+        "name": "Development",
+        "status": "active"
+      }
+    },
+    "input": [
+      {
+        "projectId": "456"
+      }
+    ]
+  },
+  {
+    "name": "cancel_nonexistent_phase",
+    "mode": "call",
+    "expected": {
+      "success": false,
+      "message": "Phase 999 does not exist."
+    },
+    "input": [
+      {
+        "projectId": "456",
+        "phaseId": "999"
+      }
+    ]
+  },
+  {
+    "name": "schedule_with_future_date",
+    "mode": "call",
+    "expected": {
+      "success": true,
+      "message": "Transition scheduled successfully."
+    },
+    "input": [
+      {
+        "projectId": "456",
+        "transitionDate": "2023-12-31T00:00:00Z"
+      }
+    ]
+  },
+  {
+    "name": "cancel_phase_with_invalid_id",
+    "mode": "call",
+    "expected": {
+      "success": false,
+      "message": "Invalid phaseId provided."
+    },
+    "input": [
+      {
+        "projectId": "456",
+        "phaseId": null
+      }
+    ]
+  }
+]

@@ -1,0 +1,1 @@
+{"content": "[MOCK] 6f93a3769545fe8a :: Given the problem: Count primes up to N., would pattern two_pointers be relevant?", "tokens": 13, "elapsed": 1.6250000001161169e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "pattern-hint", "caller": "pattern_skeleton"}}

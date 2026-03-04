@@ -1,0 +1,9 @@
+{
+  "task_id": "181e5a18-8f46-4366-9aa7-4550a25adceb",
+  "tests": [
+    {
+      "status": "compile_error",
+      "error": "invalid decimal literal (<string>, line 1)"
+    }
+  ]
+}

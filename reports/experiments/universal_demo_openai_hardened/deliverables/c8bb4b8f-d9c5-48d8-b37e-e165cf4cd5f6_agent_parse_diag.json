@@ -1,0 +1,44 @@
+{
+  "task_id": "c8bb4b8f-d9c5-48d8-b37e-e165cf4cd5f6",
+  "run_id": "universal_demo_openai_hardened",
+  "raw_path": "/Users/karanallagh/Desktop/DataCollector/reports/experiments/universal_demo_openai_hardened/deliverables/c8bb4b8f-d9c5-48d8-b37e-e165cf4cd5f6_agent_raw.txt",
+  "raw_length": 2864,
+  "sentinel_found": true,
+  "attempts": [
+    {
+      "mode": "sentinel",
+      "success": false,
+      "error": "rubric_self_check.specificity must be numeric."
+    },
+    {
+      "mode": "balanced",
+      "success": false,
+      "error": "rubric_self_check.specificity must be numeric."
+    },
+    {
+      "mode": "repair",
+      "success": false,
+      "error": "rubric_self_check.specificity must be numeric."
+    }
+  ],
+  "errors": [
+    {
+      "stage": "sentinel",
+      "message": "rubric_self_check.specificity must be numeric."
+    },
+    {
+      "stage": "balanced",
+      "message": "rubric_self_check.specificity must be numeric."
+    },
+    {
+      "stage": "repair",
+      "message": "rubric_self_check.specificity must be numeric."
+    }
+  ],
+  "repair_attempted": true,
+  "repair_used": false,
+  "max_repairs": 1,
+  "llm_provider": "openai",
+  "repair_path": "/Users/karanallagh/Desktop/DataCollector/reports/experiments/universal_demo_openai_hardened/deliverables/c8bb4b8f-d9c5-48d8-b37e-e165cf4cd5f6_agent_repair.txt",
+  "status": "failed"
+}

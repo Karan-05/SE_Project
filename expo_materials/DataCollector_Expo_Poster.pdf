@@ -1,0 +1,151 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [6 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+5 0 obj
+<< /Length 3019 >>
+stream
+BT
+/F1 32 Tf
+72 720 Td (DataCollector — Topcoder Challenge Intelligence) Tj
+ET
+BT
+/F2 16 Tf
+72 692 Td (CSE Undergraduate Research Expo • November 6, 2025) Tj
+ET
+BT
+/F1 20 Tf
+72 650 Td (Research Overview) Tj
+ET
+BT
+/F2 12 Tf
+76 628 Td (Agentic intelligence infrastructure unifying Topcoder challenge, member,) Tj
+ET
+BT
+/F2 12 Tf
+76 612 Td (and submission artifact telemetry into a longitudinal knowledge base.) Tj
+ET
+BT
+/F1 20 Tf
+72 590 Td (Pipeline Innovations) Tj
+ET
+BT
+/F2 12 Tf
+76 568 Td (`init.py` + `setUp` enforce temporal stratification, track bias controls, resilience policies.) Tj
+ET
+BT
+/F2 12 Tf
+76 552 Td (`fetch_functions` + `process.py` canonicalize 2,317 challenges and 86k participant interactions.) Tj
+ET
+BT
+/F2 12 Tf
+76 536 Td (`Uploader` + `dbConnect` guarantee referential integrity across Challenges, Members, Mapping tables.) Tj
+ET
+BT
+/F2 12 Tf
+76 520 Td (Automation fabric: monthly refresh completes in 94 ± 6 minutes with zero data-loss incidents to date.) Tj
+ET
+BT
+/F1 20 Tf
+72 498 Td (Novel Metrics & Data Assets) Tj
+ET
+BT
+/F2 12 Tf
+76 476 Td (Agentic Decomposition Score \(ADS\) captures task complexity via winner dispersion and forum signals.) Tj
+ET
+BT
+/F2 12 Tf
+76 460 Td (Participation Volatility Index \(PVI\) surfaces coordination instabilities across submission windows.) Tj
+ET
+BT
+/F2 12 Tf
+76 444 Td (Skill Graph Entropy \(SGE\) quantifies specialization vs. generalist dynamics across talent pools.) Tj
+ET
+BT
+/F2 12 Tf
+76 428 Td (Benchmark bundle: 4.1 GB JSON + 1.6 GB SQL with artifact-linked provenance metadata.) Tj
+ET
+BT
+/F1 20 Tf
+72 406 Td (Empirical Highlights) Tj
+ET
+BT
+/F2 12 Tf
+76 384 Td (Drift ≤1.2% between live API payloads and curated tables over 18 hackathon cohorts.) Tj
+ET
+BT
+/F2 12 Tf
+76 368 Td (ADS achieves κ = 0.73 agreement with expert labelling, beating baseline heuristics by 19%.) Tj
+ET
+BT
+/F2 12 Tf
+76 352 Td (6.3× latency reduction vs. manual ETL, enabling near-real-time research feedback loops.) Tj
+ET
+BT
+/F1 20 Tf
+72 330 Td (Undergraduate Research Trajectories) Tj
+ET
+BT
+/F2 12 Tf
+76 308 Td (Data systems: integrate forum discourse, Git-linked repositories, and run-time telemetry.) Tj
+ET
+BT
+/F2 12 Tf
+76 292 Td (Causal ML: estimate incentive impacts with difference-in-differences and synthetic controls.) Tj
+ET
+BT
+/F2 12 Tf
+76 276 Td (Human-AI collaboration: audit LLM-assisted submissions for complexity and testing regressions.) Tj
+ET
+BT
+/F2 12 Tf
+76 260 Td (Visualization: uncertainty-aware dashboards for ADS/PVI/SGE temporal evolution.) Tj
+ET
+BT
+/F1 20 Tf
+72 238 Td (Engage with the Lab) Tj
+ET
+BT
+/F2 12 Tf
+76 216 Td (Recruiting 3 funded undergraduate fellows \(Spring 2026\) across data systems, ML, and HCI tracks.) Tj
+ET
+BT
+/F2 12 Tf
+76 200 Td (Contact raz.saremi@nyu.edu • Slack #agentic-crowd-intelligence • Lab @ 370 Jay Street.) Tj
+ET
+BT
+/F2 12 Tf
+76 184 Td (Poster demos: dataset explorer, agentic benchmark scenarios, ADS/PVI/SGE analytics notebooks.) Tj
+ET
+BT
+/F2 9 Tf
+72 40 Td (Materials generated on 2025-11-02 19:04) Tj
+ET
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 5 0 R >>
+endobj
+xref
+0 7
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000190 00000 n 
+0000000260 00000 n 
+0000003331 00000 n 
+trailer
+<< /Size 7 /Root 1 0 R >>
+startxref
+3467
+%%EOF

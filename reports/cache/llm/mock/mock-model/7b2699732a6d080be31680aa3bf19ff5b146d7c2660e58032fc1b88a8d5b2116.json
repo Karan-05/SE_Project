@@ -1,0 +1,1 @@
+{"content": "[MOCK] c1aafcb4865845f9 :: Architect: propose a phased plan for task 355a5497-71c3-4e3a-b200-f53d62564667: Welcome to the Learn AI Challenge series", "tokens": 41, "elapsed": 2.0830000000415794e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "role-architect", "caller": "role_decomposed"}}

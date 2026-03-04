@@ -1,0 +1,1 @@
+{"content": "To extract tasks from Exchange/Outlook 2010 into a CSV file, you can use the Outlook Object Model in a VBA script. The two-pointer pattern", "tokens": 97, "elapsed": 1.2553457910107682, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

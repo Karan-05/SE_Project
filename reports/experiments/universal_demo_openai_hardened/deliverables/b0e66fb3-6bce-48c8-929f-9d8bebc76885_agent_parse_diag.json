@@ -1,0 +1,23 @@
+{
+  "task_id": "b0e66fb3-6bce-48c8-929f-9d8bebc76885",
+  "run_id": "universal_demo_openai_hardened",
+  "raw_path": "/Users/karanallagh/Desktop/DataCollector/reports/experiments/universal_demo_openai_hardened/deliverables/b0e66fb3-6bce-48c8-929f-9d8bebc76885_agent_raw.txt",
+  "raw_length": 2320,
+  "sentinel_found": true,
+  "attempts": [
+    {
+      "mode": "sentinel",
+      "success": true,
+      "length": 2298
+    }
+  ],
+  "errors": [],
+  "repair_attempted": false,
+  "repair_used": false,
+  "max_repairs": 1,
+  "llm_provider": "openai",
+  "source": "sentinel",
+  "parsed_length": 2298,
+  "repair_path": "",
+  "status": "success"
+}

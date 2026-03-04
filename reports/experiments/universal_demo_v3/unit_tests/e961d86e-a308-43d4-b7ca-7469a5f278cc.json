@@ -1,0 +1,9 @@
+{
+  "task_id": "e961d86e-a308-43d4-b7ca-7469a5f278cc",
+  "tests": [
+    {
+      "status": "compile_error",
+      "error": "invalid syntax (<string>, line 1)"
+    }
+  ]
+}

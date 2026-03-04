@@ -1,0 +1,23 @@
+[
+  {
+    "name": "query_with_technology_keyword",
+    "mode": "io",
+    "expected": "[{'challenge_id': 1, 'title': 'JavaScript Challenge 1'}, {'challenge_id': 2, 'title': 'JavaScript Challenge 2'}]",
+    "stdin": "{'keyword': 'JavaScript'}",
+    "expected_stdout": "[{'challenge_id': 1, 'title': 'JavaScript Challenge 1'}, {'challenge_id': 2, 'title': 'JavaScript Challenge 2'}]"
+  },
+  {
+    "name": "empty_query_response",
+    "mode": "io",
+    "expected": "No challenges found for the given query.",
+    "stdin": "{'keyword': ''}",
+    "expected_stdout": "No challenges found for the given query."
+  },
+  {
+    "name": "invalid_keyword_query",
+    "mode": "io",
+    "expected": "No challenges found for the given query.",
+    "stdin": "{'keyword': 'nonexistenttech'}",
+    "expected_stdout": "No challenges found for the given query."
+  }
+]

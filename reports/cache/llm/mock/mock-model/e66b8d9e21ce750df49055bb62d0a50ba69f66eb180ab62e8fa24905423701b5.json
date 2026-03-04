@@ -1,0 +1,1 @@
+{"content": "[MOCK] c048f2a96e0b3364 :: Architect: propose a phased plan for task graph_degree_test: Return degree counts for each vertex.", "tokens": 14, "elapsed": 1.5829999999716904e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "role-architect", "caller": "role_decomposed"}}

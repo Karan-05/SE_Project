@@ -1,0 +1,24 @@
+{
+  "task_type": "non_actionable",
+  "confidence": 0.9,
+  "why": [
+    "The task is a job posting rather than a coding or development task.",
+    "It lacks specific coding requirements or a repository context.",
+    "The description focuses on sourcing candidates for language support roles."
+  ],
+  "missing_info": [
+    "No specific coding or development requirements.",
+    "No repository context provided."
+  ],
+  "verification_plan": [
+    "Review the job posting for clarity and completeness.",
+    "Ensure that the posting aligns with the intended audience and purpose."
+  ],
+  "artifacts_to_generate": [
+    {
+      "name": "blocked.md",
+      "format": "md"
+    }
+  ],
+  "synthesis_policy": "none"
+}

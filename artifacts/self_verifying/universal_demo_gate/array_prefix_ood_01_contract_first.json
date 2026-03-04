@@ -1,0 +1,77 @@
+{
+  "task_id": "array_prefix_ood",
+  "strategy": "contract_first",
+  "attempt": 1,
+  "pass_rate": 1.0,
+  "plan_subtasks": [
+    "Validate inputs vs contract",
+    "Implement core logic",
+    "Check edge cases",
+    "Generate minimal unit tests for critical behaviors",
+    "Add adversarial/edge-case tests",
+    "Run tests and interpret failures"
+  ],
+  "plan_tests": [
+    "",
+    ""
+  ],
+  "plan_diagnostics": {
+    "missing_fields": "constraints",
+    "contract_length": "34",
+    "audit_note": "It seems like you're working on a contract related to a function that computes running prefix sums, but the details are underspecified. Here\u2019s a breakdown of what you might want to consider for completeness and any missing guarantees:\n\n### Completeness Review\n\n1. **Inputs**:\n   - **Specification**: Clearly define the expected input format. For example, is it a list of integers? Are there constraints on the size or type of the input?\n   - **Edge Cases**:",
+    "planning_tokens": "209",
+    "planning_time": "2.032927"
+  },
+  "patch_summary": {
+    "phase": "initial"
+  },
+  "tests_run": [
+    {
+      "name": "sample_0",
+      "mode": "call",
+      "status": "pass",
+      "expected": "[1, 3, 6]",
+      "output": "[1, 3, 6]",
+      "error": "",
+      "input": "[[1, 2, 3]]",
+      "kwargs": "{}",
+      "duration": 2.274999860674143e-05
+    },
+    {
+      "name": "sample_1",
+      "mode": "call",
+      "status": "pass",
+      "expected": "[0]",
+      "output": "[0]",
+      "error": "",
+      "input": "[[0]]",
+      "kwargs": "{}",
+      "duration": 5.0000089686363935e-06
+    }
+  ],
+  "llm_calls": 1,
+  "timeline": {
+    "attempt": 1,
+    "strategy": "contract_first",
+    "phase": "initial",
+    "events": {
+      "decompose": {
+        "start": "2026-02-24T19:54:42.318015",
+        "end": "2026-02-24T19:54:44.351125"
+      },
+      "solve": {
+        "start": "2026-02-24T19:54:44.351168",
+        "end": "2026-02-24T19:54:46.444521"
+      },
+      "tests": {
+        "start": "2026-02-24T19:54:46.444401",
+        "end": "2026-02-24T19:54:46.444465",
+        "duration_seconds": "0.000"
+      }
+    },
+    "meta": {
+      "llm_calls": "1"
+    }
+  },
+  "solution_preview": "def solve(nums):\n                out = []\n                total = 0\n                for num in nums:\n                    total += num\n                    out.append(total)\n                return out"
+}

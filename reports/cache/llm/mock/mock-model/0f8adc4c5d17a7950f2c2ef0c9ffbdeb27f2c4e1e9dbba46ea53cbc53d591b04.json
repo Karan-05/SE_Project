@@ -1,0 +1,1 @@
+{"content": "[MOCK] 8fc7a8050d836603 :: Given the problem: Return the reversed string., would pattern hash_bucket be relevant?", "tokens": 12, "elapsed": 1.4999999999876223e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "pattern-hint", "caller": "pattern_skeleton"}}

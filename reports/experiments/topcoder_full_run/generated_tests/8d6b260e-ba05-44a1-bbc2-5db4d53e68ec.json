@@ -1,0 +1,109 @@
+[
+  {
+    "name": "valid_checkpoint_screening",
+    "mode": "call",
+    "expected": {
+      "screening_score": "link_to_scorecard"
+    },
+    "input": [
+      {
+        "user_id": "jcori",
+        "project_id": "30092518"
+      }
+    ]
+  },
+  {
+    "name": "pending_screening_score",
+    "mode": "call",
+    "expected": {
+      "screening_score": "pending"
+    },
+    "input": [
+      {
+        "user_id": "jcori",
+        "project_id": "30092518"
+      }
+    ]
+  },
+  {
+    "name": "invalid_user_id",
+    "mode": "call",
+    "expected": {
+      "error": "User not found"
+    },
+    "input": [
+      {
+        "user_id": "invalid_user",
+        "project_id": "30092518"
+      }
+    ]
+  },
+  {
+    "name": "invalid_project_id",
+    "mode": "call",
+    "expected": {
+      "error": "Project not found"
+    },
+    "input": [
+      {
+        "user_id": "jcori",
+        "project_id": "invalid_project"
+      }
+    ]
+  },
+  {
+    "name": "user_not_logged_in",
+    "mode": "call",
+    "expected": {
+      "error": "User must be logged in"
+    },
+    "input": [
+      {
+        "user_id": "guest",
+        "project_id": "30092518"
+      }
+    ]
+  },
+  {
+    "name": "multiple_screening_scores",
+    "mode": "call",
+    "expected": {
+      "screening_scores": [
+        "link_to_scorecard_1",
+        "link_to_scorecard_2"
+      ]
+    },
+    "input": [
+      {
+        "user_id": "jcori",
+        "project_id": "30092518"
+      }
+    ]
+  },
+  {
+    "name": "scorecard_not_accessible",
+    "mode": "call",
+    "expected": {
+      "error": "Scorecard not accessible"
+    },
+    "input": [
+      {
+        "user_id": "jcori",
+        "project_id": "30092518"
+      }
+    ]
+  },
+  {
+    "name": "no_screening_phase",
+    "mode": "call",
+    "expected": {
+      "error": "No screening phase available"
+    },
+    "input": [
+      {
+        "user_id": "jcori",
+        "project_id": "30092519"
+      }
+    ]
+  }
+]

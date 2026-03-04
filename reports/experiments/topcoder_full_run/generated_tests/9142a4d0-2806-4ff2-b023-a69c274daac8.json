@@ -1,0 +1,97 @@
+[
+  {
+    "name": "search_role_admin",
+    "mode": "call",
+    "expected": [
+      {
+        "roleName": "admin"
+      }
+    ],
+    "input": [
+      {
+        "searchTerm": "admin"
+      }
+    ]
+  },
+  {
+    "name": "search_role_admin_invalid",
+    "mode": "call",
+    "expected": null,
+    "input": [
+      {
+        "searchTerm": "user"
+      }
+    ]
+  },
+  {
+    "name": "edit_billing_account_payment_terms_disabled",
+    "mode": "call",
+    "expected": {
+      "paymentTermsField": "disabled"
+    },
+    "input": [
+      {
+        "accountId": "12345"
+      }
+    ]
+  },
+  {
+    "name": "remove_reviewer_button_absent",
+    "mode": "call",
+    "expected": {
+      "removeReviewerButton": false
+    },
+    "input": [
+      {
+        "challengeId": "challenge_1"
+      }
+    ]
+  },
+  {
+    "name": "user_management_button_present",
+    "mode": "call",
+    "expected": {
+      "userManagementButton": true
+    },
+    "input": [
+      {
+        "challengeId": "challenge_1"
+      }
+    ]
+  },
+  {
+    "name": "search_role_empty_input",
+    "mode": "call",
+    "expected": null,
+    "input": [
+      {
+        "searchTerm": ""
+      }
+    ]
+  },
+  {
+    "name": "edit_billing_account_invalid_access",
+    "mode": "call",
+    "expected": {
+      "error": "Account not found"
+    },
+    "input": [
+      {
+        "accountId": "invalid_id"
+      }
+    ]
+  },
+  {
+    "name": "remove_reviewer_button_access_denied",
+    "mode": "call",
+    "expected": {
+      "error": "Access denied"
+    },
+    "input": [
+      {
+        "challengeId": "challenge_2",
+        "userRole": "viewer"
+      }
+    ]
+  }
+]

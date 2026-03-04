@@ -1,0 +1,112 @@
+[
+  {
+    "name": "get_roles_with_selector",
+    "mode": "call",
+    "expected": [
+      {
+        "id": 1,
+        "name": "Admin"
+      },
+      {
+        "id": 2,
+        "name": "User"
+      }
+    ],
+    "input": [
+      {
+        "selector": [
+          "id",
+          "name"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "assign_role_success",
+    "mode": "call",
+    "expected": {
+      "roleId": 1,
+      "status": "assigned"
+    },
+    "input": [
+      {
+        "userId": 123,
+        "roleId": 1
+      }
+    ]
+  },
+  {
+    "name": "deassign_role_success",
+    "mode": "call",
+    "expected": {
+      "roleId": 1,
+      "status": "deassigned"
+    },
+    "input": [
+      {
+        "userId": 123,
+        "roleId": 1
+      }
+    ]
+  },
+  {
+    "name": "has_role_check",
+    "mode": "call",
+    "expected": true,
+    "input": [
+      {
+        "userId": 123,
+        "roleId": 1
+      }
+    ]
+  },
+  {
+    "name": "get_roles_empty_selector",
+    "mode": "call",
+    "expected": null,
+    "input": [
+      {
+        "selector": []
+      }
+    ]
+  },
+  {
+    "name": "assign_role_invalid_user",
+    "mode": "call",
+    "expected": {
+      "error": "User not found"
+    },
+    "input": [
+      {
+        "userId": 999,
+        "roleId": 1
+      }
+    ]
+  },
+  {
+    "name": "deassign_role_invalid_role",
+    "mode": "call",
+    "expected": {
+      "error": "Role not found"
+    },
+    "input": [
+      {
+        "userId": 123,
+        "roleId": 999
+      }
+    ]
+  },
+  {
+    "name": "assign_role_already_assigned",
+    "mode": "call",
+    "expected": {
+      "error": "Role already assigned"
+    },
+    "input": [
+      {
+        "userId": 123,
+        "roleId": 1
+      }
+    ]
+  }
+]

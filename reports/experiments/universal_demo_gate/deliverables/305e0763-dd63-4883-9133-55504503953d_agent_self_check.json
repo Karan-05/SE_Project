@@ -1,0 +1,6 @@
+{
+  "coverage": 90.0,
+  "specificity": 88.0,
+  "actionability": 85.0,
+  "overall_notes": "Pipeline overview and schema are well-defined; validation checks and testing strategies are included."
+}

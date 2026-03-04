@@ -1,0 +1,1 @@
+{"content": "[MOCK] dbaa2bcd6e9fa263 :: Given the problem: Return the reversed string., would pattern kadane be relevant?", "tokens": 12, "elapsed": 1.4580000000652404e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "pattern-hint", "caller": "pattern_skeleton"}}

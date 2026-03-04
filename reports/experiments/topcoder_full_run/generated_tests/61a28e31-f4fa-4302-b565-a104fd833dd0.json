@@ -1,0 +1,118 @@
+[
+  {
+    "name": "valid_country_lookup",
+    "mode": "call",
+    "expected": {
+      "fromDB": true,
+      "result": {
+        "name": "United States",
+        "code": "US"
+      }
+    },
+    "input": [
+      {
+        "countryCode": "US"
+      }
+    ]
+  },
+  {
+    "name": "valid_device_lookup",
+    "mode": "call",
+    "expected": {
+      "fromDB": true,
+      "result": {
+        "name": "Device A",
+        "id": "12345"
+      }
+    },
+    "input": [
+      {
+        "deviceId": "12345"
+      }
+    ]
+  },
+  {
+    "name": "country_lookup_with_unnecessary_fields",
+    "mode": "call",
+    "expected": {
+      "fromDB": true,
+      "result": {
+        "name": "United States",
+        "code": "US"
+      }
+    },
+    "input": [
+      {
+        "countryCode": "US"
+      }
+    ]
+  },
+  {
+    "name": "invalid_country_lookup",
+    "mode": "call",
+    "expected": {
+      "fromDB": true,
+      "result": null
+    },
+    "input": [
+      {
+        "countryCode": "INVALID"
+      }
+    ]
+  },
+  {
+    "name": "swagger_security_mapping",
+    "mode": "call",
+    "expected": {
+      "secured": false
+    },
+    "input": [
+      {
+        "endpoint": "/v6/lookups/countries"
+      }
+    ]
+  },
+  {
+    "name": "base_path_check",
+    "mode": "call",
+    "expected": {
+      "error": "Not Found"
+    },
+    "input": [
+      {
+        "endpoint": "/lookups/countries"
+      }
+    ]
+  },
+  {
+    "name": "error_handling_format",
+    "mode": "call",
+    "expected": {
+      "fromDB": true,
+      "result": {
+        "error": "Invalid request"
+      }
+    },
+    "input": [
+      {
+        "countryCode": "ERROR"
+      }
+    ]
+  },
+  {
+    "name": "remove_unnecessary_fields_check",
+    "mode": "call",
+    "expected": {
+      "fromDB": true,
+      "result": {
+        "name": "Device A",
+        "id": "12345"
+      }
+    },
+    "input": [
+      {
+        "deviceId": "12345"
+      }
+    ]
+  }
+]

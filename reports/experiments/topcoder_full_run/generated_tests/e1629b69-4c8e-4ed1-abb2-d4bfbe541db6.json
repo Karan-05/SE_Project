@@ -1,0 +1,138 @@
+[
+  {
+    "name": "auth0_token_generation_success",
+    "mode": "call",
+    "expected": {
+      "token": "generatedToken",
+      "expiresIn": 3600
+    },
+    "input": [
+      {
+        "clientId": "testClientId",
+        "clientSecret": "testClientSecret",
+        "domain": "testDomain",
+        "audience": "testAudience"
+      }
+    ]
+  },
+  {
+    "name": "auth0_token_generation_failure",
+    "mode": "call",
+    "expected": {
+      "error": "Invalid client credentials"
+    },
+    "input": [
+      {
+        "clientId": "invalidClientId",
+        "clientSecret": "invalidClientSecret",
+        "domain": "testDomain",
+        "audience": "testAudience"
+      }
+    ]
+  },
+  {
+    "name": "challenge_api_pagination_success",
+    "mode": "call",
+    "expected": [
+      {
+        "id": "challenge1",
+        "name": "Challenge 1"
+      },
+      {
+        "id": "challenge2",
+        "name": "Challenge 2"
+      }
+    ],
+    "input": [
+      {
+        "page": 1,
+        "pageSize": 20
+      }
+    ]
+  },
+  {
+    "name": "challenge_api_pagination_empty",
+    "mode": "call",
+    "expected": null,
+    "input": [
+      {
+        "page": 10,
+        "pageSize": 20
+      }
+    ]
+  },
+  {
+    "name": "challenge_identification_correctness",
+    "mode": "call",
+    "expected": [
+      {
+        "id": "challenge1",
+        "phaseKey": "challenge1:phase1"
+      }
+    ],
+    "input": [
+      {
+        "projectId": "project123",
+        "challenges": [
+          {
+            "id": "challenge1",
+            "projectId": "project123"
+          },
+          {
+            "id": "challenge2",
+            "projectId": "project456"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "challenge_identification_no_matches",
+    "mode": "call",
+    "expected": null,
+    "input": [
+      {
+        "projectId": "project999",
+        "challenges": [
+          {
+            "id": "challenge1",
+            "projectId": "project123"
+          },
+          {
+            "id": "challenge2",
+            "projectId": "project456"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "challenge_api_retry_mechanism",
+    "mode": "call",
+    "expected": {
+      "success": true,
+      "retrievedChallenges": 40
+    },
+    "input": [
+      {
+        "page": 1,
+        "pageSize": 20,
+        "retryCount": 3
+      }
+    ]
+  },
+  {
+    "name": "challenge_api_retry_exceed_limit",
+    "mode": "call",
+    "expected": {
+      "error": "Max retry limit exceeded"
+    },
+    "input": [
+      {
+        "page": 1,
+        "pageSize": 20,
+        "retryCount": 5
+      }
+    ]
+  }
+]

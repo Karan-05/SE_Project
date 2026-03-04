@@ -1,0 +1,1 @@
+{"content": "Creating an AngularJS directive to parse a JSON string and display its contents in a datagrid involves several steps. Below is a simplified example of how you might implement", "tokens": 95, "elapsed": 1.6412171660049353, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

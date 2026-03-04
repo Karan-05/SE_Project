@@ -1,0 +1,53 @@
+{
+  "task_id": "mixed_matrix_hard",
+  "strategy": "multi_view",
+  "attempt": 4,
+  "pass_rate": 0.0,
+  "plan_subtasks": [
+    "align spec-view",
+    "align example-view",
+    "align constraint-view",
+    "Generate minimal unit tests for critical behaviors",
+    "Add adversarial/edge-case tests",
+    "Run tests and interpret failures"
+  ],
+  "plan_tests": [
+    "",
+    ""
+  ],
+  "plan_diagnostics": {
+    "consistent": "True",
+    "views": "6",
+    "consistency_note": "[MOCK] c6511898bc4cc307 :: Check whether these views disagree. Spec: ['Summarize goal', 'List required outputs', 'State constraints']. Examples: ['",
+    "planning_tokens": "18",
+    "planning_time": "0.000002"
+  },
+  "patch_summary": {
+    "phase": "initial"
+  },
+  "failing_tests": [],
+  "trace": [],
+  "feedback": [],
+  "reproduction": "",
+  "tests_run": [],
+  "llm_calls": 0,
+  "timeline": {
+    "attempt": 4,
+    "strategy": "multi_view",
+    "phase": "initial",
+    "events": {
+      "decompose": {
+        "start": "2026-02-24T00:15:40.392273",
+        "end": "2026-02-24T00:15:40.392330"
+      },
+      "solve": {
+        "start": "2026-02-24T00:15:40.392332",
+        "end": "2026-02-24T00:15:40.392378"
+      }
+    },
+    "meta": {
+      "llm_calls": "0"
+    }
+  },
+  "solution_preview": "def solve(*args):\n    return None"
+}

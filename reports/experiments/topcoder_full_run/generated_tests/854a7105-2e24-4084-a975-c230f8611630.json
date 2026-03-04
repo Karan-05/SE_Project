@@ -1,0 +1,82 @@
+[
+  {
+    "name": "valid_role_admin",
+    "mode": "call",
+    "expected": true,
+    "input": [
+      {
+        "role": "ADMIN"
+      }
+    ]
+  },
+  {
+    "name": "valid_role_member",
+    "mode": "call",
+    "expected": true,
+    "input": [
+      {
+        "role": "MEMBER"
+      }
+    ]
+  },
+  {
+    "name": "valid_role_guest",
+    "mode": "call",
+    "expected": true,
+    "input": [
+      {
+        "role": "GUEST"
+      }
+    ]
+  },
+  {
+    "name": "invalid_role_unknown",
+    "mode": "call",
+    "expected": null,
+    "input": [
+      {
+        "role": "UNKNOWN"
+      }
+    ]
+  },
+  {
+    "name": "empty_role",
+    "mode": "call",
+    "expected": null,
+    "input": [
+      {
+        "role": ""
+      }
+    ]
+  },
+  {
+    "name": "null_role",
+    "mode": "call",
+    "expected": null,
+    "input": [
+      {
+        "role": null
+      }
+    ]
+  },
+  {
+    "name": "role_with_special_characters",
+    "mode": "call",
+    "expected": null,
+    "input": [
+      {
+        "role": "ADMIN@123"
+      }
+    ]
+  },
+  {
+    "name": "valid_role_superadmin",
+    "mode": "call",
+    "expected": true,
+    "input": [
+      {
+        "role": "SUPERADMIN"
+      }
+    ]
+  }
+]

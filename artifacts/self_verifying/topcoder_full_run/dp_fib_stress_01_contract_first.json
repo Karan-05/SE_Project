@@ -1,0 +1,65 @@
+{
+  "task_id": "dp_fib_stress",
+  "strategy": "contract_first",
+  "attempt": 1,
+  "pass_rate": 1.0,
+  "plan_subtasks": [
+    "Validate inputs vs contract",
+    "Implement core logic",
+    "Check edge cases",
+    "Generate minimal unit tests for critical behaviors",
+    "Add adversarial/edge-case tests",
+    "Run tests and interpret failures"
+  ],
+  "plan_tests": [
+    ""
+  ],
+  "plan_diagnostics": {
+    "missing_fields": "constraints,edge_cases",
+    "contract_length": "32",
+    "audit_note": "Based on the provided contract for the problem of returning the nth Fibonacci number, here are some observations regarding completeness and potential missing guarantees:\n\n### Completeness Review\n\n1. **Inputs**:\n   - The input is described as \"Underspecified.\" It should specify:\n     - The type of input (e.g., integer).\n     - The expected range of the input (e.g., non-negative integers).\n     - Any constraints on the input (e.g., n should be an",
+    "planning_tokens": "151",
+    "planning_time": "3.355142"
+  },
+  "patch_summary": {
+    "phase": "initial"
+  },
+  "tests_run": [
+    {
+      "name": "sample_1",
+      "mode": "call",
+      "status": "pass",
+      "expected": "5",
+      "output": "5",
+      "error": "",
+      "input": "[5]",
+      "kwargs": "{}",
+      "duration": 1.0540999937802553e-05
+    }
+  ],
+  "llm_calls": 0,
+  "timeline": {
+    "attempt": 1,
+    "strategy": "contract_first",
+    "phase": "initial",
+    "events": {
+      "decompose": {
+        "start": "2026-02-24T01:34:39.008320",
+        "end": "2026-02-24T01:34:39.008897"
+      },
+      "solve": {
+        "start": "2026-02-24T01:34:39.008928",
+        "end": "2026-02-24T01:34:39.009523"
+      },
+      "tests": {
+        "start": "2026-02-24T01:34:39.009472",
+        "end": "2026-02-24T01:34:39.009493",
+        "duration_seconds": "0.000"
+      }
+    },
+    "meta": {
+      "llm_calls": "0"
+    }
+  },
+  "solution_preview": "def solve(n):\n                if n <= 1:\n                    return n\n                a,b = 0,1\n                for _ in range(2,n+1):\n                    a,b = b,a+b\n                return b"
+}

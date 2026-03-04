@@ -1,0 +1,112 @@
+[
+  {
+    "name": "test_getRsOrders_invoiceNumNotNull_1",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "data": {
+        "invoiceNum": "12345"
+      }
+    },
+    "input": [
+      {
+        "invoiceNum": "12345"
+      }
+    ]
+  },
+  {
+    "name": "test_getRsOrders_invoiceNumNotNull_2",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Invoice number cannot be null"
+    },
+    "input": [
+      {
+        "invoiceNum": null
+      }
+    ]
+  },
+  {
+    "name": "test_getRsOrders_requestTypeS",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "data": {
+        "requestType": "S"
+      }
+    },
+    "input": [
+      {
+        "requestType": "S"
+      }
+    ]
+  },
+  {
+    "name": "test_getRsOrders_edge_case_empty_invoiceNum",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Invoice number cannot be empty"
+    },
+    "input": [
+      {
+        "invoiceNum": ""
+      }
+    ]
+  },
+  {
+    "name": "test_getRsOrders_adversarial_case_invalid_invoiceNum",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Invalid invoice number format"
+    },
+    "input": [
+      {
+        "invoiceNum": "invalid"
+      }
+    ]
+  },
+  {
+    "name": "test_getRsOrders_large_input",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "data": {
+        "invoiceNum": "12345678901234567890"
+      }
+    },
+    "input": [
+      {
+        "invoiceNum": "12345678901234567890"
+      }
+    ]
+  },
+  {
+    "name": "test_getRsOrders_branch_coverage",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Unsupported request type"
+    },
+    "input": [
+      {
+        "requestType": "X"
+      }
+    ]
+  },
+  {
+    "name": "test_getRsOrders_edge_case_special_characters",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Invalid invoice number format"
+    },
+    "input": [
+      {
+        "invoiceNum": "!@#$%^&*()"
+      }
+    ]
+  }
+]

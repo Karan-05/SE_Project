@@ -1,0 +1,58 @@
+[
+  {
+    "name": "basic_case",
+    "mode": "io",
+    "expected": "6",
+    "stdin": "1 2 3",
+    "expected_stdout": "6"
+  },
+  {
+    "name": "negative_numbers",
+    "mode": "io",
+    "expected": "-6",
+    "stdin": "-1 -2 -3",
+    "expected_stdout": "-6"
+  },
+  {
+    "name": "zero_case",
+    "mode": "io",
+    "expected": "0",
+    "stdin": "0 0 0",
+    "expected_stdout": "0"
+  },
+  {
+    "name": "large_numbers",
+    "mode": "io",
+    "expected": "6000000",
+    "stdin": "1000000 2000000 3000000",
+    "expected_stdout": "6000000"
+  },
+  {
+    "name": "mixed_numbers",
+    "mode": "io",
+    "expected": "0",
+    "stdin": "-1 0 1",
+    "expected_stdout": "0"
+  },
+  {
+    "name": "single_number",
+    "mode": "io",
+    "expected": "42",
+    "stdin": "42",
+    "expected_stdout": "42"
+  },
+  {
+    "name": "two_numbers",
+    "mode": "io",
+    "expected": "15",
+    "stdin": "5 10",
+    "expected_stdout": "15"
+  },
+  {
+    "name": "large_negative_numbers",
+    "mode": "io",
+    "expected": "-6000000",
+    "stdin": "-1000000 -2000000 -3000000",
+    "expected_stdout": "-6000000"
+  }
+]

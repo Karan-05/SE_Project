@@ -1,0 +1,1 @@
+{"content": "The term \"hash_bucket\" typically refers to a data structure used in hash tables, where data is stored in \"buckets\" based on a hash function.", "tokens": 53, "elapsed": 1.5357822090008995, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

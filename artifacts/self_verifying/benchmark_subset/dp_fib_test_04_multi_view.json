@@ -1,0 +1,52 @@
+{
+  "task_id": "dp_fib_test",
+  "strategy": "multi_view",
+  "attempt": 4,
+  "pass_rate": 0.0,
+  "plan_subtasks": [
+    "align spec-view",
+    "align example-view",
+    "align constraint-view",
+    "Generate minimal unit tests for critical behaviors",
+    "Add adversarial/edge-case tests",
+    "Run tests and interpret failures"
+  ],
+  "plan_tests": [
+    ""
+  ],
+  "plan_diagnostics": {
+    "consistent": "True",
+    "views": "5",
+    "consistency_note": "[MOCK] 5d362573eec875bc :: Check whether these views disagree. Spec: ['Summarize goal', 'List required outputs', 'State constraints']. Examples: ['",
+    "planning_tokens": "17",
+    "planning_time": "0.000002"
+  },
+  "patch_summary": {
+    "phase": "initial"
+  },
+  "failing_tests": [],
+  "trace": [],
+  "feedback": [],
+  "reproduction": "",
+  "tests_run": [],
+  "llm_calls": 0,
+  "timeline": {
+    "attempt": 4,
+    "strategy": "multi_view",
+    "phase": "initial",
+    "events": {
+      "decompose": {
+        "start": "2026-02-24T00:15:40.359194",
+        "end": "2026-02-24T00:15:40.359234"
+      },
+      "solve": {
+        "start": "2026-02-24T00:15:40.359237",
+        "end": "2026-02-24T00:15:40.359279"
+      }
+    },
+    "meta": {
+      "llm_calls": "0"
+    }
+  },
+  "solution_preview": "def solve(*args):\n    return None"
+}

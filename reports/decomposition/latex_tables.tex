@@ -1,0 +1,94 @@
+% Auto-generated tables
+
+\begin{tabular}{lrrrr}
+\toprule
+strategy & pass_rate_mean & pass_rate_ci_low & pass_rate_ci_high & avg_cost \\
+\midrule
+contract_first & 0.900 & 0.800 & 0.980 & 42.000 \\
+failure_mode_first & 0.900 & 0.800 & 0.980 & 31.500 \\
+multi_view & 0.900 & 0.800 & 0.980 & 27.000 \\
+pattern_skeleton & 0.900 & 0.800 & 0.980 & 65.500 \\
+role_decomposed & 0.900 & 0.800 & 0.980 & 33.500 \\
+semantic_diff & 0.900 & 0.800 & 0.980 & 35.800 \\
+simulation_trace & 0.900 & 0.800 & 0.980 & 14.600 \\
+\bottomrule
+\end{tabular}
+
+% RL aggregate metrics with 95% CI
+\begin{tabular}{lrrrrrrrrrrrr}
+\toprule
+agent & avg_reward_mean & avg_reward_ci_low & avg_reward_ci_high & win_rate_mean & win_rate_ci_low & win_rate_ci_high & starved_tasks_mean & starved_tasks_ci_low & starved_tasks_ci_high & deadline_misses_mean & deadline_misses_ci_low & deadline_misses_ci_high \\
+\midrule
+contract_first & 17746.263 & 13494.796 & 21417.389 & 0.782 & 0.676 & 0.886 & 4.671 & 2.239 & 7.297 & NaN & NaN & NaN \\
+meta_strategy & 17746.263 & 13494.796 & 21417.389 & 0.782 & 0.676 & 0.886 & 4.671 & 2.239 & 7.297 & NaN & NaN & NaN \\
+pattern_skeleton & 17746.263 & 13494.796 & 21417.389 & 0.782 & 0.676 & 0.886 & 4.671 & 2.239 & 7.297 & NaN & NaN & NaN \\
+skill_match & 14512.735 & 12639.175 & 16572.568 & 0.684 & 0.601 & 0.766 & 3.445 & 1.942 & 5.362 & NaN & NaN & NaN \\
+random & 8782.065 & 6878.687 & 10499.918 & 0.598 & 0.508 & 0.687 & 11.290 & 7.961 & 14.678 & NaN & NaN & NaN \\
+\bottomrule
+\end{tabular}
+
+% Per-type results
+\begin{tabular}{llllr}
+\toprule
+task_type & task_difficulty & split & strategy & avg_pass_rate \\
+\midrule
+array & H & ood & contract_first & 1.000 \\
+array & H & ood & failure_mode_first & 1.000 \\
+array & H & ood & multi_view & 1.000 \\
+array & H & ood & pattern_skeleton & 1.000 \\
+array & H & ood & role_decomposed & 1.000 \\
+array & H & ood & semantic_diff & 1.000 \\
+array & H & ood & simulation_trace & 1.000 \\
+array & H & train & contract_first & 1.000 \\
+array & H & train & failure_mode_first & 1.000 \\
+array & H & train & multi_view & 1.000 \\
+array & H & train & pattern_skeleton & 1.000 \\
+array & H & train & role_decomposed & 1.000 \\
+array & H & train & semantic_diff & 1.000 \\
+array & H & train & simulation_trace & 1.000 \\
+array & M & test & contract_first & 1.000 \\
+array & M & test & failure_mode_first & 1.000 \\
+array & M & test & multi_view & 1.000 \\
+array & M & test & pattern_skeleton & 1.000 \\
+array & M & test & role_decomposed & 1.000 \\
+array & M & test & semantic_diff & 1.000 \\
+array & M & test & simulation_trace & 1.000 \\
+array & M & train & contract_first & 1.000 \\
+array & M & train & failure_mode_first & 1.000 \\
+array & M & train & multi_view & 1.000 \\
+array & M & train & pattern_skeleton & 1.000 \\
+array & M & train & role_decomposed & 1.000 \\
+array & M & train & semantic_diff & 1.000 \\
+array & M & train & simulation_trace & 1.000 \\
+array & S & test & contract_first & 1.000 \\
+array & S & test & failure_mode_first & 1.000 \\
+\bottomrule
+\end{tabular}
+
+% Multi-agent aggregate
+\begin{tabular}{lrrrrrrrrrrrr}
+\toprule
+policy & avg_reward_mean & avg_reward_std & win_rate_mean & win_rate_std & starved_tasks_mean & starved_tasks_std & dropped_tasks_mean & dropped_tasks_std & deadline_misses_mean & deadline_misses_std & market_starved_mean & market_dropped_mean \\
+\midrule
+skill_match & 21496.830 & 6162.515 & 0.448 & 0.072 & 8.540 & 1.784 & 17.180 & 3.742 & 0.000 & 0.000 & 92.660 & 73.640 \\
+random & 3404.780 & 4054.900 & 0.284 & 0.069 & 23.360 & 4.971 & 10.800 & 2.387 & 0.000 & 0.000 & 92.660 & 73.640 \\
+pattern_skeleton & -3569.980 & 9412.415 & 0.291 & 0.077 & 18.340 & 3.950 & 15.220 & 1.542 & 0.000 & 0.000 & 92.660 & 73.640 \\
+contract_first & -10500.880 & 16620.792 & 0.239 & 0.122 & 20.960 & 6.934 & 15.220 & 1.542 & 0.000 & 0.000 & 92.660 & 73.640 \\
+meta_strategy & -11940.310 & 6285.264 & 0.229 & 0.039 & 21.460 & 1.751 & 15.220 & 1.542 & 0.000 & 0.000 & 92.660 & 73.640 \\
+\bottomrule
+\end{tabular}
+
+% Cost-quality frontier
+\begin{tabular}{lrrr}
+\toprule
+strategy & quality & cost & on_frontier \\
+\midrule
+contract_first & 0.900 & 42.000 & False \\
+failure_mode_first & 0.900 & 31.500 & False \\
+multi_view & 0.900 & 27.000 & False \\
+pattern_skeleton & 0.900 & 65.500 & False \\
+role_decomposed & 0.900 & 33.500 & False \\
+semantic_diff & 0.900 & 35.800 & False \\
+simulation_trace & 0.900 & 14.600 & True \\
+\bottomrule
+\end{tabular}

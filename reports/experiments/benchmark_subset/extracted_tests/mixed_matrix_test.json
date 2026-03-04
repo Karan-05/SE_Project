@@ -1,0 +1,31 @@
+[
+  {
+    "name": "sample_0",
+    "mode": "call",
+    "expected": 5,
+    "input": [
+      [
+        [
+          1,
+          2
+        ],
+        [
+          3,
+          4
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "sample_1",
+    "mode": "call",
+    "expected": 5,
+    "input": [
+      [
+        [
+          5
+        ]
+      ]
+    ]
+  }
+]

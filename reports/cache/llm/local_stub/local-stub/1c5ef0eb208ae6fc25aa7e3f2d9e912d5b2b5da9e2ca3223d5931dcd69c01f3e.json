@@ -1,0 +1,1 @@
+{"content": "[LOCAL_STUB] 5d362573eec875bc :: Check whether these views disagree. Spec: ['Summarize goal', 'List required outputs', 'State constraints']. Examples: ['", "tokens": 17, "elapsed": 1.7079873941838741e-06, "budget_exceeded": false, "meta": {"provider": "local_stub", "model": "view-checker"}}

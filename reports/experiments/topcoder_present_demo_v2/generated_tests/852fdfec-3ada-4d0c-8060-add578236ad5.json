@@ -1,0 +1,120 @@
+[
+  {
+    "name": "valid_registration",
+    "mode": "call",
+    "expected": {
+      "status": "pending",
+      "message": "Registration submitted for approval."
+    },
+    "input": [
+      {
+        "email": "user@example.com",
+        "password": "SecurePass123",
+        "name": "John Doe"
+      }
+    ]
+  },
+  {
+    "name": "duplicate_registration",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Email already exists."
+    },
+    "input": [
+      {
+        "email": "existing_user@example.com",
+        "password": "AnotherPass123",
+        "name": "Jane Doe"
+      }
+    ]
+  },
+  {
+    "name": "empty_email",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Email is required."
+    },
+    "input": [
+      {
+        "email": "",
+        "password": "SecurePass123",
+        "name": "John Doe"
+      }
+    ]
+  },
+  {
+    "name": "short_password",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Password must be at least 8 characters."
+    },
+    "input": [
+      {
+        "email": "user@example.com",
+        "password": "123",
+        "name": "John Doe"
+      }
+    ]
+  },
+  {
+    "name": "admin_approval",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "message": "Account approved."
+    },
+    "input": [
+      {
+        "email": "user@example.com",
+        "status": "approved"
+      }
+    ]
+  },
+  {
+    "name": "admin_rejection",
+    "mode": "call",
+    "expected": {
+      "status": "success",
+      "message": "Account rejected."
+    },
+    "input": [
+      {
+        "email": "user@example.com",
+        "status": "rejected"
+      }
+    ]
+  },
+  {
+    "name": "invalid_email_format",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Invalid email format."
+    },
+    "input": [
+      {
+        "email": "invalid_email_format",
+        "password": "SecurePass123",
+        "name": "John Doe"
+      }
+    ]
+  },
+  {
+    "name": "missing_fields",
+    "mode": "call",
+    "expected": {
+      "status": "error",
+      "message": "Name and password are required."
+    },
+    "input": [
+      {
+        "email": "user@example.com",
+        "password": "",
+        "name": ""
+      }
+    ]
+  }
+]

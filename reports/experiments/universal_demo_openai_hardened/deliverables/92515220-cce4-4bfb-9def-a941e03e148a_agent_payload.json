@@ -1,0 +1,96 @@
+{
+  "task_type": "repo_patch",
+  "id": "92515220-cce4-4bfb-9def-a941e03e148a",
+  "title": "Topcoder Community App - Apply universal navigation to account settings page",
+  "summary": "This task involves applying universal navigation to the account settings page of the Topcoder Community App. The changes need to be made against the `universal_nav` branch at commit hash 51ec2f10. The implementation must align with the requirements specified in the linked issue.",
+  "artifacts": {
+    "patch_diff_unified": "TBD \u2013 missing unified diff of the changes made.",
+    "file_plan": [
+      {
+        "file": "src/components/AccountSettings.js",
+        "change": "Implement universal navigation integration."
+      },
+      {
+        "file": "src/styles/AccountSettings.css",
+        "change": "Update styles to accommodate new navigation."
+      }
+    ],
+    "risks": [
+      "Changes may not integrate well with existing components.",
+      "Potential for breaking existing functionality in the account settings page."
+    ],
+    "test_plan": "TBD \u2013 missing commands/tests + expected results."
+  },
+  "assumptions": [
+    "The developer has access to the Topcoder Community App repository.",
+    "The developer is familiar with ReactJS and the structure of the community app.",
+    "The developer can deploy the app locally to test changes."
+  ],
+  "plan": [
+    "Review the requirements specified in the GitHub issue #6780.",
+    "Implement the universal navigation changes in the account settings page.",
+    "Test the changes locally to ensure they function as expected.",
+    "Create a git patch file against commit hash 51ec2f10 in the `universal_nav` branch.",
+    "Document the changes made in the patch plan and test plan."
+  ],
+  "validations": [
+    "Self-check completed: reviewed task requirements and confirmed understanding of the changes needed.",
+    "Validation of the patch will occur after implementation."
+  ],
+  "confidence": 0.7,
+  "stop_reason": "blocked_partial_context",
+  "rubric_self_check": {
+    "coverage": 0.6,
+    "specificity": 0.7,
+    "actionability": 0.5,
+    "overall_notes": "Missing detailed patch diff and test plan."
+  },
+  "raw": {
+    "task_type": "repo_patch",
+    "id": "92515220-cce4-4bfb-9def-a941e03e148a",
+    "title": "Topcoder Community App - Apply universal navigation to account settings page",
+    "summary": "This task involves applying universal navigation to the account settings page of the Topcoder Community App. The changes need to be made against the `universal_nav` branch at commit hash 51ec2f10. The implementation must align with the requirements specified in the linked issue.",
+    "assumptions": [
+      "The developer has access to the Topcoder Community App repository.",
+      "The developer is familiar with ReactJS and the structure of the community app.",
+      "The developer can deploy the app locally to test changes."
+    ],
+    "plan": [
+      "Review the requirements specified in the GitHub issue #6780.",
+      "Implement the universal navigation changes in the account settings page.",
+      "Test the changes locally to ensure they function as expected.",
+      "Create a git patch file against commit hash 51ec2f10 in the `universal_nav` branch.",
+      "Document the changes made in the patch plan and test plan."
+    ],
+    "artifacts": {
+      "patch_diff_unified": "TBD \u2013 missing unified diff of the changes made.",
+      "file_plan": [
+        {
+          "file": "src/components/AccountSettings.js",
+          "change": "Implement universal navigation integration."
+        },
+        {
+          "file": "src/styles/AccountSettings.css",
+          "change": "Update styles to accommodate new navigation."
+        }
+      ],
+      "risks": [
+        "Changes may not integrate well with existing components.",
+        "Potential for breaking existing functionality in the account settings page."
+      ],
+      "test_plan": "TBD \u2013 missing commands/tests + expected results."
+    },
+    "validations": [
+      "Self-check completed: reviewed task requirements and confirmed understanding of the changes needed.",
+      "Validation of the patch will occur after implementation."
+    ],
+    "confidence": 0.7,
+    "stop_reason": "blocked_partial_context",
+    "rubric_self_check": {
+      "coverage": 0.6,
+      "specificity": 0.7,
+      "actionability": 0.5,
+      "overall_notes": "Missing detailed patch diff and test plan."
+    }
+  }
+}

@@ -1,0 +1,58 @@
+[
+  {
+    "name": "valid_forum_link",
+    "mode": "io",
+    "expected": "forum_link_generated",
+    "stdin": "challenge_details_loaded",
+    "expected_stdout": "forum_link_generated"
+  },
+  {
+    "name": "error_page_on_quick_click",
+    "mode": "io",
+    "expected": "error_page",
+    "stdin": "challenge_details_not_loaded",
+    "expected_stdout": "error_page"
+  },
+  {
+    "name": "no_forum_link_before_load",
+    "mode": "io",
+    "expected": "no_forum_link",
+    "stdin": "challenge_details_loading",
+    "expected_stdout": "no_forum_link"
+  },
+  {
+    "name": "forum_link_after_delay",
+    "mode": "io",
+    "expected": "forum_link_generated",
+    "stdin": "challenge_details_loaded_with_delay",
+    "expected_stdout": "forum_link_generated"
+  },
+  {
+    "name": "multiple_quick_clicks",
+    "mode": "io",
+    "expected": "error_page",
+    "stdin": "challenge_details_not_loaded_multiple_clicks",
+    "expected_stdout": "error_page"
+  },
+  {
+    "name": "forum_link_on_page_refresh",
+    "mode": "io",
+    "expected": "forum_link_generated",
+    "stdin": "page_refreshed_after_loading",
+    "expected_stdout": "forum_link_generated"
+  },
+  {
+    "name": "invalid_challenge_id",
+    "mode": "io",
+    "expected": "error_page",
+    "stdin": "invalid_challenge_id_request",
+    "expected_stdout": "error_page"
+  },
+  {
+    "name": "forum_link_accessibility",
+    "mode": "io",
+    "expected": "forum_link_accessible",
+    "stdin": "challenge_details_loaded_accessibility_check",
+    "expected_stdout": "forum_link_accessible"
+  }
+]

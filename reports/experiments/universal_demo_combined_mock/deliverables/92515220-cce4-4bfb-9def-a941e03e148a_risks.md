@@ -1,0 +1,2 @@
+- Rollback plan: redeploy previous tag
+- Monitor HTTP 5xx during rollout

@@ -1,0 +1,119 @@
+{
+  "task_id": "73d5b29a-3bef-4979-863c-80d0bae43e56",
+  "strategy": "pattern_skeleton",
+  "attempt": 3,
+  "pass_rate": 0.0,
+  "plan_subtasks": [
+    "instantiate skeleton",
+    "fill placeholders",
+    "derive pitfall-specific checks",
+    "verify pitfalls",
+    "Generate minimal unit tests for critical behaviors",
+    "Add adversarial/edge-case tests"
+  ],
+  "plan_tests": [
+    "Verify pitfall: Ensure indices not reused",
+    "Verify pitfall: Handle no-solution case"
+  ],
+  "plan_diagnostics": {
+    "pattern_name": "two_pointers",
+    "confidence": "0.00",
+    "pitfalls": "Ensure indices not reused; Handle no-solution case",
+    "planning_tokens": "256",
+    "planning_time": "4.302685",
+    "skeleton": "def solve(nums, target):\n    left, right = 0, len(nums) - 1\n    while left < right:\n        total = nums[left] + nums[right]\n        if total == target:\n            return left, right\n        if total < target:\n            left += 1\n        else:\n            right -= 1\n    return -1, -1\n"
+  },
+  "patch_summary": {
+    "phase": "initial"
+  },
+  "failing_tests": [
+    "custom_schema_configuration",
+    "connection_string_without_schema",
+    "migration_with_custom_schema",
+    "invalid_schema_name"
+  ],
+  "trace": [
+    "solve() missing 1 required positional argument: 'target'",
+    "solve() missing 1 required positional argument: 'target'",
+    "solve() missing 1 required positional argument: 'target'",
+    "solve() missing 1 required positional argument: 'target'"
+  ],
+  "feedback": [
+    "custom_schema_configuration expected 'custom_schema' but saw None",
+    "connection_string_without_schema expected 'mydb' but saw None",
+    "migration_with_custom_schema expected 'migrations applied to migration_schema' but saw None",
+    "invalid_schema_name expected 'error' but saw None"
+  ],
+  "reproduction": "inputs=[{'POSTGRES_SCHEMA': 'custom_schema'}] kwargs={}",
+  "tests_run": [
+    {
+      "name": "custom_schema_configuration",
+      "mode": "call",
+      "status": "fail",
+      "expected": "'custom_schema'",
+      "output": "None",
+      "error": "solve() missing 1 required positional argument: 'target'",
+      "input": "[{'POSTGRES_SCHEMA': 'custom_schema'}]",
+      "kwargs": "{}",
+      "duration": 8.500006515532732e-06
+    },
+    {
+      "name": "connection_string_without_schema",
+      "mode": "call",
+      "status": "fail",
+      "expected": "'mydb'",
+      "output": "None",
+      "error": "solve() missing 1 required positional argument: 'target'",
+      "input": "[{'DATABASE_URL': 'postgresql://user:password@localhost:5432/mydb'}]",
+      "kwargs": "{}",
+      "duration": 4.917004844173789e-06
+    },
+    {
+      "name": "migration_with_custom_schema",
+      "mode": "call",
+      "status": "fail",
+      "expected": "'migrations applied to migration_schema'",
+      "output": "None",
+      "error": "solve() missing 1 required positional argument: 'target'",
+      "input": "[{'POSTGRES_SCHEMA': 'migration_schema'}]",
+      "kwargs": "{}",
+      "duration": 4.208006430417299e-06
+    },
+    {
+      "name": "invalid_schema_name",
+      "mode": "call",
+      "status": "fail",
+      "expected": "'error'",
+      "output": "None",
+      "error": "solve() missing 1 required positional argument: 'target'",
+      "input": "[{'POSTGRES_SCHEMA': 'invalid/schema'}]",
+      "kwargs": "{}",
+      "duration": 4.125002305954695e-06
+    }
+  ],
+  "llm_calls": 0,
+  "timeline": {
+    "attempt": 3,
+    "strategy": "pattern_skeleton",
+    "phase": "initial",
+    "events": {
+      "decompose": {
+        "start": "2026-02-24T01:33:43.576566",
+        "end": "2026-02-24T01:33:43.577691"
+      },
+      "solve": {
+        "start": "2026-02-24T01:33:43.577705",
+        "end": "2026-02-24T01:33:43.578760"
+      },
+      "tests": {
+        "start": "2026-02-24T01:33:43.578710",
+        "end": "2026-02-24T01:33:43.578742",
+        "duration_seconds": "0.000"
+      }
+    },
+    "meta": {
+      "llm_calls": "0"
+    }
+  },
+  "solution_preview": "def solve(nums, target):\n    left, right = 0, len(nums) - 1\n    while left < right:\n        total = nums[left] + nums[right]\n        if total == target:\n            return left, right\n        if total < target:\n            left += 1\n        else:\n            right -= 1\n    return -1, -1"
+}

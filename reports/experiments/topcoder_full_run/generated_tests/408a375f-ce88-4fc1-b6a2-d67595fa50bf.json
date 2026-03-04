@@ -1,0 +1,100 @@
+[
+  {
+    "name": "valid_application_bangalore",
+    "mode": "call",
+    "expected": "Application accepted",
+    "input": [
+      {
+        "location": "Bangalore",
+        "duration": 12,
+        "working_hours": 8.5
+      }
+    ]
+  },
+  {
+    "name": "valid_application_chennai",
+    "mode": "call",
+    "expected": "Application accepted",
+    "input": [
+      {
+        "location": "Chennai",
+        "duration": 8,
+        "working_hours": 8.5
+      }
+    ]
+  },
+  {
+    "name": "invalid_application_outside_location",
+    "mode": "call",
+    "expected": "Application rejected",
+    "input": [
+      {
+        "location": "Mumbai",
+        "duration": 10,
+        "working_hours": 8.5
+      }
+    ]
+  },
+  {
+    "name": "invalid_application_duration_too_short",
+    "mode": "call",
+    "expected": "Application rejected",
+    "input": [
+      {
+        "location": "Bangalore",
+        "duration": 3,
+        "working_hours": 8.5
+      }
+    ]
+  },
+  {
+    "name": "invalid_application_duration_too_long",
+    "mode": "call",
+    "expected": "Application rejected",
+    "input": [
+      {
+        "location": "Chennai",
+        "duration": 20,
+        "working_hours": 8.5
+      }
+    ]
+  },
+  {
+    "name": "valid_application_relocation",
+    "mode": "call",
+    "expected": "Application accepted",
+    "input": [
+      {
+        "location": "Delhi",
+        "willing_to_relocate": true,
+        "duration": 10,
+        "working_hours": 8.5
+      }
+    ]
+  },
+  {
+    "name": "invalid_application_no_relocation",
+    "mode": "call",
+    "expected": "Application rejected",
+    "input": [
+      {
+        "location": "Delhi",
+        "willing_to_relocate": false,
+        "duration": 10,
+        "working_hours": 8.5
+      }
+    ]
+  },
+  {
+    "name": "valid_application_edge_case_max_duration",
+    "mode": "call",
+    "expected": "Application accepted",
+    "input": [
+      {
+        "location": "Bangalore",
+        "duration": 16,
+        "working_hours": 8.5
+      }
+    ]
+  }
+]

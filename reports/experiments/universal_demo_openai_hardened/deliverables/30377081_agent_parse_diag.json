@@ -1,0 +1,44 @@
+{
+  "task_id": "30377081",
+  "run_id": "universal_demo_openai_hardened",
+  "raw_path": "/Users/karanallagh/Desktop/DataCollector/reports/experiments/universal_demo_openai_hardened/deliverables/30377081_agent_raw.txt",
+  "raw_length": 3014,
+  "sentinel_found": true,
+  "attempts": [
+    {
+      "mode": "sentinel",
+      "success": false,
+      "error": "id must be a string."
+    },
+    {
+      "mode": "balanced",
+      "success": false,
+      "error": "id must be a string."
+    },
+    {
+      "mode": "repair",
+      "success": false,
+      "error": "id must be a string."
+    }
+  ],
+  "errors": [
+    {
+      "stage": "sentinel",
+      "message": "id must be a string."
+    },
+    {
+      "stage": "balanced",
+      "message": "id must be a string."
+    },
+    {
+      "stage": "repair",
+      "message": "id must be a string."
+    }
+  ],
+  "repair_attempted": true,
+  "repair_used": false,
+  "max_repairs": 1,
+  "llm_provider": "openai",
+  "repair_path": "/Users/karanallagh/Desktop/DataCollector/reports/experiments/universal_demo_openai_hardened/deliverables/30377081_agent_repair.txt",
+  "status": "failed"
+}

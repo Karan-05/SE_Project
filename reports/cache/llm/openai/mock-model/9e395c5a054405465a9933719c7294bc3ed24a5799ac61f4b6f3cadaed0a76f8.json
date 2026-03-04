@@ -1,0 +1,1 @@
+{"content": "```python\ndef solve(data):\n    if not data:\n        return None\n    \n    # Assuming the data is a list of numbers for this example\n    result = sum(data) / len(data)\n    return result\n```", "tokens": 240, "elapsed": 1.7328520419832785, "budget_exceeded": false, "meta": {"provider": "openai", "model": "repair-loop", "caller": "multi_view:repair"}}

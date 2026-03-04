@@ -1,0 +1,92 @@
+[
+  {
+    "name": "success_popup_display",
+    "mode": "call",
+    "expected": "Success",
+    "input": [
+      {
+        "status": "success"
+      }
+    ]
+  },
+  {
+    "name": "error_popup_display",
+    "mode": "call",
+    "expected": "Error",
+    "input": [
+      {
+        "status": "error"
+      }
+    ]
+  },
+  {
+    "name": "empty_status_popup",
+    "mode": "call",
+    "expected": "No status provided",
+    "input": [
+      {
+        "status": ""
+      }
+    ]
+  },
+  {
+    "name": "null_status_popup",
+    "mode": "call",
+    "expected": "No status provided",
+    "input": [
+      {
+        "status": null
+      }
+    ]
+  },
+  {
+    "name": "unexpected_status_popup",
+    "mode": "call",
+    "expected": "Unknown status",
+    "input": [
+      {
+        "status": "unknown"
+      }
+    ]
+  },
+  {
+    "name": "long_success_message",
+    "mode": "call",
+    "expected": "Success",
+    "input": [
+      {
+        "status": "success",
+        "message": "This is a very long success message that exceeds normal length."
+      }
+    ]
+  },
+  {
+    "name": "multiple_success_calls",
+    "mode": "call",
+    "expected": [
+      "Success",
+      "Success"
+    ],
+    "input": [
+      {
+        "status": "success"
+      },
+      {
+        "status": "success"
+      }
+    ]
+  },
+  {
+    "name": "success_with_additional_data",
+    "mode": "call",
+    "expected": "Success",
+    "input": [
+      {
+        "status": "success",
+        "data": {
+          "id": 123
+        }
+      }
+    ]
+  }
+]

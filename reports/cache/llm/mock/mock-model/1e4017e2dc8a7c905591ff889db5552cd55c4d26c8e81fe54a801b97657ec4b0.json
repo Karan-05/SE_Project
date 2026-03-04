@@ -1,0 +1,1 @@
+{"content": "[MOCK] 475acbe93b9752d7 :: You are comparing a new task to base task baseline. List semantic deltas succinctly: Return degree counts for each verte", "tokens": 20, "elapsed": 1.915999999990703e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "semantic-diff", "caller": "semantic_diff"}}

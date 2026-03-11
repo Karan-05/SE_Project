@@ -559,3 +559,35 @@
 3. Monitor repair traces to ensure the forced multi-file escalation actually touches both controller/service files once the provider is live.
 
 ---
+
+# Session Log – 2026-03-11 (Push recovery + oversized data packaging)
+
+## Commands Run
+1. `pwd` / `which python` / `python --version` / `python -c 'import sys; print(sys.executable)'` (session bootstrap)
+2. `git log -1 --stat` and `git reset --mixed origin/main` (drop the rejected commit but keep its working tree)
+3. `find . -size +90M`, `ls -lh <paths>` (inventory the files exceeding GitHub limits)
+4. `gzip -c challenge_data/legacy_excel/challengeData_legacy_xlsx/page1.json > …/page1.json.gz` and `gzip -c data/processed/tasks.csv > data/processed/tasks.csv.gz`
+5. `python scripts/unpack_large_assets.py` (verify the new decompression helper)
+6. `git add -A`, `git commit -m "Refresh Topcoder artifact bundle and compress large data"`, `git push origin main`
+
+## Files Modified / Created
+- `.gitignore` – ignore `mysql_data/`, `tmp/`, and the uncompressed `challenge_data/legacy_excel/challengeData_legacy_xlsx/page1.json` plus `data/processed/tasks.csv` so we can keep the raw files locally without re-adding them.
+- `challenge_data/legacy_excel/challengeData_legacy_xlsx/page1.json.gz`, `data/processed/tasks.csv.gz` – compressed counterparts that stay under 100 MB and ship with the repo; the raw files are restored by the helper script.
+- `scripts/unpack_large_assets.py` – idempotent decompressor that recreates the canonical CSV/JSON snapshots on demand.
+- `README.md` – now calls out the “run `python scripts/unpack_large_assets.py` before anything else” instruction.
+- Removed the tracked `data/processed/tasks.csv` blob (now ignored) while keeping the rest of the data/report updates from the original commit.
+
+## Metrics Observed
+- No new experimental metrics (task focused on repo hygiene).
+- Verified that `git push origin main` succeeds; GitHub only emits <100 MB warnings for `data/raw/tasks.csv`, `data/processed/workers.csv`, and the two `results/aegis_rl/*reward_diag.jsonl` files.
+
+## Blockers / Risks
+- Sandbox restrictions disallow Git LFS hook installation, so future >100 MB files must also be compressed or split until LFS can be configured outside the sandbox.
+- Remaining 50–99 MB files could breach the hard limit on the next refresh if they grow slightly; they should be watched or compressed proactively.
+
+## Next Steps
+1. Decide whether to compress or offload the remaining large CSV/JSONL artifacts (or enable Git LFS once direct filesystem access is available).
+2. Ensure every pipeline/documentation section that references `data/processed/tasks.csv` or the legacy Excel JSON mentions `scripts/unpack_large_assets.py`.
+3. Resume the ASE research artefact tasks now that the branch is in sync with `origin/main`.
+
+---

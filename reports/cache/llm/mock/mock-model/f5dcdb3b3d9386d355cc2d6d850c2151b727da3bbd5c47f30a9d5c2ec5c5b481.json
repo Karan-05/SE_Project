@@ -1,0 +1,1 @@
+{"content": "[MOCK] 61f49c83ff185ed4 :: You are repairing code produced by strategy 'contract_first'. Problem statement: Return the minimum coins needed to reac", "tokens": 183, "elapsed": 5.292007699608803e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "contract_first:repair"}}

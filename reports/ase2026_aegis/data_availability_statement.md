@@ -1,0 +1,5 @@
+# Data Availability
+
+- **Topcoder corpus** – All challenge metadata and artefacts used in this study live in the repository under `challenge_data/`, `analysis/output/`, `data/raw/`, and `data/processed/`. Regenerating them only requires the provided scripts (`init.py`, `legacy_excel_loader.py`, `analysis/report.py`, `scripts/export_real_tasks.py`, `src/data/preprocess.py`) and the documented Topcoder API endpoints; no proprietary credentials are embedded.
+- **MySQL snapshots** – We work from exported CSV/Excel tables in `snapshots/` because the sandbox cannot start MySQL. The schema definition (`schema_registry.py`) plus the snapshots are sufficient to recreate the relational state on any reviewer-controlled server.
+- **RL logs and counterfactual dataset** – Every experiment artefact (AEGIS, STRIDE, TARL, and the new C-STRIDE runs) is stored in `results/aegis_rl/` and referenced from the paper tables in `reports/ase2026_aegis/`. The counterfactual branch-rollout dataset is generated entirely offline via `scripts/build_counterfactual_dataset.py` and is included under `results/aegis_rl/counterfactual/`.

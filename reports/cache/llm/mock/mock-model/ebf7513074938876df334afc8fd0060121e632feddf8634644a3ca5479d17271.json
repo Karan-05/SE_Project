@@ -1,0 +1,1 @@
+{"content": "[MOCK] b1c33f1bc9d6b729 :: You are repairing code produced by strategy 'direct_baseline'. Problem statement: Return the running prefix sums. Implem", "tokens": 127, "elapsed": 3.7919962778687477e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "direct_baseline:repair"}}

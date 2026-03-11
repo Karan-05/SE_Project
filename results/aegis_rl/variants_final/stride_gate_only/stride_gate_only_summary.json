@@ -1,0 +1,15 @@
+{
+  "success_rate": 0.96,
+  "avg_reward": 61.403242423600105,
+  "avg_cost": 0.26984848484848484,
+  "avg_steps": 9.12,
+  "override_rate": 0.0,
+  "override_win_rate": 0.0,
+  "override_regret_rate": 0.0,
+  "harmful_fraction": 0.0,
+  "beneficial_fraction": 0.0,
+  "budgeted_success": 0.96,
+  "action_entropy": 0.9456741213798523,
+  "method": "stride_gate_only",
+  "notes": ""
+}

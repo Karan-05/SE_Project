@@ -1,0 +1,28 @@
+BEGIN_JSON
+{
+  "task_type": "data_etl",
+  "id": "7daca42b-c37f-477b-96db-153000825d83",
+  "title": "Topcoder O/R F2F - Topgear Scorecard Issue",
+  "summary": "This task involves updating the ETL pipeline to fix data display inconsistencies for the Topgear Standard F2F Review Scorecard v1.0.0. The main goal is to align dropdown options in the new app with the old app by updating the SQL transformations and ensuring the data reflects the correct scorecard issue. The solution must preserve existing functionality and avoid unnecessary code changes.",
+  "assumptions": [
+    "Source data schemas and exact table structures are not provided; assumed to be similar to existing Topgear scorecard data tables.",
+    "The SQL file mentioned refers to a transformation or extraction SQL script used in the ETL pipeline.",
+    "Access to the latest 'reskin-or-only' branch or codebase is assumed for patch creation but not available here.",
+    "Screenshots and videos linked provide UI context but are not directly accessible for data extraction.",
+    "No explicit SLAs or data volume constraints were provided; standard batch ETL cadence assumed.",
+    "No direct access to the existing ETL orchestration or job scheduling details."
+  ],
+  "plan": [
+    "Review existing ETL SQL files related to Topgear scorecard data extraction and transformation.",
+    "Identify the dropdown options data source and compare the old app's dropdown options with the new app's options.",
+    "Update the SQL transformation logic to ensure dropdown options match the old app's consistent set.",
+    "Validate that the updated SQL correctly reflects the Topgear Standard F2F Review Scorecard v1.0.0 data.",
+    "Create data quality checks to verify dropdown options completeness and correctness post-transformation.",
+    "Develop validation SQL queries to confirm the fix and ensure no regression in existing scorecard data.",
+    "Document the ETL pipeline changes, assumptions, and validation steps in the pipeline_spec artifact.",
+    "Provide runnable SQL snippets and Python pseudo-code for the ETL steps with logging and checkpoints.",
+    "Include a checklist for acceptance criteria ensuring no breakage of existing functions and consistent dropdown options.",
+    "Prepare a test plan with commands or queries to verify the updated data correctness and pipeline integrity."
+  ],
+  "artifacts": {
+    "pipeline_spec": "### ETL Pipeline Specification for Topgear Scorecard Issue\n\n**Source Data:**\n- Assumed relational tables containing Topgear scorecard raw data and dropdown option metadata.\n- Data extracted from transactional or staging databases supporting the F2F review app.\n\n**Cadence:**\n- Batch ETL runs daily or on-demand aligned with app deployment cycles.\n\n**Orchestration:**\n- Managed by existing ETL scheduler (e.g., Airflow, cron) - no changes assumed.\n\n**SLAs:**\n- Data availability within 1 hour of source update.\n\n**Recovery Plan:**\n- Re-run ETL job on failure with alerting.\n\n---\n\n### Transformation Logic Update\n- Modify SQL to align dropdown options with old app by joining or filtering on correct option sets.\n- Ensure scorecard issue data is correctly selected and displayed.\n\n---\n\n### Observability\n

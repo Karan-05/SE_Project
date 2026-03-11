@@ -1,0 +1,1 @@
+{"content": "Could you please specify which algorithm you'd like me to simulate for the input `[[1, 2, 3]]`?", "tokens": 49, "elapsed": 1.9772980000125244, "budget_exceeded": false, "meta": {"provider": "openai", "model": "trace-writer", "caller": "simulation_trace"}}

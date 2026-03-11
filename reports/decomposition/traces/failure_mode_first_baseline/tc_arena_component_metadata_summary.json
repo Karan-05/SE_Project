@@ -1,0 +1,241 @@
+{
+  "task_id": "tc_arena_component_metadata_summary",
+  "strategy": "failure_mode_first_baseline",
+  "plan": {
+    "strategy": "failure_mode_first_baseline",
+    "contract": {},
+    "patterns": [],
+    "subtasks": [
+      "enumerate failure modes",
+      "design tests",
+      "only then implement",
+      "Generate minimal unit tests for critical behaviors",
+      "Add adversarial/edge-case tests",
+      "Run tests and interpret failures",
+      "Repair implementation and re-run tests"
+    ],
+    "tests": [
+      "Certainly! Here are three high-risk failure modes for the described coding task along with short rationales:\n\n1. **Incorrect Filtering of Results Before Aggregation**  \n   *Rationale:* If the API aggregates language and status totals before applying the filter and limit, the metadata counts will not reflect the actual displayed subset. This leads to inaccurate UI indicators and misleads users about component coverage.\n\n2. **Omission or Misnaming of Metadata Fields**  \n   *Rationale",
+      "max constraints: extremely large inputs",
+      "degenerate: empty or single-element",
+      "adversarial: repeated values or cycles"
+    ],
+    "diagnostics": {
+      "failure_modes": "Certainly! Here are three high-risk failure modes for the described coding task along with short rationales:\n\n1. **Incorrect Filtering of Results Before Aggregation**  \n   *Rationale:* If the API aggregates language and status totals before applying the filter and limit, the metadata counts will not reflect the actual displayed subset. This leads to inaccurate UI indicators and misleads users about component coverage.\n\n2. **Omission or Misnaming of Metadata Fields**  \n   *Rationale;max constraints: extremely large inputs;degenerate: empty or single-element",
+      "planning_tokens": "174",
+      "planning_time": "2.703016"
+    },
+    "target_files": [
+      "modules/Problems/services/ProblemsService.js"
+    ],
+    "candidate_files": [
+      "modules/Problems/services/ProblemsService.js",
+      "test/problems.components.meta.spec.js",
+      "modules/Problems/controllers/ProblemsController.js",
+      "data/problems.json",
+      "test/problems.list.spec.js",
+      "node_modules/js-beautify/README.md",
+      "node_modules/globals/globals.json",
+      "node_modules/jws/readme.md",
+      "node_modules/js-beautify/CHANGELOG.md",
+      "node_modules/is-windows/README.md",
+      "node_modules/lodash/lodash.js",
+      "node_modules/on-headers/index.js"
+    ],
+    "subtask_file_map": {
+      "enumerate failure modes": [
+        "modules/Problems/services/ProblemsService.js"
+      ],
+      "design tests": [
+        "test/problems.components.meta.spec.js"
+      ],
+      "only then implement": [
+        "modules/Problems/controllers/ProblemsController.js"
+      ],
+      "Generate minimal unit tests for critical behaviors": [
+        "data/problems.json"
+      ],
+      "Add adversarial/edge-case tests": [
+        "test/problems.list.spec.js"
+      ],
+      "Run tests and interpret failures": [
+        "node_modules/js-beautify/README.md"
+      ],
+      "Repair implementation and re-run tests": [
+        "node_modules/globals/globals.json"
+      ]
+    }
+  },
+  "rounds": [
+    {
+      "round": 0,
+      "phase": "initial",
+      "subtask": "plan",
+      "localized": false,
+      "pass_rate": 0.0,
+      "status": "tests_failed",
+      "duration": 1.7424564170651138,
+      "failing_tests": [
+        "tests_0"
+      ],
+      "error_types": [
+        "fail::"
+      ],
+      "file_count": 1,
+      "multi_file_attempt": false,
+      "files_touched": [
+        "modules/Problems/services/ProblemsService.js"
+      ],
+      "inspected_files": [
+        "modules/Problems/services/ProblemsService.js",
+        "modules/Problems/controllers/ProblemsController.js",
+        "test/problems.components.meta.spec.js",
+        "data/problems.json"
+      ],
+      "proposed_files": [
+        "modules/Problems/services/ProblemsService.js"
+      ],
+      "edit_metadata": {
+        "edit_mode": "edit_batch",
+        "localized_requested": true,
+        "fallback_requested": false,
+        "raw_metadata_keys": [
+          "localized"
+        ],
+        "applied_file_count": 1,
+        "proposed_file_count": 1,
+        "multi_file_applied": false,
+        "subtask_focus": "global",
+        "contract_coverage": 0.3333333333333333,
+        "contract_satisfied": [
+          "component_limit_respected"
+        ],
+        "contract_unsatisfied": [
+          "component_metadata_totals",
+          "deterministic_component_languages"
+        ],
+        "contract_failure_categories": {
+          "aggregation": 1,
+          "sorting": 1
+        },
+        "contract_unsatisfied_details": [
+          "component_metadata_totals: When includeComponents=true, metadata.componentLanguageTotals and componentStatusTotals must summarize only the filtered and limited results.",
+          "deterministic_component_languages: Per-problem componentLanguages arrays must be deduplicated and sorted case-insensitively."
+        ],
+        "contract_fail_cases": []
+      }
+    },
+    {
+      "round": 1,
+      "phase": "repair",
+      "subtask": "enumerate failure modes",
+      "localized": true,
+      "pass_rate": 0.0,
+      "status": "tests_failed",
+      "duration": 1.295402624993585,
+      "failing_tests": [
+        "tests_0"
+      ],
+      "error_types": [
+        "fail::"
+      ],
+      "file_count": 1,
+      "multi_file_attempt": false,
+      "files_touched": [
+        "modules/Problems/services/ProblemsService.js"
+      ],
+      "inspected_files": [
+        "modules/Problems/services/ProblemsService.js",
+        "modules/Problems/controllers/ProblemsController.js",
+        "test/problems.components.meta.spec.js",
+        "data/problems.json"
+      ],
+      "proposed_files": [
+        "modules/Problems/services/ProblemsService.js"
+      ],
+      "edit_metadata": {
+        "edit_mode": "edit_batch",
+        "localized_requested": true,
+        "fallback_requested": false,
+        "raw_metadata_keys": [
+          "localized"
+        ],
+        "applied_file_count": 1,
+        "proposed_file_count": 1,
+        "multi_file_applied": false,
+        "subtask_focus": "enumerate failure modes",
+        "contract_coverage": 0.6666666666666666,
+        "contract_satisfied": [
+          "component_limit_respected",
+          "deterministic_component_languages"
+        ],
+        "contract_unsatisfied": [
+          "component_metadata_totals"
+        ],
+        "contract_failure_categories": {
+          "aggregation": 1
+        },
+        "contract_unsatisfied_details": [
+          "component_metadata_totals: When includeComponents=true, metadata.componentLanguageTotals and componentStatusTotals must summarize only the filtered and limited results."
+        ],
+        "contract_fail_cases": []
+      }
+    },
+    {
+      "round": 2,
+      "phase": "repair",
+      "subtask": "design tests",
+      "localized": true,
+      "pass_rate": 0.0,
+      "status": "tests_failed",
+      "duration": 1.4429172499803826,
+      "failing_tests": [
+        "tests_0"
+      ],
+      "error_types": [
+        "fail::"
+      ],
+      "file_count": 1,
+      "multi_file_attempt": false,
+      "files_touched": [
+        "modules/Problems/services/ProblemsService.js"
+      ],
+      "inspected_files": [
+        "modules/Problems/services/ProblemsService.js",
+        "modules/Problems/controllers/ProblemsController.js",
+        "test/problems.components.meta.spec.js",
+        "data/problems.json"
+      ],
+      "proposed_files": [
+        "modules/Problems/services/ProblemsService.js"
+      ],
+      "edit_metadata": {
+        "edit_mode": "edit_batch",
+        "localized_requested": true,
+        "fallback_requested": false,
+        "raw_metadata_keys": [
+          "localized"
+        ],
+        "applied_file_count": 1,
+        "proposed_file_count": 1,
+        "multi_file_applied": false,
+        "subtask_focus": "design tests",
+        "contract_coverage": 0.6666666666666666,
+        "contract_satisfied": [
+          "component_limit_respected",
+          "deterministic_component_languages"
+        ],
+        "contract_unsatisfied": [
+          "component_metadata_totals"
+        ],
+        "contract_failure_categories": {
+          "aggregation": 1
+        },
+        "contract_unsatisfied_details": [
+          "component_metadata_totals: When includeComponents=true, metadata.componentLanguageTotals and componentStatusTotals must summarize only the filtered and limited results."
+        ],
+        "contract_fail_cases": []
+      }
+    }
+  ]
+}

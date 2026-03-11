@@ -3,9 +3,10 @@ from __future__ import annotations
 
 from typing import Dict, List
 
+from src.decomposition.agentic import execute_plan_with_repair
 from src.decomposition.interfaces import DecompositionContext, DecompositionPlan, StrategyResult, TaskDecompositionStrategy
-from src.decomposition.strategies._utils import BudgetTracker, build_implementation_contract, finalize_result, run_tests
-from src.decomposition.self_verify import request_repair_patch, summarize_failures
+from src.decomposition.strategies._utils import BudgetTracker
+from src.decomposition.agentic.semantic import get_semantic_config
 from src.providers import llm
 
 
@@ -43,39 +44,27 @@ class FailureModeFirstStrategy(TaskDecompositionStrategy):
         return plan
 
     def solve(self, ctx: DecompositionContext, plan: DecompositionPlan) -> StrategyResult:
-        tracker = BudgetTracker(f"{self.name}:solve")
-        contract = build_implementation_contract(ctx)
-        tracker.consume(
-            llm.call(
-                f"{contract}\nGenerate targeted tests for the enumerated failure modes.",
-                model="failure-tests",
-                max_tokens=64,
-                caller=self.name,
-            ),
-            fallback="tests deferred",
-        )
-        base_code = ctx.metadata.get("reference_solution", "def solve(*args):\n    return None")
-        tests_run = run_tests(base_code, ctx)
-        iterations = 1
-        repair_feedback = ""
-        if any(tr["status"] == "fail" for tr in tests_run):
-            summary = summarize_failures(tests_run)
-            repair_feedback = "; ".join(summary.assertion_msgs)
-            patched_code, repair_meta = request_repair_patch(self.name, ctx, plan, summary, base_code)
-            base_code = patched_code
-            tests_run = run_tests(base_code, ctx)
-            iterations += 1
-        planning_tokens = float(plan.diagnostics.get("planning_tokens", 0) or 0)
-        planning_time = float(plan.diagnostics.get("planning_time", 0) or 0.0)
+        config = get_semantic_config(self.name)
         metrics: Dict[str, float | str] = {
-            "iterations": iterations,
-            "tokens_used": planning_tokens + tracker.tokens,
-            "planning_time": planning_time + tracker.time_spent,
-            "fixed_failure_modes": sum(1 for tr in tests_run if tr["status"] == "pass"),
+            "failure_mode_count": float(len(plan.tests)),
+            "semantic_variant": config.name,
         }
-        if repair_feedback:
-            metrics["repair_feedback"] = repair_feedback
-            metrics["repair_attempted"] = 1.0
-            if repair_meta:
-                metrics["repair_tokens"] = float(repair_meta.get("llm_tokens", "0") or 0)
-        return finalize_result(ctx, plan, base_code, tests_run, metrics)
+        return execute_plan_with_repair(
+            ctx,
+            plan,
+            strategy_name=self.name,
+            extra_metrics=metrics,
+            semantic_config=config,
+        )
+
+
+class FailureModeFirstBaselineStrategy(FailureModeFirstStrategy):
+    name = "failure_mode_first_baseline"
+
+
+class FailureModeFirstChecklistStrategy(FailureModeFirstStrategy):
+    name = "failure_mode_first_checklist"
+
+
+class FailureModeFirstSemanticStrategy(FailureModeFirstStrategy):
+    name = "failure_mode_first_semantic"

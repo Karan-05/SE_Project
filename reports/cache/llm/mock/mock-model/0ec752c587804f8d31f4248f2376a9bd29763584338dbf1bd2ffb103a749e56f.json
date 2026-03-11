@@ -1,0 +1,1 @@
+{"content": "[MOCK] 9d213ab96f440b38 :: You are repairing code produced by strategy 'simulation_trace'. Problem statement: Return the sum of all integers.  Memo", "tokens": 175, "elapsed": 4.832982085645199e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "simulation_trace:repair"}}

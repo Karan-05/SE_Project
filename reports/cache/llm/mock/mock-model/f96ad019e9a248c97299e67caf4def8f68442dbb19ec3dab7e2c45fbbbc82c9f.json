@@ -1,0 +1,1 @@
+{"content": "[MOCK] 3f080575b05e97fd :: You are repairing code produced by strategy 'contract_first'. Problem statement: Return the nth Fibonacci number. Implem", "tokens": 169, "elapsed": 4.875008016824722e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "contract_first:repair"}}

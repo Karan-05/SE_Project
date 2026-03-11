@@ -1,0 +1,28 @@
+BEGIN_JSON
+{
+  "task_type": "architecture_doc",
+  "id": "61a28e31-f4fa-4302-b565-a104fd833dd0",
+  "title": "TopCoder Lookups API- Fix Review Issues",
+  "summary": "This document outlines the architecture and design considerations to address code review issues in the Lookups API v6 service. The fixes include standardizing response formats, removing sensitive fields from responses, correcting API base paths, refining Swagger security configurations, enforcing unique code constraints in the database and DTOs, and resolving ESLint configuration errors. The goal is to improve API consistency, security, and maintainability while aligning with existing v5 API standards.",
+  "assumptions": [
+    "Access to the GitHub repository https://github.com/topcoder-platform/lookups-api-v6 is available for implementation and testing.",
+    "The v5 API response format at https://api.topcoder.com/v5/lookups/countries is the reference standard for response shaping.",
+    "The current Prisma schema and NestJS controllers are modifiable to implement the requested fixes.",
+    "Swagger/OpenAPI documentation is generated using decorators or configuration in the NestJS project.",
+    "ESLint configuration uses the 'globals' package which is currently misconfigured or missing.",
+    "No additional breaking changes to the API contract beyond those specified are required."
+  ],
+  "plan": [
+    "Analyze current response handling in all GET endpoints and implement a global or per-controller response wrapper to enforce the { fromDB: true, result } format.",
+    "Create or update Data Transfer Objects (DTOs) or response transformers to exclude createdAt, updatedAt, and isDeleted fields from all responses, referencing the v5 API for field selection.",
+    "Update NestJS routing modules to set the base path to /v6/lookups for all endpoints and verify route prefixes.",
+    "Adjust Swagger/OpenAPI decorators or configuration to correctly map security schemes per endpoint, marking public endpoints as unsecured and protected endpoints as secured.",
+    "Modify the Prisma schema to add unique constraints on the 'code' field for countries and any other relevant entities; run migrations accordingly.",
+    "Add validation logic in DTOs or service layers to enforce uniqueness of codes before database insertion or updates, with proper error handling for duplicates.",
+    "Fix the ESLint configuration by correcting the import statement for the 'globals' package in eslint.config.mjs, ensure the package is installed, and validate linting passes without errors.",
+    "Update Swagger documentation to reflect the correct API version and security mappings.",
+    "Test all changes locally including API responses, database migrations, Swagger UI behavior, and linting.",
+    "Prepare a git patch against the latest develop branch with all code changes and updated documentation if necessary."
+  ],
+  "artifacts": {
+    "design_doc_md": "## Problem Summary\nThe Lookups API v6 service currently has multiple issues identified during code review, including inconsistent response formats, exposure of sensitive fields, incorrect API base paths, misconfigured Swagger security, missing uniqueness constraints on codes, and ESLint configuration errors. These issues reduce API usability, security, and maintainability.\n\n## Proposed Approach\n- Implement a consistent response wrapper { fromDB: true, result } across all endpoints.\n- Use DTOs or response transformers to exclude sensitive fields (createdAt, updatedAt, isDeleted).\n- Correct the API base path to /v6/lookups in all routing modules.\n- Adjust Swagger/OpenAPI security decorators to accurately reflect endpoint security requirements.\n- Add unique constraints on the 'code' field in the Prisma schema and enforce uniqueness in DTO validation.\n- Fix ESLint configuration by properly importing the 'globals' package and ensuring linting passes.\n\n## Benefits\n- Improved API consistency and client experience.\n- Enhanced security by removing sensitive fields and correctly configuring Swagger security.\n- Prevention of duplicate codes in the database

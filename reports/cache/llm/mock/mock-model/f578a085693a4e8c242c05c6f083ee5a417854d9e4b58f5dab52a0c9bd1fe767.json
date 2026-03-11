@@ -1,0 +1,1 @@
+{"content": "[MOCK] 9f5c66c04ffcf833 :: You are executing decomposition strategy 'role_decomposed'. Problem statement: Return the nth Fibonacci number.  Impleme", "tokens": 109, "elapsed": 3.7919962778687477e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "plan-runner", "caller": "role_decomposed:initial"}}

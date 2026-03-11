@@ -1,0 +1,1 @@
+{"content": "[MOCK] b49cd2e7b8720e3e :: You are executing decomposition strategy 'role_decomposed'. Problem statement: Return degree counts for each vertex.  Im", "tokens": 120, "elapsed": 3.7500285543501377e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "plan-runner", "caller": "role_decomposed:initial"}}

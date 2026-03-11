@@ -1,0 +1,37 @@
+BEGIN_JSON
+{
+  "task_type": "data_etl",
+  "id": "329f27bd-9176-4b7b-8d2a-e1996c60db09",
+  "title": "Topcoder Member API - Update Code with Postgres Schema Part 2",
+  "summary": "Design and implement an ETL pipeline to migrate and sync member data from the existing Topcoder Member API JSON exports into a PostgreSQL database using the Prisma ORM schema. The pipeline will remove dependencies on Informix, DynamoDB, and ElasticSearch, ensuring data consistency and completeness for the SearchController and StatisticsController functionalities. The deliverable includes schema documentation, data loading scripts, validation queries, and a comprehensive acceptance checklist.",
+  "assumptions": [
+    "Prisma schema and updated Swagger API documentation will be provided separately in the forum.",
+    "Access to the Topcoder Member API JSON data dumps from https://api.topcoder-dev.com/v5/members is available for test data extraction.",
+    "The existing member API business logic remains unchanged; only data source and persistence layers are updated.",
+    "PostgreSQL version 16.3 is the target database environment.",
+    "NodeJS backend with Prisma ORM is the technology stack for data access.",
+    "No direct access to the original Informix, DynamoDB, or ElasticSearch data stores is required since JSON data exports are used.",
+    "UpdatedAt and updatedBy fields are optional in the schema and data.",
+    "The scope is limited to SearchController and StatisticsController components only.",
+    "Postman collections will be updated outside the ETL scope but should be considered for completeness.",
+    "Linting and code style fixes are outside the ETL pipeline but noted for final integration."
+  ],
+  "plan": [
+    "1. Review and analyze the provided Prisma schema and updated Swagger API documentation to understand data models and relationships.",
+    "2. Download and inspect the JSON data dumps from the live member API endpoint for completeness and structure.",
+    "3. Design a PostgreSQL schema aligned exactly with the Prisma schema, including optional fields updatedAt and updatedBy.",
+    "4. Develop SQL scripts or Prisma migration scripts to create and initialize the PostgreSQL database schema.",
+    "5. Implement a robust ETL pipeline in Python or NodeJS that:",
+    "   a. Reads the JSON data dumps.",
+    "   b. Transforms data to match the Prisma schema constraints and types.",
+    "   c. Loads data into the PostgreSQL database using Prisma ORM or direct SQL inserts.",
+    "6. Add logging and error handling in the ETL pipeline to track data load progress and failures.",
+    "7. Create SQL validation queries to verify data completeness, referential integrity, and conformity to business rules.",
+    "8. Develop data quality checks such as row counts, nullability checks on critical columns, and consistency validations.",
+    "9. Prepare sample queries and example outputs to validate that the data returned matches the existing deployed API responses.",
+    "10. Document the ETL pipeline usage, configuration, and verification steps in a README.md.",
+    "11. Provide an acceptance checklist covering schema alignment, data completeness, validation queries, and test data adequacy.",
+    "12. Coordinate with the code update team to ensure the ETL pipeline supports the updated SearchController and StatisticsController functionalities."
+  ],
+  "artifacts": {
+    "pipeline_spec": "##

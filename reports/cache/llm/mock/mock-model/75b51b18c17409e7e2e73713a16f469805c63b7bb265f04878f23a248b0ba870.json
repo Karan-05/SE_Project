@@ -1,0 +1,1 @@
+{"content": "[MOCK] dcbf7c4d0e958f59 :: Review this contract for completeness and note any missing guarantees. Contract: {'inputs': '', 'outputs': '', 'constrai", "tokens": 29, "elapsed": 2.9589864425361156e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "contract-auditor", "caller": "contract_first"}}

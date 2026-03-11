@@ -1,0 +1,30 @@
+BEGIN_JSON
+{
+  "task_type": "architecture_doc",
+  "id": "c90790bd-d289-42b7-bd97-4bc65d7232f5",
+  "title": "Topcoder Community App - Remove the support modal",
+  "summary": "This document outlines the architectural approach to remove the support modal from the Topcoder Community App. The scope includes identifying all code and UI elements related to the support modal, safely removing them from the ReactJS codebase, and ensuring no regressions or broken user flows remain. Acceptance criteria include a clean build, no modal rendering or references, and passing existing UI and regression tests.",
+  "assumptions": [
+    "The support modal is a React component or set of components currently rendered in specific parts of the app.",
+    "Removal requires code changes primarily in ReactJS, CSS, and HTML files related to the modal.",
+    "The codebase is accessible and buildable locally as per provided instructions.",
+    "No backend API changes are required since the modal is a frontend UI element.",
+    "No replacement UI or alternative support mechanism is requested in the issue.",
+    "Testing will rely on existing automated tests and manual verification of UI flows.",
+    "The patch will be created against commit hash 7031e3f3 on the 'universal_nav' branch."
+  ],
+  "plan": [
+    "Review the GitHub issue #6776 and linked documentation to understand the exact scope and rationale for removing the support modal.",
+    "Clone the community-app repository and checkout the 'universal_nav' branch at commit 7031e3f3.",
+    "Search the codebase for all references to the support modal components, including import statements, usage in JSX, CSS styles, and related assets.",
+    "Identify any routes, state management, or event handlers tied to the support modal and plan their removal or refactoring.",
+    "Remove the support modal component files and all references to them throughout the app.",
+    "Clean up any CSS or styling rules that are exclusively used by the support modal.",
+    "Run the local build and verify that the app compiles without errors or warnings related to the removed modal.",
+    "Execute existing unit and integration tests to ensure no regressions occur.",
+    "Manually verify in the UI that the support modal no longer appears and that user flows previously involving it remain functional.",
+    "Create a git patch file with all changes against the specified commit and branch.",
+    "Document the changes and testing results in the submission."
+  ],
+  "artifacts": {
+    "design_doc_md": "## Problem Summary\nThe Topcoder Community App currently includes a support modal that provides users with support options. The requirement is to remove this modal entirely from the UI and codebase to simplify the user experience and reduce maintenance overhead.\n\n## Proposed Approach\nThe approach involves identifying all code and UI elements related to the support modal and removing them from the ReactJS codebase. This includes component files, CSS styles, imports, and references in JSX. The removal will be done carefully to avoid breaking other parts of the app. Testing will include automated test runs and manual UI verification.\n\n## File-Level Plan\n- Identify and delete support modal React component files.\n- Remove import statements and usage of the modal in other components.\n- Remove CSS/SCSS rules dedicated to the modal.\n- Refactor or remove any state

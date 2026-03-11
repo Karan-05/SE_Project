@@ -1,0 +1,1 @@
+{"content": "[MOCK] 1c16d3e0389a1e2b :: You are executing decomposition strategy 'direct_baseline'. Problem statement: Return the running prefix sums.  Implemen", "tokens": 101, "elapsed": 4.62500611320138e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "plan-runner", "caller": "direct_baseline:initial"}}

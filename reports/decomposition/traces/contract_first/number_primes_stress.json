@@ -1,0 +1,46 @@
+{
+  "task_id": "number_primes_stress",
+  "strategy": "contract_first",
+  "plan": {
+    "strategy": "contract_first",
+    "contract": {
+      "inputs": "",
+      "outputs": "",
+      "constraints": "",
+      "edge_cases": "[10]"
+    },
+    "patterns": [],
+    "subtasks": [
+      "Validate inputs vs contract",
+      "Implement core logic",
+      "Check edge cases",
+      "Generate minimal unit tests for critical behaviors",
+      "Add adversarial/edge-case tests",
+      "Run tests and interpret failures",
+      "Repair implementation and re-run tests"
+    ],
+    "tests": [
+      ""
+    ],
+    "diagnostics": {
+      "missing_fields": "inputs,outputs,constraints",
+      "contract_length": "4",
+      "audit_note": "The provided contract is:\n\n```json\n{\n  \"inputs\": \"\",\n  \"outputs\": \"\",\n  \"constraints\": \"\",\n  \"edge_cases\": \"[10]\"\n}\n```\n\n**Review for completeness:**\n\n1. **Inputs:**  \n   - Missing. The contract should specify the input parameter(s).  \n   - For the problem \"Count primes up to N,\" the input should be an integer `N`.\n\n2. **Outputs:**  \n   - Missing. The contract should specify",
+      "planning_tokens": "144",
+      "planning_time": "2.171626"
+    }
+  },
+  "rounds": [
+    {
+      "round": 0,
+      "phase": "initial",
+      "subtask": "plan",
+      "localized": false,
+      "pass_rate": 1.0,
+      "status": "passed",
+      "duration": 0.00020829198183491826,
+      "failing_tests": [],
+      "error_types": []
+    }
+  ]
+}

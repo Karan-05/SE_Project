@@ -1,0 +1,1 @@
+{"content": "[MOCK] e85404d0a321c586 :: You are repairing code produced by strategy 'failure_mode_first'. Problem statement: Count primes up to N. Implementatio", "tokens": 172, "elapsed": 4.875008016824722e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "failure_mode_first:repair"}}

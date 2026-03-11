@@ -1,0 +1,32 @@
+BEGIN_JSON
+{
+  "task_type": "architecture_doc",
+  "id": 30377258,
+  "title": "Topcoder Review API - Fix Identified Issues",
+  "summary": "This document outlines the architectural and design considerations to address multiple identified issues in the Topcoder Review API codebase. The fixes target typos, security vulnerabilities, data type inconsistencies, and logical errors to improve code quality, security, and maintainability. The solution must maintain backward compatibility, adhere to NestJS and Prisma best practices, and ensure no regressions in existing functionality.",
+  "assumptions": [
+    "Access to the GitHub repository https://github.com/topcoder-platform/tc-review-api is available for code changes and testing.",
+    "The latest commit on the feat/review-opportunities branch is the base for the patch.",
+    "Environment variables can be safely added or corrected without impacting existing deployments.",
+    "The existing Prisma schema and migration files can be updated to fix data type inconsistencies without breaking database integrity.",
+    "No additional API endpoints or major feature changes are required beyond the fixes specified.",
+    "Testing infrastructure exists to verify no regressions and validate fixes after patch application."
+  ],
+  "plan": [
+    "Correct the typo in .env.sample from M2M_AUTH_PROXY_SEREVR_URL to M2M_AUTH_PROXY_SERVER_URL.",
+    "Remove hardcoded sensitive tokens from mock/mock-api.js and replace them with environment variable references.",
+    "Update the data type of opportunityId in the Prisma migration file to VARCHAR(14) to match the referenced reviewOpportunity table.",
+    "Add a default value for the updatedAt column in the Prisma migration to ensure automatic timestamping on record creation.",
+    "Fix the 403 status code description in reviewHistory.controller.ts from 'Unauthorized' to 'Forbidden'.",
+    "Rename the duplicated 'limit' query parameter in reviewOpportunity.controller.ts to 'offset' to avoid conflicts.",
+    "Correct the sorting logic in reviewOpportunity.service.ts to properly handle ascending and descending orders.",
+    "Set the success property to false in FailResponse in common.dto.ts to reflect failure accurately.",
+    "Change the role property type in reviewApplication.dto.ts to use ReviewApplicationRole instead of string for type safety.",
+    "Add @IsPositive() validation to incrementalPayment and payment properties in reviewOpportunity.dto.ts to enforce positive values.",
+    "Fix the typo in m2m.config.ts environment variable name from M2M_AUTH_PROXY_SEREVR_URL to M2M_AUTH_PROXY_SERVER_URL.",
+    "Update code comments where necessary to reflect changes and clarify intent.",
+    "Run full regression tests to ensure no existing functionality is broken.",
+    "Prepare a git patch against the latest commit on feat/review-opportunities branch including all fixes."
+  ],
+  "artifacts": {
+    "design_doc_md": "## Problem Summary\n- Several issues identified in the Topcoder Review API codebase affect code quality, security, and data integrity.\n- Issues include environment variable typos, hardcoded sensitive data, inconsistent data types in database migrations, incorrect API documentation, and logical errors in code.\n- These issues risk security vulnerabilities, data inconsistencies, and potential runtime errors.\n\n## Proposed Approach\n- Correct environment variable typos to ensure configuration correctness.\n- Remove hardcoded sensitive tokens and use environment variables for secure management.\n- Align database column data types with referenced tables to maintain data integrity.\n- Fix API documentation annotations for accurate HTTP status descriptions.\n- Correct logical errors in sorting and response DTOs to reflect intended behavior.\n- Add validation decorators in DTOs to enforce data correctness.\n- Ensure all fixes are backward compatible and tested thoroughly.\n\n## File-Level Plan\n- .env.sample: Fix typo in environment variable name.\n- mock/mock-api.js: Remove hardcoded token; use env variable.\n- prisma/migrations/20250525042446_add

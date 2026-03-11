@@ -1,0 +1,7 @@
+scenario,success_rate,avg_reward,avg_prompt_tokens,avg_completion_tokens,avg_steps,avg_total_tokens
+no_action_masking,0.0,-15.344695660445286,5590.0,3955.0,7.9,9545.0
+no_budget_penalty,0.0,-13.480450604787455,6290.0,3955.0,7.9,10245.0
+no_deep_decomposition,0.0,-11.43478256780395,4700.0,3230.0,5.7,7930.0
+no_retrieval_action,0.1,-10.825220571524294,4760.0,3380.0,6.0,8140.0
+no_uncertainty_features,0.0,-11.85760061282698,4670.0,3105.0,5.9,7775.0
+no_verifier_action,0.0,-11.744471619467799,2780.0,1680.0,3.8,4460.0

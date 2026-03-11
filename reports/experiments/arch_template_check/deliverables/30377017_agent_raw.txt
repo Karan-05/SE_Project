@@ -1,0 +1,28 @@
+BEGIN_JSON
+{
+  "task_type": "data_etl",
+  "id": 30377017,
+  "title": "[72hr] TopCoder Member API: Prisma Schema Update",
+  "summary": "This task involves designing an ETL blueprint to update the Member API's database schema using Prisma ORM with PostgreSQL as the sole backend. The focus is on transforming multiple JSON fields from Informix, Dynamo, and ElasticSearch into structured Prisma schema models and tables, especially decomposing member traits into sub-tables. The blueprint will include pipeline specifications, validation SQL snippets, Python pseudo-code for orchestration, data quality checks, and sample outputs to ensure completeness and correctness of the migration.",
+  "assumptions": [
+    "Source data resides in Informix, DynamoDB, and ElasticSearch with existing JSON fields as described.",
+    "Access to source systems is available for extraction or snapshots can be provided.",
+    "The Prisma schema will replace all previous DAL/gRPC dependencies with a single Postgres backend.",
+    "The detailed field mappings for some JSON fields (e.g., maxRating, distribution) are inferred from provided links and images but exact field names/types may require confirmation.",
+    "The ETL pipeline will be orchestrated externally (e.g., Airflow or custom NodeJS scripts), but Python pseudo-code is acceptable for demonstration.",
+    "Swagger/OpenAPI updates and Prisma schema file generation are out of scope for this ETL blueprint but must be considered in assumptions and future steps.",
+    "Validation queries assume PostgreSQL dialect and Prisma-generated schema conventions.",
+    "Acceptance checklist is required but will be included as part of the pipeline_spec narrative."
+  ],
+  "plan": [
+    "Analyze and define the Prisma schema structure for all JSON fields, focusing on decomposing memberTrait into sub-tables per trait category.",
+    "Design the ETL pipeline steps: data extraction from Informix, Dynamo, ElasticSearch; transformation to Prisma schema format; loading into PostgreSQL.",
+    "Develop SQL snippets to validate data integrity post-load, including checks on JSON fields and relational trait tables.",
+    "Write Python pseudo-code snippets illustrating extraction, transformation, loading, and error handling with logging and checkpoints.",
+    "Define data quality checks with thresholds and remediation actions for critical fields and relational integrity.",
+    "Prepare sample outputs illustrating expected transformed data in PostgreSQL tables.",
+    "Create an acceptance checklist covering completeness, data integrity, performance, and rollback readiness.",
+    "Document all assumptions, risks, and validation strategies in a comprehensive ETL blueprint markdown."
+  ],
+  "artifacts": {
+    "pipeline_spec": "## ETL Pipeline Specification for Member API Prisma Schema Update\n\n### Sources\n- Informix: legacy member data with JSON fields (maxRating, addresses, aggregatedSkills, enteredSkills).\n- DynamoDB: memberTrait data with JSON blobs for various traits.\n- ElasticSearch: distributionStats, memberHistoryStats, memberStats with JSON fields.\n\n### Cadence\n- Initial full migration followed by incremental updates daily.\n\n### Orchestration\n- Orchestrate with Airflow or NodeJS scheduler.\n- Steps: extract -> transform -> load -> validate -> notify.\n\n### SLAs\n- Initial full migration: complete within 24 hours.\n- Incremental updates: complete within 1 hour daily.\n\n### Recovery Plan\n- On failure, rollback partial loads using transaction or staging tables.\n- Alert

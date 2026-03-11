@@ -1,0 +1,1 @@
+{"content": "[MOCK] 04a3d68186eb3cd0 :: You are executing decomposition strategy 'multi_view'. Problem statement: Return the running prefix sums.  Implementatio", "tokens": 128, "elapsed": 4.041008651256561e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "plan-runner", "caller": "multi_view:initial"}}

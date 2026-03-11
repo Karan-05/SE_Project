@@ -1,0 +1,1 @@
+{"content": "[MOCK] 91feefec0c75942d :: You are repairing code produced by strategy 'role_decomposed'. Problem statement: Return the sum of all integers.  Memor", "tokens": 168, "elapsed": 4.708010237663984e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "role_decomposed:repair"}}

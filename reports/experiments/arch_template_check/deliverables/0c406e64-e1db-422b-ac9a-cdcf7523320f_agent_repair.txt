@@ -1,0 +1,29 @@
+BEGIN_JSON
+{
+  "task_type": "architecture_doc",
+  "id": "0c406e64-e1db-422b-ac9a-cdcf7523320f",
+  "title": "Topcoder Admin App - Consolidate Skills Manager",
+  "summary": "Consolidate the existing Skills Manager app into the system-admin app under a new 'Platform' tab. This involves UI integration to add a dropdown tab with a link to load the Skills Manager, removal of role-based access restrictions to allow all administrators access, and cleanup of production and development route configurations related to manage.topcoder.com. The solution must maintain current functionality and pass existing tests without code style changes or refactoring.",
+  "assumptions": [
+    "Access to the platform-ui repo and the feat/system-admin branch at or beyond commit c367efecfc89a4d66f5113a91899e194ccb1bd9c is available.",
+    "Admin credentials for testing will be provided via the forum as stated.",
+    "The existing Skills Manager app is a React component or module that can be embedded or routed within the system-admin app.",
+    "No new unit tests are required, but existing tests must remain passing.",
+    "No major refactoring or code style changes are allowed; only minimal integration changes.",
+    "The 'Platform' tab does not currently exist or if it does, it can be safely extended with a 'Skills' link.",
+    "Route configuration cleanup refers to removing or adjusting routes in the dev/prod environment configs related to manage.topcoder.com skills manager."
+  ],
+  "plan": [
+    "Review the current system-admin app codebase on the feat/system-admin branch to understand tab navigation and dropdown implementation, especially the 'Permission Management' tab.",
+    "Identify or create a 'Platform' tab in the system-admin app navigation as a dropdown menu if not already present.",
+    "Add a 'Skills' link under the 'Platform' dropdown that, when clicked, loads the existing Skills Manager app component or route.",
+    "Modify the Skills Manager app integration to remove any rolesRequired or role-based access control to allow all system administrators access.",
+    "Update routing and configuration files in both production and development environments to remove or clean up references to manage.topcoder.com/skills, ensuring no conflicts or duplicate routes.",
+    "Test the integrated Skills Manager tab manually using admin credentials to verify access and functionality.",
+    "Run existing automated tests to confirm no regressions.",
+    "Document the changes in a comprehensive README covering deployment steps and any configuration changes.",
+    "Create a validation markdown file detailing the manual and automated testing performed to verify the new functionality.",
+    "Prepare a patch file against the specified branch and commit hash containing all changes."
+  ],
+  "artifacts": {
+    "design_doc_md": "## Problem Summary\n- Current Skills Manager app is standalone under manage.topcoder.com/skills.\n- Need to consolidate it into system-admin app for unified admin resource management.\n- Remove rolesRequired so all admins can access Skills Manager.\n- Clean up route configs in prod & dev for manage.topcoder.com.\n\n## Proposed Approach\n- Add a new 'Platform' dropdown tab in system-admin app navigation.\n- Under 'Platform', add a 'Skills' link to load Skills Manager app.\n- Remove role-based restrictions from Skills Manager for universal admin access.\n- Clean route configs to avoid duplication and conflicts.\n\n## File-Level Plan\n- Modify navigation components to add 'Platform' tab and 'Skills' link.\n- Adjust Skills Manager app integration code to remove rolesRequired.\n- Update routing/config files in prod and dev environments.\n- Ensure no code style changes or refactoring.\n\n## API / Interface Changes\n- No backend API changes expected.\n- Frontend routing changes to embed Skills Manager under system-admin app.\n- Removal of rolesRequired affects frontend

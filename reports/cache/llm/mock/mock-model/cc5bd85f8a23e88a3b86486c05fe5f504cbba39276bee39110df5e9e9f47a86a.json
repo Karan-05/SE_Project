@@ -1,0 +1,1 @@
+{"content": "[MOCK] 482729c834aa6961 :: You are repairing code produced by strategy 'semantic_diff'. Problem statement: Return the nth Fibonacci number. Impleme", "tokens": 167, "elapsed": 4.958012141287327e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "semantic_diff:repair"}}

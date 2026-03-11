@@ -1,0 +1,1 @@
+{"content": "[MOCK] 5551b89085162b27 :: You are repairing code produced by strategy 'failure_mode_first'. Problem statement: Return the reversed string.  Memory", "tokens": 186, "elapsed": 5.124951712787151e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "failure_mode_first:repair"}}

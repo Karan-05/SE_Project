@@ -1,0 +1,1 @@
+{"content": "[MOCK] d773127b322074cb :: You are repairing code produced by strategy 'simulation_trace'. Problem statement: Return the minimum coins needed to re", "tokens": 152, "elapsed": 4.291010554879904e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "simulation_trace:repair"}}

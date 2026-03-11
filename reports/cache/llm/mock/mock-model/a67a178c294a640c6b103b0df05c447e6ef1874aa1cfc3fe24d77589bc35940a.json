@@ -1,0 +1,1 @@
+{"content": "[MOCK] 1dcddd4e3a620548 :: You are repairing code produced by strategy 'semantic_diff'. Problem statement: Return the number of undirected edges.  ", "tokens": 176, "elapsed": 4.958012141287327e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "semantic_diff:repair"}}

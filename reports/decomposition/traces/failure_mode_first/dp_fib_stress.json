@@ -1,0 +1,42 @@
+{
+  "task_id": "dp_fib_stress",
+  "strategy": "failure_mode_first",
+  "plan": {
+    "strategy": "failure_mode_first",
+    "contract": {},
+    "patterns": [],
+    "subtasks": [
+      "enumerate failure modes",
+      "design tests",
+      "only then implement",
+      "Generate minimal unit tests for critical behaviors",
+      "Add adversarial/edge-case tests",
+      "Run tests and interpret failures",
+      "Repair implementation and re-run tests"
+    ],
+    "tests": [
+      "Here are three high-risk failure modes for a task to return the nth Fibonacci number, along with short rationales:\n\n1. **Integer Overflow**  \n   *Rationale:* Fibonacci numbers grow exponentially, so for relatively small n (e.g., > 40 for 32-bit integers), the result can exceed the maximum value representable by standard integer types, causing incorrect results or wrap-around.\n\n2. **Incorrect Base Case Handling**  \n   *Rationale:* The Fibonacci sequence",
+      "max constraints: extremely large inputs",
+      "degenerate: empty or single-element",
+      "adversarial: repeated values or cycles"
+    ],
+    "diagnostics": {
+      "failure_modes": "Here are three high-risk failure modes for a task to return the nth Fibonacci number, along with short rationales:\n\n1. **Integer Overflow**  \n   *Rationale:* Fibonacci numbers grow exponentially, so for relatively small n (e.g., > 40 for 32-bit integers), the result can exceed the maximum value representable by standard integer types, causing incorrect results or wrap-around.\n\n2. **Incorrect Base Case Handling**  \n   *Rationale:* The Fibonacci sequence;max constraints: extremely large inputs;degenerate: empty or single-element",
+      "planning_tokens": "125",
+      "planning_time": "2.052063"
+    }
+  },
+  "rounds": [
+    {
+      "round": 0,
+      "phase": "initial",
+      "subtask": "plan",
+      "localized": false,
+      "pass_rate": 1.0,
+      "status": "passed",
+      "duration": 0.00019291701028123498,
+      "failing_tests": [],
+      "error_types": []
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "total_steps": 938.0,
+  "override_positive": 175.0,
+  "override_negative": 763.0,
+  "failure_fraction": 0.020833333333333332,
+  "expensive_fraction": 0.0
+}

@@ -1,0 +1,27 @@
+{
+  "task_id": "graph_degree_hard",
+  "tests": [
+    {
+      "name": "sample_0",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'0': 1, '1': 2, '2': 1}",
+      "output": "{0: 1, 1: 2, 2: 1}",
+      "error": "",
+      "input": "[[[0, 1], [1, 2]]]",
+      "kwargs": "{}",
+      "duration": 1.833302667364478e-05
+    },
+    {
+      "name": "sample_1",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'1': 2}",
+      "output": "{1: 2}",
+      "error": "",
+      "input": "[[[1, 1]]]",
+      "kwargs": "{}",
+      "duration": 4.58303838968277e-06
+    }
+  ]
+}

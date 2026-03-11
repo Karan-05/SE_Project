@@ -1,0 +1,1 @@
+{"content": "[MOCK] f00cb3408bf1349e :: You are repairing code produced by strategy 'role_decomposed'. Problem statement: Return the nth Fibonacci number.  Memo", "tokens": 166, "elapsed": 5.00003807246685e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "role_decomposed:repair"}}

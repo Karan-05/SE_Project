@@ -1,0 +1,44 @@
+{
+  "task_id": "60ae100e-81a4-4667-990a-83d23bd6e4df",
+  "run_id": "arch_template_check",
+  "raw_path": "/Users/karanallagh/Desktop/DataCollector/reports/experiments/arch_template_check/deliverables/60ae100e-81a4-4667-990a-83d23bd6e4df_agent_raw.txt",
+  "raw_length": 6444,
+  "sentinel_found": true,
+  "attempts": [
+    {
+      "mode": "sentinel",
+      "success": false,
+      "error": "rubric_self_check.actionability must be numeric."
+    },
+    {
+      "mode": "balanced",
+      "success": false,
+      "error": "rubric_self_check.actionability must be numeric."
+    },
+    {
+      "mode": "repair",
+      "success": false,
+      "error": "Unable to locate valid JSON block (Unterminated string starting at: line 23 column 22 (char 1511))"
+    }
+  ],
+  "errors": [
+    {
+      "stage": "sentinel",
+      "message": "rubric_self_check.actionability must be numeric."
+    },
+    {
+      "stage": "balanced",
+      "message": "rubric_self_check.actionability must be numeric."
+    },
+    {
+      "stage": "repair",
+      "message": "Unable to locate valid JSON block (Unterminated string starting at: line 23 column 22 (char 1511))"
+    }
+  ],
+  "repair_attempted": true,
+  "repair_used": false,
+  "max_repairs": 1,
+  "llm_provider": "openai",
+  "repair_path": "/Users/karanallagh/Desktop/DataCollector/reports/experiments/arch_template_check/deliverables/60ae100e-81a4-4667-990a-83d23bd6e4df_agent_repair.txt",
+  "status": "failed"
+}

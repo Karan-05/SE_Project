@@ -1,0 +1,44 @@
+{
+  "task_id": "string_reverse_ood",
+  "strategy": "semantic_diff",
+  "plan": {
+    "strategy": "semantic_diff",
+    "contract": {},
+    "patterns": [
+      "baseline"
+    ],
+    "subtasks": [
+      "load base solution",
+      "apply semantic deltas",
+      "re-test",
+      "Generate minimal unit tests for critical behaviors",
+      "Add adversarial/edge-case tests",
+      "Run tests and interpret failures",
+      "Repair implementation and re-run tests"
+    ],
+    "tests": [
+      "critical unit tests",
+      "edge-case probes"
+    ],
+    "diagnostics": {
+      "base_task": "baseline",
+      "num_deltas": "1",
+      "delta_note": "- Input: Same (a string)  \n- Output: Changed from original string to reversed string  \n- Operation: Added string reversal step  \n- Semantic effect: Output meaning is the original input read backward rather than forward",
+      "planning_tokens": "74",
+      "planning_time": "1.429790"
+    }
+  },
+  "rounds": [
+    {
+      "round": 0,
+      "phase": "initial",
+      "subtask": "plan",
+      "localized": false,
+      "pass_rate": 1.0,
+      "status": "passed",
+      "duration": 8.216704009100795e-05,
+      "failing_tests": [],
+      "error_types": []
+    }
+  ]
+}

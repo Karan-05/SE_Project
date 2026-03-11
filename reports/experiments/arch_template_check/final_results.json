@@ -1,0 +1,99 @@
+{
+  "run_id": "arch_template_check",
+  "total_rows": 100,
+  "total_unique_task_ids": 100,
+  "manifest_unique_task_ids": 100,
+  "llm_provider": "openai",
+  "attempted": 99,
+  "actionable_attempted_total": 99,
+  "attempted_success_total": 11,
+  "attempted_failed_total": 88,
+  "parse_failures_total": 0,
+  "non_actionable_total": 1,
+  "solved_pass_final": 8,
+  "algo_verified_attempted": 12,
+  "pass_at_final": 0.6666666666666666,
+  "pass_at_final_extracted_only": 0.6666666666666666,
+  "attempted_algo": 12,
+  "solved_algo": 8,
+  "attempted_non_coding": 87,
+  "completed_deliverables": 3,
+  "deliverable_success_rate": 0.034482758620689655,
+  "deliverable_artifacts": 7,
+  "task_type_breakdown": {
+    "architecture_doc": {
+      "attempted": 37,
+      "success": 3,
+      "failed": 34
+    },
+    "data_etl": {
+      "attempted": 34,
+      "success": 0,
+      "failed": 34
+    },
+    "api_backend": {
+      "attempted": 12,
+      "success": 0,
+      "failed": 12
+    },
+    "repo_patch": {
+      "attempted": 4,
+      "success": 0,
+      "failed": 4
+    },
+    "algo_coding": {
+      "attempted": 12,
+      "success": 8,
+      "failed": 4
+    }
+  },
+  "skipped_counts": {
+    "skipped_non_actionable": 1
+  },
+  "attempted_with_extracted_tests": 99,
+  "attempted_with_synthesized_tests": 0,
+  "success_rate_extracted": 0.08080808080808081,
+  "success_rate_synthesized": 0.0,
+  "self_check_attempted": 0,
+  "self_check_pass_rate": 0.0,
+  "avg_attempts": 0.48484848484848486,
+  "median_attempts": 0.0,
+  "p90_attempts": 1.0,
+  "fallback_rate": 0.04040404040404041,
+  "stagnation_rate": 0.04040404040404041,
+  "retries_exhausted_count": 4,
+  "llm_calls_total": 260.0,
+  "llm_calls_avg_per_task": 2.6262626262626263,
+  "llm_calls_per_attempted": 2.6262626262626263,
+  "llm_available": true,
+  "runtime": {
+    "start_time": "2026-03-06T12:39:38.356111",
+    "end_time": "2026-03-06T13:27:50.102402",
+    "wall_time_seconds": 2891.746291,
+    "avg_wall_time_per_attempted": 29.209558494949494
+  },
+  "reconciliation": {
+    "discovered_rows": 100,
+    "unique_tasks": 100,
+    "duplicates": 0,
+    "filtered_out": 0,
+    "manifest_total": 100,
+    "dataset_files": 7
+  },
+  "progress_fraction": 1.0,
+  "evaluation_coverage": 0.99,
+  "pipeline_status": "COMPLETE",
+  "validity": "VALID",
+  "presentation_mode": true,
+  "sample_size": 100,
+  "sample_strategy": "random",
+  "sample_seed": 42,
+  "blocking_failures": [],
+  "non_blocking_warnings": [],
+  "sampling_artifacts": [],
+  "presentation_gate_required_algo_tasks": 5,
+  "presentation_gate_observed_algo_tasks": 12,
+  "presentation_gate_status": "PASS",
+  "blocking_status": "PASS",
+  "overall_run_color": "GREEN"
+}

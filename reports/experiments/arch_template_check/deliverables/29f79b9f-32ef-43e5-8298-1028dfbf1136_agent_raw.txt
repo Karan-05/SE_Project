@@ -1,0 +1,70 @@
+BEGIN_JSON
+{
+  "task_type": "architecture_doc",
+  "id": "29f79b9f-32ef-43e5-8298-1028dfbf1136",
+  "title": "Topcoder Identity Service Tests Improvement Part 1",
+  "summary": "This document outlines the architecture and design considerations for improving and rewriting unit and end-to-end tests for the Topcoder Identity Service's RoleController and UserController APIs and their related services. The goal is to achieve ≥90% coverage across overall, branch, and line metrics while maintaining existing functionality and integrating with the revised TypeScript/Postgres codebase using Prisma ORM.",
+  "assumptions": [
+    "Access to the revised identity service code repository (https://github.com/topcoder-platform/identity-api-v6/tree/develop) is available for detailed code inspection.",
+    "Data migration tools and test data for MySQL and Postgres will be provided via forum or other channels as referenced.",
+    "Existing test patterns from referenced challenge-api-v6 tests are applicable and can be adapted.",
+    "Redis cache, Kafka event bus, and other existing functionalities remain unchanged and are integrated as-is.",
+    "The testing environment setup, including database and environment variables, will follow a documented process to be captured in README.",
+    "Linting and code quality standards for TypeScript are defined and must be adhered to in test code."
+  ],
+  "plan": [
+    "Review current RoleController and UserController implementations and their related services (RoleService, AuthFlowService, TwoFactorAuthService, UserProfileService, UserService, ValidationService) in the revised TypeScript/Postgres codebase.",
+    "Analyze existing unit and e2e tests in the repository and referenced examples to identify coverage gaps and improvement opportunities.",
+    "Design and implement new or improved unit tests targeting database data (not mocks) to ensure ≥90% coverage metrics, placing tests under test/unit folder.",
+    "Design and implement comprehensive e2e tests for RoleController and UserController APIs ensuring ≥90% coverage, placing tests under test/e2e folder.",
+    "Integrate data migration tool usage for test data setup to support realistic database states during testing.",
+    "Log and document any bugs or inconsistencies found during test development for triage.",
+    "Rewrite or create a clear README.md detailing environment setup, database migration, local deployment, and verification steps including Postman collection usage.",
+    "Ensure all test code follows best practices, passes lint checks, and integrates with CI pipelines if applicable.",
+    "Define acceptance criteria and coverage thresholds clearly for test validation.",
+    "Prepare patch file for the latest develop branch with all test improvements and README updates."
+  ],
+  "artifacts": {
+    "design_doc_md": "## Problem Summary\n- The Identity Service has been migrated from Java/MySQL to TypeScript/Postgres with Prisma ORM, retaining existing features like Redis and Kafka.\n- Current tests for RoleController and UserController and their services need improvement for coverage and quality.\n- The objective is to ensure ≥90% overall, branch, and line coverage for unit and e2e tests.\n- Tests must target actual database data, not just mocks, and adhere to best practices and linting standards.\n\n## Proposed Approach\n- Conduct thorough code review of controllers and related services to understand logic and edge cases.\n- Leverage existing test examples from challenge-api-v6 as templates for new tests.\n- Use the provided data migration tool to seed realistic test data for unit and e2e tests.\n- Implement comprehensive e2e tests simulating real API usage scenarios.\n- Update or rewrite unit tests focusing on database interactions and service logic.\n- Document environment setup, migration, deployment, and testing procedures in README.\n\n## File-Level Plan\n- test/e2e/RoleController.api.test.ts: New or improved e2e tests for RoleController APIs.\n- test/e2e/UserController.api.test.ts: New or improved e2e tests for UserController APIs.\n- test/unit/RoleService.test.ts: Unit tests targeting RoleService logic with DB data.\n- test/unit/AuthFlowService.test.ts, TwoFactorAuthService.test.ts, UserProfileService.test.ts, UserService.test.ts, ValidationService.test.ts: Unit tests for respective services.\n- README.md: Setup instructions, environment variables, migration steps, deployment, and verification guide.\n\n## API / Interface Changes\n- No changes to existing API endpoints or interfaces; testing improvements only.\n- Tests will interact with existing RoleController and UserController APIs as currently defined.\n- Postman collections for verification will be documented and possibly enhanced.\n\n## Constraints & SLAs\n- Coverage thresholds: overall, branch, and line coverage ≥90% for unit and e2e tests.\n- Maintain existing service functionality and integrations (Redis, Kafka) without regressions.\n- Tests must run reliably against Postgres 16.3 using Prisma ORM.\n- All test code must pass lint checks and adhere to TypeScript best practices.\n- README must be clear and sufficient for local environment setup and verification.\n\n## Risks & Trade-offs\n- Risk of incomplete coverage if some edge cases are missed during test design.\n- Potential delays if test data migration tools or datasets are unavailable or incomplete.\n- Maintaining parity with legacy Java/MySQL behavior requires careful validation.\n- Trade-off between test runtime duration and coverage depth; balance needed.\n- Dependency on external services (Redis, Kafka) may complicate e2e test environment setup.\n\n## Edge Cases\n- Handling of invalid or malformed API requests in RoleController and UserController.\n- Concurrency scenarios affecting user roles and authentication flows.\n- Two-factor authentication edge cases and fallback behaviors.\n- Validation service handling of unusual or boundary input data.\n- Ensuring cache consistency with Redis during test runs.\n\n## Acceptance Checklist\n- [ ] Unit tests for RoleService, AuthFlowService, TwoFactorAuthService, UserProfileService, UserService, ValidationService implemented with ≥90% coverage.\n- [ ] E2E tests for RoleController and UserController APIs implemented with ≥90% coverage.\n- [ ] All tests run successfully against Postgres 16.3 with Prisma.\n- [ ] README.md updated with clear environment setup, migration, deployment, and verification instructions.\n- [ ] Test code passes lint checks and adheres to best practices.\n- [ ] Bugs found during testing logged and documented.\n- [ ] Patch file prepared for latest develop branch including all test and documentation updates.",
+    "mermaid_diagram": "graph TD\n  A[RoleController] --> B[RoleService]\n  C[UserController] --> D[UserService]\n  D --> E[UserProfileService]\n  D --> F[AuthFlowService]\n  F --> G[TwoFactorAuthService]\n  D --> H[ValidationService]\n  B -.-> RedisCache\n  D -.-> RedisCache\n  B -.-> KafkaEventBus\n  D -.-> KafkaEventBus\n  subgraph Database\n    I[Postgres via Prisma]\n  end\n  B --> I\n  D --> I",
+    "interfaces": [
+      {
+        "producer": "RoleController",
+        "consumer": "RoleService",
+        "protocol": "Internal API Call",
+        "payload": "Role-related request and response objects"
+      },
+      {
+        "producer": "UserController",
+        "consumer": "UserService",
+        "protocol": "Internal API Call",
+        "payload": "User-related request and response objects"
+      },
+      {
+        "producer": "UserService",
+        "consumer": "UserProfileService, AuthFlowService, ValidationService",
+        "protocol": "Internal Service Calls",
+        "payload": "User profile data, authentication flow requests, validation requests"
+      },
+      {
+        "producer": "AuthFlowService",
+        "consumer": "TwoFactorAuthService",
+        "protocol": "Internal Service Call",
+        "payload": "Two-factor authentication requests and responses"
+      },
+      {
+        "producer": "RoleService, UserService",
+        "consumer": "RedisCache, KafkaEventBus",
+        "protocol": "External Integration",
+        "payload": "Cache updates, event messages"
+      },
+      {
+        "producer": "RoleService, UserService",
+        "consumer": "Postgres via Prisma ORM",
+        "protocol": "Database Access",
+        "payload": "SQL queries and mutations"
+      }
+    ],
+    "tradeoffs": [
+      "Using real database data in unit tests improves test reliability but increases test setup complexity and runtime.",
+      "Maintaining existing Redis and Kafka

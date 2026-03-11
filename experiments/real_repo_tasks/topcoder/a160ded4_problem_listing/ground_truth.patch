@@ -1,0 +1,44 @@
+--- modules/Problems/services/ProblemsService.js
++++ modules/Problems/services/ProblemsService.js
+@@ -70,6 +70,11 @@
+   logger.debug('Listing SRM problems with query %j', query);
+   const problems = loadProblems();
+   const normalizedTags = normalizeTags(query.tags);
++  const includeComponents =
++    query.includeComponents === true ||
++    query.includeComponents === 'true' ||
++    query.includeComponents === 1 ||
++    query.includeComponents === '1';
+ 
+   // Difficulty breakdown over the full dataset (canonical casing from data).
+   const difficultyBreakdown = {};
+@@ -115,11 +120,6 @@
+       tags: problem.tags,
+       totalSubmissions: problem.totalSubmissions,
+     };
+-    const includeComponents =
+-      query.includeComponents === true ||
+-      query.includeComponents === 'true' ||
+-      query.includeComponents === 1 ||
+-      query.includeComponents === '1';
+     if (includeComponents) {
+       const langs = (problem.components || []).map((c) => c.language);
+       const deduped = [...new Set(langs)].sort((a, b) =>
+--- test/problems.list.spec.js
++++ test/problems.list.spec.js
+@@ -38,6 +38,15 @@
+         Easy: 3,
+         Medium: 1,
+         Hard: 1
++      },
++      componentLanguageTotals: {
++        cpp: 1,
++        java: 1,
++        python: 2,
++        ruby: 1
++      },
++      componentStatusTotals: {
++        ACTIVE: 5
+       }
+     });
+     expect(res.body.problems).to.be.an('array').with.lengthOf(2);

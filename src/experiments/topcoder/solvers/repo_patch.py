@@ -69,7 +69,7 @@ class RepoPatchSolver:
                 llm_calls_used,
             )
         plan_text, test_plan_text, risks_text = self._compose_plan(summary_text, artifact_bundle)
-        diff_text = str(artifact_bundle.get("patch_unified_diff") or "").strip()
+        diff_text = self._extract_diff_text(artifact_bundle)
         if not diff_text:
             diff_text = self._build_diff_stub(ctx, plan_text)
         patch_path = self._write_patch(ctx, diff_text or plan_text)
@@ -262,10 +262,31 @@ class RepoPatchSolver:
             return [value.strip()]
         return []
 
+    def _extract_diff_text(self, artifacts: Dict[str, object]) -> str:
+        for key in ("patch_diff_unified", "patch_unified_diff", "patch_diff", "diff_unified"):
+            value = artifacts.get(key)
+            if isinstance(value, str) and value.strip():
+                return value.strip()
+        return ""
+
     def _compose_plan(self, summary: str, artifacts: Dict[str, object]) -> Tuple[str, str, str]:
-        files = self._safe_list(artifacts.get("files_touched"))
-        tests = self._safe_list(artifacts.get("tests_to_run"))
-        risks = self._safe_list(artifacts.get("risk_notes"))
+        file_plan_entries = self._extract_entries(
+            artifacts,
+            primary_keys=("file_plan",),
+            fallback_keys=("files_touched", "files_impacted"),
+        )
+        files = self._derive_file_names(file_plan_entries) or file_plan_entries
+        tests = self._extract_entries(
+            artifacts,
+            primary_keys=("test_plan",),
+            fallback_keys=("tests_to_run", "validation_commands"),
+        )
+        risks = self._extract_entries(
+            artifacts,
+            primary_keys=("risks",),
+            fallback_keys=("risk_notes",),
+        )
+        plan_entries = file_plan_entries or files
         plan_lines = [
             "## Problem Summary",
             summary or "Pending summary based on router context.",
@@ -273,10 +294,7 @@ class RepoPatchSolver:
         ]
         plan_lines.extend(f"- {entry}" for entry in (files or ["Pending file map."]))
         plan_lines.append("## Plan")
-        if files:
-            plan_lines.extend(f"- Update {entry}" for entry in files)
-        else:
-            plan_lines.append("- Outline code changes once files are confirmed.")
+        plan_lines.extend(f"- {entry}" for entry in (plan_entries or ["Pending repository plan."]))
         plan_lines.append("## Risks")
         plan_lines.extend(f"- {note}" for note in (risks or ["Pending risk assessment."]))
         plan_lines.append("## Validation")
@@ -284,9 +302,57 @@ class RepoPatchSolver:
         plan_text = "\n".join(plan_lines)
         test_plan_lines = ["## Test Plan"]
         test_plan_lines.extend(f"- {cmd}" for cmd in (tests or ["Pending tests."]))
-        risks_lines = ["## Risks & Rollback"]
+        risks_lines = ["## Risks"]
         risks_lines.extend(f"- {note}" for note in (risks or ["Pending risk assessment."]))
         return plan_text, "\n".join(test_plan_lines), "\n".join(risks_lines)
+
+    def _extract_entries(
+        self,
+        artifacts: Dict[str, object],
+        *,
+        primary_keys: Tuple[str, ...],
+        fallback_keys: Tuple[str, ...] = (),
+    ) -> List[str]:
+        keys = primary_keys + fallback_keys
+        for key in keys:
+            if key not in artifacts:
+                continue
+            entries = self._normalize_entries(artifacts.get(key))
+            if entries:
+                return entries
+        return []
+
+    def _normalize_entries(self, value: object) -> List[str]:
+        if value is None:
+            return []
+        if isinstance(value, list):
+            entries = []
+            for item in value:
+                text = str(item).strip()
+                if text:
+                    entries.extend(self._normalize_entries(text))
+            return [entry for entry in entries if entry]
+        if isinstance(value, str):
+            parts = [segment.strip(" -*•") for segment in value.splitlines() if segment.strip()]
+            if parts:
+                return parts
+            text = value.strip()
+            return [text] if text else []
+        text = str(value).strip()
+        return [text] if text else []
+
+    def _derive_file_names(self, plan_entries: List[str]) -> List[str]:
+        files: List[str] = []
+        for entry in plan_entries:
+            candidate = entry
+            for separator in ("–", "-", "—", ":"):
+                if separator in entry:
+                    candidate = entry.split(separator, 1)[0].strip()
+                    break
+            candidate = candidate.strip()
+            if candidate and candidate not in files:
+                files.append(candidate)
+        return files
 
     def _non_actionable_result(
         self,

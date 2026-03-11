@@ -69,17 +69,20 @@ def generate_reports(
     per_problem_path = run_dir / "per_problem.csv"
     failures_path = run_dir / "failures.csv"
 
-    total = len(records)
-    unique_task_ids = {str(rec.get("task_id") or idx) for idx, rec in enumerate(records)}
+    deduped_records = _deduplicate_summary_records(records)
+    total = len(deduped_records)
+    raw_total = len(records)
+    unique_task_ids = {str(rec.get("task_id") or idx) for idx, rec in enumerate(deduped_records)}
     total_unique_tasks = len(unique_task_ids)
-    attempted_records = [rec for rec in records if not str(rec.get("status", "")).startswith("skipped")]
+    duplicates_removed = raw_total - total
+    attempted_records = [rec for rec in deduped_records if not str(rec.get("status", "")).startswith("skipped")]
     attempted = len(attempted_records)
     successes = [rec for rec in attempted_records if str(rec.get("status", "")).lower() in SUCCESS_STATUSES_LOWER]
     completed = len(successes)
     actionable_attempted_total = attempted
     attempted_success_total = completed
     attempted_failed_total = actionable_attempted_total - attempted_success_total
-    parse_failures_total = sum(1 for rec in records if str(rec.get("status", "")) == "skipped_parse_failure")
+    parse_failures_total = sum(1 for rec in deduped_records if str(rec.get("status", "")) == "skipped_parse_failure")
     success_rate = completed / total if total else 0.0
     success_attempts = [_to_float(rec.get("attempt_count")) for rec in successes]
     avg_attempts = mean(success_attempts) if success_attempts else 0.0
@@ -101,11 +104,15 @@ def generate_reports(
         rec for rec in successes if str(rec.get("tests_source", "")).lower() not in self_check_sources
     ]
     successes_synth = [rec for rec in successes if str(rec.get("tests_source", "")).lower() in self_check_sources]
-    success_rate_extracted = len(successes_extracted) / attempted_with_extracted_tests if attempted_with_extracted_tests else 0.0
+    overall_success_rate_with_tests = len(successes_extracted) / attempted_with_extracted_tests if attempted_with_extracted_tests else 0.0
     success_rate_synthesized = len(successes_synth) / attempted_with_synthesized_tests if attempted_with_synthesized_tests else 0.0
     algo_attempted_records = [rec for rec in attempted_records if _resolved_type(rec) == TaskType.ALGO_CODING.value]
     non_actionable_statuses = {"skipped_insufficient_context", "skipped_non_actionable", "skipped_non_coding_task"}
-    non_actionable_total = sum(1 for rec in records if str(rec.get("status", "")).startswith("skipped_insufficient_context") or str(rec.get("status", "")) in non_actionable_statuses)
+    non_actionable_total = sum(
+        1
+        for rec in deduped_records
+        if str(rec.get("status", "")).startswith("skipped_insufficient_context") or str(rec.get("status", "")) in non_actionable_statuses
+    )
     non_coding_records = [
         rec
         for rec in attempted_records
@@ -126,6 +133,7 @@ def generate_reports(
     ]
     pass_algo_extracted = sum(1 for rec in algo_extracted if rec.get("unit_test_success"))
     pass_at_final_extracted_only = (pass_algo_extracted / len(algo_extracted)) if algo_extracted else 0.0
+    algo_verified_success_rate = pass_at_final_extracted_only
     algo_verified_attempted = len(algo_extracted)
     algo_verified_solved = pass_algo_extracted
     deliverable_success_rate = (completed_deliverables / attempted_non_coding) if attempted_non_coding else 0.0
@@ -189,6 +197,8 @@ def generate_reports(
         "run_id": run_id,
         "total_problems": total,
         "total_unique_tasks": total_unique_tasks,
+        "raw_task_rows": raw_total,
+        "duplicate_task_rows": duplicates_removed,
         "attempted": attempted,
         "completed_successfully": completed,
         "actionable_attempted_total": actionable_attempted_total,
@@ -207,7 +217,8 @@ def generate_reports(
         "stagnation_rate": stagnation_count / attempted if attempted else 0.0,
         "attempted_with_extracted_tests": attempted_with_extracted_tests,
         "attempted_with_synthesized_tests": attempted_with_synthesized_tests,
-        "success_rate_extracted": success_rate_extracted,
+        "overall_success_rate_with_tests": overall_success_rate_with_tests,
+        "success_rate_extracted": overall_success_rate_with_tests,
         "success_rate_synthesized": success_rate_synthesized,
         "self_check_attempted": self_check_attempted,
         "self_check_pass_rate": self_check_pass_rate,
@@ -235,6 +246,8 @@ def generate_reports(
         "completed_deliverables": completed_deliverables,
         "deliverable_success_rate": deliverable_success_rate,
         "pass_at_final_extracted_only": pass_at_final_extracted_only,
+        "algo_pass_at_final": pass_at_final_extracted_only,
+        "algo_verified_success_rate": algo_verified_success_rate,
         "algo_verified_attempted": algo_verified_attempted,
         "algo_verified_solved": algo_verified_solved,
         "task_type_breakdown": task_type_breakdown,
@@ -257,17 +270,17 @@ def generate_reports(
     algo_ratio = f"{algo_verified_solved}/{algo_verified_attempted}" if algo_verified_attempted else "0/0"
     lines.extend(
         [
-            f"- Total problems: **{total}** | Unique tasks: {total_unique_tasks}",
+            f"- Total problems: **{total}** (raw rows {raw_total})",
             f"- Actionable attempted: {actionable_attempted_total} (success {attempted_success_total}, failed {attempted_failed_total})",
             f"- Non-actionable (insufficient context): {non_actionable_total}",
             f"- Evaluation coverage: {evaluation_coverage:.2%} | Parse failures captured: {parse_failures_total}",
-            f"- Completed successfully: **{completed}** | Success rate vs total: {success_rate:.2%}",
-            f"- Algo pass@final (extracted/provided tests): {pass_at_final_extracted_only:.2%} ({algo_ratio})",
+            f"- Completed successfully: **{completed}** | Overall success rate: {success_rate:.2%}",
+            f"- Algo pass@final (provided tests only): {pass_at_final_extracted_only:.2%} ({algo_ratio})",
             f"- Algorithmic coding: attempted {attempted_algo}, solved {solved_algo}",
             f"- Non-coding deliverables: attempted {attempted_non_coding}, completed {completed_deliverables} (success {deliverable_success_rate:.2%})",
             f"- Avg/Median/Max attempts to success: {avg_attempts:.2f} / {median_attempts:.2f} / {max_attempts:.2f}",
             f"- Fallback switches: {fallback_count} (rate {summary['fallback_rate']:.2f}) | Stagnation triggers: {stagnation_count} (rate {summary['stagnation_rate']:.2f})",
-            f"- Tests: extracted={attempted_with_extracted_tests} (success {success_rate_extracted:.2%}) synthesized/self-check={attempted_with_synthesized_tests} (success {success_rate_synthesized:.2%})",
+            f"- Tests: provided/extracted={attempted_with_extracted_tests} (success {overall_success_rate_with_tests:.2%}) synthesized/self-check={attempted_with_synthesized_tests} (success {success_rate_synthesized:.2%})",
             f"- Self-checks: attempted {self_check_attempted} (pass {self_check_pass_rate:.2%}) — excluded from pass@final",
             f"- LLM calls: total={llm_calls_total:.0f} avg/task={summary['llm_calls_avg_per_task']:.2f} per_attempted={summary['llm_calls_per_attempted']:.2f} | Solve attempts logged: {solve_attempts_total:.1f}",
             f"- Runtime: start={overall_start or 'n/a'} end={overall_end or 'n/a'} wall={total_wall:.1f}s avg/task={avg_time_per_task:.2f}s",
@@ -419,3 +432,17 @@ def generate_reports(
         "failures": failures_path,
         "per_task_metrics": per_task_metrics_path,
     }
+def _deduplicate_summary_records(records: List[Dict[str, object]]) -> List[Dict[str, object]]:
+    """Keep the highest-priority record for each task."""
+
+    best: Dict[str, Tuple[int, int, Dict[str, object]]] = {}
+    for idx, rec in enumerate(records):
+        task_id = str(rec.get("task_id") or f"task_{idx}")
+        status_value = str(rec.get("status", ""))
+        priority = 1 if status_value.startswith("skipped") else 0
+        candidate = (priority, idx, rec)
+        existing = best.get(task_id)
+        if existing is None or candidate[:2] < existing[:2]:
+            best[task_id] = candidate
+    deduped = [entry[2] for entry in sorted(best.values(), key=lambda item: item[1])]
+    return deduped

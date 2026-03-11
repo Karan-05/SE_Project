@@ -1,0 +1,25 @@
+BEGIN_JSON
+{
+  "task_type": "data_etl",
+  "id": "92c5b147-7961-45e0-85da-5aefa090fe48",
+  "title": "Topcoder O/R F2F - Generic Spec Review Scorecard Reskin",
+  "summary": "Design and document an end-to-end ETL blueprint for the Generic Spec Review Scorecard reskin project. This includes defining source data schemas, transformation logic to apply new styling and UI data updates, validation queries to ensure data integrity, and a comprehensive acceptance checklist. The ETL must preserve existing functionality while enabling the new reskin style, reusing existing style assets as specified.",
+  "assumptions": [
+    "Source data schemas and exact database table structures are not provided; inferred to be related to specification reviews and scorecards.",
+    "Transformation logic focuses on updating UI-related data fields to support the new reskin without altering core business logic.",
+    "No direct access to source code or database; ETL design is based on typical patterns for UI data refresh and style metadata injection.",
+    "No explicit SLAs or data volume metrics provided; assume daily batch processing with near-real-time validation.",
+    "Acceptance criteria include no regression of existing functions and full adoption of new style assets from Figma."
+  ],
+  "plan": [
+    "1. Define source data entities relevant to specification reviews and scorecard data, including key fields and relationships.",
+    "2. Specify transformation steps to apply style metadata and reskin attributes to the scorecard data, ensuring no functional changes.",
+    "3. Draft SQL snippets for data extraction and transformation validation queries to verify correctness and completeness.",
+    "4. Develop Python pseudo-code for orchestration of ETL pipeline, including logging, error handling, and checkpoints.",
+    "5. Define data quality checks focusing on completeness, consistency, and correctness of transformed data.",
+    "6. Create an acceptance checklist covering functional validation, style conformance, and regression testing.",
+    "7. Document the entire ETL blueprint in a markdown format for review and implementation guidance."
+  ],
+  "artifacts": {
+    "pipeline_spec": "## ETL Pipeline Specification\n\n### Sources\n- Specification Review data tables (e.g., spec_reviews, scorecards, user_reviews)\n- Style metadata from reskin assets (Figma exports or style config tables)\n\n### Cadence\n- Daily batch job triggered during off-peak hours\n\n### Orchestration\n- Python-based ETL orchestrator with logging and error notifications\n\n### SLA\n- Complete processing within 2 hours\n- Data freshness within 24 hours\n\n### Recovery Plan\n- Automated retry on failure\n- Manual intervention alerts\n\n---\n\n### Transformation Steps\n1. Extract raw spec review and scorecard data.\n2. Join with style metadata to enrich UI fields.\n3. Validate no changes to core review scores or comments.\n4. Load transformed data into a reporting schema for UI consumption.\n\n### Observability\n- Logging of record counts at each stage\n- Alerting on data quality check failures\n\n### Acceptance Checklist\n- All UI fields reflect new style attributes\n- No loss or alteration of review data\n- Validation queries pass without errors\n- Regression tests confirm existing functions intact\n",
+    "sql_snippets": "-- SQL snippet to validate completeness of transformed scorecard data

@@ -1,0 +1,1 @@
+{"content": "[MOCK] a82b66837a9adaca :: You are repairing code produced by strategy 'contract_first'. Problem statement: Return the sum of all integers.  Memory", "tokens": 178, "elapsed": 5.375011824071407e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "contract_first:repair"}}

@@ -1,0 +1,29 @@
+BEGIN_JSON
+{
+  "task_type": "data_etl",
+  "id": "97745303-0ae1-4196-87db-3a03c1909b13",
+  "title": "Topcoder O/R F2F - Submissions Tab has Winners Marked in it but shouldn't",
+  "summary": "Design and specify an ETL pipeline to correct the data displayed in the Submissions/Screening tab of the Online Review system by excluding winners and extra placements (4th and 5th) from this tab. The pipeline should source challenge submission and placement data, transform it to filter out winners and undesired placements, and provide a clean dataset for the Submissions tab UI. Acceptance criteria include accurate filtering of winners and extra placements, validation queries confirming correctness, and an acceptance checklist ensuring no disruption to existing functions.",
+  "assumptions": [
+    "Source data includes submissions with placement and winner status fields accessible from the Online Review database or API.",
+    "The schema of the submissions and placements tables is not explicitly provided; inferred fields include submission_id, user_id, placement, is_winner, challenge_id, and tab_type.",
+    "No direct access to the production database or existing ETL pipelines; design is based on typical relational schema patterns.",
+    "The transformation logic must exclude winners and placements beyond 3rd place from the Submissions/Screening tab dataset.",
+    "No explicit SLA or cadence provided; assume daily batch ETL to refresh the Submissions tab data.",
+    "Validation queries and data quality checks will rely on synthetic assumptions about data distribution and expected counts.",
+    "No sample outputs or existing acceptance checklist were provided; these will be synthesized based on requirements."
+  ],
+  "plan": [
+    "1. Identify and document source tables containing submission and placement data related to challenges and Online Review tabs.",
+    "2. Define the schema of the source data focusing on fields relevant to filtering winners and placements.",
+    "3. Design the ETL pipeline steps: extraction of raw submissions, transformation to exclude winners and placements beyond 3rd place for the Submissions tab, and loading into a target table or view consumed by the UI.",
+    "4. Write SQL snippets for data extraction and transformation including filtering logic.",
+    "5. Develop Python pseudo-code for orchestrating the ETL pipeline with logging and error handling.",
+    "6. Define data quality checks to validate that no winners or extra placements appear in the Submissions tab data.",
+    "7. Create validation SQL queries to verify filtering correctness and data consistency.",
+    "8. Prepare sample output examples illustrating the expected filtered dataset.",
+    "9. Compile an acceptance checklist covering functional correctness, no regression on existing functions, and adherence to requirements.",
+    "10. Document risks and mitigation strategies related to data accuracy and pipeline failures."
+  ],
+  "artifacts": {
+    "pipeline_spec": "The ETL pipeline extracts submission data daily from the Online Review submissions and placements tables. It filters out all entries marked as winners and those with placements greater than 3 for the Submissions/Screening tab. The transformed dataset is then loaded into a dedicated table or materialized view that the UI queries for rendering the Submissions tab. The pipeline includes logging, error handling, and is orchestrated via a scheduler such as Airflow or cron.\n\nSources:\n- submissions_table: contains submission_id, user_id, challenge_id, placement, is_winner\n- placements_table: contains challenge_id, user_id, placement\n\nTransformation Logic:\n- Exclude records where is_winner = true\n- Exclude records where placement > 3\n- Filter data specifically for the Submissions/Screening tab\n\nTarget:\n- A materialized view or table named filtered_submissions_tab_data\n\nOrchestration:\n- Daily batch job scheduled via Airflow or cron\n- Logging and error handling included",

@@ -1,0 +1,27 @@
+BEGIN_JSON
+{
+  "task_type": "data_etl",
+  "id": "048a71c6-7564-4b4d-9f29-2aa3e43fecfe",
+  "title": "Topcoder O/R F2F - Winners are showing wrong in OR compared to the challenge details",
+  "summary": "This task involves designing an ETL pipeline to correct the discrepancy where the Online Review (OR) system shows only the top 3 placements for a skill builder challenge, while the challenge details show 10 winners. The pipeline must extract source challenge and winner data, transform it to include all winners up to placement 10, and load the corrected data into the OR system. Validation queries and data quality checks must ensure completeness and consistency of winner placements.",
+  "assumptions": [
+    "Source data includes challenge details with all winners and their placements accessible via database or API.",
+    "The OR system data source and schema are accessible for loading corrected winner data.",
+    "No direct access to the existing ETL codebase or database schemas was provided; inferred typical challenge and winner data structures.",
+    "Transformation logic must ensure no existing functions are broken and avoid unnecessary file changes.",
+    "The reskin-or-only repo and latest patch context are not accessible; this blueprint focuses on ETL design and validation artifacts.",
+    "The priority is to fix the winner placement count discrepancy from top 3 to top 10 as shown in challenge details."
+  ],
+  "plan": [
+    "1. Identify and document source data schemas for challenge details and winners, including placement and winner count fields.",
+    "2. Define extraction queries or API calls to retrieve full winner lists for each closed skill builder challenge.",
+    "3. Design transformation steps to map and filter winners ensuring all top 10 placements are included, correcting any truncation to top 3.",
+    "4. Define loading procedures to update the OR system's winner data with the full top 10 list without breaking existing functions.",
+    "5. Develop SQL validation queries to verify that the loaded data matches the challenge details for winner count and placements.",
+    "6. Create data quality checks to monitor winner count completeness, placement uniqueness, and data freshness.",
+    "7. Provide Python pseudo-code snippets for ETL orchestration including logging and error handling.",
+    "8. Document acceptance criteria and an acceptance checklist to confirm the fix and no regressions.",
+    "9. Outline test plans including unit tests for transformation logic and integration tests for end-to-end data correctness."
+  ],
+  "artifacts": {
+    "pipeline_spec": "## Source Data\n- Challenge Details Table: challenge_id (int), challenge_name (string), status (string), winners (array of winner objects), winner_count (int)\n- Winner Object: user_id (int), placement (int), handle (string), prize (decimal)\n\n## Pipeline Cadence\n- Trigger: On challenge closure event or daily batch for recently closed challenges\n- Orchestration: Airflow or equivalent scheduler\n- SLA: Complete data refresh within 2 hours of challenge closure\n\n## Extraction\n- Query challenge details and winners where status='Closed' and winner_count > 3\n\n## Transformation\n- Filter winners to include placements 1 through 10\n- Ensure no truncation to top 3\n- Validate placement uniqueness and completeness\n\n## Load\n- Upsert winner data into OR system ensuring full top 10 placements\n- Maintain existing data integrity and avoid breaking current functions\n\n## Validation\n- SQL queries to compare winner counts and placements between source and target\n- Data quality checks for completeness, uniqueness, and freshness\n\n## Orchestration\n- Python pseudo-code for ETL orchestration with logging and error handling\n\n## Acceptance Criteria\n- Winner data in OR matches challenge details for top 10 placements\n- No regressions or data loss

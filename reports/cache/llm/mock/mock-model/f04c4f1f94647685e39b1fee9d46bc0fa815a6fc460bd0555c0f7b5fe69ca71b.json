@@ -1,0 +1,1 @@
+{"content": "[MOCK] 4807dd9b77040bca :: You are executing decomposition strategy 'simulation_trace'. Problem statement: Return the sum of all integers.  Impleme", "tokens": 111, "elapsed": 3.5830307751893997e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "plan-runner", "caller": "simulation_trace:initial"}}

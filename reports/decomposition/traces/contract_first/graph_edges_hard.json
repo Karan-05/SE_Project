@@ -1,0 +1,46 @@
+{
+  "task_id": "graph_edges_hard",
+  "strategy": "contract_first",
+  "plan": {
+    "strategy": "contract_first",
+    "contract": {
+      "inputs": "",
+      "outputs": "",
+      "constraints": "",
+      "edge_cases": "[[[0, 1], [1, 2]]]"
+    },
+    "patterns": [],
+    "subtasks": [
+      "Validate inputs vs contract",
+      "Implement core logic",
+      "Check edge cases",
+      "Generate minimal unit tests for critical behaviors",
+      "Add adversarial/edge-case tests",
+      "Run tests and interpret failures",
+      "Repair implementation and re-run tests"
+    ],
+    "tests": [
+      ""
+    ],
+    "diagnostics": {
+      "missing_fields": "inputs,outputs,constraints",
+      "contract_length": "18",
+      "audit_note": "Let's analyze the provided contract for the problem \"Return the number of undirected edges.\"\n\n---\n\n### Contract Provided:\n\n- **inputs:** '' (empty)\n- **outputs:** '' (empty)\n- **constraints:** '' (empty)\n- **edge_cases:** `[[[0, 1], [1, 2]]]`\n\n---\n\n### Problem Description:\n\n**Problem:** Return the number of undirected edges.\n\nThis implies the input should be a list of edges (each edge is",
+      "planning_tokens": "158",
+      "planning_time": "2.143189"
+    }
+  },
+  "rounds": [
+    {
+      "round": 0,
+      "phase": "initial",
+      "subtask": "plan",
+      "localized": false,
+      "pass_rate": 1.0,
+      "status": "passed",
+      "duration": 4.087499110028148e-05,
+      "failing_tests": [],
+      "error_types": []
+    }
+  ]
+}

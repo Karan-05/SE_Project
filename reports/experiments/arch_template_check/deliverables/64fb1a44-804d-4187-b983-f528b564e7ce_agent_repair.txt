@@ -1,0 +1,31 @@
+BEGIN_JSON
+{
+  "task_type": "data_etl",
+  "id": "64fb1a44-804d-4187-b983-f528b564e7ce",
+  "title": "Topcoder Member API - Add in stats and history endpoints",
+  "summary": "Design and specify an ETL pipeline to support the revised Topcoder Member API focusing on stats and stats history endpoints. The pipeline will extract member data JSONs from the existing API, transform and load them into a PostgreSQL 16.3 database using Prisma ORM, removing dependencies on Informix, Dynamo, and ElasticSearch. The deliverable includes schema design, pipeline orchestration, data quality checks, validation queries, and test data loading scripts to enable local testing and verification of the new endpoints.",
+  "assumptions": [
+    "The primary data source for ETL is JSON data exported from https://api.topcoder-dev.com/v5/members.",
+    "The target database is PostgreSQL 16.3 with Prisma ORM as the interface layer.",
+    "The schema for stats and stats history tables will be designed based on the existing API data structure and update rules described.",
+    "No direct access to Informix, Dynamo, or ElasticSearch is required as they are deprecated.",
+    "Test data will be loaded locally from JSON files via a dedicated script.",
+    "The ETL pipeline will be orchestrated manually or via simple scripts as no orchestration tool is specified.",
+    "Acceptance criteria include data correctness, completeness, and matching the existing deployed API responses.",
+    "The update operation semantics (create, update, delete of sub-items) will be enforced in the transformation logic.",
+    "No explicit SLA or cadence is specified; assumed to be run on-demand or as part of deployment/testing.",
+    "Postman collections and README updates are outside the scope of ETL but noted as integration points."
+  ],
+  "plan": [
+    "1. Define PostgreSQL schema for member stats and stats history tables, including sub-items, with appropriate keys and constraints reflecting update rules.",
+    "2. Design and document the ETL pipeline narrative: source JSON extraction, transformation logic to map nested JSON into relational tables, and loading into Postgres via Prisma ORM.",
+    "3. Develop SQL snippets for data validation queries to verify data integrity, presence, and update correctness.",
+    "4. Provide Python pseudo-code snippets representing the ETL pipeline steps with checkpoints and logging for observability.",
+    "5. Define data quality checks including uniqueness, referential integrity, and completeness thresholds with corresponding actions.",
+    "6. Prepare sample test data JSON files and a loading script to seed the local Postgres test database.",
+    "7. Document an acceptance checklist covering schema correctness, data completeness, update semantics, and test data validation.",
+    "8. Include risk considerations such as data sync consistency, partial updates, and rollback strategies.",
+    "9. Deliver all artifacts in a markdown document (data_etl.md) for easy reference and implementation guidance."
+  ],
+  "artifacts": {
+    "pipeline_spec": "## ETL Pipeline Specification\n\n### Sources\n- JSON data exported from https://api.topcoder-dev.com/v5/members containing member stats and stats history.\n\n### Cadence\n- Run on-demand during local setup or deployment testing.\n\n### Orchestration\n- Simple Python script or NodeJS script to extract JSON files, transform, and load data into PostgreSQL via Prisma ORM.\n\n### Schema Design\n- PostgreSQL tables for member_stats and member_stats_history with appropriate foreign keys and constraints.\n\n### Transformation Logic\n- Flatten nested JSON structures into relational tables.\n- Enforce update semantics for create, update, and delete operations on sub-items.\n\n### Data Quality Checks\n- Uniqueness of primary keys.\n- Referential integrity between stats and history tables.\n- Completeness checks for required fields

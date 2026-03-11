@@ -1,0 +1,1 @@
+{"content": "[MOCK] 5e2ce4423daa77cc :: You are executing decomposition strategy 'role_decomposed'. Problem statement: Return the minimum coins needed to reach ", "tokens": 117, "elapsed": 4.00003045797348e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "plan-runner", "caller": "role_decomposed:initial"}}

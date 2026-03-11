@@ -1,0 +1,1 @@
+{"content": "[MOCK] fa159778882b5a26 :: You are repairing code produced by strategy 'pattern_skeleton'. Problem statement: Return the number of undirected edges", "tokens": 196, "elapsed": 5.416979547590017e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "pattern_skeleton:repair"}}

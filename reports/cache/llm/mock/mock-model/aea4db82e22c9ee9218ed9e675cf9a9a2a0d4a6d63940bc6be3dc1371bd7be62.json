@@ -1,0 +1,1 @@
+{"content": "[MOCK] 9c139915477ff561 :: You are executing decomposition strategy 'contract_first'. Problem statement: Return the sum of the main diagonal.  Impl", "tokens": 134, "elapsed": 4.832982085645199e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "plan-runner", "caller": "contract_first:initial"}}

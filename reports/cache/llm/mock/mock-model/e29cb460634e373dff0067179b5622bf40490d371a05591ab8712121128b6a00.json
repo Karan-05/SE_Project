@@ -1,0 +1,1 @@
+{"content": "[MOCK] 0eed76492b01209b :: You are repairing code produced by strategy 'contract_first'. Problem statement: Return the sum of the main diagonal. Im", "tokens": 173, "elapsed": 4.957953933626413e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "contract_first:repair"}}

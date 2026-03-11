@@ -356,20 +356,24 @@ def _emit_gate_block(result: Dict[str, object], args: argparse.Namespace, provid
         message = f"Unable to evaluate gate metrics: {exc}"
         print(message)
         return False, [message]
-    gate_passed, gate_reasons = evaluate_gate(metrics, presentation_mode=args.presentation)
+    gate_eval = evaluate_gate(metrics, presentation_mode=args.presentation)
     print(f"llm_calls_per_attempted: {metrics.get('llm_calls_per_attempted', 0.0):.2f}")
     print(
         f"algo_attempted/non_algo_attempted: "
         f"{metrics.get('attempted_algo', 0)} / {metrics.get('attempted_non_coding', 0)}"
     )
     print(f"deliverable_artifacts: {metrics.get('deliverable_artifacts', 0)}")
-    if gate_passed:
-        print("GATE: PASS")
+    if gate_eval.passed:
+        if gate_eval.sampling_artifacts or gate_eval.non_blocking_warnings:
+            combined = gate_eval.sampling_artifacts + gate_eval.non_blocking_warnings
+            print("GATE: PASS (warnings) -> " + "; ".join(combined))
+        else:
+            print("GATE: PASS")
         return True, []
-    print("GATE: FAIL -> " + "; ".join(gate_reasons))
+    print("GATE: FAIL -> " + "; ".join(gate_eval.blocking_failures))
     rerun_cmd = _build_rerun_command(provider)
     print(f"Remediation: rerun with `{rerun_cmd}` or expand the sample until gates pass.")
-    return False, gate_reasons
+    return False, gate_eval.blocking_failures
 
 
 def _run_presentation_summary(run_id: Optional[str]) -> None:

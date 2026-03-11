@@ -1,0 +1,1 @@
+{"content": "[MOCK] e3dce9599c4164ae :: You are executing decomposition strategy 'contract_first'. Problem statement: Return the running prefix sums.  Implement", "tokens": 133, "elapsed": 4.291010554879904e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "plan-runner", "caller": "contract_first:initial"}}

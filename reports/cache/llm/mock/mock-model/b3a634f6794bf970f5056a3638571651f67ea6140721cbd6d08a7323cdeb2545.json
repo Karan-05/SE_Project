@@ -1,0 +1,1 @@
+{"content": "[MOCK] 200758ffa2b0741c :: Return OK if you can read this.", "tokens": 7, "elapsed": 3.4590193536132574e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "mock-model", "caller": "sanity_check"}}

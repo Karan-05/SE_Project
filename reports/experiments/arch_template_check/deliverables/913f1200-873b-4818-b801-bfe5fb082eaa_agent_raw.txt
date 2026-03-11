@@ -1,0 +1,75 @@
+BEGIN_JSON
+{
+  "task_type": "architecture_doc",
+  "id": "913f1200-873b-4818-b801-bfe5fb082eaa",
+  "title": "Projects API v6 – Core Projects CRUD & Listing",
+  "summary": "Design a NestJS/Prisma-based Projects API v6 service that preserves legacy API compatibility for core CRUD and listing endpoints. The service must flatten legacy JSON fields into the Prisma schema, support pagination, filtering, sorting, and fields selection, integrate with Bus API for event publishing, and maintain legacy auth, error handling, and observability behaviors.",
+  "assumptions": [
+    "Legacy API behavior and response/request formats are fully documented and accessible via the referenced legacy repo.",
+    "Challenge 1 schema and skeleton are available and form the baseline for this implementation.",
+    "Bus API client integration details and event publishing mechanisms are consistent with legacy event topics and payload shapes.",
+    "Authorization roles and scopes are clearly defined and consistent with the legacy tc-project-service.",
+    "No Elasticsearch dependencies remain; all data is sourced from Postgres with Prisma ORM.",
+    "Legacy ES-specific fields are either omitted or replaced with Postgres equivalents to maintain parity.",
+    "Attachments are empty in this challenge but must be supported in the API response shape.",
+    "CI and linting standards are based on the existing projects-api-v6 repository conventions."
+  ],
+  "plan": [
+    "Review and extend the Prisma schema to flatten legacy 'details' JSON fields into explicit columns with appropriate types and add indexes on status, type, templateId, and createdAt.",
+    "Develop NestJS controllers, services, DTOs, and mappers implementing the specified endpoints, ensuring request validation and response formatting preserve legacy API compatibility including the 'fields' query parameter.",
+    "Implement soft-delete logic in the DELETE endpoint to match legacy behavior.",
+    "Integrate Bus API client to publish project lifecycle events with typed payloads on create, update, and delete actions, including unit tests for event payload validation.",
+    "Reuse JWT-based auth module from Challenge 1 and enforce authorization parity with legacy roles/scopes for project modifications.",
+    "Implement consistent error handling and observability features including structured logging, request IDs, and response timing metrics aligned with legacy service.",
+    "Write comprehensive unit and end-to-end tests covering all endpoints, including pagination, filtering, sorting, and 'fields' parameter support.",
+    "Document endpoint behaviors, data model changes including migration notes for flattened columns, and highlight any differences from the legacy API.",
+    "Perform linting and type checks to ensure code quality and pass CI validation."
+  ],
+  "artifacts": {
+    "design_doc_md": "## Problem Summary\n- Need to implement core Projects CRUD and listing endpoints in a new NestJS/Prisma service preserving legacy API compatibility.\n- Flatten legacy JSON fields into Prisma schema columns and remove Elasticsearch dependencies.\n- Support pagination, sorting, filtering, and selective fields response.\n- Maintain legacy auth, error handling, and observability.\n\n## Proposed Approach\n- Extend Prisma schema with flattened fields and indexes.\n- Implement NestJS controllers/services with DTO validation and legacy-compatible response interceptors.\n- Use Bus API client for event publishing with typed payloads.\n- Enforce JWT-based auth with legacy roles/scopes.\n- Implement soft-delete and consistent error handling.\n\n## File-Level Plan\n- prisma/schema.prisma: Extend Project model and add indexes.\n- src/projects/controller.ts: Implement REST endpoints.\n- src/projects/service.ts: Business logic and DB interactions.\n- src/projects/dto/*.ts: Request validation DTOs.\n- src/projects/mappers.ts: Map DB models to legacy response shapes.\n- src/events/bus-publisher.ts: Event publishing logic with typed payloads.\n- tests/unit and tests/e2e: Endpoint and event payload tests.\n- docs/api.md: Endpoint behavior and migration notes.\n\n## API / Interface Changes\n- Preserve legacy URL patterns and query parameters (page, perPage, sort, filter, fields).\n- Response envelopes match legacy casing and optional fields.\n- Soft-delete implemented via PATCH or DELETE to mark projects inactive.\n- Events published on create/update/delete with legacy topic names.\n\n## Constraints & SLAs\n- Must maintain full backward compatibility in request/response formats.\n- Indexes must optimize common filters and sorts for performance.\n- Event publishing must be reliable but asynchronous.\n- Auth must enforce legacy role-based access control.\n- Observability must allow tracing request lifecycle and errors.\n\n## Risks & Trade-offs\n- Flattening JSON fields increases schema complexity but improves query performance.\n- Removing Elasticsearch may limit advanced search features; fallback to Postgres.\n- Maintaining legacy API limits refactoring and modernization opportunities.\n- Event publishing depends on Bus API client stability.\n- Soft-delete approach must ensure data consistency and prevent accidental data loss.\n\n## Edge Cases\n- Requests with unknown or unsupported fields parameter values.\n- Partial updates that omit flattened fields.\n- Concurrent updates and event ordering.\n- Handling deleted projects in list and get endpoints.\n- Empty or missing attachments fields.\n\n## Acceptance Checklist\n- All CRUD and list endpoints implemented and tested.\n- Fields parameter supports selective property returns as per legacy.\n- Events published with correct topics and validated payloads.\n- Authorization enforced matching legacy roles/scopes.\n- Error handling and observability consistent with legacy.\n- Linting and type checks pass; CI green.\n- Documentation updated with data model and API behavior notes.",
+    "mermaid_diagram": "graph TD\n  Client -->|HTTP| NestJS_Controller\n  NestJS_Controller --> NestJS_Service\n  NestJS_Service --> Prisma_Client\n  NestJS_Service --> Bus_API_Client\n  Prisma_Client --> Postgres_DB\n  Bus_API_Client --> Message_Bus\n  NestJS_Controller -->|Logs| Observability_Service",
+    "interfaces": [
+      {
+        "producer": "NestJS_Service",
+        "consumer": "Postgres_DB",
+        "protocol": "Prisma ORM",
+        "payload": "Project model with flattened fields and indexes"
+      },
+      {
+        "producer": "NestJS_Service",
+        "consumer": "Bus_API_Client",
+        "protocol": "Bus API Client SDK",
+        "payload": "Typed event payloads for project create/update/delete"
+      },
+      {
+        "producer": "Client",
+        "consumer": "NestJS_Controller",
+        "protocol": "HTTP REST",
+        "payload": "REST requests with query params (page, perPage, sort, filter, fields), JSON bodies for POST/PATCH"
+      }
+    ],
+    "tradeoffs": [
+      "Flattening JSON fields improves query performance but increases schema complexity and migration effort.",
+      "Removing Elasticsearch simplifies architecture but may reduce advanced search capabilities.",
+      "Maintaining legacy API compatibility restricts modernization but ensures smooth client migration.",
+      "Using Bus API client for events avoids direct Kafka dependency but adds an integration layer.",
+      "Soft-delete preserves data but requires careful handling to avoid stale data exposure."
+    ]
+  },
+  "validations": [
+    "Confirmed coverage of all required endpoints and features per prompt.",
+    "Ensured design addresses legacy API compatibility including fields parameter and auth.",
+    "Included risks, trade-offs, and edge cases relevant to data model and event integration.",
+    "Validated the file-level and implementation plan aligns with deliverables and repo structure.",
+    "Mermaid diagram accurately represents component interactions."
+  ],
+  "confidence": 0.95,
+  "stop_reason": "completed",
+  "rubric_self_check": {
+    "coverage": "Full coverage of problem summary, approach, file plan, API changes, constraints, risks, edge cases, and acceptance criteria.",
+    "specificity": "Design details are concrete and aligned with legacy compatibility requirements and technology stack.",
+    "actionability": "Plan and artifacts provide clear, actionable steps and deliverables for implementation.",
+    "overall_notes": "The architecture document meets all rubric requirements, providing a solid foundation for development and validation."
+  }
+}
+END_JSON

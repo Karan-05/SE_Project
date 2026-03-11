@@ -1,0 +1,1 @@
+{"content": "[MOCK] 770afe2732b722e4 :: You are executing decomposition strategy 'simulation_trace'. Problem statement: Return degree counts for each vertex.  I", "tokens": 118, "elapsed": 3.7499703466892242e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "plan-runner", "caller": "simulation_trace:initial"}}

@@ -1,0 +1,32 @@
+BEGIN_JSON
+{
+  "task_type": "architecture_doc",
+  "id": "8da51ea0-9169-4684-b536-79dc92e6380c",
+  "title": "72 Hours Topcoder Review App Challenge Review Details Page Integration Part 2",
+  "summary": "This architecture document outlines the integration of real APIs into the Challenge Review Details page for the Submission/Screening, Winners, and Review/Appeals tabs. It covers the approach to replace mock data with live endpoints, the file-level plan for implementation, API/interface changes, constraints and SLAs, risks and trade-offs, edge cases, and an acceptance checklist to ensure completeness and quality.",
+  "assumptions": [
+    "Access to the platform-ui repository on the feat/review branch is available for patching.",
+    "The Review API, Challenge API, and Resource API endpoints are stable and accessible in the target environment.",
+    "User JWT tokens and role/scope-based authorization are correctly implemented in the frontend environment.",
+    "The existing UI components for loading states, error handling, and role-based behavior are reusable or extendable.",
+    "TypeScript interfaces for DTOs are available or can be derived from API documentation or source code.",
+    "No changes to backend APIs are required; integration is limited to frontend wiring and consumption.",
+    "Responsiveness and mobile compatibility requirements follow existing platform-ui standards."
+  ],
+  "plan": [
+    "Review the existing platform-ui feat/review branch to understand current mock data usage and UI structure for the three tabs.",
+    "Map out the API endpoints from Review API, Challenge API, and Resource API relevant to each tab and their authorization requirements.",
+    "Define TypeScript interfaces for all API responses based on DTOs to ensure type safety in the frontend.",
+    "Implement SWR hooks for data fetching for each endpoint, including caching, revalidation, and error handling.",
+    "Remove all mock data and feature-flagged placeholders related to Submission/Screening, Winners, and Review/Appeals tabs.",
+    "Wire the UI components to the live data sources, ensuring proper display of data, loading states, error states, and empty states.",
+    "Implement role and scope-based conditional rendering and access control as per UI logic requirements.",
+    "Ensure download links for submissions and artifacts are correctly wired and secured with authorization checks.",
+    "Use Challenge API to fetch challenge phases to gate UI actions related to screening, review, and appeals.",
+    "Use Resource API to fetch registrant handles for display where needed.",
+    "Test all integrations on desktop and mobile for responsiveness and correctness.",
+    "Document the integration approach and testing instructions in markdown for submission.",
+    "Prepare git patches against the platform-ui feat/review branch reflecting all changes."
+  ],
+  "artifacts": {
+    "design_doc_md": "## Problem Summary\nThe Challenge Review Details page currently uses mock data for the Submission/Screening, Winners, and Review/Appeals tabs. This leads to inaccurate or incomplete information for users. The goal is to integrate live APIs to provide real-time, accurate data for these tabs, improving user experience and data reliability.\n\n## Proposed Approach\nWe will replace all mock data with live API calls using SWR hooks for efficient data fetching and caching. TypeScript interfaces will be defined for all API responses to ensure type safety. Role-based access control will be enforced on the frontend to respect user permissions.\n\n## File-Level Plan\n- Update Submission/Screening tab to fetch data from Review API.\n- Update Winners tab to fetch data from Challenge API.\n- Update Review/Appeals tab to fetch data from Review API and Resource API.\n- Remove mock data files and feature flags related to these tabs.\n- Add utility functions for authorization checks.\n\n## API/Interface Changes\nNo backend API changes are required. Frontend will consume existing endpoints:\n- Review API

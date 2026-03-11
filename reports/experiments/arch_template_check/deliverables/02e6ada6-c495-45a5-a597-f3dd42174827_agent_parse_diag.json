@@ -1,0 +1,23 @@
+{
+  "task_id": "02e6ada6-c495-45a5-a597-f3dd42174827",
+  "run_id": "arch_template_check",
+  "raw_path": "/Users/karanallagh/Desktop/DataCollector/reports/experiments/arch_template_check/deliverables/02e6ada6-c495-45a5-a597-f3dd42174827_agent_raw.txt",
+  "raw_length": 7903,
+  "sentinel_found": true,
+  "attempts": [
+    {
+      "mode": "sentinel",
+      "success": true,
+      "length": 7883
+    }
+  ],
+  "errors": [],
+  "repair_attempted": false,
+  "repair_used": false,
+  "max_repairs": 1,
+  "llm_provider": "openai",
+  "source": "sentinel",
+  "parsed_length": 7883,
+  "repair_path": "",
+  "status": "success"
+}

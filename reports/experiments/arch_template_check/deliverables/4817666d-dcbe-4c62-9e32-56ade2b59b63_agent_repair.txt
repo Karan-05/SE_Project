@@ -1,0 +1,36 @@
+BEGIN_JSON
+{
+  "task_type": "data_etl",
+  "id": "4817666d-dcbe-4c62-9e32-56ade2b59b63",
+  "title": "Topcoder Review API - Design Prisma Schema & OpenAPI Spec for Submissions API Migration",
+  "summary": "Design an ETL blueprint for migrating the Submissions API functionality into the Topcoder Review API by extending the Prisma schema and OpenAPI specs. The blueprint covers schema extensions, data pipeline orchestration, validation queries, and data quality checks to ensure backward compatibility and seamless integration with existing Review API models and endpoints.",
+  "assumptions": [
+    "Access to the existing Prisma schema and Review API models is available for integration reference.",
+    "The existing Review API uses PostgreSQL and Prisma ORM with nanoID for IDs.",
+    "The Submissions API data is stored in PostgreSQL and accessible for migration.",
+    "The API endpoints will be adapted in NestJS with OpenAPI documentation.",
+    "No direct access to the live database or sample data was provided; schema and pipeline design is based on the provided repo and requirements.",
+    "Authentication and authorization details are assumed to be consistent with the current Review API standards.",
+    "The migration is incremental and must maintain backward compatibility without downtime."
+  ],
+  "plan": [
+    "Analyze the existing Prisma schema in the tc-review-api repo to identify overlapping models, especially the review model.",
+    "Design new Prisma models for Submission, ReviewSummation, and possibly ReviewType if not covered by existing enums or models.",
+    "Extend the existing Review model to incorporate Submissions API review fields while preserving existing functionality.",
+    "Define database relationships, indexes, and constraints to support efficient queries and integrity.",
+    "Document the schema extensions in Prisma schema.prisma with comments for clarity.",
+    "Design the ETL pipeline to extract Submissions API data, transform it to fit the new schema, and load it into the Review API database.",
+    "Outline orchestration steps for incremental and full data migration with error handling and retries.",
+    "Create SQL snippets for data validation and transformation verification.",
+    "Develop Python pseudo-code snippets for ETL orchestration with logging and checkpointing.",
+    "Define data quality checks for key columns and referential integrity with thresholds and alert actions.",
+    "Draft validation queries to verify data completeness, uniqueness, and consistency post-migration.",
+    "Prepare sample data outputs and expected results to guide testing and acceptance.",
+    "Compile an acceptance checklist covering schema correctness, data integrity, API compatibility, and performance.",
+    "Include risk analysis and rollback plans for migration failures or data inconsistencies."
+  ],
+  "artifacts": {
+    "pipeline_spec": "## ETL Pipeline Specification\n\n### Sources\n- Existing Submissions API PostgreSQL database tables for submissions, reviews, review types, and review summations.\n\n### Cadence\n- Initial full migration followed by incremental syncs every 5 minutes to capture new or updated records.\n\n### Orchestration\n- Use Airflow or a similar scheduler to run extraction, transformation, and load tasks.\n- Extraction queries pull data incrementally based on updated_at timestamps.\n- Transformation applies schema mapping, ID conversion to nanoID format, and data normalization.\n- Load tasks upsert data into the Review API PostgreSQL database using Prisma ORM compatible scripts.\n\n### SLAs\n- Data latency targets of under 10 minutes for incremental updates.\n\n### Error Handling\n- Retry logic with exponential backoff for transient failures.\n- Alerting on data anomalies or pipeline failures.",
+    "sql_snippets": [
+      "-- Validate uniqueness of submission IDs\nSELECT submission_id, COUNT(*) FROM submissions GROUP BY submission_id HAVING COUNT(*) > 1;",
+      "-- Check referential integrity between submissions and reviews\nSELECT s.submission_id FROM submissions s LEFT JOIN reviews r ON s.submission

@@ -1,0 +1,1 @@
+{"content": "[MOCK] 9ad575ee56cef048 :: You are repairing code produced by strategy 'failure_mode_first'. Problem statement: Return counts of characters as a di", "tokens": 180, "elapsed": 5.707959644496441e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "failure_mode_first:repair"}}

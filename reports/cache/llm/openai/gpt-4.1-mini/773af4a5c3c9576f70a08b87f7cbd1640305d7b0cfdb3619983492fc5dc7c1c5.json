@@ -1,0 +1,1 @@
+{"content": "Could you please specify which algorithm you want me to simulate for the input [0]?", "tokens": 34, "elapsed": 0.9381554999854416, "budget_exceeded": false, "meta": {"provider": "openai", "model": "trace-writer", "caller": "simulation_trace"}}

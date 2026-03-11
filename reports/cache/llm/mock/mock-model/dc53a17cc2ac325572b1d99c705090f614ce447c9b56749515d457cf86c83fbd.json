@@ -1,0 +1,1 @@
+{"content": "[MOCK] c0b80e8e2a680bb0 :: You are repairing code produced by strategy 'role_decomposed'. Problem statement: Return the minimum coins needed to rea", "tokens": 152, "elapsed": 4.333036486059427e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "role_decomposed:repair"}}

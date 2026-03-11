@@ -1,0 +1,28 @@
+BEGIN_JSON
+{
+  "task_type": "data_etl",
+  "id": "774f1c4d-0ca0-4de2-ae8b-87882784f2c5",
+  "title": "Topcoder O/R F2F - Save for later button submits the review score",
+  "summary": "This ETL blueprint addresses the issue where the 'Save for later' button in review scorecards incorrectly submits the review score. The pipeline will extract review submissions and their save-for-later status, transform to separate saved drafts from submitted scores, and load the cleaned data into the review scores table. Validation queries and data quality checks ensure no premature score submissions occur. Acceptance criteria include correct differentiation between saved drafts and submitted scores, and no score submission on 'Save for later' actions.",
+  "assumptions": [
+    "Source data schema for review submissions and their save-for-later status is not provided; assumed to be accessible via existing review submission tables with a 'status' or 'submission_type' field.",
+    "Transformation logic assumes a flag or status indicating 'saved for later' vs 'submitted' exists or can be derived.",
+    "No direct access to production database or codebase; ETL pipeline design is based on inferred data flows from the prompt.",
+    "No explicit SLAs or cadence provided; daily batch processing assumed.",
+    "No sample outputs or existing validation queries provided; synthetic validation queries created based on assumptions."
+  ],
+  "plan": [
+    "1. Identify source tables containing review submissions, scorecards, and save-for-later flags.",
+    "2. Define schema for input data including relevant fields: review_id, reviewer_id, score, submission_status, timestamp.",
+    "3. Design transformation logic to filter out 'save for later' entries from final score submission load.",
+    "4. Implement SQL snippets to perform filtering and aggregation to separate saved drafts from submitted scores.",
+    "5. Create Python pseudo-code for orchestrating extraction, transformation, and loading steps with logging and checkpoints.",
+    "6. Define data quality checks to ensure no scores are loaded as submitted when marked 'save for later'.",
+    "7. Develop validation queries to verify correctness of transformation and data integrity.",
+    "8. Prepare acceptance checklist including criteria for no premature score submission and successful ETL runs.",
+    "9. Document pipeline specification including source, cadence, orchestration, SLAs, and recovery plan."
+  ],
+  "artifacts": {
+    "pipeline_spec": "## Pipeline Specification\n\n### Sources\n- Review Submissions Table: Contains review_id, reviewer_id, score, submission_status (e.g., 'submitted', 'saved_for_later'), timestamp.\n- Scorecards Table: Contains detailed scorecard data.\n\n### Cadence\n- Daily batch processing at off-peak hours.\n\n### Orchestration\n- ETL job triggered via Airflow or equivalent scheduler.\n- Steps: Extract -> Transform (filter out 'saved_for_later') -> Load into final review_scores table.\n\n### SLAs\n- Data freshness within 24 hours.\n- Zero tolerance for submitted scores on 'save for later' entries.\n\n### Recovery Plan\n- Retry on failure with alerting.\n- Manual intervention for data anomalies.\n\n---",
+    "sql_snippets": "-- SQL snippet to select only submitted review scores, excluding 'saved_for_later' entries\nSELECT review_id, reviewer_id, score, timestamp\nFROM review_submissions\nWHERE submission_status = 'submitted';\n\n-- SQL snippet to identify any scores incorrectly marked as 'saved_for_later' but present in final load\nSELECT COUNT(*) AS invalid_saved_for_later_scores\nFROM review_scores\nWHERE review_id IN (\n  SELECT review_id FROM review_submissions WHERE submission_status = 'saved_for_later'\n);",
+    "python

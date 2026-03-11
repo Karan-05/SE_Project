@@ -1,0 +1,1 @@
+{"content": "[MOCK] dd4d7cc0c69c35b5 :: You are executing decomposition strategy 'contract_first' on a real repository task. Repository workspace: `/Users/karan", "tokens": 317, "elapsed": 1.1083087883889675e-05, "budget_exceeded": false, "meta": {"provider": "mock", "model": "plan-runner", "caller": "contract_first:initial"}}

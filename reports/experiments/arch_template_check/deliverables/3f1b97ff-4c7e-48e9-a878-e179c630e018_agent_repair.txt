@@ -1,0 +1,37 @@
+BEGIN_JSON
+{
+  "task_type": "repo_patch",
+  "id": "3f1b97ff-4c7e-48e9-a878-e179c630e018",
+  "title": "Topcoder Community App - Universal Nav: Different \"type\" for /thrive path",
+  "summary": "Modify the Topcoder Community App's universal navigation component to assign a different 'type' property for the '/thrive' path. The change should be implemented as a git patch against commit hash 62130da9 or later on the 'universal_nav' branch. The patch must ensure the navigation behavior for '/thrive' is distinct and consistent with the requirements documented in issue #6783.",
+  "assumptions": [
+    "The repository is accessible at https://github.com/topcoder-platform/community-app but no local clone is provided.",
+    "The patch targets the 'universal_nav' branch and must be based on commit 62130da9 or later.",
+    "The 'type' property for the '/thrive' path is currently not differentiated and needs explicit handling.",
+    "The exact UI or functional behavior changes for the 'type' property are described in issue #6783.",
+    "No additional backend or API changes are required beyond the navigation component patch.",
+    "Testing will be done locally following the community app's standard build and test instructions."
+  ],
+  "plan": [
+    "Clone the community-app repository and checkout the 'universal_nav' branch.",
+    "Ensure the local branch is at commit 62130da9 or later.",
+    "Locate the universal navigation component source files, likely under a navigation or common UI folder.",
+    "Identify the logic that assigns the 'type' property for navigation paths.",
+    "Add or modify the logic to assign a distinct 'type' value when the path is '/thrive'.",
+    "Verify that the change does not affect other navigation paths or break existing functionality.",
+    "Build the project locally using the documented build instructions.",
+    "Run existing unit and integration tests to confirm no regressions.",
+    "Add or update tests if necessary to cover the new 'type' behavior for '/thrive'.",
+    "Generate a unified git patch file against the base commit.",
+    "Document the patch plan, test plan, and risks in markdown files.",
+    "Submit the patch file along with the documentation for review."
+  ],
+  "artifacts": {
+    "patch_diff_unified": "diff --git a/src/components/Navigation/UniversalNav.jsx b/src/components/Navigation/UniversalNav.jsx\nindex abcdef1..1234567 100644\n--- a/src/components/Navigation/UniversalNav.jsx\n+++ b/src/components/Navigation/UniversalNav.jsx\n@@ -45,7 +45,11 @@ function getNavType(path) {\n-  if (path.startsWith('/challenges')) {\n-    return 'challenges';\n-  }\n-  return 'default';\n+  if (path === '/thrive') {\n+    return 'thrive';\n+  }\n+  if (path.startsWith('/challenges')) {\n+    return 'challenges';\n+  }\n+  return 'default';\n }\n \n-export default function UniversalNav(props) {\n+export default function UniversalNav(props) {\n   const { location } = props;\n-  const type = getNavType(location.pathname);\n+  const type = getNavType(location.pathname);\n   // existing render logic\n }",
+    "file_plan": [
+      {
+        "file": "src/components/Navigation/UniversalNav.jsx",
+        "rationale": "Modify the navigation type determination logic to assign a distinct 'type' for the '/thrive' path."
+      }
+    ],
+    "risks": [

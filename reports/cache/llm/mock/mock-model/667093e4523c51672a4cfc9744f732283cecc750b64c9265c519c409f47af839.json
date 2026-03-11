@@ -1,0 +1,1 @@
+{"content": "[MOCK] 16e37fe9e4989052 :: You are repairing code produced by strategy 'semantic_diff'. Problem statement: Return counts of characters as a dict so", "tokens": 175, "elapsed": 4.624947905540466e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "semantic_diff:repair"}}

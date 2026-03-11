@@ -1,0 +1,1 @@
+{"content": "[MOCK] e1b79d65e6efb298 :: You are repairing code produced by strategy 'direct_baseline'. Problem statement: Return the minimum coins needed to rea", "tokens": 129, "elapsed": 4.499976057559252e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "direct_baseline:repair"}}

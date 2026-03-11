@@ -1,0 +1,27 @@
+BEGIN_JSON
+{
+  "task_type": "data_etl",
+  "id": "73daecb3-b1d9-459f-830f-0f5af06993dc",
+  "title": "[72hr] TopCoder Member API: Prisma Schema Update",
+  "summary": "This task involves designing an end-to-end ETL blueprint for updating the TopCoder Member API's database schema to use Prisma ORM with PostgreSQL as the sole backend, removing dependencies on Informix, DynamoDB, and ElasticSearch. The focus is on redesigning JSON fields into relational tables where appropriate, especially for member traits, and maintaining JSON for aggregatedSkills and enteredSkills. The deliverable includes a detailed pipeline specification, SQL validation snippets, Python pseudo-code for orchestration, data quality checks, and an acceptance checklist.",
+  "assumptions": [
+    "The source data currently resides in Informix, DynamoDB, and ElasticSearch and must be consolidated into PostgreSQL via Prisma ORM.",
+    "Detailed schema definitions for the existing JSON fields are partially inferred from provided links and images, as no direct schema dumps were provided.",
+    "Access to the current Member API codebase and Prisma schema is limited; references to GitHub repos are for context only.",
+    "The transformation logic from legacy stores (Informix, Dynamo, ES) to the new Prisma schema will be implemented in NodeJS, but here only pseudo-code is provided.",
+    "The Swagger file update will reflect the new schema and is out of scope for this ETL blueprint but noted as a deliverable in the project.",
+    "The ETL pipeline will be orchestrated to run on a periodic cadence with error handling and logging for robustness.",
+    "Data quality checks focus on schema conformity, nullability, and referential integrity for the new Prisma schema tables."
+  ],
+  "plan": [
+    "Analyze existing JSON fields and their usage in the current Member API, focusing on member, distributionStats, memberHistoryStats, memberStats, and memberTrait models.",
+    "Design a normalized Prisma schema for all traits as separate tables linked to the member table, replacing JSON blobs with relational structures.",
+    "Retain aggregatedSkills and enteredSkills as JSON fields in the member table as per requirements.",
+    "Draft SQL snippets to validate data correctness and completeness after migration, including checks for nulls, referential integrity, and expected distributions.",
+    "Develop Python pseudo-code for the ETL pipeline to extract data from legacy sources, transform JSON fields into relational format, and load into PostgreSQL via Prisma ORM.",
+    "Define data quality checks with thresholds and remediation actions to ensure data integrity post-migration.",
+    "Create an acceptance checklist covering schema completeness, data correctness, pipeline reliability, and rollback capability.",
+    "Document the pipeline specification including source systems, orchestration cadence, SLA targets, and recovery procedures."
+  ],
+  "artifacts": {
+    "pipeline_spec": "## ETL Pipeline Specification\n\n### Sources\n- Informix (legacy member data)\n- DynamoDB (traits and some stats)\n- ElasticSearch (search-optimized member data)\n\n### Destination\n- PostgreSQL via Prisma ORM as the sole backend database\n\n### Cadence\n- Initial full migration\n- Incremental sync every 6 hours\n\n### Orchestration\n- Airflow or NodeJS cron job\n- Steps: Extract -> Transform -> Load -> Validate -> Notify\n\n###

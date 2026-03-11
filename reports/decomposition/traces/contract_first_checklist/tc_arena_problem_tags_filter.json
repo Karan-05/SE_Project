@@ -1,0 +1,247 @@
+{
+  "task_id": "tc_arena_problem_tags_filter",
+  "strategy": "contract_first_checklist",
+  "plan": {
+    "strategy": "contract_first_checklist",
+    "contract": {
+      "inputs": "Underspecified",
+      "outputs": "Underspecified",
+      "constraints": "",
+      "edge_cases": "None"
+    },
+    "patterns": [],
+    "subtasks": [
+      "Validate inputs vs contract",
+      "Implement core logic",
+      "Check edge cases",
+      "Generate minimal unit tests for critical behaviors",
+      "Add adversarial/edge-case tests",
+      "Run tests and interpret failures",
+      "Repair implementation and re-run tests"
+    ],
+    "tests": [
+      "critical unit tests",
+      "edge-case probes"
+    ],
+    "diagnostics": {
+      "missing_fields": "constraints",
+      "contract_length": "32",
+      "audit_note": "The provided contract is very underspecified and incomplete for the described problem. Here are the key points and missing guarantees:\n\n1. Inputs:\n- The contract states \"Underspecified\" for inputs.\n- The problem requires extending GET /api/v1/problems to accept filters by arbitrary skill tags.\n- The contract should specify the exact input parameters for the API, including:\n  - The skill tags filter parameter(s) (e.g., \"tags\" as a comma-separated string or array",
+      "planning_tokens": "209",
+      "planning_time": "1.943827"
+    },
+    "target_files": [
+      "modules/Problems/services/ProblemsService.js"
+    ],
+    "candidate_files": [
+      "test/problems.tags.spec.js",
+      "modules/Problems/services/ProblemsService.js",
+      "modules/Problems/controllers/ProblemsController.js",
+      "data/problems.json",
+      "node_modules/js-beautify/CHANGELOG.md",
+      "node_modules/js-beautify/README.md",
+      "node_modules/lodash/core.js",
+      "node_modules/lodash/lodash.js",
+      "test/problems.list.spec.js",
+      "package-lock.json",
+      "node_modules/.package-lock.json",
+      "node_modules/globals/globals.json"
+    ],
+    "subtask_file_map": {
+      "Validate inputs vs contract": [
+        "test/problems.tags.spec.js"
+      ],
+      "Implement core logic": [
+        "modules/Problems/services/ProblemsService.js"
+      ],
+      "Check edge cases": [
+        "modules/Problems/controllers/ProblemsController.js"
+      ],
+      "Generate minimal unit tests for critical behaviors": [
+        "data/problems.json"
+      ],
+      "Add adversarial/edge-case tests": [
+        "node_modules/js-beautify/CHANGELOG.md"
+      ],
+      "Run tests and interpret failures": [
+        "node_modules/js-beautify/README.md"
+      ],
+      "Repair implementation and re-run tests": [
+        "node_modules/lodash/core.js"
+      ]
+    }
+  },
+  "rounds": [
+    {
+      "round": 0,
+      "phase": "initial",
+      "subtask": "plan",
+      "localized": false,
+      "pass_rate": 0.0,
+      "status": "tests_failed",
+      "duration": 1.3921269580023363,
+      "failing_tests": [
+        "tests_0"
+      ],
+      "error_types": [
+        "fail::"
+      ],
+      "file_count": 1,
+      "multi_file_attempt": false,
+      "files_touched": [
+        "modules/Problems/services/ProblemsService.js"
+      ],
+      "inspected_files": [
+        "modules/Problems/services/ProblemsService.js",
+        "modules/Problems/controllers/ProblemsController.js",
+        "test/problems.tags.spec.js",
+        "data/problems.json"
+      ],
+      "proposed_files": [
+        "modules/Problems/services/ProblemsService.js"
+      ],
+      "edit_metadata": {
+        "edit_mode": "edit_batch",
+        "localized_requested": true,
+        "fallback_requested": false,
+        "raw_metadata_keys": [
+          "localized"
+        ],
+        "applied_file_count": 1,
+        "proposed_file_count": 1,
+        "multi_file_applied": false,
+        "subtask_focus": "global",
+        "contract_coverage": 0.3333333333333333,
+        "contract_satisfied": [
+          "single_tag_filter"
+        ],
+        "contract_unsatisfied": [
+          "multi_tag_union",
+          "array_tag_filter"
+        ],
+        "contract_failure_categories": {
+          "filtering": 2
+        },
+        "contract_unsatisfied_details": [
+          "multi_tag_union: Comma-separated tags (e.g. ?tags=foo,bar) must match problems that contain any requested tag and expose both normalized tags in metadata.appliedTags.",
+          "array_tag_filter: tags[]=... array form must work alongside difficulty filters while preserving ordering by roundId and the paging limit."
+        ],
+        "contract_fail_cases": []
+      }
+    },
+    {
+      "round": 1,
+      "phase": "repair",
+      "subtask": "Validate inputs vs contract",
+      "localized": true,
+      "pass_rate": 0.0,
+      "status": "tests_failed",
+      "duration": 0.9589388750027865,
+      "failing_tests": [
+        "tests_0"
+      ],
+      "error_types": [
+        "fail::"
+      ],
+      "file_count": 1,
+      "multi_file_attempt": false,
+      "files_touched": [
+        "modules/Problems/services/ProblemsService.js"
+      ],
+      "inspected_files": [
+        "modules/Problems/services/ProblemsService.js",
+        "modules/Problems/controllers/ProblemsController.js",
+        "test/problems.tags.spec.js",
+        "data/problems.json"
+      ],
+      "proposed_files": [
+        "modules/Problems/services/ProblemsService.js"
+      ],
+      "edit_metadata": {
+        "edit_mode": "edit_batch",
+        "localized_requested": true,
+        "fallback_requested": false,
+        "raw_metadata_keys": [
+          "localized"
+        ],
+        "applied_file_count": 1,
+        "proposed_file_count": 1,
+        "multi_file_applied": false,
+        "subtask_focus": "Validate inputs vs contract",
+        "contract_coverage": 0.3333333333333333,
+        "contract_satisfied": [
+          "single_tag_filter"
+        ],
+        "contract_unsatisfied": [
+          "multi_tag_union",
+          "array_tag_filter"
+        ],
+        "contract_failure_categories": {
+          "filtering": 2
+        },
+        "contract_unsatisfied_details": [
+          "multi_tag_union: Comma-separated tags (e.g. ?tags=foo,bar) must match problems that contain any requested tag and expose both normalized tags in metadata.appliedTags.",
+          "array_tag_filter: tags[]=... array form must work alongside difficulty filters while preserving ordering by roundId and the paging limit."
+        ],
+        "contract_fail_cases": []
+      }
+    },
+    {
+      "round": 2,
+      "phase": "repair",
+      "subtask": "Implement core logic",
+      "localized": true,
+      "pass_rate": 0.0,
+      "status": "tests_failed",
+      "duration": 1.101278999936767,
+      "failing_tests": [
+        "tests_0"
+      ],
+      "error_types": [
+        "fail::"
+      ],
+      "file_count": 1,
+      "multi_file_attempt": false,
+      "files_touched": [
+        "modules/Problems/services/ProblemsService.js"
+      ],
+      "inspected_files": [
+        "modules/Problems/services/ProblemsService.js",
+        "modules/Problems/controllers/ProblemsController.js",
+        "test/problems.tags.spec.js",
+        "data/problems.json"
+      ],
+      "proposed_files": [
+        "modules/Problems/services/ProblemsService.js"
+      ],
+      "edit_metadata": {
+        "edit_mode": "edit_batch",
+        "localized_requested": true,
+        "fallback_requested": false,
+        "raw_metadata_keys": [
+          "localized"
+        ],
+        "applied_file_count": 1,
+        "proposed_file_count": 1,
+        "multi_file_applied": false,
+        "subtask_focus": "Implement core logic",
+        "contract_coverage": 0.0,
+        "contract_satisfied": [],
+        "contract_unsatisfied": [
+          "single_tag_filter",
+          "multi_tag_union",
+          "array_tag_filter"
+        ],
+        "contract_failure_categories": {
+          "filtering": 3
+        },
+        "contract_unsatisfied_details": [
+          "single_tag_filter: Handle ?tags=<value> case-insensitively and return metadata.appliedTags with normalized lowercase tags.",
+          "multi_tag_union: Comma-separated tags (e.g. ?tags=foo,bar) must match problems that contain any requested tag and expose both normalized tags in metadata.appliedTags.",
+          "array_tag_filter: tags[]=... array form must work alongside difficulty filters while preserving ordering by roundId and the paging limit."
+        ],
+        "contract_fail_cases": []
+      }
+    }
+  ]
+}

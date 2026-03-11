@@ -1,0 +1,29 @@
+BEGIN_JSON
+{
+  "task_type": "architecture_doc",
+  "id": "graph_degree_ood",
+  "title": "Degree Map (ood)",
+  "summary": "Design an architecture to compute and return the degree counts for each vertex in a given graph. The system must handle input validation, efficient computation of vertex degrees, and provide a clear interface for integration. Acceptance criteria include correctness, scalability, and robustness against malformed inputs.",
+  "assumptions": [
+    "Input graph is represented as an edge list of vertex pairs.",
+    "Graph is undirected unless otherwise specified.",
+    "Vertices are represented by integers starting from 0 or any integer values.",
+    "Output is a mapping from vertex to its degree count.",
+    "No explicit performance SLA provided; assume typical graph sizes up to tens of thousands of edges.",
+    "No existing API or system context provided; design is standalone and extensible.",
+    "No concurrency or distributed processing requirements specified."
+  ],
+  "plan": [
+    "Define the problem scope and clarify input/output formats and constraints.",
+    "Design a modular architecture to parse input, compute degrees, and expose results.",
+    "Specify file-level organization for separation of concerns (input handling, core logic, output formatting).",
+    "Define API/interface contracts for input ingestion and degree retrieval.",
+    "Identify constraints and propose SLAs for performance and correctness.",
+    "Enumerate risks and trade-offs, including handling of malformed inputs and large graphs.",
+    "Analyze edge cases such as empty graphs, isolated vertices, and self-loops.",
+    "Formulate an acceptance checklist covering functional correctness, performance, and robustness.",
+    "Produce a mermaid diagram visualizing component interactions.",
+    "Document trade-offs and alternatives considered."
+  ],
+  "artifacts": {
+    "design_doc_md": "## Problem Summary\n\nThe goal is to return the degree counts for each vertex in a graph given as an edge list. The degree of a vertex is the number of edges incident to it. The system must accept input edges, validate them, compute the degree for each vertex, and provide the results in a structured format.\n\n## Proposed Approach\n\nWe propose a modular design with three main components: input parser, degree calculator, and output formatter. The input parser validates and normalizes the edge list. The degree calculator builds a vertex-degree map by iterating over edges and incrementing counts for each vertex. The output formatter returns the degree map in a consumable format (e.g., JSON or dictionary).\n\nThis approach ensures clear separation of concerns, ease of testing, and extensibility for future enhancements such as directed graphs or weighted edges.\n\n## File-Level Plan\n\n- `input_parser.py`: Responsible for input validation and normalization.\n- `degree_calculator.py`: Implements core logic to compute vertex degree counts.\n- `output_formatter.py`: Formats and returns the degree map.\n- `main.py`: Orchestrates the workflow from input to output.\n- `tests/`: Contains unit tests for each module.\n\n## API / Interface Changes\n\n- Input: Accepts a list of edges, each as a tuple or list of two integers.\n- Output: Returns a dictionary mapping vertex identifiers to their degree counts.\n- Interfaces:\n  - `parse_edges(edges_list) -> List[Tuple[int, int]]`\n  - `compute_degrees(edges: List[

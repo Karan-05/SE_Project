@@ -5,16 +5,28 @@ idempotent ETL into MySQL, and generating analysis-ready CSV/Markdown artifacts.
 
 ## Step-by-step runbook
 
+**Before you begin:** inflate the oversized assets (Topcoder legacy archive + processed tasks CSV) that are stored as `.gz` files to satisfy GitHub's 100 MB limit. Run:
+```bash
+python scripts/unpack_large_assets.py
+```
+The script is idempotent and only writes files that are missing, so it is safe to run multiple times or after pulling updates.
+
 1. **Create/activate the virtual environment**
    ```bash
-   cd /Users/karanallagh/Downloads/DataCollector
+   cd /Users/karanallagh/Desktop/DataCollector
    python3 -m venv venv              # already present, but re-create if needed
    source venv/bin/activate          # use venv\Scripts\activate on Windows
    pip install -r requirements.txt
    ```
+   After activation, `which python` should report `/Users/karanallagh/Desktop/DataCollector/venv/bin/python`. If it still points anywhere under `Downloads/`, remove any lingering shells and re-source the environment to pick up the corrected path.
 
 2. **Provision MySQL and set credentials**
    - Create a schema (default `dataCollector_v2`) in your MySQL instance.
+   - If you're using Docker/Colima locally, the repo ships a helper that verifies Docker access and bootstraps the container:
+     ```bash
+     python scripts/mysql_up.py --wait
+     ```
+     If the script reports permission issues, start Colima from a privileged shell (`colima start --cpu 2 --memory 4`, then `docker context use colima`) before retrying.
    - Export credentials so every script can find them (`.env` is supported as well):
      ```bash
      export TOPCODER_DB_HOST=localhost
@@ -83,6 +95,23 @@ idempotent ETL into MySQL, and generating analysis-ready CSV/Markdown artifacts.
     - Spot-check downloads using `python init.py ...` and tailing `challenge_data/**/page1.json`.
     - Confirm MySQL tables are populated (`mysql -u root -p -e "SELECT COUNT(*) FROM Challenges;" dataCollector_v2`).
 
+## Real-world Topcoder benchmark
+
+We ship a real Topcoder SRM API benchmark under `experiments/real_repo_tasks/topcoder` that exercises the live `tc-template-node-postgres` repository. Each task includes a manifest (`task.json`), `ground_truth.patch`, and per-task tests under `experiments/real_repos/tc-template-node-postgres/test/*.spec.js`. The consolidated manifest lives at `experiments/decomposition/topcoder_repo_manifest.jsonl` and the summary stats land in `reports/repo_analysis/topcoder_task_pack_summary.{json,md}`.
+
+- **One-command prep + run** — use the helper below to validate the provider, prepare workspaces (`npm ci` via setup metadata), and optionally launch the benchmark with multiple strategies:
+  ```bash
+  LLM_PROVIDER=ollama LLM_MODEL=llama3 \
+    python scripts/prepare_real_repo_benchmark.py \
+      --mode real_world_research \
+      --strategies contract_first,failure_mode_first
+  ```
+  Pass `--prep-only` to stop after the setup stage (useful for offline dependency installs) or `--task-root` to point at a different manifest root.
+- **Preflight + readiness** — a detailed preflight report (provider/model validation, Ollama health check, runtime tool availability, ground-truth coverage) is written to `reports/decomposition/real_world/real_repo/preflight_report.{json,md}` before any strategies are invoked.
+- **Workspace prep** — every task now carries `runtime_family`, `package_manager`, `setup_commands`, `requires_network`, and `setup_timeout_sec`. The harness runs `npm ci --no-audit --no-fund` once per strategy workspace, captures stdout/stderr under `runs/<task>/<strategy>/logs/setup_*.log`, and injects the setup status into benchmark metrics.
+- **Ground-truth localization** — `ground_truth.patch` is parsed to recover the touched files. Benchmark outputs now include both plan-vs-edit localization metrics and ground-truth precision/recall so you can tell whether a strategy edited the correct files even when tests continue to fail.
+- **Results** — structured CSV + Markdown summaries live under `reports/decomposition/<mode>/real_repo/`. Each row includes provider metadata, setup outcomes, candidate retrieval stats, localization precision/recall, ground-truth overlap, and log paths for reproduction.
+
 ## Architecture & Flow
 
 ```mermaid
@@ -106,6 +135,34 @@ Core modules:
 - `automation.py` – monthly backfill runner producing contiguous, gap-free windows with optional cache overrides.
 - `analysis/report.py`, `analysis/artifacts.py`, `analysis/super_analysis.py` – research-grade reporting stack (CSV, Markdown, AI-feasibility heuristics, artifact inspection, delivery roadmaps).
 
+## Workflow RL Pipeline
+
+We added a parallel, trace-aware workflow RL stack that keeps the legacy task-selection simulator untouched.
+
+- **Environment** – `src/rl/workflow_env.py` implements a Gymnasium-compatible workflow controller with action masking, trace logging, budgets (tokens/steps/retries), uncertainty features, and shaped rewards.
+- **Agents** – `src/rl/workflow_agents.py` ships deterministic baselines (always-direct/decompose, heuristics) plus contextual bandits, Double DQN, and Dueling Double DQN with replay buffers, target networks, checkpointing, and action masking.
+- **Experiments** – `experiments/run_workflow_rl.py` orchestrates all agents, ablations (disabling uncertainty, verifier/retrieval/decomposition, etc.), evaluation modes (unconstrained/fixed-token/fixed-step), CSV exports, and ASE 2026-ready figures/tables under `results/workflow_rl` and `reports/ase2026_workflow_rl`.
+- **Reproducibility** – every run snapshot is logged to `results/workflow_rl/config_snapshot.yaml`, episodic traces land in `episode_logs.jsonl`, and lightweight unit tests cover action masking/reward/terminal transitions.
+
+Quickstart:
+
+```bash
+# Run the full workflow RL suite (adjust --episodes for longer sweeps)
+python experiments/run_workflow_rl.py --episodes 25 --ablation-episodes 10 --budget-episodes 10
+
+# Smoke-test the environment primitives
+pytest tests/test_workflow_env.py
+
+# Automate STRIDE sweeps for teacher + override variants
+python scripts/run_stride_suite.py --variants stride_without_uncertainty_features stride_gate_plus_residual --episodes 32 --seeds 0 1 2 3 4
+
+# Run TARL and AEGIS automation helpers (small episode counts shown)
+python scripts/run_tarl_suite.py --episodes 20 --episodes-per-agent 16
+python scripts/run_aegis_suite.py --episodes 8 --episodes-per-agent 16 --use-reduced-actions
+```
+
+Outputs land in `results/workflow_rl/*.csv` for automation pipelines and `reports/ase2026_workflow_rl/*` for the paper bundle (summary markdown, tables, PNG figures, paper notes).
+
 ## Prerequisites
 
 - Python 3.10+
@@ -124,6 +181,8 @@ Core modules:
 | `TOPCODER_DB_TABLE`, `TOPCODER_DB_TABLE_CHALLENGES`, `TOPCODER_DB_TABLE_MAPPING`, `TOPCODER_DB_TABLE_MEMBERS` | Optional table overrides | see schema |
 | `TOPCODER_FORCE_REFRESH_MEMBERS` | `true/false` to bypass cache | `false` |
 | `TOPCODER_MEMBER_CACHE_TTL_HOURS` | Re-fetch members older than N hours | `720` |
+| `LLM_PROVIDER`, `LLM_MODEL` | Decomposition provider + model (`mock`, `openai`, `azure_openai`, `anthropic`, `ollama`) | `mock` / `mock-model` |
+| `OLLAMA_BASE_URL`, `OLLAMA_MODEL` | Override Ollama host/model when `LLM_PROVIDER=ollama` | `http://127.0.0.1:11434` / `llama3` |
 | `LLM_TOKEN_BUDGET`, `LLM_TIME_BUDGET_SECONDS` | Global token/time caps for decomposition plans | unset (infinite) |
 | `DECOMP_MOCK_MODE` | Force mock LLM responses (`1`/`0`) | `1` |
 
@@ -245,6 +304,10 @@ The CLI also exposes `--min-llm-calls-per-attempted` (auto-set to 0.5 for real p
 
 `tools/summarize_topcoder_run.py` enforces a “satisfactory run” gate: LLM calls must be non-zero and presentation runs must cover a healthy mix of algo and non-algo tasks with deliverable artifacts. The script prints actionable reasons if the gate fails.
 
+#### Recent Change — 2026-03-05
+
+- Presentation gate reporting now distinguishes sampling artifacts (e.g., random 15-task samples producing only two algo problems) from true regressions. Random undersampling no longer turns the run red; instead, the summary emits a GREEN run with `presentation_gate_status=WARN_INSUFFICIENT_SAMPLE` plus analyst-facing guidance on increasing `--sample-size` or temporarily disabling `--presentation` when validating truncation fixes.
+
 ## Database schema guarantees
 
 Migrations (run automatically by `dbConnect`) enforce primary keys on challenges and members plus unique `(challengeId, memberHandle)` constraint on the mapping table. Reruns update rows in-place instead of duplicating—the pipeline is safe to re-run.
@@ -304,6 +367,28 @@ Generated artifacts land in `reports/decomposition/`, including:
 - `leaderboard.md`, `latex_tables.tex`, `latex_snippets.tex` – publication-ready tables/snippets pulled directly into `paper/main.tex`.
 
 Use `experiments/decomposition/run_all_strategies.ipynb` for interactive exploration; the notebook shares the same runners as the CLI targets.
+
+### Real Topcoder Repo Benchmark
+
+The real-repo harness now ships with two reportable Topcoder Arena SRM API tasks cloned under `experiments/real_repos/tc-template-node-postgres/` and described in `experiments/real_repo_tasks/topcoder/a160ded4_*/task.json`. Each task installs dependencies with `npm install --no-audit --no-fund` and runs a focused Mocha spec (`test/problems.list.spec.js` or `test/problems.detail.spec.js`), so LLM strategies must localise multi-file edits inside `modules/Problems/`.
+
+```
+# Development smoke (fixture only)
+python -m src.decomposition.runners.run_real_repo_benchmark \
+  --mode dev \
+  --task-root experiments/real_repo_tasks/dev \
+  --strategies direct_baseline \
+  --max-tasks 1
+
+# Publishable run over the SRM API tasks (requires a real provider and npm)
+LLM_PROVIDER=ollama LLM_MODEL=llama3 \
+python -m src.decomposition.runners.run_real_repo_benchmark \
+  --mode real_world_research \
+  --strategies contract_first,failure_mode_first \
+  --task-root experiments/real_repo_tasks/topcoder
+```
+
+Use `scripts/ingest_repo_tasks.py --snapshots experiments/real_repo_tasks/topcoder --challenge-table data/raw/tasks.csv --output experiments/decomposition/topcoder_repo_manifest.jsonl` whenever you add new repo-backed tasks so the runner can consume a JSONL manifest instead of per-task folders.
 
 ## Environment Hardening & Multi-Agent RL
 

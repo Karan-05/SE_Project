@@ -1,0 +1,1 @@
+{"content": "[MOCK] 3e9ea10fdc1b7aa2 :: You are executing decomposition strategy 'semantic_diff'. Problem statement: Return the running prefix sums.  Implementa", "tokens": 133, "elapsed": 4.292000085115433e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "plan-runner", "caller": "semantic_diff:initial"}}

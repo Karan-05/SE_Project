@@ -1,0 +1,1 @@
+{"content": "[MOCK] c09c3dc1cf4a1e13 :: You are executing decomposition strategy 'semantic_diff'. Problem statement: Return counts of characters as a dict sorte", "tokens": 139, "elapsed": 4.458997864276171e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "plan-runner", "caller": "semantic_diff:initial"}}

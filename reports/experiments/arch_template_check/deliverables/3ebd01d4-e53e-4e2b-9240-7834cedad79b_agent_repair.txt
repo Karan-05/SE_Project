@@ -1,0 +1,30 @@
+BEGIN_JSON
+{
+  "task_type": "architecture_doc",
+  "id": "3ebd01d4-e53e-4e2b-9240-7834cedad79b",
+  "title": "Review API v6 JWT Service Refactor  Use tccorelibraryjs",
+  "summary": "Refactor the Review API v6 JWT service to replace direct use of jsonwebtoken and jwks-rsa libraries with the standardized tc-core-library-js for JWT validation. Maintain existing authentication features including M2M tokens, Auth0 production verification, and scope/role validation while removing mock/test token support. Use global environment variables AUTH_SECRET and VALID_ISSUERS for configuration, ensuring backward compatibility with all API endpoints.",
+  "assumptions": [
+    "Access to review-api-v6 repository and billing-accounts-api-v6 reference implementation is available.",
+    "tc-core-library-js provides built-in JWT validation methods compatible with current token formats.",
+    "Environment variables AUTH_SECRET and VALID_ISSUERS are properly configured and accessible at runtime.",
+    "Existing JwtUser interface and utility functions (isAdmin, expandScopes) are to be preserved without modification.",
+    "No changes to client integrations or API endpoints beyond JWT service internals are expected.",
+    "NestJS best practices and project coding standards are to be followed for implementation.",
+    "No additional external dependencies beyond tc-core-library-js are introduced."
+  ],
+  "plan": [
+    "Review current JWT service implementation in src/shared/modules/global/jwt.service.ts to understand existing logic using jsonwebtoken and jwks-rsa.",
+    "Analyze the billing-accounts-api-v6/src/auth JWT service implementation to understand the usage pattern of tc-core-library-js for JWT validation.",
+    "Design the refactor to replace manual JWT validation and JWKS retrieval with tc-core-library-js built-in validation functions.",
+    "Remove all mock/test token support code (TOKEN_ROLE_MAP, TEST_M2M_TOKENS) from the JWT service.",
+    "Ensure environment variable usage is updated to use global AUTH_SECRET and VALID_ISSUERS variables for token validation configuration.",
+    "Retain the JwtUser interface and utility functions (isAdmin, expandScopes) as-is, adapting them if necessary for compatibility with the new validation approach.",
+    "Implement the refactored JWT service following NestJS best practices with clear documentation and type safety.",
+    "Test the updated JWT service locally and in integration to verify that all existing API endpoints authenticate correctly with production tokens and M2M tokens.",
+    "Validate that mock/test tokens are no longer supported and that no breaking changes occur for clients.",
+    "Prepare a git patch against the develop branch including the updated JWT service file and any related configuration adjustments.",
+    "Document the changes and update environment variable usage notes as part of the submission."
+  ],
+  "artifacts": {
+    "design_doc_md": "## Problem Summary\n- The Review API v6 JWT service currently uses direct jsonwebtoken and jwks-rsa libraries for JWT validation.\n- This approach is inconsistent with the standardized tc-core-library-js usage in other Topcoder APIs.\n- Mock/test token support complicates the codebase and is not needed in production.\n- The goal is to refactor the JWT service for simplification, consistency, and maintainability.\n\n## Proposed Approach\n- Replace manual JWT validation and JWKS retrieval with tc-core-library-js built-in JWT validation.\n- Use global environment variables AUTH_SECRET and VALID_ISSUERS for configuration.\n- Remove mock/test token support while preserving M2M token functionality and Auth0 production verification.\n- Retain existing JwtUser interface and utility functions for backward compatibility.\n\n## File-Level Plan\n- Modify src/shared/modules/global/jwt.service.ts to implement the refactor.\n- Remove TOKEN_ROLE_MAP and TEST_M2M_TOKENS constants and related logic.\n- Update environment variable references

@@ -1,0 +1,1 @@
+{"content": "[MOCK] f1acc92b58e93f9b :: You are repairing code produced by strategy 'direct_baseline'. Problem statement: Count primes up to N. Implementation c", "tokens": 126, "elapsed": 4.041008651256561e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "direct_baseline:repair"}}

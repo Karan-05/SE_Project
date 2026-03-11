@@ -1,0 +1,53 @@
+agent:
+  batch_size: 64
+  buffer_size: 50000
+  device: cpu
+  epsilon_decay: 0.998
+  epsilon_final: 0.1
+  epsilon_start: 1.0
+  gamma: 0.99
+  grads_per_step: 1
+  lr: 0.0003
+  min_buffer: 1000
+  target_update: 250
+belief:
+  calibration_lr: 0.05
+  feature_dim: 32
+  history_length: 12
+  max_cost: 1.0
+  max_success_prob: 0.97
+  min_cost: 0.0
+  min_success_prob: 0.03
+  smoothing: 0.85
+constraints:
+  cvar_alpha: 0.2
+  dual_learning_rate: 0.05
+  risk_beta: 0.1
+  step_budget: 32
+  token_budget: 60000.0
+  tool_budget: 32
+  useless_loop_limit: 5
+  verifier_budget: 6
+env:
+  completion_budget: 26000
+  difficulty_max: null
+  difficulty_min: null
+  disabled_actions: []
+  enable_action_masking: true
+  enable_uncertainty_features: true
+  evaluation_mode: unconstrained
+  max_retries: 6
+  max_steps: 24
+  max_subtasks: 6
+  min_recoverable_ratio: 0.35
+  noise_scale: 0.05
+  prompt_budget: 40000
+  retrieval_limit: 6
+  seed: 2026
+  track_episode_logs: true
+  verifier_limit: 4
+graph:
+  decay: 0.95
+  enable_decomposition_tracking: true
+  enable_symbol_hops: true
+  max_nodes: 512

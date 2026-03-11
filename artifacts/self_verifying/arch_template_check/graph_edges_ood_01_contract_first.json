@@ -1,0 +1,65 @@
+{
+  "task_id": "graph_edges_ood",
+  "strategy": "contract_first",
+  "attempt": 1,
+  "pass_rate": 1.0,
+  "plan_subtasks": [
+    "Validate inputs vs contract",
+    "Implement core logic",
+    "Check edge cases",
+    "Generate minimal unit tests for critical behaviors",
+    "Add adversarial/edge-case tests",
+    "Run tests and interpret failures"
+  ],
+  "plan_tests": [
+    ""
+  ],
+  "plan_diagnostics": {
+    "missing_fields": "constraints,edge_cases",
+    "contract_length": "32",
+    "audit_note": "The provided contract is very underspecified and incomplete for the problem \"Return the number of undirected edges.\" Here's a detailed review and notes on missing guarantees:\n\n### Current Contract Review\n- **Inputs:** \"Underspecified\" \u2014 no information about the input type, format, or constraints.\n- **Outputs:** \"Underspecified\" \u2014 no information about the output type or expected value.\n- **Constraints:** None \u2014 no constraints on input size, values, or performance.\n-",
+    "planning_tokens": "207",
+    "planning_time": "2.296362"
+  },
+  "patch_summary": {
+    "phase": "initial"
+  },
+  "tests_run": [
+    {
+      "name": "sample_0",
+      "mode": "call",
+      "status": "pass",
+      "expected": "2",
+      "output": "2",
+      "error": "",
+      "input": "[[[0, 1], [1, 2]]]",
+      "kwargs": "{}",
+      "duration": 1.708301715552807e-05
+    }
+  ],
+  "llm_calls": 1,
+  "timeline": {
+    "attempt": 1,
+    "strategy": "contract_first",
+    "phase": "initial",
+    "events": {
+      "decompose": {
+        "start": "2026-03-06T13:25:54.723082",
+        "end": "2026-03-06T13:25:57.019636"
+      },
+      "solve": {
+        "start": "2026-03-06T13:25:57.019665",
+        "end": "2026-03-06T13:25:58.457517"
+      },
+      "tests": {
+        "start": "2026-03-06T13:25:58.457382",
+        "end": "2026-03-06T13:25:58.457449",
+        "duration_seconds": "0.000"
+      }
+    },
+    "meta": {
+      "llm_calls": "1"
+    }
+  },
+  "solution_preview": "def solve(edges):\n                return len(edges)"
+}

@@ -1,0 +1,1 @@
+{"content": "[MOCK] 9bba2da1666d3594 :: You are executing decomposition strategy 'semantic_diff'. Problem statement: Return degree counts for each vertex.  Impl", "tokens": 141, "elapsed": 4.62500611320138e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "plan-runner", "caller": "semantic_diff:initial"}}

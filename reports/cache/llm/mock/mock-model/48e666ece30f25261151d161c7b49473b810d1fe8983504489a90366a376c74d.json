@@ -1,0 +1,1 @@
+{"content": "[MOCK] 10b67efebefb9528 :: You are executing decomposition strategy 'semantic_diff'. Problem statement: Return the sum of the main diagonal.  Imple", "tokens": 136, "elapsed": 4.500034265220165e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "plan-runner", "caller": "semantic_diff:initial"}}

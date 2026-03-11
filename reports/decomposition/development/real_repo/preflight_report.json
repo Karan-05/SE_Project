@@ -1,0 +1,90 @@
+{
+  "provider": "mock",
+  "model": "mock",
+  "mode": "dev",
+  "task_sources": [
+    "experiments/real_repo_tasks/dev"
+  ],
+  "task_count": 1,
+  "runtime_counts": {
+    "python": 1
+  },
+  "requires_network_tasks": 0,
+  "provider_metadata": {
+    "provider": "mock",
+    "model": "mock",
+    "runtime": {},
+    "ping": {
+      "latency_sec": 2.5830231606960297e-06,
+      "tokens_used": 5,
+      "response": "[MOCK] df456142efd49314 :: Topcoder repo benchmark preflight ping"
+    }
+  },
+  "checks": [
+    {
+      "name": "provider_configured",
+      "ok": true,
+      "message": "LLM provider 'mock' configured."
+    },
+    {
+      "name": "model_configured",
+      "ok": true,
+      "message": "LLM model 'mock' configured."
+    },
+    {
+      "name": "provider_runtime",
+      "ok": true,
+      "message": "Local provider runtime not required."
+    },
+    {
+      "name": "provider_ping",
+      "ok": true,
+      "message": "LLM ping succeeded.",
+      "details": {
+        "latency_sec": 2.5830231606960297e-06,
+        "tokens_used": 5,
+        "response": "[MOCK] df456142efd49314 :: Topcoder repo benchmark preflight ping"
+      }
+    },
+    {
+      "name": "source:experiments/real_repo_tasks/dev",
+      "ok": true,
+      "message": "Task source found."
+    },
+    {
+      "name": "repo_paths",
+      "ok": true,
+      "message": "All repo snapshots available."
+    },
+    {
+      "name": "tool:python",
+      "ok": true,
+      "message": "Command 'python' available.",
+      "details": {
+        "tasks": [
+          "dev_repo_array_sum"
+        ]
+      }
+    },
+    {
+      "name": "setup_plan:dev_repo_array_sum",
+      "ok": true,
+      "message": "Setup plan ready.",
+      "details": {
+        "strategy": "none",
+        "commands": []
+      }
+    },
+    {
+      "name": "test_commands:dev_repo_array_sum",
+      "ok": true,
+      "message": "Test Commands OK."
+    },
+    {
+      "name": "build_commands:dev_repo_array_sum",
+      "ok": true,
+      "message": "Build Commands not required."
+    }
+  ],
+  "ok": true
+}

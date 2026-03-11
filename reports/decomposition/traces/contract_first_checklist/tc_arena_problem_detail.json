@@ -1,0 +1,248 @@
+{
+  "task_id": "tc_arena_problem_detail",
+  "strategy": "contract_first_checklist",
+  "plan": {
+    "strategy": "contract_first_checklist",
+    "contract": {
+      "inputs": "Underspecified",
+      "outputs": "Underspecified",
+      "constraints": "",
+      "edge_cases": "None"
+    },
+    "patterns": [],
+    "subtasks": [
+      "Validate inputs vs contract",
+      "Implement core logic",
+      "Check edge cases",
+      "Generate minimal unit tests for critical behaviors",
+      "Add adversarial/edge-case tests",
+      "Run tests and interpret failures",
+      "Repair implementation and re-run tests"
+    ],
+    "tests": [
+      "critical unit tests",
+      "edge-case probes"
+    ],
+    "diagnostics": {
+      "missing_fields": "constraints",
+      "contract_length": "32",
+      "audit_note": "The provided contract is very underspecified and incomplete for the described problem. Here are the key points and missing guarantees:\n\n1. **Inputs**:  \n   - Currently marked as \"Underspecified\".  \n   - Missing details about the input parameters, e.g., the `problemId` path parameter type and format.  \n   - No mention of authentication or authorization requirements if any.  \n   - No specification of query parameters or headers.\n\n2. **Outputs**:  \n  ",
+      "planning_tokens": "213",
+      "planning_time": "2.767032"
+    },
+    "target_files": [
+      "modules/Problems/services/ProblemsService.js"
+    ],
+    "candidate_files": [
+      "test/problems.detail.spec.js",
+      "modules/Problems/services/ProblemsService.js",
+      "modules/Problems/controllers/ProblemsController.js",
+      "data/problems.json",
+      "node_modules/globals/globals.json",
+      "test/problems.components.meta.spec.js",
+      "node_modules/es5-ext/README.md",
+      "node_modules/workerpool/README.md",
+      "node_modules/chai/History.md",
+      "node_modules/chai/ReleaseNotes.md",
+      "node_modules/eslint-plugin-import/README.md",
+      "package-lock.json"
+    ],
+    "subtask_file_map": {
+      "Validate inputs vs contract": [
+        "test/problems.detail.spec.js"
+      ],
+      "Implement core logic": [
+        "modules/Problems/services/ProblemsService.js"
+      ],
+      "Check edge cases": [
+        "modules/Problems/controllers/ProblemsController.js"
+      ],
+      "Generate minimal unit tests for critical behaviors": [
+        "data/problems.json"
+      ],
+      "Add adversarial/edge-case tests": [
+        "node_modules/globals/globals.json"
+      ],
+      "Run tests and interpret failures": [
+        "test/problems.components.meta.spec.js"
+      ],
+      "Repair implementation and re-run tests": [
+        "node_modules/es5-ext/README.md"
+      ]
+    }
+  },
+  "rounds": [
+    {
+      "round": 0,
+      "phase": "initial",
+      "subtask": "plan",
+      "localized": false,
+      "pass_rate": 0.0,
+      "status": "tests_failed",
+      "duration": 3.0490321670658886,
+      "failing_tests": [
+        "tests_0"
+      ],
+      "error_types": [
+        "fail::"
+      ],
+      "file_count": 1,
+      "multi_file_attempt": false,
+      "files_touched": [
+        "modules/Problems/services/ProblemsService.js"
+      ],
+      "inspected_files": [
+        "modules/Problems/services/ProblemsService.js",
+        "modules/Problems/controllers/ProblemsController.js",
+        "test/problems.detail.spec.js",
+        "data/problems.json"
+      ],
+      "proposed_files": [
+        "modules/Problems/services/ProblemsService.js"
+      ],
+      "edit_metadata": {
+        "edit_mode": "edit_batch",
+        "localized_requested": true,
+        "fallback_requested": false,
+        "raw_metadata_keys": [
+          "localized"
+        ],
+        "applied_file_count": 1,
+        "proposed_file_count": 1,
+        "multi_file_applied": false,
+        "subtask_focus": "global",
+        "contract_coverage": 0.3333333333333333,
+        "contract_satisfied": [
+          "missing_problem_404"
+        ],
+        "contract_unsatisfied": [
+          "component_stats_payload",
+          "controller_service_boundary"
+        ],
+        "contract_failure_categories": {
+          "aggregation": 1,
+          "architecture": 1
+        },
+        "contract_unsatisfied_details": [
+          "component_stats_payload: Detail responses must include componentStats.languages/statusCounts/maxPoints derived from each problem's components array.",
+          "controller_service_boundary: Keep the controller thin: delegate aggregation to the service without mutating global state or controller-side filtering."
+        ],
+        "contract_fail_cases": []
+      }
+    },
+    {
+      "round": 1,
+      "phase": "repair",
+      "subtask": "Validate inputs vs contract",
+      "localized": true,
+      "pass_rate": 0.0,
+      "status": "tests_failed",
+      "duration": 1.1095440000062808,
+      "failing_tests": [
+        "tests_0"
+      ],
+      "error_types": [
+        "fail::"
+      ],
+      "file_count": 1,
+      "multi_file_attempt": false,
+      "files_touched": [
+        "modules/Problems/services/ProblemsService.js"
+      ],
+      "inspected_files": [
+        "modules/Problems/services/ProblemsService.js",
+        "modules/Problems/controllers/ProblemsController.js",
+        "test/problems.detail.spec.js",
+        "data/problems.json"
+      ],
+      "proposed_files": [
+        "modules/Problems/services/ProblemsService.js"
+      ],
+      "edit_metadata": {
+        "edit_mode": "edit_batch",
+        "localized_requested": true,
+        "fallback_requested": false,
+        "raw_metadata_keys": [
+          "localized"
+        ],
+        "applied_file_count": 1,
+        "proposed_file_count": 1,
+        "multi_file_applied": false,
+        "subtask_focus": "Validate inputs vs contract",
+        "contract_coverage": 0.3333333333333333,
+        "contract_satisfied": [
+          "missing_problem_404"
+        ],
+        "contract_unsatisfied": [
+          "component_stats_payload",
+          "controller_service_boundary"
+        ],
+        "contract_failure_categories": {
+          "aggregation": 1,
+          "architecture": 1
+        },
+        "contract_unsatisfied_details": [
+          "component_stats_payload: Detail responses must include componentStats.languages/statusCounts/maxPoints derived from each problem's components array.",
+          "controller_service_boundary: Keep the controller thin: delegate aggregation to the service without mutating global state or controller-side filtering."
+        ],
+        "contract_fail_cases": []
+      }
+    },
+    {
+      "round": 2,
+      "phase": "repair",
+      "subtask": "Implement core logic",
+      "localized": true,
+      "pass_rate": 0.0,
+      "status": "tests_failed",
+      "duration": 2.131443625083193,
+      "failing_tests": [
+        "tests_0"
+      ],
+      "error_types": [
+        "fail::"
+      ],
+      "file_count": 1,
+      "multi_file_attempt": false,
+      "files_touched": [
+        "modules/Problems/services/ProblemsService.js"
+      ],
+      "inspected_files": [
+        "modules/Problems/services/ProblemsService.js",
+        "modules/Problems/controllers/ProblemsController.js",
+        "test/problems.detail.spec.js",
+        "data/problems.json"
+      ],
+      "proposed_files": [
+        "modules/Problems/services/ProblemsService.js"
+      ],
+      "edit_metadata": {
+        "edit_mode": "edit_batch",
+        "localized_requested": true,
+        "fallback_requested": false,
+        "raw_metadata_keys": [
+          "localized"
+        ],
+        "applied_file_count": 1,
+        "proposed_file_count": 1,
+        "multi_file_applied": false,
+        "subtask_focus": "Implement core logic",
+        "contract_coverage": 0.6666666666666666,
+        "contract_satisfied": [
+          "component_stats_payload",
+          "missing_problem_404"
+        ],
+        "contract_unsatisfied": [
+          "controller_service_boundary"
+        ],
+        "contract_failure_categories": {
+          "architecture": 1
+        },
+        "contract_unsatisfied_details": [
+          "controller_service_boundary: Keep the controller thin: delegate aggregation to the service without mutating global state or controller-side filtering."
+        ],
+        "contract_fail_cases": []
+      }
+    }
+  ]
+}

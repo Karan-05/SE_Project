@@ -1,0 +1,1 @@
+{"content": "[MOCK] b6d06b0b13d98a0f :: You are executing decomposition strategy 'multi_view'. Problem statement: Return counts of characters as a dict sorted b", "tokens": 132, "elapsed": 4.499976057559252e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "plan-runner", "caller": "multi_view:initial"}}

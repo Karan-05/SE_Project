@@ -1,0 +1,44 @@
+{
+  "task_id": "0c406e64-e1db-422b-ac9a-cdcf7523320f",
+  "run_id": "arch_template_check",
+  "raw_path": "/Users/karanallagh/Desktop/DataCollector/reports/experiments/arch_template_check/deliverables/0c406e64-e1db-422b-ac9a-cdcf7523320f_agent_raw.txt",
+  "raw_length": 7346,
+  "sentinel_found": true,
+  "attempts": [
+    {
+      "mode": "sentinel",
+      "success": false,
+      "error": "rubric_self_check.actionability must be numeric."
+    },
+    {
+      "mode": "balanced",
+      "success": false,
+      "error": "rubric_self_check.actionability must be numeric."
+    },
+    {
+      "mode": "repair",
+      "success": false,
+      "error": "Unable to locate valid JSON block (None)"
+    }
+  ],
+  "errors": [
+    {
+      "stage": "sentinel",
+      "message": "rubric_self_check.actionability must be numeric."
+    },
+    {
+      "stage": "balanced",
+      "message": "rubric_self_check.actionability must be numeric."
+    },
+    {
+      "stage": "repair",
+      "message": "Unable to locate valid JSON block (None)"
+    }
+  ],
+  "repair_attempted": true,
+  "repair_used": false,
+  "max_repairs": 1,
+  "llm_provider": "openai",
+  "repair_path": "/Users/karanallagh/Desktop/DataCollector/reports/experiments/arch_template_check/deliverables/0c406e64-e1db-422b-ac9a-cdcf7523320f_agent_repair.txt",
+  "status": "failed"
+}

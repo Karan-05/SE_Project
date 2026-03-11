@@ -1,0 +1,27 @@
+BEGIN_JSON
+{
+  "task_type": "data_etl",
+  "id": "d8c5b3a9-2ad6-4709-917a-7ab5854ac0f4",
+  "title": "Topcoder O/R F2F - View Completed Review Score",
+  "summary": "Design an ETL blueprint to support the reskin of the View Composite Scorecard page by extracting, transforming, and loading review score data from existing source systems. The ETL process will ensure data is clean, consistent, and ready for frontend consumption with minimal disruption to existing functions. Acceptance criteria include accurate data representation matching the reskinned UI requirements, validated data quality, and documented pipeline steps with recovery and monitoring plans.",
+  "assumptions": [
+    "Source data schemas and locations for review scores and related metadata are not explicitly provided; assumed to be in existing Topcoder review databases or APIs.",
+    "Transformation logic is inferred to focus on aggregating and formatting completed review scores for display on the reskinned page.",
+    "No direct access to the codebase or database schema was provided; ETL design will be generic and adaptable.",
+    "The ETL pipeline will run on a scheduled cadence suitable for near real-time or daily updates based on typical review score update frequency.",
+    "Data quality checks are based on common invariants such as non-null scores, valid score ranges, and consistency with review status.",
+    "Sample outputs and acceptance checklist are inferred from the UI reskin requirements and existing review score display behaviors."
+  ],
+  "plan": [
+    "1. Identify and document source tables or APIs containing completed review scores and associated metadata.",
+    "2. Define the schema for extracted data including fields such as review_id, user_id, score, review_status, timestamp, and any composite score calculations.",
+    "3. Design transformation steps to filter completed reviews, aggregate scores if needed, and format data for frontend consumption.",
+    "4. Develop SQL snippets for data extraction and transformation validation queries.",
+    "5. Create Python pseudo-code for the ETL pipeline orchestration including extraction, transformation, loading, logging, and error handling.",
+    "6. Define data quality checks with thresholds and actions to ensure data correctness and completeness.",
+    "7. Prepare validation queries and sample outputs to verify pipeline correctness.",
+    "8. Document the pipeline specification including cadence, orchestration method, SLAs, and recovery procedures.",
+    "9. Compile an acceptance checklist covering data accuracy, pipeline reliability, and integration readiness."
+  ],
+  "artifacts": {
+    "pipeline_spec": "## Pipeline Specification\n\n### Sources\n- Review scores and metadata stored in Topcoder review database tables or accessible APIs.\n\n### Cadence\n- Daily batch ETL job scheduled at off-peak hours (e.g., 2 AM UTC) with capability for on-demand runs.\n\n### Orchestration\n- Managed via Airflow or similar workflow orchestration tool with logging and alerting.\n\n### SLAs\n- Data availability within 1 hour of scheduled run completion.\n- Pipeline failure alerts sent immediately.\n\n### Recovery Plan\n- Automatic retries on transient failures.\n- Manual intervention for persistent errors.\n- Data backfill capability.\n\n---\n\n### Transformation Steps\n1. Extract completed review scores and related metadata.\n2. Filter only completed reviews.\n3. Aggregate

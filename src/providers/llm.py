@@ -288,6 +288,29 @@ def _mock_response(prompt: str, max_tokens: Optional[int], temperature: float) -
     return content, tokens
 
 
+def _ollama_request(prompt: str, max_tokens: Optional[int], temperature: float) -> Tuple[str, int]:
+    if requests is None:  # pragma: no cover - optional dependency
+        raise RuntimeError("requests is required for the Ollama provider but is not installed.")
+    base_url = os.getenv("OLLAMA_BASE_URL", "http://127.0.0.1:11434")
+    model = CONFIG.model or os.getenv("OLLAMA_MODEL") or "llama3"
+    payload: Dict[str, Any] = {
+        "model": model,
+        "prompt": prompt,
+        "stream": False,
+        "options": {
+            "temperature": temperature,
+        },
+    }
+    if max_tokens is not None:
+        payload["options"]["num_predict"] = max_tokens
+    response = requests.post(f"{base_url.rstrip('/')}/api/generate", json=payload, timeout=CONFIG.timeout)
+    response.raise_for_status()
+    data = response.json()
+    content = data.get("response", "")
+    tokens = int(data.get("eval_count", 0))
+    return content, tokens
+
+
 def _dispatch(prompt: str, max_tokens: Optional[int], temperature: float) -> Tuple[str, int]:
     provider = CONFIG.provider.lower()
     if provider == "openai":
@@ -296,6 +319,8 @@ def _dispatch(prompt: str, max_tokens: Optional[int], temperature: float) -> Tup
         return _azure_request(prompt, max_tokens, temperature)
     if provider == "anthropic":
         return _anthropic_request(prompt, max_tokens, temperature)
+    if provider == "ollama":
+        return _ollama_request(prompt, max_tokens, temperature)
     if provider == "mock":
         return _mock_response(prompt, max_tokens, temperature)
     raise RuntimeError(f"Unsupported LLM provider '{CONFIG.provider}'.")

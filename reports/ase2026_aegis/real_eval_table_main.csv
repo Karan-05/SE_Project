@@ -1,0 +1,4 @@
+run_id,strategy,model,tasks_total,pass_all_tests,partial,failures,success_rate
+real_eval_20260308_194805,contract_first,mock-model,1,1,0,0,1.000
+real_eval_20260308_195546,contract_first,mock-model,200,180,0,20,0.900
+real_eval_20260308_195812,direct_baseline,mock-model,50,45,0,5,0.900

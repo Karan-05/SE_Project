@@ -1,0 +1,72 @@
+BEGIN_JSON
+{
+  "task_type": "architecture_doc",
+  "id": "56b3df85-e4f4-40ab-a975-2a9e6810866e",
+  "title": "Topcoder Review API - Challenge and Resource API Integration",
+  "summary": "Enhance the existing tc-review-api's GET /api/reviews endpoint to correctly fetch pending reviews by integrating with Challenge API and Resources API. The solution must filter reviews based on challenge status and user roles, update response format to include role information, and implement proper error handling and caching.",
+  "assumptions": [
+    "Access to the tc-review-api, challenge-api-v6, and resource-api-v6 repositories is available for reference and patch submission.",
+    "The existing ChallengeApiService in tc-review-api is functional and can be used as a pattern for ResourceApiService.",
+    "The frontend expects a consistent JSON response format including user role and filtered active reviews.",
+    "Caching strategies should align with existing project conventions or industry best practices for API response caching.",
+    "No new API endpoints are to be created; only enhancement of the existing GET /api/reviews endpoint is required."
+  ],
+  "plan": [
+    "Analyze the current implementation of ReviewController.getPendingReviews() to identify integration points and gaps.",
+    "Review ChallengeApiService implementation to understand API call patterns, error handling, and caching.",
+    "Design and implement a new ResourceApiService following the ChallengeApiService pattern to fetch user roles from Resources API.",
+    "Enhance getPendingReviews() to call Challenge API for challenge status and Resources API for user roles, filtering reviews accordingly.",
+    "Define and update TypeScript interfaces to type API responses from Challenge API and Resources API accurately.",
+    "Implement robust error handling for all external API calls with fallback or retry logic as appropriate.",
+    "Incorporate caching mechanisms for Challenge API and Resources API responses to optimize performance.",
+    "Update the response format of GET /api/reviews to include user role information and ensure consistent structure for frontend.",
+    "Write documentation detailing the changes, usage, and testing instructions.",
+    "Create and submit a git patch against the feat/review-opportunities branch of tc-review-api repository."
+  ],
+  "artifacts": {
+    "design_doc_md": "## Problem Summary\n- The current GET /api/reviews endpoint in tc-review-api does not correctly fetch pending reviews for users with different roles.\n- It lacks integration with Challenge API for challenge status and Resources API for user roles.\n- The response format does not include user role information, causing frontend inconsistencies.\n\n## Proposed Approach\n- Enhance getPendingReviews() to integrate with Challenge API and Resources API.\n- Use ChallengeApiService to verify challenge status and filter active challenges.\n- Implement ResourceApiService to fetch user roles per challenge and filter reviews accordingly.\n- Update response format to include user roles and maintain consistent structure.\n- Implement error handling and caching for external API calls.\n\n## File-Level Plan\n- Modify src/controllers/ReviewController.ts to update getPendingReviews() method.\n- Create src/services/ResourceApiService.ts modeled after ChallengeApiService.\n- Update src/interfaces/apiResponses.ts to add new TypeScript interfaces for Resources API responses.\n- Add caching logic in services or use existing cache utilities.\n- Update documentation files (e.g., docs/review-api.md) with new integration details.\n\n## API / Interface Changes\n- No new endpoints; enhance GET /api/reviews.\n- Add user role information in the response JSON structure.\n- Define new TypeScript interfaces for Resources API response.\n- Extend existing challenge status interfaces if necessary.\n\n## Constraints & SLAs\n- API response time should remain under 500ms under normal load.\n- Caching TTL (time-to-live) for external API responses should balance freshness and performance (e.g., 5 minutes).\n- Error handling must avoid endpoint failure; degrade gracefully with partial data if needed.\n- Must comply with existing NestJS and Prisma ORM patterns.\n\n## Risks & Trade-offs\n- Increased complexity in getPendingReviews() may affect maintainability.\n- External API failures could impact review data accuracy; mitigated by error handling and caching.\n- Caching stale data risks showing outdated challenge or role info; TTL tuning required.\n- No new endpoints limits flexibility but avoids API surface expansion.\n\n## Edge Cases\n- User has no roles returned from Resources API.\n- Challenge API returns inactive or missing challenge data.\n- Partial failure in one external API call while the other succeeds.\n- Network latency or timeout during API calls.\n\n## Acceptance Checklist\n- [ ] getPendingReviews() correctly integrates Challenge and Resources APIs.\n- [ ] Response includes user role information per challenge.\n- [ ] Reviews filtered based on challenge status and user roles.\n- [ ] Proper TypeScript interfaces defined and used.\n- [ ] Error handling and caching implemented.\n- [ ] Documentation updated with integration and testing instructions.\n- [ ] Git patch submitted against feat/review-opportunities branch."
+    ,
+    "mermaid_diagram": "graph TD\n  ReviewController -->|calls| ChallengeApiService\n  ReviewController -->|calls| ResourceApiService\n  ChallengeApiService -->|GET /v5/challenges/:challengeId| ChallengeAPI\n  ResourceApiService -->|GET /resources?challengeId=:challengeId| ResourcesAPI\n  ReviewController -->|returns| Frontend",
+    "interfaces": [
+      {
+        "producer": "ChallengeApiService",
+        "consumer": "ReviewController",
+        "protocol": "HTTP REST",
+        "payload": "Challenge details with status fields (e.g., active flag, dates)"
+      },
+      {
+        "producer": "ResourceApiService",
+        "consumer": "ReviewController",
+        "protocol": "HTTP REST",
+        "payload": "User roles per challenge including role type and permissions"
+      },
+      {
+        "producer": "ReviewController",
+        "consumer": "Frontend",
+        "protocol": "HTTP REST",
+        "payload": "Pending reviews list with challenge info and user role metadata"
+      }
+    ],
+    "tradeoffs": [
+      "Using existing ChallengeApiService pattern for ResourceApiService ensures consistency but may limit optimization opportunities specific to Resources API.",
+      "Caching improves performance but risks serving stale data; TTL must be carefully chosen.",
+      "Enhancing existing endpoint avoids API proliferation but adds complexity to getPendingReviews().",
+      "Strict TypeScript typing improves maintainability but requires ongoing sync with external API changes."
+    ]
+  },
+  "validations": [
+    "Verified coverage of all requested integration points: Challenge API and Resources API.",
+    "Ensured proposed design includes error handling and caching as per guidelines.",
+    "Confirmed inclusion of TypeScript interface updates and response format enhancements.",
+    "Checked that acceptance checklist aligns with all core requirements and implementation guidelines."
+  ],
+  "confidence": 0.95,
+  "stop_reason": "completed",
+  "rubric_self_check": {
+    "coverage": "All core requirements and implementation guidelines addressed, including API integration, filtering logic, response format, error handling, and caching.",
+    "specificity": "Detailed file-level plan, interface definitions, constraints, edge cases, and trade-offs provided.",
+    "actionability": "Clear step-by-step plan and acceptance checklist support straightforward implementation and validation.",
+    "overall_notes": "The architecture document fully satisfies the prompt requirements and rubric criteria with no missing critical information."
+  }
+}
+END_JSON

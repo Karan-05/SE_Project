@@ -1,0 +1,1 @@
+{"content": "[MOCK] 429f8bf30ecc83a2 :: You are executing decomposition strategy 'semantic_diff'. Problem statement: Return the nth Fibonacci number.  Implement", "tokens": 129, "elapsed": 4.332978278398514e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "plan-runner", "caller": "semantic_diff:initial"}}

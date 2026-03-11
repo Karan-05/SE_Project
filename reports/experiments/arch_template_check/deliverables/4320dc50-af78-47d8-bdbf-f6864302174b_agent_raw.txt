@@ -1,0 +1,64 @@
+BEGIN_JSON
+{
+  "task_type": "architecture_doc",
+  "id": "4320dc50-af78-47d8-bdbf-f6864302174b",
+  "title": "Topcoder NestJS Autopilot - Event-Based Phase Transition Fixes",
+  "summary": "This design document addresses fixes to the event-based phase transition mechanism in the Topcoder Autopilot service. It covers interface compatibility restoration, precise phase cancellation, improved handling of past dates, enhanced logging, accurate return values, payload augmentation, and command constants definition. The goal is to improve reliability, maintain backward compatibility, and maintainability of the system.",
+  "assumptions": [
+    "Access to the latest develop branch of https://github.com/topcoder-platform/autopilot-v6.git is available for implementation and testing.",
+    "Existing consumers of ChallengeUpdatePayload and CommandPayload expect original interface formats without phase-specific fields.",
+    "Kafka topics and message schemas for autopilot.phase.transition are stable and backward compatibility is required.",
+    "The system uses NestJS 10+, TypeScript 5+, and @nestjs/schedule module as described.",
+    "Logging standards and conventions are consistent across the codebase and can be improved without breaking integrations.",
+    "The commands cancel_schedule and reschedule_phase are currently hardcoded strings in the codebase."
+  ],
+  "plan": [
+    "Analyze current ChallengeUpdatePayload and CommandPayload interfaces and restore them to original versions without phase-specific fields.",
+    "Implement a mock API service within the Autopilot service to fetch phase details when needed, ensuring backward compatibility.",
+    "Modify cancel_schedule command handler to respect the optional phaseId parameter, enabling cancellation of individual phases or all phases if phaseId is absent.",
+    "Update scheduling logic to immediately process phase transitions with past dates instead of throwing errors, ensuring consistent recovery and normal operation behavior.",
+    "Revise logging statements to only log 'Successfully rescheduled phase' when a job is actually rescheduled, and replace 'Canceled scheduled transition' with clearer messages reflecting cleanup actions.",
+    "Refactor cancelScheduledTransition method to return false when no job is found and true only when cancellation occurs, including consistent error handling.",
+    "Enhance the payload published to autopilot.phase.transition by adding a distinct challengeId field while maintaining backward compatibility.",
+    "Define command constants such as cancel_schedule and reschedule_phase in a new config.constants.ts file and refactor the codebase to use these constants with appropriate documentation.",
+    "Develop a git patch against the latest develop branch incorporating all fixes and improvements.",
+    "Test all changes thoroughly including unit tests, integration tests, and manual validation of Kafka message formats and logs."
+  ],
+  "artifacts": {
+    "design_doc_md": "## Problem Summary\n- The current Autopilot event-based phase transition system has several issues affecting reliability and maintainability.\n- Interface changes broke backward compatibility with existing consumers.\n- Phase cancellation is overly broad, affecting all phases instead of specific ones.\n- Past dates cause errors rather than immediate processing.\n- Logging is inconsistent and sometimes misleading.\n- Return values from cancellation methods do not reflect actual outcomes.\n- Payloads lack explicit challenge ID fields.\n- Commands are hardcoded, reducing maintainability.\n\n## Proposed Approach\n- Restore original ChallengeUpdatePayload and CommandPayload interfaces.\n- Introduce a mock API service to fetch phase details when necessary.\n- Update cancel_schedule command to handle optional phaseId for targeted cancellation.\n- Handle past dates by processing immediately, aligning recovery and normal flows.\n- Improve logging messages for clarity and accuracy.\n- Correct cancelScheduledTransition return values to reflect actual cancellation status.\n- Add explicit challengeId field to phase transition payloads.\n- Define command constants in a dedicated config.constants.ts file and refactor usage.\n\n## File-Level Plan\n- Interfaces.ts: Revert ChallengeUpdatePayload and CommandPayload to original definitions.\n- MockApiService.ts: Implement mock service for phase detail retrieval.\n- CommandHandler.ts: Update cancel_schedule command logic to respect phaseId.\n- SchedulerService.ts: Modify scheduling logic to process past dates immediately.\n- LoggerService.ts or relevant logging modules: Refine log message content and consistency.\n- TransitionService.ts: Fix cancelScheduledTransition return values.\n- Publisher.ts: Add challengeId to autopilot.phase.transition payload.\n- config.constants.ts: Create and define command constants.\n- Refactor all code references to command strings to use constants.\n\n## API / Interface Changes\n- ChallengeUpdatePayload and CommandPayload interfaces restored to original (no phase-specific fields).\n- New mock API service interface for fetching phase details.\n- cancel_schedule command accepts optional phaseId parameter.\n- autopilot.phase.transition Kafka message payload includes new challengeId field.\n- config.constants.ts exports command constants for use across the codebase.\n\n## Constraints & SLAs\n- Backward compatibility with existing message formats and consumers must be maintained.\n- Changes must not disrupt ongoing challenge phase transitions.\n- System must handle recovery scenarios gracefully without throwing errors on past dates.\n- Logging improvements must retain sufficient detail for debugging and auditing.\n- Patch submission must be compatible with NestJS 10+, TypeScript 5+, and existing tooling.\n\n## Risks & Trade-offs\n- Introducing a mock API service adds maintenance overhead but preserves interface compatibility.\n- Changing cancellation behavior could impact existing workflows if not carefully tested.\n- Immediate processing of past dates might cause race conditions if not synchronized properly.\n- Modifying log messages risks losing historical context if not carefully worded.\n- Adding challengeId field requires consumer updates or backward compatibility layers.\n- Defining command constants improves maintainability but requires thorough refactoring.\n\n## Edge Cases\n- cancel_schedule with invalid or non-existent phaseId should fail gracefully.\n- Phase transitions scheduled exactly at current time or slightly in the past.\n- Simultaneous commands for cancel_schedule and reschedule_phase for the same phase.\n- Consumers that do not expect challengeId in payload must not break.\n- Recovery scenarios where multiple past events arrive in quick succession.\n\n## Acceptance Checklist\n- [ ] ChallengeUpdatePayload and CommandPayload interfaces restored without phase fields.\n- [ ] Mock API service implemented and integrated.\n- [ ] cancel_schedule command respects optional phaseId parameter.\n- [ ] Past date phase transitions processed immediately without errors.\n- [ ] Log messages updated for clarity and consistency.\n- [ ] cancelScheduledTransition returns accurate boolean status.\n- [ ] challengeId field added to autopilot.phase.transition payload.\n- [ ] Command constants defined and used throughout codebase.\n- [ ] Comprehensive unit and integration tests pass.\n- [ ] Git patch submitted against latest develop branch.\n",
+    "mermaid_diagram": "graph TD\n  A[Challenge Event] -->|Trigger| B[Autopilot Service]\n  B --> C{Command Handler}\n  C -->|cancel_schedule with phaseId| D[Cancel Specific Phase Job]\n  C -->|cancel_schedule without phaseId| E[Cancel All Phase Jobs]\n  C -->|reschedule_phase| F[Schedule Phase Transition]\n  F --> G[Scheduler Service]\n  G --> H[Kafka Publisher]\n  H --> I[autopilot.phase.transition Topic]\n  B --> J[Mock API Service]\n  J --> B\n  B --> K[Logging Service]\n  K --> B\n  B --> L[Config Constants]\n  L --> C\n",
+    "interfaces": [
+      {
+        "producer": "Autopilot Service",
+        "consumer": "Challenge API / Kafka Consumers",
+        "protocol": "Kafka JSON messages",
+        "payload": {
+          "ChallengeUpdatePayload": "Original interface without phase-specific fields",
+          "CommandPayload": "Original interface without phase-specific fields",
+          "PhaseTransitionPayload": {
+            "challengeId": "string",
+            "phaseId": "string",
+            "scheduledTime": "ISO8601 string",
+            "otherFields": "as per existing spec"
+          }
+        }
+      },
+      {
+        "producer": "Autopilot Service",
+        "consumer": "Internal Scheduler and Command Handlers",
+        "protocol": "Internal method calls",
+        "payload": {
+          "cancel_schedule": {
+            "projectId": "string",
+            "phaseId": "optional string"
+          },
+          "reschedule_phase": {
+            "projectId": "string",
+            "phaseId": "string",
+            "newTime": "ISO8601 string"
+          }
+        }
+      }
+    ],
+    "tradeoffs": [
+      "Restoring original interfaces preserves backward compatibility but

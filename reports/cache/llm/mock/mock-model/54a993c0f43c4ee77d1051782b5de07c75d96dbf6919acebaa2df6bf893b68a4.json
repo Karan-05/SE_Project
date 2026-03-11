@@ -1,0 +1,1 @@
+{"content": "[MOCK] 226b4534391e012d :: You are repairing code produced by strategy 'failure_mode_first'. Problem statement: Return degree counts for each verte", "tokens": 151, "elapsed": 6.709014996886253e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "failure_mode_first:repair"}}

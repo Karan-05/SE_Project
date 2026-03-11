@@ -1,0 +1,36 @@
+{
+  "task_id": "7630d39a-0fbd-485a-b7a7-0662c88c57e4",
+  "run_id": "arch_template_check",
+  "raw_path": "/Users/karanallagh/Desktop/DataCollector/reports/experiments/arch_template_check/deliverables/7630d39a-0fbd-485a-b7a7-0662c88c57e4_agent_raw.txt",
+  "raw_length": 3499,
+  "sentinel_found": false,
+  "attempts": [
+    {
+      "mode": "sentinel",
+      "success": false,
+      "error": "sentinel_block_missing"
+    },
+    {
+      "mode": "balanced",
+      "success": false,
+      "error": "no_balanced_candidate"
+    },
+    {
+      "mode": "repair",
+      "success": false,
+      "error": "Unable to locate valid JSON block (None)"
+    }
+  ],
+  "errors": [
+    {
+      "stage": "repair",
+      "message": "Unable to locate valid JSON block (None)"
+    }
+  ],
+  "repair_attempted": true,
+  "repair_used": false,
+  "max_repairs": 1,
+  "llm_provider": "openai",
+  "repair_path": "/Users/karanallagh/Desktop/DataCollector/reports/experiments/arch_template_check/deliverables/7630d39a-0fbd-485a-b7a7-0662c88c57e4_agent_repair.txt",
+  "status": "failed"
+}

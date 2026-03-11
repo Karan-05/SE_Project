@@ -1,0 +1,16 @@
+{
+  "task_id": "number_primes_ood",
+  "tests": [
+    {
+      "name": "sample_0",
+      "mode": "call",
+      "status": "pass",
+      "expected": "4",
+      "output": "4",
+      "error": "",
+      "input": "[10]",
+      "kwargs": "{}",
+      "duration": 3.654201282188296e-05
+    }
+  ]
+}

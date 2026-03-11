@@ -1,0 +1,1 @@
+{"content": "[MOCK] f378091af13139be :: You are repairing code produced by strategy 'role_decomposed'. Problem statement: Return the nth Fibonacci number. Imple", "tokens": 148, "elapsed": 4.624947905540466e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "role_decomposed:repair"}}

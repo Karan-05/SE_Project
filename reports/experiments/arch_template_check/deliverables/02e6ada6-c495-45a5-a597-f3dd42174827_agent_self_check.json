@@ -1,0 +1,6 @@
+{
+  "coverage": 1.0,
+  "specificity": 0.95,
+  "actionability": 0.95,
+  "overall_notes": "The architecture doc comprehensively covers problem, approach, constraints, risks, edge cases, and acceptance criteria with clear actionable steps and artifact plans."
+}

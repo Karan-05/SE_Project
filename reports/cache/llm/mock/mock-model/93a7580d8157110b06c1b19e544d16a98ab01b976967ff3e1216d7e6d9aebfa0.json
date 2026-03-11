@@ -1,0 +1,1 @@
+{"content": "[MOCK] d59276c24f72f4b3 :: You are executing decomposition strategy 'role_decomposed'. Problem statement: Return counts of characters as a dict sor", "tokens": 117, "elapsed": 3.999972250312567e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "plan-runner", "caller": "role_decomposed:initial"}}

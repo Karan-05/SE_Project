@@ -1,0 +1,22 @@
+{
+  "task_id": "dev_repo_array_sum",
+  "prompt": "Implement calculator.task.solve so that it returns the sum of a list of numbers. Use the repository structure and respect the provided tests.",
+  "dataset": "tiny_python_app_fixture",
+  "dataset_source": "dev_fixture_repo",
+  "repo_dir": "../../../real_repos/tiny_python_app",
+  "task_type": "bugfix",
+  "difficulty": "S",
+  "language": "python",
+  "entry_point": "solve",
+  "target_files": ["calculator/task.py"],
+  "allowed_edit_paths": ["calculator/task.py"],
+  "file_context": ["calculator/task.py"],
+  "apply_mode": "markers",
+  "markers": {"begin": "# BEGIN SOLUTION", "end": "# END SOLUTION"},
+  "test_commands": ["pytest -q"],
+  "env": {"PYTHONPATH": "."},
+  "task_is_fixture": true,
+  "task_is_real_world": false,
+  "reportable": false,
+  "allow_file_creation": false
+}

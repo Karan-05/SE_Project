@@ -1,0 +1,45 @@
+BEGIN_JSON
+{
+  "task_type": "non_actionable",
+  "id": "a6b76b39-abf8-4b77-b334-c10ca0e03e0f",
+  "title": "Topcoder O/R F2F - Edit Project Text area",
+  "summary": "The request is to remove the white background inside a textarea on the Edit Project page as part of a UI reskin. The task involves creating a patch for a Java/JSP web application, referencing design assets and setup documentation. However, this is a UI/frontend bug fix unrelated to data ETL pipelines or transformations.",
+  "assumptions": [
+    "The task is a UI bug fix related to CSS/HTML in a Java/JSP web app, not a data ETL pipeline design or implementation.",
+    "No source data, schema, transformation logic, or validation queries are provided or relevant.",
+    "The provided links are UI design and setup documentation, not data sources or ETL specs.",
+    "The task requires code patching and testing in a repo, not ETL blueprinting or SQL/python pipeline code."
+  ],
+  "plan": [
+    "Confirm that the task is a UI patch and not an ETL task.",
+    "Request access to the code repository containing the Edit Project page JSP and CSS files.",
+    "Identify the CSS or JSP code responsible for the textarea background styling.",
+    "Modify the CSS to remove or override the white background style for the textarea.",
+    "Test the change in Firefox to confirm the white background is removed without breaking existing functionality.",
+    "Create a minimal patch based on the latest 'reskin-or-only' branch, avoiding unnecessary file changes.",
+    "Submit the patch for review."
+  ],
+  "artifacts": {
+    "reason": "The task is a UI bug fix involving CSS/Java/JSP patching, not a data ETL pipeline design or implementation. No ETL blueprint or related artifacts can be produced from the given prompt.",
+    "what_needed": [
+      "Access to the code repository to create and test the patch.",
+      "Clarification if ETL-related work is required or if this is purely a UI/frontend bug fix.",
+      "Details on any data sources or transformation steps if ETL work is intended."
+    ]
+  },
+  "validations": [
+    "Reviewed the prompt and confirmed it describes a UI patch task, not an ETL pipeline design.",
+    "Cross-checked task_type hint and memory hints; they indicate missing ETL blueprint details but the prompt content is unrelated to ETL.",
+    "Ensured assumptions and plan align with the actual task scope and constraints.",
+    "Confirmed that producing ETL artifacts would be speculative and not actionable given the prompt."
+  ],
+  "confidence": 0.95,
+  "stop_reason": "non_actionable_ui_patch",
+  "rubric_self_check": {
+    "coverage": "Complete coverage of prompt scope and constraints with clear rationale for task_type selection.",
+    "specificity": "Specific assumptions and plan steps tailored to the UI patch context.",
+    "actionability": "Plan provides concrete next steps for patch creation and testing.",
+    "overall_notes": "Correctly identified task as non-ETL and non-actionable for ETL blueprint generation, preventing misaligned deliverables."
+  }
+}
+END_JSON

@@ -1,0 +1,26 @@
+BEGIN_JSON
+{
+  "task_type": "architecture_doc",
+  "id": "408a375f-ce88-4fc1-b6a2-d67595fa50bf",
+  "title": "Development Opportunity for AI Engineers Location Restricted",
+  "summary": "Design a scalable multi-agent AI system architecture supporting MCP servers and advanced context engineering techniques for LLMs, including RAG variants and document OCR. The system must integrate upstream and downstream enterprise systems via APIs and SSE, adhere to Responsible AI guidelines, and enable observability and evaluation of AI models. The architecture should support extensibility, microservice patterns, and efficient data pipelines.",
+  "assumptions": [
+    "No existing codebase or detailed technical specs provided; architecture inferred from job description.",
+    "Specific upstream/downstream system interfaces and data formats are undefined; assume REST/SSE APIs.",
+    "Performance SLAs and exact scale requirements are not specified; assume moderate enterprise scale.",
+    "Security, compliance, and deployment environment details are not provided; assume cloud-native deployment.",
+    "Responsible AI guidelines refer to standard ethical AI practices including bias mitigation and explainability."
+  ],
+  "plan": [
+    "Analyze job description and responsibilities to identify core system components and integration points.",
+    "Define the high-level architecture including multi-agent system, MCP servers, context engineering modules, and API layers.",
+    "Detail file-level modularization for core components and integration adapters.",
+    "Specify API and interface contracts for upstream data ingestion and downstream data consumption including SSE.",
+    "Establish constraints and SLAs focusing on availability, latency, and compliance with Responsible AI standards.",
+    "Identify risks such as model drift, data quality issues, and integration complexity; propose mitigation strategies.",
+    "Discuss trade-offs between monolithic vs microservice architectures, and between real-time vs batch processing.",
+    "Outline edge cases including incomplete data, OCR errors, and LLM context window limits.",
+    "Create an acceptance checklist covering functional, performance, security, and ethical criteria."
+  ],
+  "artifacts": {
+    "design_doc_md": "## Problem Summary\n- Need to develop and manage multi-agent AI systems with MCP servers and APIs.\n- Support advanced context engineering for LLMs including RAG variants and rerankers.\n- Integrate document OCR, data extraction, and enterprise system APIs.\n- Ensure compliance with Responsible AI guidelines and scalable microservice design.\n\n## Proposed Approach\n- Architect a modular multi-agent system with MCP servers exposing FastAPI endpoints.\n- Implement context engineering modules supporting RAG, GraphRAG, Hierarchical RAG, Context RAG, and rerankers.\n- Use OCR and NLP pipelines for document processing, interfaced via APIs.\n- Design upstream and downstream API integrations with REST and SSE for real-time data flow.\n- Incorporate observability with LLM evaluation tools like Ragas and DeepEval.\n\n## File-Level Plan\n- /agents/: Multi-agent system core logic and coordination.\n- /mcp_server/: MCP server implementation exposing FastAPI endpoints.\n- /context_engineering/: Modules for RAG variants, rerankers, and prompt management.\n- /document_processing/: OCR, RegEx, NLP extraction pipelines.\n- /api/: Upstream/downstream API clients and SSE handlers.\n- /utils/: Common utilities, logging, and Responsible AI compliance checks.\n\n## API / Interface Changes\n- Expose MCP server APIs via FastAPI for agent interaction.\n- Upstream API client to fetch required data for agents.\n- Downstream API and SSE endpoints for consumers to receive processed data.\n- Internal interfaces for context engineering modules and document processing pipelines.\n\n## Constraints & SLAs\n- Location constraint: team based in Bangalore or Chennai with occasional onsite visits.\n- Duration: 4 to 16 weeks with possible extension.\n- Working hours: 8

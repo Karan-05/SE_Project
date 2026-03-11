@@ -1,0 +1,6 @@
+run_id,task_category,status,count
+real_eval_20260308_194805,algo_coding,PASS_ALL_TESTS,1
+real_eval_20260308_195546,algo_coding,PASS_ALL_TESTS,180
+real_eval_20260308_195546,algo_coding,BUILD_FAIL,20
+real_eval_20260308_195812,algo_coding,PASS_ALL_TESTS,45
+real_eval_20260308_195812,algo_coding,BUILD_FAIL,5

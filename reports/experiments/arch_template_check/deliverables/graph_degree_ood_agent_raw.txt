@@ -1,0 +1,29 @@
+BEGIN_JSON
+{
+  "task_type": "architecture_doc",
+  "id": "graph_degree_ood",
+  "title": "Degree Map (ood)",
+  "summary": "Design an architecture to compute the degree counts for each vertex in a given graph, represented as an edge list. The solution should handle input validation, core degree counting logic, and provide a clear interface for integration. Acceptance criteria include correctness, clarity, and handling edge cases such as isolated vertices and empty graphs.",
+  "assumptions": [
+    "Input graph is provided as a list of edges, each edge represented by a pair of vertex identifiers.",
+    "Vertices are represented by integers or strings but primarily integers as per examples.",
+    "Degree counts include both in-degree and out-degree combined (undirected degree) unless otherwise specified.",
+    "No explicit constraints on graph size or performance requirements were provided.",
+    "Output format is a mapping from vertex to its degree count.",
+    "No existing codebase or repo context was provided, so the design is standalone and generic."
+  ],
+  "plan": [
+    "Define the problem scope and expected input/output formats clearly.",
+    "Design a modular approach separating input validation, degree counting logic, and output formatting.",
+    "Specify file-level organization for maintainability and testability.",
+    "Define the API or interface for the degree counting module, including input and output contracts.",
+    "Enumerate constraints, performance expectations, and SLAs if applicable.",
+    "Identify risks and trade-offs such as handling large graphs, memory usage, and input validation strictness.",
+    "Detail edge cases to be handled explicitly, such as empty graphs, isolated vertices, and malformed inputs.",
+    "Create an acceptance checklist to verify completeness and correctness of the implementation.",
+    "Produce a mermaid diagram to illustrate the architecture components and data flow.",
+    "Outline interfaces between components and external consumers.",
+    "Document trade-offs considered and rationale for chosen approach."
+  ],
+  "artifacts": {
+    "design_doc_md": "## Problem Summary\nThe task is to compute the degree counts for each vertex in a graph given as an edge list. Each edge connects two vertices, and the degree of a vertex is the number of edges incident to it. The solution must correctly handle all vertices appearing in the edges, including isolated vertices if specified, and return a mapping from vertex to its degree count.\n\n## Proposed Approach\nThe approach involves three main components: input validation, degree counting logic, and output formatting. Input validation ensures the edge list is well-formed (list of pairs). The degree counting logic iterates over edges, incrementing counts for each vertex encountered. The output is a dictionary mapping each vertex to its degree count. This modular approach supports maintainability and testing.\n\n## File-Level Plan\n- `degree_counter.py`: Core logic for degree counting and input validation.\n- `interfaces.py`: Defines input/output data contracts and API functions.\n- `tests/`: Unit tests covering normal and edge cases.\n- `README.md`: Usage instructions and design summary.\n\n## API / Interface Changes\n- Function `compute_degree_counts(edges: List[Tuple[int, int]]) -> Dict[int, int]`:\n  - Input: List of edges, each edge a tuple of two vertices.\n  - Output: Dictionary mapping vertex to degree count.\n  - Raises ValueError on invalid input.\n\n## Constraints &

@@ -1,0 +1,90 @@
+{
+  "task_id": "graph_degree_ood",
+  "strategy": "semantic_diff",
+  "attempt": 9,
+  "pass_rate": 0.0,
+  "plan_subtasks": [
+    "load base solution",
+    "apply semantic deltas",
+    "re-test",
+    "Generate minimal unit tests for critical behaviors",
+    "Add adversarial/edge-case tests",
+    "Run tests and interpret failures"
+  ],
+  "plan_tests": [
+    "critical unit tests",
+    "edge-case probes"
+  ],
+  "plan_diagnostics": {
+    "base_task": "baseline",
+    "num_deltas": "1",
+    "delta_note": "**Semantic Deltas:**\n\n- Base task: Likely returns adjacency or edge list information per vertex.\n- New task: Returns degree counts (number of edges) for each vertex instead of adjacency details.\n- Output changes from detailed edge data to aggregated numeric counts.\n- Validation now requires checking numeric degree correctness rather than edge presence.\n\n**Next steps:**\n\n- Refine plan to compute and return degree",
+    "planning_tokens": "152",
+    "planning_time": "1.434158"
+  },
+  "patch_summary": {
+    "phase": "initial"
+  },
+  "failing_tests": [
+    "sample_0",
+    "sample_1"
+  ],
+  "trace": [
+    "",
+    ""
+  ],
+  "feedback": [
+    "sample_0 expected {'0': 1, '1': 2, '2': 1} but saw {0: 1, 1: 2, 2: 1}",
+    "sample_1 expected {'1': 2} but saw {1: 2}"
+  ],
+  "reproduction": "inputs=[[[0, 1], [1, 2]]] kwargs={}",
+  "tests_run": [
+    {
+      "name": "sample_0",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'0': 1, '1': 2, '2': 1}",
+      "output": "{0: 1, 1: 2, 2: 1}",
+      "error": "",
+      "input": "[[[0, 1], [1, 2]]]",
+      "kwargs": "{}",
+      "duration": 2.258399035781622e-05
+    },
+    {
+      "name": "sample_1",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'1': 2}",
+      "output": "{1: 2}",
+      "error": "",
+      "input": "[[[1, 1]]]",
+      "kwargs": "{}",
+      "duration": 6.833986844867468e-06
+    }
+  ],
+  "llm_calls": 1,
+  "timeline": {
+    "attempt": 9,
+    "strategy": "semantic_diff",
+    "phase": "initial",
+    "events": {
+      "decompose": {
+        "start": "2026-03-06T12:53:27.028124",
+        "end": "2026-03-06T12:53:28.462454"
+      },
+      "solve": {
+        "start": "2026-03-06T12:53:28.462491",
+        "end": "2026-03-06T12:53:30.818323"
+      },
+      "tests": {
+        "start": "2026-03-06T12:53:30.818226",
+        "end": "2026-03-06T12:53:30.818278",
+        "duration_seconds": "0.000"
+      }
+    },
+    "meta": {
+      "llm_calls": "1"
+    }
+  },
+  "solution_preview": "def solve(edges):\n                deg = {}\n                for a,b in edges:\n                    deg[a] = deg.get(a,0)+1\n                    deg[b] = deg.get(b,0)+1\n                return deg"
+}

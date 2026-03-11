@@ -1,0 +1,14 @@
+{
+  "success_rate": 1.0,
+  "avg_reward": 72.54710576387244,
+  "avg_cost": 0.26106060606060605,
+  "avg_steps": 9.0,
+  "override_rate": 0.0,
+  "override_win_rate": 0.0,
+  "override_regret_rate": 0.0,
+  "harmful_fraction": 0.0,
+  "beneficial_fraction": 0.0,
+  "budgeted_success": 1.0,
+  "action_entropy": 0.9158558456076286,
+  "method": "cstride_imitation_only"
+}

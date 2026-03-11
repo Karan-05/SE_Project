@@ -1,0 +1,1 @@
+{"content": "The problem **\"Return the minimum coins needed to reach target\"** is typically a variation of the **coin change problem**, where you want to find the minimum", "tokens": 60, "elapsed": 2.452847832988482, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

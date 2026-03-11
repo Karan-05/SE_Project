@@ -1,0 +1,1 @@
+{"content": "[MOCK] 7d3f3975103dd518 :: You are executing decomposition strategy 'failure_mode_first'. Problem statement: Return the number of undirected edges.", "tokens": 139, "elapsed": 4.458997864276171e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "plan-runner", "caller": "failure_mode_first:initial"}}

@@ -1,0 +1,1 @@
+{"content": "The problem \"Return the running prefix sums\" typically involves computing the cumulative sums of elements in a list or array, where each element in the output is the sum", "tokens": 56, "elapsed": 1.0723526669899002, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

@@ -1,0 +1,31 @@
+BEGIN_JSON
+{
+  "task_type": "repo_patch",
+  "id": "adb6dd4a-998d-4e2e-b3bc-155f089b0581",
+  "title": "Topcoder Admin App - Add SSOLogin to User Management",
+  "summary": "Enhance the system-admin app in platform-ui by adding SSO Login management. This includes adding a new 'SSO Logins' option to the Edit dropdown in user management, displaying a dialog with all SSO logins for a user, and integrating with the Identity Service endpoints for fetching, adding, and deleting SSO logins. The patch must be based on the feat/system-admin branch at or beyond commit c367efecfc89a4d66f5113a91899e194ccb1bd9c and preserve existing test integrity and code quality standards.",
+  "assumptions": [
+    "The platform-ui repo is accessible and the feat/system-admin branch is checked out at or beyond the specified commit.",
+    "Admin credentials for testing will be available as stated, but are not included here.",
+    "The Identity Service endpoints behave as documented in the provided swagger.yaml and are reachable during testing.",
+    "No unit tests are required to be added, but existing tests must not break.",
+    "The UI framework and coding standards in platform-ui are known and must be followed; no refactoring or style changes outside the scope of the feature.",
+    "The dialog UI for SSO Logins will be consistent with existing modal/dialog styles in the system-admin app.",
+    "The patch will include a README for deployment/configuration if any changes are needed, and a validation markdown describing manual test steps."
+  ],
+  "plan": [
+    "Clone and checkout the platform-ui repo, switch to feat/system-admin branch at the specified commit or later.",
+    "Analyze the user management component to locate the Edit dropdown and identify where to add the 'SSO Logins' option.",
+    "Implement the dropdown addition to include 'SSO Logins' as a selectable option.",
+    "Create a new dialog component to display the list of SSO logins for a selected user, following existing UI patterns.",
+    "Integrate the dialog with the backend Identity Service endpoints: GET /users/{userId}/ssoUserLogins to fetch logins, POST /users/{userId}/ssoUserLogin to add a login, and DELETE /users/{userId}/ssoUserLogin to remove a login.",
+    "Ensure proper error handling and loading states in the dialog.",
+    "Test the new UI manually using admin credentials to verify fetching, adding, and deleting SSO logins works as expected without breaking existing functionality.",
+    "Prepare a patch file (unified diff) against the feat/system-admin branch.",
+    "Write a comprehensive README covering any deployment or configuration changes required by the patch.",
+    "Write a validation markdown file describing manual test steps and expected outcomes.",
+    "Verify no existing tests are broken by running the current test suite.",
+    "Document risks, rollback steps, and test plan in separate markdown files."
+  ],
+  "artifacts": {
+    "patch_diff_unified": "diff --git a/src/components/system-admin/users/UserEditDropdown.js b/src/components/system-admin/users/UserEditDropdown.js\nindex abcdef1..1234567 100644\n--- a/src/components/system-admin/users/UserEditDropdown.js\n+++ b/src/components/system-admin/users/UserEditDropdown.js\n@@ -45,6 +45,15 @@ function UserEditDropdown({ user, onClose }) {\n   return (\n     <Dropdown>\n       {/* existing dropdown items */}\n+      <Dropdown.Item onClick={() => openSsoLoginsDialog(user.id)}>\n+        SSO Logins\n+      </Dropdown.Item>\n     </Dropdown>\n   );\n }\n+\n

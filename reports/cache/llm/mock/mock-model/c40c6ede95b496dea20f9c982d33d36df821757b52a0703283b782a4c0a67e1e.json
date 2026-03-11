@@ -1,0 +1,1 @@
+{"content": "[MOCK] 22aad88046d08203 :: You are executing decomposition strategy 'contract_first'. Problem statement: Return the minimum coins needed to reach t", "tokens": 137, "elapsed": 4.62500611320138e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "plan-runner", "caller": "contract_first:initial"}}

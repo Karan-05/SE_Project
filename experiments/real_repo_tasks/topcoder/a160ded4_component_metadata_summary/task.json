@@ -1,0 +1,134 @@
+{
+  "task_id": "tc_arena_component_metadata_summary",
+  "prompt": "Topcoder Arena 3.0 SRM API backlog: when includeComponents=true the listing response must add language+status totals for the filtered+limited result set so the UI can render component coverage indicators. The metadata object should include componentLanguageTotals/componentStatusTotals counts that respect limit, difficulty, and tag filters.",
+  "dataset": "topcoder_arena_srm",
+  "dataset_source": "a160ded4-e34a-4989-b2a2-d09ead684045",
+  "repo_path": "experiments/real_repos/tc-template-node-postgres",
+  "language": "node",
+  "framework": "Express + Mocha",
+  "task_type": "feature",
+  "difficulty": "M",
+  "build_commands": [],
+  "test_commands": [
+    "npm test -- --reporter dot test/problems.components.meta.spec.js"
+  ],
+  "setup_commands": [
+    "npm ci --no-audit --no-fund"
+  ],
+  "target_files": [
+    "modules/Problems/services/ProblemsService.js"
+  ],
+  "file_context": [
+    "modules/Problems/services/ProblemsService.js",
+    "modules/Problems/controllers/ProblemsController.js",
+    "test/problems.components.meta.spec.js",
+    "data/problems.json"
+  ],
+  "apply_mode": "rewrite",
+  "allowed_edit_paths": [
+    "modules/Problems/**/*.js",
+    "test/problems.components.meta.spec.js",
+    "package.json",
+    "package-lock.json",
+    "config/test.json"
+  ],
+  "timeout_seconds": 420,
+  "env": {
+    "NODE_ENV": "development"
+  },
+  "task_is_fixture": false,
+  "task_is_real_world": true,
+  "reportable": true,
+  "dataset_source_type": "topcoder_challenge_record",
+  "metadata": {
+    "challenge_id": "a160ded4-e34a-4989-b2a2-d09ead684045",
+    "challenge_url": "https://www.topcoder.com/challenges/a160ded4-e34a-4989-b2a2-d09ead684045",
+    "api_endpoint": "GET /api/v1/problems",
+    "related_tests": [
+      "test/problems.components.meta.spec.js"
+    ],
+    "test_files": [
+      "test/problems.components.meta.spec.js",
+      "test/problems.list.spec.js",
+      "test/problems.tags.spec.js",
+      "test/problems.detail.spec.js"
+    ],
+    "implementation_target_files": [
+      "modules/Problems/services/ProblemsService.js"
+    ],
+    "support_files": [
+      "modules/Problems/controllers/ProblemsController.js",
+      "data/problems.json",
+      "config/test.json"
+    ],
+    "schema_hints": [
+      "data/problems.json contains problems with id, roundId, name, difficulty, tags, totalSubmissions, and components[{language,status,points}].",
+      "Component stats must be derived only from the filtered + limited problems array."
+    ],
+    "contract": [
+      {
+        "id": "component_metadata_totals",
+        "description": "When includeComponents=true, metadata.componentLanguageTotals and componentStatusTotals must summarize only the filtered and limited results.",
+        "category": "aggregation",
+        "tests": [
+          "SRM component metadata summary::aggregates language and status totals for filtered results"
+        ],
+        "keywords": [
+          "componentlanguagetotals",
+          "componentstatustotals",
+          "includecomponents"
+        ]
+      },
+      {
+        "id": "component_limit_respected",
+        "description": "Aggregations must respect appliedLimit when includeComponents=true so only the returned problems influence metadata.",
+        "category": "limit",
+        "tests": [
+          "SRM component metadata summary::respects the applied limit when aggregating component metadata"
+        ],
+        "keywords": [
+          "appliedlimit"
+        ]
+      },
+      {
+        "id": "deterministic_component_languages",
+        "description": "Per-problem componentLanguages arrays must be deduplicated and sorted case-insensitively.",
+        "category": "sorting",
+        "tests": [
+          "SRM component metadata summary::aggregates language and status totals for filtered results"
+        ],
+        "keywords": [
+          "componentlanguages"
+        ]
+      }
+    ],
+    "allowed_editable_files": {
+      "implementation": [
+        "modules/Problems/**/*.js"
+      ],
+      "tests": [
+        "test/problems.list.spec.js"
+      ],
+      "support": [
+        "data/problems.json",
+        "config/test.json",
+        "package.json",
+        "package-lock.json"
+      ]
+    },
+    "expected_files": [
+      "modules/Problems/services/ProblemsService.js"
+    ],
+    "oracle_patch_files": [
+      "modules/Problems/services/ProblemsService.js",
+      "test/problems.list.spec.js"
+    ],
+    "ground_truth_patch": "ground_truth.patch",
+    "repo_snapshot_sha256": "b5d35262031fffb59e4ece9e9d7bc9119912652f0e88b1c9109f0b471e778fc5",
+    "notes": "Expose per-language and per-status component counts for the filtered result set whenever includeComponents=true so arena dashboards can summarise coverage."
+  },
+  "runtime_family": "node",
+  "package_manager": "npm",
+  "requires_network": true,
+  "setup_timeout_sec": 420
+}

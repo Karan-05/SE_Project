@@ -1,0 +1,1 @@
+{"content": "[MOCK] 2e008e77192139b1 :: You are executing decomposition strategy 'contract_first'. Problem statement: Return degree counts for each vertex.  Imp", "tokens": 140, "elapsed": 4.542001988738775e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "plan-runner", "caller": "contract_first:initial"}}

@@ -1,0 +1,1 @@
+{"content": "[MOCK] 62a2e4c3b09f6090 :: You are repairing code produced by strategy 'direct_baseline'. Problem statement: Return the nth Fibonacci number. Imple", "tokens": 124, "elapsed": 3.917026333510876e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "direct_baseline:repair"}}

@@ -1,0 +1,44 @@
+{
+  "task_id": "graph_edges_stress",
+  "strategy": "semantic_diff",
+  "plan": {
+    "strategy": "semantic_diff",
+    "contract": {},
+    "patterns": [
+      "baseline"
+    ],
+    "subtasks": [
+      "load base solution",
+      "apply semantic deltas",
+      "re-test",
+      "Generate minimal unit tests for critical behaviors",
+      "Add adversarial/edge-case tests",
+      "Run tests and interpret failures",
+      "Repair implementation and re-run tests"
+    ],
+    "tests": [
+      "critical unit tests",
+      "edge-case probes"
+    ],
+    "diagnostics": {
+      "base_task": "baseline",
+      "num_deltas": "1",
+      "delta_note": "- Task output changes from listing edges or adjacency details to returning a single integer.\n- Focus shifts from describing graph structure to providing a numeric summary.\n- Semantic goal moves from representation to quantification of graph connectivity.\n- Input remains a graph, but output is simplified to a count rather than detailed data.",
+      "planning_tokens": "94",
+      "planning_time": "1.615033"
+    }
+  },
+  "rounds": [
+    {
+      "round": 0,
+      "phase": "initial",
+      "subtask": "plan",
+      "localized": false,
+      "pass_rate": 1.0,
+      "status": "passed",
+      "duration": 0.00014937500236555934,
+      "failing_tests": [],
+      "error_types": []
+    }
+  ]
+}

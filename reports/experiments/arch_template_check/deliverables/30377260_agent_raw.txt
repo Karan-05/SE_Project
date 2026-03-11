@@ -1,0 +1,69 @@
+BEGIN_JSON
+{
+  "task_type": "architecture_doc",
+  "id": 30377260,
+  "title": "Topcoder Admin App - Consolidate Skills Manager",
+  "summary": "This architecture document covers the consolidation of the current Skills Manager app from manage.topcoder.com into the system-admin app within platform-ui. The goal is to create a new 'Platform' tab with a 'Skills' link, remove rolesRequired restrictions for universal admin access, and clean up routing configurations in production and development environments. The solution must maintain existing functionality and pass all current tests without refactoring code styling.",
+  "assumptions": [
+    "Access to the feat/system-admin branch of platform-ui repository at or after commit c367efecfc89a4d66f5113a91899e194ccb1bd9c is available.",
+    "Admin credentials for testing will be provided via the Topcoder forum as stated.",
+    "The current Skills Manager app is fully functional and accessible at https://manage.topcoder.com/skills.",
+    "No unit tests are required to be added, but existing tests must remain passing.",
+    "No major refactoring or code style changes are permitted beyond integration changes.",
+    "Production and development routing configurations for manage.topcoder.com are accessible and modifiable.",
+    "The 'Permission Management' tab implementation in the system-admin app is a valid reference for UI/UX consistency."
+  ],
+  "plan": [
+    "Review the existing system-admin app codebase on the feat/system-admin branch to understand current tab and dropdown implementations, especially 'Permission Management'.",
+    "Analyze the current Skills Manager app implementation at manage.topcoder.com/skills, focusing on rolesRequired usage and routing configurations.",
+    "Design the integration approach to add a 'Platform' tab with a 'Skills' dropdown link that loads the Skills Manager app within the system-admin app context.",
+    "Modify the Skills Manager app to remove rolesRequired restrictions to allow access for all administrators in the system-admin app.",
+    "Update routing configurations in both production and development environments to remove references to manage.topcoder.com related to skills management, ensuring no conflicts or broken routes.",
+    "Implement the UI changes in platform-ui to add the new tab and link, and embed or route to the Skills Manager app accordingly.",
+    "Test the integrated solution with admin credentials to confirm the Skills Manager loads correctly, rolesRequired restrictions are lifted, and routing behaves as expected.",
+    "Verify that all existing tests in platform-ui pass without modification.",
+    "Document deployment and configuration changes in a comprehensive README.",
+    "Prepare a validation markdown file detailing testing steps and outcomes for the new functionality."
+  ],
+  "artifacts": {
+    "design_doc_md": "## Problem Summary\n- The Skills Manager app currently exists as a standalone app at manage.topcoder.com/skills.\n- Admin functionality is fragmented across multiple apps, complicating management.\n- Consolidation into system-admin app in platform-ui is required for unified admin experience.\n- Mandatory to remove rolesRequired restrictions and clean up routing configs.\n\n## Proposed Approach\n- Introduce a new 'Platform' tab in system-admin app with a dropdown link labeled 'Skills'.\n- Clicking 'Skills' loads the existing Skills Manager app within system-admin app UI.\n- Remove rolesRequired checks from Skills Manager to allow access for all administrators.\n- Clean up manage.topcoder.com routing configs in prod and dev to avoid redundancy.\n\n## File-Level Plan\n- Modify navigation components in platform-ui (e.g., Tabs or Sidebar) to add 'Platform' tab and 'Skills' link.\n- Refactor Skills Manager app to remove rolesRequired usage.\n- Update route configuration files for prod and dev environments to remove/manage manage.topcoder.com references.\n- Ensure integration points load Skills Manager app correctly within system-admin app context.\n\n## API / Interface Changes\n- No backend API changes expected; integration is UI and routing focused.\n- Skills Manager app interface remains unchanged except for rolesRequired removal.\n- Navigation interface updated to include new tab and dropdown.\n\n## Constraints & SLAs\n- Must maintain existing test pass rates; no breaking changes.\n- No code style or refactoring beyond integration scope.\n- Deployment must not disrupt current production environment.\n- Admin credentials required for validation testing.\n\n## Risks & Trade-offs\n- Risk of UI inconsistencies if Skills Manager app does not fully integrate visually.\n- Removing rolesRequired may expose functionality to unintended users if admin roles are not well defined.\n- Routing cleanup must be carefully tested to avoid breaking existing paths.\n- Trade-off between minimal changes and ensuring seamless integration.\n\n## Edge Cases\n- Skills Manager app may rely on rolesRequired for internal logic; removing it could cause unexpected behavior.\n- Users without proper admin rights accessing Skills Manager via new tab.\n- Route conflicts or caching issues in prod/dev after config cleanup.\n\n## Acceptance Checklist\n- [ ] New 'Platform' tab with 'Skills' dropdown link added to system-admin app.\n- [ ] Skills Manager app loads correctly within system-admin app without rolesRequired restrictions.\n- [ ] Routing configurations cleaned up in prod and dev environments.\n- [ ] Existing tests pass without modification.\n- [ ] README documents deployment and configuration changes.\n- [ ] Validation markdown file details testing steps and results.",
+    "mermaid_diagram": "graph TD\n  A[System-Admin App] -->|Dropdown Tab| B(Platform Tab)\n  B --> C(Skills Link)\n  C --> D[Skills Manager App]\n  D -.->|No rolesRequired| E[Admin Users]\n  subgraph Routing\n    F[Prod Config] -->|Cleaned| G[Manage.topcoder.com]\n    H[Dev Config] -->|Cleaned| G\n  end",
+    "interfaces": [
+      {
+        "producer": "System-Admin App (platform-ui)",
+        "consumer": "Skills Manager App",
+        "protocol": "Internal UI routing / React component embedding",
+        "payload": "Navigation event triggers loading of Skills Manager app UI without rolesRequired restriction"
+      },
+      {
+        "producer": "Admin Users",
+        "consumer": "System-Admin App",
+        "protocol": "Web UI",
+        "payload": "User navigates to Platform > Skills tab to access Skills Manager"
+      }
+    ],
+    "tradeoffs": [
+      "Removing rolesRequired simplifies access but may reduce security granularity; mitigated by restricting to administrators only.",
+      "Embedding Skills Manager in system-admin app improves UX but may introduce UI inconsistencies; minimized by reusing existing styles.",
+      "Cleaning routing configs reduces complexity but risks breaking legacy paths; mitigated by thorough testing and fallback routes.",
+      "No unit tests added to preserve current test stability, accepting limited test coverage on integration changes."
+    ]
+  },
+  "validations": [
+    "Reviewed all requirements and confirmed coverage in design document sections.",
+    "Cross-checked assumptions against provided repo and environment details.",
+    "Ensured plan addresses all mandatory requirements and integration steps.",
+    "Validated mermaid diagram accurately reflects component relationships and routing cleanup.",
+    "Confirmed risks and trade-offs are realistic and actionable.",
+    "Acceptance checklist aligns with project scope and testing expectations."
+  ],
+  "confidence": 0.95,
+  "stop_reason": "completed",
+  "rubric_self_check": {
+    "coverage": 1,
+    "specificity": 0.95,
+    "actionability": 1,
+    "overall_notes": "The architecture document fully addresses the prompt requirements with clear problem summary, approach, file-level plan, interface changes, constraints, risks, edge cases, and acceptance criteria. The design is actionable and specific with minimal assumptions."
+  }
+}
+END_JSON

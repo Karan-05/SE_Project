@@ -1,0 +1,1 @@
+{"content": "[MOCK] 4e18161311c2da7e :: You are repairing code produced by strategy 'failure_mode_first'. Problem statement: Return the sum of all integers. Imp", "tokens": 175, "elapsed": 4.750036168843508e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "failure_mode_first:repair"}}

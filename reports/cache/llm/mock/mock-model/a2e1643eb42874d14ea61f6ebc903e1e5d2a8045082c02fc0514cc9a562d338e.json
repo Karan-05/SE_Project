@@ -1,0 +1,1 @@
+{"content": "[MOCK] 0021cbbcfac5641a :: You are executing decomposition strategy 'direct_baseline'. Problem statement: Return counts of characters as a dict sor", "tokens": 105, "elapsed": 4.834029823541641e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "plan-runner", "caller": "direct_baseline:initial"}}

@@ -1,0 +1,1 @@
+{"content": "[MOCK] 917883796cc38cab :: You are executing decomposition strategy 'failure_mode_first'. Problem statement: Return counts of characters as a dict ", "tokens": 144, "elapsed": 5.082983989268541e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "plan-runner", "caller": "failure_mode_first:initial"}}

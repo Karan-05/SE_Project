@@ -1,0 +1,7 @@
+config_id,seed,success_rate,avg_reward,budgeted_success,notes,config
+0,2026,0.0,-24.38514105128141,0.0,aegis_variant,"{'lr': 0.0003, 'gamma': 0.95, 'epsilon_decay': 0.995, 'epsilon_final': 0.05, 'use_reduced_action_space': False, 'warm_start': 0, 'enable_hierarchy': True}"
+0,2027,0.0,-26.485620282310414,0.0,aegis_variant,"{'lr': 0.0003, 'gamma': 0.95, 'epsilon_decay': 0.995, 'epsilon_final': 0.05, 'use_reduced_action_space': False, 'warm_start': 0, 'enable_hierarchy': True}"
+0,2028,0.0,-34.953212051268125,0.0,aegis_variant,"{'lr': 0.0003, 'gamma': 0.95, 'epsilon_decay': 0.995, 'epsilon_final': 0.05, 'use_reduced_action_space': False, 'warm_start': 0, 'enable_hierarchy': True}"
+1,2026,0.2,-9.945887694958936,0.2,aegis_variant,"{'lr': 0.0003, 'gamma': 0.95, 'epsilon_decay': 0.995, 'epsilon_final': 0.05, 'use_reduced_action_space': False, 'warm_start': 0, 'enable_hierarchy': False}"
+1,2027,0.2,-5.254808686503237,0.2,aegis_variant,"{'lr': 0.0003, 'gamma': 0.95, 'epsilon_decay': 0.995, 'epsilon_final': 0.05, 'use_reduced_action_space': False, 'warm_start': 0, 'enable_hierarchy': False}"
+1,2028,0.2,-6.7657984293183135,0.2,aegis_variant,"{'lr': 0.0003, 'gamma': 0.95, 'epsilon_decay': 0.995, 'epsilon_final': 0.05, 'use_reduced_action_space': False, 'warm_start': 0, 'enable_hierarchy': False}"

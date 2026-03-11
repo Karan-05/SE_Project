@@ -1,0 +1,1 @@
+{"content": "[MOCK] 5c4c92d76eb0514a :: You are repairing code produced by strategy 'semantic_diff'. Problem statement: Return the sum of the main diagonal.  Me", "tokens": 178, "elapsed": 5.500041879713535e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "semantic_diff:repair"}}

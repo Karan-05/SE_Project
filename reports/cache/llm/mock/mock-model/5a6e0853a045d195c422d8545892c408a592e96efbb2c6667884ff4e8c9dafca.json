@@ -1,0 +1,1 @@
+{"content": "[MOCK] c8be7bdc4ebe1d0e :: You are repairing code produced by strategy 'simulation_trace'. Problem statement: Return the nth Fibonacci number. Impl", "tokens": 146, "elapsed": 4.292000085115433e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "simulation_trace:repair"}}

@@ -1,0 +1,244 @@
+{
+  "task_id": "tc_arena_problem_listing",
+  "strategy": "contract_first_baseline",
+  "plan": {
+    "strategy": "contract_first_baseline",
+    "contract": {
+      "inputs": "Underspecified",
+      "outputs": "Underspecified",
+      "constraints": "",
+      "edge_cases": "None"
+    },
+    "patterns": [],
+    "subtasks": [
+      "Validate inputs vs contract",
+      "Implement core logic",
+      "Check edge cases",
+      "Generate minimal unit tests for critical behaviors",
+      "Add adversarial/edge-case tests",
+      "Run tests and interpret failures",
+      "Repair implementation and re-run tests"
+    ],
+    "tests": [
+      "critical unit tests",
+      "edge-case probes"
+    ],
+    "diagnostics": {
+      "missing_fields": "constraints",
+      "contract_length": "32",
+      "audit_note": "The provided contract is very underspecified and incomplete for the described problem. Here is a detailed review and missing guarantees:\n\n### Current Contract Review\n- **inputs**: \"Underspecified\" \u2014 no details on what inputs are accepted or required.\n- **outputs**: \"Underspecified\" \u2014 no details on the structure or fields of the output.\n- **constraints**: empty \u2014 no constraints are specified.\n- **edge_cases**: \"None\" \u2014 no edge cases",
+      "planning_tokens": "210",
+      "planning_time": "2.070221"
+    },
+    "target_files": [
+      "modules/Problems/services/ProblemsService.js"
+    ],
+    "candidate_files": [
+      "test/problems.list.spec.js",
+      "modules/Problems/services/ProblemsService.js",
+      "modules/Problems/controllers/ProblemsController.js",
+      "data/problems.json",
+      "test/problems.components.meta.spec.js",
+      "test/problems.tags.spec.js",
+      "node_modules/js-beautify/CHANGELOG.md",
+      "node_modules/js-beautify/README.md",
+      "node_modules/globals/globals.json",
+      "node_modules/jws/readme.md",
+      "node_modules/lodash/core.js",
+      "node_modules/es5-ext/CHANGES"
+    ],
+    "subtask_file_map": {
+      "Validate inputs vs contract": [
+        "test/problems.list.spec.js"
+      ],
+      "Implement core logic": [
+        "modules/Problems/services/ProblemsService.js"
+      ],
+      "Check edge cases": [
+        "modules/Problems/controllers/ProblemsController.js"
+      ],
+      "Generate minimal unit tests for critical behaviors": [
+        "data/problems.json"
+      ],
+      "Add adversarial/edge-case tests": [
+        "test/problems.components.meta.spec.js"
+      ],
+      "Run tests and interpret failures": [
+        "test/problems.tags.spec.js"
+      ],
+      "Repair implementation and re-run tests": [
+        "node_modules/js-beautify/CHANGELOG.md"
+      ]
+    }
+  },
+  "rounds": [
+    {
+      "round": 0,
+      "phase": "initial",
+      "subtask": "plan",
+      "localized": false,
+      "pass_rate": 0.0,
+      "status": "tests_failed",
+      "duration": 1.56559145799838,
+      "failing_tests": [
+        "tests_0"
+      ],
+      "error_types": [
+        "fail::"
+      ],
+      "file_count": 1,
+      "multi_file_attempt": false,
+      "files_touched": [
+        "modules/Problems/services/ProblemsService.js"
+      ],
+      "inspected_files": [
+        "modules/Problems/services/ProblemsService.js",
+        "modules/Problems/controllers/ProblemsController.js",
+        "test/problems.list.spec.js",
+        "data/problems.json"
+      ],
+      "proposed_files": [
+        "modules/Problems/services/ProblemsService.js"
+      ],
+      "edit_metadata": {
+        "edit_mode": "edit_batch",
+        "localized_requested": true,
+        "fallback_requested": false,
+        "raw_metadata_keys": [
+          "localized"
+        ],
+        "applied_file_count": 1,
+        "proposed_file_count": 1,
+        "multi_file_applied": false,
+        "subtask_focus": "global",
+        "contract_coverage": 0.75,
+        "contract_satisfied": [
+          "difficulty_limit_metadata",
+          "sorted_round_id",
+          "component_lang_sorting"
+        ],
+        "contract_unsatisfied": [
+          "include_components_metadata"
+        ],
+        "contract_failure_categories": {
+          "aggregation": 1
+        },
+        "contract_unsatisfied_details": [
+          "include_components_metadata: When includeComponents=true, both metadata.componentLanguageTotals/componentStatusTotals and per-problem componentLanguages must reflect the filtered+limited set."
+        ],
+        "contract_fail_cases": []
+      }
+    },
+    {
+      "round": 1,
+      "phase": "repair",
+      "subtask": "Validate inputs vs contract",
+      "localized": true,
+      "pass_rate": 0.0,
+      "status": "tests_failed",
+      "duration": 0.9027415410382673,
+      "failing_tests": [
+        "tests_0"
+      ],
+      "error_types": [
+        "fail::"
+      ],
+      "file_count": 1,
+      "multi_file_attempt": false,
+      "files_touched": [
+        "modules/Problems/services/ProblemsService.js"
+      ],
+      "inspected_files": [
+        "modules/Problems/services/ProblemsService.js",
+        "modules/Problems/controllers/ProblemsController.js",
+        "test/problems.list.spec.js",
+        "data/problems.json"
+      ],
+      "proposed_files": [
+        "modules/Problems/services/ProblemsService.js"
+      ],
+      "edit_metadata": {
+        "edit_mode": "edit_batch",
+        "localized_requested": true,
+        "fallback_requested": false,
+        "raw_metadata_keys": [
+          "localized"
+        ],
+        "applied_file_count": 1,
+        "proposed_file_count": 1,
+        "multi_file_applied": false,
+        "subtask_focus": "Validate inputs vs contract",
+        "contract_coverage": 1.0,
+        "contract_satisfied": [
+          "difficulty_limit_metadata",
+          "sorted_round_id",
+          "include_components_metadata",
+          "component_lang_sorting"
+        ],
+        "contract_unsatisfied": [],
+        "contract_failure_categories": {},
+        "contract_unsatisfied_details": [],
+        "contract_fail_cases": []
+      }
+    },
+    {
+      "round": 2,
+      "phase": "repair",
+      "subtask": "Implement core logic",
+      "localized": true,
+      "pass_rate": 0.0,
+      "status": "tests_failed",
+      "duration": 1.5651215839898214,
+      "failing_tests": [
+        "tests_0"
+      ],
+      "error_types": [
+        "fail::"
+      ],
+      "file_count": 1,
+      "multi_file_attempt": false,
+      "files_touched": [
+        "modules/Problems/services/ProblemsService.js"
+      ],
+      "inspected_files": [
+        "modules/Problems/services/ProblemsService.js",
+        "modules/Problems/controllers/ProblemsController.js",
+        "test/problems.list.spec.js",
+        "data/problems.json"
+      ],
+      "proposed_files": [
+        "modules/Problems/services/ProblemsService.js"
+      ],
+      "edit_metadata": {
+        "edit_mode": "edit_batch",
+        "localized_requested": true,
+        "fallback_requested": false,
+        "raw_metadata_keys": [
+          "localized"
+        ],
+        "applied_file_count": 1,
+        "proposed_file_count": 1,
+        "multi_file_applied": false,
+        "subtask_focus": "Implement core logic",
+        "contract_coverage": 0.5,
+        "contract_satisfied": [
+          "difficulty_limit_metadata",
+          "sorted_round_id"
+        ],
+        "contract_unsatisfied": [
+          "include_components_metadata",
+          "component_lang_sorting"
+        ],
+        "contract_failure_categories": {
+          "aggregation": 1,
+          "sorting": 1
+        },
+        "contract_unsatisfied_details": [
+          "include_components_metadata: When includeComponents=true, both metadata.componentLanguageTotals/componentStatusTotals and per-problem componentLanguages must reflect the filtered+limited set.",
+          "component_lang_sorting: Per-problem componentLanguages arrays must be deduplicated and sorted case-insensitively to aid the UI."
+        ],
+        "contract_fail_cases": []
+      }
+    }
+  ]
+}

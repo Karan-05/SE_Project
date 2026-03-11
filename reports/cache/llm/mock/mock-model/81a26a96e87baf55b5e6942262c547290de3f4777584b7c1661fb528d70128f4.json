@@ -1,0 +1,1 @@
+{"content": "[MOCK] 1aee4eaf41de33f0 :: You are executing decomposition strategy 'semantic_diff'. Problem statement: Return the minimum coins needed to reach ta", "tokens": 139, "elapsed": 4.417030140757561e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "plan-runner", "caller": "semantic_diff:initial"}}

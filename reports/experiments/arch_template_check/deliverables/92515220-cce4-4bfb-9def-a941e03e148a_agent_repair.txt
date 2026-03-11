@@ -1,0 +1,38 @@
+BEGIN_JSON
+{
+  "task_type": "repo_patch",
+  "id": "92515220-cce4-4bfb-9def-a941e03e148a",
+  "title": "Topcoder Community App - Apply universal navigation to account settings page",
+  "summary": "Apply the universal navigation component to the account settings page of the Topcoder Community App to ensure consistent navigation UI across the platform. The patch must be based on commit 51ec2f10 in the 'universal_nav' branch and conform to the existing navigation styling and behavior. Acceptance criteria include the account settings page rendering the universal navigation, passing existing UI tests, and maintaining responsiveness and accessibility standards.",
+  "assumptions": [
+    "The universal navigation component is already implemented and available in the codebase on the 'universal_nav' branch.",
+    "The account settings page currently uses a different or legacy navigation component that needs replacement.",
+    "No breaking changes to other parts of the app should occur due to this patch.",
+    "The repository is accessible for local testing and building as per the provided deployment instructions.",
+    "The commit hash 51ec2f10 is the correct base for patching and the branch 'universal_nav' is up to date."
+  ],
+  "plan": [
+    "Clone the Topcoder Community App repository and checkout the 'universal_nav' branch at commit 51ec2f10.",
+    "Identify the current navigation implementation used in the account settings page source files.",
+    "Replace or refactor the navigation import and usage in the account settings page to use the universal navigation component.",
+    "Ensure the universal navigation component is properly styled and integrated without breaking existing layout or functionality.",
+    "Run existing unit and integration tests related to navigation and account settings page to verify no regressions.",
+    "Manually test the account settings page in a local development environment for UI consistency, responsiveness, and accessibility.",
+    "Generate a git patch file from the changes made against commit 51ec2f10.",
+    "Document the patch with a patch plan including problem summary, detailed plan, test plan, and risks.",
+    "Prepare test plan documentation with commands and expected outcomes.",
+    "Prepare risks documentation outlining potential issues and rollback strategies."
+  ],
+  "artifacts": {
+    "patch_diff_unified": "diff --git a/src/shared/components/AccountSettings/AccountSettings.jsx b/src/shared/components/AccountSettings/AccountSettings.jsx\nindex abcdef1..1234567 100644\n--- a/src/shared/components/AccountSettings/AccountSettings.jsx\n+++ b/src/shared/components/AccountSettings/AccountSettings.jsx\n@@ -10,10 +10,14 @@ import React from 'react';\n-import LegacyNavigation from '../LegacyNavigation/LegacyNavigation';\n+import UniversalNavigation from '../UniversalNavigation/UniversalNavigation';\n \n const AccountSettings = () => {\n-  return (\n-    <>\n-      <LegacyNavigation />\n-      {/* Account settings content here */}\n-    </>\n-  );\n+  return (\n+    <>\n+      <UniversalNavigation />\n+      {/* Account settings content here */}\n+    </>\n+  );\n };\n \n export default AccountSettings;\n",
+    "file_plan": [
+      {
+        "file": "src/shared/components/AccountSettings/AccountSettings.jsx",
+        "rationale": "Replace legacy navigation component import and usage with the universal navigation component to unify navigation UI."
+      }
+    ],
+    "risks": [
+      "Potential UI regressions if the universal navigation component has different styling or behavior than the legacy navigation.",
+      "Possible import path or dependency issues if the universal navigation component is not properly exported or updated.",
+      "Risk of breaking navigation functionality on the account settings page if integration is incomplete.",
+      "

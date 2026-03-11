@@ -1,0 +1,28 @@
+BEGIN_JSON
+{
+  "task_type": "architecture_doc",
+  "id": "4320dc50-af78-47d8-bdbf-f6864302174b",
+  "title": "Topcoder NestJS Autopilot - Event-Based Phase Transition Fixes",
+  "summary": "This design document addresses fixes to the event-based phase transition mechanism in the Topcoder Autopilot service. It covers interface compatibility restoration, precise phase cancellation, improved handling of past dates, enhanced logging, accurate return values, payload augmentation, and command constants definition. The goal is to improve reliability, maintain backward compatibility, and maintainability of the system.",
+  "assumptions": [
+    "Access to the latest develop branch of https://github.com/topcoder-platform/autopilot-v6.git is available for implementation and testing.",
+    "Existing consumers of ChallengeUpdatePayload and CommandPayload expect original interface formats without phase-specific fields.",
+    "Kafka topics and message schemas for autopilot.phase.transition are stable and backward compatibility is required.",
+    "The system uses NestJS 10+, TypeScript 5+, and @nestjs/schedule module as described.",
+    "Logging standards and conventions are consistent across the codebase and can be improved without breaking integrations.",
+    "The commands cancel_schedule and reschedule_phase are currently hardcoded strings in the codebase."
+  ],
+  "plan": [
+    "Analyze current ChallengeUpdatePayload and CommandPayload interfaces and restore them to original versions without phase-specific fields.",
+    "Implement a mock API service within the Autopilot service to fetch phase details when needed, ensuring backward compatibility.",
+    "Modify cancel_schedule command handler to respect the optional phaseId parameter, enabling cancellation of individual phases or all phases if phaseId is absent.",
+    "Update scheduling logic to immediately process phase transitions with past dates instead of throwing errors, ensuring consistent recovery and normal operation behavior.",
+    "Revise logging statements to only log 'Successfully rescheduled phase' when a job is actually rescheduled, and replace 'Canceled scheduled transition' with clearer messages reflecting cleanup actions.",
+    "Refactor cancelScheduledTransition method to return false when no job is found and true only when cancellation occurs, including consistent error handling.",
+    "Enhance the payload published to autopilot.phase.transition by adding a distinct challengeId field while maintaining backward compatibility.",
+    "Define command constants such as cancel_schedule and reschedule_phase in a new config.constants.ts file and refactor the codebase to use these constants with appropriate documentation.",
+    "Develop a git patch against the latest develop branch incorporating all fixes and improvements.",
+    "Test all changes thoroughly including unit tests, integration tests, and manual validation of Kafka message formats and logs."
+  ],
+  "artifacts": {
+    "design_doc_md": "## Problem Summary\n- The current Autopilot event-based phase transition system has several issues affecting reliability and maintainability.\n- Interface changes broke backward compatibility with existing consumers.\n- Phase cancellation is overly broad, affecting all phases instead of specific ones.\n- Past dates cause errors rather than immediate processing.\n- Logging is inconsistent and sometimes misleading.\n- Return values from cancellation methods do not reflect actual outcomes.\n- Payloads lack explicit challenge ID fields.\n- Commands are hardcoded, reducing maintainability.\n\n## Proposed Approach\n- Restore original ChallengeUpdatePayload and CommandPayload interfaces.\n- Introduce a mock API service to fetch phase details when necessary.\n- Update cancel_schedule command to handle optional phaseId for targeted cancellation.\n- Handle past dates by processing immediately, aligning recovery and normal flows.\n- Improve logging messages for clarity and accuracy.\n- Correct cancelScheduledTransition return values to reflect actual cancellation status.\n- Add explicit challengeId field to phase transition payloads.\n- Define command constants in a dedicated config.constants.ts file and refactor usage.\n\n## File-Level Plan\n- Interfaces.ts: Revert ChallengeUpdatePayload and CommandPayload to

@@ -1,0 +1,30 @@
+BEGIN_JSON
+{
+  "task_type": "architecture_doc",
+  "id": "d29af94a-f951-479c-8f39-86a413c7c100",
+  "title": "72 Hours  Topcoder Review App  Challenge Review Edit Page Integration  Repost",
+  "summary": "This architecture document outlines the integration of real Review API endpoints into the Challenge Review Edit Page (ScorecardDetailsPage) and the Review/Appeals Tab in the Challenge Review Details page. It covers replacing mock data with live API calls, implementing full CRUD for appeals and appeal responses, enforcing role-based access control and phase gating, and integrating review progress indicators. The solution must maintain existing UI/UX patterns, responsiveness, and use SWR for data fetching.",
+  "assumptions": [
+    "Access to platform-ui repo on feat/review branch is available for patching.",
+    "Review API and Challenge API endpoints are stable and accessible as per provided URLs.",
+    "TypeScript interfaces for Review API DTOs will be derived from API specs or existing code.",
+    "Role-based access control and phase gating logic is partially implemented and will be extended.",
+    "No backend changes are required beyond consuming existing APIs.",
+    "Testing environments with different user roles and challenge phases are available for validation."
+  ],
+  "plan": [
+    "Analyze current platform-ui codebase focusing on ScorecardDetailsPage and Review/Appeals Tab components.",
+    "Replace all mock data fetching hooks (useFetchReviews, fetchReviewInfo, fetchAppeals, fetchScorecards) with SWR hooks calling real Review API endpoints.",
+    "Implement full CRUD operations for appeals and appeal responses using Review API POST, PATCH, DELETE endpoints with proper role and phase gating.",
+    "Update Review/Appeals Tab in ChallengeDetailsContent to fetch and display real review and appeal data, including counts and reviewer info.",
+    "Integrate Review Progress API data into Active Reviews Page and Challenge Review Details Page header with real-time progress indicators.",
+    "Ensure all data fetching uses SWR with caching and revalidation, and handle loading and error states gracefully.",
+    "Maintain existing UI/UX patterns, responsiveness, and role-based UI behavior as per requirements.",
+    "Remove all mock data files and feature-flagged placeholders related to reviews and appeals.",
+    "Update or add TypeScript interfaces to accurately reflect Review API DTOs and responses.",
+    "Document integration details, including API usage, CRUD operations, role/phase gating, and testing instructions.",
+    "Create git patches against the feat/review branch of platform-ui repository.",
+    "Validate implementation with thorough testing across user roles and challenge phases."
+  ],
+  "artifacts": {
+    "design_doc_md": "## Problem Summary\n- Current Challenge Review Edit Page and Review/Appeals Tab use mock data instead of live Review API data.\n- Appeals and appeal responses lack full CRUD integration.\n- Review progress indicators are mocked and need real-time API integration.\n- Role-based access control and phase gating must be enforced consistently.\n\n## Proposed Approach\n- Replace all mock data fetching with SWR hooks calling Review API endpoints.\n- Implement appeals and appeal responses CRUD operations with proper API calls.\n- Update UI components to reflect real-time data and role-based behavior.\n- Integrate Review Progress API for real-time progress display in multiple UI locations.\n- Remove all mock data and feature flags related to review functionality.\n\n## File-Level Plan\n- Modify ScorecardDetailsPage component to replace mock hooks with SWR-based API calls.\n- Update appeals management components to support create, update, delete via Review API.\n- Refactor Review/Appeals Tab in ChallengeDetailsContent to fetch and display real data.\n- Add Review Progress display components to Active Reviews Page and Challenge Review Details Page header.\n- Update or add TypeScript interfaces for Review API DTOs.\n- Remove

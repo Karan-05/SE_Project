@@ -1,0 +1,1 @@
+{"content": "[MOCK] 9eafc854f731df86 :: You are repairing code produced by strategy 'direct_baseline'. Problem statement: Return the reversed string.  Memory Hi", "tokens": 174, "elapsed": 5.499983672052622e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "direct_baseline:repair"}}

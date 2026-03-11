@@ -1,0 +1,42 @@
+{
+  "task_id": "mixed_matrix",
+  "strategy": "failure_mode_first",
+  "plan": {
+    "strategy": "failure_mode_first",
+    "contract": {},
+    "patterns": [],
+    "subtasks": [
+      "enumerate failure modes",
+      "design tests",
+      "only then implement",
+      "Generate minimal unit tests for critical behaviors",
+      "Add adversarial/edge-case tests",
+      "Run tests and interpret failures",
+      "Repair implementation and re-run tests"
+    ],
+    "tests": [
+      "Certainly! Here are three high-risk failure modes for the task **\"Return the sum of the main diagonal\"** of a matrix, along with short rationales:\n\n1. **Incorrect indexing of diagonal elements**  \n   *Rationale:* The main diagonal elements are those where the row and column indices are equal (i.e., matrix[i][i]). Using incorrect indices (e.g., matrix[i][j] with i \u2260 j) will lead to summing the wrong",
+      "max constraints: extremely large inputs",
+      "degenerate: empty or single-element",
+      "adversarial: repeated values or cycles"
+    ],
+    "diagnostics": {
+      "failure_modes": "Certainly! Here are three high-risk failure modes for the task **\"Return the sum of the main diagonal\"** of a matrix, along with short rationales:\n\n1. **Incorrect indexing of diagonal elements**  \n   *Rationale:* The main diagonal elements are those where the row and column indices are equal (i.e., matrix[i][i]). Using incorrect indices (e.g., matrix[i][j] with i \u2260 j) will lead to summing the wrong;max constraints: extremely large inputs;degenerate: empty or single-element",
+      "planning_tokens": "127",
+      "planning_time": "2.859410"
+    }
+  },
+  "rounds": [
+    {
+      "round": 0,
+      "phase": "initial",
+      "subtask": "plan",
+      "localized": false,
+      "pass_rate": 1.0,
+      "status": "passed",
+      "duration": 0.0005256669828668237,
+      "failing_tests": [],
+      "error_types": []
+    }
+  ]
+}

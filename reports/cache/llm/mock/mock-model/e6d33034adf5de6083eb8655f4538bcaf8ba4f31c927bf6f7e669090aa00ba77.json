@@ -1,0 +1,1 @@
+{"content": "[MOCK] e76a8604cf2127c1 :: You are executing decomposition strategy 'role_decomposed'. Problem statement: Return the running prefix sums.  Implemen", "tokens": 113, "elapsed": 3.999972250312567e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "plan-runner", "caller": "role_decomposed:initial"}}

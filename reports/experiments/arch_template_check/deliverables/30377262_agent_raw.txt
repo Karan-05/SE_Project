@@ -1,0 +1,30 @@
+BEGIN_JSON
+{
+  "task_type": "data_etl",
+  "id": 30377262,
+  "title": "Topcoder Member API - Update Code with Postgres Schema Part 2",
+  "summary": "This task involves updating the Topcoder Member API code to remove dependencies on Informix, DynamoDB, and ElasticSearch, and use PostgreSQL with Prisma ORM as the sole backend database. The scope is limited to SearchController and StatisticsController. The ETL pipeline includes extracting member data from the existing API JSON dumps, transforming it to fit the Prisma schema, and loading it into a PostgreSQL 16.3 database. Validation requires ensuring test data matches the live API responses and that existing business logic is preserved.",
+  "assumptions": [
+    "Prisma schema and updated Swagger documentation are available from the forum but not included here.",
+    "Access to the member API JSON data dumps from https://api.topcoder-dev.com/v5/members is possible for test data extraction.",
+    "Existing codebase and unit tests are accessible for integration and validation.",
+    "No changes to business logic are required, only data source and persistence updates.",
+    "Postman collections will be updated after data loading and API verification.",
+    "updatedAt and updatedBy fields are optional in the Prisma schema and code.",
+    "Local environment setup includes NodeJS, Prisma CLI, and PostgreSQL 16.3.",
+    "VPN access or AWS dependencies are to be removed or bypassed."
+  ],
+  "plan": [
+    "1. Extract: Download member data JSON files from the live API endpoint for test data.",
+    "2. Transform: Map the JSON data fields to the Prisma schema structure, handling optional fields like updatedAt and updatedBy.",
+    "3. Load: Develop a NodeJS script using Prisma ORM to load the transformed data into the PostgreSQL database.",
+    "4. Code Update: Refactor SearchController and StatisticsController to remove Informix, Dynamo, and ElasticSearch dependencies and use Prisma ORM for all database interactions.",
+    "5. Testing: Run existing unit tests to ensure no business logic is broken.",
+    "6. Validation: Verify that API responses from the updated local environment match the live API data for equivalent queries.",
+    "7. Postman: Update Postman collections to reflect the new API behavior and data source.",
+    "8. Documentation: Update README.md with setup instructions, environment variables, running tests, and verification steps.",
+    "9. Linting: Fix all lint errors in the updated codebase.",
+    "10. Final Review: Conduct a checklist-based acceptance review covering data completeness, API correctness, and code quality."
+  ],
+  "artifacts": {
+    "pipeline_spec": "## ETL Pipeline Specification\n\n### Sources\n- JSON data dumps from https://api.topcoder-dev.com/v5/members\n\n### Extraction\n- Download JSON files manually or via scripted HTTP GET requests.\n\n### Transformation\n- Parse JSON data.\n- Map fields to Prisma schema entities.\n- Handle optional fields (updatedAt, updatedBy) gracefully.\n- Normalize data formats (dates, enums).\n\n### Loading\n- Use Prisma ORM in NodeJS to insert/update records into PostgreSQL 16.3.\n- Implement idempotent loading to allow repeated runs without duplicates.\n\n### Cadence\n- One-time load for test data setup.\n\n

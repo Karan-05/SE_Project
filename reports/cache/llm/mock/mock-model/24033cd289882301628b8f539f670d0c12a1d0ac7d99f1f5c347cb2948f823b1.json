@@ -1,0 +1,1 @@
+{"content": "[MOCK] 5fd22b43082b21f0 :: You are executing decomposition strategy 'failure_mode_first'. Problem statement: Return the nth Fibonacci number.  Impl", "tokens": 134, "elapsed": 3.958994057029486e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "plan-runner", "caller": "failure_mode_first:initial"}}

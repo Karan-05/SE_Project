@@ -1,0 +1,1 @@
+{"content": "[MOCK] 4b7f5c34da992438 :: You are repairing code produced by strategy 'contract_first'. Problem statement: Return counts of characters as a dict s", "tokens": 183, "elapsed": 5.08397351950407e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "contract_first:repair"}}

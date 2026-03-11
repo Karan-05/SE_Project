@@ -1,0 +1,38 @@
+BEGIN_JSON
+{
+  "task_type": "repo_patch",
+  "id": "f537cf53-949f-42eb-ae9b-9659ba55820b",
+  "title": "Topcoder NestJS Autopilot  Winston Logger ECS Deployment Fix",
+  "summary": "Fix the Winston logger configuration in the Topcoder Autopilot NestJS service to prevent startup failures on AWS ECS due to attempts to write logs to a read-only filesystem. Implement an environment-based logging strategy that uses file logging in development and console-only logging in production unless overridden by an environment variable. Update logger service, configuration constants, environment validation, and documentation to support this strategy, ensuring container logging best practices and backward compatibility.",
+  "assumptions": [
+    "Access to the GitHub repository https://github.com/topcoder-platform/autopilot-v6.git is available for patch submission.",
+    "The develop branch is the target for the patch.",
+    "The existing logger service uses Winston with file transports that write to a 'logs' directory.",
+    "The environment variables NODE_ENV and ENABLE_FILE_LOGGING are used to control logging behavior.",
+    "ESLint and Prettier are configured and should be respected in code formatting.",
+    "The .env.example file exists and is the source for environment variable documentation.",
+    "The README.md and deployment documentation exist and can be updated with new logging configuration notes.",
+    "No breaking changes to existing logging behavior in development/local environments are allowed.",
+    "The patch will be tested in a containerized ECS-like environment to verify no file system write attempts occur in production mode."
+  ],
+  "plan": [
+    "Clone the repository and checkout the develop branch.",
+    "Modify src/common/services/logger.service.ts to implement conditional Winston transports:",
+    " - Use both console and file transports in development/local environments.",
+    " - Use console-only transport in production unless ENABLE_FILE_LOGGING=true.",
+    " - Remove hardcoded file transport in production by default.",
+    " - Ensure proper formatting and log levels are preserved.",
+    "Update src/common/constants/config.constants.ts to add default values for ENABLE_FILE_LOGGING (default false) and related logging config.",
+    "Update src/config/validation.ts to validate the new ENABLE_FILE_LOGGING environment variable as a boolean.",
+    "Modify .env.example to include ENABLE_FILE_LOGGING with description and default value.",
+    "Update README.md to document the new environment variable, logging strategy per environment, and ECS deployment notes.",
+    "Add a troubleshooting section for logging issues related to ECS deployment.",
+    "Test the changes locally in development mode to verify file logging works.",
+    "Test the changes in a production-like environment (NODE_ENV=production) to verify no file writes and console logging only unless override is enabled.",
+    "Run ESLint and Prettier to ensure code style compliance.",
+    "Prepare a unified git patch against the latest develop commit including all changes.",
+    "Write a test plan with commands to validate the patch.",
+    "Document risks, rollback steps, and validation strategy."
+  ],
+  "artifacts": {
+    "patch_diff_unified": "diff --git a/src/common/services/logger.service.ts b/src/common/services/logger.service.ts\nindex abcdef1..1234567 100644\n--- a/src/common/services/logger.service.ts\n+++ b/src/common/services/logger.service.ts\n@@ -10,20 +10,55 @@ import { createLogger, transports, format } from 'winston';\n \n const { combine, timestamp, printf, colorize } = format;\n \n-const logFormat = printf(({ level, message, timestamp }) => {\n-  return `${timestamp} [${level}]: ${message}`;\n-});\n+\n+const logFormat = printf(({ level, message, timestamp }) => {\n+  return `${timestamp} [${level}]: ${message}`;\

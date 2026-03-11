@@ -1,0 +1,1 @@
+{"content": "[MOCK] 4c8d54e335c85521 :: You are executing decomposition strategy 'simulation_trace'. Problem statement: Return the nth Fibonacci number.  Implem", "tokens": 107, "elapsed": 3.7500285543501377e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "plan-runner", "caller": "simulation_trace:initial"}}

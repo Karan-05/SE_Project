@@ -1,0 +1,44 @@
+{
+  "task_id": "dp_fib_ood",
+  "strategy": "semantic_diff",
+  "plan": {
+    "strategy": "semantic_diff",
+    "contract": {},
+    "patterns": [
+      "baseline"
+    ],
+    "subtasks": [
+      "load base solution",
+      "apply semantic deltas",
+      "re-test",
+      "Generate minimal unit tests for critical behaviors",
+      "Add adversarial/edge-case tests",
+      "Run tests and interpret failures",
+      "Repair implementation and re-run tests"
+    ],
+    "tests": [
+      "critical unit tests",
+      "edge-case probes"
+    ],
+    "diagnostics": {
+      "base_task": "baseline",
+      "num_deltas": "1",
+      "delta_note": "**Semantic deltas compared to base task baseline:**\n\n- Input changes from general or unspecified to a specific integer \\( n \\).\n- Output changes from general or unspecified to a single integer (the \\( n \\)th Fibonacci number).\n- Task focus shifts to numerical sequence computation.\n- Requires understanding and implementing the Fibonacci sequence definition.\n- May involve recursion, iteration, or memoization techniques.\n- Em",
+      "planning_tokens": "111",
+      "planning_time": "1.806837"
+    }
+  },
+  "rounds": [
+    {
+      "round": 0,
+      "phase": "initial",
+      "subtask": "plan",
+      "localized": false,
+      "pass_rate": 1.0,
+      "status": "passed",
+      "duration": 0.0001188750029541552,
+      "failing_tests": [],
+      "error_types": []
+    }
+  ]
+}

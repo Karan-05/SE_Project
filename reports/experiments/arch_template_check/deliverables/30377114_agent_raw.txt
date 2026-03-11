@@ -1,0 +1,34 @@
+BEGIN_JSON
+{
+  "task_type": "data_etl",
+  "id": 30377114,
+  "title": "Topcoder Ratings Processor - Rebuild with Postgres Part 1",
+  "summary": "Rebuild the Topcoder Ratings Processor to replace Informix dependencies with PostgreSQL 16.3 and Prisma ORM. The ETL pipeline will process event handlers (processRegistration, processReview, processReviewSummation, processReviewEnd) updating ratings data robustly, preserving history for rollback. The solution must mock rating retrieval service, use challenge ID as track key, and maintain existing business logic with no lint errors. Unit tests must pass as before.",
+  "assumptions": [
+    "Access to the current Prisma schema for algo_rating and related tables is available or can be inferred from the tc-ratings-processor repo.",
+    "The exact data format and event payloads for each event handler are consistent with the existing Ratings Processor implementation.",
+    "The mock service for ratings and volatility will simulate the previous algo_rating table fetches without external dependencies.",
+    "Seed data for PostgreSQL to validate the ETL transformations will be derived from existing Informix data or synthesized to cover key cases.",
+    "No changes to business logic or rating calculation algorithms are required, only backend data access and storage changes.",
+    "The PostgreSQL database is version 16.3 as specified, supporting all needed features.",
+    "The Prisma ORM is used exclusively for database interaction, replacing Informix queries.",
+    "The Readme update will include instructions for configuring PostgreSQL, running the processor, and validating results.",
+    "No code lint errors means adherence to NodeJS and Prisma best practices and style guides.",
+    "Unit tests from the existing codebase will be adapted or reused to verify the new implementation."
+  ],
+  "plan": [
+    "Analyze current Ratings Processor codebase focusing on Informix queries and data access patterns for the four event handlers.",
+    "Map Informix tables and fields to their corresponding Prisma schema models, updating references from round id to challenge id and legacy challenge id as track key.",
+    "Design and implement a mock rating service to provide ratings and volatility values, replacing direct algo_rating table fetches.",
+    "Refactor each event handler (processRegistration, processReview, processReviewSummation, processReviewEnd) to use Prisma ORM with PostgreSQL backend, preserving existing business logic.",
+    "Create seed data scripts or SQL inserts for PostgreSQL to simulate realistic ratings and challenge data for testing.",
+    "Update or create unit tests to ensure all existing tests pass without regression.",
+    "Write SQL validation queries to verify data correctness and history preservation in the new algo_rating table schema.",
+    "Develop Python pseudo-code snippets illustrating the ETL orchestration, checkpoints, and logging for the ratings processor pipeline.",
+    "Document the entire ETL pipeline in a markdown file including schema overview, pipeline steps, data quality checks, sample outputs, and an acceptance checklist.",
+    "Update README.md with configuration, environment variables, running instructions, and test verification steps.",
+    "Perform static analysis and linting to ensure no code style violations exist.",
+    "Conduct final validations to confirm the removal of Informix dependencies and exclusive use of PostgreSQL + Prisma."
+  ],
+  "artifacts": {
+    "pipeline_spec": "The ETL pipeline ingests event data for processRegistration, processReview, processReviewSummation, and processReviewEnd. Each event

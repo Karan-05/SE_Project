@@ -1,0 +1,77 @@
+{
+  "task_id": "dp_coin_stress",
+  "strategy": "contract_first",
+  "attempt": 1,
+  "pass_rate": 1.0,
+  "plan_subtasks": [
+    "Validate inputs vs contract",
+    "Implement core logic",
+    "Check edge cases",
+    "Generate minimal unit tests for critical behaviors",
+    "Add adversarial/edge-case tests",
+    "Run tests and interpret failures"
+  ],
+  "plan_tests": [
+    "",
+    ""
+  ],
+  "plan_diagnostics": {
+    "missing_fields": "constraints",
+    "contract_length": "34",
+    "audit_note": "The provided contract is very underspecified and incomplete. Here's a detailed review:\n\n### Contract Review\n\n- **Inputs:** Marked as \"Underspecified\"  \n  - Missing details on the type, range, and constraints of inputs.  \n  - For a coin change problem, inputs typically include:  \n    - A list/array of coin denominations (integers, positive)  \n    - A target amount (integer, non-negative)  \n  - These should be explicitly stated",
+    "planning_tokens": "207",
+    "planning_time": "1.789405"
+  },
+  "patch_summary": {
+    "phase": "initial"
+  },
+  "tests_run": [
+    {
+      "name": "sample_0",
+      "mode": "call",
+      "status": "pass",
+      "expected": "3",
+      "output": "3",
+      "error": "",
+      "input": "[[1, 2, 5], 11]",
+      "kwargs": "{}",
+      "duration": 3.4374999813735485e-05
+    },
+    {
+      "name": "sample_1",
+      "mode": "call",
+      "status": "pass",
+      "expected": "-1",
+      "output": "-1",
+      "error": "",
+      "input": "[[2], 3]",
+      "kwargs": "{}",
+      "duration": 7.2499969974160194e-06
+    }
+  ],
+  "llm_calls": 1,
+  "timeline": {
+    "attempt": 1,
+    "strategy": "contract_first",
+    "phase": "initial",
+    "events": {
+      "decompose": {
+        "start": "2026-03-06T02:55:35.261265",
+        "end": "2026-03-06T02:55:37.050871"
+      },
+      "solve": {
+        "start": "2026-03-06T02:55:37.050917",
+        "end": "2026-03-06T02:55:38.896118"
+      },
+      "tests": {
+        "start": "2026-03-06T02:55:38.895976",
+        "end": "2026-03-06T02:55:38.896048",
+        "duration_seconds": "0.000"
+      }
+    },
+    "meta": {
+      "llm_calls": "1"
+    }
+  },
+  "solution_preview": "def solve(coins, amount):\n                dp = [float('inf')] * (amount + 1)\n                dp[0] = 0\n                for coin in coins:\n                    for value in range(coin, amount + 1):\n                        dp[value] = min(dp[value], dp[value - coin] + 1)\n                return dp[amount] if dp[amount] != float('inf') else -1"
+}

@@ -1,0 +1,29 @@
+BEGIN_JSON
+{
+  "task_type": "architecture_doc",
+  "id": "6a707d6e-c768-480e-ab9e-b096ea9c49c3",
+  "title": "AI Aided Asset Versioning Platform Architecture",
+  "summary": "Design a scalable platform architecture for automating creative asset adaptation using AI. Deliverables include a relational database schema with ERD and DDL, a complete OpenAPI 3.0 REST specification for backend operations, a mapping of frontend UI actions to API endpoints, and detailed implementation notes covering backend logic, AI integration, queue processing, and authentication. The system supports Admin and User panels with distinct roles and features, emphasizing AI-agnostic adaptability and React.js frontend integration.",
+  "assumptions": [
+    "The AI/LLM integration will be abstracted behind a service interface allowing runtime switching between OpenAI, Claude, and Gemini.",
+    "User authentication and authorization are handled via JWT tokens issued after login, with role-based access control for Admin and User panels.",
+    "Asset storage and delivery use a scalable object storage service (e.g., AWS S3), not detailed here but assumed available.",
+    "Batch asset generation jobs are processed asynchronously via a queue system (e.g., Celery with Redis/RabbitMQ).",
+    "Frontend actions correspond directly to REST API calls; no GraphQL or websockets are required.",
+    "Content moderation (NSFW detection) is performed as part of upload processing using AI or third-party services.",
+    "The ERD and DDL focus on core entities to support described features; analytics and reporting are out of scope."
+  ],
+  "plan": [
+    "Design the database schema capturing users, roles, platforms, formats, resizing formats, image templates, AI behavior settings, content moderation rules, manual editing options, assets, adaptation jobs, and job statuses.",
+    "Create an ERD diagram illustrating entity relationships and constraints.",
+    "Write DDL SQL scripts for PostgreSQL to implement the schema with appropriate indexes and foreign keys.",
+    "Define a comprehensive OpenAPI 3.0 spec covering authentication, admin management (platforms, formats, AI settings), user asset upload, adaptation job creation and tracking, and download endpoints.",
+    "Map all frontend UI actions from the provided design to specific API endpoints with methods, paths, parameters, and descriptions.",
+    "Document backend implementation notes detailing AI module integration, queue/job processing, auth mechanisms, and assumptions.",
+    "Include risks and trade-offs regarding AI agnosticism, manual editing toggles, and content moderation accuracy.",
+    "Define constraints and SLAs for upload size, accepted formats, job processing time, and API response times.",
+    "Identify edge cases such as corrupted uploads, unsupported formats, AI service failures, and concurrent job submissions.",
+    "Compile an acceptance checklist covering schema completeness, API coverage, UI-to-API mapping accuracy, and backend integration readiness."
+  ],
+  "artifacts": {
+    "design_doc_md": "## Problem Summary\n- Marketing teams spend excessive time manually adapting creative assets to various platforms and formats.\n- The platform automates asset resizing, adaptation, and export using AI, supporting admin and user roles.\n- Admin panel manages platforms, formats, AI behavior, content rules, and manual editing options.\n- User panel supports asset upload, adaptation selection, manual editing (if enabled), preview, batch generation, and download.\n\n## Proposed Approach\n- Use PostgreSQL relational schema to model users, roles, platforms, formats, AI settings, assets, and jobs.\n- Implement RESTful backend with OpenAPI 3.0 spec for all operations.\n- Abstract AI/LLM integration behind a configurable service interface to support multiple providers.\n- Use asynchronous job queue for batch asset adaptation processing.\n- React.js frontend calls backend APIs mapped explicitly to UI actions.\n\n## File-Level Plan\n-

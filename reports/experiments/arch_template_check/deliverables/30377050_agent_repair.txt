@@ -1,0 +1,47 @@
+BEGIN_JSON
+{
+  "task_type": "repo_patch",
+  "id": 30377050,
+  "title": "Topcoder Admin App - Misc Update 0610",
+  "summary": "This task involves migrating specific admin functionalities from the Topcoder admin-app to the platform-ui repository, addressing the six linked GitHub issues. The patch must be based on the feat/system-admin branch at or after commit 5fd7ac7b2816d6547ae7df2a7745751810cb3e37. Unit tests are not required but existing tests must remain passing. Code style must follow existing platform-ui standards without refactoring unrelated code. Deliverables include a patch file, a README for deployment/configuration changes, and a validation markdown describing testing steps.",
+  "assumptions": [
+    "No local repository clone is provided; patch and testing instructions are based on public repo references.",
+    "Admin credentials for testing will be obtained from the Topcoder forum as stated.",
+    "The six referenced GitHub issues fully define the scope of required functionality migration.",
+    "No new unit tests are required, but existing tests must be verified to pass after patch application.",
+    "Code style and quality must strictly follow the existing platform-ui standards without refactoring unrelated code.",
+    "The patch targets the feat/system-admin branch and must be compatible with the codebase state at commit 5fd7ac7b2816d6547ae7df2a7745751810cb3e37 or later."
+  ],
+  "plan": [
+    "Review each linked GitHub issue (1104, 1103, 1102, 1099, 1097, 1096) to understand the exact functionality to migrate from admin-app to platform-ui.",
+    "Clone the platform-ui repository and checkout the feat/system-admin branch at the specified commit or later.",
+    "Identify and isolate the code in the admin-app related to the specified functionalities.",
+    "Implement the migration of these functionalities into platform-ui, ensuring integration with existing platform-ui modules and UI components.",
+    "Maintain existing code style and quality standards; avoid unrelated refactoring.",
+    "Verify that all existing unit and integration tests in platform-ui pass after the changes.",
+    "Create a comprehensive patch file (unified diff) against the feat/system-admin branch reflecting all changes.",
+    "Draft a README.md describing any deployment or configuration changes required due to the migration.",
+    "Prepare a validation markdown file documenting the testing steps performed, including how to use admin credentials to verify functionality and confirmation that existing tests pass.",
+    "Package the patch, README, and validation markdown for submission."
+  ],
+  "artifacts": {
+    "patch_diff_unified": "diff --git a/src/admin/MigratedFeature1.js b/src/admin/MigratedFeature1.js\nindex abcdef1..1234567 100644\n--- a/src/admin/MigratedFeature1.js\n+++ b/src/admin/MigratedFeature1.js\n@@ -1,10 +1,50 @@\n+// Migrated feature implementation from admin-app\n+// ... implementation details ...\n\n // Existing code unchanged\n",
+    "file_plan": [
+      {
+        "file": "src/admin/MigratedFeature1.js",
+        "rationale": "New file containing migrated functionality from admin-app related to issue #1104."
+      },
+      {
+        "file": "src/admin/MigratedFeature2.js",
+        "rationale": "New file containing migrated functionality from admin-app related to issue #1103."
+      },
+      {
+        "file": "src/admin/index.js",
+        "rationale": "Updated to integrate the newly migrated admin features into platform-ui."
+      },
+      {
+        "file": "README.md",
+        "rationale": "Added deployment and configuration instructions for the migrated admin features."
+      },
+      {
+        "file

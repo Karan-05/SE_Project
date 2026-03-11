@@ -1,0 +1,46 @@
+{
+  "task_id": "dp_fib_stress",
+  "strategy": "contract_first",
+  "plan": {
+    "strategy": "contract_first",
+    "contract": {
+      "inputs": "",
+      "outputs": "",
+      "constraints": "",
+      "edge_cases": "[0]"
+    },
+    "patterns": [],
+    "subtasks": [
+      "Validate inputs vs contract",
+      "Implement core logic",
+      "Check edge cases",
+      "Generate minimal unit tests for critical behaviors",
+      "Add adversarial/edge-case tests",
+      "Run tests and interpret failures",
+      "Repair implementation and re-run tests"
+    ],
+    "tests": [
+      ""
+    ],
+    "diagnostics": {
+      "missing_fields": "inputs,outputs,constraints",
+      "contract_length": "3",
+      "audit_note": "The contract you provided is:\n\n```json\n{\n  \"inputs\": \"\",\n  \"outputs\": \"\",\n  \"constraints\": \"\",\n  \"edge_cases\": \"[0]\"\n}\n```\n\nand the problem statement is: \"Return the nth Fibonacci number.\"\n\n### Review for Completeness\n\n1. **Inputs**:  \n   - Currently empty (`\"\"`).  \n   - Should specify the input parameter(s). For the Fibonacci problem, typically the input is a single integer `n` representing the",
+      "planning_tokens": "144",
+      "planning_time": "2.248186"
+    }
+  },
+  "rounds": [
+    {
+      "round": 0,
+      "phase": "initial",
+      "subtask": "plan",
+      "localized": false,
+      "pass_rate": 1.0,
+      "status": "passed",
+      "duration": 0.00019874999998137355,
+      "failing_tests": [],
+      "error_types": []
+    }
+  ]
+}

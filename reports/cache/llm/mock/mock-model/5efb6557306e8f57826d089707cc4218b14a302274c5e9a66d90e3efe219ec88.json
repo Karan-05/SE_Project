@@ -1,0 +1,1 @@
+{"content": "[MOCK] 26dad798b323f350 :: You are executing decomposition strategy 'failure_mode_first'. Problem statement: Count primes up to N.  Implementation ", "tokens": 134, "elapsed": 4.332978278398514e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "plan-runner", "caller": "failure_mode_first:initial"}}

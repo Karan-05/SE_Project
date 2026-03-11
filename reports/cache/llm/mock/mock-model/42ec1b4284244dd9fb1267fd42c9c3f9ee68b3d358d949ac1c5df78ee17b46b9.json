@@ -1,0 +1,1 @@
+{"content": "[MOCK] 7096b423b2230a26 :: Given the problem: Implement calculator.task.solve so that it returns the sum of a list of numbers. Use the repository l", "tokens": 37, "elapsed": 2.4579931050539017e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "pattern-hint", "caller": "pattern_skeleton"}}

@@ -1,0 +1,1 @@
+{"content": "[MOCK] ee66e47ce5c28b3d :: You are repairing code produced by strategy 'multi_view'. Problem statement: Return counts of characters as a dict sorte", "tokens": 168, "elapsed": 5.333975423127413e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "multi_view:repair"}}

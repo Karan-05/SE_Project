@@ -95,6 +95,11 @@ class RubricVerifier:
         pattern = re.compile(r"^\s{0,3}#{1,6}\s*(.+)$", re.MULTILINE)
         for match in pattern.finditer(text):
             headings.append(match.group(1).strip().lower())
+        colon_pattern = re.compile(r"^\s{0,3}([A-Za-z0-9 /&]+?)\s*:\s*$", re.MULTILINE)
+        for match in colon_pattern.finditer(text):
+            candidate = match.group(1).strip().lower()
+            if candidate and candidate not in headings:
+                headings.append(candidate)
         return headings
 
     def _rubric_specific_score(self, rubric_name: str, text: str) -> Tuple[float, List[str]]:

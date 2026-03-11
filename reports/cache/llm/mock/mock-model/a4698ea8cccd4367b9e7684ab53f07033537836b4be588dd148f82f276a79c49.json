@@ -1,0 +1,1 @@
+{"content": "[MOCK] 2e2e8f537037c698 :: You are repairing code produced by strategy 'semantic_diff'. Problem statement: Return the reversed string. Implementati", "tokens": 166, "elapsed": 5.041016265749931e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "semantic_diff:repair"}}

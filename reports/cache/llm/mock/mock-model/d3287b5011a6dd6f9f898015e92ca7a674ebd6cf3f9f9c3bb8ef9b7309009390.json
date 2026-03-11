@@ -1,0 +1,1 @@
+{"content": "[MOCK] dc341710068476bf :: You are executing decomposition strategy 'role_decomposed'. Problem statement: Return the reversed string.  Implementati", "tokens": 108, "elapsed": 4.250032361596823e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "plan-runner", "caller": "role_decomposed:initial"}}

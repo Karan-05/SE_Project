@@ -1,0 +1,9 @@
+strategy,initial_success_rate,final_success_rate,avg_repair_rounds,avg_subtasks_repaired,localized_repair_rate,compile_failure_rate,repair_gain
+contract_first,1.0,1.0,0.0,0.0,0.0,0.0,0.0
+direct_baseline,1.0,1.0,0.0,0.0,0.0,0.0,0.0
+failure_mode_first,1.0,1.0,0.0,0.0,0.0,0.0,0.0
+multi_view,1.0,1.0,0.0,0.0,0.0,0.0,0.0
+pattern_skeleton,1.0,1.0,0.0,0.0,0.0,0.0,0.0
+role_decomposed,1.0,1.0,0.0,0.0,0.0,0.0,0.0
+semantic_diff,1.0,1.0,0.0,0.0,0.0,0.0,0.0
+simulation_trace,1.0,1.0,0.0,0.0,0.0,0.0,0.0

@@ -1,0 +1,1 @@
+{"content": "[MOCK] 5bfb7e8f9c66211a :: You are repairing code produced by strategy 'semantic_diff'. Problem statement: Return the sum of all integers.  Memory ", "tokens": 174, "elapsed": 4.457950126379728e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "semantic_diff:repair"}}

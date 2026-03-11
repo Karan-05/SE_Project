@@ -1,0 +1,46 @@
+{
+  "task_id": "array_prefix_test",
+  "strategy": "contract_first",
+  "plan": {
+    "strategy": "contract_first",
+    "contract": {
+      "inputs": "",
+      "outputs": "",
+      "constraints": "",
+      "edge_cases": "[[1, 2, 3]]"
+    },
+    "patterns": [],
+    "subtasks": [
+      "Validate inputs vs contract",
+      "Implement core logic",
+      "Check edge cases",
+      "Generate minimal unit tests for critical behaviors",
+      "Add adversarial/edge-case tests",
+      "Run tests and interpret failures",
+      "Repair implementation and re-run tests"
+    ],
+    "tests": [
+      ""
+    ],
+    "diagnostics": {
+      "missing_fields": "inputs,outputs,constraints",
+      "contract_length": "11",
+      "audit_note": "Let's analyze the provided contract for the problem \"Return the running prefix sums.\"\n\n---\n\n### Contract Provided:\n- **inputs:** '' (empty)\n- **outputs:** '' (empty)\n- **constraints:** '' (empty)\n- **edge_cases:** [[1, 2, 3]]\n\n---\n\n### Problem Description:\n**Return the running prefix sums.**\n\nThis typically means:  \nGiven an input list/array of numbers, return a list where each element at index *i*",
+      "planning_tokens": "152",
+      "planning_time": "2.034500"
+    }
+  },
+  "rounds": [
+    {
+      "round": 0,
+      "phase": "initial",
+      "subtask": "plan",
+      "localized": false,
+      "pass_rate": 1.0,
+      "status": "passed",
+      "duration": 0.00016095797764137387,
+      "failing_tests": [],
+      "error_types": []
+    }
+  ]
+}

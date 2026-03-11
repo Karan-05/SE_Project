@@ -1,0 +1,1 @@
+{"content": "[MOCK] 2fcf50a2ac287cfb :: You are repairing a repository-backed change produced by strategy 'contract_first'. Repository workspace: `/Users/karana", "tokens": 840, "elapsed": 3.250001464039087e-05, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "contract_first:repair"}}

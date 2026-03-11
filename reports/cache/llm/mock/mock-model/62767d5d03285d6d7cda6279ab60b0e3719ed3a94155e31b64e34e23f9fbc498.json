@@ -1,0 +1,1 @@
+{"content": "[MOCK] 85ab9f8040019c24 :: You are repairing code produced by strategy 'contract_first'. Problem statement: Return the number of undirected edges. ", "tokens": 170, "elapsed": 4.58303838968277e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "contract_first:repair"}}

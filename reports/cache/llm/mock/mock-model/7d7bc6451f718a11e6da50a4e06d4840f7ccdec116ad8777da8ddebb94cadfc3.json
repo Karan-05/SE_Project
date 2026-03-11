@@ -1,0 +1,1 @@
+{"content": "[MOCK] 310ee62cde7eb2bb :: You are repairing a repository-backed change produced by strategy 'failure_mode_first'. Repository workspace: `/Users/ka", "tokens": 848, "elapsed": 3.279210068285465e-05, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "failure_mode_first:repair"}}

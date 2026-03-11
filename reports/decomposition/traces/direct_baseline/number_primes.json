@@ -1,0 +1,35 @@
+{
+  "task_id": "number_primes",
+  "strategy": "direct_baseline",
+  "plan": {
+    "strategy": "direct_baseline",
+    "contract": {},
+    "patterns": [],
+    "subtasks": [
+      "Generate minimal unit tests for critical behaviors",
+      "Add adversarial/edge-case tests",
+      "Run tests and interpret failures",
+      "Repair implementation and re-run tests"
+    ],
+    "tests": [
+      "critical unit tests",
+      "edge-case probes"
+    ],
+    "diagnostics": {
+      "note": "No decomposition, direct execution."
+    }
+  },
+  "rounds": [
+    {
+      "round": 0,
+      "phase": "initial",
+      "subtask": "plan",
+      "localized": false,
+      "pass_rate": 1.0,
+      "status": "passed",
+      "duration": 0.0028776670224033296,
+      "failing_tests": [],
+      "error_types": []
+    }
+  ]
+}

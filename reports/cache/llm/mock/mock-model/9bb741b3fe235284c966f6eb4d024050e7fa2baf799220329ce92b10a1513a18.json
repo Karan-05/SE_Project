@@ -1,0 +1,1 @@
+{"content": "[MOCK] 6599b51b6691ae59 :: You are executing decomposition strategy 'role_decomposed'. Problem statement: Return the sum of all integers.  Implemen", "tokens": 113, "elapsed": 5.416048225015402e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "plan-runner", "caller": "role_decomposed:initial"}}

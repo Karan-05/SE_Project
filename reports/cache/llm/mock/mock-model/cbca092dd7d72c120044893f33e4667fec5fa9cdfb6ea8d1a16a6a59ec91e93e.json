@@ -1,0 +1,1 @@
+{"content": "[MOCK] 529e0d5d2dce1ddb :: You are repairing code produced by strategy 'contract_first'. Problem statement: Return the reversed string. Implementat", "tokens": 165, "elapsed": 4.833971615880728e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "contract_first:repair"}}

@@ -1,0 +1,21 @@
+{
+  "round": 1,
+  "strategy": "contract_first",
+  "proposed_files": [
+    "calculator/task.py"
+  ],
+  "applied_files": [
+    "calculator/task.py"
+  ],
+  "status": "applied",
+  "metadata": {
+    "edit_mode": "edit_batch",
+    "localized_requested": true,
+    "fallback_requested": false,
+    "raw_metadata_keys": [
+      "localized"
+    ],
+    "subtask_focus": "global"
+  },
+  "error": ""
+}

@@ -1,0 +1,32 @@
+BEGIN_JSON
+{
+  "task_type": "architecture_doc",
+  "id": "8ce4125b-ba2c-4be9-a9a9-0a1ce1d21a97",
+  "title": "72 Hours  Topcoder Review App  Challenge Review Edit Page Integration  Repost",
+  "summary": "This architecture document outlines the integration of real Review API endpoints into the Challenge Review Edit Page (ScorecardDetailsPage) and the Review/Appeals Tab in the Challenge Review Details page. It covers replacing mock data with live API calls, implementing full CRUD for appeals and appeal responses, enforcing role-based access control and phase gating, and updating UI components accordingly. The document includes file-level plans, API/interface changes, constraints, risks, edge cases, and acceptance criteria to guide implementation and testing.",
+  "assumptions": [
+    "Access to the platform-ui repo on the feat/review branch is available for patching.",
+    "Review API v6 and Challenge API v6 endpoints are stable and accessible at the provided hosted URLs.",
+    "Existing UI components and role/phase logic are mostly implemented but require API integration and phase gating adjustments.",
+    "TypeScript interfaces for Review API DTOs are available or will be derived from API specs.",
+    "No backend changes are required beyond consuming existing Review API endpoints.",
+    "SWR and React Hook Form are already integrated in the codebase and will be used for data fetching and form management.",
+    "Testing environments with different user roles and challenge phases are available to validate role-based and phase gating behavior."
+  ],
+  "plan": [
+    "Analyze current ScorecardDetailsPage and Review/Appeals Tab components to identify mock data usage and integration points.",
+    "Implement SWR hooks for fetching reviews, appeals, appeal responses, and review progress from the Review API, replacing all mock data.",
+    "Create/update TypeScript interfaces for all Review API DTOs to ensure type-safe integration.",
+    "Implement CRUD operations for appeals and appeal responses with proper role-based and phase-based access control.",
+    "Update Review/Appeals Tab in ChallengeDetailsContent to display real review and appeal data, including counts and reviewer info.",
+    "Integrate Review Progress API data into Active Reviews Page and Challenge Review Details Page header with real-time progress indicators.",
+    "Remove all mock data files and references from platform-ui codebase.",
+    "Add error handling, loading states, and confirmation modals consistent with existing UI patterns.",
+    "Ensure all UI components remain responsive and maintain existing UX patterns across devices.",
+    "Document the integration approach, API usage, testing instructions, and environment configuration in markdown.",
+    "Prepare git patches against the feat/review branch and include updated TypeScript interfaces and service layer docs.",
+    "Validate all features with multiple user roles and challenge phases to ensure correct role gating and phase gating.",
+    "Perform code reviews and static analysis to ensure code quality and maintainability."
+  ],
+  "artifacts": {
+    "design_doc_md": "## Problem Summary\n- The Challenge Review Edit Page and Review/Appeals Tab currently use mock data and require integration with live Review API endpoints.\n- Full CRUD operations for appeals and appeal responses must be implemented with role-based and phase-based access control.\n- Review Progress data must be integrated into multiple UI locations for real-time status.\n- The integration must maintain existing UI/UX patterns, responsiveness, and error handling.\n\n## Proposed Approach\n- Replace all mock data with SWR-based hooks fetching live data from Review API endpoints.\n- Use TypeScript interfaces derived from Review API DTOs for type safety.\n- Implement appeals and appeal responses CRUD with role and phase gating enforced in UI and API calls.\n- Update Review/Appeals Tab and Review Progress indicators to reflect real data.\n- Remove all mock data and feature flags related to reviews and appeals.\n- Maintain existing React Hook Form usage

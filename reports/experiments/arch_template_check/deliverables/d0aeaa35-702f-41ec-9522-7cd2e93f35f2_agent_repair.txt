@@ -1,0 +1,29 @@
+BEGIN_JSON
+{
+  "task_type": "data_etl",
+  "id": "d0aeaa35-702f-41ec-9522-7cd2e93f35f2",
+  "title": "Topcoder O/R F2F - Forum link is opening error page",
+  "summary": "This ETL blueprint addresses the data extraction and transformation needed to ensure the forum link for challenge details is generated correctly only after the full page DOM is loaded. The pipeline will extract challenge metadata, transform it to generate a valid forum link, and load it into a system that supports UI rendering without premature link generation errors. The acceptance criteria include successful generation of forum links post DOM load and validation of data consistency.",
+  "assumptions": [
+    "Source data includes challenge details and metadata accessible via an API or database.",
+    "The forum link generation depends on challenge metadata fields that become available only after full DOM load.",
+    "No direct access to the frontend codebase or reskin-or repo; ETL focuses on backend data preparation.",
+    "No explicit schema or source data structure provided; inferred typical challenge metadata fields.",
+    "The transformation step involves constructing forum URLs from challenge identifiers and metadata.",
+    "Validation will rely on synthetic test data and inferred business logic from the prompt and video.",
+    "SLAs and cadence are not explicitly defined; assumed near-real-time or on-demand ETL execution."
+  ],
+  "plan": [
+    "1. Define the source data schema for challenge details including challenge ID, status, and metadata fields relevant to forum link generation.",
+    "2. Design the transformation logic to generate forum links only after all required metadata fields are present, simulating DOM load completion.",
+    "3. Specify the target schema or data store where the transformed data with forum links will be loaded for consumption by the frontend.",
+    "4. Develop SQL snippets to validate source data completeness and correctness of transformed forum links.",
+    "5. Write Python pseudo-code to orchestrate the ETL pipeline with logging and checkpoints for data quality.",
+    "6. Define data quality checks to ensure no forum links are generated prematurely and all challenge details are consistent.",
+    "7. Create an acceptance checklist to verify the ETL pipeline meets the requirements and does not break existing functions.",
+    "8. Document the entire ETL blueprint including schema, pipeline steps, tests, sample outputs, and validation queries."
+  ],
+  "artifacts": {
+    "pipeline_spec": "Source: Challenge metadata database or API containing challenge details and status.\nCadence: Triggered on challenge detail updates or on-demand before UI rendering.\nOrchestration: Python ETL script with logging and checkpointing to ensure data readiness.\nSLAs: Forum link must be generated only after all challenge metadata fields are populated, ideally within seconds of data availability.\nRecovery Plan: Retry ETL on failure, alert on data inconsistencies, and fallback to last known good forum link.\n\nTransformation Steps:\n- Extract challenge details.\n- Verify all required metadata fields are present (simulate DOM loaded).\n- Construct forum link using challenge ID and metadata.\n- Load transformed data to a cache or database for frontend consumption.",
+    "sql_snippets": "-- Validate source data completeness\nSELECT challenge_id, COUNT(*) AS metadata_fields_count\nFROM challenge_metadata\nGROUP BY challenge_id\nHAVING COUNT(*) < expected_metadata_field_count;\n\n-- Validate correctness of transformed forum links\nSELECT challenge_id, forum_link\nFROM transformed_challenge_data\nWHERE forum_link IS NULL OR forum_link NOT LIKE 'https://forum.topcoder.com/challenges/%';",
+    "python_snippets": "import logging\n\ndef etl_pipeline():\n    logging.info('Starting ETL pipeline')\n    # Extract\n    challenges = extract_challenge_metadata()\n    # Transform\n    transformed = []\n    for c in challenges:\

@@ -1,0 +1,1 @@
+{"content": "[MOCK] 6f5cf3988db7be22 :: Implement function solve(arg1:str) -> dict. Do NOT read from stdin or write to stdout; rely solely on the provided argum", "tokens": 28, "elapsed": 2.6669586077332497e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "failure-tests", "caller": "failure_mode_first"}}

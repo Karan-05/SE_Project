@@ -1,0 +1,1 @@
+{"content": "[MOCK] dd3361520f4cb4f1 :: You are executing decomposition strategy 'multi_view'. Problem statement: Return the nth Fibonacci number.  Implementati", "tokens": 124, "elapsed": 4.167028237134218e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "plan-runner", "caller": "multi_view:initial"}}

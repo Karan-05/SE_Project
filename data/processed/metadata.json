@@ -7,7 +7,7 @@
     "max_submissions_per_task": 20,
     "market_bucket": "M"
   },
-  "num_tasks": 204,
-  "num_workers": 4170,
-  "num_interactions": 4300
+  "num_tasks": 22023,
+  "num_workers": 402280,
+  "num_interactions": 425704
 }

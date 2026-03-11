@@ -1,0 +1,28 @@
+BEGIN_JSON
+{
+  "task_type": "data_etl",
+  "id": "61a28e31-f4fa-4302-b565-a104fd833dd0",
+  "title": "TopCoder Lookups API- Fix Review Issues",
+  "summary": "This task involves designing an ETL blueprint for the Lookups API v6 service to address code review issues. The scope includes ensuring consistent response formats, removing sensitive fields from API responses, correcting API base paths, fixing Swagger security configs, enforcing uniqueness on country codes in the database and DTOs, and resolving ESLint configuration errors. The deliverable is a comprehensive ETL plan with pipeline specs, validation SQL, pseudo-code, and data quality checks to support these fixes.",
+  "assumptions": [
+    "Access to the lookups-api-v6 PostgreSQL database schema is partial; Prisma schema inferred from description.",
+    "Exact table and column names for countries, devices, and institutions are assumed to follow typical naming conventions.",
+    "No direct access to the repo or current Prisma schema; assumptions made based on standard NestJS + Prisma patterns.",
+    "ETL here is interpreted as data validation, transformation, and verification steps to support API correctness and data integrity.",
+    "The ESLint fix is outside ETL scope but noted as a code quality prerequisite.",
+    "API response formatting and Swagger fixes are primarily code-level but impact data shape and validation, so included in data quality checks."
+  ],
+  "plan": [
+    "1. Define the database schema relevant to countries, devices, and educational institutions focusing on fields: id, name, code, createdAt, updatedAt, isDeleted.",
+    "2. Specify SQL snippets to validate uniqueness constraints on 'code' fields and absence of disallowed fields in output queries.",
+    "3. Design a pipeline spec describing data extraction from PostgreSQL, transformation to exclude sensitive fields, and loading into API response DTOs.",
+    "4. Provide Python pseudo-code for ETL orchestration including Prisma schema migrations for uniqueness constraints, data validation, and error handling.",
+    "5. Define data quality checks to ensure no sensitive fields leak in API responses, uniqueness of codes, and correctness of response format wrapper.",
+    "6. Include validation queries to verify the base path and Swagger security configurations indirectly by checking metadata tables or config files if applicable.",
+    "7. Document an acceptance checklist covering all core requirements and validation steps to confirm fixes.",
+    "8. Note risks related to schema migrations, data rollback, and partial data exposure during transition.",
+    "9. Provide instructions for running validation queries and ETL pipeline checks as part of CI/CD or manual review."
+  ],
+  "artifacts": {
+    "pipeline_spec": "The ETL pipeline extracts lookup data from PostgreSQL tables (countries, devices, institutions) using scheduled jobs or on-demand triggers. The pipeline applies transformations to remove 'createdAt', 'updatedAt', and 'isDeleted' fields from outputs. It enforces uniqueness constraints on 'code' fields by validating existing data and applying Prisma schema migrations. The transformed data is loaded into DTOs used by the NestJS API for consistent response formatting. The pipeline includes error handling to wrap responses in { fromDB: true, result } format and logs validation errors for duplicates or schema violations. The pipeline runs post-deployment to verify data integrity and API response correctness.",
+    "sql_snippets": "-- Check for duplicate country codes\nSELECT code, COUNT(*) FROM countries GROUP BY code HAVING COUNT(*) > 1;\n\n-- Check for duplicate device codes\nSELECT code, COUNT(*) FROM devices GROUP BY code HAVING COUNT(*) > 1;\n\n-- Check for duplicate institution codes\nSELECT code, COUNT(*) FROM institutions GROUP BY code HAVING COUNT(*) > 1;\n\n-- Validate absence of sensitive fields in API output queries (example for countries)\nSELECT id, name, code FROM countries

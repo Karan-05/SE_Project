@@ -1,0 +1,28 @@
+BEGIN_JSON
+{
+  "task_type": "architecture_doc",
+  "id": "78b3768b-8665-48f5-90fb-3d8b728dccf6",
+  "title": "Projects API - Schema Definition and TypeScript Skeleton",
+  "summary": "Design a simplified, flattened PostgreSQL schema using Prisma for the Topcoder Project Service, removing deprecated features and Elasticsearch dependency. Create a NestJS application skeleton with modules, controllers, services, DTOs, and bus API integration for Kafka messaging and email. Ensure full API compatibility with the existing service including endpoints, request/response formats, query parameters, pagination, sorting, filtering, and authentication.",
+  "assumptions": [
+    "Access to the existing project JSON schema and API documentation is assumed but not provided; design inferred from challenge description and typical project service patterns.",
+    "Kafka event payload formats and bus API integration patterns are assumed based on standard Topcoder platform conventions.",
+    "Authentication is JWT-based as stated; authorization rules are assumed consistent with existing service but not detailed here.",
+    "Exact field sets for entities are inferred to cover core project info, members, attachments, and invites without deprecated or complex nested JSON fields.",
+    "API endpoint URL patterns and query parameters are assumed to match the existing tc-project-service repository's current stable version.",
+    "Email sending via bus API follows the same pattern as event publishing; detailed email payload schema is assumed standard."
+  ],
+  "plan": [
+    "Analyze existing tc-project-service repository and API to identify essential fields and endpoints for Project, ProjectMember, ProjectAttachment, and ProjectMemberInvite entities.",
+    "Design Prisma schema with flattened tables for these entities, defining relations, indexes for performance, and removing JSON columns.",
+    "Create NestJS application structure with modules: ProjectModule, AuthModule, PrismaModule, MessagingModule, and EmailModule following NestJS best practices.",
+    "Implement PrismaService for DB access, JwtAuthGuard and AuthService for authentication, and bus API service for Kafka event publishing and email sending.",
+    "Define controllers with endpoints matching existing API routes, supporting query params, pagination, sorting, and filtering.",
+    "Develop service layer interfaces encapsulating business logic for each entity, ensuring API compatibility in request/response DTOs.",
+    "Implement Kafka event integration via bus API for all required events with defined event payloads.",
+    "Integrate email sending through bus API external.action.email topic with appropriate payloads.",
+    "Document schema design decisions, API compatibility details, differences from original service, and deployment instructions.",
+    "Include acceptance criteria checklist and risk mitigation strategies."
+  ],
+  "artifacts": {
+    "design_doc_md": "## Problem Summary\n- Current Topcoder Project Service uses Express.js, PostgreSQL, Elasticsearch, Kafka, and complex JSON data structures.\n- Need to modernize by migrating to TypeScript/NestJS, Prisma, and PostgreSQL-only storage.\n- Simplify schema by flattening data and removing deprecated features.\n- Maintain full API compatibility and streamline Kafka messaging via bus API.\n\n## Proposed Approach\n- Design a flattened Prisma schema for Project, ProjectMember, ProjectAttachment, and ProjectMemberInvite entities.\n- Build a NestJS app with modular structure, Prisma integration, JWT auth, and bus API messaging.\n- Preserve existing API endpoints, request/response formats, and query capabilities.\n- Use bus API for Kafka event publishing and email sending to replace direct Kafka integration.\n\n## File-Level Plan\n- prisma/schema.prisma: Define all models with relations and indexes.\n- src/modules/auth: JWT-based AuthModule, guards, and services.\n- src/modules/project: Controllers, services, DTOs for project-related endpoints.\n- src/modules/prisma: PrismaService for DB access.\n- src/modules/messaging: Bus API integration for event publishing.\n- src/modules/email: Email sending service using

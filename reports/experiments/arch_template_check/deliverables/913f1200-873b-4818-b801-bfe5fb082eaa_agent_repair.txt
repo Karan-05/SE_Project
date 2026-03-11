@@ -1,0 +1,29 @@
+BEGIN_JSON
+{
+  "task_type": "architecture_doc",
+  "id": "913f1200-873b-4818-b801-bfe5fb082eaa",
+  "title": "Projects API v6 – Core Projects CRUD & Listing",
+  "summary": "Design a NestJS/Prisma-based Projects API v6 service that preserves legacy API compatibility for core CRUD and listing endpoints. The service must flatten legacy JSON fields into the Prisma schema, support pagination, filtering, sorting, and fields selection, integrate with Bus API for event publishing, and maintain legacy auth, error handling, and observability behaviors.",
+  "assumptions": [
+    "Legacy API behavior and response/request formats are fully documented and accessible via the referenced legacy repo.",
+    "Challenge 1 schema and skeleton are available and form the baseline for this implementation.",
+    "Bus API client integration details and event publishing mechanisms are consistent with legacy event topics and payload shapes.",
+    "Authorization roles and scopes are clearly defined and consistent with the legacy tc-project-service.",
+    "No Elasticsearch dependencies remain; all data is sourced from Postgres with Prisma ORM.",
+    "Legacy ES-specific fields are either omitted or replaced with Postgres equivalents to maintain parity.",
+    "Attachments are empty in this challenge but must be supported in the API response shape.",
+    "CI and linting standards are based on the existing projects-api-v6 repository conventions."
+  ],
+  "plan": [
+    "Review and extend the Prisma schema to flatten legacy 'details' JSON fields into explicit columns with appropriate types and add indexes on status, type, templateId, and createdAt.",
+    "Develop NestJS controllers, services, DTOs, and mappers implementing the specified endpoints, ensuring request validation and response formatting preserve legacy API compatibility including the 'fields' query parameter.",
+    "Implement soft-delete logic in the DELETE endpoint to match legacy behavior.",
+    "Integrate Bus API client to publish project lifecycle events with typed payloads on create, update, and delete actions, including unit tests for event payload validation.",
+    "Reuse JWT-based auth module from Challenge 1 and enforce authorization parity with legacy roles/scopes for project modifications.",
+    "Implement consistent error handling and observability features including structured logging, request IDs, and response timing metrics aligned with legacy service.",
+    "Write comprehensive unit and end-to-end tests covering all endpoints, including pagination, filtering, sorting, and 'fields' parameter support.",
+    "Document endpoint behaviors, data model changes including migration notes for flattened columns, and highlight any differences from the legacy API.",
+    "Perform linting and type checks to ensure code quality and pass CI validation."
+  ],
+  "artifacts": {
+    "design_doc_md": "## Problem Summary\n- Need to implement core Projects CRUD and listing endpoints in a new NestJS/Prisma service preserving legacy API compatibility.\n- Flatten legacy JSON fields into Prisma schema columns and remove Elasticsearch dependencies.\n- Support pagination, sorting, filtering, and selective fields response.\n- Maintain legacy auth, error handling, and observability.\n\n## Proposed Approach\n- Extend Prisma schema with flattened fields and indexes.\n- Implement NestJS controllers/services with DTO validation and legacy-compatible response interceptors.\n- Use Bus API client for event publishing with typed payloads.\n- Enforce JWT-based auth with legacy roles/scopes.\n- Implement soft-delete and consistent error handling.\n\n## File-Level Plan\n- prisma/schema.prisma: Extend Project model and add indexes.\n- src/projects/controller.ts: Implement REST endpoints.\n- src/projects/service.ts: Business logic and DB interactions.\n- src/projects/dto/*.ts: Request validation DTOs.\n- src/projects/mappers.ts: Map DB models to legacy response shapes.\n- src/events/bus-publisher.ts: Event publishing logic with typed payloads.\n- tests/unit and tests/e2e: Endpoint and event payload tests.\n

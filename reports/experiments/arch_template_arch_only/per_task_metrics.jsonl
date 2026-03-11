@@ -1,0 +1,15 @@
+{"task_id": "0d1aa466-da5c-4b48-b6cf-a8059cf35d6b", "status": "failed_architecture_doc", "llm_calls_used": 2, "timed_out": false, "timeout_reason": "", "attempt_logs": []}
+{"task_id": "c90790bd-d289-42b7-bd97-4bc65d7232f5", "status": "failed_architecture_doc", "llm_calls_used": 2, "timed_out": false, "timeout_reason": "", "attempt_logs": []}
+{"task_id": "8da51ea0-9169-4684-b536-79dc92e6380c", "status": "failed_architecture_doc", "llm_calls_used": 2, "timed_out": false, "timeout_reason": "", "attempt_logs": []}
+{"task_id": "61a28e31-f4fa-4302-b565-a104fd833dd0", "status": "failed_architecture_doc", "llm_calls_used": 2, "timed_out": false, "timeout_reason": "", "attempt_logs": []}
+{"task_id": "4320dc50-af78-47d8-bdbf-f6864302174b", "status": "failed_architecture_doc", "llm_calls_used": 2, "timed_out": false, "timeout_reason": "", "attempt_logs": []}
+{"task_id": "755e5e35-17a1-4a26-9a07-ac733f612954", "status": "failed_architecture_doc", "llm_calls_used": 2, "timed_out": false, "timeout_reason": "", "attempt_logs": []}
+{"task_id": "f9403b29-37cc-47a3-bda0-80d4e592f5c5", "status": "failed_architecture_doc", "llm_calls_used": 2, "timed_out": false, "timeout_reason": "", "attempt_logs": []}
+{"task_id": "mixed_matrix_stress", "status": "failed_architecture_doc", "llm_calls_used": 2, "timed_out": false, "timeout_reason": "", "attempt_logs": []}
+{"task_id": "2362226c-ab72-4c46-819a-37d09f9fbf16", "status": "failed_architecture_doc", "llm_calls_used": 2, "timed_out": false, "timeout_reason": "", "attempt_logs": []}
+{"task_id": "355a5497-71c3-4e3a-b200-f53d62564667", "status": "failed_architecture_doc", "llm_calls_used": 2, "timed_out": false, "timeout_reason": "", "attempt_logs": []}
+{"task_id": "graph_degree_ood", "status": "failed_architecture_doc", "llm_calls_used": 2, "timed_out": false, "timeout_reason": "", "attempt_logs": []}
+{"task_id": "774f1c4d-0ca0-4de2-ae8b-87882784f2c5", "status": "failed_architecture_doc", "llm_calls_used": 2, "timed_out": false, "timeout_reason": "", "attempt_logs": []}
+{"task_id": "41831165-c026-4f33-b273-ee8a3f5e28eb", "status": "failed_architecture_doc", "llm_calls_used": 2, "timed_out": false, "timeout_reason": "", "attempt_logs": []}
+{"task_id": "02e6ada6-c495-45a5-a597-f3dd42174827", "status": "failed_architecture_doc", "llm_calls_used": 2, "timed_out": false, "timeout_reason": "", "attempt_logs": []}
+{"task_id": "06525af6-cea6-40f0-9d8a-95c750cd9f45", "status": "failed_architecture_doc", "llm_calls_used": 2, "timed_out": false, "timeout_reason": "", "attempt_logs": []}

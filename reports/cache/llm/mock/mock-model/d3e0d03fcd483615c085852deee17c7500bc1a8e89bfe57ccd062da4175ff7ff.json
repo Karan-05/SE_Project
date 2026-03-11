@@ -1,0 +1,1 @@
+{"content": "[MOCK] ce7172e9a6097177 :: You are executing decomposition strategy 'direct_baseline'. Problem statement: Return the minimum coins needed to reach ", "tokens": 105, "elapsed": 5.709007382392883e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "plan-runner", "caller": "direct_baseline:initial"}}

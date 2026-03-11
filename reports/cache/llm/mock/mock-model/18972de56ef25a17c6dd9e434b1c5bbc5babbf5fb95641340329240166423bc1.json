@@ -1,0 +1,1 @@
+{"content": "[MOCK] 94ba81326554177a :: You are executing decomposition strategy 'semantic_diff'. Problem statement: Return the number of undirected edges.  Imp", "tokens": 134, "elapsed": 4.292000085115433e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "plan-runner", "caller": "semantic_diff:initial"}}

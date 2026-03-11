@@ -1,0 +1,1 @@
+{"content": "[MOCK] 58dc79d147e94298 :: You are repairing code produced by strategy 'role_decomposed'. Problem statement: Return degree counts for each vertex. ", "tokens": 147, "elapsed": 4.499976057559252e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "role_decomposed:repair"}}

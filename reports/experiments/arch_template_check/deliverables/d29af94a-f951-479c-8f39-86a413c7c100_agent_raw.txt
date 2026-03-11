@@ -1,0 +1,57 @@
+BEGIN_JSON
+{
+  "task_type": "architecture_doc",
+  "id": "d29af94a-f951-479c-8f39-86a413c7c100",
+  "title": "72 Hours  Topcoder Review App  Challenge Review Edit Page Integration  Repost",
+  "summary": "This architecture document outlines the integration of real Review API endpoints into the Challenge Review Edit Page (ScorecardDetailsPage) and the Review/Appeals Tab in the Challenge Review Details page. It covers replacing mock data with live API calls, implementing full CRUD for appeals and appeal responses, enforcing role-based access control and phase gating, and integrating review progress indicators. The solution must maintain existing UI/UX patterns, responsiveness, and use SWR for data fetching.",
+  "assumptions": [
+    "Access to platform-ui repo on feat/review branch is available for patching.",
+    "Review API and Challenge API endpoints are stable and accessible as per provided URLs.",
+    "TypeScript interfaces for Review API DTOs will be derived from API specs or existing code.",
+    "Role-based access control and phase gating logic is partially implemented and will be extended.",
+    "No backend changes are required beyond consuming existing APIs.",
+    "Testing environments with different user roles and challenge phases are available for validation."
+  ],
+  "plan": [
+    "Analyze current platform-ui codebase focusing on ScorecardDetailsPage and Review/Appeals Tab components.",
+    "Replace all mock data fetching hooks (useFetchReviews, fetchReviewInfo, fetchAppeals, fetchScorecards) with SWR hooks calling real Review API endpoints.",
+    "Implement full CRUD operations for appeals and appeal responses using Review API POST, PATCH, DELETE endpoints with proper role and phase gating.",
+    "Update Review/Appeals Tab in ChallengeDetailsContent to fetch and display real review and appeal data, including counts and reviewer info.",
+    "Integrate Review Progress API data into Active Reviews Page and Challenge Review Details Page header with real-time progress indicators.",
+    "Ensure all data fetching uses SWR with caching and revalidation, and handle loading and error states gracefully.",
+    "Maintain existing UI/UX patterns, responsiveness, and role-based UI behavior as per requirements.",
+    "Remove all mock data files and feature-flagged placeholders related to reviews and appeals.",
+    "Update or add TypeScript interfaces to accurately reflect Review API DTOs and responses.",
+    "Document integration details, including API usage, CRUD operations, role/phase gating, and testing instructions.",
+    "Create git patches against the feat/review branch of platform-ui repository.",
+    "Validate implementation with thorough testing across user roles and challenge phases."
+  ],
+  "artifacts": {
+    "design_doc_md": "## Problem Summary\n- Current Challenge Review Edit Page and Review/Appeals Tab use mock data instead of live Review API data.\n- Appeals and appeal responses lack full CRUD integration.\n- Review progress indicators are mocked and need real-time API integration.\n- Role-based access control and phase gating must be enforced consistently.\n\n## Proposed Approach\n- Replace all mock data fetching with SWR hooks calling Review API endpoints.\n- Implement appeals and appeal responses CRUD operations with proper API calls.\n- Update UI components to reflect real-time data and role-based behavior.\n- Integrate Review Progress API for real-time progress display in multiple UI locations.\n- Remove all mock data and feature flags related to review functionality.\n\n## File-Level Plan\n- Modify ScorecardDetailsPage component to replace mock hooks with SWR-based API calls.\n- Update appeals management components to support create, update, delete via Review API.\n- Refactor Review/Appeals Tab in ChallengeDetailsContent to fetch and display real data.\n- Add Review Progress display components to Active Reviews Page and Challenge Review Details Page header.\n- Update or add TypeScript interfaces for Review API DTOs.\n- Remove mock data files and references.\n- Add unit and integration tests for new API integrations and role/phase gating.\n\n## API / Interface Changes\n- Use GET /v6/review/reviews with challengeId and submissionId for review data.\n- Use POST, PATCH on /v6/review/appeals and /v6/review/appeals/:appealId for appeals CRUD.\n- Use POST, PATCH on /v6/review/appeals/:appealId/response and /v6/review/appeals/response/:appealResponseId for appeal responses.\n- Use GET /v6/review/reviews/progress/:challengeId for review progress data.\n- All API calls wrapped in SWR hooks with proper caching and error handling.\n\n## Constraints & SLAs\n- All API calls must respect role-based scopes and permissions.\n- Appeals creation/editing allowed only during Appeals phase; appeal responses only during Appeals Response phase.\n- UI must remain responsive and mobile-friendly.\n- SWR caching and revalidation must minimize redundant calls without stale data.\n- Implementation must not degrade existing UI/UX or performance.\n- Changes must be completed within the 72-hour submission phase.\n\n## Risks & Trade-offs\n- Risk: API downtime or schema changes during integration may cause failures.\n- Trade-off: SWR caching may cause slight data staleness; balanced with revalidation strategy.\n- Risk: Complex role and phase gating logic may introduce bugs if not thoroughly tested.\n- Trade-off: Removing mock data early may impact parallel development; requires coordination.\n- Risk: UI regressions due to replacing mock data with live API responses.\n\n## Edge Cases\n- No reviews or appeals exist for a challenge or submission (empty states).\n- Appeals or appeal responses created/updated/deleted concurrently by multiple users.\n- Users with multiple roles or partial permissions.\n- Phase transitions occurring during user interaction.\n- Network errors or API failures during CRUD operations.\n\n## Acceptance Checklist\n- [ ] ScorecardDetailsPage fully integrated with live Review API data.\n- [ ] Appeals and appeal responses support full CRUD with role and phase gating.\n- [ ] Review/Appeals Tab displays real scores, appeals counts, and reviewer info.\n- [ ] Review Progress indicators show real-time data on Active Reviews and Challenge Review Details pages.\n- [ ] All mock data and feature flags removed.\n- [ ] SWR hooks used for all data fetching with caching and error handling.\n- [ ] TypeScript interfaces updated for Review API DTOs.\n- [ ] UI remains responsive and consistent with existing design.\n- [ ] Documentation provided covering integration, testing, and environment setup.\n- [ ] Thorough testing completed for all user roles and challenge phases.",
+    "mermaid_diagram": "graph TD\n  A[ScorecardDetailsPage] -->|Fetch reviews, appeals| B[Review API]\n  A -->|CRUD appeals & responses| B\n  C[Review/Appeals Tab] -->|Fetch reviews & appeals| B\n  D[Active Reviews Page] -->|Fetch progress| B\n  E[Challenge Review Details Header] -->|Fetch progress| B\n  B -->|Data| F[UI Components]\n  F -->|Display with role & phase gating| A\n  F -->|Display with role & phase gating| C\n  F -->|Display progress| D\n  F -->|Display progress| E",
+    "interfaces": [
+      {
+        "producer": "Review API",
+        "consumer": "platform-ui frontend",
+        "protocol": "REST over HTTPS, JSON",
+        "payload": "ReviewResponseDto, AppealResponseDto, AppealResponseRequestDto, ReviewProgressResponseDto"
+      },
+      {
+        "producer": "Challenge API",
+        "consumer": "platform-ui frontend",
+        "protocol": "REST over HTTPS, JSON",
+        "payload": "Challenge phases info for gating"
+      }
+    ],
+    "tradeoffs": [
+      "Using SWR provides caching and revalidation benefits but may introduce slight data staleness; balanced by careful cache invalidation.",
+      "Full CRUD operations increase complexity and testing scope but provide complete appeal management functionality.",
+      "Removing mock data early ensures consistency but requires coordination with other developers to avoid conflicts.",
+      "Phase gating enforcement in frontend improves UX but relies on accurate and timely phase data from Challenge API.",
+      "Integrating Review Progress API in multiple UI locations improves visibility but requires consistent data synchronization."
+    ]
+  },
+  "validations": [
+    "Reviewed prompt requirements and verified all major API endpoints are covered in design.",
+    "Ensured role-based access control and phase gating are explicitly addressed in approach and acceptance criteria.",
+    "Confirmed file-level plan aligns with typical platform-ui repo

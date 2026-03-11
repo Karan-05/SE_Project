@@ -1,0 +1,2 @@
+success_rate,avg_reward,avg_cost,avg_steps,override_rate,override_win_rate,override_regret_rate,harmful_fraction,beneficial_fraction,budgeted_success,action_entropy,method
+0.975,60.714025096671435,0.27835700757575754,9.53125,0.0,0.0,0.0,0.0,0.0,0.975,0.93678915835917,stride_gate_plus_residual

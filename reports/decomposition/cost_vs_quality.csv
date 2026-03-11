@@ -1,8 +1,9 @@
 strategy,avg_pass_rate,avg_tokens
-contract_first,0.9,42.0
-failure_mode_first,0.9,31.5
-multi_view,0.9,27.0
-pattern_skeleton,0.9,65.5
-role_decomposed,0.9,33.5
-semantic_diff,0.9,35.8
-simulation_trace,0.9,14.6
+contract_first,1.0,151.9
+direct_baseline,1.0,0.0
+failure_mode_first,1.0,126.3
+multi_view,1.0,110.0
+pattern_skeleton,1.0,172.9
+role_decomposed,1.0,163.9
+semantic_diff,1.0,96.0
+simulation_trace,1.0,60.1

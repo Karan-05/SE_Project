@@ -1,0 +1,1 @@
+{"content": "[MOCK] 56c1f74111180d4f :: You are executing decomposition strategy 'contract_first'. Problem statement: Return the sum of all integers.  Implement", "tokens": 133, "elapsed": 4.916975740343332e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "plan-runner", "caller": "contract_first:initial"}}

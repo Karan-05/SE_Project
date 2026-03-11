@@ -1,0 +1,1 @@
+{"content": "[MOCK] 36a3727f02743a24 :: You are repairing code produced by strategy 'multi_view'. Problem statement: Count primes up to N.  Memory Hint: - Why i", "tokens": 172, "elapsed": 4.875008016824722e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "multi_view:repair"}}

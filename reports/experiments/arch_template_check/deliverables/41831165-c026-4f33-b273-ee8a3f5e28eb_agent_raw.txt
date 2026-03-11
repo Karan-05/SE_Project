@@ -1,0 +1,28 @@
+BEGIN_JSON
+{
+  "task_type": "data_etl",
+  "id": "41831165-c026-4f33-b273-ee8a3f5e28eb",
+  "title": "Topcoder O/R F2F - Edit Late Deliverables is not reskinned",
+  "summary": "This ETL blueprint covers the update of the Late Deliverables page data extraction and transformation to support the reskin of the UI. It involves updating the SQL data source to provide the necessary data for the reskinned page, reusing existing page and table layouts, and ensuring no breakage of current functionality. Acceptance criteria include correctness of data shown on the Late Deliverables page, alignment with the new UI style, and no regressions in existing features.",
+  "assumptions": [
+    "Access to the current database schema and SQL files related to Late Deliverables is required but not provided.",
+    "The existing SQL query for Late Deliverables needs to be updated to support the reskinned UI, but exact data fields and transformations are not fully specified.",
+    "The Figma design file and general setup document provide UI styling guidance but do not specify backend data changes explicitly.",
+    "The ETL pipeline is assumed to be batch or near-real-time but exact cadence and orchestration details are not provided.",
+    "No direct access to the code repository or environment to verify existing SQL or Java code is available.",
+    "Validation will rely on synthetic or inferred data quality checks and SQL snippets based on typical Late Deliverables data structure."
+  ],
+  "plan": [
+    "Review the existing SQL file for the Late Deliverables page to understand current data extraction logic.",
+    "Analyze the Figma design assets and general requirements document to identify any new data fields or changes in data presentation needed for the reskin.",
+    "Update the SQL query to include any additional columns or filters required to support the reskinned UI, ensuring compatibility with existing table layout.",
+    "Develop a Python pseudo-code snippet representing the ETL steps for extracting, transforming, and loading the Late Deliverables data into the target system or view.",
+    "Define data quality checks to validate completeness, accuracy, and freshness of the Late Deliverables data after transformation.",
+    "Write SQL snippets for validation queries to verify data correctness and alignment with business rules.",
+    "Create a detailed pipeline specification describing data sources, update cadence, orchestration method, SLAs, and recovery plans.",
+    "Document an acceptance checklist including UI data correctness, no regression in existing functionality, and compliance with reskin styling.",
+    "Prepare risk and mitigation notes related to data consistency, schema changes, and deployment.",
+    "Package all artifacts into a comprehensive ETL blueprint document."
+  ],
+  "artifacts": {
+    "pipeline_spec": "The Late Deliverables ETL pipeline extracts data from the primary transactional database containing deliverable records. The pipeline runs daily after business hours to capture all late deliverables up to the previous day. Extraction uses an updated SQL query that includes all necessary fields for the reskinned UI. Transformation steps include filtering late deliverables, joining with user and project metadata, and formatting dates. The transformed data is loaded into a reporting schema or materialized view accessible by the UI layer. Orchestration is assumed to be via existing Airflow DAGs or cron jobs with alerting on failures. SLA targets data availability within 4 hours of pipeline start. Recovery involves re-running

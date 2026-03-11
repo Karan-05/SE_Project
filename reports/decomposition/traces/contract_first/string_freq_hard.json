@@ -1,0 +1,46 @@
+{
+  "task_id": "string_freq_hard",
+  "strategy": "contract_first",
+  "plan": {
+    "strategy": "contract_first",
+    "contract": {
+      "inputs": "",
+      "outputs": "",
+      "constraints": "",
+      "edge_cases": "['aba']"
+    },
+    "patterns": [],
+    "subtasks": [
+      "Validate inputs vs contract",
+      "Implement core logic",
+      "Check edge cases",
+      "Generate minimal unit tests for critical behaviors",
+      "Add adversarial/edge-case tests",
+      "Run tests and interpret failures",
+      "Repair implementation and re-run tests"
+    ],
+    "tests": [
+      ""
+    ],
+    "diagnostics": {
+      "missing_fields": "inputs,outputs,constraints",
+      "contract_length": "7",
+      "audit_note": "The contract you provided is:\n\n```python\n{\n  'inputs': '',\n  'outputs': '',\n  'constraints': '',\n  'edge_cases': \"['aba']\"\n}\n```\n\n**Review for completeness:**\n\n1. **Inputs:**  \n   - Currently empty.  \n   - Should specify the input type and format. For example:  \n     - Input: a string (e.g., `\"aba\"`)  \n     - Clarify if input can be empty, or",
+      "planning_tokens": "151",
+      "planning_time": "1.621020"
+    }
+  },
+  "rounds": [
+    {
+      "round": 0,
+      "phase": "initial",
+      "subtask": "plan",
+      "localized": false,
+      "pass_rate": 1.0,
+      "status": "passed",
+      "duration": 0.00012745801359415054,
+      "failing_tests": [],
+      "error_types": []
+    }
+  ]
+}

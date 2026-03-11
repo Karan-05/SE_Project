@@ -1,0 +1,1 @@
+{"content": "[MOCK] fcd2561a81a16a00 :: You are executing decomposition strategy 'semantic_diff'. Problem statement: Count primes up to N.  Implementation contr", "tokens": 129, "elapsed": 4.04199818149209e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "plan-runner", "caller": "semantic_diff:initial"}}

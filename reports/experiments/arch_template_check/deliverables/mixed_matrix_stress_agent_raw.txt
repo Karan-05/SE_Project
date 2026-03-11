@@ -1,0 +1,25 @@
+BEGIN_JSON
+{
+  "task_type": "architecture_doc",
+  "id": "mixed_matrix_stress",
+  "title": "Matrix Trace (stress)",
+  "summary": "This document outlines the architecture for a system that computes the sum of the main diagonal elements of a matrix under stress conditions. It covers the problem scope, proposed approach, file-level design, interface changes, constraints, risks, edge cases, and acceptance criteria to ensure robustness and correctness.",
+  "assumptions": [
+    "Input matrices are square and can be large, requiring stress testing for performance and correctness.",
+    "The system will be implemented as a standalone module or service.",
+    "No specific programming language or framework constraints are provided.",
+    "Stress testing implies handling large input sizes and potential concurrency or resource constraints.",
+    "No existing API or system integration details are provided, so a minimal interface is assumed."
+  ],
+  "plan": [
+    "Define the problem scope and summarize requirements.",
+    "Design an efficient approach to compute the matrix trace with considerations for large matrices.",
+    "Draft a file-level plan for implementation including modules for input validation, computation, and testing.",
+    "Specify any API or interface changes needed to expose the functionality.",
+    "Identify constraints and service-level agreements (SLAs) relevant to performance and reliability.",
+    "Analyze risks and trade-offs including performance bottlenecks and error handling.",
+    "Enumerate edge cases such as empty matrices, non-square inputs, and extremely large sizes.",
+    "Create an acceptance checklist to validate completeness, correctness, and performance under stress."
+  ],
+  "artifacts": {
+    "design_doc_md": "## Problem Summary\nThe goal is to compute the sum of the main diagonal elements (trace) of a given square matrix. The system must handle stress conditions, including large matrix sizes and potential performance bottlenecks.\n\n## Proposed Approach\nImplement a function that iterates over the main diagonal elements of the matrix and accumulates their sum. For large matrices, optimize memory access and consider parallelization if needed. Input validation will ensure the matrix is square. Stress testing will validate performance and correctness under load.\n\n## File-Level Plan\n- matrix_trace.py: Core logic to compute the trace.\n- input_validation.py: Validate matrix shape and data types.\n- stress_tests.py: Scripts to generate large matrices and run performance tests.\n- api_interface.py (optional): Expose functionality via API if required.\n- README.md: Documentation and usage instructions.\n\n## API / Interface Changes\n- If integrated into an existing system, add a new endpoint or method `compute_matrix_trace(matrix: List[List[int]]) -> int`.\n- Input: 2D list representing a square matrix.\n- Output: Integer sum of the main diagonal.\n- Authentication and authorization are not specified; assume none or minimal.\n\n## Constraints & SLAs\n- Input matrices must be square (N x N).\n- The system should handle matrices up to a defined large size (e.g., 10,000 x 10,000) efficiently.\n- Performance SLA: Compute trace within a reasonable time frame (e.g., under 1 second for 10,000 x 10,000 matrix on target hardware).\n- Memory usage should be optimized to prevent excessive consumption.\n\n## Risks & Trade-offs\n- Large matrices may cause high memory consumption or CPU load;

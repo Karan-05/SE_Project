@@ -1,0 +1,1 @@
+{"content": "[MOCK] 0062c31c1b05651d :: You are executing decomposition strategy 'multi_view'. Problem statement: Return the reversed string.  Implementation co", "tokens": 123, "elapsed": 4.082976374775171e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "plan-runner", "caller": "multi_view:initial"}}

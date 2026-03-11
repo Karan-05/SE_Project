@@ -1,0 +1,29 @@
+BEGIN_JSON
+{
+  "task_type": "data_etl",
+  "id": "156b30ad-dd11-4183-9626-a0daed357c57",
+  "title": "Topcoder O/R F2F - Overlap Back to Home button",
+  "summary": "Design and implement an ETL blueprint to create a test SQL patch simulating the updated UI page for local testing, ensuring the 'Back to Home' button does not overlap the grey background footer. The ETL process will extract relevant UI and review data, transform it to match the sample page layout, and load it into a test schema for validation. Acceptance criteria include successful local testing with the updated UI layout and no regression of existing functions.",
+  "assumptions": [
+    "Source data schemas and tables reside in the 'tc-online-review-backend' database but detailed schema definitions are not provided.",
+    "The updated test.sql patch should simulate the UI page as per the provided review links and Figma design assets.",
+    "No direct access to the actual source data or schema definitions; inferred schema and transformations are based on standard review and UI data structures.",
+    "ETL pipeline will be designed as a pseudo-code blueprint with SQL snippets and Python orchestration for local simulation and testing.",
+    "Validation queries will be based on expected data shapes and UI element positioning logic inferred from the prompt.",
+    "No direct access to the latest 'reskin-or' repo or patch files; patch creation is conceptual and focuses on test.sql update simulation."
+  ],
+  "plan": [
+    "Analyze the provided Figma design and review links to understand the UI layout and data requirements for the 'Back to Home' button and footer.",
+    "Identify key source tables and fields in the 'tc-online-review-backend' related to UI elements and review data for extraction.",
+    "Design SQL transformations to simulate the page layout, ensuring the 'Back to Home' button is positioned correctly without overlapping the footer.",
+    "Create a test SQL patch (test.sql) that applies these transformations for local testing.",
+    "Develop Python pseudo-code to orchestrate the ETL pipeline: extract data, apply transformations, and load into a test schema.",
+    "Define data quality checks to validate the presence, correctness, and layout consistency of the UI elements in the test data.",
+    "Prepare validation SQL queries to verify the ETL output aligns with the expected UI layout and functionality.",
+    "Document the entire ETL blueprint including pipeline specification, SQL snippets, Python orchestration, data quality checks, and validation queries.",
+    "Review and ensure no breaking changes to existing functions and minimal file changes as per instructions.",
+    "Provide an acceptance checklist for final verification before deployment."
+  ],
+  "artifacts": {
+    "pipeline_spec": "The ETL pipeline extracts UI layout and review data from the 'tc-online-review-backend' source database, transforms it to simulate the updated page layout with correct 'Back to Home' button positioning, and loads it into a test schema for local testing. The pipeline runs on-demand or triggered by UI update events, with orchestration handled by Python scripts. Recovery plans include re-running failed steps and validating data integrity before load. SLA targets local test readiness within 30 minutes of pipeline start.",
+    "sql_snippets": "-- Extract relevant UI review data\nWITH review_data AS (\n  SELECT review_id, user_id, page_section, element_name,

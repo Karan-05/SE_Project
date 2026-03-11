@@ -1,0 +1,27 @@
+BEGIN_JSON
+{
+  "task_type": "data_etl",
+  "id": "5a953c7c-482a-4643-aad1-f7a093da7fb9",
+  "title": "Topcoder O/R F2F - Submit Score TextArea in Firefox",
+  "summary": "This ETL blueprint outlines the extraction, transformation, and loading steps related to the UI data for the Review Scorecard page, specifically targeting the textarea submit score display issue in Firefox. The goal is to ensure data consistency and quality for the reskin-or-only codebase while enabling validation of the textarea background color property. Acceptance criteria include reproducible pipeline steps, validation queries, and data quality checks ensuring no regression in existing functions.",
+  "assumptions": [
+    "No direct source data or database schema related to the textarea submit score is provided.",
+    "The task primarily involves UI styling issues, but an ETL blueprint is requested, so inferred data sources relate to UI event logs or scorecard submissions.",
+    "No explicit schema or sample data was shared; assumptions made that relevant data includes user submissions, timestamps, browser info, and UI element properties.",
+    "Transformation steps will focus on filtering Firefox browser data and identifying textarea background color properties.",
+    "No direct SQL or codebase access was provided; pseudo-code and validation queries are based on typical UI telemetry and scorecard data.",
+    "Acceptance checklist and validation focus on detecting and preventing white background issues in Firefox for the textarea component."
+  ],
+  "plan": [
+    "1. Define the source data schema for user submissions and UI telemetry related to the Review Scorecard page.",
+    "2. Design the ETL pipeline to extract relevant data, filter for Firefox browser usage, and transform UI element properties to detect background color issues.",
+    "3. Load the transformed data into a reporting or monitoring table for validation and alerting.",
+    "4. Develop SQL snippets to validate the absence of white background issues in Firefox submissions.",
+    "5. Write Python pseudo-code for the ETL orchestration including logging and error handling.",
+    "6. Define data quality checks to monitor data completeness, correctness, and UI property conformity.",
+    "7. Create an acceptance checklist to verify pipeline correctness and issue resolution.",
+    "8. Document all components in the ETL blueprint for handoff and review."
+  ],
+  "artifacts": {
+    "pipeline_spec": "Source Data: UserScoreSubmissions table containing user_id, submission_id, browser, textarea_background_color, timestamp, and score.\nCadence: Daily batch extraction from transactional DB.\nOrchestration: Airflow DAG triggering extraction, transformation, and loading steps.\nSLAs: Data available in reporting table within 2 hours post batch.\nRecovery: Retry on failure with alerting; manual intervention if repeated failures.\n\nTransformation Steps:\n- Filter submissions where browser='Firefox'.\n- Extract textarea_background_color property.\n- Flag records where background color is white (#FFFFFF or rgb(255,255,255)).\n- Aggregate counts of flagged records per day.\n\nLoading:\n- Load transformed data into ReviewScorecardUIIssues table for monitoring.",
+    "sql_snippets": "-- Validation query to detect white background issues in Firefox\nSELECT\n  DATE(timestamp) AS submission_date,\n  COUNT(*) AS total_submissions,\n  SUM(CASE WHEN textarea_background_color IN

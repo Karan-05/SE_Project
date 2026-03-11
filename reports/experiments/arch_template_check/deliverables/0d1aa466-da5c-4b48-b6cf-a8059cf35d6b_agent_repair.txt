@@ -1,0 +1,29 @@
+BEGIN_JSON
+{
+  "task_type": "data_etl",
+  "id": "0d1aa466-da5c-4b48-b6cf-a8059cf35d6b",
+  "title": "Topcoder O/R F2F - UI issue in the Submit response button (Data science)",
+  "summary": "Design an ETL blueprint to support the UI fix for the Submit response button issue observed in the Appeal responses of a Data Science challenge in production. The ETL should extract relevant data from the existing source systems, transform it to support the updated UI logic and styling as per the reskin design assets, and load it into the target system without breaking existing functions. Validation queries and data quality checks must ensure data correctness and completeness for the UI behavior.",
+  "assumptions": [
+    "No direct access to source data schemas or sample data was provided; assumed relational database sources with standard challenge response tables.",
+    "The UI issue relates to data correctness or availability impacting the Submit response button state or behavior.",
+    "Transformation logic involves enriching or correcting response status or metadata to support UI changes.",
+    "The latest 'reskin-or' codebase and deployment environment details are not accessible, so patching is out of scope; focus is on ETL blueprint only.",
+    "ETL orchestration and scheduling details are not specified; assume daily batch runs with SLA of <1 hour.",
+    "No explicit sample outputs or acceptance checklist provided; inferred acceptance as no UI breakage and data correctness for appeal responses."
+  ],
+  "plan": [
+    "Review the existing data sources related to challenge appeal responses and identify key tables/fields impacting the Submit response button UI state.",
+    "Define the target schema modifications or new fields required to support the UI fix, referencing style and behavior from Figma assets and documentation.",
+    "Design the extraction queries to fetch raw appeal response data and any related metadata needed for transformation.",
+    "Specify transformation steps to clean, enrich, or correct data to align with the UI requirements, including handling edge cases like missing or invalid responses.",
+    "Outline loading strategy to update the target system or data mart without breaking existing functions, ensuring atomicity and rollback capability.",
+    "Develop SQL snippets for extraction, transformation, and validation queries to verify data correctness post-load.",
+    "Provide Python pseudo-code for ETL orchestration including logging, checkpointing, and error handling.",
+    "Define data quality checks with thresholds and automated alerting or remediation actions.",
+    "Create an acceptance checklist covering data correctness, performance SLAs, and no regression on existing UI functionality.",
+    "Document risks, assumptions, and mitigation strategies for deployment and rollback."
+  ],
+  "artifacts": {
+    "pipeline_spec": "The ETL pipeline extracts appeal response data from the production challenge database daily at 2 AM UTC. Extraction queries pull user responses, submission timestamps, and status flags. Transformation enriches the data by validating response completeness, normalizing status codes, and adding flags to control the Submit response button UI state per the new design. Loading updates the reskin-or data mart tables used by the UI layer. The pipeline includes logging at each step, checkpointing after extraction and transformation, and error handling to retry or alert on failures. SLA target is to complete within 1 hour of start. Recovery plan includes re-running failed batches with data consistency checks.",
+    "sql_snippets": "-- Extraction: Fetch appeal responses and related metadata\nSELECT response_id, user_id, challenge_id, submission_time, status_code, appeal_status\nFROM challenge_appeal_responses\nWHERE submission_time >= CURRENT_DATE - INTERVAL '1 day';\n\n-- Transformation: Normalize status codes and add UI control flags\nWITH normalized AS (\n  SELECT response_id, user_id, challenge_id, submission_time,\n    CASE\n      WHEN status_code IN ('SUBMITTED', 'PENDING') THEN 'ACTIVE'\n      ELSE

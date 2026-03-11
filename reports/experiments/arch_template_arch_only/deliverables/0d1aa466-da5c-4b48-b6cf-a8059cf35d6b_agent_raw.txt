@@ -1,0 +1,31 @@
+BEGIN_JSON
+{
+  "task_type": "architecture_doc",
+  "id": "0d1aa466-da5c-4b48-b6cf-a8059cf35d6b",
+  "title": "Topcoder O/R F2F - UI issue in the Submit response button (Data science)",
+  "summary": "This document addresses the UI issue observed in the Submit response button during Appeal responses in the Data Science challenge production environment. The scope includes analyzing the root cause, proposing a minimal-impact patch aligned with the latest reskin-or codebase, and ensuring no regression or functionality breakage. Acceptance criteria include a verified UI fix, adherence to style guidelines from Figma, and no unnecessary code changes.",
+  "assumptions": [
+    "Access to the latest reskin-or codebase is available for patching.",
+    "The UI issue is isolated to the Submit response button as shown in the provided video.",
+    "No backend or API changes are required; the fix is purely UI/Frontend.",
+    "Figma design assets and style guidance are authoritative for UI consistency.",
+    "No changes to existing business logic or functionality should be introduced.",
+    "The Google Docs setup instructions provide environment and build context.",
+    "No explicit performance SLAs or load constraints were specified for this UI fix."
+  ],
+  "plan": [
+    "Review the provided video and screenshot to understand the UI issue specifics.",
+    "Analyze the current Submit response button implementation in the reskin-or codebase.",
+    "Compare current UI implementation against Figma style guidelines for the button.",
+    "Identify minimal CSS/JS/JSP changes required to fix the button UI issue without affecting other components.",
+    "Create a patch branch from the latest reskin-or codebase.",
+    "Implement the UI fix with minimal file changes, avoiding unnecessary whitespace or unrelated edits.",
+    "Run existing UI and integration tests to ensure no regressions.",
+    "Manually verify the fix in a local or staging environment following the setup guide.",
+    "Document the fix in code comments referencing the issue and design sources.",
+    "Prepare the patch diff and file-level plan describing changes and rationale.",
+    "Highlight risks and mitigations related to UI regressions or build failures.",
+    "Submit the patch with clear instructions for reviewers and testers."
+  ],
+  "artifacts": {
+    "design_doc_md": "## Problem Summary\nA UI issue was observed in the Submit response button during the Appeal responses workflow for a Data Science challenge in production. The button's appearance or behavior deviates from expected design standards, impacting user experience.\n\n## Proposed Approach\nAnalyze the current button implementation in the reskin-or codebase and align it with the Figma design assets and style guidelines. Implement minimal CSS and JSP changes to correct the button's UI without altering existing functionality or introducing unrelated modifications.\n\n## File-Level Plan\n- Identify JSP files rendering the Submit response button.\n- Locate associated CSS/SCSS files managing button styles.\n- Modify only the necessary style rules or markup to fix the UI issue.\n- Avoid global style changes or unrelated file edits.\n- Add comments referencing the fix and design sources.\n\n## API / Interface Changes\nNo API or backend interface changes are required as this is a UI-only fix.\n\n## Constraints & SLAs\n- The patch must not break existing functionality.\n- No unnecessary file changes or whitespace modifications.\n-

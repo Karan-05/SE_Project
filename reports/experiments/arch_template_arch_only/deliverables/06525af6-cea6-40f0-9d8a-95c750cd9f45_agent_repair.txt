@@ -1,0 +1,28 @@
+BEGIN_JSON
+{
+  "task_type": "architecture_doc",
+  "id": "06525af6-cea6-40f0-9d8a-95c750cd9f45",
+  "title": "Topcoder Identity Service: fix authentication issue",
+  "summary": "This document outlines the architecture and design considerations for fixing the authentication issue in the Topcoder Identity Service. The fix involves aligning the new TypeScript/Postgres service's password authentication logic with the legacy Java/MySQL service by correctly encrypting and comparing passwords using Blowfish encryption. The document also covers the file-level plan, API/interface changes, constraints, risks, trade-offs, edge cases, and acceptance criteria to ensure a robust and consistent authentication mechanism.",
+  "assumptions": [
+    "Access to legacy Java code and new TypeScript code repositories is available for reference.",
+    "Postman collections for testing authentication flows are or will be provided or created.",
+    "Redis cache and Kafka event bus functionalities remain unchanged and do not require modification.",
+    "Environment variables and configuration for Blowfish encryption keys are consistent with legacy service.",
+    "Database schema for users and passwords in Postgres is compatible with legacy encrypted password storage.",
+    "Code linting standards and best practices for TypeScript are defined and enforced."
+  ],
+  "plan": [
+    "Analyze legacy Java authentication logic, focusing on password encryption and comparison using Blowfish.",
+    "Review current TypeScript authentication implementation and identify deviations from legacy logic.",
+    "Refactor authentication methods in user.controller.ts (getOneTimeToken and auth0Login) to encrypt incoming plaintext passwords and compare encrypted values against stored encrypted passwords.",
+    "Ensure the encryption method (UserService.encodePasswordLegacy) uses the same Blowfish key and algorithm as legacy service.",
+    "Develop comprehensive Postman test collections to verify authentication flows including successful and failed login attempts.",
+    "Rewrite README.md to include detailed setup instructions, environment variables, and step-by-step verification using Postman collections.",
+    "Run code linting tools and refactor tests to comply with best practices and pass lint checks.",
+    "Perform integration testing to verify Redis cache and Kafka event bus functionalities remain intact.",
+    "Document API/interface changes and update relevant contracts if necessary.",
+    "Prepare acceptance checklist and conduct final validation before submission."
+  ],
+  "artifacts": {
+    "design_doc_md": "## Problem Summary\nThe current TypeScript/Postgres Identity Service implementation has an authentication issue where password comparison logic is inconsistent with the legacy Java/MySQL service. Specifically, the new service attempts to decrypt stored passwords for comparison, whereas the legacy service encrypts the incoming password and compares encrypted values. This causes authentication failures for known users.\n\n## Proposed Approach\nAlign the new service's authentication logic with the legacy approach by:\n- Retrieving the encrypted password from the database.\n- Encrypting the incoming plaintext password using the same Blowfish key and method.\n- Comparing the two encrypted passwords directly.\n- Allowing login only if the encrypted passwords match.\n\nRefactor the affected methods in user.controller.ts to implement this logic. Maintain existing Redis cache and Kafka event bus integrations without changes.\n\n## File-Level Plan\n- `src/api/user/auth-flow.service.ts`: Refactor encryption and comparison logic.\n- `src/api/user/user.controller.ts`: Fix getOneTimeToken and auth0Login methods to use correct password comparison.\n- `README.md`: Update with setup instructions, environment variables, and testing steps.\n\n## API/Interface Changes\n- Modify authentication endpoints to handle encrypted password comparison.\n- No changes to Redis or Kafka interfaces.\n\n## Constraints\n- Must maintain backward compatibility with existing encrypted passwords.\n- Encryption keys must remain consistent with legacy service.\n\n## Risks\n- Incorrect encryption key usage could lock out users.\n- Incomplete testing may cause regression in authentication flows.\n\n## Trade-offs\n

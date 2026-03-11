@@ -1,0 +1,36 @@
+BEGIN_JSON
+{
+  "task_type": "data_etl",
+  "id": 30377087,
+  "title": "Topcoder Member API - Update Code with Postgres Schema Part 1",
+  "summary": "Revise the Topcoder Member API code to remove dependencies on Informix, DynamoDB, and ElasticSearch, and use PostgreSQL with Prisma ORM as the sole backend. Update HealthController, MemberController, and MemberTraitController to align with the Prisma schema without changing business logic. Provide seed data loading scripts, update Postman collections, and ensure all existing tests pass. Deliver a comprehensive ETL blueprint including pipeline specification, validation queries, and data quality checks for local testing and verification.",
+  "assumptions": [
+    "Prisma schema and updated Swagger documentation will be provided separately via forum or repository.",
+    "Access to the current member API codebase (https://github.com/topcoder-platform/member-api/tree/develop) is available for reference.",
+    "Test data can be downloaded from the live API endpoint https://api.topcoder-dev.com/v5/members as JSON for seeding.",
+    "The business logic must remain unchanged while removing legacy data source dependencies.",
+    "Postman collections may require updates to reflect new API behavior and schema.",
+    "PostgreSQL version 16.3 is the target database environment.",
+    "The existing unit tests are expected to pass after migration.",
+    "The README will be updated with setup, run, and verification instructions.",
+    "Linting and code style fixes are required as part of the update.",
+    "No direct access to the Prisma schema or Swagger files is currently available in this prompt."
+  ],
+  "plan": [
+    "1. Obtain and review the Prisma schema and updated Swagger API documentation from the forum or repository.",
+    "2. Analyze the current codebase focusing on HealthController, MemberController, and MemberTraitController to identify and isolate dependencies on Informix, DynamoDB, and ElasticSearch.",
+    "3. Refactor the code to replace all legacy data source interactions with Prisma ORM calls targeting PostgreSQL, ensuring business logic remains unchanged.",
+    "4. Develop a data seeding script that downloads JSON data from the live API endpoint and loads it into the PostgreSQL test database using Prisma.",
+    "5. Validate that the seeded test data is sufficient and that API responses from the local environment match the live API responses.",
+    "6. Update Postman collections to reflect any changes in the API endpoints or data schema.",
+    "7. Fix all linting errors and ensure code adheres to NodeJS best practices.",
+    "8. Update the README with detailed setup instructions, environment variable configurations, running instructions, and verification steps.",
+    "9. Execute all existing unit tests to confirm no regressions.",
+    "10. Document the ETL pipeline specification, including data sources, cadence, orchestration, SLAs, and recovery plans.",
+    "11. Provide SQL snippets for data validation and transformation checks.",
+    "12. Provide Python pseudo-code snippets for the ETL pipeline with checkpoints and logging.",
+    "13. Define comprehensive data quality checks with thresholds and actions.",
+    "14. Compile an acceptance checklist covering completeness, correctness, and testing criteria."
+  ],
+  "artifacts": {
+    "pipeline_spec": "## ETL Pipeline Specification\n\n### Data Sources\n- Source: Live API JSON data from https://api.topcoder-dev.com/v

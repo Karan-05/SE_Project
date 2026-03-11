@@ -1,0 +1,46 @@
+{
+  "task_id": "string_reverse_stress",
+  "strategy": "contract_first",
+  "plan": {
+    "strategy": "contract_first",
+    "contract": {
+      "inputs": "",
+      "outputs": "",
+      "constraints": "",
+      "edge_cases": "['abc']"
+    },
+    "patterns": [],
+    "subtasks": [
+      "Validate inputs vs contract",
+      "Implement core logic",
+      "Check edge cases",
+      "Generate minimal unit tests for critical behaviors",
+      "Add adversarial/edge-case tests",
+      "Run tests and interpret failures",
+      "Repair implementation and re-run tests"
+    ],
+    "tests": [
+      ""
+    ],
+    "diagnostics": {
+      "missing_fields": "inputs,outputs,constraints",
+      "contract_length": "7",
+      "audit_note": "The contract you provided is:\n\n```json\n{\n  \"inputs\": \"\",\n  \"outputs\": \"\",\n  \"constraints\": \"\",\n  \"edge_cases\": [\"abc\"]\n}\n```\n\n**Review for completeness:**\n\n1. **Inputs:**  \n   - Currently empty. It should specify the type and format of the input, e.g., \"a single string\".\n\n2. **Outputs:**  \n   - Currently empty. It should specify what the output is, e.g., \"the",
+      "planning_tokens": "145",
+      "planning_time": "2.046934"
+    }
+  },
+  "rounds": [
+    {
+      "round": 0,
+      "phase": "initial",
+      "subtask": "plan",
+      "localized": false,
+      "pass_rate": 1.0,
+      "status": "passed",
+      "duration": 9.033299284055829e-05,
+      "failing_tests": [],
+      "error_types": []
+    }
+  ]
+}

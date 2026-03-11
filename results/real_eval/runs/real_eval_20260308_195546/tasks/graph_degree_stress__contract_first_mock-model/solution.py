@@ -1,0 +1,1 @@
+[MOCK] c25be314dc329b2c :: You are repairing code produced by strategy 'contract_first'. Problem statement: Return degree counts for each vertex.

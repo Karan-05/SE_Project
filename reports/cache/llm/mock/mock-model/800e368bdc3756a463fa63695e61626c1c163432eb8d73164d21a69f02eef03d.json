@@ -1,0 +1,1 @@
+{"content": "[MOCK] 9bdd7a53eb8e4afe :: You are executing decomposition strategy 'pattern_skeleton'. Problem statement: Return counts of characters as a dict so", "tokens": 165, "elapsed": 7.041962817311287e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "plan-runner", "caller": "pattern_skeleton:initial"}}

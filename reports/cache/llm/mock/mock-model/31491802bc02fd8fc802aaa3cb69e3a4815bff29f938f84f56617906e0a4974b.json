@@ -1,0 +1,1 @@
+{"content": "[MOCK] c19e960c778dee4f :: You are executing decomposition strategy 'multi_view'. Problem statement: Return the number of undirected edges.  Implem", "tokens": 128, "elapsed": 3.958994057029486e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "plan-runner", "caller": "multi_view:initial"}}

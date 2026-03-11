@@ -1,0 +1,4 @@
+run_id,tasks_total,pass_all_tests,partial,test_fail,build_fail,invalid_output,no_assets,execution_error,timeouts
+real_eval_20260308_194805,1,1,0,0,0,0,0,0,0
+real_eval_20260308_195546,200,180,0,0,20,0,0,0,0
+real_eval_20260308_195812,50,45,0,0,5,0,0,0,0

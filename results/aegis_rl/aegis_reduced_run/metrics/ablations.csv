@@ -1,0 +1,6 @@
+setting,success_rate,avg_reward,notes
+aegis_flat,0.0,-43.01757535879564,flat_controller
+aegis_reduced,0.5,11.841176340995373,reduced_action_space
+aegis_no_calibration,0.5,23.78114691358255,calibration_disabled
+aegis_no_graph,0.5,-11.835312706671997,graph_disabled
+aegis_no_constraints,0.5,-7.76659106388162,constraints_disabled

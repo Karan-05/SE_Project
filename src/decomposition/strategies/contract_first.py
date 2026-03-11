@@ -3,8 +3,10 @@ from __future__ import annotations
 
 from typing import Dict, List
 
+from src.decomposition.agentic import execute_plan_with_repair
 from src.decomposition.interfaces import DecompositionContext, DecompositionPlan, StrategyResult, TaskDecompositionStrategy
-from src.decomposition.strategies._utils import BudgetTracker, build_implementation_contract, finalize_result, run_tests
+from src.decomposition.strategies._utils import BudgetTracker
+from src.decomposition.agentic.semantic import get_semantic_config
 from src.providers import llm
 
 
@@ -57,26 +59,34 @@ class ContractFirstStrategy(TaskDecompositionStrategy):
         return plan
 
     def solve(self, ctx: DecompositionContext, plan: DecompositionPlan) -> StrategyResult:
-        tracker = BudgetTracker(f"{self.name}:solve")
-        contract = build_implementation_contract(ctx)
-        tracker.consume(
-            llm.call(
-                f"{contract}\nDraft implementation notes conditioned on the approved contract.",
-                model="contract-solver",
-                max_tokens=64,
-                temperature=0.1,
-                caller=self.name,
-            ),
-            fallback="Notes unavailable",
-        )
-        base_code = ctx.metadata.get("reference_solution", "def solve(*args):\n    return None")
-        tests_run = run_tests(base_code, ctx)
         completeness = sum(1 for field in self.REQUIRED_FIELDS if plan.contract.get(field)) / len(self.REQUIRED_FIELDS)
-        planning_tokens = float(plan.diagnostics.get("planning_tokens", 0) or 0)
-        planning_time = float(plan.diagnostics.get("planning_time", 0) or 0.0)
+        config = get_semantic_config(self.name)
         metrics: Dict[str, float | str] = {
             "contract_completeness": round(completeness, 2),
-            "tokens_used": planning_tokens + tracker.tokens,
-            "planning_time": planning_time + tracker.time_spent,
+            "semantic_variant": config.name,
         }
-        return finalize_result(ctx, plan, base_code, tests_run, metrics)
+        return execute_plan_with_repair(
+            ctx,
+            plan,
+            strategy_name=self.name,
+            extra_metrics=metrics,
+            semantic_config=config,
+        )
+
+
+class ContractFirstBaselineStrategy(ContractFirstStrategy):
+    """Baseline variant without checklist/critic for ablations."""
+
+    name = "contract_first_baseline"
+
+
+class ContractFirstChecklistStrategy(ContractFirstStrategy):
+    """Checklist-only ablation."""
+
+    name = "contract_first_checklist"
+
+
+class ContractFirstSemanticStrategy(ContractFirstStrategy):
+    """Alias exposing the full semantic stack explicitly."""
+
+    name = "contract_first_semantic"

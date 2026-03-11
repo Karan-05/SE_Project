@@ -1,0 +1,90 @@
+{
+  "task_id": "graph_degree_test",
+  "strategy": "semantic_diff",
+  "attempt": 10,
+  "pass_rate": 0.0,
+  "plan_subtasks": [
+    "load base solution",
+    "apply semantic deltas",
+    "re-test",
+    "Generate minimal unit tests for critical behaviors",
+    "Add adversarial/edge-case tests",
+    "Run tests and interpret failures"
+  ],
+  "plan_tests": [
+    "critical unit tests",
+    "edge-case probes"
+  ],
+  "plan_diagnostics": {
+    "base_task": "baseline",
+    "num_deltas": "1",
+    "delta_note": "**Semantic Deltas:**\n\n- **Base Task:** Typically returns adjacency lists or edges for each vertex.\n- **New Task:** Returns the *degree count* (number of edges) for each vertex instead of the edges themselves.\n- **Output Change:** From lists of neighbors \u2192 to integer counts per vertex.\n- **Validation Focus:** Ensure output matches expected degree counts exactly for all vertices.",
+    "planning_tokens": "151",
+    "planning_time": "1.797275"
+  },
+  "patch_summary": {
+    "phase": "repair",
+    "prompt_excerpt": ", 2]]] kwargs={}\nProduce a minimal patch to fix only the failing behavior. Keep public APIs identical and do not refactor unrelated sections. Return the full updated implementation without commentary.",
+    "llm_tokens": "427"
+  },
+  "failing_tests": [
+    "sample_0",
+    "sample_1"
+  ],
+  "trace": [
+    "",
+    ""
+  ],
+  "feedback": [
+    "sample_0 expected {'0': 1, '1': 2, '2': 1} but saw {0: 1, 1: 2, 2: 1}",
+    "sample_1 expected {'1': 2} but saw {1: 2}"
+  ],
+  "reproduction": "inputs=[[[0, 1], [1, 2]]] kwargs={}",
+  "tests_run": [
+    {
+      "name": "sample_0",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'0': 1, '1': 2, '2': 1}",
+      "output": "{0: 1, 1: 2, 2: 1}",
+      "error": "",
+      "input": "[[[0, 1], [1, 2]]]",
+      "kwargs": "{}",
+      "duration": 3.2790994737297297e-05
+    },
+    {
+      "name": "sample_1",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'1': 2}",
+      "output": "{1: 2}",
+      "error": "",
+      "input": "[[[1, 1]]]",
+      "kwargs": "{}",
+      "duration": 1.0124989785254002e-05
+    }
+  ],
+  "llm_calls": 1,
+  "timeline": {
+    "attempt": 10,
+    "strategy": "semantic_diff",
+    "phase": "repair",
+    "events": {
+      "repair": {
+        "start": "2026-03-06T12:57:37.197802",
+        "end": "2026-03-06T12:57:39.343605"
+      },
+      "tests": {
+        "start": "2026-03-06T12:57:39.344068",
+        "end": "2026-03-06T12:57:39.344133",
+        "duration_seconds": "0.000"
+      }
+    },
+    "meta": {
+      "prompt_excerpt": ", 2]]] kwargs={}\nProduce a minimal patch to fix only the failing behavior. Keep public APIs identical and do not refactor unrelated sections. Return the full updated implementation without commentary.",
+      "llm_tokens": "427",
+      "llm_calls": "1"
+    }
+  },
+  "solution_preview": "def solve(edges):\n                deg = {}\n                for a,b in edges:\n                    deg[a] = deg.get(a,0)+1\n                    deg[b] = deg.get(b,0)+1\n                return deg"
+}

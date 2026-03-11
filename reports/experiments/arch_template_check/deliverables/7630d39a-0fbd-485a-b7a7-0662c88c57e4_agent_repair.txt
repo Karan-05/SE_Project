@@ -1,0 +1,30 @@
+BEGIN_JSON
+{
+  "task_type": "data_etl",
+  "id": "7630d39a-0fbd-485a-b7a7-0662c88c57e4",
+  "title": "Topcoder Member Profile Processor - Rebuild with Postgres",
+  "summary": "Rebuild the Member Profile Processor to remove Informix dependencies and use PostgreSQL 16.3 with Prisma ORM as the sole backend. The processor must handle event handlers calculate, loadRatings, and loadCoders, updating the schema to use challenge id and legacy challenge id as track keys instead of round id. The business logic remains unchanged. Deliverables include a robust ETL pipeline specification, validation queries, Python pseudo-code for orchestration, and data quality checks to ensure correctness and completeness.",
+  "assumptions": [
+    "Access to the existing Prisma schema and member-profile-processor codebase is assumed for schema details and business logic.",
+    "Exact table structures and relationships in PostgreSQL are inferred from Prisma schema and existing Informix logic.",
+    "Event handler logic (calculate, loadRatings, loadCoders) is assumed to be well-defined and stable, with no business logic changes required.",
+    "Seed data for testing will be provided or synthesized based on existing test cases and schema.",
+    "Postgres 16.3 features and Prisma ORM capabilities are fully supported and used for data transformations.",
+    "No external data sources besides PostgreSQL are involved after migration.",
+    "The pipeline will be orchestrated externally or via NodeJS scripts invoking Prisma ORM; Python pseudo-code is for specification clarity.",
+    "Data quality checks focus on key invariants such as referential integrity, completeness of rating loads, and consistency of challenge keys."
+  ],
+  "plan": [
+    "Analyze existing member-profile-processor code and Prisma schema to understand current data flows and transformations.",
+    "Define the PostgreSQL schema entities and relationships based on Prisma models, focusing on challenge id and legacy challenge id as track keys.",
+    "Design the ETL pipeline stages corresponding to event handlers: calculate, loadRatings, and loadCoders, detailing inputs, transformations, and outputs.",
+    "Develop SQL snippets for key validation queries to verify data correctness and completeness after each stage.",
+    "Write Python pseudo-code for the ETL orchestration to demonstrate data extraction, transformation, loading, and error handling with logging.",
+    "Specify data quality checks with thresholds and actions to detect anomalies or missing data.",
+    "Document the entire pipeline specification including schema, orchestration, validation, and quality checks in data_etl.md format.",
+    "Include sample data or seed data instructions for testing and validation.",
+    "Create an acceptance checklist covering schema correctness, pipeline robustness, test coverage, and documentation completeness.",
+    "Review and self-validate all artifacts against the prompt requirements and rubric criteria."
+  ],
+  "artifacts": {
+    "pipeline_spec": "## Schema Overview\n- Use Prisma ORM models mapped to PostgreSQL 16.3 tables.\n- Key entities: MemberProfile, Rating, Challenge, LegacyChallenge.\n- Use challengeId and legacyChallengeId as track keys instead of roundId.\n\n## Pipeline Stages\n1. loadCoders: Extract member coder data from PostgreSQL, transform as needed, load into MemberProfile.\n2. loadRatings: Extract rating data, associate with challenges using challengeId and legacyChallengeId, load into Rating table.\n3. calculate: Perform calculations and aggregations on member profiles and ratings, update MemberProfile accordingly.\n\n## Validation Queries\n- Verify referential integrity between Rating and Challenge tables.\n- Check completeness of ratings loaded for each member.\n- Confirm consistency of challenge keys used in all tables.\n\n## Python Pseudo-code\n- Orchestrate ETL stages with error handling and logging.\n- Use Prisma ORM calls for data extraction and loading.\n- Implement retries and

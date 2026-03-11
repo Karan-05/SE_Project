@@ -1,0 +1,32 @@
+{
+  "task_count": 4,
+  "languages": [
+    "node"
+  ],
+  "frameworks": [
+    "Express + Mocha"
+  ],
+  "runtime_families": {
+    "node": 4
+  },
+  "multi_file_tasks": 2,
+  "tasks_with_ground_truth": 4,
+  "average_expected_files": 1.5,
+  "test_commands_per_task": {
+    "tc_arena_component_metadata_summary": [
+      "npm test -- --reporter dot test/problems.components.meta.spec.js"
+    ],
+    "tc_arena_problem_detail": [
+      "npm test -- --reporter dot test/problems.detail.spec.js"
+    ],
+    "tc_arena_problem_listing": [
+      "npm test -- --reporter dot test/problems.list.spec.js"
+    ],
+    "tc_arena_problem_tags_filter": [
+      "npm test -- --reporter dot test/problems.tags.spec.js"
+    ]
+  },
+  "reportable_count": 4,
+  "fixture_count": 0,
+  "requires_network_tasks": 4
+}

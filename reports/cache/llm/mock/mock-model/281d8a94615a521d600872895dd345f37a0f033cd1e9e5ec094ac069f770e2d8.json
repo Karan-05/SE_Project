@@ -1,0 +1,1 @@
+{"content": "[MOCK] 17433822f5ccbc0f :: You are repairing code produced by strategy 'multi_view'. Problem statement: Return the sum of all integers. Implementat", "tokens": 163, "elapsed": 4.458008334040642e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "multi_view:repair"}}

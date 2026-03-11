@@ -1,0 +1,1 @@
+{"content": "[MOCK] 1661c962bbb6b4fd :: You are repairing code produced by strategy 'direct_baseline'. Problem statement: Return the reversed string. Implementa", "tokens": 125, "elapsed": 3.958994057029486e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "direct_baseline:repair"}}

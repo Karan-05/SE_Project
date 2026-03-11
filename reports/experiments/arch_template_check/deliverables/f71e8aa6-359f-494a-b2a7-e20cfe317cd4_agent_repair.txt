@@ -1,0 +1,33 @@
+BEGIN_JSON
+{
+  "task_type": "data_etl",
+  "id": "f71e8aa6-359f-494a-b2a7-e20cfe317cd4",
+  "title": "Topcoder O/R F2F - Advancing screening failed submissions page is not reskinned",
+  "summary": "Design an ETL blueprint to support the reskinning of the advancing screening failed submissions page by extracting relevant submission screening data, transforming it to align with the new UI/UX design, and loading it into the target system. The ETL must ensure data correctness, maintain existing functionality, and enable validation through quality checks. Acceptance criteria include a documented pipeline spec, transformation logic, validation queries, and an acceptance checklist aligned with the reskin requirements.",
+  "assumptions": [
+    "No direct access to source database schemas or data samples; inferred typical submission screening data structure.",
+    "Transformation steps inferred to align with new UI/UX design from Figma and documentation links.",
+    "No direct access to existing ETL code or pipeline orchestration details; pipeline design is conceptual and pseudo-coded.",
+    "Validation queries and quality checks are based on standard data integrity and completeness principles.",
+    "Acceptance checklist is based on provided requirements and best practices for ETL validation."
+  ],
+  "plan": [
+    "Review provided Figma design assets and setup documentation to understand UI/UX changes impacting data requirements.",
+    "Define source data schema for submission screening including submission ID, screening status, failure reasons, timestamps, and user actions.",
+    "Design transformation logic to map and enrich source data to the new reskinned page requirements, preserving existing functionality.",
+    "Specify target schema reflecting the reskinned UI data model.",
+    "Draft a pipeline specification detailing data extraction, transformation cadence, orchestration, SLAs, and failure recovery.",
+    "Write SQL snippets for data validation and transformation checks.",
+    "Develop Python pseudo-code snippets illustrating pipeline orchestration, logging, and checkpointing.",
+    "Define data quality checks focusing on completeness, consistency, and correctness of screening failure data.",
+    "Compile an acceptance checklist covering data correctness, pipeline reliability, and UI data alignment.",
+    "Document all artifacts in a comprehensive ETL blueprint markdown."
+  ],
+  "artifacts": {
+    "pipeline_spec": "## ETL Pipeline Specification for Advancing Screening Failed Submissions Reskin\n\n### Sources\n- Submission Screening Database/Table containing submission_id, screening_status, failure_reason, timestamps, user_actions.\n\n### Cadence\n- Incremental batch runs every 15 minutes to capture latest screening failures and advances.\n\n### Orchestration\n- Managed via Airflow or similar scheduler with retry and alerting on failures.\n\n### SLAs\n- Data latency under 30 minutes.\n- 99.9% pipeline success rate.\n\n### Recovery Plan\n- Automatic retries on transient failures.\n- Manual intervention alerts for persistent errors.\n- Data backfill scripts for missed runs.\n\n---\n\n### Transformations\n- Filter submissions with screening_status = 'failed'.\n- Join with user action logs to identify 'Advance' button clicks.\n- Map failure reasons to new UI categories.\n- Format timestamps to ISO 8601.\n- Enrich data with UI display flags per Figma design.\n\n### Target\n- Reskinned submissions table with updated schema supporting new UI elements.",
+    "sql_snippets": [
+      "-- Validate no null submission IDs\nSELECT COUNT(*) FROM submissions WHERE submission_id IS NULL;",
+      "-- Check all failure reasons map to known categories\nSELECT DISTINCT failure_reason FROM submissions WHERE failure_reason NOT IN ('CategoryA', 'CategoryB', 'CategoryC');",
+      "-- Verify timestamp format correctness\nSELECT submission_id, timestamp FROM submissions WHERE TRY_CAST(timestamp AS TIMESTAMP) IS NULL;"
+    ],
+    "python_snippets":

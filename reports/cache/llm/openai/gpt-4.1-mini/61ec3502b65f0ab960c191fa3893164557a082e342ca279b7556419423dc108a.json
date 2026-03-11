@@ -1,0 +1,1 @@
+{"content": "For the problem \"Return the running prefix sums,\" the **two pointers** pattern is generally **not relevant**.\n\n### Explanation:\n- **Running prefix sums**", "tokens": 57, "elapsed": 2.356125582999084, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

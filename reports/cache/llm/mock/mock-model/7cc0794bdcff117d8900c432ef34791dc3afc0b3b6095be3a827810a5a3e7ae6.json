@@ -1,0 +1,1 @@
+{"content": "[MOCK] 582b0f7f5e9f3285 :: You are repairing code produced by strategy 'simulation_trace'. Problem statement: Count primes up to N.  Memory Hint: -", "tokens": 175, "elapsed": 4.792003892362118e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "simulation_trace:repair"}}

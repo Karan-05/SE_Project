@@ -1,0 +1,1 @@
+{"content": "[MOCK] cc794b7c951673f0 :: You are executing decomposition strategy 'direct_baseline'. Problem statement: Return the sum of all integers.  Implemen", "tokens": 101, "elapsed": 6.125017534941435e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "plan-runner", "caller": "direct_baseline:initial"}}

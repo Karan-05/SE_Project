@@ -1,0 +1,1 @@
+{"content": "[MOCK] 6c8e899c82db29e5 :: You are executing decomposition strategy 'pattern_skeleton'. Problem statement: Return the running prefix sums.  Impleme", "tokens": 161, "elapsed": 6.665999535471201e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "plan-runner", "caller": "pattern_skeleton:initial"}}

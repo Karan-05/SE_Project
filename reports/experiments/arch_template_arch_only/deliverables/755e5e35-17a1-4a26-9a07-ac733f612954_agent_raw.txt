@@ -1,0 +1,27 @@
+BEGIN_JSON
+{
+  "task_type": "architecture_doc",
+  "id": "755e5e35-17a1-4a26-9a07-ac733f612954",
+  "title": "Topcoder Online Review - Manual payments not saving",
+  "summary": "This document analyzes the issue where manual payments in the Topcoder Online Review system are not persisted when saved. It proposes a solution approach, outlines a file-level plan for code changes, details required API/interface modifications, and defines constraints, SLAs, risks, and edge cases. The acceptance checklist ensures the fix resolves the problem with no regressions.",
+  "assumptions": [
+    "Access to the 'tc-online-review' GitHub repository and dev branch is available for patch submission.",
+    "The root cause is related to backend payment saving logic or data persistence, as indicated by log warnings.",
+    "No explicit API or database schema details were provided; inferred from typical Online Review payment workflows.",
+    "The UI changes for adding manual payments are assumed to be functioning correctly; focus is on backend save operation.",
+    "Logs indicate a possible data validation or transaction issue preventing saving; exact error messages not fully detailed.",
+    "No existing automated tests or coverage reports were provided; test plans are based on typical payment scenarios."
+  ],
+  "plan": [
+    "Analyze the current payment save flow in the Online Review backend, focusing on manual payment paths.",
+    "Review log warnings and trace them to specific code modules or database operations.",
+    "Identify missing or erroneous validation, transaction handling, or persistence logic causing save failures.",
+    "Design and implement fixes to ensure manual payments are correctly validated, saved, and reflected in the payment list.",
+    "Update or add API endpoints if necessary to support manual payment creation and retrieval.",
+    "Add or enhance unit and integration tests to cover manual payment save scenarios and error handling.",
+    "Perform regression testing on payment features to ensure no side effects.",
+    "Document changes and update system diagrams if applicable.",
+    "Submit a git patch against the 'dev' branch of the 'tc-online-review' repo."
+  ],
+  "artifacts": {
+    "design_doc_md": "## Problem Summary\nManual payments added via the Online Review UI for challenges are not being saved, despite the UI allowing entry and submission. Logs show warnings indicating backend issues during save operations, preventing persistence and display of these payments.\n\n## Proposed Approach\nInvestigate the backend payment save workflow, focusing on manual payment handling. Identify and fix validation or transaction issues causing save failures. Ensure proper database persistence and update payment retrieval logic to reflect manual payments. Enhance error logging for better diagnostics.\n\n## File-Level Plan\n- `PaymentService.java` or equivalent: Fix save logic for manual payments.\n- `PaymentController.java`: Verify API endpoints handling manual payment requests.\n- `PaymentDAO.java`: Ensure database insert/update operations handle manual payments correctly.\n- `LoggingConfig.java`: Improve logging around payment save failures.\n- Add or update unit and integration tests in `PaymentServiceTest.java` and `PaymentControllerTest.java`.\n\n## API / Interface Changes\n- Confirm or add POST endpoint for manual payment creation with required fields (userId, amount, type).\n- Ensure GET endpoint for payments returns manual payments correctly.\n- Update API contracts to include manual payment flags or metadata if missing.\n\n## Constraints & SLAs

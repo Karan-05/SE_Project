@@ -1,0 +1,1 @@
+{"content": "[MOCK] faaa5aa6268a3eae :: You are repairing code produced by strategy 'pattern_skeleton'. Problem statement: Return counts of characters as a dict", "tokens": 201, "elapsed": 5.665991920977831e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "pattern_skeleton:repair"}}

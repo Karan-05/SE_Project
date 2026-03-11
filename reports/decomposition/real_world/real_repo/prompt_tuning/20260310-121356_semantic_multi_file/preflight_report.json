@@ -1,0 +1,171 @@
+{
+  "provider": "mock",
+  "model": "mock-model",
+  "mode": "dev",
+  "task_sources": [
+    "experiments/real_repo_tasks/topcoder"
+  ],
+  "task_count": 4,
+  "runtime_counts": {
+    "node": 4
+  },
+  "requires_network_tasks": 4,
+  "provider_metadata": {
+    "provider": "mock",
+    "model": "mock-model",
+    "runtime": {},
+    "ping": {
+      "latency_sec": 2.749962732195854e-06,
+      "tokens_used": 5,
+      "response": "[MOCK] df456142efd49314 :: Topcoder repo benchmark preflight ping"
+    }
+  },
+  "checks": [
+    {
+      "name": "provider_configured",
+      "ok": true,
+      "message": "LLM provider 'mock' configured."
+    },
+    {
+      "name": "model_configured",
+      "ok": true,
+      "message": "LLM model 'mock-model' configured."
+    },
+    {
+      "name": "provider_runtime",
+      "ok": true,
+      "message": "Local provider runtime not required."
+    },
+    {
+      "name": "provider_ping",
+      "ok": true,
+      "message": "LLM ping succeeded.",
+      "details": {
+        "latency_sec": 2.749962732195854e-06,
+        "tokens_used": 5,
+        "response": "[MOCK] df456142efd49314 :: Topcoder repo benchmark preflight ping"
+      }
+    },
+    {
+      "name": "source:experiments/real_repo_tasks/topcoder",
+      "ok": true,
+      "message": "Task source found."
+    },
+    {
+      "name": "repo_paths",
+      "ok": true,
+      "message": "All repo snapshots available."
+    },
+    {
+      "name": "tool:node",
+      "ok": true,
+      "message": "Command 'node' available.",
+      "details": {
+        "tasks": [
+          "tc_arena_component_metadata_summary",
+          "tc_arena_problem_detail",
+          "tc_arena_problem_listing",
+          "tc_arena_problem_tags_filter"
+        ]
+      }
+    },
+    {
+      "name": "tool:npm",
+      "ok": true,
+      "message": "Command 'npm' available.",
+      "details": {
+        "tasks": [
+          "tc_arena_component_metadata_summary",
+          "tc_arena_problem_detail",
+          "tc_arena_problem_listing",
+          "tc_arena_problem_tags_filter"
+        ]
+      }
+    },
+    {
+      "name": "setup_plan:tc_arena_component_metadata_summary",
+      "ok": true,
+      "message": "Setup plan ready.",
+      "details": {
+        "strategy": "task_defined",
+        "commands": [
+          "npm ci --no-audit --no-fund"
+        ]
+      }
+    },
+    {
+      "name": "test_commands:tc_arena_component_metadata_summary",
+      "ok": true,
+      "message": "Test Commands OK."
+    },
+    {
+      "name": "build_commands:tc_arena_component_metadata_summary",
+      "ok": true,
+      "message": "Build Commands not required."
+    },
+    {
+      "name": "setup_plan:tc_arena_problem_detail",
+      "ok": true,
+      "message": "Setup plan ready.",
+      "details": {
+        "strategy": "task_defined",
+        "commands": [
+          "npm ci --no-audit --no-fund"
+        ]
+      }
+    },
+    {
+      "name": "test_commands:tc_arena_problem_detail",
+      "ok": true,
+      "message": "Test Commands OK."
+    },
+    {
+      "name": "build_commands:tc_arena_problem_detail",
+      "ok": true,
+      "message": "Build Commands not required."
+    },
+    {
+      "name": "setup_plan:tc_arena_problem_listing",
+      "ok": true,
+      "message": "Setup plan ready.",
+      "details": {
+        "strategy": "task_defined",
+        "commands": [
+          "npm ci --no-audit --no-fund"
+        ]
+      }
+    },
+    {
+      "name": "test_commands:tc_arena_problem_listing",
+      "ok": true,
+      "message": "Test Commands OK."
+    },
+    {
+      "name": "build_commands:tc_arena_problem_listing",
+      "ok": true,
+      "message": "Build Commands not required."
+    },
+    {
+      "name": "setup_plan:tc_arena_problem_tags_filter",
+      "ok": true,
+      "message": "Setup plan ready.",
+      "details": {
+        "strategy": "task_defined",
+        "commands": [
+          "npm ci --no-audit --no-fund"
+        ]
+      }
+    },
+    {
+      "name": "test_commands:tc_arena_problem_tags_filter",
+      "ok": true,
+      "message": "Test Commands OK."
+    },
+    {
+      "name": "build_commands:tc_arena_problem_tags_filter",
+      "ok": true,
+      "message": "Build Commands not required."
+    }
+  ],
+  "ok": true
+}

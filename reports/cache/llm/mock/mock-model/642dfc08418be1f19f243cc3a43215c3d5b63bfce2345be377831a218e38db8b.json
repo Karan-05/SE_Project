@@ -1,0 +1,1 @@
+{"content": "[MOCK] 841d885c56cbef7a :: Implement function solve(arg1:str) -> dict. Do NOT read from stdin or write to stdout; rely solely on the provided argum", "tokens": 34, "elapsed": 3.0840164981782436e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "pattern-codegen", "caller": "pattern_skeleton"}}

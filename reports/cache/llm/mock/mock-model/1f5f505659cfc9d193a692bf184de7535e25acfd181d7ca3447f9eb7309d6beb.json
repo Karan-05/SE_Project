@@ -1,0 +1,1 @@
+{"content": "[MOCK] 51b032703800ab98 :: You are repairing code produced by strategy 'semantic_diff'. Problem statement: Return the minimum coins needed to reach", "tokens": 179, "elapsed": 5.249981768429279e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "semantic_diff:repair"}}

@@ -1,0 +1,1 @@
+{"content": "[MOCK] f19c3ad9e80d78c9 :: You are repairing code produced by strategy 'contract_first'. Problem statement: Return the sum of all integers. Impleme", "tokens": 170, "elapsed": 4.875008016824722e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "contract_first:repair"}}

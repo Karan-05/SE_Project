@@ -1,0 +1,30 @@
+BEGIN_JSON
+{
+  "task_type": "architecture_doc",
+  "id": "cd9b908a-f6d0-49ec-aca4-332916a6a7ee",
+  "title": "Topcoder Review API - Fix Identified Issues",
+  "summary": "This architecture document outlines the approach to fix multiple identified issues in the Topcoder Review API codebase, including typos, security risks from hardcoded secrets, data type inconsistencies in Prisma migrations, API documentation inaccuracies, and logical errors in sorting and validation. The fixes aim to improve code quality, security, and maintainability without introducing regressions.",
+  "assumptions": [
+    "Access to the GitHub repository and latest commit on the feat/review-opportunities branch is available for patch submission.",
+    "All identified issues are accurately reported and no additional undisclosed issues exist.",
+    "The environment variables referenced are correctly loaded and managed in deployment environments.",
+    "No breaking changes to existing API contracts or database schema beyond type consistency are allowed.",
+    "NanoID default generation is supported in PostgreSQL as per existing schema conventions."
+  ],
+  "plan": [
+    "Correct the typo in the .env.sample file: rename M2M_AUTH_PROXY_SEREVR_URL to M2M_AUTH_PROXY_SERVER_URL.",
+    "Remove hardcoded m2mToken from mock/mock-api.js and replace with environment variable usage for security.",
+    "Update Prisma migration SQL to change opportunityId column type from TEXT to VARCHAR(14) to match referenced table.",
+    "Add a default value (CURRENT_TIMESTAMP) to the updatedAt column in the Prisma migration to ensure automatic timestamping.",
+    "Fix API response documentation in reviewHistory.controller.ts by changing 403 description from 'Unauthorized' to 'Forbidden'.",
+    "Rename duplicate 'limit' query parameter in reviewOpportunity.controller.ts to 'offset' to avoid conflicts.",
+    "Correct sorting logic in reviewOpportunity.service.ts to return positive/negative values properly for ascending and descending orders.",
+    "Set success property to false in FailResponse within common.dto.ts to accurately represent failure responses.",
+    "Use ReviewApplicationRole type instead of string for the role property in reviewApplication.dto.ts for type safety.",
+    "Add @IsPositive() validation decorator to incrementalPayment property in reviewOpportunity.dto.ts to enforce positive values.",
+    "Add @IsNumber() and @IsPositive() decorators to payment property in reviewOpportunity.dto.ts for validation consistency.",
+    "Fix typo in m2m.config.ts environment variable name from M2M_AUTH_PROXY_SEREVR_URL to M2M_AUTH_PROXY_SERVER_URL.",
+    "Test all changes locally and ensure no regressions in functionality or API behavior before submitting the git patch."
+  ],
+  "artifacts": {
+    "design_doc_md": "## Problem Summary\n- Multiple code quality, security, and consistency issues identified in the Topcoder Review API.\n- Issues include typos in environment variables, hardcoded sensitive tokens, data type mismatches in database schema, inaccurate API docs, and logical errors.\n- These issues risk runtime failures, security vulnerabilities, and maintenance challenges.\n\n## Proposed Approach\n- Correct typos and unify environment variable names for consistency.\n- Remove hardcoded tokens and replace with environment variables to enhance security.\n- Align database schema types for foreign keys to ensure data integrity.\n- Correct API documentation for accurate client understanding.\n- Fix sorting logic and validation decorators to prevent functional bugs.\n- Maintain backward compatibility and avoid breaking changes.\n\n## File-Level Plan\n- .env.sample: Fix environment variable typo.\n- mock/mock-api.js: Remove hardcoded token, use env variable.\n- prisma/migrations/20250525042446_add_review_application/migration.sql: Adjust column types and defaults.\n- src/api/review-history/reviewHistory.controller.ts: Fix API response descriptions.\n- src/api/review-opportunity

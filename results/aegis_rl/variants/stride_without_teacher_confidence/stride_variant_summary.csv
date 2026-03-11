@@ -1,0 +1,2 @@
+success_rate,avg_reward,avg_cost,avg_steps,override_rate,override_win_rate,override_regret_rate,harmful_fraction,beneficial_fraction,budgeted_success,action_entropy,method
+1.0,61.92599099382221,0.2671590909090909,9.15,0.0,0.0,0.0,0.0,0.0,1.0,0.9553095191717148,stride_without_teacher_confidence

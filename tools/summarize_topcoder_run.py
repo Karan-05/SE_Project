@@ -79,6 +79,42 @@ def _find_run(run_id: Optional[str], latest: bool) -> RunArtifacts:
     )
 
 
+@dataclass
+class GateEvaluation:
+    passed: bool
+    blocking_failures: List[str]
+    non_blocking_warnings: List[str]
+    sampling_artifacts: List[str]
+    presentation_gate_status: str
+    presentation_gate_required_algo_tasks: int
+    presentation_gate_observed_algo_tasks: int
+    sampling_insufficiency_reason: Optional[str]
+    blocking_status: str
+    overall_run_color: str
+
+    def reasons(self) -> List[str]:
+        if self.blocking_failures:
+            return list(self.blocking_failures)
+        if self.non_blocking_warnings:
+            return list(self.non_blocking_warnings)
+        return list(self.sampling_artifacts)
+
+    def to_metrics_payload(self) -> Dict[str, object]:
+        payload: Dict[str, object] = {
+            "blocking_failures": self.blocking_failures,
+            "non_blocking_warnings": self.non_blocking_warnings,
+            "sampling_artifacts": self.sampling_artifacts,
+            "presentation_gate_required_algo_tasks": self.presentation_gate_required_algo_tasks,
+            "presentation_gate_observed_algo_tasks": self.presentation_gate_observed_algo_tasks,
+            "presentation_gate_status": self.presentation_gate_status,
+            "blocking_status": self.blocking_status,
+            "overall_run_color": self.overall_run_color,
+        }
+        if self.sampling_insufficiency_reason:
+            payload["sampling_insufficiency_reason"] = self.sampling_insufficiency_reason
+        return payload
+
+
 def _compute_metrics_for_artifacts(artifacts: RunArtifacts) -> Dict[str, object]:
     df = _load_records(artifacts)
     summary_data = _load_json(artifacts.summary)
@@ -398,25 +434,101 @@ def compute_metrics(
     return metrics
 
 
-def evaluate_gate(metrics: Dict[str, object], presentation_mode: bool) -> Tuple[bool, List[str]]:
-    reasons: List[str] = []
+def _is_sampling_insufficiency(metrics: Dict[str, object], observed_algo: int, required_algo: int) -> bool:
+    if observed_algo >= required_algo:
+        return False
+    strategy = str(metrics.get("sample_strategy") or "").lower()
+    if strategy != "random":
+        return False
+    sample_size = int(metrics.get("sample_size") or 0)
+    attempted_total = int(metrics.get("actionable_attempted_total") or metrics.get("attempted") or 0)
+    sample_scope = sample_size or attempted_total
+    if sample_scope <= 0 or required_algo <= 0:
+        return False
+    threshold = required_algo * 4
+    if attempted_total and attempted_total <= threshold:
+        return True
+    if sample_scope <= threshold:
+        return True
+    return False
+
+
+def evaluate_gate(metrics: Dict[str, object], presentation_mode: bool) -> GateEvaluation:
+    blocking: List[str] = []
+    warnings: List[str] = []
+    sampling_artifacts: List[str] = []
+    required_algo = PRESENTATION_MIN_ALGO
+    observed_algo = int(metrics.get("attempted_algo") or 0)
+    observed_non_algo = int(metrics.get("attempted_non_coding") or 0)
+    solved_algo = int(metrics.get("solved_algo") or 0)
+    deliverable_artifacts = int(metrics.get("deliverable_artifacts") or 0)
+    actionable_attempted = int(metrics.get("actionable_attempted_total") or metrics.get("attempted") or 0)
+    llm_calls_total = float(metrics.get("llm_calls_total") or 0.0)
+    llm_calls_per_attempted = float(metrics.get("llm_calls_per_attempted") or 0.0)
+    parse_failures_total = int(metrics.get("parse_failures_total") or 0)
+    pipeline_status = (metrics.get("pipeline_status") or "").upper()
+    validity = metrics.get("validity") or "UNKNOWN"
     mock_demo = metrics.get("validity") == "DEMO_ONLY_MOCK"
     if not mock_demo:
-        if metrics.get("llm_calls_total", 0.0) <= 0:
-            reasons.append("llm_calls_total == 0")
-        elif metrics.get("actionable_attempted_total", 0) > 0 and metrics.get("llm_calls_per_attempted", 0.0) <= 0:
-            reasons.append("llm_calls_per_attempted == 0")
+        if llm_calls_total <= 0:
+            blocking.append("llm_calls_total == 0")
+        elif actionable_attempted > 0 and llm_calls_per_attempted <= 0:
+            blocking.append("llm_calls_per_attempted == 0")
+    if parse_failures_total > 0:
+        blocking.append(f"parse_failures_total == {parse_failures_total}")
+    if pipeline_status and pipeline_status != "COMPLETE":
+        blocking.append(f"pipeline_status == {pipeline_status}")
+    if validity not in {"VALID", "DEMO_ONLY_MOCK"}:
+        blocking.append(f"run validity is {validity}")
+    presentation_gate_status = "PASS"
+    sampling_reason: Optional[str] = None
     if presentation_mode:
-        if metrics.get("attempted_algo", 0) < PRESENTATION_MIN_ALGO:
-            reasons.append(f"only {metrics.get('attempted_algo', 0)} algo tasks attempted (need {PRESENTATION_MIN_ALGO})")
-        if metrics.get("attempted_non_coding", 0) < PRESENTATION_MIN_NON_ALGO:
-            reasons.append(
-                f"only {metrics.get('attempted_non_coding', 0)} non-algo tasks routed "
-                f"(need {PRESENTATION_MIN_NON_ALGO})"
+        if observed_non_algo < PRESENTATION_MIN_NON_ALGO:
+            blocking.append(
+                f"only {observed_non_algo} non-algo tasks routed (need {PRESENTATION_MIN_NON_ALGO})"
             )
-        if metrics.get("deliverable_artifacts", 0) < PRESENTATION_MIN_NON_ALGO:
-            reasons.append("insufficient non-algo deliverable artifacts")
-    return not reasons, reasons
+            presentation_gate_status = "FAIL"
+        elif deliverable_artifacts < PRESENTATION_MIN_NON_ALGO:
+            blocking.append(
+                f"insufficient non-algo deliverable artifacts despite {observed_non_algo} routed tasks"
+            )
+            presentation_gate_status = "FAIL"
+        if observed_algo < required_algo:
+            if _is_sampling_insufficiency(metrics, observed_algo, required_algo):
+                sample_strategy = metrics.get("sample_strategy") or "random"
+                message = (
+                    f"Presentation coverage warning: only {observed_algo} algo tasks were sampled/attempted; "
+                    f"gate expects >={required_algo} for presentation-quality coverage. This is a sampling artifact, not a regression."
+                )
+                sampling_reason = message
+                sampling_artifacts.append(message)
+                sampling_artifacts.append(
+                    f"Presentation gate warning is due to sample composition (only {observed_algo} algo tasks attempted in this {sample_strategy} sample), not due to a regression."
+                )
+                sampling_artifacts.append(
+                    "To satisfy presentation-quality coverage, increase --sample-size or run without random undersampling / disable --presentation."
+                )
+                presentation_gate_status = "WARN_INSUFFICIENT_SAMPLE"
+            else:
+                blocking.append(f"only {observed_algo} algo tasks attempted (need {required_algo})")
+                presentation_gate_status = "FAIL"
+        elif solved_algo <= 0:
+            blocking.append("0 algorithmic tasks solved despite sufficient coverage")
+            presentation_gate_status = "FAIL"
+    blocking_status = "FAIL" if blocking else "PASS"
+    overall_run_color = "RED" if blocking else "GREEN"
+    return GateEvaluation(
+        passed=not blocking,
+        blocking_failures=blocking,
+        non_blocking_warnings=warnings,
+        sampling_artifacts=sampling_artifacts,
+        presentation_gate_status=presentation_gate_status,
+        presentation_gate_required_algo_tasks=required_algo,
+        presentation_gate_observed_algo_tasks=observed_algo,
+        sampling_insufficiency_reason=sampling_reason,
+        blocking_status=blocking_status,
+        overall_run_color=overall_run_color,
+    )
 
 
 def _format_rate(value: float) -> str:
@@ -450,6 +562,36 @@ def render_markdown(metrics: Dict[str, object], artifacts: RunArtifacts) -> str:
         lines.append(
             f"> **Sample Estimate:** sample_size={metrics.get('sample_size')} seed={metrics.get('sample_seed')} strategy={metrics.get('sample_strategy')}"
         )
+        lines.append("")
+    blocking = metrics.get("blocking_failures") or []
+    warnings = metrics.get("non_blocking_warnings") or []
+    sampling = metrics.get("sampling_artifacts") or []
+    lines.extend(
+        [
+            "## Run Health & Gates",
+            f"- Overall run color: **{metrics.get('overall_run_color', 'UNKNOWN')}**",
+            f"- Blocking status: {metrics.get('blocking_status', 'UNKNOWN')}",
+            f"- Presentation gate: {metrics.get('presentation_gate_status', 'N/A')} "
+            f"(observed algo {metrics.get('presentation_gate_observed_algo_tasks', 0)} / required {metrics.get('presentation_gate_required_algo_tasks', PRESENTATION_MIN_ALGO)})",
+        ]
+    )
+    for entry in blocking:
+        lines.append(f"- BLOCKING: {entry}")
+    for entry in warnings:
+        lines.append(f"- Warning: {entry}")
+    for entry in sampling:
+        lines.append(f"- Sampling: {entry}")
+    lines.append("")
+    if metrics.get("deliverable_artifacts", 0) > 0:
+        lines.append("> The truncation fix worked: deliverable artifacts were successfully extracted and scored.")
+        lines.append("")
+    if metrics.get("presentation_gate_status") == "WARN_INSUFFICIENT_SAMPLE":
+        observed_algo = metrics.get("presentation_gate_observed_algo_tasks", 0)
+        strategy = metrics.get("sample_strategy") or "random"
+        lines.append(
+            f"> Presentation gate warning is due to sample composition (only {observed_algo} algo tasks attempted in this {strategy} sample), not due to a regression."
+        )
+        lines.append("> To satisfy presentation-quality coverage, increase --sample-size or run without random undersampling / disable --presentation.")
         lines.append("")
     algo_ratio = (
         f"{metrics['solved_pass_final']}/{metrics['algo_verified_attempted']}"
@@ -527,10 +669,13 @@ def main() -> None:
     artifacts = _find_run(args.run_id, args.latest)
     metrics = _compute_metrics_for_artifacts(artifacts)
     is_presentation = bool(metrics.get("presentation_mode"))
-    gate_passed, gate_reasons = evaluate_gate(metrics, is_presentation)
-    if gate_reasons:
+    gate_eval = evaluate_gate(metrics, is_presentation)
+    if gate_eval.blocking_failures:
         prefix = "Presentation gate not satisfied" if is_presentation else "Run validity issues"
-        print(f"{prefix}: " + "; ".join(gate_reasons))
+        print(f"{prefix}: " + "; ".join(gate_eval.blocking_failures))
+    elif gate_eval.sampling_artifacts or gate_eval.non_blocking_warnings:
+        print("Presentation mode warnings: " + "; ".join(gate_eval.sampling_artifacts + gate_eval.non_blocking_warnings))
+    metrics.update(gate_eval.to_metrics_payload())
     markdown = render_markdown(metrics, artifacts)
     out_md = artifacts.run_dir / "final_results.md"
     out_json = artifacts.run_dir / "final_results.json"

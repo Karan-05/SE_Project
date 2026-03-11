@@ -1,0 +1,63 @@
+BEGIN_JSON
+{
+  "task_type": "architecture_doc",
+  "id": "0c406e64-e1db-422b-ac9a-cdcf7523320f",
+  "title": "Topcoder Admin App - Consolidate Skills Manager",
+  "summary": "Consolidate the existing Skills Manager app into the system-admin app under a new 'Platform' tab. This involves UI integration to add a dropdown tab with a link to load the Skills Manager, removal of role-based access restrictions to allow all administrators access, and cleanup of production and development route configurations related to manage.topcoder.com. The solution must maintain current functionality and pass existing tests without code style changes or refactoring.",
+  "assumptions": [
+    "Access to the platform-ui repo and the feat/system-admin branch at or beyond commit c367efecfc89a4d66f5113a91899e194ccb1bd9c is available.",
+    "Admin credentials for testing will be provided via the forum as stated.",
+    "The existing Skills Manager app is a React component or module that can be embedded or routed within the system-admin app.",
+    "No new unit tests are required, but existing tests must remain passing.",
+    "No major refactoring or code style changes are allowed; only minimal integration changes.",
+    "The 'Platform' tab does not currently exist or if it does, it can be safely extended with a 'Skills' link.",
+    "Route configuration cleanup refers to removing or adjusting routes in the dev/prod environment configs related to manage.topcoder.com skills manager."
+  ],
+  "plan": [
+    "Review the current system-admin app codebase on the feat/system-admin branch to understand tab navigation and dropdown implementation, especially the 'Permission Management' tab.",
+    "Identify or create a 'Platform' tab in the system-admin app navigation as a dropdown menu if not already present.",
+    "Add a 'Skills' link under the 'Platform' dropdown that, when clicked, loads the existing Skills Manager app component or route.",
+    "Modify the Skills Manager app integration to remove any rolesRequired or role-based access control to allow all system administrators access.",
+    "Update routing and configuration files in both production and development environments to remove or clean up references to manage.topcoder.com/skills, ensuring no conflicts or duplicate routes.",
+    "Test the integrated Skills Manager tab manually using admin credentials to verify access and functionality.",
+    "Run existing automated tests to confirm no regressions.",
+    "Document the changes in a comprehensive README covering deployment steps and any configuration changes.",
+    "Create a validation markdown file detailing the manual and automated testing performed to verify the new functionality.",
+    "Prepare a patch file against the specified branch and commit hash containing all changes."
+  ],
+  "artifacts": {
+    "design_doc_md": "## Problem Summary\n- Current Skills Manager app is standalone under manage.topcoder.com/skills.\n- Need to consolidate it into system-admin app for unified admin resource management.\n- Remove rolesRequired so all admins can access Skills Manager.\n- Clean up route configs in prod & dev for manage.topcoder.com.\n\n## Proposed Approach\n- Add a new 'Platform' dropdown tab in system-admin app navigation.\n- Under 'Platform', add a 'Skills' link to load Skills Manager app.\n- Remove role-based restrictions from Skills Manager for universal admin access.\n- Clean route configs to avoid duplication and conflicts.\n\n## File-Level Plan\n- Modify navigation components to add 'Platform' tab and 'Skills' link.\n- Adjust Skills Manager app integration code to remove rolesRequired.\n- Update routing/config files in prod and dev environments.\n- Ensure no code style changes or refactoring.\n\n## API / Interface Changes\n- No backend API changes expected.\n- Frontend routing changes to embed Skills Manager under system-admin app.\n- Removal of rolesRequired affects frontend authorization logic.\n\n## Constraints & SLAs\n- Must not break existing functionality or tests.\n- No unit tests required but existing tests must pass.\n- Follow existing codebase style strictly.\n- Deployment must not disrupt current production environment.\n\n## Risks & Trade-offs\n- Removing rolesRequired may expose Skills Manager to all admins; ensure this is acceptable.\n- Route cleanup risks breaking existing links if not done carefully.\n- Minimal changes limit refactoring opportunities, possibly leaving some legacy code.\n\n## Edge Cases\n- 'Platform' tab may already exist; integration must merge without conflict.\n- Skills Manager app may have hidden dependencies on rolesRequired.\n- Route cleanup must consider any external bookmarks or integrations.\n\n## Acceptance Checklist\n- [ ] 'Platform' tab with 'Skills' link present and functional.\n- [ ] Skills Manager loads correctly within system-admin app.\n- [ ] rolesRequired removed and access granted to all admins.\n- [ ] Route configs cleaned without breaking other routes.\n- [ ] Existing tests pass without modification.\n- [ ] README and validation markdown included with submission.",
+    "mermaid_diagram": "graph TD\n  A[System-Admin App] -->|Dropdown Tab| B[Platform Tab]\n  B -->|Link| C[Skills Manager App]\n  C --> D[Skills Manager Functionality]\n  A --> E[Route Configurations]\n  E -->|Cleaned| F[Prod & Dev Environments]",
+    "interfaces": [
+      {
+        "producer": "System-Admin App Navigation",
+        "consumer": "Skills Manager App",
+        "protocol": "React component routing",
+        "payload": "Navigation event triggers loading of Skills Manager component without role restrictions"
+      }
+    ],
+    "tradeoffs": [
+      "Removing rolesRequired simplifies access but may reduce security granularity; chosen for broader admin access.",
+      "Embedding Skills Manager inside system-admin app improves UX but requires careful route and config cleanup to avoid conflicts.",
+      "Minimal code changes preserve codebase stability but limit opportunity to improve legacy code.",
+      "Not adding new unit tests reduces workload but relies on existing test coverage and manual validation."
+    ]
+  },
+  "validations": [
+    "Reviewed prompt requirements and confirmed all mandatory points are addressed in design.",
+    "Ensured architecture doc covers problem summary, approach, file plan, interface changes, constraints, risks, edge cases, and acceptance criteria.",
+    "Cross-checked assumptions and plan steps for completeness and alignment with prompt.",
+    "Validated mermaid diagram and interface contracts represent the integration flow clearly.",
+    "Confirmed tradeoffs section discusses security and integration complexity trade-offs.",
+    "Confidence in design completeness and alignment with prompt requirements is high."
+  ],
+  "confidence": 0.95,
+  "stop_reason": "completed",
+  "rubric_self_check": {
+    "coverage": "All required architecture doc sections are present and address the prompt requirements.",
+    "specificity": "Details specific integration points, config cleanup, and access control changes relevant to the project.",
+    "actionability": "Plan provides clear, ordered steps for implementation and validation.",
+    "overall_notes": "The design document is concise, actionable, and aligned with the prompt. It includes risks, tradeoffs, and acceptance criteria as required."
+  }
+}
+END_JSON

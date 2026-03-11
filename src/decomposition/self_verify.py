@@ -103,7 +103,7 @@ class RetryConfig:
         )
 
 
-def ensure_testing_subtasks(plan: DecompositionPlan) -> DecompositionPlan:
+def ensure_testing_subtasks(plan: DecompositionPlan, ctx: Optional[DecompositionContext] = None) -> DecompositionPlan:
     """Append verification subtasks if the plan omitted them."""
 
     required = [
@@ -117,6 +117,20 @@ def ensure_testing_subtasks(plan: DecompositionPlan) -> DecompositionPlan:
             plan.subtasks.append(step)
     if not plan.tests:
         plan.tests.extend(["critical unit tests", "edge-case probes"])
+    if ctx and isinstance(ctx.metadata, dict):
+        repo_files = ctx.metadata.get("repo_target_files")
+        if repo_files and not plan.target_files:
+            plan.target_files = list(repo_files)
+        candidates = ctx.metadata.get("repo_candidate_files") or []
+        if candidates and not plan.candidate_files:
+            plan.candidate_files = list(candidates)
+        if plan.candidate_files and not plan.subtask_file_map and plan.subtasks:
+            mapping: Dict[str, List[str]] = {}
+            for idx, subtask in enumerate(plan.subtasks):
+                if idx < len(plan.candidate_files):
+                    mapping[subtask] = [plan.candidate_files[idx]]
+            plan.subtask_file_map = mapping
+            plan.repair_target_files = mapping
     return plan
 
 
@@ -366,7 +380,7 @@ def execute_with_self_verification(
         attempt_idx = total_attempts + 1
         timeline = AttemptTimeline(attempt=attempt_idx, strategy=strategy_name, phase="initial")
         timeline.start("decompose")
-        plan = ensure_testing_subtasks(strategy.decompose(ctx))
+        plan = ensure_testing_subtasks(strategy.decompose(ctx), ctx)
         timeline.end("decompose")
         attempt_timer = time.perf_counter()
         attempt_llm_start = llm.total_calls()
@@ -523,7 +537,10 @@ def execute_with_self_verification(
     final_result.metrics["pass_rate_history"] = ",".join(f"{value:.3f}" for value in pass_rate_history)
     final_result.metrics["strategy_used"] = fallback_path[-1] if fallback_path else ""
     final_result.metrics["fallback_path"] = "->".join(fallback_path)
-    final_result.metrics["final_status"] = "passed" if final_pass_rate == 1.0 else "failed"
+    if "final_status" not in final_result.metrics:
+        final_result.metrics["final_status"] = "passed" if final_pass_rate == 1.0 else "failed"
+    else:
+        final_result.metrics["self_verify_final_status"] = "passed" if final_pass_rate == 1.0 else "failed"
     if last_summary:
         final_result.metrics["failing_tests"] = ",".join(last_summary.failing_tests)
         final_result.metrics["last_failure_feedback"] = "; ".join(last_summary.assertion_msgs or last_summary.brief_trace)

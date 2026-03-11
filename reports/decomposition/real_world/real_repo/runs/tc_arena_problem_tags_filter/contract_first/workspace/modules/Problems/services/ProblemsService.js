@@ -1,0 +1,19 @@
+```json
+{
+  "contract_review": [
+    {
+      "id": "multi_tag_union",
+      "status": "covered",
+      "plan": "Normalize comma-separated tags to lowercase array, filter problems containing any of those tags, and expose all normalized tags in metadata.appliedTags."
+    },
+    {
+      "id": "array_tag_filter",
+      "status": "covered",
+      "plan": "Support tags[]=... array form alongside difficulty filters, normalize tags, filter problems accordingly, preserve ordering by roundId, and apply paging limit."
+    }
+  ],
+  "edits": [
+    {
+      "path": "modules/Problems/services/ProblemsService.js",
+      "mode": "rewrite",
+      "content": "'use strict';\n\n/*\n * Copyright (c) 2016 TopCoder, Inc.\n */\n\n/**\n * Service for SRM problem APIs.\n */\nconst fs = require('fs');\nconst path = require('path');\nconst Joi = require('joi');\nconst logger = require('../../../common/logger');\n\nlet cachedProblems;\n\nconst MAX_LIMIT = 50;\n\n/**\n * Normalize tags filter into a lowercase array.\n * @param {string|Array<string>} rawTags\n * @returns {Array<string>}\n */\nfunction normalizeTags(rawTags) {\n  if (!rawTags && rawTags !== '') {\n    return [];\n  }\n  const list = Array.isArray(rawTags) ? rawTags : String(rawTags).split(',');\n  return list\n    .map((tag) => String(tag || '').trim().toLowerCase())\n    .filter((tag) => tag);\n}\n\n/**\n * Check whether the problem contains at least one of the requested tags.\n * @param {Object} problem\n * @param {Array<string>} tags\n * @returns {boolean}\n */\nfunction problemMatchesTags(problem, tags) {\n  if (!tags || tags.length === 0) return true;\n  if (!problem.tags || !Array.isArray(problem.tags)) return false;\n  const problemTagsLower = problem.tags.map(t => t.toLowerCase());\n  return tags.some(tag => problemTagsLower.includes(tag));\n}\n\n/**\n * List problems with optional filtering by tags and difficulty.\n * @param {Object} filters\n * @param {string|Array<string>} [filters.tags] - comma-separated or array of tags\n * @param {string} [filters.difficulty]\n * @returns {Promise<Object>} payload with problems and metadata\n */\nfunction* listProblems(filters) {\n  if (!cachedProblems) {\n    const filePath = path.resolve(__dirname, '../../data/problems.json');\n    const raw = fs.readFileSync(filePath, 'utf8');\n    cachedProblems = JSON.parse(raw);\n  }\n\n  // Normalize tags filter\n  let normalizedTags = [];\n  if (filters.tags !== undefined) {\n    normalizedTags = normalizeTags(filters.tags);\n  } else if (filters['tags[]'] !== undefined) {\n    normalizedTags = normalizeTags(filters['tags[]']);\n  }\n\n  // Normalize difficulty filter\n  const difficultyFilter = filters.difficulty ? String(filters.difficulty).toLowerCase() : null;\n\n  // Filter problems\n  let filtered = cachedProblems.filter(problem => {\n    // Difficulty filter\n    if (difficultyFilter && problem.difficulty.toLowerCase() !== difficultyFilter) {\n      return false;\n

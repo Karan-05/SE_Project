@@ -1,0 +1,1 @@
+{"content": "[MOCK] a3e435319ec5acc3 :: You are repairing code produced by strategy 'role_decomposed'. Problem statement: Count primes up to N.  Memory Hint: - ", "tokens": 169, "elapsed": 4.708010237663984e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "role_decomposed:repair"}}

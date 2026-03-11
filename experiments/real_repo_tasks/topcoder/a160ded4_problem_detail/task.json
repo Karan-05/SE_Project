@@ -1,0 +1,138 @@
+{
+  "task_id": "tc_arena_problem_detail",
+  "prompt": "Topcoder Arena 3.0 SRM API backlog: extend GET /api/v1/problems/:problemId so SRM detail pages show component statistics (language counts, status counts, max points) and return a 404 JSON error when a problem does not exist. The controller should stay thin and leverage the service to aggregate component metadata from data/problems.json.",
+  "dataset": "topcoder_arena_srm",
+  "dataset_source": "a160ded4-e34a-4989-b2a2-d09ead684045",
+  "repo_path": "experiments/real_repos/tc-template-node-postgres",
+  "language": "node",
+  "framework": "Express + Mocha",
+  "task_type": "feature",
+  "difficulty": "M",
+  "build_commands": [],
+  "test_commands": [
+    "npm test -- --reporter dot test/problems.detail.spec.js"
+  ],
+  "setup_commands": [
+    "npm ci --no-audit --no-fund"
+  ],
+  "target_files": [
+    "modules/Problems/services/ProblemsService.js"
+  ],
+  "file_context": [
+    "modules/Problems/services/ProblemsService.js",
+    "modules/Problems/controllers/ProblemsController.js",
+    "test/problems.detail.spec.js",
+    "data/problems.json"
+  ],
+  "apply_mode": "rewrite",
+  "allowed_edit_paths": [
+    "modules/Problems/**/*.js",
+    "test/problems.detail.spec.js",
+    "data/problems.json",
+    "package.json",
+    "package-lock.json",
+    "config/test.json"
+  ],
+  "timeout_seconds": 420,
+  "env": {
+    "NODE_ENV": "development"
+  },
+  "task_is_fixture": false,
+  "task_is_real_world": true,
+  "reportable": true,
+  "dataset_source_type": "topcoder_challenge_record",
+  "metadata": {
+    "challenge_id": "a160ded4-e34a-4989-b2a2-d09ead684045",
+    "challenge_url": "https://www.topcoder.com/challenges/a160ded4-e34a-4989-b2a2-d09ead684045",
+    "api_endpoint": "GET /api/v1/problems/:problemId",
+    "related_tests": [
+      "test/problems.detail.spec.js"
+    ],
+    "test_files": [
+      "test/problems.detail.spec.js",
+      "test/problems.list.spec.js",
+      "test/problems.components.meta.spec.js",
+      "test/problems.tags.spec.js"
+    ],
+    "implementation_target_files": [
+      "modules/Problems/services/ProblemsService.js"
+    ],
+    "support_files": [
+      "modules/Problems/controllers/ProblemsController.js",
+      "data/problems.json",
+      "config/test.json"
+    ],
+    "schema_hints": [
+      "Problem detail responses mirror entries in data/problems.json and must append componentStats.languages/statusCounts/maxPoints.",
+      "Unknown problem IDs should not leak stack traces; respond with 404 plus a JSON { message } payload."
+    ],
+    "contract": [
+      {
+        "id": "component_stats_payload",
+        "description": "Detail responses must include componentStats.languages/statusCounts/maxPoints derived from each problem's components array.",
+        "category": "aggregation",
+        "tests": [
+          "SRM problem detail contract::includes component statistics for SRM-5004"
+        ],
+        "keywords": [
+          "componentstats",
+          "statuscounts",
+          "languages",
+          "maxpoints"
+        ]
+      },
+      {
+        "id": "missing_problem_404",
+        "description": "When a problemId does not exist, return HTTP 404 with a JSON body describing the missing ID.",
+        "category": "error_handling",
+        "tests": [
+          "SRM problem detail contract::returns 404 when an SRM problem does not exist"
+        ],
+        "keywords": [
+          "404",
+          "not found"
+        ]
+      },
+      {
+        "id": "controller_service_boundary",
+        "description": "Keep the controller thin: delegate aggregation to the service without mutating global state or controller-side filtering.",
+        "category": "architecture",
+        "tests": [
+          "SRM problem detail contract::includes component statistics for SRM-5004"
+        ],
+        "keywords": [
+          "modules/problems/controllers"
+        ]
+      }
+    ],
+    "allowed_editable_files": {
+      "implementation": [
+        "modules/Problems/**/*.js"
+      ],
+      "tests": [
+        "test/problems.list.spec.js"
+      ],
+      "support": [
+        "data/problems.json",
+        "config/test.json",
+        "package.json",
+        "package-lock.json"
+      ]
+    },
+    "expected_files": [
+      "modules/Problems/services/ProblemsService.js"
+    ],
+    "oracle_patch_files": [
+      "modules/Problems/services/ProblemsService.js",
+      "test/problems.list.spec.js"
+    ],
+    "ground_truth_patch": "ground_truth.patch",
+    "multi_file_localization": true,
+    "repo_snapshot_sha256": "b5d35262031fffb59e4ece9e9d7bc9119912652f0e88b1c9109f0b471e778fc5",
+    "notes": "Detail endpoint must aggregate component stats and emit a 404 JSON payload for unknown IDs."
+  },
+  "runtime_family": "node",
+  "package_manager": "npm",
+  "requires_network": true,
+  "setup_timeout_sec": 420
+}

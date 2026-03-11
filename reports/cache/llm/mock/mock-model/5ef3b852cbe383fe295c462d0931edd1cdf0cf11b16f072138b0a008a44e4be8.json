@@ -1,0 +1,1 @@
+{"content": "[MOCK] 81508e28988d6728 :: You are repairing code produced by strategy 'contract_first'. Problem statement: Return degree counts for each vertex. I", "tokens": 170, "elapsed": 5.083042196929455e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "contract_first:repair"}}

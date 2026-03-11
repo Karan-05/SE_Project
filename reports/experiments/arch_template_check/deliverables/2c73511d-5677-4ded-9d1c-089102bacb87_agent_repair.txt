@@ -1,0 +1,30 @@
+BEGIN_JSON
+{
+  "task_type": "data_etl",
+  "id": "2c73511d-5677-4ded-9d1c-089102bacb87",
+  "title": "Topcoder O/R F2F - Uploaded document(by the reviewer while reviewing from scorecard) is not available to download",
+  "summary": "This ETL blueprint addresses the issue where uploaded documents by reviewers during scorecard reviews are not available for download in the new application. The scope includes extracting document metadata and storage references from source systems, transforming and validating document accessibility, and loading the data into the target system to enable download functionality. Acceptance criteria include ensuring all uploaded documents are accessible and downloadable as per the old app behavior, with no regressions in existing functions.",
+  "assumptions": [
+    "Source data schema for uploaded documents and metadata is not provided and must be inferred or obtained from the existing system.",
+    "The storage mechanism (e.g., file system, cloud storage) for uploaded documents is assumed to be accessible via metadata references in the source data.",
+    "Transformation logic to map old app document references to new app storage format is required but details are missing.",
+    "No direct access to source or target databases or ETL orchestration tools is currently available.",
+    "Validation queries and sample outputs must be designed based on inferred schema and expected document download URLs or paths.",
+    "The ETL pipeline will run on a scheduled cadence aligned with scorecard review updates but exact frequency is unspecified."
+  ],
+  "plan": [
+    "1. Gather and analyze source data schemas for uploaded documents and related metadata from the old and new applications.",
+    "2. Define the target schema to store document references enabling download functionality in the new app.",
+    "3. Design extraction queries or connectors to retrieve uploaded document metadata and storage references from source systems.",
+    "4. Develop transformation logic to normalize and map document metadata to the target schema, ensuring compatibility with new app download mechanisms.",
+    "5. Implement loading procedures to insert or update document metadata in the target system.",
+    "6. Create validation SQL queries to verify completeness and correctness of document references post-load.",
+    "7. Develop data quality checks to ensure no missing or broken document links exist.",
+    "8. Write Python pseudo-code snippets representing the ETL orchestration with logging and error handling.",
+    "9. Define SLAs for pipeline execution and document availability.",
+    "10. Prepare an acceptance checklist covering functional verification, data quality, and no regressions in existing features."
+  ],
+  "artifacts": {
+    "pipeline_spec": "### Sources\n- Source system(s) holding uploaded document metadata and storage references from scorecard reviews.\n\n### Cadence\n- Scheduled ETL runs aligned with scorecard review updates, e.g., hourly or daily.\n\n### Orchestration\n- Extract metadata and storage references.\n- Transform to normalize document paths and metadata.\n- Load into target document reference table.\n- Validate data quality and completeness.\n\n### SLAs\n- Pipeline should complete within 30 minutes of scheduled run.\n- Document availability must be verified within 1 hour of upload.\n\n### Recovery Plan\n- On failure, retry extraction and loading up to 3 times.\n- Alert on persistent failures.\n- Manual intervention for data inconsistencies.",
+    "sql_snippets": "-- Validation: Check for missing document references\nSELECT document_id, COUNT(*) AS ref_count\nFROM target_document_reference_table\nGROUP BY document_id\nHAVING COUNT(*) = 0;\n\n-- Validation: Check for broken document links\nSELECT document_id, document_url\nFROM target_document_reference_table\nWHERE document_url IS NULL OR document_url = '' OR NOT EXISTS (\n  SELECT 1 FROM external_storage WHERE external_storage.url = target_document_reference_table.document_url\n);",
+    "python_snippets": "

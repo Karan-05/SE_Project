@@ -1,0 +1,1 @@
+{"content": "[MOCK] 73abc1bb3e2af265 :: You are repairing code produced by strategy 'multi_view'. Problem statement: Return the sum of the main diagonal.  Memor", "tokens": 175, "elapsed": 5.125009920448065e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "multi_view:repair"}}

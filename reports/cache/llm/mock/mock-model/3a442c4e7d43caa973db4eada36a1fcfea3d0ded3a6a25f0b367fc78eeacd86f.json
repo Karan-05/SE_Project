@@ -1,0 +1,1 @@
+{"content": "[MOCK] 66ae5e569efbe0db :: You are repairing code produced by strategy 'multi_view'. Problem statement: Return the nth Fibonacci number. Implementa", "tokens": 162, "elapsed": 4.584027919918299e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "multi_view:repair"}}

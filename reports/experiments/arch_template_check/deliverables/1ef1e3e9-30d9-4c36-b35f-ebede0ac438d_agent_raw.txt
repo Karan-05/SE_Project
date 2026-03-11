@@ -1,0 +1,81 @@
+BEGIN_JSON
+{
+  "task_type": "architecture_doc",
+  "id": "1ef1e3e9-30d9-4c36-b35f-ebede0ac438d",
+  "title": "[GIG] Azure Integration Tech Lead –  Melbourne, Australia",
+  "summary": "This document outlines the architecture and design considerations for an Azure Integration Tech Lead role focused on building scalable, secure, and performant APIs using Azure-native services and .NET technologies. The scope includes Azure Function Apps, Durable Functions, API Management, and CI/CD pipelines with a strong emphasis on clean code, TDD, and monitoring.",
+  "assumptions": [
+    "The engagement is a full-time onsite role in Melbourne for 6 months with possible extension.",
+    "The candidate is expected to lead design and development of Azure-based integrations using Function Apps, Durable Functions, and APIM.",
+    "API design follows RESTful principles using .NET Core, with OpenAPI specifications for documentation and governance.",
+    "Azure DevOps and GitHub workflows are used for CI/CD and source control.",
+    "Monitoring and performance tuning leverage Application Insights.",
+    "Security best practices involve Azure Key Vault and secure development patterns.",
+    "No specific existing codebase or repository access is provided; this is a role description and architecture guideline.",
+    "No detailed API specifications or business domain context provided; architecture is based on typical enterprise integration patterns."
+  ],
+  "plan": [
+    "Summarize the problem and role requirements to frame the architectural context.",
+    "Describe the proposed approach focusing on Azure Integration Services, API design, and DevOps practices.",
+    "Outline a file-level plan for organizing code and infrastructure as code artifacts.",
+    "Define API/interface changes and contracts, including OpenAPI and integration points.",
+    "Enumerate constraints and SLAs relevant to performance, security, and deployment.",
+    "Identify risks and trade-offs related to technology choices, scalability, and operational complexity.",
+    "Highlight edge cases such as high transaction volumes, failure recovery, and security threats.",
+    "Provide an acceptance checklist covering design, implementation, testing, monitoring, and documentation."
+  ],
+  "artifacts": {
+    "design_doc_md": "## Problem Summary\n- Need to lead and architect Azure-based integration solutions for enterprise APIs.\n- Build scalable, secure, and maintainable RESTful APIs using Azure Function Apps, Durable Functions, and API Management.\n- Ensure adherence to clean code, TDD, secure development, and DevOps best practices.\n- Deliver a robust, monitored, and performant API ecosystem supporting high transaction volumes.\n\n## Proposed Approach\n- Use Azure Function Apps and Durable Functions to implement serverless, event-driven integration workflows.\n- Leverage Azure API Management (APIM) for API gateway, security, throttling, and OpenAPI documentation.\n- Develop APIs in C# (.NET Core) following clean architecture and dependency injection.\n- Implement CI/CD pipelines with Azure DevOps or GitHub Actions for automated builds, tests, and deployments.\n- Use Azure Key Vault for secrets management and Application Insights for monitoring and telemetry.\n\n## File-Level Plan\n- /src/FunctionApps/ : Azure Function App projects including Durable Functions workflows.\n- /src/APIs/ : REST API projects built with .NET Core, including controllers and service layers.\n- /infrastructure/ : ARM templates or Bicep files for provisioning APIM, Function Apps, Key Vault, Storage.\n- /tests/ : Unit and integration tests using .NET Unit Testing frameworks and MoQ.\n- /docs/ : OpenAPI specifications, architecture diagrams, and operational runbooks.\n\n## API / Interface Changes\n- Define RESTful endpoints with OpenAPI specs for each integration API.\n- Use JSON for request/response payloads with versioning strategy.\n- Secure APIs via OAuth2/JWT tokens managed through APIM.\n- Expose Durable Function orchestration status endpoints for monitoring.\n\n## Constraints & SLAs\n- APIs must support high throughput with low latency; target <200ms response times.\n- Ensure 99.9% uptime SLA for production APIs.\n- Secure all secrets and sensitive data using Azure Key Vault.\n- Deployments must be automated and rollback-capable via CI/CD pipelines.\n\n## Risks & Trade-offs\n- Serverless Function Apps may have cold start latency; mitigate with pre-warming or Premium plans.\n- Complex Durable Function workflows can increase debugging difficulty.\n- APIM adds cost and operational overhead but provides critical API governance.\n- Balancing rapid development with strict TDD and code quality may impact delivery speed.\n\n## Edge Cases\n- Handling large bursts of API traffic and scaling function apps accordingly.\n- Durable Functions failure/retry scenarios and state consistency.\n- Securing APIs against common threats like injection, DDoS, and unauthorized access.\n- Managing versioning and backward compatibility of APIs.\n\n## Acceptance Checklist\n- Architecture documented with clear integration patterns and technology choices.\n- OpenAPI specs published and validated.\n- Automated CI/CD pipelines implemented and tested.\n- Unit and integration tests covering critical paths.\n- Monitoring and alerting configured in Application Insights.\n- Security best practices enforced including Key Vault usage and API authentication.\n- Performance benchmarks meeting SLA requirements.",
+    "mermaid_diagram": "graph TD\n  Client -->|REST API Calls| APIM[Azure API Management]\n  APIM --> FunctionApps[Azure Function Apps]\n  FunctionApps --> DurableFunctions[Durable Functions]\n  FunctionApps --> Storage[Azure Storage Accounts]\n  FunctionApps --> KeyVault[Azure Key Vault]\n  APIM --> ApplicationInsights[Application Insights]\n  CI_CD[CI/CD Pipeline] --> APIM\n  CI_CD --> FunctionApps\n  CI_CD --> DurableFunctions",
+    "interfaces": [
+      {
+        "producer": "Client Applications",
+        "consumer": "Azure API Management",
+        "protocol": "HTTPS REST",
+        "payload": "JSON request/response with OAuth2/JWT authentication"
+      },
+      {
+        "producer": "Azure API Management",
+        "consumer": "Azure Function Apps",
+        "protocol": "HTTPS REST",
+        "payload": "JSON payloads invoking serverless functions"
+      },
+      {
+        "producer": "Azure Function Apps",
+        "consumer": "Durable Functions",
+        "protocol": "Durable Task Framework",
+        "payload": "Stateful orchestration messages"
+      },
+      {
+        "producer": "Azure Function Apps",
+        "consumer": "Azure Storage Accounts",
+        "protocol": "Azure Storage SDK",
+        "payload": "Blobs, Queues, Tables for state and data persistence"
+      }
+    ],
+    "tradeoffs": [
+      "Using Azure Function Apps enables serverless scalability but introduces cold start latency; mitigated by Premium plans.",
+      "Durable Functions provide reliable orchestration but add complexity in debugging and state management.",
+      "API Management adds cost but is essential for API governance, security, and analytics.",
+      "Strict TDD and clean code practices improve maintainability but may slow initial delivery velocity.",
+      "Onsite full-time engagement ensures close collaboration but limits remote flexibility."
+    ]
+  },
+  "validations": [
+    "Reviewed prompt and extracted all key requirements and constraints.",
+    "Ensured architecture doc covers all rubric sections: problem summary, approach, file plan, interfaces, constraints, risks, edge cases, and acceptance criteria.",
+    "Mermaid diagram reflects core Azure integration components and their interactions.",
+    "Interfaces clearly define producer-consumer relationships and protocols.",
+    "Trade-offs explicitly address technology decisions and operational impacts.",
+    "Acceptance checklist aligns with best practices for Azure integration projects."
+  ],
+  "confidence": 0.95,
+  "stop_reason": "completed",
+  "rubric_self_check": {
+    "coverage": "All required sections from problem summary to acceptance checklist are included and detailed.",
+    "specificity": "Architecture and design details are tailored to Azure Integration Services and .NET technologies as per prompt.",
+    "actionability": "Plan and acceptance checklist provide concrete steps and criteria for implementation and validation.",
+    "overall_notes": "The architecture doc fully addresses the prompt requirements for an Azure Integration Tech Lead role with clear, concise, and actionable content."
+  }
+}
+END_JSON

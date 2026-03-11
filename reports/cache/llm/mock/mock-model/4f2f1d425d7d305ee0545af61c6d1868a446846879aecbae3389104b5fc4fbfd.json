@@ -1,0 +1,1 @@
+{"content": "[MOCK] 8b3c6c73b34fcb06 :: Implement function solve(arg1:list[int]) -> list[int]. Do NOT read from stdin or write to stdout; rely solely on the pro", "tokens": 34, "elapsed": 2.4579931050539017e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "pattern-codegen", "caller": "pattern_skeleton"}}

@@ -1,0 +1,1 @@
+{"content": "[MOCK] e10de4ba26928ed0 :: You are executing decomposition strategy 'failure_mode_first'. Problem statement: Return the minimum coins needed to rea", "tokens": 143, "elapsed": 4.208995960652828e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "plan-runner", "caller": "failure_mode_first:initial"}}

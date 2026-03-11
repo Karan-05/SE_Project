@@ -1,0 +1,15 @@
+{
+  "success_rate": 0.8,
+  "avg_reward": 55.85023932291964,
+  "avg_cost": 0.33780303030303027,
+  "avg_steps": 12.75,
+  "override_rate": 0.20306249306249305,
+  "override_win_rate": 0.3731912531912532,
+  "override_regret_rate": 0.15786158286158286,
+  "harmful_fraction": 0.15786158286158286,
+  "beneficial_fraction": 0.3731912531912532,
+  "budgeted_success": 0.8,
+  "action_entropy": 1.1521152168512345,
+  "method": "stride_gate_plus_residual_plus_curriculum",
+  "notes": ""
+}

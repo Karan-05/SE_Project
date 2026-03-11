@@ -1,0 +1,36 @@
+BEGIN_JSON
+{
+  "task_type": "data_etl",
+  "id": 30377078,
+  "title": "Topcoder Marathon Match Scorer Rebuild POC Part 2 Relaunched",
+  "summary": "Design an ETL pipeline blueprint for migrating the existing Marathon Match scoring system from a continuously running EC2 instance with Docker-based scoring to an on-demand AWS Fargate-based Java scorer. The pipeline will handle Kafka submission messages, invoke Fargate tasks for scoring, update submission statuses through the lifecycle, and integrate with AWS Parameter Store for dynamic configuration. Acceptance criteria include a detailed pipeline spec, runnable pseudo-code snippets, validation SQL queries, and data quality checks ensuring correctness and reliability.",
+  "assumptions": [
+    "The scorer is implemented in Java and packaged as a Docker image stored in AWS ECR.",
+    "Kafka topics and message schemas for submissions are stable and accessible.",
+    "AWS Lambda functions are used for orchestration and status updates.",
+    "AWS Systems Manager Parameter Store is used for dynamic scorer configuration per challenge ID.",
+    "The scoring output is returned to the Lambda function via Fargate task exit codes, logs, or a temporary storage mechanism.",
+    "No direct access to the existing codebase or Kafka schemas was provided; design is based on description and best practices.",
+    "The submission lifecycle status updates are performed via API calls to the submission system.",
+    "The pipeline must support multiple concurrent challenges and multiple scorer types per challenge.",
+    "The existing scoring process reads scores from files; this will be refactored to return scores programmatically."
+  ],
+  "plan": [
+    "Define Kafka source topics and message schema for submission events.",
+    "Design AWS Lambda function to trigger on Kafka submission messages and initiate scoring.",
+    "Define AWS Fargate task configuration to run the Java scorer container with environment variables and parameters from Parameter Store.",
+    "Implement logic in Lambda to update submission status to 'submitted' upon receiving a submission message.",
+    "Invoke Fargate task on-demand per submission, passing challenge ID and scorer configuration.",
+    "Design scorer container to read configuration from Parameter Store and execute appropriate test code for the challenge.",
+    "Capture scoring results from Fargate task output (logs or exit code) and pass back to Lambda.",
+    "Lambda updates submission status through lifecycle: 'running examples', 'running provisional', and finally 'completed'.",
+    "Lambda calls review API to create review entries based on scoring results.",
+    "Define data quality checks to ensure all submissions are processed, statuses updated correctly, and scores returned.",
+    "Create SQL validation queries to verify submission status transitions and review creation in the database.",
+    "Provide Python pseudo-code snippets for Lambda orchestration and Parameter Store interaction.",
+    "Document pipeline orchestration, error handling, retries, and SLA constraints.",
+    "Prepare a validation markdown file describing test scenarios and verification steps.",
+    "Prepare a comprehensive README covering deployment, configuration, and usage instructions."
+  ],
+  "artifacts": {
+    "pipeline_spec": "## Sources\n- Kafka topics: submission events with challengeId, submissionId, and metadata.\n\n## Cadence\n- Event-driven: triggered per submission message.\n\n## Orchestration\n- AWS Lambda triggered by Kafka event.\n- Lambda updates submission status to 'submitted'.\n- Lambda invokes AWS Fargate task for Java scorer with challengeId and scorer config.\n-

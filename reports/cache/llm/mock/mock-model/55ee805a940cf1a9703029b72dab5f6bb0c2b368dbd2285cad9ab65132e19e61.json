@@ -1,0 +1,1 @@
+{"content": "[MOCK] 76a252939e1ca2c8 :: You are executing decomposition strategy 'multi_view'. Problem statement: Return the minimum coins needed to reach targe", "tokens": 132, "elapsed": 3.958004526793957e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "plan-runner", "caller": "multi_view:initial"}}

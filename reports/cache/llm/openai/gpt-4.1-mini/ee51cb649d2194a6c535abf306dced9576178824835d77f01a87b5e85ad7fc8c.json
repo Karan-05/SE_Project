@@ -1,0 +1,1 @@
+{"content": "The problem **\"Return the minimum coins needed to reach target\"** is a classic coin change problem, which is typically solved using dynamic programming.\n\n### What is", "tokens": 59, "elapsed": 1.0608630829956383, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

@@ -1,0 +1,36 @@
+BEGIN_JSON
+{
+  "task_type": "repo_patch",
+  "id": "f107d44d-d997-41de-8c44-c9f63b718f96",
+  "title": "MTL-DBG-Dec22-Niti01",
+  "summary": "Implement MTL Night Debug support for the Windows device driver as requested by the customer. The patch will add debug hooks and logging to support nighttime debugging scenarios, improve traceability, and ensure minimal impact on normal operation. Acceptance criteria include successful compilation, passing regression tests, and verified debug output during night mode operation.",
+  "assumptions": [
+    "No local repository or existing codebase provided; patch content is inferred based on typical Windows device driver debug support.",
+    "Customer requirements for 'MTL Night Debug support' are limited to adding debug hooks and logging; no detailed spec provided.",
+    "Testing environment includes Windows driver build tools and test harness capable of running driver regression and debug scenarios.",
+    "No conflicts with existing driver functionality are expected, but rollback plan is prepared.",
+    "Patch will affect device driver source files related to debug and logging modules."
+  ],
+  "plan": [
+    "Analyze existing device driver debug infrastructure to identify integration points for night debug support.",
+    "Develop patch adding night debug hooks, conditional logging, and any required configuration flags.",
+    "Update driver initialization and runtime code to support night mode debug activation.",
+    "Prepare unified diff patch for the affected source files with clear comments and documentation.",
+    "Create a test plan including build verification, regression test execution, and manual debug output validation during night mode.",
+    "Document risks including potential performance impact and debug log volume increase, with rollback instructions.",
+    "Validate patch by applying to local repo, building driver, running tests, and verifying debug output correctness.",
+    "Submit patch with accompanying markdown files for patch plan, risks, and test plan."
+  ],
+  "artifacts": {
+    "patch_diff_unified": "diff --git a/driver/debug.c b/driver/debug.c\nindex 1234567..89abcde 100644\n--- a/driver/debug.c\n+++ b/driver/debug.c\n@@ -100,6 +100,30 @@ void debug_log(const char* msg) {\n-    // Existing debug log implementation\n+    // Extended debug log for MTL Night Debug support\n+    if (is_night_mode_active()) {\n+        // Add additional night debug info\n+        log_night_debug_info(msg);\n+    }\n+    // Call existing log function\n+    original_debug_log(msg);\n+}\n+\n+bool is_night_mode_active() {\n+    // Check system time or config flag for night mode\n+    SYSTEMTIME st;\n+    GetLocalTime(&st);\n+    return (st.wHour >= 22 || st.wHour < 6);\n+}\n+\n+void log_night_debug_info(const char* msg) {\n+    // Detailed logging for night debug\n+    // e.g., write to dedicated night debug log buffer\n+    night_debug_buffer_write(msg);\n+}\n\n--- a/driver/debug.h b/driver/debug.h\n+++ b/driver/debug.h\n@@ -10,6 +10,10 @@\n-void debug_log(const char* msg);\n+void debug_log(const char* msg);\n+bool is_night_mode_active();\n+void log_night_debug_info(const char* msg);\n",
+    "file_plan": [
+      {
+        "file": "driver/debug.c",
+        "rationale": "Add night mode detection and extended debug logging functions."
+      },
+      {
+        "file": "driver/debug.h",
+        "rationale": "Declare new functions for night debug support."
+      }
+    ],
+    "risks":

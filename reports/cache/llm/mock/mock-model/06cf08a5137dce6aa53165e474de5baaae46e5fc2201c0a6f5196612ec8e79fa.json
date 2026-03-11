@@ -1,0 +1,1 @@
+{"content": "[MOCK] ddeb4b33d11f5596 :: You are executing decomposition strategy 'role_decomposed'. Problem statement: Return the number of undirected edges.  I", "tokens": 113, "elapsed": 3.958004526793957e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "plan-runner", "caller": "role_decomposed:initial"}}

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import copy
 import csv
 import json
 import importlib
@@ -7,6 +8,7 @@ import shutil
 from datetime import datetime, timedelta
 from pathlib import Path
 from types import SimpleNamespace
+from typing import Dict
 
 import pytest
 
@@ -20,10 +22,13 @@ from src.experiments.topcoder.experiment_runner import ExperimentConfig, _Topcod
 from src.experiments.topcoder.solvers.design_doc import DesignDocSolver
 from src.experiments.topcoder.solvers.repo_patch import RepoPatchSolver
 from src.experiments.topcoder.solvers.base import SolverContext
+from src.experiments.topcoder.formatting import JsonExtractionOutcome
 from src.experiments.topcoder.verifiers import RubricVerifier, RepoVerifier
 from src.experiments.topcoder.parsing import JsonExtractionError
+from src.experiments.topcoder.types import TopcoderDatasetDescriptor
 from src.providers.llm import LLMResponse
 from tools.run_topcoder_experiment import apply_presentation_defaults
+from tools.summarize_topcoder_run import build_run_metrics, evaluate_gate
 
 
 def _write_sample_csv(path: Path, *, with_tests: bool = True) -> None:
@@ -389,6 +394,58 @@ def test_design_doc_solver_produces_required_sections(monkeypatch, tmp_path: Pat
     assert reason == "mock"
 
 
+def _build_design_doc_ctx(tmp_path: Path) -> SolverContext:
+    return SolverContext(
+        task={"id": "doc-static", "title": "Static Doc", "problem_statement": "Outline architecture."},
+        decision=RoutingDecision(TaskType.ARCHITECTURE_DOC, "design doc", ["design"]),
+        config=SimpleNamespace(test_timeout_seconds=30.0),
+        retry_config=SimpleNamespace(),
+        test_manager=None,
+        run_dir=tmp_path,
+        artifact_dir=tmp_path / "artifacts",
+        deliverables_dir=tmp_path / "deliverables",
+        patches_dir=tmp_path / "patches",
+        rubric_dir=tmp_path / "rubric_out",
+        test_results_dir=tmp_path / "tests",
+        repo_logs_dir=tmp_path / "repo_logs",
+        repo_search_root=tmp_path,
+        llm_available=True,
+    )
+
+
+def test_design_doc_solver_normalizes_heading_variants(tmp_path: Path) -> None:
+    rubric = RubricVerifier(tmp_path / "rubric")
+    solver = DesignDocSolver(rubric)
+    ctx = _build_design_doc_ctx(tmp_path)
+    raw_sections = "\n\n".join(f"{section}:\n- details" for section in DesignDocSolver.required_sections)
+    document = solver._render_deliverable(ctx, {}, {"design_doc_md": raw_sections})
+    for section in DesignDocSolver.required_sections:
+        assert f"## {section}" in document
+    result = rubric.evaluate(
+        task=ctx.task,
+        deliverable_text=document,
+        rubric_name="architecture_doc",
+        required_sections=DesignDocSolver.required_sections,
+        artifacts={"architecture.md": document},
+    )
+    assert result.passes_threshold
+    assert not result.missing
+
+
+def test_rubric_flags_docs_missing_headings(tmp_path: Path) -> None:
+    rubric = RubricVerifier(tmp_path / "rubric")
+    plain_doc = "System overview only.\nNo explicit sections listed."
+    result = rubric.evaluate(
+        task={"id": "doc-missing"},
+        deliverable_text=plain_doc,
+        rubric_name="architecture_doc",
+        required_sections=DesignDocSolver.required_sections,
+        artifacts={"architecture.md": plain_doc},
+    )
+    assert not result.passes_threshold
+    assert result.missing
+
+
 def test_memory_retrieval_injects_hints(monkeypatch) -> None:
     memory_path = Path("reports") / "tests_memory" / "mem.jsonl"
     memory_path.parent.mkdir(parents=True, exist_ok=True)
@@ -450,6 +507,208 @@ def test_repo_solver_reports_parse_failure(monkeypatch, tmp_path: Path) -> None:
     assert result.metrics["parse_error"] == "broken"
     assert result.artifacts["agent_parse_diagnostics_path"] == str(diag_path)
 
+
+def _setup_repo_solver(tmp_path: Path):
+    rubric = RubricVerifier(tmp_path / "rubric_dir")
+    repo_verifier = RepoVerifier(tmp_path / "repo_logs")
+    solver = RepoPatchSolver(rubric, repo_verifier)
+    for directory in ["deliverables", "patches", "rubric_out", "tests", "repo_logs", "artifacts"]:
+        (tmp_path / directory).mkdir(parents=True, exist_ok=True)
+    ctx = SolverContext(
+        task={"id": "demo", "title": "Fix bug", "problem_statement": "Fix bug", "metadata": {}},
+        decision=RoutingDecision(TaskType.REPO_PATCH, "route", []),
+        config=SimpleNamespace(run_id="test_repo_plan"),
+        retry_config=SimpleNamespace(run_id="test_repo_plan"),
+        test_manager=None,
+        run_dir=tmp_path,
+        artifact_dir=tmp_path / "artifacts",
+        deliverables_dir=tmp_path / "deliverables",
+        patches_dir=tmp_path / "patches",
+        rubric_dir=tmp_path / "rubric_out",
+        test_results_dir=tmp_path / "tests",
+        repo_logs_dir=tmp_path / "repo_logs",
+        repo_search_root=tmp_path,
+        llm_available=True,
+    )
+    raw_path = tmp_path / "raw_agent.txt"
+    diag_path = tmp_path / "diag.json"
+    raw_path.write_text("raw", encoding="utf-8")
+    diag_path.write_text("{}", encoding="utf-8")
+
+    def make_payload(artifacts: dict[str, object]):
+        payload = {
+            "task_type": TaskType.REPO_PATCH.value,
+            "id": ctx.task["id"],
+            "title": ctx.task["title"],
+            "summary": "Critical fix required",
+            "assumptions": [],
+            "plan": ["Outline patch"],
+            "artifacts": artifacts,
+            "validations": ["SELF_CHECK"],
+            "confidence": 0.8,
+            "stop_reason": "completed",
+            "rubric_self_check": {
+                "coverage": 50,
+                "specificity": 50,
+                "actionability": 50,
+                "overall_notes": "test",
+            },
+        }
+        extraction = JsonExtractionOutcome(
+            payload=payload,
+            json_text=json.dumps(payload),
+            source="test",
+            raw_text="raw",
+            raw_path=raw_path,
+            diagnostics_path=diag_path,
+        )
+        return payload, extraction
+
+    return solver, ctx, make_payload
+
+
+def _run_synthetic_experiment(monkeypatch, run_id: str, tasks: list[dict[str, object]]):
+    runner = _TopcoderExperiment(ExperimentConfig(run_id=run_id, allow_no_llm=True))
+    descriptor = TopcoderDatasetDescriptor(
+        dataset_id="synthetic_ds",
+        path=Path("synthetic.json"),
+        file_type="json",
+    )
+    monkeypatch.setattr(runner, "_discover_datasets", lambda: [descriptor])
+
+    def fake_loader(_descriptor: TopcoderDatasetDescriptor) -> list[dict[str, object]]:
+        return copy.deepcopy(tasks)
+
+    monkeypatch.setattr(
+        "src.experiments.topcoder.experiment_runner.load_tasks_from_dataset",
+        fake_loader,
+    )
+
+    executed: list[str] = []
+
+    def fake_run(tasks_to_run: list[dict[str, object]], checkpoint) -> None:
+        for task in tasks_to_run:
+            executed.append(str(task.get("id")))
+            now = datetime.utcnow()
+            record = runner._build_task_record(
+                task,
+                status="completed_patch",
+                error_type="success",
+                start=now,
+                end=now,
+                pass_rate=1.0,
+                attempt_count=1.0,
+            )
+            record["resolved_task_type"] = TaskType.REPO_PATCH.value
+            record["deliverable_success"] = True
+            checkpoint.append(record)
+
+    monkeypatch.setattr(runner, "_run_tasks", fake_run)
+    runner.run()
+    return runner, executed
+
+
+def test_repo_solver_consumes_new_artifacts(monkeypatch, tmp_path: Path) -> None:
+    solver, ctx, make_payload = _setup_repo_solver(tmp_path)
+    structured_artifacts = {
+        "patch_diff_unified": "diff --git a/service/handler.py b/service/handler.py\n--- a/service/handler.py\n+++ b/service/handler.py",
+        "file_plan": [
+            "service/handler.py – replace legacy adapter with modern client",
+            "tests/test_handler.py – cover regression scenario",
+        ],
+        "test_plan": [
+            "pytest tests/test_handler.py",
+            "npm test",
+        ],
+        "risks": [
+            "Monitor modern client latency before rollout",
+            "Rollback via previous container tag if errors spike",
+        ],
+    }
+    monkeypatch.setattr(solver, "_request_patch", lambda *_args, **_kwargs: make_payload(structured_artifacts))
+    result = solver.solve(ctx)
+    assert result.verifier_score >= 70
+
+    deliverable_path = Path(result.artifacts["deliverable_path"])
+    content = deliverable_path.read_text()
+    for heading in ["## Problem Summary", "## Files / Modules", "## Plan", "## Risks", "## Validation"]:
+        assert heading in content
+    assert "service/handler.py" in content
+    assert "pytest tests/test_handler.py" in content
+
+    patch_content = Path(result.artifacts["patch_path"]).read_text()
+    assert "diff --git a/service/handler.py" in patch_content
+    test_plan_content = Path(result.artifacts["test_plan_path"]).read_text()
+    assert "npm test" in test_plan_content
+    risks_content = Path(result.artifacts["risks_path"]).read_text()
+    assert "latency" in risks_content
+
+
+def test_repo_solver_handles_legacy_artifact_keys(monkeypatch, tmp_path: Path) -> None:
+    solver, ctx, make_payload = _setup_repo_solver(tmp_path)
+    legacy_artifacts = {
+        "patch_unified_diff": "diff --git a/core.py b/core.py\n--- a/core.py\n+++ b/core.py",
+        "files_touched": ["core.py", "README.md"],
+        "tests_to_run": "pytest -q\nflake8",
+        "risk_notes": ["Regression risk if validation missed"],
+    }
+    monkeypatch.setattr(solver, "_request_patch", lambda *_args, **_kwargs: make_payload(legacy_artifacts))
+    result = solver.solve(ctx)
+    deliverable_path = Path(result.artifacts["deliverable_path"])
+    content = deliverable_path.read_text()
+    assert "core.py" in content
+    assert "pytest -q" in content
+    assert result.verifier_score > 0
+
+
+def test_duplicate_tasks_are_deduplicated(monkeypatch) -> None:
+    tasks = [
+        {
+            "id": "dup-task",
+            "title": "Primary task",
+            "problem_statement": "First description",
+            "metadata": {"dataset_id": "synthetic_ds", "dataset_path": "synthetic.json"},
+        },
+        {
+            "id": "dup-task",
+            "title": "Duplicate task",
+            "problem_statement": "Second description",
+            "metadata": {"dataset_id": "synthetic_ds", "dataset_path": "synthetic.json"},
+        },
+    ]
+    runner, executed = _run_synthetic_experiment(monkeypatch, "dedupe_guard", tasks)
+    assert executed == ["dup-task"]
+    manifest = json.loads((runner.run_dir / "tasks_manifest.json").read_text())
+    assert manifest["task_count"] == 1
+    assert manifest["duplicate_task_count"] == 1
+    summary = json.loads((runner.run_dir / "summary.json").read_text())
+    assert summary["duplicate_task_rows"] == 1
+    assert summary["raw_task_rows"] == 2
+
+
+def test_summary_matches_final_results(monkeypatch) -> None:
+    pytest.importorskip("pandas")
+    tasks = [
+        {
+            "id": "dup-two",
+            "title": "First pass",
+            "problem_statement": "Variant A",
+            "metadata": {"dataset_id": "synthetic_ds", "dataset_path": "synthetic.json"},
+        },
+        {
+            "id": "dup-two",
+            "title": "Second pass",
+            "problem_statement": "Variant B",
+            "metadata": {"dataset_id": "synthetic_ds", "dataset_path": "synthetic.json"},
+        },
+    ]
+    run_id = "dedupe_metrics"
+    runner, _ = _run_synthetic_experiment(monkeypatch, run_id, tasks)
+    summary = json.loads((runner.run_dir / "summary.json").read_text())
+    metrics, _ = build_run_metrics(run_id)
+    assert summary["total_problems"] == metrics["total_unique_task_ids"]
+    assert summary["attempted"] == metrics["attempted"]
+    assert summary["completed_successfully"] == metrics["attempted_success_total"]
 
 def test_route_task_identifies_repo_patch() -> None:
     task = {
@@ -550,3 +809,68 @@ def test_generate_reports_marks_mock_runs(tmp_path: Path) -> None:
     generate_reports("mock_run", run_dir, records, artifact_dir=artifact_dir, metadata={"mock_provider": True, "llm_provider": "mock"})
     summary = json.loads((run_dir / "summary.json").read_text())
     assert summary["run_validity"] == "DEMO_ONLY_MOCK"
+
+
+def _gate_metrics(**overrides: object) -> Dict[str, object]:
+    base: Dict[str, object] = {
+        "attempted": 10,
+        "actionable_attempted_total": 10,
+        "attempted_algo": 5,
+        "solved_algo": 1,
+        "attempted_non_coding": 2,
+        "deliverable_artifacts": 2,
+        "llm_calls_total": 10.0,
+        "llm_calls_per_attempted": 1.0,
+        "parse_failures_total": 0,
+        "pipeline_status": "COMPLETE",
+        "validity": "VALID",
+        "sample_size": 15,
+        "sample_strategy": "random",
+    }
+    for key, value in overrides.items():
+        base[key] = value
+    return base
+
+
+def test_evaluate_gate_sampling_warning() -> None:
+    metrics = _gate_metrics(attempted=15, actionable_attempted_total=15, attempted_algo=2, solved_algo=1)
+    gate = evaluate_gate(metrics, presentation_mode=True)
+    assert gate.passed
+    assert gate.presentation_gate_status == "WARN_INSUFFICIENT_SAMPLE"
+    assert gate.sampling_artifacts
+    assert gate.overall_run_color == "GREEN"
+
+
+def test_evaluate_gate_algo_failure_when_coverage_sufficient() -> None:
+    metrics = _gate_metrics(
+        attempted=60,
+        actionable_attempted_total=60,
+        attempted_algo=6,
+        solved_algo=0,
+        sample_size=60,
+    )
+    gate = evaluate_gate(metrics, presentation_mode=True)
+    assert not gate.passed
+    assert "0 algorithmic tasks solved" in " ".join(gate.blocking_failures)
+    assert gate.presentation_gate_status == "FAIL"
+
+
+def test_evaluate_gate_parse_failure_blocks_run() -> None:
+    metrics = _gate_metrics(parse_failures_total=2)
+    gate = evaluate_gate(metrics, presentation_mode=True)
+    assert not gate.passed
+    assert any("parse_failures_total" in reason for reason in gate.blocking_failures)
+
+
+def test_evaluate_gate_incomplete_pipeline_blocks_run() -> None:
+    metrics = _gate_metrics(pipeline_status="IN_PROGRESS")
+    gate = evaluate_gate(metrics, presentation_mode=True)
+    assert not gate.passed
+    assert any("pipeline_status" in reason for reason in gate.blocking_failures)
+
+
+def test_evaluate_gate_ignores_presentation_thresholds_when_disabled() -> None:
+    metrics = _gate_metrics(attempted_algo=1, solved_algo=0)
+    gate = evaluate_gate(metrics, presentation_mode=False)
+    assert gate.passed
+    assert gate.presentation_gate_status == "PASS"

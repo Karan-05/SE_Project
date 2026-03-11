@@ -1,0 +1,1 @@
+{"content": "[MOCK] 3f7867f6cd8cd33f :: You are executing decomposition strategy 'simulation_trace'. Problem statement: Return the reversed string.  Implementat", "tokens": 106, "elapsed": 3.7499703466892242e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "plan-runner", "caller": "simulation_trace:initial"}}

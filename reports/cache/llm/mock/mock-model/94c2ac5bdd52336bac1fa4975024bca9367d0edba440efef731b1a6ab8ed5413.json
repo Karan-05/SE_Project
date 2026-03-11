@@ -1,0 +1,1 @@
+{"content": "[MOCK] 16b5e433acd55afa :: You are repairing code produced by strategy 'role_decomposed'. Problem statement: Return the sum of all integers. Implem", "tokens": 148, "elapsed": 4.208995960652828e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "role_decomposed:repair"}}

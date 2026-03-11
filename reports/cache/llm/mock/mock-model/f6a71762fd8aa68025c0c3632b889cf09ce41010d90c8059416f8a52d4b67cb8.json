@@ -1,0 +1,1 @@
+{"content": "[MOCK] bb7fb361b74d26bf :: You are repairing code produced by strategy 'contract_first'. Problem statement: Return the running prefix sums. Impleme", "tokens": 167, "elapsed": 4.875008016824722e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "contract_first:repair"}}

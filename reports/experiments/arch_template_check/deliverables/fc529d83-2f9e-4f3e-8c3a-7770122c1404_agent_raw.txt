@@ -1,0 +1,47 @@
+BEGIN_JSON
+{
+  "task_type": "non_actionable",
+  "id": "fc529d83-2f9e-4f3e-8c3a-7770122c1404",
+  "title": "Topcoder O/R F2F - Buttons in some pages are not fully visible",
+  "summary": "The prompt describes a UI/UX issue related to button visibility on certain pages due to footer overlap, with instructions to create a patch for a Java/Maven web app. However, it lacks any ETL-related details such as source data, schema, transformations, or validation requirements necessary for an ETL blueprint.",
+  "assumptions": [
+    "The prompt is primarily a frontend UI bug fix task with no ETL data pipeline context.",
+    "No source data, schema, or transformation logic is provided or implied.",
+    "No SQL, Python, or data pipeline specifications are included or relevant.",
+    "The task does not align with data_etl requirements despite the initial task_type hint.",
+    "The provided design assets and documentation relate to UI styling, not data processing."
+  ],
+  "plan": [
+    "Confirm with requester if ETL-related data pipeline details exist for this task.",
+    "Request explicit ETL source data descriptions, schema definitions, transformation logic, and validation criteria if ETL work is expected.",
+    "If no ETL context is provided, recommend routing this task to a frontend or repo_patch specialist for UI code fixes.",
+    "If ETL details are provided later, re-assess and produce a full ETL blueprint accordingly."
+  ],
+  "artifacts": {
+    "reason": "The task prompt lacks any ETL-related information such as source data, schema, transformations, or validation requirements, making it impossible to produce an ETL blueprint.",
+    "what_needed": [
+      "Detailed source data descriptions and schema for relevant datasets.",
+      "Transformation steps or business logic to be applied to the data.",
+      "Sample input and expected output data for validation.",
+      "SQL or Python code snippets illustrating transformations or checks.",
+      "Acceptance criteria specific to data quality and pipeline success.",
+      "Access or references to any existing ETL pipelines or orchestration frameworks."
+    ]
+  },
+  "validations": [
+    "Confirmed prompt content is exclusively UI/Java/Maven frontend patch related with no ETL context.",
+    "Cross-checked memory hints and extra context for ETL details; none found.",
+    "Reviewed rubric requirements for ETL blueprint; prompt does not meet minimum input criteria.",
+    "Ensured assumptions and plan align with inability to produce ETL artifacts.",
+    "Validated output JSON schema compliance and completeness."
+  ],
+  "confidence": 1.0,
+  "stop_reason": "blocked_missing_etl_context",
+  "rubric_self_check": {
+    "coverage": 1,
+    "specificity": 1,
+    "actionability": 1,
+    "overall_notes": "The response fully covers the inability to produce ETL artifacts due to missing context, provides a clear unblock plan, and aligns with all rubric criteria for non_actionable tasks."
+  }
+}
+END_JSON

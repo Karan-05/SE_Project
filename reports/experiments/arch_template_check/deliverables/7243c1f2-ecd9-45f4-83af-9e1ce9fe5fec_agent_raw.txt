@@ -1,0 +1,29 @@
+BEGIN_JSON
+{
+  "task_type": "repo_patch",
+  "id": "7243c1f2-ecd9-45f4-83af-9e1ce9fe5fec",
+  "title": "Update HuggingFace MCP Integration for Topcoder Intelligence Assistant",
+  "summary": "Update the Topcoder Intelligence Assistant HuggingFace Space codebase to remove all mock data and enforce live MCP API calls only. Remove the \"Your Skills & Technologies\" section from both UI and backend, using only \"Current Interests & Goals\" for query searches. Implement minimal, user-friendly UI error messages on MCP/OpenAI API failures without fallback data. Deliver updated code, README, deployment, and demo video.",
+  "assumptions": [
+    "No local repository access is provided; patch is designed based on standard HuggingFace Space structure and typical app.py usage.",
+    "MCP API client integration details and environment variables are assumed to be configured or documented in the README.",
+    "The 'Your Skills & Technologies' section is present in both frontend UI code and backend query logic and can be removed without breaking other features.",
+    "Error handling for MCP/OpenAI API failures will show clear, minimal UI messages without fallback or mock data.",
+    "The codebase uses Python and Streamlit or Gradio for UI as typical for HuggingFace Spaces.",
+    "Demo video creation is out of scope for code patch but instructions for validation are included."
+  ],
+  "plan": [
+    "Clone the existing Topcoder Intelligence Assistant HuggingFace Space repository.",
+    "Identify and remove all hardcoded/mock response data in the backend code (likely in app.py or related modules).",
+    "Refactor backend code to always call MCP APIs for live data; remove any fallback or mock data usage.",
+    "Remove the 'Your Skills & Technologies' section from the UI code and backend logic.",
+    "Ensure only the 'Current Interests & Goals' section is used for constructing MCP query searches.",
+    "Add robust error handling for MCP/OpenAI API calls to catch exceptions and display minimal, user-friendly error messages in the UI.",
+    "Update README with clear setup instructions including cloning, environment variable configuration, and running locally.",
+    "Test locally by running the app, verifying no mock data is used, breaking MCP/API calls to confirm error messages, and querying with tech keywords to validate results.",
+    "Prepare a unified diff patch including all code and README changes.",
+    "Document risks, test plan, and validation steps in separate markdown files.",
+    "Deliver patch and documentation for deployment and demo."
+  ],
+  "artifacts": {
+    "patch_diff_unified": "--- a/app.py\n+++ b/app.py\n@@ -1,15 +1,30 @@\n-# Example mock data for challenges\n-mock_challenges = [{\"id\": 1, \"name\": \"Mock Challenge\"}]\n+\n+import streamlit as st\n+import requests\n+import os\n+\n+def call_mcp_api(query):\n+    mcp_url = os.getenv('MCP_API_URL')\n+    mcp_token = os.getenv('MCP_API_TOKEN')\n+    headers = {'Authorization': f'Bearer {mcp_token}'}\n+    try:\n+        response = requests.get(f\"{mcp_url}/search\", params={\"q\": query}, headers=headers, timeout=10)\n+        response.raise_for_status()\n+        return response.json()\n+    except Exception as e:\n+        st.error(f\"Error fetching data from MCP: {str(e)}\")\n+        return None\n+\n-def get_challenges(query):\n-    # Previously returned mock data or fallback\n-    return mock_challenges\n+\n+def get_challenges(query):\n+    data = call_mcp_api(query)\n+    if data is None:\n+        return []\n+    return data.get('challenges', [])\n \n-def main():\n-    st.title(\"Topcoder Intelligence Assistant\")\n-    # UI code including Your Skills & Technologies section\n-    # ...\n+def main():\n+    st.title(\"Topcoder Intelligence Assistant\")\n+\n+    # Remove 'Your Skills & Technologies' section\n

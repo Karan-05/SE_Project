@@ -1,0 +1,33 @@
+BEGIN_JSON
+{
+  "task_type": "data_etl",
+  "id": 30377331,
+  "title": "Topcoder Review API - Legacy Submissions Data Import for Submissions API Migration",
+  "summary": "This task involves designing and specifying an ETL pipeline to migrate legacy submissions data from Informix JSON exports and ElasticSearch exports into the new Prisma-based schema of the Topcoder Review API. The pipeline must transform, merge, and load data while preserving relationships and IDs, with validation to ensure data quality and API correctness.",
+  "assumptions": [
+    "Access to Informix JSON export files and ElasticSearch export JSON files is available.",
+    "The current Prisma schema is stable and accessible for reference.",
+    "Legacy ID to nanoID mapping logic is not fully detailed but will be implemented as part of migration.",
+    "Exact enum mappings for statuses and types will be derived from existing lookup tables in the schema or legacy data.",
+    "API endpoint validation will be done outside the ETL pipeline but requires data correctness from this migration.",
+    "Batch size and progress tracking mechanisms will be implemented with reasonable defaults due to lack of explicit scale metrics.",
+    "Rollback mechanism will be implemented using transactional batch imports or staging tables as Prisma/PostgreSQL supports."
+  ],
+  "plan": [
+    "Analyze legacy Informix JSON exports structure and map fields to Prisma schema for submissions, uploads, and artifacts.",
+    "Analyze ElasticSearch export JSON structure and map fields to Prisma schema, including handling different document types (reviews, submissions).",
+    "Define enum mapping tables for submission status, submission type, upload status, and upload type based on legacy lookup tables.",
+    "Design ID mapping strategy to generate nanoIDs for new records while preserving legacy IDs in the new schema.",
+    "Implement data transformation logic for Informix data, converting and mapping all fields and relationships to Prisma format.",
+    "Implement data transformation logic for ElasticSearch data, mapping fields and merging with Informix data where overlap exists.",
+    "Develop batch import scripts using Prisma seeding workflow to import transformed data into PostgreSQL with progress tracking.",
+    "Implement rollback mechanism for failed batches using transactions or staging tables to maintain data integrity.",
+    "Create SQL queries to validate data quality, including enum correctness, required fields, and relationship integrity.",
+    "Develop Python pseudo-code snippets for ETL orchestration with checkpoints, logging, and error handling.",
+    "Prepare a data quality checks table specifying checks, columns involved, thresholds, and actions on failure.",
+    "Document the entire data mapping specification, deployment guide, and reconciliation approach for overlapping data sources.",
+    "Define validation queries and tests to confirm API endpoints return correct data, support pagination, filtering, and data persistence.",
+    "Outline a deployment and rollback plan to safely migrate data without disrupting existing API functionality."
+  ],
+  "artifacts": {
+    "pipeline_spec": "### Data Sources\n- Informix JSON exports containing legacy submissions, uploads, and artifacts.\n- ElasticSearch JSON exports containing submissions, reviews, and related documents.\n\n### Cadence\n- One-time bulk migration with batch processing to handle large volume.\n\n### Orchestration\n- Python-based ETL script executed via CLI or CI pipeline.\n- Use Prisma seeding workflow for data insertion.\n- Batch size configurable (e.g., 1000 records per batch).\n- Progress tracking via logging and checkpoint files.\n\n### SLAs\n- Data correctness and completeness must meet 100% for migrated records.\n- Rollback capability within batch processing time frame.\n\n### Data Transformations\n- Map legacy IDs to nanoIDs.\n- Convert legacy enums to new schema enums.\n- Merge overlapping data from Informix and ElasticSearch sources.\n\n### Data Quality Checks\n- Enum value validation.\n- Required field presence.\n- Referential integrity checks.\n\n### Deployment\n- Run in staging environment first.\

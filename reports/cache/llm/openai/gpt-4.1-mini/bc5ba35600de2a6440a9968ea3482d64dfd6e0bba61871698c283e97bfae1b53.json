@@ -1,0 +1,1 @@
+{"content": "The **two pointers** pattern typically involves using two indices or pointers to traverse data structures (like arrays or linked lists) to solve problems related to searching, sorting", "tokens": 57, "elapsed": 1.3398152909940109, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

@@ -1,0 +1,1 @@
+{"content": "[MOCK] 1c265995e5f987fe :: You are repairing code produced by strategy 'pattern_skeleton'. Problem statement: Return the running prefix sums. Imple", "tokens": 196, "elapsed": 5.207955837249756e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "pattern_skeleton:repair"}}

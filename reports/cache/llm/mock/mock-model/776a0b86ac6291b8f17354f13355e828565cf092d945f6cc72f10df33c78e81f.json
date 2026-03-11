@@ -1,0 +1,1 @@
+{"content": "[MOCK] 0088dafaf2e62996 :: You are repairing code produced by strategy 'semantic_diff'. Problem statement: Return the running prefix sums. Implemen", "tokens": 167, "elapsed": 4.875008016824722e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "semantic_diff:repair"}}

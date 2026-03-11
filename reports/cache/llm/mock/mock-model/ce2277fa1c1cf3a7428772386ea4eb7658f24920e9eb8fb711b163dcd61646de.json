@@ -1,0 +1,1 @@
+{"content": "[MOCK] 7f6fac646102cfd8 :: Implement function solve(arg1:int) -> int. Do NOT read from stdin or write to stdout; rely solely on the provided argume", "tokens": 34, "elapsed": 2.4170149117708206e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "pattern-codegen", "caller": "pattern_skeleton"}}

@@ -1,0 +1,1 @@
+[MOCK] b6b1f4bfceb98ff7 :: You are repairing code produced by strategy 'direct_baseline'. Problem statement: Return degree counts for each vertex.

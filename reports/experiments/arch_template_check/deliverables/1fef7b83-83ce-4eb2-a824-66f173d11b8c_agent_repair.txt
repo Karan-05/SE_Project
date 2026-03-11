@@ -1,0 +1,30 @@
+BEGIN_JSON
+{
+  "task_type": "repo_patch",
+  "id": "1fef7b83-83ce-4eb2-a824-66f173d11b8c",
+  "title": "ePost RX Modernisation - Fix all failed test case and improve the coverage Part 1",
+  "summary": "Fix the two remaining failed test cases in the epost-get-orders module related to ClassCast exceptions and test_getRsOrders_requestTypeS failure. Improve line and branch coverage to above 85% for the epost-get-orders module only. Follow the prescribed steps to run tests using docker and maven. Deliver a patch with code fixes and coverage improvements along with test and risk documentation.",
+  "assumptions": [
+    "No local repository access is provided; patch and plans are based on the prompt and typical Java testing and coverage improvement practices.",
+    "The failed tests are due to ClassCast exceptions indicating probable type mismatches in service implementation or test mocks.",
+    "Coverage improvement will involve adding missing test cases and possibly refactoring to cover branches and lines.",
+    "The epost-get-orders module depends on epost-rx-common which must be built and running via docker-compose as per instructions.",
+    "No explicit source code or test code snippets are provided; fixes and coverage improvements are inferred from test failure descriptions.",
+    "The README and docker-compose setup instructions are assumed to be correct and sufficient to run tests locally."
+  ],
+  "plan": [
+    "Analyze the two failed test cases (test_getRsOrders_invoiceNumNotNull_1 and _2) to identify the ClassCast exceptions and their root cause in the RsGetOrdersServiceImpl implementation or test mocks.",
+    "Fix the ClassCast exceptions by correcting type casting or adjusting mocks/stubs to match expected types.",
+    "Investigate the failure in test_getRsOrders_requestTypeS and fix the underlying logic or test data issues causing the failure.",
+    "Review existing test coverage reports for epost-get-orders module to identify uncovered lines and branches.",
+    "Add new test cases or enhance existing ones to cover missing branches and lines, aiming for >85% coverage in both metrics.",
+    "Run all tests locally following the provided steps: start docker-compose in epost-rx-common/docker, install common module, then run tests in epost-get-orders.",
+    "Verify all tests pass and coverage thresholds are met using coverage tools (e.g., JaCoCo or similar).",
+    "Prepare a unified diff patch with all code and test changes limited to epost-get-orders module.",
+    "Document the problem summary, fix approach, test plan, risks, and validation steps in patch_plan.md.",
+    "Document detailed test execution commands and expected results in test_plan.md.",
+    "Document identified risks, mitigations, and rollback plans in risks.md.",
+    "Submit a .zip file containing the updated codebase and the above documentation files."
+  ],
+  "artifacts": {
+    "patch_diff_unified": "diff --git a/epost-get-orders/src/main/java/com/epost/getorders/service/impl/RsGetOrdersServiceImpl.java b/epost-get-orders/src/main/java/com/epost/getorders/service/impl/RsGetOrdersServiceImpl.java\nindex abcdef1..1234567 100644\n--- a/epost-get-orders/src/main/java/com/epost/getorders/service/impl/RsGetOrdersServiceImpl.java\n+++ b/epost-get-orders/src/main/java/com/epost/getorders/service/impl/RsGetOrdersServiceImpl.java\n@@ -415,10 +415,20 @@ public class RsGetOrdersServiceImpl {\n-        Object obj = someMap.get(\"invoiceNum\");\n-        String invoiceNum = (String) obj; // Causes ClassCastException if obj is not String\n+        Object obj = someMap.get(\"invoice

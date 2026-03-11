@@ -1,0 +1,12 @@
+services:
+  mysql:
+    image: mysql:8.0
+    restart: unless-stopped
+    ports:
+      - "3310:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: change_me
+      MYSQL_DATABASE: dataCollector_v2
+      MYSQL_ROOT_HOST: "%"
+    volumes:
+      - ./mysql_data:/var/lib/mysql

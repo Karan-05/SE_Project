@@ -1,0 +1,27 @@
+{
+  "task_id": "dp_coin_stress",
+  "tests": [
+    {
+      "name": "sample_0",
+      "mode": "call",
+      "status": "pass",
+      "expected": "3",
+      "output": "3",
+      "error": "",
+      "input": "[[1, 2, 5], 11]",
+      "kwargs": "{}",
+      "duration": 3.4374999813735485e-05
+    },
+    {
+      "name": "sample_1",
+      "mode": "call",
+      "status": "pass",
+      "expected": "-1",
+      "output": "-1",
+      "error": "",
+      "input": "[[2], 3]",
+      "kwargs": "{}",
+      "duration": 7.2499969974160194e-06
+    }
+  ]
+}

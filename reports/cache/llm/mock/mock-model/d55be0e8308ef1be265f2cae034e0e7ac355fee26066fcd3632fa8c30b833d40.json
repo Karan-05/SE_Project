@@ -1,0 +1,1 @@
+{"content": "[MOCK] 659294458237c914 :: Simulate algorithm steps for input [10]", "tokens": 6, "elapsed": 1.374981366097927e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "trace-writer", "caller": "simulation_trace"}}

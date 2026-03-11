@@ -1,0 +1,31 @@
+BEGIN_JSON
+{
+  "task_type": "architecture_doc",
+  "id": "409e33c1-aab0-492e-b636-71b56b90aaf5",
+  "title": "Projects API v6  Attachments and Billing Account",
+  "summary": "Design and implement the Projects API v6 extensions to support CRUD operations for project attachments and billing account updates. Ensure compatibility with legacy response formats, event publishing, permission enforcement, and integration with external dependencies via mock abstractions.",
+  "assumptions": [
+    "Legacy Projects API and Projects API v6 repositories are accessible for reference and integration.",
+    "External Salesforce dependencies for billing account updates will be mocked in development.",
+    "File storage for attachments is abstracted behind an interface with a mock or in-memory implementation available.",
+    "Legacy field shapes and permission models are well documented and will guide DTO validation and enforcement.",
+    "Event bus API is available for publishing structured events with request ID and timing context.",
+    "No explicit SLAs provided; standard API responsiveness and availability expected.",
+    "Testing frameworks and CI pipelines exist in the projects-api-v6 repo for unit and e2e tests."
+  ],
+  "plan": [
+    "Analyze legacy Projects API and current Projects API v6 codebases to understand existing attachment and billing account implementations and legacy field shapes.",
+    "Design data models and Prisma schema updates for ProjectAttachment including indexes on projectId.",
+    "Define DTOs for attachments and billing account endpoints enforcing legacy-compatible payload validation and response shapes.",
+    "Implement REST controllers and services for attachments CRUD endpoints with permission checks and support for the 'fields' query parameter.",
+    "Implement billing account endpoints (GET single, GET list, PUT/PATCH update) with permission filtering, sensitive data masking, and external SFDC dependency abstracted behind a service interface with a dev mock provider.",
+    "Implement event publishing for project.attachment.added/updated/removed and project.action.billingAccount.update, including payloads with projectId, old/new billingAccountId, and actor info; consider emitting project.updated if legacy requires.",
+    "Develop a pluggable storage service interface for attachments with a mock or in-memory implementation for dev/testing environments.",
+    "Add structured logging with request IDs and timing metrics to all endpoints and event publishing.",
+    "Create Prisma migrations for schema changes and indexes.",
+    "Develop comprehensive unit and end-to-end tests covering permissions, 'fields' parameter support, event publishing, and mock integrations.",
+    "Document API endpoints, payload formats, permission models, event contracts, and mock provider usage.",
+    "Coordinate CI integration to ensure linting, type checking, and tests pass before submission."
+  ],
+  "artifacts": {
+    "design_doc_md": "## Problem Summary\n- Extend Projects API v6 to support full CRUD for project attachments and billing account updates.\n- Ensure backward compatibility with legacy API response formats and field shapes.\n- Integrate event publishing for attachment and billing account lifecycle events.\n- Abstract external dependencies (e.g., Salesforce) with mocks for development.\n\n## Proposed Approach\n- Leverage existing legacy API and v6 codebases to align DTOs and permission models.\n- Introduce ProjectAttachment model with necessary metadata and indexes.\n- Implement RESTful endpoints with 'fields' param support and permission enforcement.\n- Abstract billing account external integrations behind service interfaces with dev mocks.\n- Use event bus API for publishing structured events with typed payloads.\n- Provide pluggable storage interface for attachments with mock implementation.\n- Add structured logging and request tracing for observability.\n\n## File-Level Plan\n- Controllers/attachmentsController.ts: CRUD endpoints for attachments.\n- Controllers/billingAccountController.ts: Billing account endpoints.\n- Services/attachmentService.ts: Business logic and storage interface usage.\n- Services/billingAccountService.ts: Billing account update logic and SFDC abstraction

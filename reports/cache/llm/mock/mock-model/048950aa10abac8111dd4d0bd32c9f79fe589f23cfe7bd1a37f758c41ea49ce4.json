@@ -1,0 +1,1 @@
+{"content": "[MOCK] f71b00287119f17e :: You are repairing code produced by strategy 'pattern_skeleton'. Problem statement: Count primes up to N. Implementation ", "tokens": 195, "elapsed": 5.291018169373274e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "pattern_skeleton:repair"}}

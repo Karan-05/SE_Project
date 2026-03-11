@@ -1,0 +1,29 @@
+BEGIN_JSON
+{
+  "task_type": "data_etl",
+  "id": "28238fd9-139a-48fc-a6c7-639c7ca359b3",
+  "title": "Topcoder Challenge API: fix issues found in Test Cases",
+  "summary": "Revise the Challenge API data synchronization by removing dependencies on Informix, DynamoDB, and ElasticSearch, using Postgres with Prisma ORM as the sole backend. Fix and validate the failed test cases across multiple challenge API functionalities as reported in Challenge_API_Report_1.xlsx and Challenge_API_Report_2.xlsx. Ensure no regressions occur and all fixes maintain at least 90% test pass rate.",
+  "assumptions": [
+    "Access to Challenge_API_Report_1.xlsx and Challenge_API_Report_2.xlsx is required for detailed failure analysis but is currently unavailable.",
+    "The Challenge API codebase is hosted at https://github.com/topcoder-platform/challenge-api-v6/tree/develop and uses Prisma ORM with Postgres as backend.",
+    "Test cases are run in a controlled environment with dependencies on VPN and AWS access, which may limit local testing.",
+    "Existing migration tools from Informix/Dynamo/ES to Postgres are functional and do not require modification.",
+    "The fixes primarily involve correcting data ETL and synchronization logic to align with Prisma schema and Postgres backend.",
+    "No detailed schema or data lineage documentation was provided; inferred from standard Challenge API domain knowledge.",
+    "Validation will be based on reproducing failed test cases and ensuring no new failures arise."
+  ],
+  "plan": [
+    "Obtain and analyze the test failure reports (Challenge_API_Report_1.xlsx and Challenge_API_Report_2.xlsx) to identify root causes for each failed test case category.",
+    "Map each failed test case to the corresponding data flow and synchronization logic in the current API implementation.",
+    "Review and update the Prisma schema and ORM queries to ensure data consistency and correctness for all challenge-related entities.",
+    "Refactor or fix ETL processes that migrate or sync data from legacy sources to Postgres to ensure data integrity and completeness.",
+    "Implement additional validation queries and data quality checks to detect and prevent data anomalies causing test failures.",
+    "Run the full suite of test cases locally or in a CI environment with VPN/AWS access to verify fixes and detect regressions.",
+    "Iterate on fixes for any newly introduced failures or remaining test issues until at least 90% pass rate is achieved.",
+    "Document the ETL pipeline, schema changes, validation queries, and testing approach in a comprehensive markdown file.",
+    "Prepare a patch file against the develop branch reflecting all code and schema updates.",
+    "Include a validation markdown file detailing test execution, coverage, and results (video preferred)."
+  ],
+  "artifacts": {
+    "pipeline_spec": "The ETL pipeline consists of the following stages:\n1. Data Extraction: Legacy data from Informix, DynamoDB, and ElasticSearch is extracted using existing migration tools.\n2. Data Transformation: Data is transformed to conform to the Prisma schema and Postgres data types, including normalization and enrichment.\n3. Data Loading: Transformed data is loaded into the Postgres database via Prisma ORM.\n4. Synchronization: The API services use Prisma ORM exclusively for all CRUD operations, eliminating prior DAL/gRPC dependencies.\n5. Validation: Post-load validation queries and

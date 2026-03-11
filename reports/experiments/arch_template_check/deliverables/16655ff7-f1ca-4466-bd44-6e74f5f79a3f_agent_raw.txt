@@ -1,0 +1,28 @@
+BEGIN_JSON
+{
+  "task_type": "data_etl",
+  "id": "16655ff7-f1ca-4466-bd44-6e74f5f79a3f",
+  "title": "Topcoder O/R F2F - Yes/No dropdown not appearing in scorecard",
+  "summary": "This ETL blueprint addresses the issue of missing 'Yes/No' dropdown options in the scorecard UI caused by absent CSS class 'custom-option'. The scope includes extracting relevant UI configuration data, transforming to include proper CSS class references, and loading updated configuration for the frontend to consume. Acceptance criteria require successful transformation of dropdown option data to include the 'custom-option' class and validation that the UI renders the dropdown correctly.",
+  "assumptions": [
+    "Source data for dropdown options and UI configuration is stored in a relational database or configuration files accessible for extraction.",
+    "No direct access to the underlying source schema or data samples was provided; inferred that dropdown options are stored as records with label and CSS class attributes.",
+    "Transformation involves adding or correcting CSS class references to include 'custom-option' for dropdown elements.",
+    "Loading step updates the UI configuration store or database to be consumed by the frontend application.",
+    "No direct SQL or code snippets were provided; pseudo-code and validation queries will be synthesized based on typical ETL patterns.",
+    "No explicit SLAs or cadence were specified; assume a one-time or on-demand ETL run triggered by deployment or patch release.",
+    "Acceptance checklist is inferred from the requirement to fix dropdown rendering and avoid breaking existing functions."
+  ],
+  "plan": [
+    "1. Define source data schema for dropdown options and UI configuration, including fields for option label and CSS class.",
+    "2. Design the extraction process to retrieve dropdown option records from the source system.",
+    "3. Implement transformation logic to add or correct the CSS class 'custom-option' for the dropdown options.",
+    "4. Design the loading process to update the UI configuration store or database with transformed data.",
+    "5. Develop validation SQL queries to verify that the transformed data includes the correct CSS class.",
+    "6. Create data quality checks to ensure no existing options lose their original properties and that the new class is applied consistently.",
+    "7. Write pseudo-code for the ETL pipeline steps including extraction, transformation, loading, and logging.",
+    "8. Define acceptance criteria and checklist to verify dropdown rendering correctness and no regressions.",
+    "9. Document the entire ETL blueprint including schema, pipeline spec, validation queries, and quality checks."
+  ],
+  "artifacts": {
+    "pipeline_spec": "### Sources:\n- UI configuration database or config files containing dropdown option data.\n\n### Cadence:\n- One-time or on-demand ETL run triggered by patch deployment.\n\n### Orchestration:\n- ETL pipeline triggered manually or via CI/CD post patch approval.\n\n### SLA:\n- ETL must complete successfully before frontend deployment.\n\n### Recovery Plan:\n- Rollback to previous config if dropdown rendering fails; monitor logs for transformation errors.\n\n### Steps:\n1. Extract dropdown options from source.\n2. Transform options to include 'custom-option' CSS class.\n3. Load updated options back to configuration store.\n4. Validate transformation via SQL and application UI tests.\n5. Log

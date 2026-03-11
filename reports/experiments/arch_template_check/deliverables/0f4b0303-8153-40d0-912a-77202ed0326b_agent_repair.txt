@@ -1,0 +1,30 @@
+BEGIN_JSON
+{
+  "task_type": "architecture_doc",
+  "id": "0f4b0303-8153-40d0-912a-77202ed0326b",
+  "title": "MS Teams AI Agent Tab App with MCP Gateway Integration",
+  "summary": "Design a Microsoft Teams Tab-based application embedding an AI Agent using AWS Bedrock LLMs and integrating Topcoder MCP Gateway for tool orchestration. The app supports Azure AD SSO, provides a responsive React+Fluent UI frontend, and enables users to interact with backend tools via conversational AI. The architecture covers authentication, LLM integration, tool invocation, user experience, and secure secrets management.",
+  "assumptions": [
+    "The backend service validating Azure AD tokens will be implemented as a Node.js or Python API.",
+    "AWS Bedrock LLMs are accessed via LangChain JS or Python MCP Adapter depending on implementation choice.",
+    "Topcoder MCP Gateway API is stable and accessible with provided sample code.",
+    "Secrets management will use Azure Key Vault or AWS Secrets Manager depending on hosting environment.",
+    "Deployment will be on AWS, supporting containerized backend and static hosting for frontend.",
+    "Session memory for chat history is optional but recommended for better UX.",
+    "No detailed UI mockups provided; UI design follows Fluent UI best practices.",
+    "Tenant-aware installation implies multi-tenant support scoped to Microsoft 365 tenant ID."
+  ],
+  "plan": [
+    "Define detailed architecture components: frontend Teams tab, backend API, AI agent, MCP Gateway integration, and secrets management.",
+    "Design authentication flow with Azure AD SSO token injection, backend validation, and role-based access control.",
+    "Specify LLM integration approach using LangChain JS with AWS Bedrock, including streaming and retry logic.",
+    "Design MCP Gateway tool invocation layer with typed schemas, environment-aware config, and error handling.",
+    "Create React + Fluent UI frontend architecture supporting prompt input, streaming responses, tool result rendering, and chat history panel.",
+    "Design secrets management integration with Azure Key Vault or AWS Secrets Manager to avoid hardcoded secrets.",
+    "Document deployment steps for AWS hosting including containerization and static site deployment.",
+    "Prepare architecture diagrams (component and sequence) illustrating data flow, authentication, and tool invocation.",
+    "Outline security and IAM configuration for Azure AD, AWS Bedrock, MCP Gateway, and secrets management.",
+    "Define acceptance criteria and testing strategy including integration tests for SSO, LLM streaming, and MCP tool calls."
+  ],
+  "artifacts": {
+    "design_doc_md": "## Problem Summary\n- Need a Microsoft Teams Tab App embedding an AI Agent using AWS Bedrock LLMs.\n- Integrate Topcoder MCP Gateway for backend tool orchestration.\n- Support Azure AD SSO for secure tenant-aware user authentication.\n- Provide intuitive UI for non-technical users with streaming AI responses and tool results.\n\n## Proposed Approach\n- Frontend: React + Fluent UI Teams Tab with SSO token injection and chat interface.\n- Backend: Node.js/Python API validating tokens, orchestrating LLM calls via LangChain JS/Python adapter.\n- AI Agent: Uses AWS Bedrock LLMs for prompt orchestration, streaming, retry/fallback.\n- MCP Gateway: Securely call tools with typed schemas; environment-aware config; error handling.\n- Secrets: Managed via Azure Key Vault or AWS Secrets Manager, no hardcoding.\n- Deployment: AWS containerized backend and static hosting for frontend.\n\n## File-Level Plan\n- frontend/\n  - React components for chat UI, streaming, history panel, and authentication.\n- backend/\n  - API server with token validation, LLM integration, MCP Gateway client.\n- config/\n  - Environment configs for dev/test/prod, secrets references.\n- docs/\n  - Architecture

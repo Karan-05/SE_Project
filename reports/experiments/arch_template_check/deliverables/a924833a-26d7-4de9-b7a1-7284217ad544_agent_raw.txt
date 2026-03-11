@@ -1,0 +1,29 @@
+BEGIN_JSON
+{
+  "task_type": "repo_patch",
+  "id": "a924833a-26d7-4de9-b7a1-7284217ad544",
+  "title": "AI Powered Image Resizing with Background Expansion Challenge",
+  "summary": "Implement a modular Python codebase that takes input images of arbitrary resolution and generates multiple platform-ready outputs with exact target aspect ratios and resolutions. The solution must preserve focal points (face/product/human-centered), perform smart cropping, background expansion (outpainting/content-aware fill), and AI upscaling to maintain visual fidelity. Outputs should support multiple DPI qualities (72, 150, 300). Deliverables include code, documentation, and sample inputs/outputs.",
+  "assumptions": [
+    "No existing repository or codebase was provided; this patch is designed as a standalone modular Python package.",
+    "AI models for outpainting and upscaling (e.g., Stable Diffusion, Real-ESRGAN) will be integrated via external APIs or pre-trained model wrappers.",
+    "Focal point detection will rely on available libraries (e.g., face detection, object detection) or user input metadata.",
+    "Output DPI support will be implemented by adjusting image resolution and metadata accordingly.",
+    "Exact integration details of previous challenge submissions are unknown; this patch is a new implementation that can be integrated or used standalone.",
+    "Design prototype link is referenced but not programmatically accessible; UI integration is out of scope for this backend patch."
+  ],
+  "plan": [
+    "Create a new Python module 'image_resizer' with submodules for focal point detection, smart cropping, background expansion, and AI upscaling.",
+    "Implement an API entry point function that accepts input image and target formats (aspect ratios, resolutions, DPI).",
+    "Integrate focal point detection using face and object detection libraries to identify key subjects.",
+    "Implement smart cropping logic that preserves focal points while fitting target aspect ratios.",
+    "Integrate an outpainting/background expansion module using Stable Diffusion or similar AI model APIs to extend backgrounds seamlessly.",
+    "Integrate AI upscaling module (e.g., Real-ESRGAN or equivalent) to enhance output image quality for medium and high DPI targets.",
+    "Develop utility functions to handle image format conversions, DPI metadata adjustments, and batch processing for multiple target outputs.",
+    "Add comprehensive unit and integration tests covering focal point preservation, cropping accuracy, background expansion quality, and upscaling fidelity.",
+    "Write detailed documentation including setup instructions, API usage, and verification steps.",
+    "Prepare sample input images and generate at least 5 platform-ready outputs per image demonstrating various aspect ratios and DPI settings.",
+    "Add risk and rollback documentation addressing AI model dependencies, performance considerations, and fallback mechanisms."
+  ],
+  "artifacts": {
+    "patch_diff_unified": "diff --git a/image_resizer/__init__.py b/image_resizer/__init__.py\nnew file mode 100644\nindex 0000000..1234567\n--- /dev/null\n+++ b/image_resizer/__init__.py\n@@ -0,0 +1,10 @@\n+from .core import resize_image\n+\n+__all__ = ['resize_image']\n\ndiff --git a/image_resizer/core.py b/image_resizer/core.py\nnew file mode 100644\nindex 0000000..89abcde\n--- /dev/null\n+++ b/image_resizer/core.py\n@@ -0,0 +1,150 @@\n+\"\"\"Core module for AI-powered image resizing with background expansion.\"\"\"\n+import cv2\n+import numpy as np\n+from PIL import Image\n+\n+# Placeholder imports for AI models\n+# from ai_models import StableDiffusionOutpainting, RealESRGANUpscaler\n+\n+def detect_focal_points(image: Image.Image, mode: str):\n+    \"\"\"Detect focal points based on mode: face-centric, product-centric, human-centered, etc.\"\"\"\n+    # TODO: Implement detection logic or integrate existing detectors\n+    # Return bounding boxes or masks of focal points\n+    return []\n+\n+def smart_crop(image: Image.Image, focal_points, target_aspect_ratio: float):\n+    \"\"\"

@@ -1,0 +1,1 @@
+{"content": "[MOCK] afde82dbf8f54feb :: You are repairing code produced by strategy 'direct_baseline'. Problem statement: Return degree counts for each vertex. ", "tokens": 183, "elapsed": 4.832982085645199e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "direct_baseline:repair"}}

@@ -1,0 +1,46 @@
+{
+  "task_id": "dp_coin_ood",
+  "strategy": "contract_first",
+  "plan": {
+    "strategy": "contract_first",
+    "contract": {
+      "inputs": "",
+      "outputs": "",
+      "constraints": "",
+      "edge_cases": "[[1, 2, 5], 11]"
+    },
+    "patterns": [],
+    "subtasks": [
+      "Validate inputs vs contract",
+      "Implement core logic",
+      "Check edge cases",
+      "Generate minimal unit tests for critical behaviors",
+      "Add adversarial/edge-case tests",
+      "Run tests and interpret failures",
+      "Repair implementation and re-run tests"
+    ],
+    "tests": [
+      ""
+    ],
+    "diagnostics": {
+      "missing_fields": "inputs,outputs,constraints",
+      "contract_length": "15",
+      "audit_note": "The provided contract is:\n\n```json\n{\n  \"inputs\": \"\",\n  \"outputs\": \"\",\n  \"constraints\": \"\",\n  \"edge_cases\": \"[[1, 2, 5], 11]\"\n}\n```\n\n**Review for completeness:**\n\n1. **Inputs:**  \n   - Currently empty.  \n   - Should specify the input parameters clearly, e.g.,  \n     - `coins`: List[int] \u2014 the denominations of coins available.  \n     - `amount",
+      "planning_tokens": "157",
+      "planning_time": "2.412473"
+    }
+  },
+  "rounds": [
+    {
+      "round": 0,
+      "phase": "initial",
+      "subtask": "plan",
+      "localized": false,
+      "pass_rate": 1.0,
+      "status": "passed",
+      "duration": 0.00026699999580159783,
+      "failing_tests": [],
+      "error_types": []
+    }
+  ]
+}

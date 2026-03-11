@@ -1,0 +1,12 @@
+method,success_rate,avg_reward,avg_steps,avg_tokens,avg_constraint,budgeted_success,catastrophic_failure,action_entropy,notes
+aegis_full,0.5,-5.657718663943118,14.25,23200.0,0.08548771785041723,0.5,0.0,1.3882981538772583,full_hierarchy
+aegis_flat,0.0,-51.94392638917678,16.0,25300.0,0.09202335569231275,0.0,0.0,1.5517358779907227,flat_controller
+aegis_reduced,0.0,-50.55766424278274,14.0,28800.0,0.09202335569231275,0.0,0.0,1.4809849858283997,reduced_action_space
+aegis_no_calibration,0.5,-77.65002966670687,8.5,22650.0,0.08993284511662791,0.5,0.0,1.153343677520752,calibration_disabled
+aegis_no_graph,0.5,4.795528841700079,14.5,27800.0,0.08925741925779142,0.5,0.0,1.4659159183502197,graph_disabled
+aegis_no_constraints,1.0,60.24274776935339,16.0,0.0,0.0,1.0,0.0,1.612991988658905,constraints_disabled
+aegis_warm_start,0.5,-9.573057061788447,12.0,20125.0,0.07857775584115638,0.5,0.0,1.2722545266151428,imitation_warm_start
+baseline_always_direct,0.0,-7.180000000000003,24.0,52800.0,0.0,0.0,0.0,0.0,baseline
+baseline_always_decompose,0.0,-6.96,24.0,19200.0,0.0,0.0,0.0,0.0,baseline
+baseline_heuristic,1.0,19.44591256908533,15.5,21425.0,0.0,1.0,0.0,0.0,baseline
+baseline_contextual_bandit,0.0,-9.53769856316546,8.0,11575.0,0.0,0.0,0.0,0.0,baseline

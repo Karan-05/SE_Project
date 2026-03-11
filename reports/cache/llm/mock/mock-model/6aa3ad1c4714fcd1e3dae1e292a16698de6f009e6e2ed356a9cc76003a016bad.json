@@ -1,0 +1,1 @@
+{"content": "[MOCK] 64d0069e804dfe86 :: You are repairing code produced by strategy 'direct_baseline'. Problem statement: Return the number of undirected edges.", "tokens": 183, "elapsed": 4.708010237663984e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "direct_baseline:repair"}}

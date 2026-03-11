@@ -1,0 +1,1 @@
+{"content": "The problem \"Return the sum of all integers\" is very general and straightforward: you just add up all the integers given.\n\n**Kadane's algorithm** is", "tokens": 57, "elapsed": 2.563776750001125, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

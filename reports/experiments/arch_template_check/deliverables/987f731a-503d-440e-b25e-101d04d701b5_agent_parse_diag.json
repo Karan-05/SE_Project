@@ -1,0 +1,36 @@
+{
+  "task_id": "987f731a-503d-440e-b25e-101d04d701b5",
+  "run_id": "arch_template_check",
+  "raw_path": "/Users/karanallagh/Desktop/DataCollector/reports/experiments/arch_template_check/deliverables/987f731a-503d-440e-b25e-101d04d701b5_agent_raw.txt",
+  "raw_length": 3338,
+  "sentinel_found": false,
+  "attempts": [
+    {
+      "mode": "sentinel",
+      "success": false,
+      "error": "sentinel_block_missing"
+    },
+    {
+      "mode": "balanced",
+      "success": false,
+      "error": "no_balanced_candidate"
+    },
+    {
+      "mode": "repair",
+      "success": false,
+      "error": "Unable to locate valid JSON block (Expecting ',' delimiter: line 30 column 4 (char 3548))"
+    }
+  ],
+  "errors": [
+    {
+      "stage": "repair",
+      "message": "Unable to locate valid JSON block (Expecting ',' delimiter: line 30 column 4 (char 3548))"
+    }
+  ],
+  "repair_attempted": true,
+  "repair_used": false,
+  "max_repairs": 1,
+  "llm_provider": "openai",
+  "repair_path": "/Users/karanallagh/Desktop/DataCollector/reports/experiments/arch_template_check/deliverables/987f731a-503d-440e-b25e-101d04d701b5_agent_repair.txt",
+  "status": "failed"
+}

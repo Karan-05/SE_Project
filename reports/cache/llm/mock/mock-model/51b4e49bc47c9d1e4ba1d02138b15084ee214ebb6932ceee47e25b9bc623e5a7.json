@@ -1,0 +1,1 @@
+{"content": "[MOCK] f81ed266a322ada2 :: You are repairing code produced by strategy 'simulation_trace'. Problem statement: Return the sum of all integers. Imple", "tokens": 148, "elapsed": 4.04199818149209e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "simulation_trace:repair"}}

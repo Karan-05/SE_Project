@@ -1,0 +1,6 @@
+strategy,tasks_total,pass_all_tests,build_fail,test_fail,success_rate,avg_num_subtasks,avg_num_tests,avg_tokens_used,avg_planning_time
+contract_first,50,45,5,0,0.9,7.0,1.0,55.9,5.712400000001225e-06
+direct_baseline,50,45,5,0,0.9,4.0,2.0,0.0,0.0
+failure_mode_first,50,45,5,0,0.9,7.0,4.0,47.3,4.800273096204008e-06
+multi_view,50,45,5,0,0.9,7.0,1.0,23.0,3.334000000019486e-06
+pattern_skeleton,50,45,5,0,0.9,8.0,2.0,76.7,7.366598028996836e-06

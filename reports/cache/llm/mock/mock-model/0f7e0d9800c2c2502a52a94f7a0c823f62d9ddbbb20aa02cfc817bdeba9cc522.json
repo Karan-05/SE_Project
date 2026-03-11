@@ -1,0 +1,1 @@
+{"content": "[MOCK] c95b97a834fca35f :: You are executing decomposition strategy 'simulation_trace'. Problem statement: Return the minimum coins needed to reach", "tokens": 115, "elapsed": 3.875000402331352e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "plan-runner", "caller": "simulation_trace:initial"}}

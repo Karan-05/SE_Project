@@ -3,8 +3,9 @@ from __future__ import annotations
 
 from typing import Dict, List
 
+from src.decomposition.agentic import execute_plan_with_repair
 from src.decomposition.interfaces import DecompositionContext, DecompositionPlan, StrategyResult, TaskDecompositionStrategy
-from src.decomposition.strategies._utils import BudgetTracker, finalize_result, run_tests
+from src.decomposition.strategies._utils import BudgetTracker
 from src.providers import llm
 
 
@@ -37,19 +38,7 @@ class SimulationTraceStrategy(TaskDecompositionStrategy):
         return plan
 
     def solve(self, ctx: DecompositionContext, plan: DecompositionPlan) -> StrategyResult:
-        tracker = BudgetTracker(f"{self.name}:solve")
-        tracker.consume(
-            llm.call("Verify trace consistency before coding.", model="trace-check", max_tokens=64, caller=self.name),
-            fallback="Trace verification skipped",
-        )
-        base_code = ctx.metadata.get("reference_solution", "def solve(*args):\n    return None")
-        tests_run = run_tests(base_code, ctx)
-        planning_tokens = float(plan.diagnostics.get("planning_tokens", 0) or 0)
-        planning_time = float(plan.diagnostics.get("planning_time", 0) or 0.0)
         metrics: Dict[str, float | str] = {
             "trace_length": float(plan.diagnostics.get("trace_length", 1)),
-            "tokens_used": planning_tokens + tracker.tokens,
-            "planning_time": planning_time + tracker.time_spent,
-            "mismatches_detected": 0.0,
         }
-        return finalize_result(ctx, plan, base_code, tests_run, metrics)
+        return execute_plan_with_repair(ctx, plan, strategy_name=self.name, extra_metrics=metrics)

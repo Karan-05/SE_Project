@@ -1,0 +1,1 @@
+{"content": "[MOCK] 7e06f1d1a5f9b5af :: You are executing decomposition strategy 'contract_first'. Problem statement: Return the number of undirected edges.  Im", "tokens": 133, "elapsed": 3.999972250312567e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "plan-runner", "caller": "contract_first:initial"}}

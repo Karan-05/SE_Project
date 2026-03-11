@@ -1,0 +1,16 @@
+{
+  "task_id": "string_reverse_ood",
+  "tests": [
+    {
+      "name": "sample_0",
+      "mode": "call",
+      "status": "pass",
+      "expected": "'cba'",
+      "output": "'cba'",
+      "error": "",
+      "input": "['abc']",
+      "kwargs": "{}",
+      "duration": 1.9041995983570814e-05
+    }
+  ]
+}

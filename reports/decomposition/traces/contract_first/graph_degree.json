@@ -1,0 +1,46 @@
+{
+  "task_id": "graph_degree",
+  "strategy": "contract_first",
+  "plan": {
+    "strategy": "contract_first",
+    "contract": {
+      "inputs": "",
+      "outputs": "",
+      "constraints": "",
+      "edge_cases": "[[[0, 1], [1, 2]]]"
+    },
+    "patterns": [],
+    "subtasks": [
+      "Validate inputs vs contract",
+      "Implement core logic",
+      "Check edge cases",
+      "Generate minimal unit tests for critical behaviors",
+      "Add adversarial/edge-case tests",
+      "Run tests and interpret failures",
+      "Repair implementation and re-run tests"
+    ],
+    "tests": [
+      ""
+    ],
+    "diagnostics": {
+      "missing_fields": "inputs,outputs,constraints",
+      "contract_length": "18",
+      "audit_note": "The contract you provided is:\n\n```json\n{\n  \"inputs\": \"\",\n  \"outputs\": \"\",\n  \"constraints\": \"\",\n  \"edge_cases\": [[[0, 1], [1, 2]]]\n}\n```\n\n**Problem:** Return degree counts for each vertex.\n\n---\n\n### Review for Completeness\n\n1. **Inputs:**\n   - Currently empty (`\"\"`).\n   - The problem states the input is a graph represented by edges, e.g., `[[",
+      "planning_tokens": "157",
+      "planning_time": "1.906639"
+    }
+  },
+  "rounds": [
+    {
+      "round": 0,
+      "phase": "initial",
+      "subtask": "plan",
+      "localized": false,
+      "pass_rate": 1.0,
+      "status": "passed",
+      "duration": 0.0001591669861227274,
+      "failing_tests": [],
+      "error_types": []
+    }
+  ]
+}

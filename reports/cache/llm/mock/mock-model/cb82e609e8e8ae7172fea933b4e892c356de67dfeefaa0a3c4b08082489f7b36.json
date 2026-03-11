@@ -1,0 +1,1 @@
+{"content": "[MOCK] 4090561ee3205740 :: You are repairing code produced by strategy 'simulation_trace'. Problem statement: Return degree counts for each vertex.", "tokens": 174, "elapsed": 4.749977961182594e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "simulation_trace:repair"}}

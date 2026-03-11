@@ -1,0 +1,28 @@
+BEGIN_JSON
+{
+  "task_type": "architecture_doc",
+  "id": "355a5497-71c3-4e3a-b200-f53d62564667",
+  "title": "Learn AI – Build and Deploy an AI Agent with Topcoder MCP on Hugging Face",
+  "summary": "This architecture document outlines the design for building an AI Agent application leveraging the Topcoder Model Context Protocol (MCP) server, deployable on Hugging Face Spaces using CPU Basic tier. The agent can take various forms (chatbot, assistant, code generator, etc.) and must integrate with MCP via SSE or Streamable HTTP transports to deliver meaningful user experiences. The design covers modular backend logic, UI/UX integration, deployment constraints, and a clear use case focus.",
+  "assumptions": [
+    "The AI agent will be deployed on Hugging Face Spaces using CPU Basic tier without GPU acceleration.",
+    "MCP server endpoints (https://api.topcoder-dev.com/v6/mcp and https://api.topcoder-dev.com/v6/mcp/sse) are stable and accessible without authentication.",
+    "The agent will use either SSE or Streamable HTTP transport for MCP communication as per challenge requirements.",
+    "The chosen programming language and UI framework (e.g., Python + Gradio) will be compatible with Hugging Face Spaces environment.",
+    "Detailed MCP tool capabilities and endpoints will be explored and selected by the developer during implementation.",
+    "User experience will prioritize simplicity, responsiveness, and clarity given the CPU resource constraints."
+  ],
+  "plan": [
+    "Define a clear, meaningful use case for the AI agent that leverages MCP tools to solve a specific problem.",
+    "Design modular backend architecture to handle MCP communication, data processing, and prompt engineering.",
+    "Select and integrate an appropriate UI framework (e.g., Gradio) for user interaction within Hugging Face Spaces.",
+    "Implement MCP client logic using SSE or Streamable HTTP to query MCP server and process streaming responses.",
+    "Develop frontend components to display input fields, loading states, and formatted AI agent outputs.",
+    "Perform end-to-end testing covering normal and edge cases including error handling and timeouts.",
+    "Prepare deployment artifacts including requirements.txt, README, and configuration for Hugging Face Spaces.",
+    "Document architecture decisions, API interfaces, constraints, risks, and acceptance criteria in a clear design doc.",
+    "Deploy the agent on Hugging Face Spaces and validate operational stability and performance within CPU limits.",
+    "Package final submission with source code, documentation, and optional demo video for evaluation."
+  ],
+  "artifacts": {
+    "design_doc_md": "## Problem Summary\n- Build an AI Agent leveraging Topcoder MCP server to deliver a user-friendly intelligent application.\n- Agent can be chatbot, assistant, code generator, or visualization tool addressing a specific problem.\n- Must run on Hugging Face Spaces CPU Basic tier without GPU dependencies.\n- Requires integration with MCP server via SSE or Streamable HTTP transports.\n\n## Proposed Approach\n- Modular backend handling MCP communication, prompt engineering, and response processing.\n- Use Python with Gradio for UI to simplify Hugging Face deployment and user interaction.\n- Implement MCP client using SSE for real-time streaming responses.\n- Design for efficient CPU usage and responsive UI with loading indicators.\n\n## File-Level Plan\n- `backend/agent.py`: MCP client and core logic module.\n- `frontend/app.py`: Gradio UI components and interaction handlers.\n- `requirements.txt`: Python dependencies including gradio, httpx, sseclient.\n- `README.md`: Setup, deployment, and usage instructions.\n- `docs/use_case.md`: Detailed problem definition and solution rationale.\n\n## API / Interface Changes\n- MCP server endpoints remain external; agent acts as MCP client.\n- Backend exposes internal API for frontend to send user input and

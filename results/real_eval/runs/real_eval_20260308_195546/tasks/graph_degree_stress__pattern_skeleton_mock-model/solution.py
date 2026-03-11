@@ -1,0 +1,1 @@
+[MOCK] 5041a0eb10dad1d8 :: You are repairing code produced by strategy 'pattern_skeleton'. Problem statement: Return degree counts for each vertex.

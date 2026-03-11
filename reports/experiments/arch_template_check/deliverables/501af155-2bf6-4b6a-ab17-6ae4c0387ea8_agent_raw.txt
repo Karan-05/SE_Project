@@ -1,0 +1,34 @@
+BEGIN_JSON
+{
+  "task_type": "data_etl",
+  "id": "501af155-2bf6-4b6a-ab17-6ae4c0387ea8",
+  "title": "Topcoder NestJS Autopilot  Kafka Schema Registry Removal",
+  "summary": "This task involves removing the Confluent Schema Registry dependency from the Topcoder Autopilot Kafka messaging system and replacing Avro serialization with direct JSON serialization. The pipeline will ensure message structure and validation are preserved while simplifying infrastructure and improving AWS Glue compatibility. The ETL blueprint will cover source code changes, configuration updates, deployment infrastructure, and validation strategies to ensure seamless JSON message processing.",
+  "assumptions": [
+    "Access to the GitHub repository https://github.com/topcoder-platform/autopilot-v6.git is available for code and configuration context.",
+    "The Kafka topics and message schemas are stable and well-defined in TypeScript interfaces with class-validator decorators.",
+    "No additional external data sources or transformations beyond Kafka message serialization are involved.",
+    "The existing message validation logic is based on TypeScript runtime decorators and can be reused without Avro schema validation.",
+    "Docker Compose and ECS deployment configurations are accessible and modifiable.",
+    "No direct access to AWS Glue schema registry is required as it is replaced by JSON serialization.",
+    "The Kafka brokers support JSON message payloads without schema validation middleware."
+  ],
+  "plan": [
+    "1. Analyze the current Kafka message serialization and schema registry integration in the codebase, focusing on src/kafka/kafka.service.ts and related modules.",
+    "2. Remove all Schema Registry dependencies from package.json and lock files.",
+    "3. Remove Schema Registry configuration from environment variables and configuration files, including validation schemas.",
+    "4. Modify src/kafka/kafka.service.ts to replace Avro-based encoding/decoding with JSON.stringify and JSON.parse, removing schema initialization and management logic.",
+    "5. Ensure message payload validation continues using existing TypeScript interfaces and class-validator decorators without schema validation dependencies.",
+    "6. Update message templates and any utilities to support JSON serialization while maintaining message structure consistency.",
+    "7. Remove Schema Registry service from Docker Compose and update Kafka UI configuration to remove schema references.",
+    "8. Simplify error handling by removing schema-specific exceptions and adding JSON parsing error handling with meaningful logs and DLQ integration.",
+    "9. Update README.md and other documentation to reflect the removal of Schema Registry and adoption of JSON messaging, including setup and environment variable changes.",
+    "10. Create a data quality validation plan including checks for message schema conformity, JSON parsing success rate, and message delivery integrity.",
+    "11. Develop SQL snippets or queries to validate Kafka topic message content if persisted or logged in a database or data lake.",
+    "12. Provide Python pseudo-code snippets demonstrating JSON serialization/deserialization with error handling and logging for monitoring.",
+    "13. Define data quality checks with thresholds and actions for monitoring message health and pipeline integrity.",
+    "14. Compile an acceptance checklist covering build success, runtime validation, message compatibility, error handling, and infrastructure simplification.",
+    "15. Document the ETL pipeline specification including sources (Kafka topics), cadence (real-time streaming), orchestration (NestJS services), SLAs, and recovery plans.",
+    "16. Review and validate all changes against the rubric to ensure completeness and correctness."
+  ],
+  "artifacts

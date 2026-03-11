@@ -1,0 +1,25 @@
+BEGIN_JSON
+{
+  "task_type": "architecture_doc",
+  "id": "854a7105-2e24-4084-a975-c230f8611630",
+  "title": "TopCoder Projects API  Fix Project Member Role Validation",
+  "summary": "This architecture document addresses the inconsistency between the project member role validation enums used in the DTOs and the original PROJECT_MEMBER_ROLE constants in the TopCoder Projects API v6. The goal is to unify role validation by removing duplicate enums, referencing the canonical constants, and updating Swagger documentation to ensure consistency and correctness in API behavior.",
+  "assumptions": [
+    "Access to the latest develop branch of the projects-api-v6 GitHub repository is available for patch submission.",
+    "The PROJECT_MEMBER_ROLE constants are defined centrally and are authoritative for role validation.",
+    "The project-member.dto.ts file currently contains a duplicate ProjectMemberRole enum that conflicts with the constants.",
+    "Swagger/OpenAPI documentation generation is integrated and reflects DTO validations automatically or via decorators.",
+    "No breaking changes to existing API consumers are allowed; changes must be backward compatible or clearly documented."
+  ],
+  "plan": [
+    "Review the current project-member.dto.ts file to identify and remove the duplicate ProjectMemberRole enum.",
+    "Refactor the DTOs to use the PROJECT_MEMBER_ROLE constants directly for role validation, ensuring type safety and alignment.",
+    "Update the Swagger decorators or OpenAPI annotations in the DTOs to reflect the correct roles from PROJECT_MEMBER_ROLE constants.",
+    "Verify that all references to project member roles in the codebase use the unified PROJECT_MEMBER_ROLE constants.",
+    "Run existing automated tests and add new tests if necessary to validate the updated role validation logic.",
+    "Build and run the API locally in Docker to manually verify that endpoints accepting project member roles validate correctly and Swagger UI shows updated role enums.",
+    "Create a git patch against the latest develop branch including all code changes, type updates, and documentation fixes.",
+    "Document the changes and update any relevant README or developer notes regarding the role validation fix."
+  ],
+  "artifacts": {
+    "design_doc_md": "## Problem Summary\n- The project member DTOs use a local ProjectMemberRole enum that is inconsistent with the canonical PROJECT_MEMBER_ROLE constants.\n- This mismatch causes validation errors and inconsistencies in API behavior and documentation.\n- The issue impacts role validation correctness and Swagger-generated API docs.\n\n## Proposed Approach\n- Remove the duplicate ProjectMemberRole enum from project-member.dto.ts.\n- Reference the PROJECT_MEMBER_ROLE constants directly in DTO validations.\n- Update Swagger decorators to reflect the correct role values.\n- Ensure all code and documentation align with the unified role constants.\n\n## File-Level Plan\n- Modify project-member.dto.ts to remove the local enum and import PROJECT_MEMBER_ROLE.\n- Update DTO validation decorators to use PROJECT_MEMBER_ROLE values.\n- Adjust Swagger/OpenAPI annotations in the DTOs.\n- Verify no other files define conflicting role enums.\n\n## API / Interface Changes\n- No changes to API endpoints or payload structures.\n- Validation logic for project member roles now uses centralized constants.\n- Swagger UI reflects updated, consistent role enums.\n\n## Constraints & SLAs\n- Must maintain backward compatibility with existing API clients.\n- Validation must strictly enforce roles defined in PROJECT_MEMBER_ROLE.\n- Documentation updates must be accurate and complete.\n- Changes should be delivered as a patch against the develop branch.\n\n## Risks & Trade-offs\n- Risk of breaking validation if constants are changed without coordination.\n- Removing local enums may affect local type references if not updated correctly.\n- Swagger documentation might not immediately reflect changes if caching occurs.\n- Trade-off between strict validation and flexibility for future role additions.\n\n## Edge Cases\n- Requests with roles not defined in PROJECT_MEMBER_ROLE must be rejected.\n- Ensure roles with similar

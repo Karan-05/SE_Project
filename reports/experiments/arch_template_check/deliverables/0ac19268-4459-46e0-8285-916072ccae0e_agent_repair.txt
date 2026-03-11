@@ -1,0 +1,31 @@
+BEGIN_JSON
+{
+  "task_type": "data_etl",
+  "id": "0ac19268-4459-46e0-8285-916072ccae0e",
+  "title": "[72HR] Topcoder Admin App - Add Non-MM Submission Management",
+  "summary": "Design an ETL blueprint to support the addition of submission management for Non-MM challenges in the Topcoder Admin App, migrating functionality from the current admin tool to platform-ui. The ETL pipeline will extract submission data via the submissions API, transform it to fit the new UI requirements, and load it into any necessary staging or reporting stores. The solution must ensure data quality, support download and AV rescan actions, and provide validation queries and tests for correctness.",
+  "assumptions": [
+    "The primary data source is the submissions API at https://api.topcoder-dev.com/v5/submissions.",
+    "No direct database access is provided; extraction is via API calls.",
+    "The ETL pipeline is primarily for data preparation and validation to support the UI features, not for UI implementation itself.",
+    "The AV Rescan action triggers a message on a bus API; ETL will not implement this but will ensure data correctness for submissions.",
+    "No explicit SLAs or cadence are provided; assume near-real-time or daily batch extraction.",
+    "No schema details for the submissions API response are provided; inferred standard fields include submissionId, submissionTime, submitterHandle.",
+    "No existing data warehouse or staging schema is specified; design a minimal schema for loading submissions data.",
+    "Unit tests for UI are out of scope; ETL validation focuses on data correctness and completeness.",
+    "No direct access to platform-ui repo or submission-processor code; ETL scope limited to data pipeline design and validation."
+  ],
+  "plan": [
+    "1. Define the target schema for submissions data to support the UI table: submission_id, time_submitted, submitter_handle, challenge_id, and any metadata needed for actions.",
+    "2. Design the extraction step to call the submissions API, handling pagination and filtering for Non-MM challenge submissions.",
+    "3. Implement transformation logic to normalize and clean submission data, ensuring timestamps are in ISO 8601 format and handles are validated.",
+    "4. Load the transformed data into a staging table or data store accessible by platform-ui or reporting tools.",
+    "5. Create SQL validation queries to verify data completeness (e.g., no missing submission IDs), freshness, and correctness of key fields.",
+    "6. Develop Python pseudo-code for the ETL pipeline orchestration, including error handling, logging, and retries.",
+    "7. Define data quality checks with thresholds and actions for anomalies (e.g., missing fields, duplicate submissions).",
+    "8. Document the pipeline specification, including source, cadence, orchestration, SLAs, and recovery procedures.",
+    "9. Provide a validation markdown file describing how to test the ETL pipeline and verify data correctness.",
+    "10. Include an acceptance checklist covering schema correctness, data freshness, error handling, and integration readiness."
+  ],
+  "artifacts": {
+    "pipeline_spec": "## ETL Pipeline Specification for Non-MM Submission Management\n\n### Sources\n- Submissions API: GET https://api.topcoder-dev.com/v5/submissions\n- Pagination and filters applied to retrieve Non-MM challenge submissions only\n\n### Cadence\n- Daily batch extraction with incremental updates based on submissionTime\n\n### Orchestration\n- Python-based ETL script scheduled via cron or Airflow\n- Includes retries and error logging\n\n### Target Schema\n- submission_id (string)\n- time_submitted (timestamp, ISO 8601)\n- submitter_handle (string)\n- challenge_id (string)\n- metadata (json or key-value pairs for UI actions)\n\n### Loading\n- Load into

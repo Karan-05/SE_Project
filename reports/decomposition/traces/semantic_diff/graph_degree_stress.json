@@ -1,0 +1,44 @@
+{
+  "task_id": "graph_degree_stress",
+  "strategy": "semantic_diff",
+  "plan": {
+    "strategy": "semantic_diff",
+    "contract": {},
+    "patterns": [
+      "baseline"
+    ],
+    "subtasks": [
+      "load base solution",
+      "apply semantic deltas",
+      "re-test",
+      "Generate minimal unit tests for critical behaviors",
+      "Add adversarial/edge-case tests",
+      "Run tests and interpret failures",
+      "Repair implementation and re-run tests"
+    ],
+    "tests": [
+      "critical unit tests",
+      "edge-case probes"
+    ],
+    "diagnostics": {
+      "base_task": "baseline",
+      "num_deltas": "1",
+      "delta_note": "**Semantic deltas:**\n\n- Instead of returning a list or set of vertices, return a mapping (e.g., dictionary) from each vertex to its degree count.\n- Compute the degree of each vertex (number of edges incident to the vertex).\n- Output format changes from vertices to vertex-degree pairs.",
+      "planning_tokens": "94",
+      "planning_time": "1.519946"
+    }
+  },
+  "rounds": [
+    {
+      "round": 0,
+      "phase": "initial",
+      "subtask": "plan",
+      "localized": false,
+      "pass_rate": 1.0,
+      "status": "passed",
+      "duration": 0.0001305839978158474,
+      "failing_tests": [],
+      "error_types": []
+    }
+  ]
+}

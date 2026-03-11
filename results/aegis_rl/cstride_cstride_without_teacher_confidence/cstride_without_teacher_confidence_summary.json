@@ -1,0 +1,14 @@
+{
+  "success_rate": 0.91875,
+  "avg_reward": 48.91711910584388,
+  "avg_cost": 0.31883996212121213,
+  "avg_steps": 10.85,
+  "override_rate": 0.18128732378732382,
+  "override_win_rate": 0.21041666666666664,
+  "override_regret_rate": 0.7895833333333334,
+  "harmful_fraction": 0.7895833333333334,
+  "beneficial_fraction": 0.21041666666666664,
+  "budgeted_success": 0.91875,
+  "action_entropy": 1.0357344466825946,
+  "method": "cstride_without_teacher_confidence"
+}

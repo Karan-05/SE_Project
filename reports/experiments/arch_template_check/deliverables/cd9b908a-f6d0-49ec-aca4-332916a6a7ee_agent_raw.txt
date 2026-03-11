@@ -1,0 +1,73 @@
+BEGIN_JSON
+{
+  "task_type": "architecture_doc",
+  "id": "cd9b908a-f6d0-49ec-aca4-332916a6a7ee",
+  "title": "Topcoder Review API - Fix Identified Issues",
+  "summary": "This architecture document outlines the approach to fix multiple identified issues in the Topcoder Review API codebase, including typos, security risks from hardcoded secrets, data type inconsistencies in Prisma migrations, API documentation inaccuracies, and logical errors in sorting and validation. The fixes aim to improve code quality, security, and maintainability without introducing regressions.",
+  "assumptions": [
+    "Access to the GitHub repository and latest commit on the feat/review-opportunities branch is available for patch submission.",
+    "All identified issues are accurately reported and no additional undisclosed issues exist.",
+    "The environment variables referenced are correctly loaded and managed in deployment environments.",
+    "No breaking changes to existing API contracts or database schema beyond type consistency are allowed.",
+    "NanoID default generation is supported in PostgreSQL as per existing schema conventions."
+  ],
+  "plan": [
+    "Correct the typo in the .env.sample file: rename M2M_AUTH_PROXY_SEREVR_URL to M2M_AUTH_PROXY_SERVER_URL.",
+    "Remove hardcoded m2mToken from mock/mock-api.js and replace with environment variable usage for security.",
+    "Update Prisma migration SQL to change opportunityId column type from TEXT to VARCHAR(14) to match referenced table.",
+    "Add a default value (CURRENT_TIMESTAMP) to the updatedAt column in the Prisma migration to ensure automatic timestamping.",
+    "Fix API response documentation in reviewHistory.controller.ts by changing 403 description from 'Unauthorized' to 'Forbidden'.",
+    "Rename duplicate 'limit' query parameter in reviewOpportunity.controller.ts to 'offset' to avoid conflicts.",
+    "Correct sorting logic in reviewOpportunity.service.ts to return positive/negative values properly for ascending and descending orders.",
+    "Set success property to false in FailResponse within common.dto.ts to accurately represent failure responses.",
+    "Use ReviewApplicationRole type instead of string for the role property in reviewApplication.dto.ts for type safety.",
+    "Add @IsPositive() validation decorator to incrementalPayment property in reviewOpportunity.dto.ts to enforce positive values.",
+    "Add @IsNumber() and @IsPositive() decorators to payment property in reviewOpportunity.dto.ts for validation consistency.",
+    "Fix typo in m2m.config.ts environment variable name from M2M_AUTH_PROXY_SEREVR_URL to M2M_AUTH_PROXY_SERVER_URL.",
+    "Test all changes locally and ensure no regressions in functionality or API behavior before submitting the git patch."
+  ],
+  "artifacts": {
+    "design_doc_md": "## Problem Summary\n- Multiple code quality, security, and consistency issues identified in the Topcoder Review API.\n- Issues include typos in environment variables, hardcoded sensitive tokens, data type mismatches in database schema, inaccurate API docs, and logical errors.\n- These issues risk runtime failures, security vulnerabilities, and maintenance challenges.\n\n## Proposed Approach\n- Correct typos and unify environment variable names for consistency.\n- Remove hardcoded tokens and replace with environment variables to enhance security.\n- Align database schema types for foreign keys to ensure data integrity.\n- Correct API documentation for accurate client understanding.\n- Fix sorting logic and validation decorators to prevent functional bugs.\n- Maintain backward compatibility and avoid breaking changes.\n\n## File-Level Plan\n- .env.sample: Fix environment variable typo.\n- mock/mock-api.js: Remove hardcoded token, use env variable.\n- prisma/migrations/20250525042446_add_review_application/migration.sql: Adjust column types and defaults.\n- src/api/review-history/reviewHistory.controller.ts: Fix API response descriptions.\n- src/api/review-opportunity/reviewOpportunity.controller.ts: Rename duplicate query param.\n- src/api/review-opportunity/reviewOpportunity.service.ts: Correct sorting comparator.\n- src/dto/common.dto.ts: Fix FailResponse success flag.\n- src/dto/reviewApplication.dto.ts: Use typed role property.\n- src/dto/reviewOpportunity.dto.ts: Add validation decorators.\n- src/shared/config/m2m.config.ts: Fix env variable typo.\n\n## API / Interface Changes\n- No breaking API contract changes.\n- Query parameter rename from duplicate 'limit' to 'offset' in reviewOpportunity controller.\n- API response status descriptions corrected for clarity.\n\n## Constraints & SLAs\n- Changes must not break existing API functionality or database integrity.\n- Environment variables must be properly documented and loaded.\n- Patch must pass existing tests and manual verification.\n- Changes should be backward compatible with current deployments.\n\n## Risks & Trade-offs\n- Risk of regression if sorting logic or database schema changes are not thoroughly tested.\n- Potential deployment issues if environment variables are not set correctly after renaming.\n- Trade-off between immediate security improvement by removing hardcoded tokens and the need to ensure env vars are correctly configured.\n\n## Edge Cases\n- Sorting on fields with undefined or null values.\n- Missing or misconfigured environment variables leading to runtime errors.\n- Database migration failures if existing data violates new type constraints.\n- Clients relying on previous API docs may need communication about updated descriptions and parameter names.\n\n## Acceptance Checklist\n- [ ] Typo fixes applied to environment variables and config files.\n- [ ] Hardcoded tokens removed and replaced with env variable usage.\n- [ ] Prisma migration updated for consistent data types and defaults.\n- [ ] API documentation corrected for status codes and query parameters.\n- [ ] Sorting logic fixed to handle both ascending and descending correctly.\n- [ ] Validation decorators added for numeric fields.\n- [ ] All changes tested locally with no regressions.\n- [ ] Git patch created against latest feat/review-opportunities branch.\n- [ ] Code comments updated where necessary.\n- [ ] No new issues introduced as verified by code review and testing.",
+    "mermaid_diagram": "graph TD\n  A[Client] -->|API Calls| B[Topcoder Review API]\n  B --> C[NestJS Controllers]\n  C --> D[Services]\n  D --> E[Prisma ORM]\n  E --> F[PostgreSQL Database]\n  B --> G[Environment Variables]\n  B --> H[OpenAPI/Swagger Docs]\n  style G fill:#f9f,stroke:#333,stroke-width:2px\n  style H fill:#bbf,stroke:#333,stroke-width:2px",
+    "interfaces": [
+      {
+        "producer": "Topcoder Review API",
+        "consumer": "API Clients",
+        "protocol": "HTTP REST",
+        "payload": "JSON requests and responses with validation and error codes as per OpenAPI spec"
+      },
+      {
+        "producer": "Environment Variable Store",
+        "consumer": "Topcoder Review API",
+        "protocol": "OS Environment or Vault",
+        "payload": "Secure configuration values including tokens and URLs"
+      },
+      {
+        "producer": "Prisma ORM",
+        "consumer": "PostgreSQL Database",
+        "protocol": "SQL",
+        "payload": "Database schema and queries with consistent data types"
+      }
+    ],
+    "tradeoffs": [
+      "Fixing environment variable typos improves reliability but requires deployment environment updates.",
+      "Removing hardcoded tokens enhances security but depends on correct env var provisioning.",
+      "Changing database column types ensures integrity but may require data migration or validation.",
+      "Renaming query parameters avoids ambiguity but may break clients relying on old names if not communicated.",
+      "Correcting sorting logic prevents bugs but requires thorough testing to avoid regressions."
+    ]
+  },
+  "validations": [
+    "Reviewed all identified issues and mapped them to specific code files and configurations.",
+    "Ensured the plan addresses each issue with actionable steps aligned to best practices.",
+    "Confirmed no breaking API changes except controlled query parameter rename with documentation update.",
+    "Validated that environment variable fixes are consistent across .env.sample and config files.",
+    "Verified sorting logic fix aligns with JavaScript comparator requirements for correct ordering.",
+    "Checked that added validation decorators conform to NestJS/DTO standards.",
+    "Confirmed the acceptance checklist covers all fixes and testing requirements."
+  ],
+  "confidence": 0.95,
+  "stop_reason": "completed",
+  "rubric_self_check": {
+    "coverage": "All identified issues from the prompt are addressed in the plan and design doc.",
+    "specificity": "Each fix is mapped to exact files

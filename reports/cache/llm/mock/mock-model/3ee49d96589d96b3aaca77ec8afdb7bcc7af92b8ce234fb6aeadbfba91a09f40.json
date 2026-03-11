@@ -1,0 +1,1 @@
+{"content": "[MOCK] c81b5cce193a3ed1 :: You are executing decomposition strategy 'direct_baseline'. Problem statement: Return the number of undirected edges.  I", "tokens": 101, "elapsed": 3.6249984987080097e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "plan-runner", "caller": "direct_baseline:initial"}}

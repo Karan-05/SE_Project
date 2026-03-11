@@ -1,0 +1,39 @@
+BEGIN_JSON
+{
+  "task_type": "data_etl",
+  "id": "73d5b29a-3bef-4979-863c-80d0bae43e56",
+  "title": "Topcoder Review API - Implement Configurable PostgreSQL Schema",
+  "summary": "Design and implement a configurable PostgreSQL schema support for the Topcoder Review API. This includes environment variable-based schema configuration, migration support for custom schemas, and updated documentation. The solution must ensure all migrations and application operations respect the configured schema, defaulting to 'public' if none is specified, without regression.",
+  "assumptions": [
+    "Access to the PostgreSQL database and ability to run migrations is available in deployment environments.",
+    "The Prisma ORM supports schema configuration via its datasource configuration or environment variables.",
+    "The existing migration scripts (e.g., migrate.ts) can be modified to accept schema parameters.",
+    "No changes to the database structure beyond schema usage are required.",
+    "The environment variable POSTGRES_SCHEMA is the preferred method for schema configuration, overriding any schema in DATABASE_URL.",
+    "The .env.sample file exists and is editable for documentation updates.",
+    "The README.md is the primary documentation source for deployment and development instructions.",
+    "Testing environment can simulate schema changes to validate migration and application behavior.",
+    "No changes to API contracts or external interfaces are needed for this feature."
+  ],
+  "plan": [
+    "1. Modify application configuration to remove any schema parameter from DATABASE_URL and instead read POSTGRES_SCHEMA environment variable.",
+    "2. Implement logic in the application bootstrap or Prisma client initialization to use POSTGRES_SCHEMA if set, otherwise default to 'public'.",
+    "3. Update Prisma schema file (schema.prisma) to use a dynamic schema name via environment variable interpolation for the datasource schema.",
+    "4. Refactor migration scripts (including migrate.ts) to accept and use the POSTGRES_SCHEMA environment variable to run migrations against the correct schema.",
+    "5. Add checks or commands in migration scripts to create the schema if it does not exist before running migrations.",
+    "6. Update .env.sample file with clear documentation and examples for POSTGRES_SCHEMA usage.",
+    "7. Update README.md to document schema configuration steps, environment variable usage, migration instructions, and deployment examples.",
+    "8. Create data quality checks and validation queries to verify that migrations have applied to the correct schema and that application tables exist within the configured schema.",
+    "9. Develop Python pseudo-code snippets to automate migration runs and schema validation as part of deployment pipelines.",
+    "10. Perform tests to verify that the application works correctly with different schema configurations, including default 'public' and custom schema names.",
+    "11. Validate that no regressions occur in existing functionality by running existing test suites and migration flows.",
+    "12. Package all changes as a patch against the latest commit in the feat/review-opportunities branch, including code, migration scripts, and documentation."
+  ],
+  "artifacts": {
+    "pipeline_spec": "The ETL pipeline for schema configuration involves the following steps:\n\n- Source: Environment variables POSTGRES_SCHEMA and DATABASE_URL (without schema parameter).\n- Cadence: On application startup and migration execution.\n- Orchestration: Migration scripts (migrate.ts) are triggered manually or via CI/CD pipelines.\n- SLAs: Migrations must complete successfully before application startup to ensure schema consistency.",
+    "sql_snippets": [
+      "-- SQL snippet to create schema if not exists\nCREATE SCHEMA IF NOT EXISTS ${POSTGRES_SCHEMA};",
+      "-- SQL snippet to verify tables exist in schema\nSELECT table_name FROM information_schema.tables WHERE table_schema = '${POSTGRES_SCHEMA}';"
+    ],
+    "python_snippets": [
+      "import os\nimport subprocess\n\nPOSTGRES_SCHEMA = os.getenv('POSTGRES_SCHEMA', 'public')\n

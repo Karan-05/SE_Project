@@ -205,6 +205,8 @@ class _TopcoderExperiment:
         self.exclude_datasets = list(config.exclude_datasets or default_excludes)
         self.force_task_type = config.force_task_type
         self.default_non_coding_mode = (config.default_non_coding_mode or "design_doc").lower()
+        self.raw_task_rows = 0
+        self.duplicate_task_stats: Dict[str, object] = {"duplicates_count": 0, "duplicate_task_ids": []}
 
     def _discover_datasets(self) -> List[TopcoderDatasetDescriptor]:
         search_paths = (
@@ -249,8 +251,10 @@ class _TopcoderExperiment:
         for descriptor in descriptors:
             dataset_tasks = load_tasks_from_dataset(descriptor)
             tasks.extend(dataset_tasks)
+        raw_total = len(tasks)
         if self.config.max_tasks is not None:
             tasks = tasks[: self.config.max_tasks]
+        tasks = self._deduplicate_tasks(tasks)
         if self.presentation and self.sample_size:
             tasks, counts = select_sample(
                 tasks,
@@ -260,6 +264,7 @@ class _TopcoderExperiment:
                 min_with_tests=self.sample_min_with_tests,
             )
             self.sample_counts = counts
+        self.raw_task_rows = raw_total
         manifest_entries = []
         for task in tasks:
             metadata = task.get("metadata", {})
@@ -276,11 +281,41 @@ class _TopcoderExperiment:
             "run_id": self.run_id,
             "generated_at": datetime.utcnow().isoformat(),
             "task_count": len(tasks),
+            "raw_task_rows": raw_total,
+            "duplicate_task_count": self.duplicate_task_stats.get("duplicates_count", 0),
+            "duplicate_task_ids": self.duplicate_task_stats.get("duplicate_task_ids", []),
             "tasks": manifest_entries,
         }
         (self.run_dir / "tasks_manifest.json").write_text(json.dumps(manifest, indent=2), encoding="utf-8")
         logger.info("Loaded %s canonical tasks", len(tasks))
         return tasks
+
+    def _deduplicate_tasks(self, tasks: List[Dict[str, object]]) -> List[Dict[str, object]]:
+        seen: Dict[str, Dict[str, object]] = {}
+        order: List[str] = []
+        duplicates: List[str] = []
+        for idx, task in enumerate(tasks):
+            task_id = str(task.get("id") or "").strip()
+            if not task_id:
+                task_id = f"task_{idx}"
+                task["id"] = task_id
+            if task_id not in seen:
+                seen[task_id] = task
+                order.append(task_id)
+            else:
+                if task_id not in duplicates and len(duplicates) < 25:
+                    duplicates.append(task_id)
+        deduped = [seen[task_id] for task_id in order]
+        duplicates_count = len(tasks) - len(deduped)
+        self.duplicate_task_stats = {"duplicates_count": duplicates_count, "duplicate_task_ids": duplicates}
+        if duplicates_count:
+            logger.info(
+                "Deduplicated %s task rows (%s unique IDs such as %s).",
+                duplicates_count,
+                len(duplicates),
+                ", ".join(duplicates[:3]) or "n/a",
+            )
+        return deduped
 
     def _build_task_record(self, task: Dict[str, object], *, status: str, error_type: str, start: datetime, end: datetime, **overrides: object) -> Dict[str, object]:
         metadata = task.get("metadata", {}) or {}
@@ -658,6 +693,9 @@ class _TopcoderExperiment:
             "stop_reason": self.stop_reason or "",
             "llm_provider": self.llm_provider,
             "mock_provider": self.llm_provider.lower() == "mock",
+            "raw_task_rows": self.raw_task_rows,
+            "duplicate_task_count": self.duplicate_task_stats.get("duplicates_count", 0),
+            "duplicate_task_ids": self.duplicate_task_stats.get("duplicate_task_ids", []),
         }
         if self.presentation:
             metadata.update(

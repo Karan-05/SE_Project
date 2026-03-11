@@ -1,0 +1,1 @@
+{"content": "[MOCK] cb45f1dcdc5bb1e2 :: Implement function solve(arg1:str) -> str. Do NOT read from stdin or write to stdout; rely solely on the provided argume", "tokens": 28, "elapsed": 2.500019036233425e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "failure-tests", "caller": "failure_mode_first"}}

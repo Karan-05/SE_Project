@@ -1,0 +1,39 @@
+cli_args:
+  ablation_agent: double_dqn
+  ablation_episodes: 10
+  budget_episodes: 10
+  episodes: 25
+  evaluation_mode: unconstrained
+  figure_episodes: 8
+  output_dir: /Users/karanallagh/Desktop/DataCollector/results/workflow_rl
+  report_dir: /Users/karanallagh/Desktop/DataCollector/reports/ase2026_workflow_rl
+  seed: 2026
+env_config:
+  completion_budget: 26000
+  disabled_actions: []
+  enable_action_masking: true
+  enable_uncertainty_features: true
+  evaluation_mode: unconstrained
+  max_retries: 6
+  max_steps: 24
+  max_subtasks: 6
+  min_recoverable_ratio: 0.35
+  noise_scale: 0.05
+  prompt_budget: 40000
+  retrieval_limit: 6
+  seed: 2026
+  track_episode_logs: true
+  verifier_limit: 4
+reward_config:
+  abandon_penalty: 10.0
+  abandon_recoverable_penalty: 15.0
+  budget_violation_penalty: 8.0
+  compile_bonus: 2.5
+  failure_penalty: 5.0
+  invalid_action_penalty: 3.0
+  latency_cost: 0.08
+  repair_loop_penalty: 1.5
+  step_penalty: 0.05
+  success_bonus: 25.0
+  test_improvement: 4.0
+  token_cost: 0.0002

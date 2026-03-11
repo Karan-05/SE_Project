@@ -1,0 +1,1 @@
+{"content": "[MOCK] 2cd9880b9bcc5dc7 :: You are repairing code produced by strategy 'contract_first'. Problem statement: Count primes up to N.  Memory Hint: - W", "tokens": 179, "elapsed": 4.959001671522856e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "contract_first:repair"}}

@@ -1,0 +1,1 @@
+{"content": "[MOCK] a839bfeeff1ef871 :: You are repairing code produced by strategy 'pattern_skeleton'. Problem statement: Return the sum of the main diagonal. ", "tokens": 176, "elapsed": 6.749993190169334e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "pattern_skeleton:repair"}}

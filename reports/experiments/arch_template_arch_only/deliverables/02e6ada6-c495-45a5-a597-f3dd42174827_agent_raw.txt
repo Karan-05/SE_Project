@@ -1,0 +1,30 @@
+BEGIN_JSON
+{
+  "task_type": "architecture_doc",
+  "id": "02e6ada6-c495-45a5-a597-f3dd42174827",
+  "title": "Topcoder Identity Service: tests implementation",
+  "summary": "This architecture document outlines the approach to implement comprehensive testing for the Topcoder Identity Service rewritten in TypeScript with PostgreSQL via Prisma. The goal is to achieve >=90% overall, branch, and line coverage for E2E and unit tests, rewrite Postman collections for full API coverage, and ensure tests run against a real database using a data migration tool. The document covers design, constraints, risks, and acceptance criteria for the testing strategy and supporting documentation.",
+  "assumptions": [
+    "Access to both legacy Java project and revised TypeScript/Postgres codebases is available for reference and test development.",
+    "Data migration tool is functional and can reliably seed test databases with consistent test data.",
+    "Redis cache, Kafka event bus, and other unchanged functionalities remain integrated and accessible during testing.",
+    "Existing Postman collections are minimal and require complete rewriting to cover all API cases.",
+    "Code linting standards and best practices are defined and enforceable via CI or local tooling.",
+    "Test environment supports real database connections (Postgres 16.3) and necessary environment variables can be configured.",
+    "No major API or functional changes are introduced beyond test coverage improvements."
+  ],
+  "plan": [
+    "Review legacy Java project tests and functionality to identify all API behaviors and edge cases.",
+    "Analyze the current TypeScript/Postgres implementation to map existing coverage gaps and test weaknesses.",
+    "Design and implement E2E tests for all APIs under 'test/e2e' folder targeting real Postgres database seeded by migration tool.",
+    "Rewrite and update unit tests under 'test/unit' folder to ensure >=90% coverage, focusing on isolated component logic.",
+    "Develop comprehensive Postman collections per API covering all success, failure, and edge cases, replacing existing minimal tests.",
+    "Integrate linting and code quality checks into test code to ensure adherence to best practices.",
+    "Log and document any bugs or inconsistencies discovered during testing for triage and resolution.",
+    "Write a detailed README.md with setup instructions, environment variables, database migration steps, local deployment, and test verification via Postman collections.",
+    "Validate test coverage metrics using coverage tools to confirm >=90% overall, branch, and line coverage.",
+    "Perform code reviews and static analysis on test code to ensure maintainability and quality.",
+    "Prepare final submission with source code, updated Postman collections, and README documentation."
+  ],
+  "artifacts": {
+    "design_doc_md": "## Problem Summary\nThe Topcoder Identity Service has been migrated from Java/MySQL to TypeScript/Postgres with Prisma ORM, preserving existing functionalities such as Redis caching and Kafka event bus. However, the current test coverage is insufficient, with minimal Postman tests and incomplete unit and E2E tests. This document defines a comprehensive testing strategy to ensure robust validation of all APIs and components, targeting real database integration and achieving high coverage metrics.\n\n## Proposed Approach\n- Leverage legacy Java tests and functionality as a baseline to identify all required test cases.\n- Implement E2E tests in the 'test/e2e' folder that interact with a real Postgres database seeded via the data migration tool

@@ -1,0 +1,38 @@
+BEGIN_JSON
+{
+  "task_type": "architecture_doc",
+  "id": "4ecc36e0-b1d5-4d9d-81dd-616ad6fbdd8d",
+  "title": "96 Hours Topcoder Identity Service Fixing issues found in UserController",
+  "summary": "This architecture document outlines the approach to fix discrepancies in the UserController of the Topcoder Identity Service, ensuring full functional parity with the legacy v3 Java UserResource implementation while maintaining the existing TypeScript/Postgres/Prisma stack and preserving integrations such as Redis cache and Kafka event bus. The goal is to address 16 identified issues, with at least 13 fixed to pass review, including permission checks, API parameter handling, validation logic, OTP handling, and event publishing.",
+  "assumptions": [
+    "Full access to the v3 Java Identity Service repository and codebase is available for reference and comparison.",
+    "The revised TypeScript/Postgres codebase is based on the develop branch at commit 4204fc4c90ebadc25f1aceb45ba19e962c03fe89 or later.",
+    "Redis cache, Kafka event bus, and other existing integrations remain unchanged and must be preserved.",
+    "Database schema changes are minimal or none, focusing on logic and API behavior alignment.",
+    "Postman collections will be updated or created to validate the fixed APIs post-implementation.",
+    "SRM-related logic is out of scope and will not be addressed in this fix.",
+    "No new features or breaking changes beyond fixing the identified issues are introduced."
+  ],
+  "plan": [
+    "Review and document current UserController implementation discrepancies against v3 Java UserResource for each of the 16 issues.",
+    "Design detailed fixes for each issue, ensuring permission checking logic aligns with allowedScope and v3 Java logic.",
+    "Update API handlers to remove deprecated parameters (e.g., ssoUserId) and align method signatures and behaviors with v3 Java code.",
+    "Refactor validation logic in registerUser and other relevant methods to match v3 Java validation, including password, handle, and email validation.",
+    "Implement profile validation, setAccessToken, and addSocialProfile calls for POST :resourceId/profiles as per v3 Java.",
+    "Remove social_login_provider references and update to use ProviderTypes as defined in v3 Java code.",
+    "Disable or remove unsupported endpoints (PATCH resetPassword, POST resendEmail).",
+    "Correct resendActivationEmail and activate logic to fully reflect v3 Java implementations.",
+    "Fix email update flow to avoid generating OTP and sending emails unnecessarily, matching v3 Java behavior.",
+    "Enhance PATCH :resourceId/status to include comment parameter, activateEmail call, and publishNotificationEvent as per v3 Java.",
+    "Adjust resetToken retrieval to use getResetPasswordUrlPrefix method from v3 Java.",
+    "Update validationService.validateHandle to call isInvalidHandle and isHandleContainingNGWord as in v3 Java.",
+    "Simplify twoFactorAuthService#updateUser2faStatus by removing diceEnabled logic and aligning MFA logic with v3 Java.",
+    "Rework OTP-related APIs to use user_otp_email table instead of cache and follow v3 Java logic exactly.",
+    "Ensure all APIs with selector parameters only select specified fields, consistent with existing authorization service patterns.",
+    "Update Postman collections to cover all fixed API behaviors, ensuring comprehensive testing.",
+    "Conduct code linting and static analysis to ensure best practices and code quality.",
+    "Perform integration and regression testing to validate fixes and ensure no regressions.",
+    "Prepare a validation markdown file documenting verification steps and results."
+  ],
+  "artifacts": {
+    "design_doc_md": "## Problem Summary\n- The UserController in the revised TypeScript/Postgres Identity Service deviates from the legacy v3 Java UserResource in multiple functional aspects.\n

@@ -1,0 +1,27 @@
+{
+  "task_id": "graph_degree_ood",
+  "tests": [
+    {
+      "name": "sample_0",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'0': 1, '1': 2, '2': 1}",
+      "output": "{0: 1, 1: 2, 2: 1}",
+      "error": "",
+      "input": "[[[0, 1], [1, 2]]]",
+      "kwargs": "{}",
+      "duration": 2.3875036276876926e-05
+    },
+    {
+      "name": "sample_1",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'1': 2}",
+      "output": "{1: 2}",
+      "error": "",
+      "input": "[[[1, 1]]]",
+      "kwargs": "{}",
+      "duration": 6.749993190169334e-06
+    }
+  ]
+}

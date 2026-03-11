@@ -1,0 +1,1 @@
+{"content": "[MOCK] 522d982579a7c0d4 :: You are repairing code produced by strategy 'failure_mode_first'. Problem statement: Return the number of undirected edg", "tokens": 175, "elapsed": 4.708010237663984e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "failure_mode_first:repair"}}

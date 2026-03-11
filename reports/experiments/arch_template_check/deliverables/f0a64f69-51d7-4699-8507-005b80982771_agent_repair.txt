@@ -1,0 +1,27 @@
+BEGIN_JSON
+{
+  "task_type": "architecture_doc",
+  "id": "f0a64f69-51d7-4699-8507-005b80982771",
+  "title": "Topcoder NestJS Autopilot: Event-Based Phase Transition Implementation",
+  "summary": "Design a scalable event-driven scheduling system for the Topcoder Autopilot service using NestJS's @nestjs/schedule module and Kafka. The system must dynamically schedule phase transitions, handle schedule updates, recover from failures, and integrate with existing Kafka infrastructure. Documentation and deployment guidance are required.",
+  "assumptions": [
+    "Access to the latest develop branch of the autopilot-v6 GitHub repo is available for implementation.",
+    "Existing Kafka topics and message formats for phase transitions are stable and well-documented.",
+    "Challenge and phase data can be queried via an existing service or API for recovery and scheduling.",
+    "No conflicting scheduling systems will run concurrently; the new system will replace polling.",
+    "Error handling and logging frameworks are in place or will be implemented as part of the solution."
+  ],
+  "plan": [
+    "Analyze existing autopilot-v6 codebase focusing on Kafka integration and phase transition handling.",
+    "Add @nestjs/schedule module dependency and create a SchedulerService using SchedulerRegistry for dynamic job management.",
+    "Implement SchedulerService methods: schedulePhaseTransition, cancelScheduledTransition, updateScheduledTransition, getAllScheduledTransitions.",
+    "Enhance AutopilotService to use SchedulerService for scheduling phase transitions based on phase end times.",
+    "Integrate event publishing to Kafka topic 'autopilot.phase.transition' with correct payloads at scheduled times.",
+    "Implement handlers for phase schedule updates to cancel and reschedule jobs with audit logging.",
+    "Develop a RecoveryService that runs on startup to fetch active phases, schedule upcoming transitions, and process overdue transitions immediately.",
+    "Add comprehensive error handling and logging throughout scheduling, event publishing, and recovery processes.",
+    "Document the architecture, scheduling approach, recovery mechanisms, and provide deployment instructions in markdown format.",
+    "Include examples and scenarios in documentation covering normal scheduling, rescheduling, and recovery."
+  ],
+  "artifacts": {
+    "design_doc_md": "## Problem Summary\n- Current Autopilot-v6 lacks automated scheduling for phase transitions, relying on manual or polling mechanisms.\n- Inefficient polling leads to latency and resource overhead.\n- Need event-driven scheduling integrated with Kafka for real-time phase transitions.\n- System must support dynamic scheduling, updates, recovery, and scalability.\n\n## Proposed Approach\n- Use NestJS @nestjs/schedule module's SchedulerRegistry for dynamic job management.\n- SchedulerService will manage one-time scheduled jobs for phase transitions.\n- On scheduled time, publish phase transition events to Kafka topic 'autopilot.phase.transition'.\n- Implement recovery on service startup to re-schedule or immediately trigger overdue transitions.\n\n## File-Level Plan\n- Add @nestjs/schedule to dependencies.\n- Create SchedulerService with methods for scheduling, cancelling, updating, and listing jobs.\n- Enhance AutopilotService to interface with SchedulerService and Kafka producer.\n- Implement RecoveryService to run on app bootstrap and handle phase data.\n- Add logging and error handling modules or extend existing ones.\n- Add documentation files: architecture.md and deployment_guide.md.\n\n## API / Interface Changes\n- SchedulerService interface exposing schedulePhaseTransition, cancelScheduledTransition, updateScheduledTransition, getAllScheduledTransitions.\n- AutopilotService methods to trigger scheduling and handle phase updates.\n- Kafka event payload schema includes challengeId, phaseId, scheduledTime, and metadata.\n- RecoveryService interface to initialize scheduling on startup.\n\n## Constraints & SLAs\n- Scheduled phase transition events must be triggered within a few seconds of phase end time.\n- System must handle updates to phase

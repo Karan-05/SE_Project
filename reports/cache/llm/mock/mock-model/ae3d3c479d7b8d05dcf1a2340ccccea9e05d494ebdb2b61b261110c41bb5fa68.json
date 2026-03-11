@@ -1,0 +1,1 @@
+{"content": "[MOCK] f2bf8f83c5921325 :: Return OK in one sentence.", "tokens": 5, "elapsed": 6.041984306648374e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "mock-model", "caller": "sanity_check"}}

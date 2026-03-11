@@ -170,6 +170,12 @@ dmypy.json
 # profiling data
 .prof
 
+# Project-specific artifacts
+mysql_data/
+tmp/
+challenge_data/legacy_excel/challengeData_legacy_xlsx/page1.json
+data/processed/tasks.csv
+
 ### vscode ###
 .vscode/*
 !.vscode/settings.json

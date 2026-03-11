@@ -32,6 +32,10 @@ class DecompositionPlan:
     tests: List[str] = field(default_factory=list)
     simulation_traces: List[str] = field(default_factory=list)
     role_messages: List[str] = field(default_factory=list)
+    target_files: List[str] = field(default_factory=list)
+    candidate_files: List[str] = field(default_factory=list)
+    subtask_file_map: Dict[str, List[str]] = field(default_factory=dict)
+    repair_target_files: Dict[str, List[str]] = field(default_factory=dict)
     diagnostics: Dict[str, str] = field(default_factory=dict)
 
 
@@ -43,6 +47,7 @@ class StrategyResult:
     solution_code: str
     tests_run: List[Dict[str, str]] = field(default_factory=list)
     metrics: Dict[str, float | str] = field(default_factory=dict)
+    round_traces: List[Dict[str, object]] = field(default_factory=list)
 
 
 class TaskDecompositionStrategy(Protocol):

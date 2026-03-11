@@ -1,0 +1,25 @@
+BEGIN_JSON
+{
+  "task_type": "architecture_doc",
+  "id": "mixed_matrix_stress",
+  "title": "Matrix Trace (stress)",
+  "summary": "This architecture document outlines a design for a system that computes the sum of the main diagonal elements (trace) of a matrix, with a focus on handling large or mixed data inputs under stress conditions. The document covers the problem scope, proposed approach, file-level plan, API/interface changes, constraints, risks, edge cases, and acceptance criteria to ensure robustness and scalability.",
+  "assumptions": [
+    "The input matrix is square or rectangular but only the main diagonal elements are summed.",
+    "The matrix data can be large, requiring stress testing and performance considerations.",
+    "No existing codebase or repository is provided; design is for a new or standalone component.",
+    "The system will expose an API or interface to accept matrix data and return the trace sum.",
+    "Performance SLAs and resource constraints are inferred but not explicitly provided."
+  ],
+  "plan": [
+    "Define the problem scope and requirements for matrix trace calculation under stress.",
+    "Design a scalable and efficient approach to compute the main diagonal sum, including handling large matrices.",
+    "Outline the file-level structure for implementation and testing.",
+    "Specify API or interface changes for input/output handling.",
+    "Identify constraints, SLAs, and performance goals.",
+    "Analyze risks and trade-offs related to performance, memory usage, and input validation.",
+    "Enumerate edge cases such as empty matrices, non-square matrices, and invalid inputs.",
+    "Define an acceptance checklist to validate correctness, performance, and robustness."
+  ],
+  "artifacts": {
+    "design_doc_md": "## Problem Summary\nThe task is to compute the sum of the main diagonal elements (trace) of a given matrix. The solution must handle large or mixed-type matrices efficiently, ensuring performance under stress conditions such as very large input sizes or mixed data types.\n\n## Proposed Approach\nWe propose a streaming or batch processing approach that iterates over the input matrix rows, summing the diagonal elements directly without storing the entire matrix in memory when possible. For large matrices, memory-efficient techniques and parallel processing will be considered to meet performance SLAs. Input validation will ensure matrix shape correctness and data type consistency.\n\n## File-Level Plan\n- `matrix_trace.py`: Core logic for computing the trace.\n- `api.py`: API endpoint or interface for receiving matrix input and returning results.\n- `tests/test_matrix_trace.py`: Unit and stress tests covering correctness and performance.\n- `utils.py`: Helper functions for input validation and data preprocessing.\n\n## API / Interface Changes\n- Endpoint: POST `/matrix/trace`\n- Input: JSON payload with matrix data as a list of lists.\n- Output: JSON response with the trace sum.\n- Authentication: None assumed but can be added if integrated into larger system.\n\n## Constraints & SLAs\n- Must handle matrices up to at least 10^6 elements efficiently.\n- Response time SLA: under 2 seconds for matrices up to 10^5 elements.\n- Memory usage should be optimized to avoid loading entire large matrices if streaming is possible.\n- Input validation must reject non-numeric or malformed matrices.\n\n## Risks & Trade-offs\n- Trade-off between memory usage and speed: streaming reduces memory but may increase processing time.\n- Handling mixed data types may require additional validation and conversion overhead.\n- Large input sizes may cause timeouts or resource exhaustion if not properly managed.\n\n## Edge Cases\n- Empty matrix input.\n- Non-square matrices where number of rows != number of columns.\n- Matrices with non-numeric or null values.\n- Extremely large matrices exceeding memory or time constraints.\n\n## Acceptance Criteria\n- Correctness: Accurate trace calculation for various matrix sizes and

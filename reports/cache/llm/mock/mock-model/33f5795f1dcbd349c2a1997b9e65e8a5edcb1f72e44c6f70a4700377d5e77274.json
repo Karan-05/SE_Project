@@ -1,0 +1,1 @@
+{"content": "[MOCK] 3f2be4ad127d9e98 :: You are executing decomposition strategy 'role_decomposed'. Problem statement: Count primes up to N.  Implementation con", "tokens": 109, "elapsed": 3.7910067476332188e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "plan-runner", "caller": "role_decomposed:initial"}}

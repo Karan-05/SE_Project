@@ -1,0 +1,1 @@
+{"content": "[MOCK] 3d6fa39069a5402b :: Implement function solve(arg1:list[int], arg2:int) -> int. Do NOT read from stdin or write to stdout; rely solely on the", "tokens": 29, "elapsed": 2.9999646358191967e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "failure-tests", "caller": "failure_mode_first"}}

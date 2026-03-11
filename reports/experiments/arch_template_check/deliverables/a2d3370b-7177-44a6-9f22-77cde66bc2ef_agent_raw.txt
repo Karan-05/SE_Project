@@ -1,0 +1,26 @@
+BEGIN_JSON
+{
+  "task_type": "data_etl",
+  "id": "a2d3370b-7177-44a6-9f22-77cde66bc2ef",
+  "title": "Topcoder O/R F2F - Topgear Scorecard Issue",
+  "summary": "Design and implement an ETL pipeline to address the Topgear Scorecard issue by extracting relevant source data, applying necessary transformations to fix the scorecard options loading and related issues, and loading the cleansed data into the target system. The pipeline must adhere to existing style and functional constraints, avoid breaking current functions, and include validation queries and data quality checks to ensure correctness.",
+  "assumptions": [
+    "Source data schemas and exact data sources are not provided; assumed to be relational databases or APIs related to the scorecard system.",
+    "Transformation logic details are inferred from the issue description and video but not explicitly provided.",
+    "No direct access to the existing codebase or database schema; patch creation is out of scope for ETL but pipeline design will align with described constraints.",
+    "Acceptance criteria focus on fixing the scorecard options loading issue and ensuring no regressions in existing functions.",
+    "No direct sample outputs or detailed error logs are available; validations will be based on inferred expected behavior."
+  ],
+  "plan": [
+    "Analyze the provided Figma design assets and documentation to understand the UI/UX requirements and data usage patterns.",
+    "Identify and document the source data systems and schemas relevant to the scorecard options and related entities.",
+    "Design the ETL pipeline steps: extraction from source(s), transformation logic to fix loading issues, and loading into the target system.",
+    "Develop SQL snippets for data extraction and transformation validations.",
+    "Write Python pseudo-code for orchestrating the ETL pipeline with checkpoints and logging.",
+    "Define data quality checks focusing on completeness, correctness, and consistency of scorecard options data.",
+    "Create validation queries to verify the fixes and ensure no regressions.",
+    "Document the pipeline specification including cadence, orchestration, SLAs, and recovery plans.",
+    "Prepare an acceptance checklist to verify all requirements are met before deployment."
+  ],
+  "artifacts": {
+    "pipeline_spec": "## Pipeline Specification\n\n### Sources\n- Scorecard options and related data extracted from the primary relational database(s) supporting the Topgear system.\n- Assumed tables: scorecard_options, scorecard_entries, user_responses.\n\n### Cadence\n- Run the ETL pipeline on-demand during scorecard updates and nightly batch runs to sync data.\n\n### Orchestration\n- Use Apache Airflow or similar scheduler to manage extraction, transformation, and loading steps with logging and alerting.\n\n### SLAs\n- Data freshness within 24 hours.\n- Failure alerts within 15 minutes.\n\n### Recovery Plan\n- Automatic retries on transient failures.\n- Manual intervention for persistent errors with detailed logs.\n\n---\n\n## Transformation Steps\n1. Extract raw scorecard options and user response data.\n2. Apply data cleansing to fix missing or incorrect options loading.\n3. Validate transformed data against expected schema and business rules.\n4. Load cleansed data into the target scorecard system tables.\n\n---\n\n## Acceptance Checklist\n- Scorecard options load correctly and completely in dev and prod.\

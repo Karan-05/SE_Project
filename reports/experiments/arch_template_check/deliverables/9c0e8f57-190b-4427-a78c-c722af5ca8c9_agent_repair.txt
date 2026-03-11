@@ -1,0 +1,27 @@
+BEGIN_JSON
+{
+  "task_type": "data_etl",
+  "id": "9c0e8f57-190b-4427-a78c-c722af5ca8c9",
+  "title": "Topcoder O/R F2F - When a review scorecard is reopened and trying to submit new review, the previously entered scores are still displayed in the card",
+  "summary": "Design an ETL blueprint to address the issue where reopening a review scorecard and submitting a new review displays previously entered scores and comments. The ETL pipeline should extract relevant review and scorecard data, transform it to clear or separate reopened review states, and load the cleaned or updated data into the target system to ensure that reopened scorecards do not show stale data. Validation queries and data quality checks must confirm that reopened reviews start with empty or reset scorecards as per requirements.",
+  "assumptions": [
+    "Source data schema for reviews, scorecards, and review states is not provided and must be inferred or requested.",
+    "The ETL pipeline will operate on batch or micro-batch cadence based on typical review system update frequency.",
+    "The transformation logic includes identifying reopened reviews and resetting or clearing previous scores/comments for those instances.",
+    "No direct access to the application code or database is available; the solution focuses on data pipeline and validation aspects.",
+    "Acceptance criteria include no display of previous scores/comments on reopened scorecards and successful submission of new reviews with fresh data."
+  ],
+  "plan": [
+    "Gather and analyze source data schemas for reviews, scorecards, and review status including fields indicating reopening.",
+    "Define extraction queries or connectors to ingest relevant tables or data streams containing review submissions and scorecard entries.",
+    "Design transformation logic to detect reopened scorecards and clear or isolate previous scores and comments, ensuring new submissions start clean.",
+    "Develop loading procedures to update the target data store or analytics layer with the transformed clean review data.",
+    "Implement data quality checks to verify no residual scores/comments persist on reopened reviews and that new reviews are recorded properly.",
+    "Write validation SQL queries to confirm the correctness of the transformation and loading steps.",
+    "Document the ETL pipeline specification including source, cadence, orchestration, SLAs, and recovery plans.",
+    "Provide runnable pseudo-code snippets for extraction, transformation, and loading with logging and checkpointing.",
+    "Create an acceptance checklist covering functional correctness, data integrity, and performance criteria.",
+    "Plan test executions and monitoring to ensure the ETL pipeline meets the requirements and does not regress."
+  ],
+  "artifacts": {
+    "pipeline_spec": "## ETL Pipeline Specification\n\n### Sources\n- Review Submissions Table: Contains review IDs, reviewer IDs, scorecard data, comments, and status flags.\n- Scorecard Entries Table: Stores individual score and comment entries linked to reviews.\n\n### Cadence\n- Run ETL every 15 minutes to capture reopened reviews and new submissions promptly.\n\n### Orchestration\n- Use Airflow or equivalent scheduler to orchestrate extraction, transformation, and loading tasks.\n\n### SLAs\n- Pipeline must complete within 5 minutes of scheduled run.\n- Data freshness within 15 minutes of source update.\n\n### Recovery Plan\n- On failure, retry up to 3 times with exponential backoff.\n- Alert on persistent failures.\n\n### Transformation Logic\n- Identify reopened scorecards by status flags or timestamps.\n- Clear or reset previous scores and comments for reopened reviews.\n- Ensure new review submissions start with empty or reset scorecards.\n\n### Loading\n- Update target data store with cleaned review and scorecard data.\n- Maintain audit logs for changes.\n\n### Data Quality Checks\n- Verify no residual scores/comments on reopened reviews.\n- Confirm new reviews are recorded with fresh data.\n\n### Validation Queries\n- SQL

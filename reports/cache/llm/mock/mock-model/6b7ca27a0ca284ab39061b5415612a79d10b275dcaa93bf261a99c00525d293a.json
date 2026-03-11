@@ -1,0 +1,1 @@
+{"content": "[MOCK] 295b735f12a9b9d7 :: You are repairing code produced by strategy 'failure_mode_first'. Problem statement: Return the minimum coins needed to ", "tokens": 176, "elapsed": 4.500034265220165e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "failure_mode_first:repair"}}

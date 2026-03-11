@@ -1,0 +1,1 @@
+{"content": "[MOCK] 3876d083cb00ed1c :: You are executing decomposition strategy 'pattern_skeleton'. Problem statement: Count primes up to N.  Implementation co", "tokens": 157, "elapsed": 4.874949809163809e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "plan-runner", "caller": "pattern_skeleton:initial"}}

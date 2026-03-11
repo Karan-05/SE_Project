@@ -1,0 +1,35 @@
+BEGIN_JSON
+{
+  "task_type": "architecture_doc",
+  "id": "63966897-0b67-433c-831a-81170f44e0db",
+  "title": "72 hours  Topcoder NestJS Autopilot Review Opportunity Management",
+  "summary": "Design an automated review opportunity management system integrated into the Topcoder Autopilot service. The system detects challenge phase transitions for submission and registration phases, fetches reviewer configurations, and creates review opportunities via the Review API. It must be resilient, configurable, and prevent duplicates while supporting audit logging and recovery.",
+  "assumptions": [
+    "Access to the latest develop branch of the autopilot-v6 repo is available for patch submission.",
+    "Existing phase transition event handling and ChallengeApiService are implemented and accessible.",
+    "Review API authentication tokens and scopes will be managed securely by the autopilot service.",
+    "Feature flags and configuration management infrastructure exist or will be added as needed.",
+    "Monitoring and alerting infrastructure can be integrated or extended for this service.",
+    "Detailed API schemas and DTO definitions for Review API and Challenge API are available from the referenced repos.",
+    "No changes to Challenge API or Review API codebases are required, only client integration.",
+    "The solution must comply with NestJS 10+, TypeScript 5+, Kafka event infrastructure, ESLint/Prettier, and Docker containerization."
+  ],
+  "plan": [
+    "Analyze existing autopilot-v6 phase transition event handlers to identify insertion points for review opportunity logic.",
+    "Design and implement a ReviewApiService HTTP client in autopilot-v6, mirroring ChallengeApiService, including DTOs for create, update, and get operations.",
+    "Implement retry logic with exponential backoff and error handling in ReviewApiService for reliability.",
+    "Enhance phase transition processing to filter for submission and registration phase starts on active challenges.",
+    "Fetch DefaultChallengeReviewer configurations from Challenge API for each relevant challenge type and track.",
+    "Filter reviewer configurations to only those with isMemberReview=true and isAIReviewer=false.",
+    "Check existing review opportunities for the challenge via Review API to prevent duplicates.",
+    "Create new review opportunities using the Review API with appropriate parameters (openPositions, startDate, duration, payments, opportunityType).",
+    "Implement logic to handle different review types (REGULAR_REVIEW, COMPONENT_DEV_REVIEW, SPEC_REVIEW, ITERATIVE_REVIEW, SCENARIOS_REVIEW) based on challenge data.",
+    "Add configuration options and feature flags to enable/disable automatic review opportunity creation and override defaults.",
+    "Implement audit logging for all review opportunity operations, including creation, updates, and failures.",
+    "Add recovery mechanisms to detect and create missed review opportunities, possibly via scheduled reconciliation jobs.",
+    "Integrate monitoring and alerting for failures or anomalies in review opportunity creation.",
+    "Document the deployment and operational guide in markdown, including configuration, feature flags, and troubleshooting.",
+    "Perform thorough testing including unit, integration, and resilience tests before submission."
+  ],
+  "artifacts": {
+    "design_doc_md": "## Problem Summary\n- Manual creation of review opportunities leads to delays and missed chances.\n- Need to automate creation when submission or registration phases open.\n- Must integrate with existing phase transition event system.\n- Ensure no duplicate opportunities are created.\n\n## Proposed Approach\n- Implement ReviewApiService client with retry and error handling.\n- Detect phase transitions for submission and registration phases.\n- Fetch reviewer configs from Challenge API filtering on isMemberReview and isAIReviewer.\n- Create review opportunities via Review API respecting challenge-specific overrides.\n- Add feature flags and configuration for flexibility.\n- Implement audit logging, monitoring, and recovery mechanisms.\n\n## File-Level Plan\n- src/review/review-api.service.ts: HTTP client for Review API.\n- src/review/d

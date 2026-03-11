@@ -1,0 +1,1 @@
+{"content": "[MOCK] c264e33e23cfb2f9 :: List three high-risk failure modes for this coding task along with short rationales: Topcoder Arena 3.0 SRM API backlog:", "tokens": 58, "elapsed": 1.4791963621973991e-05, "budget_exceeded": false, "meta": {"provider": "mock", "model": "failure-scout", "caller": "failure_mode_first"}}

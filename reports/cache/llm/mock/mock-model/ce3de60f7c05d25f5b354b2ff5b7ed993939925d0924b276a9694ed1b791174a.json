@@ -1,0 +1,1 @@
+{"content": "[MOCK] c368a72981efaaba :: You are repairing code produced by strategy 'failure_mode_first'. Problem statement: Return the running prefix sums.  Me", "tokens": 172, "elapsed": 4.833040293306112e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "failure_mode_first:repair"}}

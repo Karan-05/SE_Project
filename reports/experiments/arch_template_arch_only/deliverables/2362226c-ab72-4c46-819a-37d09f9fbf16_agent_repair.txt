@@ -1,0 +1,34 @@
+BEGIN_JSON
+{
+  "task_type": "architecture_doc",
+  "id": "2362226c-ab72-4c46-819a-37d09f9fbf16",
+  "title": "Topcoder Work Manager - Fix submission phase display on 2 round challenge",
+  "summary": "This architecture document outlines the approach to fix the incorrect display of the submission phase in two-round challenges within the Topcoder Work Manager application. The fix must integrate with the existing ReactJS frontend, respect current UI/UX patterns, and maintain backward compatibility without introducing regressions. The solution will be implemented as a patch against the develop branch and must pass all existing tests without altering existing functionality.",
+  "assumptions": [
+    "Access to the 'develop' branch of the Topcoder Work Manager repository (commit a90f1581 or later) is available for patching.",
+    "The issue is primarily related to frontend display logic involving CSS, HTML, JavaScript, and ReactJS components.",
+    "No backend API changes are required; the fix is limited to UI and client-side logic.",
+    "Existing automated tests cover the relevant functionality sufficiently to detect regressions.",
+    "The linked GitHub issue #1464 contains detailed requirements and expected behavior for the submission phase display fix.",
+    "No additional performance or scalability constraints beyond normal UI responsiveness are expected."
+  ],
+  "plan": [
+    "Review the issue #1464 in the GitHub repository to understand the exact requirements and user impact.",
+    "Clone the Topcoder Work Manager repository and checkout the 'develop' branch at or after commit a90f1581.",
+    "Identify the ReactJS components responsible for rendering the submission phase in two-round challenges.",
+    "Analyze the current logic and CSS styles that lead to incorrect display of the submission phase.",
+    "Design a fix that correctly reflects the submission phase status for two-round challenges, ensuring consistency with other phases.",
+    "Implement the fix in the relevant ReactJS components and CSS files, adhering to existing code style and patterns.",
+    "Run all existing unit and integration tests locally to ensure no regressions.",
+    "Add or update tests if necessary to cover the fix explicitly.",
+    "Prepare a git patch file against the develop branch including the fix and any test updates.",
+    "Document the changes and rationale briefly in the commit message referencing issue #1464.",
+    "Submit the patch ensuring it passes the CI pipeline and meets all acceptance criteria."
+  ],
+  "artifacts": {
+    "design_doc_md": "## Problem Summary\nThe Topcoder Work Manager application incorrectly displays the submission phase in challenges that have two rounds. This causes confusion for copilots launching challenges, as the phase status shown does not reflect the actual challenge state.\n\n## Proposed Approach\nFix the ReactJS components responsible for rendering the submission phase by correcting the logic that determines phase visibility and status for two-round challenges. Adjust CSS styles if necessary to maintain visual consistency. Ensure the fix is backward compatible and does not affect single-round challenges or other phases.\n\n## File-Level Plan\n- Identify and modify ReactJS components under `src/components` related to challenge phases.\n- Update CSS modules or stylesheets that style the submission phase display.\n- Modify or add unit tests in the `src/__tests__` directory that cover phase display logic.\n\n## API / Interface Changes\nNo backend API or external interface changes are required. The fix is purely frontend and client-side.\n\n## Tradeoffs\nThe fix focuses on UI correctness and does not introduce new features or performance optimizations. It prioritizes backward compatibility and minimal code changes to reduce risk of regressions."
+  },
+  "validations": [
+    "Verify that the submission phase displays correctly for two-round challenges in the UI.",
+    "Run all existing unit and integration tests to confirm no regressions.",
+    "Add new tests if necessary to cover the fixed display logic explicitly

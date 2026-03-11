@@ -1,0 +1,31 @@
+BEGIN_JSON
+{
+  "task_type": "data_etl",
+  "id": "cdb60740-ab44-40e2-9491-7c14f71a8256",
+  "title": "Topcoder Member API V6 Test Improvement Part 2",
+  "summary": "Design a comprehensive ETL blueprint for the revised Topcoder Member API V6 focusing on SearchController and StatisticsController. The ETL pipeline will source data exclusively from PostgreSQL (version 16.3) using Prisma ORM, removing dependencies on Informix, Dynamo, and ElasticSearch. The blueprint includes schema design, pipeline orchestration, data quality checks, validation queries, and runnable pseudo-code to ensure data correctness and test coverage above 90%.",
+  "assumptions": [
+    "Access to the revised member-api-v6 repository and its Prisma schema is available for detailed schema extraction.",
+    "The data migration tool mentioned is available and functional to seed test data in PostgreSQL.",
+    "Existing DAL/gRPC dependencies have been or will be removed as per project goals.",
+    "Focus is on SearchController and StatisticsController APIs and their related services only.",
+    "The ETL pipeline is primarily for syncing and validating data within PostgreSQL to support the API services.",
+    "No direct access to Informix, DynamoDB, or ElasticSearch data sources is required or available.",
+    "Postman collections and environment setup instructions will be documented separately in README as requested."
+  ],
+  "plan": [
+    "1. Extract and document the Prisma schema for the member API v6 focusing on tables relevant to Search and Statistics features.",
+    "2. Define the ETL pipeline architecture to source data from PostgreSQL using Prisma ORM, ensuring removal of legacy dependencies.",
+    "3. Specify the orchestration cadence and recovery plan for the ETL pipeline to maintain data consistency and availability.",
+    "4. Develop SQL snippets and validation queries to verify data integrity, coverage, and correctness post-ETL.",
+    "5. Create Python pseudo-code snippets illustrating the ETL pipeline steps with checkpoints, logging, and error handling.",
+    "6. Define comprehensive data quality checks including thresholds and actions for anomalies.",
+    "7. Document a test strategy including unit tests targeting database data and end-to-end tests to achieve >=90% coverage.",
+    "8. Prepare sample outputs and expected results for validation of the ETL pipeline and test coverage.",
+    "9. Compile an acceptance checklist covering schema correctness, pipeline reliability, data quality, and test completeness.",
+    "10. Deliver a detailed README covering environment setup, database migration, local deployment, and verification steps."
+  ],
+  "artifacts": {
+    "pipeline_spec": "The ETL pipeline extracts and transforms data exclusively from PostgreSQL 16.3 using Prisma ORM, eliminating dependencies on Informix, DynamoDB, and ElasticSearch. The pipeline runs on-demand and scheduled intervals to sync and validate data for SearchController and StatisticsController services. Orchestration is handled via NodeJS scripts with logging and error recovery. SLA targets data availability within 5 minutes of source updates. Recovery plan includes retry logic and alerting on failures.",
+    "sql_snippets": "-- Validation Query 1: Check for missing user profiles referenced in statistics\nSELECT s.user_id FROM statistics s LEFT JOIN users u ON s.user_id = u.id WHERE u.id IS NULL;\n\n-- Validation Query 2: Ensure search index table consistency\nSELECT si.id FROM search_index si LEFT JOIN users u ON si.user_id = u.id WHERE u.id IS NULL;",
+    "python_snippets": "def etl_pipeline():\n    try:\n        # Extract data from PostgreSQL using Prisma ORM\n        data = extract_data()\n        # Transform data as per business rules\n        transformed = transform_data(data)\n        # Load data into target tables\n        load_data(transformed)\n        # Run data quality checks

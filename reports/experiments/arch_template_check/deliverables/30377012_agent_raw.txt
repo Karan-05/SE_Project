@@ -1,0 +1,31 @@
+BEGIN_JSON
+{
+  "task_type": "data_etl",
+  "id": 30377012,
+  "title": "Topcoder Challenge API: fix issues found in Test Cases",
+  "summary": "This task involves fixing failed test cases in the Topcoder Challenge API after migrating to a Prisma ORM-based Postgres backend, removing dependencies on Informix, Dynamo, and ElasticSearch. The scope includes revising data synchronization, ensuring all specified test cases pass (covering listing, creating, getting challenges, statistics, notifications, challenge types, timelines, phases, and templates), and maintaining stability for other tests. Acceptance requires at least 90% of issues fixed and no regressions.",
+  "assumptions": [
+    "Access to the Challenge API codebase on the develop branch is available.",
+    "Test case failure details are provided in Challenge_API_Report_1.xlsx and Challenge_API_Report_2.xlsx accessible via forum.",
+    "The Prisma schema and migration tools from previous challenges are correctly implemented.",
+    "No direct access to Informix, Dynamo, or ElasticSearch is required as they are removed.",
+    "The fix focuses on data ETL and synchronization correctness between Postgres and API logic.",
+    "The test cases cover both functional and integration aspects of the API.",
+    "No detailed SLA or performance constraints were explicitly provided.",
+    "Validation markdown and video demonstration will be created post-fix for verification."
+  ],
+  "plan": [
+    "Review the provided test case failure reports (Challenge_API_Report_1.xlsx and Challenge_API_Report_2.xlsx) to understand specific failure points.",
+    "Analyze the current Prisma schema and ORM usage in the Challenge API codebase to identify misalignments causing test failures.",
+    "Map each failed test case to the affected data flow or API endpoint and identify root cause (e.g., missing data, incorrect queries, synchronization issues).",
+    "Design fixes in the data ETL logic or API data access layers to correct data retrieval, creation, update, or deletion operations as per test case requirements.",
+    "Implement fixes ensuring Prisma ORM usage fully replaces previous DAL/gRPC/Informix/Dynamo/ElasticSearch dependencies.",
+    "Develop or update data migration scripts if needed to align data shape with Prisma schema.",
+    "Run full test suite locally to verify fixes and ensure no regressions in other test cases.",
+    "Create validation markdown documenting testing approach, coverage, and results, including screenshots or video evidence.",
+    "Package the patch file against the develop branch of the Challenge API repository.",
+    "Submit the patch and validation documentation for review."
+  ],
+  "artifacts": {
+    "pipeline_spec": "The ETL pipeline involves extracting challenge-related data from legacy sources (Informix, Dynamo, ElasticSearch) via migration tools into a unified Postgres database using Prisma ORM. The pipeline runs as a one-time migration followed by live synchronization through API calls using Prisma. Data validation checkpoints occur post-migration and after each API operation to ensure consistency. The pipeline is orchestrated via scripts integrated into the Challenge API backend with logging and error handling to detect and recover from failures. SLA targets include data consistency and API response correctness as verified by automated test cases.",
+    "sql_snippets": "-- Validation query to check challenge count consistency\nSELECT COUNT(*) FROM challenges;\n\n-- Check for orphaned challenge timelines\nSELECT ct.id FROM challenge_timelines ct LEFT JOIN challenges c ON ct.challenge_id = c.id WHERE c

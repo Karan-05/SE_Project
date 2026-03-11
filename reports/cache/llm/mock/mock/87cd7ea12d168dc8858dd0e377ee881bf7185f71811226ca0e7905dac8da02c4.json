@@ -1,0 +1,1 @@
+{"content": "[MOCK] 648994616dfde5a5 :: You are repairing code produced by strategy 'contract_first'. Problem statement: Implement calculator.task.solve so that", "tokens": 181, "elapsed": 5.624955520033836e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "contract_first:repair"}}

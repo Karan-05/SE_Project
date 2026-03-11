@@ -1,8 +1,9 @@
 category,strategy,pass_rate
-unknown,contract_first,0.9
-unknown,failure_mode_first,0.9
-unknown,multi_view,0.9
-unknown,pattern_skeleton,0.9
-unknown,role_decomposed,0.9
-unknown,semantic_diff,0.9
-unknown,simulation_trace,0.9
+unknown,contract_first,1.0
+unknown,direct_baseline,1.0
+unknown,failure_mode_first,1.0
+unknown,multi_view,1.0
+unknown,pattern_skeleton,1.0
+unknown,role_decomposed,1.0
+unknown,semantic_diff,1.0
+unknown,simulation_trace,1.0

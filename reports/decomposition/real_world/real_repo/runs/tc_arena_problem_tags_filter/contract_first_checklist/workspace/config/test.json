@@ -1,0 +1,5 @@
+{
+  "port": 3001,
+  "logLevel": "error",
+  "version": "v1"
+}

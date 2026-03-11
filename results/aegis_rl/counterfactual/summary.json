@@ -1,0 +1,10 @@
+{
+  "episodes": 256,
+  "states_evaluated": 4925,
+  "candidate_evaluations": 10144,
+  "beneficial_fraction": 0.5527405362776026,
+  "regret_fraction": 0.43769716088328076,
+  "mean_teacher_reward": -63.40524724164159,
+  "mean_teacher_success": 0.001218274111675127,
+  "mean_teacher_cost_ratio": 0.6304265497615752
+}

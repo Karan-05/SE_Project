@@ -1,0 +1,1 @@
+{"content": "The problem \"Return degree counts for each vertex\" typically involves counting the number of edges connected to each vertex in a graph.\n\n**About the pattern `hash_bucket", "tokens": 57, "elapsed": 1.0698067919583991, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

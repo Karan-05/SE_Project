@@ -1,0 +1,6 @@
+{
+  "coverage": 1.0,
+  "specificity": 1.0,
+  "actionability": 1.0,
+  "overall_notes": "The response fully covers the inability to produce ETL artifacts due to missing context, provides a clear unblock plan, and aligns with all rubric criteria for non_actionable tasks."
+}

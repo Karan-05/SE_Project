@@ -1,0 +1,44 @@
+{
+  "task_id": "number_primes_stress",
+  "strategy": "semantic_diff",
+  "plan": {
+    "strategy": "semantic_diff",
+    "contract": {},
+    "patterns": [
+      "baseline"
+    ],
+    "subtasks": [
+      "load base solution",
+      "apply semantic deltas",
+      "re-test",
+      "Generate minimal unit tests for critical behaviors",
+      "Add adversarial/edge-case tests",
+      "Run tests and interpret failures",
+      "Repair implementation and re-run tests"
+    ],
+    "tests": [
+      "critical unit tests",
+      "edge-case probes"
+    ],
+    "diagnostics": {
+      "base_task": "baseline",
+      "num_deltas": "1",
+      "delta_note": "**Base task:** Count primes up to N.\n\n**New task:** (Assuming a new task is provided, but since it's not specified, I'll list possible semantic deltas when comparing a new task to the base task.)\n\n**Possible semantic deltas:**\n\n1. **Change in number range:** Counting primes up to M instead of N (different upper bound).\n2. **Different number property:**",
+      "planning_tokens": "111",
+      "planning_time": "1.559935"
+    }
+  },
+  "rounds": [
+    {
+      "round": 0,
+      "phase": "initial",
+      "subtask": "plan",
+      "localized": false,
+      "pass_rate": 1.0,
+      "status": "passed",
+      "duration": 0.00026233302196487784,
+      "failing_tests": [],
+      "error_types": []
+    }
+  ]
+}

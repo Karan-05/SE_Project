@@ -1,0 +1,1 @@
+{"content": "[MOCK] 873e7d9a303edbe8 :: You are executing decomposition strategy 'direct_baseline'. Problem statement: Implement calculator.task.solve so that i", "tokens": 120, "elapsed": 6.874965038150549e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "plan-runner", "caller": "direct_baseline:initial"}}

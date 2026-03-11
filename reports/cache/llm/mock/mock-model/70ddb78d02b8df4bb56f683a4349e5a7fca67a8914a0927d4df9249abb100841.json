@@ -1,0 +1,1 @@
+{"content": "[MOCK] 8958405f34ab4831 :: You are repairing code produced by strategy 'contract_first'. Problem statement: Count primes up to N. Implementation co", "tokens": 169, "elapsed": 4.999979864805937e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "contract_first:repair"}}

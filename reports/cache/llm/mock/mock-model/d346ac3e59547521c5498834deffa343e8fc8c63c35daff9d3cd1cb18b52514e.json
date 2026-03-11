@@ -1,0 +1,1 @@
+{"content": "[MOCK] d874f35261fa47ea :: You are repairing code produced by strategy 'semantic_diff'. Problem statement: Count primes up to N.  Memory Hint: - Wh", "tokens": 173, "elapsed": 4.915986210107803e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "semantic_diff:repair"}}

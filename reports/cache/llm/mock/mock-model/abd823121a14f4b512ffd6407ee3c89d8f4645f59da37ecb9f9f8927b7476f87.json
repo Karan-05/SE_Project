@@ -1,0 +1,1 @@
+{"content": "[MOCK] e4700ed72c6ac12d :: You are executing decomposition strategy 'semantic_diff'. Problem statement: Return the sum of all integers.  Implementa", "tokens": 134, "elapsed": 3.999972250312567e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "plan-runner", "caller": "semantic_diff:initial"}}

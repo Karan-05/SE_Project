@@ -1,0 +1,1 @@
+{"content": "[MOCK] 16d2800dbd221316 :: You are repairing code produced by strategy 'multi_view'. Problem statement: Return the number of undirected edges. Impl", "tokens": 162, "elapsed": 4.62500611320138e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "multi_view:repair"}}

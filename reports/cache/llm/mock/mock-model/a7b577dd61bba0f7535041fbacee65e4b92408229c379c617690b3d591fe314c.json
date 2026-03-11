@@ -1,0 +1,1 @@
+{"content": "[MOCK] 745b19e2b84574da :: You are repairing code produced by strategy 'multi_view'. Problem statement: Return the reversed string. Implementation ", "tokens": 161, "elapsed": 4.832982085645199e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "multi_view:repair"}}

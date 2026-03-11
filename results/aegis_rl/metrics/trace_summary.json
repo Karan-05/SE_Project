@@ -1,0 +1,27 @@
+{
+  "option_frequency": {
+    "verify": 0.09567901234567901,
+    "decompose_deep": 0.05864197530864197,
+    "abandon": 0.12345679012345678,
+    "decompose_shallow": 0.13580246913580246,
+    "research_context": 0.10185185185185185,
+    "localize": 0.3734567901234568,
+    "direct_solve": 0.07716049382716049,
+    "repair": 0.027777777777777776,
+    "submit": 0.006172839506172839
+  },
+  "failure_modes": {
+    "failure": 46
+  },
+  "avg_duration": {
+    "verify": 4.064516129032258,
+    "decompose_deep": 2.736842105263158,
+    "abandon": 5.9,
+    "decompose_shallow": 5.2727272727272725,
+    "research_context": 3.484848484848485,
+    "localize": 4.619834710743802,
+    "direct_solve": 4.52,
+    "repair": 5.333333333333333,
+    "submit": 6.0
+  }
+}

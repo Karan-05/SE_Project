@@ -1,0 +1,28 @@
+BEGIN_JSON
+{
+  "task_type": "data_etl",
+  "id": "b4210a15-4a64-4fd4-9073-2a3e7e71c52c",
+  "title": "Topcoder O/R F2F - Save changes after editing score card is opening the project in a new tab",
+  "summary": "Design an ETL blueprint to support the data flow and validation for the Topcoder review scorecard editing process, ensuring correct capture and update of scorecard changes without unintended side effects. The ETL will extract relevant scorecard and project data, transform it to reflect edits accurately, and load it into the target system for reporting and auditing. Acceptance criteria include reproducible pipeline steps, validation queries to confirm data integrity, and a comprehensive checklist for deployment verification.",
+  "assumptions": [
+    "Source data schemas and exact database tables for scorecards and projects are not provided and are inferred based on typical review scorecard systems.",
+    "Transformation logic assumes edits update rating fields and timestamps, requiring change capture and reconciliation.",
+    "No direct access to the application codebase or repo; ETL focuses on data pipeline and validation only.",
+    "No explicit SLAs or cadence specified; daily batch processing is assumed.",
+    "No sample input/output data provided; synthetic examples are used for validation.",
+    "No existing ETL framework specified; pseudo-code assumes Python with SQL and Airflow-like orchestration."
+  ],
+  "plan": [
+    "1. Define source data schema for review scorecards, projects, and edits based on inferred fields.",
+    "2. Specify target schema reflecting updated scorecard states and audit trails.",
+    "3. Design extraction queries to pull raw scorecard and project data from source systems.",
+    "4. Develop transformation logic to detect and apply scorecard edits, ensuring no duplicate or missing updates.",
+    "5. Implement loading steps to update target tables with transformed data.",
+    "6. Write validation SQL queries to verify data completeness, consistency, and correctness post-load.",
+    "7. Create Python pseudo-code snippets illustrating pipeline orchestration with checkpoints and error handling.",
+    "8. Define data quality checks with thresholds and corrective actions.",
+    "9. Compile an acceptance checklist covering functional correctness, data integrity, and operational readiness."
+  ],
+  "artifacts": {
+    "pipeline_spec": "## ETL Pipeline Specification\n\n### Source Systems\n- Review Scorecard Table: Contains scorecard_id, project_id, reviewer_id, rating, comments, last_modified_timestamp.\n- Project Table: Contains project_id, project_name, status.\n- Scorecard Edit Log: Tracks edits with edit_id, scorecard_id, editor_id, old_rating, new_rating, edit_timestamp.\n\n### Cadence\n- Daily batch extraction at 2 AM UTC.\n\n### Orchestration\n- Extract raw data from source tables.\n- Transform edits by joining scorecard and edit log, applying latest changes.\n- Load updated scorecard data into target warehouse table.\n\n### SLA\n- Pipeline completes within 1 hour of scheduled run.\n- Data freshness within 24 hours.\n\n### Recovery Plan\n- On failure, alert ops team and retry up to 3 times with exponential backoff.\n- Manual intervention if failure persists.\n",
+    "sql_snippets": "-- Extraction: Pull latest scorecard and edits

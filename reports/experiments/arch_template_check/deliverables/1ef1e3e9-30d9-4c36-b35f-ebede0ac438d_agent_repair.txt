@@ -1,0 +1,28 @@
+BEGIN_JSON
+{
+  "task_type": "architecture_doc",
+  "id": "1ef1e3e9-30d9-4c36-b35f-ebede0ac438d",
+  "title": "[GIG] Azure Integration Tech Lead –  Melbourne, Australia",
+  "summary": "This document outlines the architecture and design considerations for an Azure Integration Tech Lead role focused on building scalable, secure, and performant APIs using Azure-native services and .NET technologies. The scope includes Azure Function Apps, Durable Functions, API Management, and CI/CD pipelines with a strong emphasis on clean code, TDD, and monitoring.",
+  "assumptions": [
+    "The engagement is a full-time onsite role in Melbourne for 6 months with possible extension.",
+    "The candidate is expected to lead design and development of Azure-based integrations using Function Apps, Durable Functions, and APIM.",
+    "API design follows RESTful principles using .NET Core, with OpenAPI specifications for documentation and governance.",
+    "Azure DevOps and GitHub workflows are used for CI/CD and source control.",
+    "Monitoring and performance tuning leverage Application Insights.",
+    "Security best practices involve Azure Key Vault and secure development patterns.",
+    "No specific existing codebase or repository access is provided; this is a role description and architecture guideline.",
+    "No detailed API specifications or business domain context provided; architecture is based on typical enterprise integration patterns."
+  ],
+  "plan": [
+    "Summarize the problem and role requirements to frame the architectural context.",
+    "Describe the proposed approach focusing on Azure Integration Services, API design, and DevOps practices.",
+    "Outline a file-level plan for organizing code and infrastructure as code artifacts.",
+    "Define API/interface changes and contracts, including OpenAPI and integration points.",
+    "Enumerate constraints and SLAs relevant to performance, security, and deployment.",
+    "Identify risks and trade-offs related to technology choices, scalability, and operational complexity.",
+    "Highlight edge cases such as high transaction volumes, failure recovery, and security threats.",
+    "Provide an acceptance checklist covering design, implementation, testing, monitoring, and documentation."
+  ],
+  "artifacts": {
+    "design_doc_md": "## Problem Summary\n- Need to lead and architect Azure-based integration solutions for enterprise APIs.\n- Build scalable, secure, and maintainable RESTful APIs using Azure Function Apps, Durable Functions, and API Management.\n- Ensure adherence to clean code, TDD, secure development, and DevOps best practices.\n- Deliver a robust, monitored, and performant API ecosystem supporting high transaction volumes.\n\n## Proposed Approach\n- Use Azure Function Apps and Durable Functions to implement serverless, event-driven integration workflows.\n- Leverage Azure API Management (APIM) for API gateway, security, throttling, and OpenAPI documentation.\n- Develop APIs in C# (.NET Core) following clean architecture and dependency injection.\n- Implement CI/CD pipelines with Azure DevOps or GitHub Actions for automated builds, tests, and deployments.\n- Use Azure Key Vault for secrets management and Application Insights for monitoring and telemetry.\n\n## File-Level Plan\n- /src/FunctionApps/ : Azure Function App projects including Durable Functions workflows.\n- /src/APIs/ : REST API projects built with .NET Core, including controllers and service layers.\n- /infrastructure/ : ARM templates or Bicep files for provisioning APIM, Function Apps, Key Vault, Storage.\n- /tests/ : Unit and integration tests using .NET Unit Testing frameworks and MoQ.\n- /docs/ : OpenAPI specifications, architecture diagrams, and operational runbooks.\n\n## API / Interface Changes\n- Define RESTful endpoints with OpenAPI specs for each integration API.\n- Use JSON for request/response payloads with versioning strategy.\n- Secure APIs via OAuth2/JWT tokens managed through

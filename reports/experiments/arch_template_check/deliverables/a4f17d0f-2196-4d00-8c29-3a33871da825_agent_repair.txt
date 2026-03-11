@@ -1,0 +1,35 @@
+BEGIN_JSON
+{
+  "task_type": "architecture_doc",
+  "id": "a4f17d0f-2196-4d00-8c29-3a33871da825",
+  "title": "Topcoder Identity Service: updating AuthorizationResource with TypeScript and Postgres",
+  "summary": "This architecture document outlines the migration of the AuthorizationResource from Java/MySQL to TypeScript/Postgres using Prisma, while preserving existing functionalities such as Redis caching, Kafka event bus, and Shiro-like permission checks. The migration must support dual data sources (Postgres for common_oltp and MySQL for legacy data), maintain encrypted password authentication, and remove deprecated Dice 2FA code. It includes updating unit tests, Postman collections, Swagger API definitions, and README documentation with a target test coverage of >= 90%.",
+  "assumptions": [
+    "Access to existing Identity Service Java codebase and revised TypeScript/Postgres codebase is available.",
+    "Database schemas for MySQL and Postgres (common_oltp) are stable and accessible.",
+    "Redis cache, Kafka event bus, and Shiro-like permission mechanisms are already integrated and will remain unchanged.",
+    "Details of the deprecated Dice 2FA code are known from previous challenges and can be safely removed.",
+    "Constants replacement for group membership is to be applied consistently as per provided example.",
+    "Unit test coverage tools and Postman environment are configured for the project.",
+    "Swagger API specification format and tooling are compatible with current project setup.",
+    "No breaking changes to existing authentication flows are allowed; password encryption and login must remain functional.",
+    "Data migration strategy supports dual data sources without service downtime.",
+    "Forum or project stakeholders will provide missing data or dependencies if needed."
+  ],
+  "plan": [
+    "Analyze the current AuthorizationResource Java implementation and identify all endpoints and business logic.",
+    "Map existing MySQL data access patterns to Prisma ORM models for both Postgres (common_oltp) and MySQL data sources.",
+    "Implement AuthorizationResource in TypeScript using Prisma, ensuring Redis caching, Kafka event bus, and Shiro-like permission checks are integrated as before.",
+    "Remove all Dice 2FA related code and references, replacing with standard Auth0 2FA mechanisms as per project guidelines.",
+    "Replace specified constants in group.controller.ts and group.service.ts with the defined constant object for membership types.",
+    "Correct validateMembership logic to check groupMembership.getMembershipTypeId instead of getMembershipType.",
+    "Develop comprehensive unit tests for AuthorizationResource endpoints targeting >= 90% coverage.",
+    "Update or create Postman test collections to cover all AuthorizationResource endpoints with relevant test cases.",
+    "Revise Swagger API documentation to reflect the updated AuthorizationResource endpoints and data models accurately.",
+    "Update README.md with detailed setup, testing, and verification instructions specific to the AuthorizationResource migration.",
+    "Conduct integration testing to verify login functionality, password encryption compatibility, and overall service stability with dual data sources.",
+    "Perform code reviews and static analysis to ensure code quality and adherence to project standards.",
+    "Coordinate deployment and rollout plan to enable smooth migration with minimal disruption."
+  ],
+  "artifacts": {
+    "design_doc_md": "## Problem Summary\n- Migrate AuthorizationResource from Java/MySQL to TypeScript/Postgres with Prisma.\n- Preserve Redis cache, Kafka event bus, and Shiro-like permission checks.\n- Support two data sources: Postgres (common_oltp) and MySQL.\n- Remove deprecated Dice 2FA code and fix validateMembership logic.\n\n## Proposed Approach\n- Use Prisma ORM to interface with both Postgres and MySQL databases.\n- Implement AuthorizationResource endpoints in TypeScript, maintaining existing business logic.\n- Integrate Redis caching and Kafka event bus as in legacy service.\n- Remove Dice 2FA code, replacing with standard

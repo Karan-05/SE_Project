@@ -1,0 +1,1 @@
+{"content": "[MOCK] 676e1303bf210487 :: You are executing decomposition strategy 'pattern_skeleton'. Problem statement: Return degree counts for each vertex.  I", "tokens": 168, "elapsed": 5.249981768429279e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "plan-runner", "caller": "pattern_skeleton:initial"}}

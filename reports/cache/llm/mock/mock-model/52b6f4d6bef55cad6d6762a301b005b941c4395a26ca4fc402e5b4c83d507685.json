@@ -1,0 +1,1 @@
+{"content": "[MOCK] 62bc390c836c1561 :: You are executing decomposition strategy 'semantic_diff'. Problem statement: Return the reversed string.  Implementation", "tokens": 127, "elapsed": 4.917033948004246e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "plan-runner", "caller": "semantic_diff:initial"}}

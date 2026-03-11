@@ -1,0 +1,1 @@
+{"content": "[MOCK] a267039c2070852c :: You are repairing code produced by strategy 'direct_baseline'. Problem statement: Implement calculator.task.solve so tha", "tokens": 172, "elapsed": 8.167000487446785e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "direct_baseline:repair"}}

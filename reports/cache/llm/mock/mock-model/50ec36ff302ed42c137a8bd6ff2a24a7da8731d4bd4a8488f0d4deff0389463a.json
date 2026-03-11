@@ -1,0 +1,1 @@
+{"content": "[MOCK] 526e6b2329f2bee4 :: You are executing decomposition strategy 'multi_view'. Problem statement: Return the sum of all integers.  Implementatio", "tokens": 128, "elapsed": 3.916968125849962e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "plan-runner", "caller": "multi_view:initial"}}

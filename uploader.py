@@ -2,8 +2,7 @@
 import json
 import logging
 import os
-from os import listdir
-from os.path import isdir, join
+from pathlib import Path
 from typing import Any, Dict, List, Set
 
 from progress.bar import Bar
@@ -74,54 +73,84 @@ class Uploader:
         ''' Loads processed challenge from json file and upload it to DB while 
             fetching registrants and submissions from the API
         '''
-        if not isdir(directory):
+        directory_path = Path(directory)
+        if not directory_path.is_dir():
             raise NotADirectoryError(f'{directory} is not a valid directory')
 
-        file_list = [file for file in listdir(
-            directory) if file.endswith('.json')]
+        json_files: List[Path] = sorted(
+            file_path
+            for file_path in directory_path.iterdir()
+            if file_path.is_file() and file_path.suffix == ".json"
+        )
+        page_files = [file_path for file_path in json_files if file_path.name.startswith("page")]
+        file_list = page_files or json_files
 
-        if file_list:
-            for file_name in file_list:
-                try:
-                    file_location = join(directory, file_name)
-                except OSError as exception:
-                    logger.error(
-                        'File %s could not be resolved in %s: %s',
-                        file_name,
-                        directory,
-                        exception,
-                    )
-                else:
-                    with open(file_location, "r", encoding="utf-8") as curr_json_file:
-                        json_data = curr_json_file.read()
-                    challenge_json = json.loads(json_data)
+        if not file_list:
+            logger.warning('No JSON files found in %s', directory_path)
+            return
 
-                    challenge_progress = Bar(
-                        "Uploading Challenges", max=len(challenge_json))
-                    for challenge in challenge_json:
-                        challenge_primary_id: int = self.db_obj.upload_data(
-                            challenge, "challenges")
-                        if challenge_primary_id != -1:
-                            self.load_challenge_members(
-                                challenge, challenge["winners"], challenge_primary_id)
-                        challenge_progress.next()
-                    challenge_progress.finish()
-                    logger.info(
-                        'Finished loading challenges and related members from %s',
-                        file_name,
-                    )
+        logger.info(
+            'Uploading challenges from %s (%s files)',
+            directory_path,
+            len(file_list),
+        )
 
-        else:
-            logger.warning('No JSON files found in %s', directory)
+        for file_path in file_list:
+            try:
+                with open(file_path, "r", encoding="utf-8") as curr_json_file:
+                    challenge_json = json.load(curr_json_file)
+            except json.JSONDecodeError as exc:
+                logger.error('Failed to parse %s: %s', file_path, exc)
+                continue
+            except OSError as exception:
+                logger.error(
+                    'File %s could not be read: %s',
+                    file_path,
+                    exception,
+                )
+                continue
 
-    def load_challenge_members(self, challenge: Dict[str, Any], challenge_winner: List[str], challenge_primary_id: int):
+            if not isinstance(challenge_json, list):
+                logger.error('File %s does not contain a list of challenges; skipping', file_path)
+                continue
+
+            challenge_progress = Bar(
+                f"Uploading {file_path.name}", max=len(challenge_json))
+            for challenge in challenge_json:
+                challenge_primary_id: int = self.db_obj.upload_data(
+                    challenge, "challenges")
+                if challenge_primary_id != -1:
+                    self.load_challenge_members(
+                        challenge, challenge.get("winners"), challenge_primary_id)
+                challenge_progress.next()
+            challenge_progress.finish()
+            logger.info(
+                'Finished loading challenges and related members from %s',
+                file_path.name,
+            )
+
+    def load_challenge_members(
+        self,
+        challenge: Dict[str, Any],
+        challenge_winner: str | List[str] | None,
+        challenge_primary_id: int,
+    ):
         ''' Fetches all registrants, submissions and winners, loads it to the mapping 
             database based on challenge_id and challenge_winner
         '''
         if self.skip_member_fetch:
             return
 
-        winners_list = [handle for handle in challenge_winner.split(",") if handle]
+        if isinstance(challenge_winner, list):
+            winners_field = ",".join(
+                handle for handle in challenge_winner if isinstance(handle, str) and handle
+            )
+        elif isinstance(challenge_winner, str):
+            winners_field = challenge_winner
+        else:
+            winners_field = ""
+
+        winners_list = [handle.strip() for handle in winners_field.split(",") if handle.strip()]
         winner_dict: Dict[str, int] = {}
         for position, winner in enumerate(winners_list):
             winner_dict[winner] = position + 1

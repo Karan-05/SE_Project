@@ -1,0 +1,1 @@
+{"content": "[MOCK] 17c014eb8183d485 :: You are repairing code produced by strategy 'direct_baseline'. Problem statement: Return the sum of all integers. Implem", "tokens": 126, "elapsed": 5.374953616410494e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "direct_baseline:repair"}}

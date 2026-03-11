@@ -1,0 +1,1 @@
+{"content": "The problem \"Return the running prefix sums\" means you want to compute an array where each element at index *i* is the sum of all elements from the", "tokens": 56, "elapsed": 1.8909676250186749, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

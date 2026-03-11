@@ -1,0 +1,67 @@
+BEGIN_JSON
+{
+  "task_type": "architecture_doc",
+  "id": "a4f17d0f-2196-4d00-8c29-3a33871da825",
+  "title": "Topcoder Identity Service: updating AuthorizationResource with TypeScript and Postgres",
+  "summary": "This architecture document outlines the migration of the AuthorizationResource from Java/MySQL to TypeScript/Postgres using Prisma, while preserving existing functionalities such as Redis caching, Kafka event bus, and Shiro-like permission checks. The migration must support dual data sources (Postgres for common_oltp and MySQL for legacy data), maintain encrypted password authentication, and remove deprecated Dice 2FA code. It includes updating unit tests, Postman collections, Swagger API definitions, and README documentation with a target test coverage of >= 90%.",
+  "assumptions": [
+    "Access to existing Identity Service Java codebase and revised TypeScript/Postgres codebase is available.",
+    "Database schemas for MySQL and Postgres (common_oltp) are stable and accessible.",
+    "Redis cache, Kafka event bus, and Shiro-like permission mechanisms are already integrated and will remain unchanged.",
+    "Details of the deprecated Dice 2FA code are known from previous challenges and can be safely removed.",
+    "Constants replacement for group membership is to be applied consistently as per provided example.",
+    "Unit test coverage tools and Postman environment are configured for the project.",
+    "Swagger API specification format and tooling are compatible with current project setup.",
+    "No breaking changes to existing authentication flows are allowed; password encryption and login must remain functional.",
+    "Data migration strategy supports dual data sources without service downtime.",
+    "Forum or project stakeholders will provide missing data or dependencies if needed."
+  ],
+  "plan": [
+    "Analyze the current AuthorizationResource Java implementation and identify all endpoints and business logic.",
+    "Map existing MySQL data access patterns to Prisma ORM models for both Postgres (common_oltp) and MySQL data sources.",
+    "Implement AuthorizationResource in TypeScript using Prisma, ensuring Redis caching, Kafka event bus, and Shiro-like permission checks are integrated as before.",
+    "Remove all Dice 2FA related code and references, replacing with standard Auth0 2FA mechanisms as per project guidelines.",
+    "Replace specified constants in group.controller.ts and group.service.ts with the defined constant object for membership types.",
+    "Correct validateMembership logic to check groupMembership.getMembershipTypeId instead of getMembershipType.",
+    "Develop comprehensive unit tests for AuthorizationResource endpoints targeting >= 90% coverage.",
+    "Update or create Postman test collections to cover all AuthorizationResource endpoints with relevant test cases.",
+    "Revise Swagger API documentation to reflect the updated AuthorizationResource endpoints and data models accurately.",
+    "Update README.md with detailed setup, testing, and verification instructions specific to the AuthorizationResource migration.",
+    "Conduct integration testing to verify login functionality, password encryption compatibility, and overall service stability with dual data sources.",
+    "Perform code reviews and static analysis to ensure code quality and adherence to project standards.",
+    "Coordinate deployment and rollout plan to enable smooth migration with minimal disruption."
+  ],
+  "artifacts": {
+    "design_doc_md": "## Problem Summary\n- Migrate AuthorizationResource from Java/MySQL to TypeScript/Postgres with Prisma.\n- Preserve Redis cache, Kafka event bus, and Shiro-like permission checks.\n- Support two data sources: Postgres (common_oltp) and MySQL.\n- Remove deprecated Dice 2FA code and fix validateMembership logic.\n\n## Proposed Approach\n- Use Prisma ORM to interface with both Postgres and MySQL databases.\n- Implement AuthorizationResource endpoints in TypeScript, maintaining existing business logic.\n- Integrate Redis caching and Kafka event bus as in legacy service.\n- Remove Dice 2FA code, replacing with standard Auth0 2FA.\n- Replace constants in group-related files with a centralized constant object.\n- Adjust validateMembership to check membershipTypeId correctly.\n- Write unit tests and update Postman and Swagger documentation.\n\n## File-Level Plan\n- AuthorizationResource.ts: Implement migrated endpoints.\n- prisma/schema.prisma: Define models for Postgres and MySQL data sources.\n- group.controller.ts & group.service.ts: Replace constants and fix validateMembership.\n- tests/AuthorizationResource.test.ts: Add unit tests with >90% coverage.\n- postman/AuthorizationResource.postman_collection.json: Update or add test cases.\n- swagger.yaml: Update AuthorizationResource API definitions.\n- README.md: Update setup, test, and verification instructions.\n\n## API / Interface Changes\n- AuthorizationResource endpoints remain functionally identical.\n- Swagger API updated to reflect TypeScript/Postgres migration.\n- Postman collections updated to cover all AuthorizationResource endpoints.\n- Internal interfaces updated to use Prisma models and dual data source handling.\n\n## Constraints & SLAs\n- Maintain backward compatibility with existing login and authentication flows.\n- Ensure dual data source access without service downtime.\n- Test coverage for AuthorizationResource endpoints must be >= 90%.\n- Postgres version 16.3 and Prisma ORM usage mandated.\n- Redis cache and Kafka event bus integration must remain unchanged.\n\n## Risks & Trade-offs\n- Dual data source complexity may introduce latency or synchronization challenges.\n- Removing Dice 2FA requires careful validation to avoid security regressions.\n- Migration errors could impact login availability; thorough testing is critical.\n- Maintaining legacy MySQL alongside Postgres may complicate future refactoring.\n- Updating constants and validateMembership logic risks subtle bugs if not fully tested.\n\n## Edge Cases\n- Users with legacy encrypted passwords must authenticate seamlessly.\n- Authorization checks must correctly handle edge cases in group membership validation.\n- Redis cache misses or Kafka event bus failures should degrade gracefully.\n- Handling of users transitioning from Dice 2FA to Auth0 2FA must be smooth.\n\n## Acceptance Checklist\n- [ ] AuthorizationResource fully migrated to TypeScript/Postgres with Prisma.\n- [ ] Redis cache, Kafka event bus, and Shiro-like permission checks preserved.\n- [ ] Dice 2FA code completely removed and replaced with Auth0 2FA.\n- [ ] Constants replaced and validateMembership logic corrected.\n- [ ] Unit tests cover >= 90% of AuthorizationResource code.\n- [ ] Postman test collection updated and verified.\n- [ ] Swagger API documentation updated accurately.\n- [ ] README.md updated with setup, testing, and verification instructions.\n- [ ] Integration tests confirm login and authentication functionality.\n- [ ] Code review and static analysis completed with no critical issues.\n- [ ] Deployment plan prepared for smooth migration rollout.",
+    "mermaid_diagram": "graph TD\n  A[Client] -->|HTTP Requests| B[AuthorizationResource (TypeScript)]\n  B -->|Queries| C[Prisma ORM]\n  C -->|Reads/Writes| D[Postgres (common_oltp)]\n  C -->|Reads/Writes| E[MySQL (Legacy Data)]\n  B -->|Cache| F[Redis]\n  B -->|Events| G[Kafka Event Bus]\n  B -->|Permission Checks| H[Shiro-like Module]",
+    "interfaces": [
+      {
+        "producer": "AuthorizationResource (TypeScript Service)",
+        "consumer": "Client Applications (Web, Mobile)",
+        "protocol": "HTTP/REST",
+        "payload": "JSON request/response for authorization endpoints (login, role lookup, permission checks)"
+      },
+      {
+        "producer": "AuthorizationResource",
+        "consumer": "Prisma ORM",
+        "protocol": "ORM Queries",
+        "payload": "Database queries and mutations for Postgres and MySQL data sources"
+      },
+      {
+        "producer": "AuthorizationResource",
+        "consumer": "Redis Cache",
+        "protocol": "Redis Protocol",
+        "payload": "Caching keys and values related to authorization data"
+      },
+      {
+        "producer": "AuthorizationResource",
+        "consumer": "Kafka Event Bus",
+        "protocol": "Kafka Messaging",
+        "payload": "Event messages for authorization-related activities"
+      }
+    ],
+    "tradeoffs": [
+      "Maintaining dual data sources (Postgres and MySQL) increases complexity but ensures backward compatibility during migration.",
+      "Removing Dice 2FA simplifies 2FA management but requires careful transition to Auth0 2FA to avoid user disruption.",
+      "Using Prisma ORM standardizes database access but may introduce performance overhead compared to native queries.",
+      "Preserving Redis and Kafka integrations retains system

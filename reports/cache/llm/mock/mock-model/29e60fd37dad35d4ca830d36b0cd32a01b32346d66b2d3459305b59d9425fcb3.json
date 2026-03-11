@@ -1,0 +1,1 @@
+{"content": "[MOCK] 86d77c73cd8d9f4f :: You are executing decomposition strategy 'multi_view'. Problem statement: Count primes up to N.  Implementation contract", "tokens": 124, "elapsed": 4.250032361596823e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "plan-runner", "caller": "multi_view:initial"}}

@@ -1,0 +1,1 @@
+{"content": "The problem \"Return the sum of the main diagonal\" typically involves iterating over a square matrix and summing the elements where the row index equals the column index", "tokens": 59, "elapsed": 1.230368709017057, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

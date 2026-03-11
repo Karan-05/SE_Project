@@ -1,0 +1,30 @@
+BEGIN_JSON
+{
+  "task_type": "data_etl",
+  "id": "aa869b61-572c-4929-8d05-db890d5c21ce",
+  "title": "Topcoder Resource API - add support for memberId for resource API",
+  "summary": "This task involves updating the Topcoder Resource API data pipeline to support memberId as a primary identifier alongside memberHandle. The ETL pipeline will be designed to extract resource data, transform it by prioritizing memberId over memberHandle, and load it into a Postgres database using Prisma ORM. The pipeline will ensure createdBy and updatedBy fields use memberId. Validation queries and data quality checks will confirm correctness and consistency of the migration.",
+  "assumptions": [
+    "Access to the resource API source code and current Postgres database schema is available for reference.",
+    "Migration data from Dynamo to Postgres is available as per referenced prior challenge but not directly included here.",
+    "MemberId and memberHandle fields exist in the source data and the Postgres schema supports storing both.",
+    "ETL pipeline will be implemented using Python with Prisma ORM for Postgres interaction.",
+    "No direct access to Informix, Dynamo, or ElasticSearch is needed as they are deprecated for this pipeline.",
+    "API-level code changes and test fixes are out of scope for this ETL specification but should align with data schema changes.",
+    "Data volume and update frequency are assumed moderate and can be handled in batch mode with daily cadence.",
+    "No explicit SLA or latency requirements were provided; assume standard daily batch processing with error recovery."
+  ],
+  "plan": [
+    "1. Analyze current Postgres schema and Prisma ORM schema to confirm memberId and memberHandle fields and their constraints.",
+    "2. Define source data extraction logic from existing Postgres tables or migration staging tables containing resource data.",
+    "3. Design transformation logic to prioritize memberId over memberHandle for user identification and update createdBy and updatedBy fields accordingly.",
+    "4. Implement Python ETL pipeline using Prisma ORM to extract, transform, and load resource data into Postgres.",
+    "5. Add logging and checkpointing to handle partial failures and enable restartability.",
+    "6. Develop SQL validation queries to verify that all resource records have memberId set and createdBy/updatedBy fields correctly populated.",
+    "7. Define data quality checks such as non-null constraints on memberId, consistency between memberId and memberHandle mappings, and no orphan records.",
+    "8. Document the pipeline steps, configuration, and validation procedures in a comprehensive markdown file.",
+    "9. Provide sample SQL queries and example outputs demonstrating successful data migration and transformation.",
+    "10. Include an acceptance checklist covering completeness of memberId support, data integrity, and pipeline robustness."
+  ],
+  "artifacts": {
+    "pipeline_spec": "## ETL Pipeline Specification for Topcoder Resource API MemberId Support\n\n### Sources\n- Postgres database tables containing resource data migrated from Dynamo.\n- Prisma ORM schema defining resource and user entities with memberId and memberHandle.\n\n### Cadence\n- Daily batch processing to sync and update resource records.\n\n### Orchestration\n- Python script executed via cron or Airflow DAG.\n- Checkpoints stored in Postgres or local state file for restartability.\n\n### SLAs\n- Complete daily run within 1

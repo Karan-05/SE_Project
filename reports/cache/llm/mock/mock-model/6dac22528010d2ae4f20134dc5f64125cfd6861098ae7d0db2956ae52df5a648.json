@@ -1,0 +1,1 @@
+{"content": "[MOCK] 718e2b9ca6572826 :: You are executing decomposition strategy 'contract_first'. Problem statement: Count primes up to N.  Implementation cont", "tokens": 129, "elapsed": 3.958004526793957e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "plan-runner", "caller": "contract_first:initial"}}

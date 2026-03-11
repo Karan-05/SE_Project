@@ -1,0 +1,28 @@
+BEGIN_JSON
+{
+  "task_type": "architecture_doc",
+  "id": "29f79b9f-32ef-43e5-8298-1028dfbf1136",
+  "title": "Topcoder Identity Service Tests Improvement Part 1",
+  "summary": "This document outlines the architecture and design considerations for improving and rewriting unit and end-to-end tests for the Topcoder Identity Service's RoleController and UserController APIs and their related services. The goal is to achieve ≥90% coverage across overall, branch, and line metrics while maintaining existing functionality and integrating with the revised TypeScript/Postgres codebase using Prisma ORM.",
+  "assumptions": [
+    "Access to the revised identity service code repository (https://github.com/topcoder-platform/identity-api-v6/tree/develop) is available for detailed code inspection.",
+    "Data migration tools and test data for MySQL and Postgres will be provided via forum or other channels as referenced.",
+    "Existing test patterns from referenced challenge-api-v6 tests are applicable and can be adapted.",
+    "Redis cache, Kafka event bus, and other existing functionalities remain unchanged and are integrated as-is.",
+    "The testing environment setup, including database and environment variables, will follow a documented process to be captured in README.",
+    "Linting and code quality standards for TypeScript are defined and must be adhered to in test code."
+  ],
+  "plan": [
+    "Review current RoleController and UserController implementations and their related services (RoleService, AuthFlowService, TwoFactorAuthService, UserProfileService, UserService, ValidationService) in the revised TypeScript/Postgres codebase.",
+    "Analyze existing unit and e2e tests in the repository and referenced examples to identify coverage gaps and improvement opportunities.",
+    "Design and implement new or improved unit tests targeting database data (not mocks) to ensure ≥90% coverage metrics, placing tests under test/unit folder.",
+    "Design and implement comprehensive e2e tests for RoleController and UserController APIs ensuring ≥90% coverage, placing tests under test/e2e folder.",
+    "Integrate data migration tool usage for test data setup to support realistic database states during testing.",
+    "Log and document any bugs or inconsistencies found during test development for triage.",
+    "Rewrite or create a clear README.md detailing environment setup, database migration, local deployment, and verification steps including Postman collection usage.",
+    "Ensure all test code follows best practices, passes lint checks, and integrates with CI pipelines if applicable.",
+    "Define acceptance criteria and coverage thresholds clearly for test validation.",
+    "Prepare patch file for the latest develop branch with all test improvements and README updates."
+  ],
+  "artifacts": {
+    "design_doc_md": "## Problem Summary\n- The Identity Service has been migrated from Java/MySQL to TypeScript/Postgres with Prisma ORM, retaining existing features like Redis and Kafka.\n- Current tests for RoleController and UserController and their services need improvement for coverage and quality.\n- The objective is to ensure ≥90% overall, branch, and line coverage for unit and e2e tests.\n- Tests must target actual database data, not just mocks, and adhere to best practices and linting standards.\n\n## Proposed Approach\n- Conduct thorough code review of controllers and related services to understand logic and edge cases.\n- Leverage existing test examples from challenge-api-v6 as templates for new tests.\n- Use the provided data migration tool to seed realistic test data for unit and e2e tests.\n- Implement comprehensive e2e tests simulating real API usage scenarios.\n- Update or rewrite unit tests focusing on database interactions and service logic.\n- Document environment setup, migration, deployment, and testing procedures in README.\n\n## File-Level Plan\n- test/e2e/RoleController.api.test.ts: New or improved e2e tests for RoleController APIs

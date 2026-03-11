@@ -1,0 +1,1 @@
+{"content": "[MOCK] eaa817132b9e6c3e :: You are repairing code produced by strategy 'contract_first'. Problem statement: Return the running prefix sums.  Memory", "tokens": 176, "elapsed": 5.082983989268541e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "contract_first:repair"}}

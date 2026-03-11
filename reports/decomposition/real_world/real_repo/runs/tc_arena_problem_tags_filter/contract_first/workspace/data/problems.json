@@ -1,0 +1,75 @@
+[
+  {
+    "id": "SRM-5001",
+    "roundId": 83501,
+    "name": "Adaptive Security Grid",
+    "difficulty": "Easy",
+    "tags": ["graphs", "simulation"],
+    "totalSubmissions": 320,
+    "uniqueUsers": 145,
+    "statement": "Simulate security coverage along a sequence of corridors.",
+    "components": [
+      {"componentId": "5001A", "language": "java", "points": 250, "status": "ACTIVE"},
+      {"componentId": "5001B", "language": "python", "points": 250, "status": "ACTIVE"},
+      {"componentId": "5001C", "language": "cpp", "points": 250, "status": "ACTIVE"}
+    ]
+  },
+  {
+    "id": "SRM-5002",
+    "roundId": 83511,
+    "name": "Bandwidth Optimizer",
+    "difficulty": "Medium",
+    "tags": ["greedy", "networking"],
+    "totalSubmissions": 211,
+    "uniqueUsers": 84,
+    "statement": "Choose data channels that maximize throughput under constraints.",
+    "components": [
+      {"componentId": "5002A", "language": "java", "points": 500, "status": "ACTIVE"},
+      {"componentId": "5002B", "language": "javascript", "points": 500, "status": "ACTIVE"}
+    ]
+  },
+  {
+    "id": "SRM-5003",
+    "roundId": 83412,
+    "name": "Rival Route Planner",
+    "difficulty": "Easy",
+    "tags": ["shortest_path", "grid"],
+    "totalSubmissions": 487,
+    "uniqueUsers": 205,
+    "statement": "Compute alternative city paths that avoid reserved checkpoints.",
+    "components": [
+      {"componentId": "5003A", "language": "python", "points": 250, "status": "ACTIVE"},
+      {"componentId": "5003B", "language": "ruby", "points": 250, "status": "ACTIVE"}
+    ]
+  },
+  {
+    "id": "SRM-5004",
+    "roundId": 83777,
+    "name": "Quantum Chess Master",
+    "difficulty": "Hard",
+    "tags": ["game", "dp"],
+    "totalSubmissions": 109,
+    "uniqueUsers": 32,
+    "statement": "Predict winning lines in a probabilistic chess variant.",
+    "components": [
+      {"componentId": "5004A", "language": "cpp", "points": 1000, "status": "ACTIVE"},
+      {"componentId": "5004B", "language": "java", "points": 1000, "status": "ACTIVE"},
+      {"componentId": "5004C", "language": "python", "points": 1000, "status": "ACTIVE"}
+    ]
+  },
+  {
+    "id": "SRM-5005",
+    "roundId": 83522,
+    "name": "Signal Cache Manager",
+    "difficulty": "Easy",
+    "tags": ["queue", "streaming"],
+    "totalSubmissions": 265,
+    "uniqueUsers": 133,
+    "statement": "Maintain a rolling cache of telemetry signals with deduplication.",
+    "components": [
+      {"componentId": "5005A", "language": "go", "points": 250, "status": "ACTIVE"},
+      {"componentId": "5005B", "language": "python", "points": 250, "status": "ACTIVE"},
+      {"componentId": "5005C", "language": "java", "points": 250, "status": "ACTIVE"}
+    ]
+  }
+]

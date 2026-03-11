@@ -1,0 +1,1 @@
+{"content": "[MOCK] f6fa0381a8cf52f1 :: You are executing decomposition strategy 'contract_first'. Problem statement: Return the reversed string.  Implementatio", "tokens": 128, "elapsed": 4.250032361596823e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "plan-runner", "caller": "contract_first:initial"}}

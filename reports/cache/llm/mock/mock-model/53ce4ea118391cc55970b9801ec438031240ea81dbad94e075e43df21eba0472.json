@@ -1,0 +1,1 @@
+{"content": "[MOCK] 2ae756d0489d96ca :: You are executing decomposition strategy 'failure_mode_first'. Problem statement: Return degree counts for each vertex. ", "tokens": 146, "elapsed": 4.584027919918299e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "plan-runner", "caller": "failure_mode_first:initial"}}

@@ -1,0 +1,1 @@
+{"content": "[MOCK] ea10e911ac0588c9 :: You are executing decomposition strategy 'direct_baseline'. Problem statement: Return the nth Fibonacci number.  Impleme", "tokens": 97, "elapsed": 3.916968125849962e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "plan-runner", "caller": "direct_baseline:initial"}}

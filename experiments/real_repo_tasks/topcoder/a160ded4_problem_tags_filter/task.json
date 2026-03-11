@@ -1,0 +1,133 @@
+{
+  "task_id": "tc_arena_problem_tags_filter",
+  "prompt": "Topcoder Arena 3.0 SRM API backlog: extend GET /api/v1/problems so the arena UI can filter problems by arbitrary skill tags (case-insensitive, comma-separated, or array form) and surface the normalized tag filters in the metadata payload. Tag filters must compose with existing difficulty and limit behavior while preserving stable sorting.",
+  "dataset": "topcoder_arena_srm",
+  "dataset_source": "a160ded4-e34a-4989-b2a2-d09ead684045",
+  "repo_path": "experiments/real_repos/tc-template-node-postgres",
+  "language": "node",
+  "framework": "Express + Mocha",
+  "task_type": "feature",
+  "difficulty": "M",
+  "build_commands": [],
+  "test_commands": [
+    "npm test -- --reporter dot test/problems.tags.spec.js"
+  ],
+  "setup_commands": [
+    "npm ci --no-audit --no-fund"
+  ],
+  "target_files": [
+    "modules/Problems/services/ProblemsService.js"
+  ],
+  "file_context": [
+    "modules/Problems/services/ProblemsService.js",
+    "modules/Problems/controllers/ProblemsController.js",
+    "test/problems.tags.spec.js",
+    "data/problems.json"
+  ],
+  "apply_mode": "rewrite",
+  "allowed_edit_paths": [
+    "modules/Problems/**/*.js",
+    "test/problems.tags.spec.js",
+    "package.json",
+    "package-lock.json",
+    "config/test.json"
+  ],
+  "timeout_seconds": 420,
+  "env": {
+    "NODE_ENV": "development"
+  },
+  "task_is_fixture": false,
+  "task_is_real_world": true,
+  "reportable": true,
+  "dataset_source_type": "topcoder_challenge_record",
+  "metadata": {
+    "challenge_id": "a160ded4-e34a-4989-b2a2-d09ead684045",
+    "challenge_url": "https://www.topcoder.com/challenges/a160ded4-e34a-4989-b2a2-d09ead684045",
+    "api_endpoint": "GET /api/v1/problems",
+    "related_tests": [
+      "test/problems.tags.spec.js"
+    ],
+    "test_files": [
+      "test/problems.tags.spec.js",
+      "test/problems.list.spec.js",
+      "test/problems.components.meta.spec.js",
+      "test/problems.detail.spec.js"
+    ],
+    "implementation_target_files": [
+      "modules/Problems/services/ProblemsService.js"
+    ],
+    "support_files": [
+      "modules/Problems/controllers/ProblemsController.js",
+      "data/problems.json",
+      "config/test.json"
+    ],
+    "schema_hints": [
+      "Tag filters accept comma-separated strings or arrays and must normalize tags to lowercase in metadata.appliedTags.",
+      "Tag filtering composes with other filters (difficulty) and existing 50-result limit."
+    ],
+    "contract": [
+      {
+        "id": "single_tag_filter",
+        "description": "Handle ?tags=<value> case-insensitively and return metadata.appliedTags with normalized lowercase tags.",
+        "category": "filtering",
+        "tests": [
+          "SRM problem tag filters::filters by a single tag case-insensitively"
+        ],
+        "keywords": [
+          "appliedtags"
+        ]
+      },
+      {
+        "id": "multi_tag_union",
+        "description": "Comma-separated tags (e.g. ?tags=foo,bar) must match problems that contain any requested tag and expose both normalized tags in metadata.appliedTags.",
+        "category": "filtering",
+        "tests": [
+          "SRM problem tag filters::accepts comma-separated tags and returns merged results"
+        ],
+        "keywords": [
+          "tags"
+        ]
+      },
+      {
+        "id": "array_tag_filter",
+        "description": "tags[]=... array form must work alongside difficulty filters while preserving ordering by roundId and the paging limit.",
+        "category": "filtering",
+        "tests": [
+          "SRM problem tag filters::accepts array form and combines with difficulty filter"
+        ],
+        "keywords": [
+          "roundid",
+          "difficulty"
+        ]
+      }
+    ],
+    "allowed_editable_files": {
+      "implementation": [
+        "modules/Problems/**/*.js"
+      ],
+      "tests": [
+        "test/problems.list.spec.js"
+      ],
+      "support": [
+        "data/problems.json",
+        "config/test.json",
+        "package.json",
+        "package-lock.json"
+      ]
+    },
+    "expected_files": [
+      "modules/Problems/services/ProblemsService.js"
+    ],
+    "oracle_patch_files": [
+      "modules/Problems/services/ProblemsService.js",
+      "test/problems.list.spec.js"
+    ],
+    "ground_truth_patch": "ground_truth.patch",
+    "repo_snapshot_sha256": "b5d35262031fffb59e4ece9e9d7bc9119912652f0e88b1c9109f0b471e778fc5",
+    "notes": "Allow the SRM problems listing to accept ?tags=foo,bar and expose normalized tags in metadata while preserving pagination and difficulty filters."
+  },
+  "runtime_family": "node",
+  "package_manager": "npm",
+  "requires_network": true,
+  "setup_timeout_sec": 420
+}

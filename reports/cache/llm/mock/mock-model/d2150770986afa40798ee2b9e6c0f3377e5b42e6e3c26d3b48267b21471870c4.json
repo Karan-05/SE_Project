@@ -1,0 +1,1 @@
+{"content": "[MOCK] f8e35f5e7979d0f5 :: You are repairing code produced by strategy 'contract_first'. Problem statement: Topcoder Arena 3.0 SRM API backlog: whe", "tokens": 173, "elapsed": 9.416951797902584e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "contract_first:repair"}}

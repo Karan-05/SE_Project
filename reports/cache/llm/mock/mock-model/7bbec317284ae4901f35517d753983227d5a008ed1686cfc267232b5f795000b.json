@@ -1,0 +1,1 @@
+{"content": "[MOCK] 5041a0eb10dad1d8 :: You are repairing code produced by strategy 'pattern_skeleton'. Problem statement: Return degree counts for each vertex.", "tokens": 191, "elapsed": 5.874957423657179e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "pattern_skeleton:repair"}}

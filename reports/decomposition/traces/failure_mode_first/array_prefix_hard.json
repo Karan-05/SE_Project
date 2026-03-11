@@ -1,0 +1,42 @@
+{
+  "task_id": "array_prefix_hard",
+  "strategy": "failure_mode_first",
+  "plan": {
+    "strategy": "failure_mode_first",
+    "contract": {},
+    "patterns": [],
+    "subtasks": [
+      "enumerate failure modes",
+      "design tests",
+      "only then implement",
+      "Generate minimal unit tests for critical behaviors",
+      "Add adversarial/edge-case tests",
+      "Run tests and interpret failures",
+      "Repair implementation and re-run tests"
+    ],
+    "tests": [
+      "Certainly! Here are three high-risk failure modes for a task that returns the running prefix sums, along with brief rationales:\n\n1. **Incorrect Indexing or Off-by-One Errors**  \n   *Rationale:* Mismanaging loop indices or array boundaries can lead to missing elements or accessing out-of-bounds indices, resulting in incorrect prefix sums or runtime errors.\n\n2. **Integer Overflow**  \n   *Rationale:* If the input array contains large integers, summing them",
+      "max constraints: extremely large inputs",
+      "degenerate: empty or single-element",
+      "adversarial: repeated values or cycles"
+    ],
+    "diagnostics": {
+      "failure_modes": "Certainly! Here are three high-risk failure modes for a task that returns the running prefix sums, along with brief rationales:\n\n1. **Incorrect Indexing or Off-by-One Errors**  \n   *Rationale:* Mismanaging loop indices or array boundaries can lead to missing elements or accessing out-of-bounds indices, resulting in incorrect prefix sums or runtime errors.\n\n2. **Integer Overflow**  \n   *Rationale:* If the input array contains large integers, summing them;max constraints: extremely large inputs;degenerate: empty or single-element",
+      "planning_tokens": "125",
+      "planning_time": "2.461590"
+    }
+  },
+  "rounds": [
+    {
+      "round": 0,
+      "phase": "initial",
+      "subtask": "plan",
+      "localized": false,
+      "pass_rate": 1.0,
+      "status": "passed",
+      "duration": 4.4874963350594044e-05,
+      "failing_tests": [],
+      "error_types": []
+    }
+  ]
+}

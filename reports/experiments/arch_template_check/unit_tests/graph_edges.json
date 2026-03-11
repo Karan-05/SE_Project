@@ -1,0 +1,16 @@
+{
+  "task_id": "graph_edges",
+  "tests": [
+    {
+      "name": "sample_0",
+      "mode": "call",
+      "status": "pass",
+      "expected": "2",
+      "output": "2",
+      "error": "",
+      "input": "[[[0, 1], [1, 2]]]",
+      "kwargs": "{}",
+      "duration": 1.7457990907132626e-05
+    }
+  ]
+}

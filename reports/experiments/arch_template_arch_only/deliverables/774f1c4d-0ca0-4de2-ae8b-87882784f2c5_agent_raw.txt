@@ -1,0 +1,30 @@
+BEGIN_JSON
+{
+  "task_type": "architecture_doc",
+  "id": "774f1c4d-0ca0-4de2-ae8b-87882784f2c5",
+  "title": "Topcoder O/R F2F - Save for later button submits the review score",
+  "summary": "This design document addresses the issue where the 'Save for later' button on review scorecards incorrectly submits the review score instead of saving it as a draft. The scope includes analysis of the current review workflow, proposed architectural changes to decouple save and submit actions, and rollout plans to ensure backward compatibility and minimal disruption. Acceptance criteria include ensuring that 'Save for later' persists the scorecard without submission and existing submit functionality remains unchanged.",
+  "assumptions": [
+    "Access to the latest 'reskin-or-only' codebase branch is available for patching.",
+    "The review scorecard UI and backend APIs are implemented in Java with JSP and Maven build system.",
+    "The 'Save for later' button currently triggers the same submit logic as the final submission.",
+    "No existing automated tests cover the distinction between save and submit actions.",
+    "Figma design assets and general setup documentation provide UI and styling guidance but do not specify backend behavior.",
+    "The system uses a persistent data store for review scores, supporting draft and final states.",
+    "Authentication and authorization mechanisms are already in place and do not require changes."
+  ],
+  "plan": [
+    "Analyze the current frontend JSP and Java backend code handling the review scorecard submission and 'Save for later' button.",
+    "Identify the code paths triggered by the 'Save for later' button and confirm why it leads to submission rather than draft save.",
+    "Design a new backend API or extend existing APIs to support saving review scores as drafts without final submission.",
+    "Update the frontend JSP and JavaScript to call the new or modified API when 'Save for later' is clicked.",
+    "Ensure that the backend distinguishes between draft saves and final submissions, persisting draft state accordingly.",
+    "Add or update database schema if needed to track draft versus submitted states of review scorecards.",
+    "Implement unit and integration tests to cover both saving drafts and final submissions, ensuring no regressions.",
+    "Create a patch based on the latest 'reskin-or-only' branch with minimal changes limited to affected files.",
+    "Validate changes against existing functionality to ensure no breakage of current features.",
+    "Prepare deployment and rollout plan to safely release the fix with monitoring for any issues.",
+    "Document the changes and update relevant design and user documentation to reflect new save behavior."
+  ],
+  "artifacts": {
+    "design_doc_md": "## Problem Summary\nThe 'Save for later' button on review scorecards currently submits the review score immediately, contrary to expected behavior. This affects all review scorecards including screening scorecards, leading to premature submission and potential workflow disruption.\n\n## Proposed Approach\nSeparate the 'Save for later' action from the final submission process by introducing a draft save mechanism. Modify frontend JSP and backend Java APIs to distinguish between saving a draft and submitting a final score. Persist draft states in the database without triggering submission workflows.\n\n## File-Level Plan\n- Frontend JSP files handling review scorecards: Update button handlers to call new draft save API.\n- Java backend controller classes: Add or modify endpoints to support

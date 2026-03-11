@@ -1,0 +1,35 @@
+BEGIN_JSON
+{
+  "task_type": "data_etl",
+  "id": "987f731a-503d-440e-b25e-101d04d701b5",
+  "title": "Topcoder Challenge API - Add field for \"challengeSource\"",
+  "summary": "This ETL blueprint outlines the addition of an optional string field 'challengeSource' to the Topcoder Challenge API's Postgres database schema using Prisma ORM. The pipeline will handle extraction from existing sources, transformation to include the new field, and loading into the updated Postgres schema. Validation queries and data quality checks ensure the field is properly integrated and does not break existing functionality.",
+  "assumptions": [
+    "Access to the existing Postgres database schema and Prisma schema is available.",
+    "The 'challengeSource' field is optional and may be null or empty in existing records.",
+    "Existing data migration tools and pipelines are extensible to include the new field.",
+    "No changes to external dependencies (Informix, Dynamo, ElasticSearch) are required as they are deprecated.",
+    "No new enum constraints are needed for 'challengeSource'; it is a free-text field.",
+    "Existing APIs and business logic will be updated separately to handle the new field; this blueprint focuses on the data pipeline and schema.",
+    "Unit tests are out of scope but existing tests must remain passing.",
+    "No additional configuration changes are required beyond Prisma schema and database migration."
+  ],
+  "plan": [
+    "1. Update the Prisma schema to add an optional string field 'challengeSource' to the Challenge model.",
+    "2. Generate and apply a database migration to add the 'challengeSource' column to the Postgres challenges table.",
+    "3. Modify the existing data extraction scripts to include 'challengeSource' if available from source systems or default to null.",
+    "4. Update transformation logic to map and validate the 'challengeSource' field, ensuring it is a string and optional.",
+    "5. Adjust the data loading process to insert or update the 'challengeSource' field in the Postgres database via Prisma ORM.",
+    "6. Add SQL validation queries to verify the presence and data type of 'challengeSource' in the database.",
+    "7. Implement data quality checks to ensure 'challengeSource' values are either null or non-empty strings without invalid characters.",
+    "8. Document the pipeline changes, schema updates, and validation steps in a comprehensive ETL markdown document.",
+    "9. Provide a validation markdown file describing manual and automated testing steps to confirm correct integration of 'challengeSource'.",
+    "10. Review and verify that the pipeline changes do not affect existing data integrity or processing performance."
+  ],
+  "artifacts": {
+    "pipeline_spec": "## Pipeline Specification for Adding 'challengeSource' Field\n\n### Sources\n- Existing Postgres database (via Prisma ORM)\n- Legacy data sources if applicable (Informix, Dynamo, ElasticSearch) for backfill (deprecated but may have historical data)\n\n### Cadence\n- Incremental updates aligned with existing ETL schedule (e.g., hourly or daily batch jobs)\n\n### Orchestration\n- Extend existing ETL orchestration scripts or Airflow DAGs to include new field handling\n\n### SLAs\n- Data availability within 1 hour of source update\n- Zero downtime migration\n\n### Recovery Plan\n- Rollback migration if issues detected\n- Revert ETL changes to last known good state\n\n### Monitoring\n- Alerts on ETL failures or data quality check failures\n- Dashboard metrics for 'challengeSource' field population rate"
+  },
+  "validations": [
+    "SQL query to check 'challengeSource' column existence and data type in Postgres.",
+    "Data quality check to ensure 'challengeSource' is either null or a valid non-empty string without invalid characters.",
+    "Automated

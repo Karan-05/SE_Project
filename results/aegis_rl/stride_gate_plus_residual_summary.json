@@ -1,0 +1,15 @@
+{
+  "success_rate": 0.975,
+  "avg_reward": 60.714025096671435,
+  "avg_cost": 0.27835700757575754,
+  "avg_steps": 9.53125,
+  "override_rate": 0.0,
+  "override_win_rate": 0.0,
+  "override_regret_rate": 0.0,
+  "harmful_fraction": 0.0,
+  "beneficial_fraction": 0.0,
+  "budgeted_success": 0.975,
+  "action_entropy": 0.93678915835917,
+  "method": "stride_gate_plus_residual",
+  "notes": "threshold sweep (expanded dataset) (thr=0.90)"
+}

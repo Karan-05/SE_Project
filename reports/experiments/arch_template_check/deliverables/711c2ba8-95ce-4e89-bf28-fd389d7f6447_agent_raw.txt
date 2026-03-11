@@ -1,0 +1,29 @@
+BEGIN_JSON
+{
+  "task_type": "data_etl",
+  "id": "711c2ba8-95ce-4e89-bf28-fd389d7f6447",
+  "title": "Topcoder Marathon Match Scorer Rebuild POC Part 2 Relaunched",
+  "summary": "Design an ETL pipeline blueprint to replace the existing always-on EC2-based Docker scorer with an on-demand AWS Fargate Java scorer. The pipeline should orchestrate scoring triggered by Kafka messages, manage configuration via AWS Parameter Store, handle multiple challenges and scorer types concurrently, and update submission statuses through the lifecycle stages. The solution must include schema definitions, pipeline orchestration, data quality checks, validation queries, and runnable pseudo-code for implementation guidance.",
+  "assumptions": [
+    "Source Kafka topics and message schemas are stable and accessible for scoring triggers.",
+    "Submission API and review API endpoints exist and are reachable for status updates and review creation.",
+    "AWS Parameter Store contains all necessary configuration parameters for challenges and scorer types.",
+    "The Java scorer image is built and stored in AWS ECR, ready for deployment on Fargate.",
+    "The scorer outputs scoring results in a structured format consumable by the main lambda function.",
+    "No direct access to existing codebase or KafkaHandlerService.js source; design based on provided descriptions.",
+    "Security and IAM roles for Fargate tasks, Lambda functions, and Parameter Store access are configured externally."
+  ],
+  "plan": [
+    "Define source and target data schemas including Kafka message format, submission status updates, and review API payloads.",
+    "Design the orchestration pipeline triggered by Kafka submission messages to launch Fargate tasks for scoring.",
+    "Implement configuration management using AWS Parameter Store to dynamically load challenge and scorer configurations.",
+    "Develop the scoring lifecycle state transitions: submitted -> running examples -> running provisional -> completed.",
+    "Design data flow for scorer results from Fargate tasks back to the main Lambda function for review creation.",
+    "Create SQL validation queries to verify submission status updates and review creation correctness.",
+    "Draft Python pseudo-code for pipeline orchestration, including Kafka message consumption, Fargate task invocation, and status updates with logging and error handling.",
+    "Define data quality checks to ensure message integrity, status correctness, and timely processing.",
+    "Prepare a validation strategy and acceptance checklist covering end-to-end scoring, configuration changes, and concurrency handling.",
+    "Document the entire ETL blueprint in markdown format with schema, pipeline steps, validation queries, and checklist."
+  ],
+  "artifacts": {
+    "pipeline_spec": "## Sources\n- Kafka topics receiving submission messages with challengeId and submission details.\n\n## Cadence\n- Event-driven, triggered on each new submission message.\n\n## Orchestration\n- AWS Lambda function triggered by Kafka messages.\n- Lambda reads configuration from AWS Parameter Store for relevant challenge and scorer.\n- Lambda invokes AWS Fargate task running the Java scorer container with submission payload.\n- Fargate task executes scoring logic and returns score results.\n- Lambda updates submission status through lifecycle stages via Submission API.\n- Lambda calls Review API to create reviews based on scoring results.\n\n## SLAs\n- Submission status updated within 1 minute of scoring completion.\n- Scoring task execution timeout set to 5 minutes per submission.\n\n## Recovery Plan\n-

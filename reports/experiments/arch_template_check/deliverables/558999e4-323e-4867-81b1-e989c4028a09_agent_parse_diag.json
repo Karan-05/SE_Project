@@ -1,0 +1,44 @@
+{
+  "task_id": "558999e4-323e-4867-81b1-e989c4028a09",
+  "run_id": "arch_template_check",
+  "raw_path": "/Users/karanallagh/Desktop/DataCollector/reports/experiments/arch_template_check/deliverables/558999e4-323e-4867-81b1-e989c4028a09_agent_raw.txt",
+  "raw_length": 3130,
+  "sentinel_found": true,
+  "attempts": [
+    {
+      "mode": "sentinel",
+      "success": false,
+      "error": "rubric_self_check.actionability must be numeric."
+    },
+    {
+      "mode": "balanced",
+      "success": false,
+      "error": "rubric_self_check.actionability must be numeric."
+    },
+    {
+      "mode": "repair",
+      "success": false,
+      "error": "rubric_self_check.actionability must be numeric."
+    }
+  ],
+  "errors": [
+    {
+      "stage": "sentinel",
+      "message": "rubric_self_check.actionability must be numeric."
+    },
+    {
+      "stage": "balanced",
+      "message": "rubric_self_check.actionability must be numeric."
+    },
+    {
+      "stage": "repair",
+      "message": "rubric_self_check.actionability must be numeric."
+    }
+  ],
+  "repair_attempted": true,
+  "repair_used": false,
+  "max_repairs": 1,
+  "llm_provider": "openai",
+  "repair_path": "/Users/karanallagh/Desktop/DataCollector/reports/experiments/arch_template_check/deliverables/558999e4-323e-4867-81b1-e989c4028a09_agent_repair.txt",
+  "status": "failed"
+}

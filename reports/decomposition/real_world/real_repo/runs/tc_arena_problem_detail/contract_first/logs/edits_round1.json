@@ -1,0 +1,28 @@
+{
+  "round": 1,
+  "strategy": "contract_first",
+  "proposed_files": [
+    "modules/Problems/services/ProblemsService.js"
+  ],
+  "applied_files": [
+    "modules/Problems/services/ProblemsService.js"
+  ],
+  "status": "applied",
+  "metadata": {
+    "edit_mode": "edit_batch",
+    "localized_requested": true,
+    "fallback_requested": false,
+    "raw_metadata_keys": [
+      "localized"
+    ],
+    "applied_file_count": 1,
+    "proposed_file_count": 1,
+    "multi_file_applied": false,
+    "subtask_focus": "global"
+  },
+  "error": "",
+  "proposed_file_count": 1,
+  "applied_file_count": 1,
+  "multi_file_proposed": false,
+  "multi_file_applied": false
+}

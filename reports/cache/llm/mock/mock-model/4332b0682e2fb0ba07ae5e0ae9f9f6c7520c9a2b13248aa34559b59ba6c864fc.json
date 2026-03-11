@@ -1,0 +1,1 @@
+{"content": "[MOCK] 235a8085b844139f :: You are repairing code produced by strategy 'semantic_diff'. Problem statement: Return the nth Fibonacci number.  Memory", "tokens": 188, "elapsed": 5.415990017354488e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "semantic_diff:repair"}}

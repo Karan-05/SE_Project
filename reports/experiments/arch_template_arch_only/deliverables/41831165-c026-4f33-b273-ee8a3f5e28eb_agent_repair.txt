@@ -1,0 +1,31 @@
+BEGIN_JSON
+{
+  "task_type": "architecture_doc",
+  "id": "41831165-c026-4f33-b273-ee8a3f5e28eb",
+  "title": "Topcoder O/R F2F - Edit Late Deliverables is not reskinned",
+  "summary": "This document outlines the architecture for reskinning the 'Edit Late Deliverables' page in the Topcoder Payments Track application. The goal is to reuse the existing page and table layout while applying the latest UI/UX style guidance from the Payments Track Reskin Figma design. The SQL query powering the page will be updated to correctly show data for the Late Deliverables page. The solution must not break existing functionality or introduce unnecessary changes.",
+  "assumptions": [
+    "Access to the latest 'reskin-or-only' branch is available for patch creation.",
+    "The existing SQL file for the Late Deliverables page is accessible and modifiable.",
+    "The Figma design link provides comprehensive style guidance and downloadable assets.",
+    "The current JSP and Java backend code structure is known or can be inferred from the existing codebase.",
+    "No changes are required to the underlying business logic or database schema beyond the SQL update.",
+    "The existing page and table layout is suitable for reuse with updated styling only.",
+    "No API backend changes are explicitly required beyond SQL updates.",
+    "Testing infrastructure and deployment pipeline are in place to validate the patch."
+  ],
+  "plan": [
+    "Review the Figma design assets and style guidance to understand the new UI requirements.",
+    "Access the current 'Edit Late Deliverables' JSP page and identify all UI components and CSS classes.",
+    "Compare the existing page styling with the Figma design to identify required style updates.",
+    "Locate the SQL file that powers the Late Deliverables data and analyze the current query logic.",
+    "Modify the SQL query to ensure it returns the correct data set for the Late Deliverables page as per requirements.",
+    "Apply the new styling to the JSP page and table layout, reusing existing structure to minimize code changes.",
+    "Ensure no unnecessary whitespace or unrelated file changes are introduced in the patch.",
+    "Test the updated page locally to verify correct data display and adherence to the new style.",
+    "Run regression tests to confirm no existing functionality is broken.",
+    "Prepare a patch against the latest 'reskin-or-only' branch with only the necessary changes.",
+    "Document the changes and submit for code review."
+  ],
+  "artifacts": {
+    "design_doc_md": "## Problem Summary\nThe 'Edit Late Deliverables' page in the Topcoder Payments Track application is currently not reskinned to match the updated UI/UX style guidance. Users experience inconsistency in look and feel compared to other reskinned pages. The page also requires an update to the SQL query to correctly display data relevant to late deliverables.\n\n## Proposed Approach\nReuse the existing JSP page and table layout to minimize disruption. Update the page styling to align with the Payments Track Reskin Figma design assets. Modify the SQL query powering the page to ensure accurate data retrieval for late deliverables. Avoid unnecessary code or whitespace changes and maintain all existing functionality.\n\n## File-Level Plan\n- JSP file for the 'Edit Late Deliverables' page: update CSS classes and HTML structure as needed to apply new styles.\n- SQL file responsible for the Late Deliverables data: update query logic to correctly filter and display late deliverables.\n- No changes to backend Java code or database schema are planned.\n\n## Risks\n- Potential for UI inconsistencies if style updates are incomplete.\n- SQL query changes might affect data accuracy if not carefully tested.\n\n## Test Plan\n- Manual UI verification against Figma design.\n- Automated regression tests to ensure no breakage.\n- Data validation to confirm correct late deliverables are

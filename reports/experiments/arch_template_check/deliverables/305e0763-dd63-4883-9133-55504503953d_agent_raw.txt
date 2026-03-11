@@ -1,0 +1,30 @@
+BEGIN_JSON
+{
+  "task_type": "data_etl",
+  "id": "305e0763-dd63-4883-9133-55504503953d",
+  "title": "Hard | Topcoder Skill Builder Competition | ReactJS  | Annotations",
+  "summary": "Design an end-to-end ETL blueprint for the ReactJS-based learning platform with features including learning space creation, posts with markdown and PDF export, comments, upvotes/downvotes, and text annotations. The ETL pipeline will ingest, transform, and store user, learning space, post, comment, vote, and annotation data from backend sources (e.g., Firebase/Supabase) into an analytics data warehouse to support reporting and monitoring. Validation queries and data quality checks will ensure data correctness and completeness.",
+  "assumptions": [
+    "Backend data source is a cloud database such as Firebase or Supabase with REST or streaming access to user, learning space, post, comment, vote, and annotation data.",
+    "Data is available in JSON or structured format with timestamps for incremental extraction.",
+    "ETL pipeline will be implemented using Python with orchestration via Airflow or similar.",
+    "Markdown content and annotations are stored as text fields in the source.",
+    "No direct sample data or schemas provided; inferred schema based on feature descriptions.",
+    "PDF export is a frontend feature and does not affect ETL data ingestion.",
+    "Upvotes/downvotes are stored as vote records linked to posts or comments.",
+    "Annotations include highlighted text, user notes, and references to post text ranges."
+  ],
+  "plan": [
+    "Define source schemas for users, learning spaces, posts, comments, votes, and annotations based on feature requirements.",
+    "Design target data warehouse schema optimized for analytics queries, including dimension and fact tables.",
+    "Develop incremental extraction logic for each source entity using timestamps or change data capture.",
+    "Implement transformation steps to clean data, parse markdown content, and flatten nested structures.",
+    "Load transformed data into the data warehouse with appropriate keys and indexes.",
+    "Create validation SQL queries to verify record counts, referential integrity, and data freshness.",
+    "Develop data quality checks for mandatory fields, vote counts consistency, and annotation correctness.",
+    "Write Python pseudo-code for the ETL pipeline with checkpoints, logging, and error handling.",
+    "Document pipeline orchestration cadence, SLA targets, and recovery procedures.",
+    "Prepare acceptance checklist covering schema completeness, data freshness, and correctness."
+  ],
+  "artifacts": {
+    "pipeline_spec": "Sources:\n- Users: user_id, auth info, profile data\n- Learning Spaces: space_id, title, description, prerequisites, thumbnail, creator_id\n- Posts: post_id, space_id, author_id, title, body_markdown, created_at\n- Comments: comment_id, post_id, author_id, body_markdown, created_at\n- Votes: vote_id, target_type (post/comment), target_id, user_id, vote_type (up/down), created_at\n- Annotations: annotation_id, post_id, user_id, highlighted_text, note_text, text_range_start, text_range_end, created_at\n\nCadence:\n- Run ETL every 15 minutes for near-real-time data availability.\n\nOrchestration:\n- Use Airflow DAG with tasks for extraction, transformation, loading, and validation.\n

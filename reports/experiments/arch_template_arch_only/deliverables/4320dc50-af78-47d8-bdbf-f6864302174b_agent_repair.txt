@@ -1,0 +1,29 @@
+BEGIN_JSON
+{
+  "task_type": "architecture_doc",
+  "id": "4320dc50-af78-47d8-bdbf-f6864302174b",
+  "title": "Topcoder NestJS Autopilot - Event-Based Phase Transition Fixes",
+  "summary": "This document addresses architectural and implementation fixes for the Topcoder Autopilot service's event-based phase transition mechanism. The fixes focus on restoring interface compatibility, enabling granular phase cancellation, handling past dates gracefully, improving logging, correcting method return values, enriching payloads with challenge IDs, and centralizing command constants. The goal is to improve system reliability, maintainability, and backward compatibility while adhering to the existing NestJS, Kafka, and Docker-based technology stack.",
+  "assumptions": [
+    "Access to the GitHub repository https://github.com/topcoder-platform/autopilot-v6.git is available for patch submission and code reference.",
+    "The existing Autopilot service uses NestJS 10+, TypeScript 5+, @nestjs/schedule, Kafka, ESLint, Prettier, and Docker as stated.",
+    "The previous implementation and code review findings are accurate and complete as described in the prompt.",
+    "No additional feature requirements or breaking API changes beyond those listed are expected.",
+    "Backward compatibility with existing consumers and message formats is critical and must be preserved.",
+    "Logging improvements should maintain or improve current observability without losing critical information.",
+    "The patch will be applied on the develop branch's latest commit as per submission guidelines."
+  ],
+  "plan": [
+    "Review current ChallengeUpdatePayload and CommandPayload interface definitions and restore them to their original state without phase-specific fields.",
+    "Design and implement a mock API service to fetch phase details dynamically when required, ensuring backward compatibility.",
+    "Modify the cancel_schedule command handler to respect the optional phaseId parameter, enabling cancellation of individual phases or all phases as appropriate.",
+    "Update scheduling logic to detect past dates and process those phase transitions immediately instead of throwing errors, aligning recovery and normal processing behaviors.",
+    "Revise log messages to only log 'Successfully rescheduled phase' when a job is actually rescheduled, replace misleading 'Canceled scheduled transition' messages with context-appropriate wording, and standardize terminology throughout the logging system.",
+    "Refactor the cancelScheduledTransition method to return false when no job is found to cancel and true only when a job is canceled, including consistent error handling.",
+    "Enhance the payload published to autopilot.phase.transition to include a distinct challengeId field, maintaining backward compatibility with existing consumers.",
+    "Create a config.constants.ts file defining all command strings such as cancel_schedule and reschedule_phase, refactor the codebase to use these constants, and document these commands and their parameters clearly.",
+    "Develop a comprehensive test plan covering interface compatibility, phase cancellation behavior, past date handling, logging correctness, return value accuracy, payload structure, and usage of command constants.",
+    "Prepare and submit a git patch against the develop branch including all fixes, tests, and documentation updates."
+  ],
+  "artifacts": {
+    "design_doc_md": "## Problem Summary\nThe Topcoder Autopilot service's event-based phase transition mechanism currently suffers from multiple issues that impact its reliability and maintainability. These include interface incompatibilities due to phase-specific fields in payloads, inability to cancel individual phases, improper handling of past dates causing errors, confusing and misleading log messages, incorrect return values from cancellation methods, lack of challengeId in published payloads, and scattered command string literals.\n\n## Proposed Solutions\n1. Restore ChallengeUpdatePayload and CommandPayload interfaces to their original, phase-agnostic definitions to maintain backward compatibility.\n2. Implement a mock API service to fetch phase details dynamically when needed, avoiding breaking interface changes.\n3. Enhance cancel_schedule command to accept an optional phaseId parameter, allowing cancellation of specific phases or all phases

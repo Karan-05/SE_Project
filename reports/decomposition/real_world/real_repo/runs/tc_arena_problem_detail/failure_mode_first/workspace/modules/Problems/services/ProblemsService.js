@@ -1,0 +1,24 @@
+```json
+{
+  "contract_review": [
+    {
+      "id": "aggregation",
+      "status": "covered",
+      "plan": "Implement aggregation of componentStats.languages, statusCounts, and maxPoints in the service layer when fetching problem details."
+    },
+    {
+      "id": "error_handling",
+      "status": "covered",
+      "plan": "Return HTTP 404 with JSON { message } when problemId is not found in the service layer."
+    },
+    {
+      "id": "architecture",
+      "status": "covered",
+      "plan": "Keep the controller thin by delegating all aggregation and error handling to the service without mutating global state or filtering in the controller."
+    }
+  ],
+  "edits": [
+    {
+      "path": "modules/Problems/services/ProblemsService.js",
+      "mode": "rewrite",
+      "content": "'use strict';\n\n/*\n * Copyright (c) 2016 TopCoder, Inc.\n */\n\n/**\n * Service for SRM problem APIs.\n */\nconst fs = require('fs');\nconst path = require('path');\nconst Joi = require('joi');\nconst logger = require('../../../common/logger');\n\nlet cachedProblems;\n\nconst MAX_LIMIT = 50;\n\n/**\n * Normalize tags filter into a lowercase array.\n * @param {string|Array<string>} rawTags\n * @returns {Array<string>}\n */\nfunction normalizeTags(rawTags) {\n  if (!rawTags && rawTags !== '') {\n    return [];\n  }\n  const list = Array.isArray(rawTags) ? rawTags : String(rawTags).split(',');\n  return list\n    .map((tag) => String(tag || '').trim().toLowerCase())\n    .filter((tag) => tag);\n}\n\n/**\n * Check whether the problem contains at least one of the requested tags.\n * @param {Object} problem\n * @param {Array<string>} tags\n * @returns {boolean}\n */\nfunction problemHasTags(problem, tags) {\n  if (!tags || tags.length === 0) return true;\n  if (!problem.tags || !Array.isArray(problem.tags)) return false;\n  const problemTags = problem.tags.map((t) => t.toLowerCase());\n  return tags.some((tag) => problemTags.includes(tag));\n}\n\n/**\n * Load problems from JSON file and cache them.\n * @returns {Array<Object>} problems\n */\nfunction loadProblems() {\n  if (cachedProblems) return cachedProblems;\n  const filePath = path.join(__dirname, '..', '..', '..', 'data', 'problems.json');\n  const raw = fs.readFileSync(filePath, 'utf8');\n  cachedProblems = JSON.parse(raw);\n  return cachedProblems;\n}\n\n/**\n * Aggregate component statistics for a problem.\n * @param {Object} problem\n * @returns {Object} componentStats\n */\nfunction aggregateComponentStats(problem) {\n  const languages = {};\n  const statusCounts = {};\n  let maxPoints = 0;\n\n  if (Array.isArray(problem.components)) {\n    for (const comp of problem.components) {\n      // Aggregate languages\n      if (comp.language) {\n        languages[comp.language] = (languages[comp.language] || 0) + 1;\n      }\n      // Aggregate status counts\n      if (comp

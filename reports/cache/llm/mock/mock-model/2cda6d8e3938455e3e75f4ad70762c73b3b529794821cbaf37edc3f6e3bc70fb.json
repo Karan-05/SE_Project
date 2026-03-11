@@ -1,0 +1,1 @@
+{"content": "[MOCK] ac81944bdaf88db9 :: You are executing decomposition strategy 'contract_first'. Problem statement: Return the nth Fibonacci number.  Implemen", "tokens": 129, "elapsed": 3.875000402331352e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "plan-runner", "caller": "contract_first:initial"}}

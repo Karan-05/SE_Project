@@ -1,0 +1,1 @@
+{"content": "[MOCK] dcc8d8b91738d81f :: You are repairing code produced by strategy 'multi_view'. Problem statement: Return the minimum coins needed to reach ta", "tokens": 169, "elapsed": 4.292000085115433e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "multi_view:repair"}}

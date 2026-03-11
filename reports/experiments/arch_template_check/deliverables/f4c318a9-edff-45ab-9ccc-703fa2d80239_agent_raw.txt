@@ -1,0 +1,27 @@
+BEGIN_JSON
+{
+  "task_type": "data_etl",
+  "id": "f4c318a9-edff-45ab-9ccc-703fa2d80239",
+  "title": "Topcoder O/R F2F - Unable to Approve reject challenges since the Response drop down is not selectable",
+  "summary": "Design an ETL blueprint to support data extraction, transformation, and loading for the Approval process in the Topcoder O/R F2F system. The ETL should ensure that challenge approval data, including the Response dropdown selections, are correctly ingested and transformed to enable UI functionality. The solution must include schema definitions, pipeline orchestration, validation queries, and data quality checks to ensure completeness and correctness of approval-related data.",
+  "assumptions": [
+    "Source data schemas and tables related to challenges, approvals, and responses are not explicitly provided and must be inferred or requested.",
+    "The ETL pipeline will extract data from the Topcoder challenge management database or API endpoints.",
+    "Transformation logic must handle enabling the Response dropdown by ensuring correct data availability and status flags.",
+    "No direct access to the codebase or database; design based on provided context and standard ETL best practices.",
+    "The pipeline cadence and SLA requirements are not specified and will be assumed to be near-real-time or daily batch.",
+    "Validation queries and data quality checks will be designed based on inferred schema and business logic."
+  ],
+  "plan": [
+    "Gather detailed source schema information for challenges, approvals, and response status fields from the product or database team.",
+    "Define the target schema for the Approval data mart or reporting tables that support the UI dropdown functionality.",
+    "Design the ETL pipeline steps: extraction from source systems, transformation to enrich and normalize approval response data, and loading into target tables.",
+    "Develop SQL snippets for data validation and transformation logic to ensure Response dropdown data is correctly populated and selectable.",
+    "Create Python pseudo-code for the ETL orchestration, including logging, checkpoints, and error handling.",
+    "Define data quality checks to monitor completeness, correctness, and freshness of approval response data.",
+    "Prepare sample outputs and acceptance criteria to validate that the Response dropdown is enabled and functional based on the ETL data.",
+    "Document the entire ETL blueprint including pipeline spec, SQL snippets, Python orchestration, data quality checks, and validation queries."
+  ],
+  "artifacts": {
+    "pipeline_spec": "## ETL Pipeline Specification\n\n### Sources\n- Challenge Management Database (tables: challenges, approvals, responses)\n- API endpoints for challenge approval status (if applicable)\n\n### Cadence\n- Daily batch run at 2 AM UTC\n- Support incremental loads based on last updated timestamps\n\n### Orchestration\n- Extract approval-related data\n- Transform to normalize response status and map to UI dropdown values\n- Load into Approval Data Mart schema\n\n### SLA\n- Data available in target tables by 3 AM UTC\n- Less than 1% data loss or delay\n\n### Recovery Plan\n- Retry failed jobs up to 3 times\n- Alert on failures or data quality issues\n- Manual intervention for persistent errors",
+    "sql_snippets": "-- SQL snippet to validate Response dropdown data completeness\nSELECT\n  approval_id,\n  response_status,\n  COUNT(*) AS count\nFROM approval_responses\nWHERE response_status

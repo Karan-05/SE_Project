@@ -1,0 +1,1 @@
+{"content": "[MOCK] 6736dc69a74203d7 :: You are executing decomposition strategy 'direct_baseline'. Problem statement: Count primes up to N.  Implementation con", "tokens": 97, "elapsed": 3.916968125849962e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "plan-runner", "caller": "direct_baseline:initial"}}

@@ -1,0 +1,63 @@
+BEGIN_JSON
+{
+  "task_type": "architecture_doc",
+  "id": "8da51ea0-9169-4684-b536-79dc92e6380c",
+  "title": "72 Hours Topcoder Review App Challenge Review Details Page Integration Part 2",
+  "summary": "Design a comprehensive integration of live APIs into the Challenge Review Details page for Submission/Screening, Winners, and Review/Appeals tabs. The integration must use React + TypeScript with SWR for data fetching, handle role-based access, loading, and error states, and remove all mock data. The solution must respect the provided API contracts and ensure responsive UI behavior.",
+  "assumptions": [
+    "The platform-ui repository and specified branch (feat/review) are accessible for patch application.",
+    "API endpoints and DTOs are stable and documented as per the provided description.",
+    "User JWT and role-based authorization logic are implemented and available in the frontend environment.",
+    "No additional backend changes are required beyond consuming existing APIs.",
+    "UI components for loading and empty states (e.g., TableLoading) are available in the codebase.",
+    "Network and API error handling strategies align with existing platform-ui conventions.",
+    "The challenge phases and registrants data are already fetched or accessible as described."
+  ],
+  "plan": [
+    "Analyze the current platform-ui feat/review branch to identify existing mock data and placeholders in the Submission/Screening, Winners, and Review/Appeals tabs.",
+    "Design TypeScript interfaces based on the Review API and Challenge API DTOs for strong typing of API responses.",
+    "Implement SWR hooks for each tab to fetch live data from the Review API endpoints, ensuring proper caching, revalidation, and error/loading state management.",
+    "Integrate the Submission/Screening tab to display submissions with screening statuses, download links for submissions and artifacts, and handle empty/loading states.",
+    "Integrate the Winners tab to fetch and display project results with placements, scores, and reviewer information, handling empty/loading states.",
+    "Integrate the Review/Appeals tab to reuse submissions data and display dummy score and appeals data as a placeholder until real data is available.",
+    "Remove all mock data and feature-flagged placeholders related to these tabs from the UI.",
+    "Ensure role-based UI behavior by enforcing access scopes and roles for data fetching and UI rendering.",
+    "Test the integrated tabs for responsiveness, correctness of data display, error handling, and role-based access compliance.",
+    "Document the integration approach and testing instructions in markdown for submission."
+  ],
+  "artifacts": {
+    "design_doc_md": "## Problem Summary\n- Complete integration of Submission/Screening, Winners, and Review/Appeals tabs in the Challenge Review Details page.\n- Replace mock data with live API calls using Review API, Challenge API, and Resource API.\n- Ensure role-based access, proper loading, error, and empty states.\n- Use React + TypeScript with SWR for data fetching and caching.\n\n## Proposed Approach\n- Remove mock data and wire UI components to live API endpoints using SWR hooks.\n- Define TypeScript interfaces reflecting API DTOs for type safety.\n- Implement data fetching for submissions, project results, and registrants as needed.\n- Handle loading, error, and empty states uniformly across tabs.\n- Enforce role and scope-based access control in UI logic.\n- Ensure responsiveness and mobile compatibility.\n\n## File-Level Plan\n- Modify platform-ui repo on feat/review branch.\n- Update SubmissionScreeningTab.tsx (or equivalent) to fetch submissions and screening info.\n- Update WinnersTab.tsx to fetch and display winners and placements.\n- Update ReviewAppealsTab.tsx to reuse submissions data and show placeholders for appeals.\n- Remove mock data files or code blocks related to these tabs.\n- Add or update SWR hooks and TypeScript interfaces under a suitable directory (e.g., api/hooks or types).\n- Update styles if needed to maintain responsive design.\n\n## API / Interface Changes\n- Use Review API endpoints:\n  - GET /v6/review/api/submissions with challengeId and optional query params.\n  - GET /v6/review/api/submissions/:submissionId/download for submission file downloads.\n  - GET /v6/review/api/submissions/:submissionId/artifacts and artifact downloads.\n  - GET /v6/review/projectResult?challengeId=:challengeId for winners.\n- Use Challenge API for challenge phases.\n- Use Resource API for registrants if handle lookup needed.\n- Enforce authorization scopes: read:submission, read:project-result.\n\n## Constraints & SLAs\n- 72-hour submission phase and 24-hour review phase impose tight deadlines.\n- API rate limits and latency must be considered for SWR caching strategies.\n- Role-based access must strictly prevent unauthorized data exposure.\n- UI must handle no-data and error states gracefully with user-friendly messages.\n- Responsive design required for desktop and mobile devices.\n\n## Risks & Trade-offs\n- Risk: API changes or instability could break integration; mitigated by strong typing and error handling.\n- Trade-off: Using SWR caching improves performance but may show stale data briefly; balanced by revalidation.\n- Risk: Role-based logic complexity might cause incorrect data exposure; mitigated by thorough testing.\n- Trade-off: Dummy data in Review/Appeals tab may confuse users; clearly mark as placeholder.\n\n## Edge Cases\n- No submissions or winners returned (empty states).\n- Partial data missing fields (e.g., missing reviews or artifacts).\n- User lacks required roles/scopes to view certain tabs.\n- Network failures or API errors during data fetch.\n- Mobile viewport constraints affecting table layouts.\n\n## Acceptance Checklist\n- [ ] All three tabs fetch real data from live APIs using SWR.\n- [ ] Mock data and placeholders removed.\n- [ ] Loading, error, and empty states handled and displayed correctly.\n- [ ] Role-based access enforced for data fetching and UI rendering.\n- [ ] TypeScript interfaces accurately model API DTOs.\n- [ ] UI responsive and tested on desktop and mobile.\n- [ ] Documentation included explaining integration and testing steps.\n",
+    "mermaid_diagram": "graph TD\n  UI[Challenge Review Details Page UI] -->|Fetches| SWR[React SWR Hooks]\n  SWR -->|Calls| ReviewAPI[Review API]\n  SWR -->|Calls| ChallengeAPI[Challenge API]\n  SWR -->|Calls| ResourceAPI[Resource API]\n  ReviewAPI -->|Provides| Submissions[Submission/Screening Data]\n  ReviewAPI -->|Provides| ProjectResults[Winners Data]\n  ChallengeAPI -->|Provides| ChallengePhases[Challenge Phase Data]\n  ResourceAPI -->|Provides| Registrants[Registrant Data]\n  UI -->|Role-based Access| Auth[User JWT & Roles]\n",
+    "interfaces": [
+      {
+        "producer": "Review API",
+        "consumer": "platform-ui frontend",
+        "protocol": "HTTPS REST JSON",
+        "payload": "SubmissionResponseDto, ProjectResultResponseDto, SubmissionQueryDto, Artifact DTOs"
+      },
+      {
+        "producer": "Challenge API",
+        "consumer": "platform-ui frontend",
+        "protocol": "HTTPS REST JSON",
+        "payload": "Challenge DTO including phases"
+      },
+      {
+        "producer": "Resource API",
+        "consumer": "platform-ui frontend",
+        "protocol": "HTTPS REST JSON",
+        "payload": "Registrant DTOs for handle lookup"
+      }
+    ],
+    "tradeoffs": [
+      "Using SWR improves data freshness and caching but may introduce complexity in error handling and revalidation timing.",
+      "Enforcing role-based UI logic on the client side is necessary but requires careful testing to avoid unauthorized data exposure; backend enforcement is assumed.",
+      "Dummy data in Review/Appeals tab allows progress without backend readiness but may confuse users; clearly marking placeholders is essential.",
+      "Removing mock data cleans the UI but requires thorough testing to ensure no regressions or missing features."
+    ]
+  },
+  "validations": [
+    "Reviewed prompt and confirmed all API endpoints and data models are covered.",
+    "Ensured architecture doc covers problem summary, approach, file plan, API changes, constraints, risks, edge cases, and acceptance criteria.",
+    "Validated that all required artifact keys and rubric points are addressed.",
+    "Confirmed assumptions cover missing details and environment dependencies.",
+    "Cross-checked plan steps to align with prompt requirements

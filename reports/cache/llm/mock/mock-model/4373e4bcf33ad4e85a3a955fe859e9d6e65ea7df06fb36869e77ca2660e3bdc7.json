@@ -1,0 +1,1 @@
+{"content": "[MOCK] 2e497d0ec17e051d :: You are executing decomposition strategy 'multi_view'. Problem statement: Return the sum of the main diagonal.  Implemen", "tokens": 129, "elapsed": 4.750036168843508e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "plan-runner", "caller": "multi_view:initial"}}

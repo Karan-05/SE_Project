@@ -1,0 +1,44 @@
+BEGIN_JSON
+{
+  "task_type": "non_actionable",
+  "id": "558999e4-323e-4867-81b1-e989c4028a09",
+  "title": "Topcoder Online Review - UI Issue in the edit project links page",
+  "summary": "The request is to fix a UI issue in the Topcoder Online Review edit project links page. The prompt primarily references frontend UI changes and a GitHub issue for details, without any ETL-related data sources, schemas, transformations, or validation queries. The task lacks any ETL-specific input or requirements to produce an ETL blueprint.",
+  "assumptions": [
+    "The provided prompt and references focus on frontend UI fixes in a GitHub repo, not ETL pipelines.",
+    "No data sources, schema definitions, transformation logic, or validation requirements for ETL are provided or implied.",
+    "The task_type hint 'data_etl' conflicts with the actual problem scope which is UI bugfix in a web app.",
+    "No access to the GitHub repo or detailed UI bug reproduction steps is available to generate patch or ETL specs.",
+    "The Google doc and GitHub issue links are not accessible for further details or data context."
+  ],
+  "plan": [
+    "Confirm that the task is a UI bugfix and not an ETL task, thus outside the data_etl scope.",
+    "Request or wait for a prompt with concrete ETL requirements including source data, schemas, transformations, and validation criteria.",
+    "If ETL context is provided later, produce a full ETL blueprint with pipeline specs, SQL snippets, python pseudo-code, and data quality checks.",
+    "For now, mark as non_actionable due to lack of ETL context and data."
+  ],
+  "artifacts": {
+    "reason": "The prompt describes a UI bugfix task with no ETL-related data, schema, or transformation details, making it impossible to produce an ETL blueprint.",
+    "what_needed": [
+      "Clear ETL problem statement including source data locations, schema definitions, and transformation requirements.",
+      "Sample input/output data or SQL queries related to the ETL process.",
+      "Validation criteria and acceptance checklist for data quality and pipeline correctness.",
+      "Access to any relevant datasets, repositories, or documentation describing the ETL workflow."
+    ]
+  },
+  "validations": [
+    "Reviewed the prompt and confirmed no ETL-related inputs or requirements are present.",
+    "Cross-checked referenced links and tags indicating UI/CSS/JS focus, not data processing.",
+    "Validated that producing ETL artifacts without data context would be guesswork and non-actionable.",
+    "Ensured assumptions and plan align with the lack of ETL scope."
+  ],
+  "confidence": 1.0,
+  "stop_reason": "non_actionable_ui_task_no_etl_context",
+  "rubric_self_check": {
+    "coverage": "Complete coverage of prompt scope and missing ETL context.",
+    "specificity": "Specific about missing ETL inputs and why the task cannot be executed as data_etl.",
+    "actionability": "Clearly outlines what is needed to unblock and produce a valid ETL blueprint.",
+    "overall_notes": "Correctly identified task mismatch and provided a deterministic, schema-compliant non_actionable response."
+  }
+}
+END_JSON

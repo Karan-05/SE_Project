@@ -1,0 +1,90 @@
+{
+  "task_id": "graph_degree_hard",
+  "strategy": "failure_mode_first",
+  "attempt": 5,
+  "pass_rate": 0.0,
+  "plan_subtasks": [
+    "enumerate failure modes",
+    "design tests",
+    "only then implement",
+    "Generate minimal unit tests for critical behaviors",
+    "Add adversarial/edge-case tests",
+    "Run tests and interpret failures"
+  ],
+  "plan_tests": [
+    "Here are three high-risk failure modes for the task \"Return degree counts for each vertex,\" along with short rationales:\n\n1. **Incorrect Input Validation**  \n   *Rationale:* If the input edges list is malformed (e.g., contains invalid vertex indices, non-integer values, or empty edges), the function may crash or produce incorrect results. Proper validation is critical to avoid runtime errors or logical bugs.\n\n2. **Incorrect Vertex Index Handling**  \n   *Rationale",
+    "max constraints: extremely large inputs",
+    "degenerate: empty or single-element",
+    "adversarial: repeated values or cycles"
+  ],
+  "plan_diagnostics": {
+    "failure_modes": "Here are three high-risk failure modes for the task \"Return degree counts for each vertex,\" along with short rationales:\n\n1. **Incorrect Input Validation**  \n   *Rationale:* If the input edges list is malformed (e.g., contains invalid vertex indices, non-integer values, or empty edges), the function may crash or produce incorrect results. Proper validation is critical to avoid runtime errors or logical bugs.\n\n2. **Incorrect Vertex Index Handling**  \n   *Rationale;max constraints: extremely large inputs;degenerate: empty or single-element",
+    "planning_tokens": "186",
+    "planning_time": "2.940182"
+  },
+  "patch_summary": {
+    "phase": "initial"
+  },
+  "failing_tests": [
+    "sample_0",
+    "sample_1"
+  ],
+  "trace": [
+    "",
+    ""
+  ],
+  "feedback": [
+    "sample_0 expected {'0': 1, '1': 2, '2': 1} but saw {0: 1, 1: 2, 2: 1}",
+    "sample_1 expected {'1': 2} but saw {1: 2}"
+  ],
+  "reproduction": "inputs=[[[0, 1], [1, 2]]] kwargs={}",
+  "tests_run": [
+    {
+      "name": "sample_0",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'0': 1, '1': 2, '2': 1}",
+      "output": "{0: 1, 1: 2, 2: 1}",
+      "error": "",
+      "input": "[[[0, 1], [1, 2]]]",
+      "kwargs": "{}",
+      "duration": 3.0499999411404133e-05
+    },
+    {
+      "name": "sample_1",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'1': 2}",
+      "output": "{1: 2}",
+      "error": "",
+      "input": "[[[1, 1]]]",
+      "kwargs": "{}",
+      "duration": 5.916983354836702e-06
+    }
+  ],
+  "llm_calls": 2,
+  "timeline": {
+    "attempt": 5,
+    "strategy": "failure_mode_first",
+    "phase": "initial",
+    "events": {
+      "decompose": {
+        "start": "2026-03-06T12:48:28.498008",
+        "end": "2026-03-06T12:48:31.438455"
+      },
+      "solve": {
+        "start": "2026-03-06T12:48:31.438499",
+        "end": "2026-03-06T12:48:35.674631"
+      },
+      "tests": {
+        "start": "2026-03-06T12:48:33.244196",
+        "end": "2026-03-06T12:48:35.674529",
+        "duration_seconds": "0.000"
+      }
+    },
+    "meta": {
+      "llm_calls": "2"
+    }
+  },
+  "solution_preview": "def solve(edges):\n                deg = {}\n                for a,b in edges:\n                    deg[a] = deg.get(a,0)+1\n                    deg[b] = deg.get(b,0)+1\n                return deg"
+}

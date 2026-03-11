@@ -1,0 +1,90 @@
+{
+  "task_id": "graph_degree_test",
+  "strategy": "contract_first",
+  "attempt": 1,
+  "pass_rate": 0.0,
+  "plan_subtasks": [
+    "Validate inputs vs contract",
+    "Implement core logic",
+    "Check edge cases",
+    "Generate minimal unit tests for critical behaviors",
+    "Add adversarial/edge-case tests",
+    "Run tests and interpret failures"
+  ],
+  "plan_tests": [
+    "",
+    ""
+  ],
+  "plan_diagnostics": {
+    "missing_fields": "constraints",
+    "contract_length": "34",
+    "audit_note": "The provided contract is incomplete and underspecified in several critical areas. Here's a detailed review:\n\n### Contract Review\n\n1. **Inputs:**\n   - Marked as \"Underspecified.\"\n   - Missing details on the expected input format.\n   - For a problem about returning degree counts for each vertex, inputs are typically:\n     - A list of edges, where each edge is a pair of vertices (e.g., `[[0,1], [1,2], ...",
+    "planning_tokens": "213",
+    "planning_time": "2.348740"
+  },
+  "patch_summary": {
+    "phase": "initial"
+  },
+  "failing_tests": [
+    "sample_0",
+    "sample_1"
+  ],
+  "trace": [
+    "",
+    ""
+  ],
+  "feedback": [
+    "sample_0 expected {'0': 1, '1': 2, '2': 1} but saw {0: 1, 1: 2, 2: 1}",
+    "sample_1 expected {'1': 2} but saw {1: 2}"
+  ],
+  "reproduction": "inputs=[[[0, 1], [1, 2]]] kwargs={}",
+  "tests_run": [
+    {
+      "name": "sample_0",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'0': 1, '1': 2, '2': 1}",
+      "output": "{0: 1, 1: 2, 2: 1}",
+      "error": "",
+      "input": "[[[0, 1], [1, 2]]]",
+      "kwargs": "{}",
+      "duration": 1.745804911479354e-05
+    },
+    {
+      "name": "sample_1",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'1': 2}",
+      "output": "{1: 2}",
+      "error": "",
+      "input": "[[[1, 1]]]",
+      "kwargs": "{}",
+      "duration": 4.125002305954695e-06
+    }
+  ],
+  "llm_calls": 1,
+  "timeline": {
+    "attempt": 1,
+    "strategy": "contract_first",
+    "phase": "initial",
+    "events": {
+      "decompose": {
+        "start": "2026-03-06T12:57:07.812683",
+        "end": "2026-03-06T12:57:10.161607"
+      },
+      "solve": {
+        "start": "2026-03-06T12:57:10.161647",
+        "end": "2026-03-06T12:57:13.117839"
+      },
+      "tests": {
+        "start": "2026-03-06T12:57:13.117770",
+        "end": "2026-03-06T12:57:13.117809",
+        "duration_seconds": "0.000"
+      }
+    },
+    "meta": {
+      "llm_calls": "1"
+    }
+  },
+  "solution_preview": "def solve(edges):\n                deg = {}\n                for a,b in edges:\n                    deg[a] = deg.get(a,0)+1\n                    deg[b] = deg.get(b,0)+1\n                return deg"
+}

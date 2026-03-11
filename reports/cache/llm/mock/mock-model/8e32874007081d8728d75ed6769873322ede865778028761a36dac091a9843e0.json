@@ -1,0 +1,1 @@
+{"content": "[MOCK] 54f0c2ed200bf89e :: You are executing decomposition strategy 'direct_baseline'. Problem statement: Return the reversed string.  Implementati", "tokens": 96, "elapsed": 4.375004209578037e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "plan-runner", "caller": "direct_baseline:initial"}}

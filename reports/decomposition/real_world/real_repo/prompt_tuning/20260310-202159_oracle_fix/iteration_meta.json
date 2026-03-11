@@ -1,0 +1,21 @@
+{
+  "iteration_name": "20260310-202159_oracle_fix",
+  "timestamp": "20260310-202159",
+  "mode": "dev",
+  "reports_mode": "real_world_research",
+  "strategies": [
+    "contract_first",
+    "failure_mode_first"
+  ],
+  "task_sources": [
+    "experiments/real_repo_tasks/topcoder"
+  ],
+  "datasets": [],
+  "exclude_datasets": [],
+  "max_tasks": null,
+  "require_reportable": true,
+  "exclude_fixtures": true,
+  "include_oracle": true,
+  "notes": "Regenerated unified patches and oracle stage",
+  "command": "scripts/run_prompt_tuning_iteration.py --mode dev --reports-mode real_world_research --strategies contract_first,failure_mode_first --task-root experiments/real_repo_tasks/topcoder --require-reportable --exclude-fixtures --label oracle_fix --notes Regenerated unified patches and oracle stage"
+}

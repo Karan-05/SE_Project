@@ -1,0 +1,28 @@
+BEGIN_JSON
+{
+  "task_type": "data_etl",
+  "id": "47cb585f-afb1-4bfe-aff8-946636d03122",
+  "title": "Reporting Application - Thymeleaf Based HTML Email Templates",
+  "summary": "Design an ETL blueprint for managing Thymeleaf-based HTML email templates used in a reporting application. The blueprint includes schema definition, pipeline steps for ingestion, validation, transformation, and deployment, along with data quality checks and validation queries to ensure template integrity and compliance with HTML email best practices.",
+  "assumptions": [
+    "Source data for templates is stored in a version-controlled repository or CMS accessible for ETL ingestion.",
+    "No direct sample outputs or acceptance checklist were provided; inferred requirements from prompt and best practices.",
+    "Transformation involves validation, linting, and packaging templates for deployment.",
+    "Deployment target environment supports Thymeleaf rendering and email sending infrastructure.",
+    "No direct access to XD design files; assumed template content is finalized and available for ingestion.",
+    "Validation queries focus on template metadata and structural correctness rather than data content."
+  ],
+  "plan": [
+    "Define schema for template metadata storage including template id, name, version, last updated timestamp, and status.",
+    "Design pipeline steps: ingestion of templates from source repo, validation of HTML and Thymeleaf syntax, transformation to ensure responsive design and compliance, and deployment packaging.",
+    "Implement SQL snippets to validate metadata integrity and uniqueness constraints.",
+    "Develop Python pseudo-code for ETL orchestration with logging, error handling, and checkpointing.",
+    "Define data quality checks for template completeness, valid HTML5 compliance, and absence of broken links or missing assets.",
+    "Create validation queries to verify template metadata consistency and successful pipeline execution.",
+    "Document pipeline specification, data quality checks, and validation queries in a markdown file for developer onboarding and audit.",
+    "Include risk considerations such as template version conflicts and rollback strategies in the documentation.",
+    "Provide instructions for running and verifying the ETL pipeline and template deployment."
+  ],
+  "artifacts": {
+    "pipeline_spec": "## Pipeline Specification\n\n### Sources\n- Thymeleaf HTML email templates stored in a version-controlled repository (e.g., Git).\n- Metadata stored in a relational database table `email_templates`.\n\n### Cadence\n- Triggered on template updates or scheduled daily to sync changes.\n\n### Orchestration\n- Use Airflow or similar scheduler to orchestrate the ETL pipeline.\n\n### Steps\n1. **Ingestion:** Pull latest templates and metadata from source repo.\n2. **Validation:** Run HTML5 and Thymeleaf syntax checks, lint CSS inline styles.\n3. **Transformation:** Apply responsive design fixes, inline CSS, and optimize for email clients.\n4. **Packaging:** Bundle templates with assets for deployment.\n5. **Deployment:** Push to email sending service or application template store.\n\n### SLAs\n- Pipeline should complete within 10 minutes of trigger.\n- 99.9% success rate with alerting on failures.\n\n### Recovery Plan\n- On failure, rollback to last known good template version.\n- Notify developers via email or messaging system.\n",
+    "sql_snippets": "-- SQL snippet to create template metadata table\nCREATE TABLE email_templates (\n  template_id VARCHAR(20) PRIMARY KEY,\n  template_name VARCHAR(255) NOT NULL,\n  version INT NOT NULL,\n  last_updated TIMESTAMP NOT NULL,\n  status VARCHAR(50) NOT NULL,\n  UNIQUE(template_name, version)\n);\n\n-- SQL snippet to check for duplicate template names with same version\nSELECT template_name, version, COUNT(*)\nFROM email_templates\nGROUP BY template_name, version\nHAVING COUNT(*) > 1;\n\n-- SQL snippet

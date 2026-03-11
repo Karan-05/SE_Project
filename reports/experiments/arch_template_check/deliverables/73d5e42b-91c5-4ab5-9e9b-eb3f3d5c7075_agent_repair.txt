@@ -1,0 +1,28 @@
+BEGIN_JSON
+{
+  "task_type": "architecture_doc",
+  "id": "73d5e42b-91c5-4ab5-9e9b-eb3f3d5c7075",
+  "title": "Topcoder Identity Service implementing IdentityProviderResource",
+  "summary": "This architecture document outlines the design and implementation plan for migrating the IdentityProviderResource from the legacy Java-based Identity Service to the revised TypeScript/Postgres-based Identity Service. The goal is to maintain existing functionalities such as redis caching and Kafka event bus integration while ensuring high test coverage and adherence to best practices. The document covers the problem summary, proposed approach, file-level plan, API/interface changes, constraints, risks and trade-offs, edge cases, and acceptance criteria.",
+  "assumptions": [
+    "Access to the existing IdentityProviderResource.java source code and business logic is available for reference.",
+    "The revised Identity Service repository and environment setup (TypeScript, Prisma, Postgres) are accessible and consistent with previous migration challenges.",
+    "Redis cache, Kafka event bus, and other existing infrastructure remain unchanged and integrated as before.",
+    "Test data for E2E and unit tests targeting Postgres is or will be provided via forum or existing test fixtures.",
+    "Linting and code style guidelines are consistent with the existing revised Identity Service project standards.",
+    "Postman collection format and tooling are compatible with the existing API testing framework."
+  ],
+  "plan": [
+    "Analyze the existing IdentityProviderResource.java to fully understand its functionality, endpoints, and integration points.",
+    "Design the TypeScript implementation of IdentityProviderResource in the revised Identity Service codebase, ensuring feature parity and reuse of common code modules.",
+    "Implement the IdentityProviderResource using Prisma ORM to interact with Postgres version 16.3, maintaining Redis cache and Kafka event bus usage as in the legacy service.",
+    "Develop comprehensive unit tests targeting all methods of IdentityProviderResource to achieve >=90% coverage (line, branch, overall), placing tests under test/unit.",
+    "Develop E2E tests that validate the IdentityProviderResource behavior against a live Postgres database, ensuring >=90% coverage, placing tests under test/e2e.",
+    "Create Postman collections covering all IdentityProviderResource endpoints and typical workflows for manual and automated API testing.",
+    "Perform code linting and static analysis to ensure adherence to best practices and project standards.",
+    "Document the verification strategy clearly, including test coverage metrics, test data setup, and instructions for running tests and validations.",
+    "Prepare a patch file against the develop branch of the revised Identity Service repository, referencing commit hash b9cd006b1d53553b8d379f428a4508effec07d85 or later.",
+    "Review and finalize the architecture documentation including risks, trade-offs, constraints, and acceptance checklist before submission."
+  ],
+  "artifacts": {
+    "design_doc_md": "## Problem Summary\n- Migrate IdentityProviderResource from Java/MySQL to TypeScript/Postgres with Prisma.\n- Maintain existing functionalities including redis cache and Kafka event bus.\n- Ensure high test coverage and follow revised service architecture and best practices.\n\n## Proposed Approach\n- Analyze legacy Java code to replicate logic in TypeScript.\n- Use Prisma ORM for database interactions with Postgres 16.3.\n- Integrate existing redis and Kafka components without modification.\n- Implement unit and E2E tests to ensure >=90% coverage.\n- Provide Postman collections for API validation.\n\n## File-Level Plan\n- src/resources/IdentityProviderResource.ts: New resource implementation.\n- test/unit/IdentityProviderResource.test.ts: Unit tests for all methods.\n- test/e2e/IdentityProviderResource.e2e.test.ts: E2E tests with database.\n- postman/IdentityProviderResource.postman_collection.json: Postman

@@ -1,0 +1,1 @@
+[MOCK] e54ef63ba3831aa0 :: You are repairing code produced by strategy 'multi_view'. Problem statement: Return degree counts for each vertex.  Memo

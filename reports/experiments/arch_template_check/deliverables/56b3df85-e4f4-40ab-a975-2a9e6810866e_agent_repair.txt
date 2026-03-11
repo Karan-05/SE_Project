@@ -1,0 +1,27 @@
+BEGIN_JSON
+{
+  "task_type": "architecture_doc",
+  "id": "56b3df85-e4f4-40ab-a975-2a9e6810866e",
+  "title": "Topcoder Review API - Challenge and Resource API Integration",
+  "summary": "Enhance the existing tc-review-api's GET /api/reviews endpoint to correctly fetch pending reviews by integrating with Challenge API and Resources API. The solution must filter reviews based on challenge status and user roles, update response format to include role information, and implement proper error handling and caching.",
+  "assumptions": [
+    "Access to the tc-review-api, challenge-api-v6, and resource-api-v6 repositories is available for reference and patch submission.",
+    "The existing ChallengeApiService in tc-review-api is functional and can be used as a pattern for ResourceApiService.",
+    "The frontend expects a consistent JSON response format including user role and filtered active reviews.",
+    "Caching strategies should align with existing project conventions or industry best practices for API response caching.",
+    "No new API endpoints are to be created; only enhancement of the existing GET /api/reviews endpoint is required."
+  ],
+  "plan": [
+    "Analyze the current implementation of ReviewController.getPendingReviews() to identify integration points and gaps.",
+    "Review ChallengeApiService implementation to understand API call patterns, error handling, and caching.",
+    "Design and implement a new ResourceApiService following the ChallengeApiService pattern to fetch user roles from Resources API.",
+    "Enhance getPendingReviews() to call Challenge API for challenge status and Resources API for user roles, filtering reviews accordingly.",
+    "Define and update TypeScript interfaces to type API responses from Challenge API and Resources API accurately.",
+    "Implement robust error handling for all external API calls with fallback or retry logic as appropriate.",
+    "Incorporate caching mechanisms for Challenge API and Resources API responses to optimize performance.",
+    "Update the response format of GET /api/reviews to include user role information and ensure consistent structure for frontend.",
+    "Write documentation detailing the changes, usage, and testing instructions.",
+    "Create and submit a git patch against the feat/review-opportunities branch of tc-review-api repository."
+  ],
+  "artifacts": {
+    "design_doc_md": "## Problem Summary\n- The current GET /api/reviews endpoint in tc-review-api does not correctly fetch pending reviews for users with different roles.\n- It lacks integration with Challenge API for challenge status and Resources API for user roles.\n- The response format does not include user role information, causing frontend inconsistencies.\n\n## Proposed Approach\n- Enhance getPendingReviews() to integrate with Challenge API and Resources API.\n- Use ChallengeApiService to verify challenge status and filter active challenges.\n- Implement ResourceApiService to fetch user roles per challenge and filter reviews accordingly.\n- Update response format to include user roles and maintain consistent structure.\n- Implement error handling and caching for external API calls.\n\n## File-Level Plan\n- Modify src/controllers/ReviewController.ts to update getPendingReviews() method.\n- Create src/services/ResourceApiService.ts modeled after ChallengeApiService.\n- Update src/interfaces/apiResponses.ts to add new TypeScript interfaces for Resources API responses.\n- Add caching logic in services or use existing cache utilities.\n- Update documentation files (e.g., docs/review-api.md) with new integration details.\n\n## API / Interface Changes\n- No new endpoints; enhance GET /api/reviews.\n- Add user role information in the response JSON structure.\n- Define new TypeScript interfaces for Resources API response.\n- Extend existing challenge status interfaces if necessary.\n\n## Constraints & SLAs\n- API response time should remain under 500ms under normal load.\n- Caching TTL (time-to-live) for external API responses should balance freshness and performance (

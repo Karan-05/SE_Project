@@ -1,0 +1,6 @@
+{
+  "expected_snapshot": "b5d35262031fffb59e4ece9e9d7bc9119912652f0e88b1c9109f0b471e778fc5",
+  "computed_snapshot": "b5d35262031fffb59e4ece9e9d7bc9119912652f0e88b1c9109f0b471e778fc5",
+  "snapshot_verified": true,
+  "log_path": "/Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo/runs/tc_arena_problem_detail/failure_mode_first/logs/snapshot_check.json"
+}

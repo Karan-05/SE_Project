@@ -1,0 +1,1 @@
+{"content": "[MOCK] 0b0477de69e52095 :: You are executing decomposition strategy 'direct_baseline'. Problem statement: Return the sum of the main diagonal.  Imp", "tokens": 102, "elapsed": 3.7500285543501377e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "plan-runner", "caller": "direct_baseline:initial"}}

@@ -1,0 +1,44 @@
+{
+  "task_id": "array_prefix_hard",
+  "strategy": "semantic_diff",
+  "plan": {
+    "strategy": "semantic_diff",
+    "contract": {},
+    "patterns": [
+      "baseline"
+    ],
+    "subtasks": [
+      "load base solution",
+      "apply semantic deltas",
+      "re-test",
+      "Generate minimal unit tests for critical behaviors",
+      "Add adversarial/edge-case tests",
+      "Run tests and interpret failures",
+      "Repair implementation and re-run tests"
+    ],
+    "tests": [
+      "critical unit tests",
+      "edge-case probes"
+    ],
+    "diagnostics": {
+      "base_task": "baseline",
+      "num_deltas": "1",
+      "delta_note": "- Output changes from final sum to running prefix sums (intermediate cumulative sums).\n- Task shifts from single scalar output to sequence output.\n- Requires maintaining and updating state at each step.\n- Increased output length proportional to input length.\n- Emphasis on incremental aggregation rather than one-time aggregation.",
+      "planning_tokens": "90",
+      "planning_time": "1.528847"
+    }
+  },
+  "rounds": [
+    {
+      "round": 0,
+      "phase": "initial",
+      "subtask": "plan",
+      "localized": false,
+      "pass_rate": 1.0,
+      "status": "passed",
+      "duration": 4.454201553016901e-05,
+      "failing_tests": [],
+      "error_types": []
+    }
+  ]
+}

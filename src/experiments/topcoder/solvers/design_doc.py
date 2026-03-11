@@ -44,10 +44,17 @@ class ArchitectureDocSolver:
         "Acceptance Checklist",
     ]
 
-    def __init__(self, rubric: RubricVerifier, rubric_name: str = "architecture_doc", temperature: float = 0.4):
+    def __init__(
+        self,
+        rubric: RubricVerifier,
+        rubric_name: str = "architecture_doc",
+        temperature: float = 0.4,
+        max_response_tokens: int = 1800,
+    ):
         self.rubric = rubric
         self.rubric_name = rubric_name
         self.temperature = temperature
+        self.max_response_tokens = max_response_tokens
 
     def solve(self, ctx: SolverContext) -> SolverResult:
         start_calls = llm.total_calls()
@@ -154,16 +161,20 @@ class ArchitectureDocSolver:
         hint_block = statement
         if hints:
             hint_block += "\n\nMemory Hints:\n" + "\n".join(f"- {hint}" for hint in hints)
+        template_lines = "\n".join(f"## {section}" for section in self.required_sections)
         prompt = build_universal_agent_prompt(
             task=ctx.task,
             solver_name=self.name,
             task_type_hint="architecture_doc",
             instructions=(
                 "Produce a complete architecture/design doc with all required sections."
-                "Keep prose concise and actionable."
+                " Keep prose concise and actionable—limit each section to ~4 bullet points or short paragraphs."
+                " Use EXACTLY the following markdown headings (each starting with '## ') in this order:"
+                f"\n{template_lines}"
+                "\nDo not introduce additional top-level headings; rely on sub-bullets if needed."
             ),
             artifacts=[
-                ArtifactRequest("architecture.md", "md", "Architecture doc with required sections in order."),
+                ArtifactRequest("architecture.md", "md", "Architecture doc strictly following the required heading template."),
             ],
             verification_expectations=[
                 "Check section coverage vs. rubric.",
@@ -178,7 +189,7 @@ class ArchitectureDocSolver:
         )
         response = llm.call(
             prompt,
-            max_tokens=700,
+            max_tokens=self.max_response_tokens,
             temperature=self.temperature,
             caller="design_doc_solver",
         )
@@ -245,7 +256,51 @@ class ArchitectureDocSolver:
         tradeoffs = self._safe_list(artifacts.get("tradeoffs"))
         if tradeoffs:
             sections.append("## Trade-offs\n" + "\n".join(f"- {entry}" for entry in tradeoffs))
-        return "\n\n".join(section for section in sections if section.strip()) or self._fallback_deliverable(ctx)
+        document = "\n\n".join(section for section in sections if section.strip())
+        document = self._normalize_sections(document)
+        return document or self._fallback_deliverable(ctx)
+
+    def _normalize_sections(self, document: str) -> str:
+        if not document:
+            return document
+        lines = document.splitlines()
+        normalized: List[str] = []
+        normalized_sections: List[str] = []
+        canonical = {section.lower(): section for section in self.required_sections}
+
+        for line in lines:
+            stripped = line.strip()
+            if not stripped:
+                normalized.append(line)
+                continue
+            if stripped.startswith("##"):
+                label = stripped[2:].strip()
+                key = canonical.get(label.lower())
+                if key:
+                    normalized.append(f"## {key}")
+                    normalized_sections.append(key.lower())
+                else:
+                    normalized.append(line)
+                continue
+            matched_section = None
+            remainder = ""
+            for lower_name, canonical_name in canonical.items():
+                if stripped.lower() == lower_name:
+                    matched_section = canonical_name
+                    break
+                if stripped.lower().startswith(lower_name) and stripped[len(lower_name) :].lstrip().startswith((":","-")):
+                    matched_section = canonical_name
+                    remainder = stripped[len(lower_name):].lstrip(" :-")
+                    break
+            if matched_section:
+                normalized.append(f"## {matched_section}")
+                normalized_sections.append(matched_section.lower())
+                if remainder:
+                    normalized.append(remainder)
+            else:
+                normalized.append(line)
+
+        return "\n".join(normalized)
 
     def _non_actionable_result(
         self,

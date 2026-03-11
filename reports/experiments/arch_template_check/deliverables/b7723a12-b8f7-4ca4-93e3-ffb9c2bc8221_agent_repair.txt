@@ -1,0 +1,30 @@
+BEGIN_JSON
+{
+  "task_type": "data_etl",
+  "id": "b7723a12-b8f7-4ca4-93e3-ffb9c2bc8221",
+  "title": "Topcoder Ratings Calculation Service Postgres Schema Design",
+  "summary": "Design a Prisma ORM schema for the Ratings Calculation Service by transforming existing Informix tables to PostgreSQL, including audit fields and indexes. Update the OpenAPI specification to reflect the new schema and remove deprecated elements. Provide an ETL blueprint with pipeline steps, validation queries, and data quality checks to ensure accurate migration and ongoing data integrity.",
+  "assumptions": [
+    "Access to the Informix schema and data models is limited; transformation is based on available src/models and inferred schema.",
+    "Exact Informix table definitions and ElasticSearch/Dynamo mappings are partially inferred due to lack of full source data.",
+    "OpenAPI spec update scope is limited to reflect schema changes and remove deprecated fields like app-version; no full API redesign is requested.",
+    "Prisma best practices include adding createdBy, createdAt, updatedBy, updatedAt fields and indexing frequently queried columns.",
+    "Verification of transformation will rely on data validation queries and sample data checks rather than full integration tests.",
+    "Pipeline orchestration and scheduling details are not provided, so a generic daily batch ETL is assumed."
+  ],
+  "plan": [
+    "Analyze existing Informix schema from src/models and related resources to identify all tables and fields for Ratings Calculation Service.",
+    "Design Prisma schema models for PostgreSQL including audit fields (createdBy, createdAt, updatedBy, updatedAt) and add indexes on frequently queried columns.",
+    "Document transformation rules from Informix to Prisma schema including datatype mappings, naming conventions, and index strategies.",
+    "Update OpenAPI (Swagger) specification to align with the new Prisma schema, removing deprecated fields such as app-version and correcting inconsistencies with existing controllers.",
+    "Define an ETL pipeline specification describing data extraction from Informix, transformation to new schema, and loading into PostgreSQL via Prisma.",
+    "Develop SQL snippets for data validation and transformation verification, ensuring data integrity and completeness.",
+    "Provide Python pseudo-code snippets representing ETL orchestration with checkpoints, logging, and error handling.",
+    "Specify data quality checks with thresholds and actions to monitor ongoing data correctness post-migration.",
+    "Create an acceptance checklist covering schema completeness, API doc accuracy, ETL correctness, and data quality validation.",
+    "Self-validate all artifacts against requirements and rubric criteria before submission."
+  ],
+  "artifacts": {
+    "pipeline_spec": "## ETL Pipeline Specification\n\n### Data Sources\n- Informix database containing original Ratings Calculation Service tables.\n- ElasticSearch and DynamoDB sources for supplementary data as applicable.\n\n### Cadence\n- Daily batch ETL process scheduled during off-peak hours.\n\n### Orchestration\n- Orchestrated via Airflow or similar scheduler (assumed).\n- Steps:\n  1. Extract data from Informix tables.\n  2. Transform data to conform to Prisma schema (data type conversions, field renaming, audit fields addition).\n  3. Load transformed data into PostgreSQL via Prisma ORM.\n  4. Run data quality checks and validation queries.\n  5. Log success/failure and alert on anomalies.",
+    "sql_snippets": "-- Sample SQL validation query to check row counts\nSELECT COUNT(*) FROM ratings_calculation_service_informix;\n\n-- Data transformation example\n-- Convert Informix DATETIME to PostgreSQL TIMESTAMP\n-- Add audit fields with default values\n\n-- Index creation example\nCREATE INDEX idx_ratings_user_id ON ratings(user_id);",
+    "python_snippets": "def etl_pipeline():\n    try:\n        extract_data()\n        transformed_data

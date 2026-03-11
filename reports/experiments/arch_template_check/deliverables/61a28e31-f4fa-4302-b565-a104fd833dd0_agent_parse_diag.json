@@ -1,0 +1,36 @@
+{
+  "task_id": "61a28e31-f4fa-4302-b565-a104fd833dd0",
+  "run_id": "arch_template_check",
+  "raw_path": "/Users/karanallagh/Desktop/DataCollector/reports/experiments/arch_template_check/deliverables/61a28e31-f4fa-4302-b565-a104fd833dd0_agent_raw.txt",
+  "raw_length": 3542,
+  "sentinel_found": false,
+  "attempts": [
+    {
+      "mode": "sentinel",
+      "success": false,
+      "error": "sentinel_block_missing"
+    },
+    {
+      "mode": "balanced",
+      "success": false,
+      "error": "no_balanced_candidate"
+    },
+    {
+      "mode": "repair",
+      "success": false,
+      "error": "Unable to locate valid JSON block (Unterminated string starting at: line 26 column 22 (char 2765))"
+    }
+  ],
+  "errors": [
+    {
+      "stage": "repair",
+      "message": "Unable to locate valid JSON block (Unterminated string starting at: line 26 column 22 (char 2765))"
+    }
+  ],
+  "repair_attempted": true,
+  "repair_used": false,
+  "max_repairs": 1,
+  "llm_provider": "openai",
+  "repair_path": "/Users/karanallagh/Desktop/DataCollector/reports/experiments/arch_template_check/deliverables/61a28e31-f4fa-4302-b565-a104fd833dd0_agent_repair.txt",
+  "status": "failed"
+}

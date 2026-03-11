@@ -1,0 +1,1 @@
+{"content": "[MOCK] cf0c6bf0a5e06c05 :: You are repairing code produced by strategy 'simulation_trace'. Problem statement: Return the running prefix sums. Imple", "tokens": 147, "elapsed": 4.083034582436085e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "simulation_trace:repair"}}

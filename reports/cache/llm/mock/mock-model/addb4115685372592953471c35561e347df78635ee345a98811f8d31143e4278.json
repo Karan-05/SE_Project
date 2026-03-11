@@ -1,0 +1,1 @@
+{"content": "[MOCK] 497e3a4e3ec649a4 :: You are executing decomposition strategy 'failure_mode_first'. Problem statement: Return the running prefix sums.  Imple", "tokens": 138, "elapsed": 4.458008334040642e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "plan-runner", "caller": "failure_mode_first:initial"}}

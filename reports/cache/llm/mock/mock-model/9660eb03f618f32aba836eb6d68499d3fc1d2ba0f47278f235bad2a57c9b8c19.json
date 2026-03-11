@@ -1,0 +1,1 @@
+{"content": "[MOCK] a17741f37ed226bd :: You are executing decomposition strategy 'simulation_trace'. Problem statement: Return the number of undirected edges.  ", "tokens": 111, "elapsed": 3.4589902497828007e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "plan-runner", "caller": "simulation_trace:initial"}}

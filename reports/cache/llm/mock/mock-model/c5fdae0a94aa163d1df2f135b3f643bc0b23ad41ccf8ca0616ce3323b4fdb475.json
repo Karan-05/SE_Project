@@ -1,0 +1,1 @@
+{"content": "[MOCK] 2081e9cfa4da818b :: You are executing decomposition strategy 'role_decomposed'. Problem statement: Return the sum of the main diagonal.  Imp", "tokens": 114, "elapsed": 4.167028237134218e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "plan-runner", "caller": "role_decomposed:initial"}}

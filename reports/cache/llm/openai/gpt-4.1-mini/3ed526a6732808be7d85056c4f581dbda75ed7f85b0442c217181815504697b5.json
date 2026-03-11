@@ -1,0 +1,1 @@
+{"content": "For the problem \"Return the number of undirected edges,\" the **two pointers** pattern is generally **not relevant**.\n\n### Reasoning:\n- **Two", "tokens": 59, "elapsed": 1.2551491250051185, "budget_exceeded": false, "meta": {"provider": "openai", "model": "pattern-hint", "caller": "pattern_skeleton"}}

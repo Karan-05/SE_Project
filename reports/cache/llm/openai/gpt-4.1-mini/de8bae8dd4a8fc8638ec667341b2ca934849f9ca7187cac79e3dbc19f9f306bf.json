@@ -1,0 +1,1 @@
+{"content": "Could you please specify which algorithm you'd like me to simulate for the input `['abc']`? For example, sorting, searching, string manipulation, or something else?", "tokens": 51, "elapsed": 1.4095152909867465, "budget_exceeded": false, "meta": {"provider": "openai", "model": "trace-writer", "caller": "simulation_trace"}}

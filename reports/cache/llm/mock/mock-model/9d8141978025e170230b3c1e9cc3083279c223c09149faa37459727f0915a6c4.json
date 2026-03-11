@@ -1,0 +1,1 @@
+{"content": "[MOCK] 216f923367345a29 :: You are repairing code produced by strategy 'semantic_diff'. Problem statement: Return degree counts for each vertex. Im", "tokens": 171, "elapsed": 4.375004209578037e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "semantic_diff:repair"}}

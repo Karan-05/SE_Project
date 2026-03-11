@@ -1,0 +1,90 @@
+{
+  "task_id": "graph_degree_test",
+  "strategy": "multi_view",
+  "attempt": 7,
+  "pass_rate": 0.0,
+  "plan_subtasks": [
+    "align spec-view",
+    "align example-view",
+    "align constraint-view",
+    "Generate minimal unit tests for critical behaviors",
+    "Add adversarial/edge-case tests",
+    "Run tests and interpret failures"
+  ],
+  "plan_tests": [
+    "",
+    ""
+  ],
+  "plan_diagnostics": {
+    "consistent": "True",
+    "views": "6",
+    "consistency_note": "The provided input is:\n\nSpec: ['Summarize goal', 'List required outputs', 'State constraints']  \nExamples: ['', '']  \nConstraints: [None]\n\nYou asked: \"Check whether these views disagree.\"\n\nSince the examples are both empty strings ('' and ''), there is no content to compare or analyze for disagreement.\n\nTherefore, the views do",
+    "planning_tokens": "112",
+    "planning_time": "1.942327"
+  },
+  "patch_summary": {
+    "phase": "initial"
+  },
+  "failing_tests": [
+    "sample_0",
+    "sample_1"
+  ],
+  "trace": [
+    "",
+    ""
+  ],
+  "feedback": [
+    "sample_0 expected {'0': 1, '1': 2, '2': 1} but saw {0: 1, 1: 2, 2: 1}",
+    "sample_1 expected {'1': 2} but saw {1: 2}"
+  ],
+  "reproduction": "inputs=[[[0, 1], [1, 2]]] kwargs={}",
+  "tests_run": [
+    {
+      "name": "sample_0",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'0': 1, '1': 2, '2': 1}",
+      "output": "{0: 1, 1: 2, 2: 1}",
+      "error": "",
+      "input": "[[[0, 1], [1, 2]]]",
+      "kwargs": "{}",
+      "duration": 2.2457970771938562e-05
+    },
+    {
+      "name": "sample_1",
+      "mode": "call",
+      "status": "fail",
+      "expected": "{'1': 2}",
+      "output": "{1: 2}",
+      "error": "",
+      "input": "[[[1, 1]]]",
+      "kwargs": "{}",
+      "duration": 5.750043783336878e-06
+    }
+  ],
+  "llm_calls": 1,
+  "timeline": {
+    "attempt": 7,
+    "strategy": "multi_view",
+    "phase": "initial",
+    "events": {
+      "decompose": {
+        "start": "2026-03-06T12:57:28.698857",
+        "end": "2026-03-06T12:57:30.641430"
+      },
+      "solve": {
+        "start": "2026-03-06T12:57:30.641477",
+        "end": "2026-03-06T12:57:31.973393"
+      },
+      "tests": {
+        "start": "2026-03-06T12:57:31.973300",
+        "end": "2026-03-06T12:57:31.973354",
+        "duration_seconds": "0.000"
+      }
+    },
+    "meta": {
+      "llm_calls": "1"
+    }
+  },
+  "solution_preview": "def solve(edges):\n                deg = {}\n                for a,b in edges:\n                    deg[a] = deg.get(a,0)+1\n                    deg[b] = deg.get(b,0)+1\n                return deg"
+}

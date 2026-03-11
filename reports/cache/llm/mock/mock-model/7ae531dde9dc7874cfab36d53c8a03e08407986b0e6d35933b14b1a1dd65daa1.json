@@ -1,0 +1,1 @@
+{"content": "[MOCK] 52f8c86d73764360 :: You are executing decomposition strategy 'simulation_trace'. Problem statement: Count primes up to N.  Implementation co", "tokens": 107, "elapsed": 3.4160329960286617e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "plan-runner", "caller": "simulation_trace:initial"}}

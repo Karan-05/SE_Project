@@ -1,0 +1,27 @@
+{
+  "task_id": "mixed_matrix_stress",
+  "tests": [
+    {
+      "name": "sample_0",
+      "mode": "call",
+      "status": "pass",
+      "expected": "5",
+      "output": "5",
+      "error": "",
+      "input": "[[[1, 2], [3, 4]]]",
+      "kwargs": "{}",
+      "duration": 3.0916009563952684e-05
+    },
+    {
+      "name": "sample_1",
+      "mode": "call",
+      "status": "pass",
+      "expected": "5",
+      "output": "5",
+      "error": "",
+      "input": "[[[5]]]",
+      "kwargs": "{}",
+      "duration": 9.000010322779417e-06
+    }
+  ]
+}

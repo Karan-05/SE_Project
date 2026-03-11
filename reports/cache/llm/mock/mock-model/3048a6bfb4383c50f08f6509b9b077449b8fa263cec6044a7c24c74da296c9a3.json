@@ -1,0 +1,1 @@
+{"content": "[MOCK] 31ae2381eb0e72b6 :: You are repairing code produced by strategy 'failure_mode_first'. Problem statement: Return the nth Fibonacci number. Im", "tokens": 172, "elapsed": 4.915986210107803e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "failure_mode_first:repair"}}

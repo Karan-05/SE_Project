@@ -1,0 +1,43 @@
+BEGIN_JSON
+{
+  "task_type": "architecture_doc",
+  "id": 30377032,
+  "title": "Topcoder Review App - API Integration Part 1",
+  "summary": "This architecture document details the design and implementation plan for integrating real API functionality into the Topcoder Review App, specifically enhancing the tc-review-api backend for the ActiveReviewsPage and implementing direct multi-API integration in the platform-ui frontend for the ChallengeDetailsPage. It covers backend enhancements, frontend service modules, data orchestration, authentication, error handling, and role-based display logic to meet the specified requirements.",
+  "assumptions": [
+    "Access to the specified GitHub repositories and branches is available for patch application and testing.",
+    "Existing API clients and services (e.g., ChallengeApiService) in tc-review-api can be used as references for new service implementations.",
+    "Authentication tokens and user context are managed consistently across frontend and backend services.",
+    "API endpoints from Challenge API and Resources API are stable and documented as per given URLs.",
+    "No modifications are required for Challenge API and Resources API repositories.",
+    "Frontend is using React with TypeScript and supports hooks and service modularization.",
+    "Backend uses NestJS with Prisma ORM and PostgreSQL as stated.",
+    "Caching strategies will be implemented on the frontend to reduce API calls and improve performance."
+  ],
+  "plan": [
+    "Enhance tc-review-api backend GET /api/reviews endpoint:",
+    " - Extend ReviewController.getPendingReviews() to integrate ChallengeApiService and new ResourceApiService.",
+    " - Implement ResourceApiService to query Resources API for user roles per challenge.",
+    " - Filter reviews by user role and active challenge status, and format response to include user role info.",
+    "Update platform-ui frontend for ActiveReviewsPage:",
+    " - Replace mock data in fetchActiveReviews() with real API calls to tc-review-api's enhanced endpoint.",
+    " - Update useFetchActiveReviews() hook to handle new API response format with error/loading states.",
+    " - Modify TableActiveReviews component to display user role information and maintain existing filters.",
+    "Implement direct multi-API integration in platform-ui for ChallengeDetailsPage:",
+    " - Create new service modules: challenge-api.service.ts, resources-api.service.ts, and update reviews.service.ts.",
+    " - Implement data orchestration layer to execute parallel API calls, aggregate, filter, and transform data based on user roles.",
+    " - Update useFetchChallengeInfo() hook and ChallengeDetailsPage component to consume aggregated data.",
+    "Implement role-based display logic:",
+    " - Add conditional rendering and tab visibility based on user roles and challenge phases.",
+    " - Enforce permission checks for data display and editing capabilities.",
+    "Implement shared API integration tasks:",
+    " - Develop auth service for token management, authorization headers, and token refresh.",
+    " - Add comprehensive error handling, loading indicators, retry mechanisms, and partial data handling.",
+    " - Establish base API service class with common functionality (logging, caching, error handling).",
+    " - Extend base class for each API service with proper TypeScript interfaces for all responses.",
+    "Remove all mock data and references from platform-ui after real API integration is complete.",
+    "Prepare Git patches for tc-review-api (feat/review-opportunities branch) and platform-ui (feat/review branch).",
+    "Document new service modules, data aggregation strategy, and testing instructions in markdown."
+  ],
+  "artifacts": {
+    "design_doc_md": "## Problem Summary\n- The Topcoder Review App currently uses mock data; real API integration is required for ActiveReviewsPage and ChallengeDetailsPage.\n- Backend tc-review-api needs enhancement to fetch accurate pending reviews with role-based filtering.\n- Frontend platform-ui requires direct multi-API integration for challenge details aggregation.\n- Proper authentication, error handling, and caching are critical for robust integration.\n\n##

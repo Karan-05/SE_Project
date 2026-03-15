@@ -5,7 +5,7 @@ idempotent ETL into MySQL, and generating analysis-ready CSV/Markdown artifacts.
 
 ## Step-by-step runbook
 
-**Before you begin:** inflate the oversized assets (Topcoder legacy archive + processed tasks CSV) that are stored as `.gz` files to satisfy GitHub's 100 MB limit. Run:
+**Before you begin:** inflate the oversized assets (Topcoder legacy archive, processed tasks CSV, artifact-candidate manifests, and repo-candidate manifests) that are stored as `.gz` files to satisfy GitHub's 100 MB limit. Run:
 ```bash
 python scripts/unpack_large_assets.py
 ```

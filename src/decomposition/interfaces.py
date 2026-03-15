@@ -26,6 +26,7 @@ class DecompositionPlan:
     """Structured plan produced by every strategy."""
 
     strategy_name: str
+    contract_items: List[Dict[str, object]] = field(default_factory=list)
     contract: Dict[str, str] = field(default_factory=dict)
     patterns: List[str] = field(default_factory=list)
     subtasks: List[str] = field(default_factory=list)

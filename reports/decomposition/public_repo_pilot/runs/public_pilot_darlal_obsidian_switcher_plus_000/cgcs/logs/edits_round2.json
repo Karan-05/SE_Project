@@ -1,0 +1,53 @@
+{
+  "round": 2,
+  "strategy": "cgcs",
+  "proposed_files": [
+    "src/main.ts"
+  ],
+  "applied_files": [
+    "src/main.ts"
+  ],
+  "status": "applied",
+  "metadata": {
+    "raw_edit_payload": "{\"edits\": [{\"path\": \"src/main.ts\", \"mode\": \"rewrite\", \"content\": \"[MOCK] 43f977739a927582 :: You are repairing a repository-backed change produced by strategy 'cgcs'. Repository workspace: `/Users/karanallagh/Desk\"}], \"localized\": true}",
+    "raw_payload": "{\"edits\": [{\"path\": \"src/main.ts\", \"mode\": \"rewrite\", \"content\": \"[MOCK] 43f977739a927582 :: You are repairing a repository-backed change produced by strategy 'cgcs'. Repository workspace: `/Users/karanallagh/Desk\"}], \"localized\": true}",
+    "payload_parse_ok": true,
+    "payload_parse_error": "",
+    "candidate_files_raw": [
+      "src/main.ts",
+      "README.md",
+      "src/switcherPlus/__tests__/switcherPlusKeymap.test.ts",
+      "src/switcherPlus/switcherPlusKeymap.ts",
+      "src/settings/__tests__/switcherPlusSettings.test.ts",
+      "package.json",
+      "src/settings/generalSettingsTabSection.ts",
+      "src/settings/switcherPlusSettings.ts",
+      "src/switcherPlus/inputParser.ts",
+      "src/switcherPlus/modeHandler.ts",
+      "src/switcherPlus/__tests__/modeHandler.test.ts",
+      "src/switcherPlus/__tests__/modeHandler.perf.test.ts"
+    ],
+    "candidate_files_filtered": [
+      "src/main.ts"
+    ],
+    "candidate_files": [
+      "src/main.ts"
+    ],
+    "strategy_mode": "cgcs",
+    "edit_mode": "edit_batch",
+    "localized_requested": true,
+    "fallback_requested": false,
+    "raw_metadata_keys": [
+      "localized"
+    ],
+    "applied_file_count": 1,
+    "proposed_file_count": 1,
+    "multi_file_applied": false,
+    "subtask_focus": "contract::M000_comparison_flip_2abb0d97"
+  },
+  "error": "",
+  "proposed_file_count": 1,
+  "applied_file_count": 1,
+  "multi_file_proposed": false,
+  "multi_file_applied": false
+}

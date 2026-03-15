@@ -1,0 +1,1131 @@
+{
+  "task_id": "tc_arena_problem_tags_filter",
+  "strategy": "cgcs",
+  "plan": {
+    "strategy": "cgcs",
+    "contract_items": [
+      {
+        "id": "single_tag_filter",
+        "label": "single_tag_filter",
+        "description": "Handle ?tags=<value> case-insensitively and return metadata.appliedTags with normalized lowercase tags.",
+        "category": "filtering",
+        "expected_behavior": "Handle ?tags=<value> case-insensitively and return metadata.appliedTags with normalized lowercase tags.",
+        "test_refs": [
+          "SRM problem tag filters::filters by a single tag case-insensitively"
+        ],
+        "priority": "",
+        "source": "",
+        "notes": "",
+        "keywords": [
+          "appliedtags"
+        ]
+      },
+      {
+        "id": "multi_tag_union",
+        "label": "multi_tag_union",
+        "description": "Comma-separated tags (e.g. ?tags=foo,bar) must match problems that contain any requested tag and expose both normalized tags in metadata.appliedTags.",
+        "category": "filtering",
+        "expected_behavior": "Comma-separated tags (e.g. ?tags=foo,bar) must match problems that contain any requested tag and expose both normalized tags in metadata.appliedTags.",
+        "test_refs": [
+          "SRM problem tag filters::accepts comma-separated tags and returns merged results"
+        ],
+        "priority": "",
+        "source": "",
+        "notes": "",
+        "keywords": [
+          "tags"
+        ]
+      },
+      {
+        "id": "array_tag_filter",
+        "label": "array_tag_filter",
+        "description": "tags[]=... array form must work alongside difficulty filters while preserving ordering by roundId and the paging limit.",
+        "category": "filtering",
+        "expected_behavior": "tags[]=... array form must work alongside difficulty filters while preserving ordering by roundId and the paging limit.",
+        "test_refs": [
+          "SRM problem tag filters::accepts array form and combines with difficulty filter"
+        ],
+        "priority": "",
+        "source": "",
+        "notes": "",
+        "keywords": [
+          "roundid",
+          "difficulty"
+        ]
+      }
+    ],
+    "contract": {
+      "clauses": [
+        "Handle ?tags=<value> case-insensitively and return metadata.appliedTags with normalized lowercase tags.",
+        "Comma-separated tags (e.g. ?tags=foo,bar) must match problems that contain any requested tag and expose both normalized tags in metadata.appliedTags.",
+        "tags[]=... array form must work alongside difficulty filters while preserving ordering by roundId and the paging limit."
+      ],
+      "categories": [
+        "filtering",
+        "filtering",
+        "filtering"
+      ],
+      "mapping": {
+        "single_tag_filter": "Handle ?tags=<value> case-insensitively and return metadata.appliedTags with normalized lowercase tags.",
+        "multi_tag_union": "Comma-separated tags (e.g. ?tags=foo,bar) must match problems that contain any requested tag and expose both normalized tags in metadata.appliedTags.",
+        "array_tag_filter": "tags[]=... array form must work alongside difficulty filters while preserving ordering by roundId and the paging limit."
+      }
+    },
+    "patterns": [],
+    "subtasks": [
+      "contract::single_tag_filter",
+      "contract::multi_tag_union",
+      "contract::array_tag_filter",
+      "Generate minimal unit tests for critical behaviors",
+      "Add adversarial/edge-case tests",
+      "Run tests and interpret failures",
+      "Repair implementation and re-run tests"
+    ],
+    "tests": [
+      "critical unit tests",
+      "edge-case probes"
+    ],
+    "diagnostics": {
+      "contract_clause_count": "3",
+      "contract_ids": "single_tag_filter,multi_tag_union,array_tag_filter"
+    },
+    "target_files": [
+      "modules/Problems/services/ProblemsService.js"
+    ],
+    "candidate_files": [
+      "modules/Problems/services/ProblemsService.js"
+    ],
+    "subtask_file_map": {
+      "contract::single_tag_filter": [
+        "modules/Problems/services/ProblemsService.js"
+      ]
+    }
+  },
+  "rounds": [
+    {
+      "round": 0,
+      "phase": "initial",
+      "subtask": "plan",
+      "localized": false,
+      "pass_rate": 0.0,
+      "status": "tests_failed",
+      "duration": 0.7655802500012214,
+      "failing_tests": [
+        "tests_0"
+      ],
+      "error_types": [
+        "fail::"
+      ],
+      "file_count": 1,
+      "multi_file_attempt": false,
+      "files_touched": [
+        "modules/Problems/services/ProblemsService.js"
+      ],
+      "inspected_files": [
+        "modules/Problems/services/ProblemsService.js",
+        "modules/Problems/controllers/ProblemsController.js",
+        "test/problems.tags.spec.js",
+        "data/problems.json"
+      ],
+      "proposed_files": [
+        "modules/Problems/services/ProblemsService.js"
+      ],
+      "edit_metadata": {
+        "raw_edit_payload": "{\"edits\": [{\"path\": \"modules/Problems/services/ProblemsService.js\", \"mode\": \"rewrite\", \"content\": \"```json\\n{\\n  \\\"edits\\\": [\\n    {\\n      \\\"path\\\": \\\"modules/Problems/services/ProblemsService.js\\\",\\n      \\\"mode\\\": \\\"rewrite\\\",\\n      \\\"content\\\": \\\"'use strict';\\\\n\\\\n/*\\\\n * Copyright (c) 2016 TopCoder, Inc.\\\\n */\\\\n\\\\n/**\\\\n * Service for SRM problem APIs.\\\\n */\\\\nconst fs = require('fs');\\\\nconst path = require('path');\\\\nconst Joi = require('joi');\\\\nconst logger = require('../../../common/logger');\\\\n\\\\nlet cachedProblems;\\\\n\\\\nconst MAX_LIMIT = 50;\\\\n\\\\n/**\\\\n * Normalize tags filter into a lowercase array.\\\\n * @param {string|Array<string>} rawTags\\\\n * @returns {Array<string>}\\\\n */\\\\nfunction normalizeTags(rawTags) {\\\\n  if (!rawTags && rawTags !== '') {\\\\n    return [];\\\\n  }\\\\n  const list = Array.isArray(rawTags) ? rawTags : String(rawTags).split(',');\\\\n  return list\\\\n    .map((tag) => String(tag || '').trim().toLowerCase())\\\\n    .filter((tag) => tag);\\\\n}\\\\n\\\\n/**\\\\n * Check whether the problem contains at least one of the requested tags.\\\\n * @param {Object} problem\\\\n * @param {Array<string>} tags\\\\n * @returns {boolean}\\\\n */\\\\nfunction problemHasAnyTag(problem, tags) {\\\\n  if (!tags || tags.length === 0) {\\\\n    return true;\\\\n  }\\\\n  if (!problem.tags || !Array.isArray(problem.tags)) {\\\\n    return false;\\\\n  }\\\\n  const problemTagsLower = problem.tags.map((t) => t.toLowerCase());\\\\n  return tags.some((tag) => problemTagsLower.includes(tag));\\\\n}\\\\n\\\\n/**\\\\n * Load problems from JSON file and cache them.\\\\n * @returns {Array<Object>}\\\\n */\\\\nfunction loadProblems() {\\\\n  if (cachedProblems) {\\\\n    return cachedProblems;\\\\n  }\\\\n  const filePath = path.join(__dirname, '..', '..', '..', 'data', 'problems.json');\\\\n  const data = fs.readFileSync(filePath, 'utf8');\\\\n  cachedProblems = JSON.parse(data);\\\\n  return cachedProblems;\\\\n}\\\\n\\\\n/**\\\\n * List problems with optional filtering and paging.\\\\n * @param {Object} query\\\\n * @param {string|Array<string>} [query.tags] - tags filter, comma-separated string or array\\\\n * @param {string} [query.difficulty] - difficulty filter\\\\n * @param {number} [query.page] - page number (1-based)\\\\n * @param {number} [query.limit] - max results per page\\\\n * @returns {Promise<Object>} payload with problems and metadata\\\\n */\\\\nfunction* listProblems(query) {\\\\n  const problems = loadProblems();\\\\n\\\\n  // Normalize and parse filters\\\\n  const rawTags = query.tags || query['tags[]'] || query['tags[]'];\\\\n  // Support tags as array or comma-separated string\\\\n  let tags = [];\\\\n  if (query.tags !== undefined) {\\\\n    tags = normalizeTags(query.tags);\\\\n  } else if (query['tags[]'] !== undefined) {\\\\n    // tags[]=... array form\\\\n    tags = normalizeTags(query['tags[]']);\\\\n  }\\\\n\\\\n  // Difficulty filter\\\\n  const difficulty = query.difficulty ? String(query.difficulty).toLowerCase() : null;\\\\n\\\\n  // Paging\"}], \"localized\": true}",
+        "raw_payload": "{\"edits\": [{\"path\": \"modules/Problems/services/ProblemsService.js\", \"mode\": \"rewrite\", \"content\": \"```json\\n{\\n  \\\"edits\\\": [\\n    {\\n      \\\"path\\\": \\\"modules/Problems/services/ProblemsService.js\\\",\\n      \\\"mode\\\": \\\"rewrite\\\",\\n      \\\"content\\\": \\\"'use strict';\\\\n\\\\n/*\\\\n * Copyright (c) 2016 TopCoder, Inc.\\\\n */\\\\n\\\\n/**\\\\n * Service for SRM problem APIs.\\\\n */\\\\nconst fs = require('fs');\\\\nconst path = require('path');\\\\nconst Joi = require('joi');\\\\nconst logger = require('../../../common/logger');\\\\n\\\\nlet cachedProblems;\\\\n\\\\nconst MAX_LIMIT = 50;\\\\n\\\\n/**\\\\n * Normalize tags filter into a lowercase array.\\\\n * @param {string|Array<string>} rawTags\\\\n * @returns {Array<string>}\\\\n */\\\\nfunction normalizeTags(rawTags) {\\\\n  if (!rawTags && rawTags !== '') {\\\\n    return [];\\\\n  }\\\\n  const list = Array.isArray(rawTags) ? rawTags : String(rawTags).split(',');\\\\n  return list\\\\n    .map((tag) => String(tag || '').trim().toLowerCase())\\\\n    .filter((tag) => tag);\\\\n}\\\\n\\\\n/**\\\\n * Check whether the problem contains at least one of the requested tags.\\\\n * @param {Object} problem\\\\n * @param {Array<string>} tags\\\\n * @returns {boolean}\\\\n */\\\\nfunction problemHasAnyTag(problem, tags) {\\\\n  if (!tags || tags.length === 0) {\\\\n    return true;\\\\n  }\\\\n  if (!problem.tags || !Array.isArray(problem.tags)) {\\\\n    return false;\\\\n  }\\\\n  const problemTagsLower = problem.tags.map((t) => t.toLowerCase());\\\\n  return tags.some((tag) => problemTagsLower.includes(tag));\\\\n}\\\\n\\\\n/**\\\\n * Load problems from JSON file and cache them.\\\\n * @returns {Array<Object>}\\\\n */\\\\nfunction loadProblems() {\\\\n  if (cachedProblems) {\\\\n    return cachedProblems;\\\\n  }\\\\n  const filePath = path.join(__dirname, '..', '..', '..', 'data', 'problems.json');\\\\n  const data = fs.readFileSync(filePath, 'utf8');\\\\n  cachedProblems = JSON.parse(data);\\\\n  return cachedProblems;\\\\n}\\\\n\\\\n/**\\\\n * List problems with optional filtering and paging.\\\\n * @param {Object} query\\\\n * @param {string|Array<string>} [query.tags] - tags filter, comma-separated string or array\\\\n * @param {string} [query.difficulty] - difficulty filter\\\\n * @param {number} [query.page] - page number (1-based)\\\\n * @param {number} [query.limit] - max results per page\\\\n * @returns {Promise<Object>} payload with problems and metadata\\\\n */\\\\nfunction* listProblems(query) {\\\\n  const problems = loadProblems();\\\\n\\\\n  // Normalize and parse filters\\\\n  const rawTags = query.tags || query['tags[]'] || query['tags[]'];\\\\n  // Support tags as array or comma-separated string\\\\n  let tags = [];\\\\n  if (query.tags !== undefined) {\\\\n    tags = normalizeTags(query.tags);\\\\n  } else if (query['tags[]'] !== undefined) {\\\\n    // tags[]=... array form\\\\n    tags = normalizeTags(query['tags[]']);\\\\n  }\\\\n\\\\n  // Difficulty filter\\\\n  const difficulty = query.difficulty ? String(query.difficulty).toLowerCase() : null;\\\\n\\\\n  // Paging\"}], \"localized\": true}",
+        "payload_parse_ok": true,
+        "payload_parse_error": "",
+        "candidate_files_raw": [
+          "test/problems.tags.spec.js",
+          "modules/Problems/services/ProblemsService.js",
+          "modules/Problems/controllers/ProblemsController.js",
+          "data/problems.json",
+          "node_modules/js-beautify/CHANGELOG.md",
+          "node_modules/js-beautify/README.md",
+          "node_modules/lodash/core.js",
+          "node_modules/lodash/lodash.js",
+          "test/problems.list.spec.js",
+          "package-lock.json",
+          "node_modules/.package-lock.json",
+          "node_modules/globals/globals.json"
+        ],
+        "candidate_files_filtered": [
+          "modules/Problems/services/ProblemsService.js"
+        ],
+        "candidate_files": [
+          "modules/Problems/services/ProblemsService.js"
+        ],
+        "strategy_mode": "cgcs",
+        "edit_mode": "edit_batch",
+        "localized_requested": true,
+        "fallback_requested": false,
+        "raw_metadata_keys": [
+          "localized"
+        ],
+        "applied_file_count": 1,
+        "proposed_file_count": 1,
+        "multi_file_applied": false,
+        "subtask_focus": "global",
+        "contract_coverage": 0.3333333333333333,
+        "contract_satisfied": [
+          "single_tag_filter"
+        ],
+        "contract_unsatisfied": [
+          "multi_tag_union",
+          "array_tag_filter"
+        ],
+        "contract_failure_categories": {
+          "filtering": 2
+        },
+        "contract_unsatisfied_details": [
+          "multi_tag_union: Comma-separated tags (e.g. ?tags=foo,bar) must match problems that contain any requested tag and expose both normalized tags in metadata.appliedTags.",
+          "array_tag_filter: tags[]=... array form must work alongside difficulty filters while preserving ordering by roundId and the paging limit."
+        ],
+        "contract_fail_cases": [],
+        "contract_items": [
+          {
+            "id": "single_tag_filter",
+            "label": "single_tag_filter",
+            "description": "Handle ?tags=<value> case-insensitively and return metadata.appliedTags with normalized lowercase tags.",
+            "category": "filtering",
+            "expected_behavior": "Handle ?tags=<value> case-insensitively and return metadata.appliedTags with normalized lowercase tags.",
+            "test_refs": [
+              "SRM problem tag filters::filters by a single tag case-insensitively"
+            ],
+            "priority": "",
+            "source": "",
+            "notes": "",
+            "keywords": [
+              "appliedtags"
+            ]
+          },
+          {
+            "id": "multi_tag_union",
+            "label": "multi_tag_union",
+            "description": "Comma-separated tags (e.g. ?tags=foo,bar) must match problems that contain any requested tag and expose both normalized tags in metadata.appliedTags.",
+            "category": "filtering",
+            "expected_behavior": "Comma-separated tags (e.g. ?tags=foo,bar) must match problems that contain any requested tag and expose both normalized tags in metadata.appliedTags.",
+            "test_refs": [
+              "SRM problem tag filters::accepts comma-separated tags and returns merged results"
+            ],
+            "priority": "",
+            "source": "",
+            "notes": "",
+            "keywords": [
+              "tags"
+            ]
+          },
+          {
+            "id": "array_tag_filter",
+            "label": "array_tag_filter",
+            "description": "tags[]=... array form must work alongside difficulty filters while preserving ordering by roundId and the paging limit.",
+            "category": "filtering",
+            "expected_behavior": "tags[]=... array form must work alongside difficulty filters while preserving ordering by roundId and the paging limit.",
+            "test_refs": [
+              "SRM problem tag filters::accepts array form and combines with difficulty filter"
+            ],
+            "priority": "",
+            "source": "",
+            "notes": "",
+            "keywords": [
+              "roundid",
+              "difficulty"
+            ]
+          }
+        ],
+        "witness_count": 1,
+        "witness_samples": [
+          {
+            "test_case": "tests_0",
+            "message": "Exception during run: /Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/workspace/",
+            "category": "assertion",
+            "expected": "",
+            "actual": "",
+            "contracts": []
+          }
+        ],
+        "cgcs_state": {
+          "round": 0,
+          "round_index": 0,
+          "strategy": "cgcs",
+          "task_id": "tc_arena_problem_tags_filter",
+          "contract_items": [
+            {
+              "id": "single_tag_filter",
+              "label": "single_tag_filter",
+              "description": "Handle ?tags=<value> case-insensitively and return metadata.appliedTags with normalized lowercase tags.",
+              "category": "filtering",
+              "expected_behavior": "Handle ?tags=<value> case-insensitively and return metadata.appliedTags with normalized lowercase tags.",
+              "test_refs": [
+                "SRM problem tag filters::filters by a single tag case-insensitively"
+              ],
+              "priority": "",
+              "source": "",
+              "notes": "",
+              "keywords": [
+                "appliedtags"
+              ]
+            },
+            {
+              "id": "multi_tag_union",
+              "label": "multi_tag_union",
+              "description": "Comma-separated tags (e.g. ?tags=foo,bar) must match problems that contain any requested tag and expose both normalized tags in metadata.appliedTags.",
+              "category": "filtering",
+              "expected_behavior": "Comma-separated tags (e.g. ?tags=foo,bar) must match problems that contain any requested tag and expose both normalized tags in metadata.appliedTags.",
+              "test_refs": [
+                "SRM problem tag filters::accepts comma-separated tags and returns merged results"
+              ],
+              "priority": "",
+              "source": "",
+              "notes": "",
+              "keywords": [
+                "tags"
+              ]
+            },
+            {
+              "id": "array_tag_filter",
+              "label": "array_tag_filter",
+              "description": "tags[]=... array form must work alongside difficulty filters while preserving ordering by roundId and the paging limit.",
+              "category": "filtering",
+              "expected_behavior": "tags[]=... array form must work alongside difficulty filters while preserving ordering by roundId and the paging limit.",
+              "test_refs": [
+                "SRM problem tag filters::accepts array form and combines with difficulty filter"
+              ],
+              "priority": "",
+              "source": "",
+              "notes": "",
+              "keywords": [
+                "roundid",
+                "difficulty"
+              ]
+            }
+          ],
+          "active_clause_id": "single_tag_filter",
+          "active_clause": "single_tag_filter",
+          "regression_guard_ids": [
+            "single_tag_filter"
+          ],
+          "witnesses": [
+            {
+              "signature": "47696ee0d1c7973c52cbf6f776656bfd58400fe2",
+              "test_case": "tests_0",
+              "message": "Exception during run: /Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/workspace/modules/Problems/services/ProblemsService.js:7\n      \"content\": \"'use strict';\\n\\n/*\\n * Copyright (c) 2016 TopCoder, Inc.\\n */\\n\\n/**\\n * Service for SRM problem APIs.\\n */\\nconst fs = require('fs');\\nconst path = require('path');\\nconst Joi = require('joi');\\nconst logger = require('../../../common/logger');\\n\\nlet cachedProblems;\\n\\nconst MAX_LIMIT = 50;\\n\\n/**\\n * Normalize tags filter into a lowercase array.\\n * @param {string|Array<string>} rawTags\\n * @returns {Array<string>}\\n */\\nfunction normalizeTags(rawTags) {\\n  if (!rawTags && rawTags !== '') {\\n    return [];\\n  }\\n  const list = Array.isArray(rawTags) ? rawTags : String(rawTags).split(',');\\n  return list\\n    .map((tag) => String(tag || '').trim().toLowerCase())\\n    .filter((tag) => tag);\\n}\\n\\n/**\\n * Check whether the problem contains at least one of the requested tags.\\n * @param {Object} problem\\n * @param {Array<string>} tags\\n * @returns {boolean}\\n */\\nfunction problemHasAnyTag(problem, tags) {\\n  if (!tags || tags.length === 0) {\\n    return true;\\n  }\\n  if (!problem.tags || !Array.isArray(problem.tags)) {\\n    return false;\\n  }\\n  const problemTagsLower = problem.tags.map((t) => t.toLowerCase());\\n  return tags.some((tag) => problemTagsLower.includes(tag));\\n}\\n\\n/**\\n * Load problems from JSON file and cache them.\\n * @returns {Array<Object>}\\n */\\nfunction loadProblems() {\\n  if (cachedProblems) {\\n    return cachedProblems;\\n  }\\n  const filePath = path.join(__dirname, '..', '..', '..', 'data', 'problems.json');\\n  const data = fs.readFileSync(filePath, 'utf8');\\n  cachedProblems = JSON.parse(data);\\n  return cachedProblems;\\n}\\n\\n/**\\n * List problems with optional filtering and paging.\\n * @param {Object} query\\n * @param {string|Array<string>} [query.tags] - tags filter, comma-separated string or array\\n * @param {string} [query.difficulty] - difficulty filter\\n * @param {number} [query.page] - page number (1-based)\\n * @param {number} [query.limit] - max results per page\\n * @returns {Promise<Object>} payload with problems and metadata\\n */\\nfunction* listProblems(query) {\\n  const problems = loadProblems();\\n\\n  // Normalize and parse filters\\n  const rawTags = query.tags || query['tags[]'] || query['tags[]'];\\n  // Support tags as array or comma-separated string\\n  let tags = [];\\n  if (query.tags !== undefined) {\\n    tags = normalizeTags(query.tags);\\n  } else if (query['tags[]'] !== undefined) {\\n    // tags[]=... array form\\n    tags = normalizeTags(query['tags[]']);\\n  }\\n\\n  // Difficulty filter\\n  const difficulty = query.difficulty ? String(query.difficulty).toLowerCase() : null;\\n\\n  // Paging\n                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            \n\nSyntaxError: Unexpected end of input\n    at wrapSafe (node:internal/modules/cjs/loader:1666:18)\n    at Module._compile (node:internal/modules/cjs/loader:1708:20)\n    at Object..js (node:internal/modules/cjs/loader:1899:10)\n    at Module.load (node:internal/modules/cjs/loader:1469:32)\n    at Module._load (node:internal/modules/cjs/loader:1286:12)\n    at TracingChannel.traceSync (node:diagnostics_channel:322:14)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)\n    at Module.require (node:internal/modules/cjs/loader:1491:12)\n    at require (node:internal/modules/helpers:135:16)\n    at Object.<anonymous> (/Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/workspace/modules/Problems/controllers/ProblemsController.js:10:25)\n    at Module._compile (node:internal/modules/cjs/loader:1734:14)\n    at Object..js (node:internal/modules/cjs/loader:1899:10)\n    at Module.load (node:internal/modules/cjs/loader:1469:32)\n    at Module._load (node:internal/modules/cjs/loader:1286:12)\n    at TracingChannel.traceSync (node:diagnostics_channel:322:14)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)\n    at Module.require (node:internal/modules/cjs/loader:1491:12)\n    at require (node:internal/modules/helpers:135:16)\n    at Object.<anonymous> (/Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/workspace/test/problems.components.meta.spec.js:5:28)\n    at Module._compile (node:internal/modules/cjs/loader:1734:14)\n    at Object..js (node:internal/modules/cjs/loader:1899:10)\n    at Module.load (node:internal/modules/cjs/loader:1469:32)\n    at Module._load (node:internal/modules/cjs/loader:1286:12)\n    at TracingChannel.traceSync (node:diagnostics_channel:322:14)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)\n    at cjsLoader (node:internal/modules/esm/translators:315:5)\n    at ModuleWrap.<anonymous> (node:internal/modules/esm/translators:207:7)\n    at ModuleJob.run (node:internal/modules/esm/module_job:327:25)\n    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:663:26)\n    at async formattedImport (/Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/workspace/node_modules/mocha/lib/nodejs/esm-utils.js:9:14)\n    at async exports.requireOrImport (/Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/workspace/node_modules/mocha/lib/nodejs/esm-utils.js:42:28)\n    at async exports.loadFilesAsync (/Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/workspace/node_modules/mocha/lib/nodejs/esm-utils.js:100:20)\n    at async singleRun (/Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/workspace/node_modules/mocha/lib/cli/run-helpers.js:162:3)\n    at async exports.handler (/Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/workspace/node_modules/mocha/lib/cli/run.js:375:5)",
+              "expected": "",
+              "actual": "",
+              "location": "/Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/logs/tests_0_round1.log",
+              "category": "assertion",
+              "linked_contract_ids": [
+                "array_tag_filter",
+                "multi_tag_union"
+              ]
+            }
+          ],
+          "raw_edit_payload": "{\"edits\": [{\"path\": \"modules/Problems/services/ProblemsService.js\", \"mode\": \"rewrite\", \"content\": \"```json\\n{\\n  \\\"edits\\\": [\\n    {\\n      \\\"path\\\": \\\"modules/Problems/services/ProblemsService.js\\\",\\n      \\\"mode\\\": \\\"rewrite\\\",\\n      \\\"content\\\": \\\"'use strict';\\\\n\\\\n/*\\\\n * Copyright (c) 2016 TopCoder, Inc.\\\\n */\\\\n\\\\n/**\\\\n * Service for SRM problem APIs.\\\\n */\\\\nconst fs = require('fs');\\\\nconst path = require('path');\\\\nconst Joi = require('joi');\\\\nconst logger = require('../../../common/logger');\\\\n\\\\nlet cachedProblems;\\\\n\\\\nconst MAX_LIMIT = 50;\\\\n\\\\n/**\\\\n * Normalize tags filter into a lowercase array.\\\\n * @param {string|Array<string>} rawTags\\\\n * @returns {Array<string>}\\\\n */\\\\nfunction normalizeTags(rawTags) {\\\\n  if (!rawTags && rawTags !== '') {\\\\n    return [];\\\\n  }\\\\n  const list = Array.isArray(rawTags) ? rawTags : String(rawTags).split(',');\\\\n  return list\\\\n    .map((tag) => String(tag || '').trim().toLowerCase())\\\\n    .filter((tag) => tag);\\\\n}\\\\n\\\\n/**\\\\n * Check whether the problem contains at least one of the requested tags.\\\\n * @param {Object} problem\\\\n * @param {Array<string>} tags\\\\n * @returns {boolean}\\\\n */\\\\nfunction problemHasAnyTag(problem, tags) {\\\\n  if (!tags || tags.length === 0) {\\\\n    return true;\\\\n  }\\\\n  if (!problem.tags || !Array.isArray(problem.tags)) {\\\\n    return false;\\\\n  }\\\\n  const problemTagsLower = problem.tags.map((t) => t.toLowerCase());\\\\n  return tags.some((tag) => problemTagsLower.includes(tag));\\\\n}\\\\n\\\\n/**\\\\n * Load problems from JSON file and cache them.\\\\n * @returns {Array<Object>}\\\\n */\\\\nfunction loadProblems() {\\\\n  if (cachedProblems) {\\\\n    return cachedProblems;\\\\n  }\\\\n  const filePath = path.join(__dirname, '..', '..', '..', 'data', 'problems.json');\\\\n  const data = fs.readFileSync(filePath, 'utf8');\\\\n  cachedProblems = JSON.parse(data);\\\\n  return cachedProblems;\\\\n}\\\\n\\\\n/**\\\\n * List problems with optional filtering and paging.\\\\n * @param {Object} query\\\\n * @param {string|Array<string>} [query.tags] - tags filter, comma-separated string or array\\\\n * @param {string} [query.difficulty] - difficulty filter\\\\n * @param {number} [query.page] - page number (1-based)\\\\n * @param {number} [query.limit] - max results per page\\\\n * @returns {Promise<Object>} payload with problems and metadata\\\\n */\\\\nfunction* listProblems(query) {\\\\n  const problems = loadProblems();\\\\n\\\\n  // Normalize and parse filters\\\\n  const rawTags = query.tags || query['tags[]'] || query['tags[]'];\\\\n  // Support tags as array or comma-separated string\\\\n  let tags = [];\\\\n  if (query.tags !== undefined) {\\\\n    tags = normalizeTags(query.tags);\\\\n  } else if (query['tags[]'] !== undefined) {\\\\n    // tags[]=... array form\\\\n    tags = normalizeTags(query['tags[]']);\\\\n  }\\\\n\\\\n  // Difficulty filter\\\\n  const difficulty = query.difficulty ? String(query.difficulty).toLowerCase() : null;\\\\n\\\\n  // Paging\"}], \"localized\": true}",
+          "payload_parse_ok": true,
+          "payload_parse_error": "",
+          "candidate_files": [
+            "modules/Problems/services/ProblemsService.js"
+          ],
+          "candidate_files_raw": [
+            "test/problems.tags.spec.js",
+            "modules/Problems/services/ProblemsService.js",
+            "modules/Problems/controllers/ProblemsController.js",
+            "data/problems.json",
+            "node_modules/js-beautify/CHANGELOG.md",
+            "node_modules/js-beautify/README.md",
+            "node_modules/lodash/core.js",
+            "node_modules/lodash/lodash.js",
+            "test/problems.list.spec.js",
+            "package-lock.json",
+            "node_modules/.package-lock.json",
+            "node_modules/globals/globals.json"
+          ],
+          "candidate_files_filtered": [
+            "modules/Problems/services/ProblemsService.js"
+          ],
+          "clause_selection_reason": "initial_clause_seed",
+          "row_quality": {
+            "contract_quality": "strong",
+            "contract_item_count": 3,
+            "active_clause_source": "initial_clause_seed",
+            "active_clause_present": true,
+            "witness_count": 1,
+            "witness_unique_count": 1,
+            "payload_present": true,
+            "payload_parse_ok": true,
+            "candidate_file_count": 1,
+            "clause_selection_reason": "initial_clause_seed",
+            "skipped_targets_present": false,
+            "lint_error_count": 0,
+            "used_fallback": false,
+            "strategy_mode": "cgcs_clause",
+            "regression_guard_count": 1
+          },
+          "lint_errors": [],
+          "skipped_targets": [],
+          "outcome_metrics": {
+            "status": "tests_failed",
+            "pass_rate": 0.0,
+            "duration": 0.7655802500012214,
+            "failing_tests": [
+              "tests_0"
+            ],
+            "error_types": [
+              "fail::"
+            ]
+          },
+          "coverage": 0.3333333333333333,
+          "satisfied_ids": [
+            "single_tag_filter"
+          ],
+          "unsatisfied_ids": [
+            "multi_tag_union",
+            "array_tag_filter"
+          ],
+          "regressed_ids": [],
+          "witness_counts": {
+            "single_tag_filter": 0,
+            "multi_tag_union": 1,
+            "array_tag_filter": 1
+          },
+          "witness_sample": [
+            {
+              "signature": "47696ee0d1c7973c52cbf6f776656bfd58400fe2",
+              "test_case": "tests_0",
+              "message": "Exception during run: /Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/workspace/modules/Problems/services/ProblemsService.js:7\n      \"content\": \"'use strict';\\n\\n/*\\n * Copyright (c) 2016 TopCoder, Inc.\\n */\\n\\n/**\\n * Service for SRM problem APIs.\\n */\\nconst fs = require('fs');\\nconst path = require('path');\\nconst Joi = require('joi');\\nconst logger = require('../../../common/logger');\\n\\nlet cachedProblems;\\n\\nconst MAX_LIMIT = 50;\\n\\n/**\\n * Normalize tags filter into a lowercase array.\\n * @param {string|Array<string>} rawTags\\n * @returns {Array<string>}\\n */\\nfunction normalizeTags(rawTags) {\\n  if (!rawTags && rawTags !== '') {\\n    return [];\\n  }\\n  const list = Array.isArray(rawTags) ? rawTags : String(rawTags).split(',');\\n  return list\\n    .map((tag) => String(tag || '').trim().toLowerCase())\\n    .filter((tag) => tag);\\n}\\n\\n/**\\n * Check whether the problem contains at least one of the requested tags.\\n * @param {Object} problem\\n * @param {Array<string>} tags\\n * @returns {boolean}\\n */\\nfunction problemHasAnyTag(problem, tags) {\\n  if (!tags || tags.length === 0) {\\n    return true;\\n  }\\n  if (!problem.tags || !Array.isArray(problem.tags)) {\\n    return false;\\n  }\\n  const problemTagsLower = problem.tags.map((t) => t.toLowerCase());\\n  return tags.some((tag) => problemTagsLower.includes(tag));\\n}\\n\\n/**\\n * Load problems from JSON file and cache them.\\n * @returns {Array<Object>}\\n */\\nfunction loadProblems() {\\n  if (cachedProblems) {\\n    return cachedProblems;\\n  }\\n  const filePath = path.join(__dirname, '..', '..', '..', 'data', 'problems.json');\\n  const data = fs.readFileSync(filePath, 'utf8');\\n  cachedProblems = JSON.parse(data);\\n  return cachedProblems;\\n}\\n\\n/**\\n * List problems with optional filtering and paging.\\n * @param {Object} query\\n * @param {string|Array<string>} [query.tags] - tags filter, comma-separated string or array\\n * @param {string} [query.difficulty] - difficulty filter\\n * @param {number} [query.page] - page number (1-based)\\n * @param {number} [query.limit] - max results per page\\n * @returns {Promise<Object>} payload with problems and metadata\\n */\\nfunction* listProblems(query) {\\n  const problems = loadProblems();\\n\\n  // Normalize and parse filters\\n  const rawTags = query.tags || query['tags[]'] || query['tags[]'];\\n  // Support tags as array or comma-separated string\\n  let tags = [];\\n  if (query.tags !== undefined) {\\n    tags = normalizeTags(query.tags);\\n  } else if (query['tags[]'] !== undefined) {\\n    // tags[]=... array form\\n    tags = normalizeTags(query['tags[]']);\\n  }\\n\\n  // Difficulty filter\\n  const difficulty = query.difficulty ? String(query.difficulty).toLowerCase() : null;\\n\\n  // Paging\n                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            \n\nSyntaxError: Unexpected end of input\n    at wrapSafe (node:internal/modules/cjs/loader:1666:18)\n    at Module._compile (node:internal/modules/cjs/loader:1708:20)\n    at Object..js (node:internal/modules/cjs/loader:1899:10)\n    at Module.load (node:internal/modules/cjs/loader:1469:32)\n    at Module._load (node:internal/modules/cjs/loader:1286:12)\n    at TracingChannel.traceSync (node:diagnostics_channel:322:14)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)\n    at Module.require (node:internal/modules/cjs/loader:1491:12)\n    at require (node:internal/modules/helpers:135:16)\n    at Object.<anonymous> (/Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/workspace/modules/Problems/controllers/ProblemsController.js:10:25)\n    at Module._compile (node:internal/modules/cjs/loader:1734:14)\n    at Object..js (node:internal/modules/cjs/loader:1899:10)\n    at Module.load (node:internal/modules/cjs/loader:1469:32)\n    at Module._load (node:internal/modules/cjs/loader:1286:12)\n    at TracingChannel.traceSync (node:diagnostics_channel:322:14)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)\n    at Module.require (node:internal/modules/cjs/loader:1491:12)\n    at require (node:internal/modules/helpers:135:16)\n    at Object.<anonymous> (/Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/workspace/test/problems.components.meta.spec.js:5:28)\n    at Module._compile (node:internal/modules/cjs/loader:1734:14)\n    at Object..js (node:internal/modules/cjs/loader:1899:10)\n    at Module.load (node:internal/modules/cjs/loader:1469:32)\n    at Module._load (node:internal/modules/cjs/loader:1286:12)\n    at TracingChannel.traceSync (node:diagnostics_channel:322:14)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)\n    at cjsLoader (node:internal/modules/esm/translators:315:5)\n    at ModuleWrap.<anonymous> (node:internal/modules/esm/translators:207:7)\n    at ModuleJob.run (node:internal/modules/esm/module_job:327:25)\n    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:663:26)\n    at async formattedImport (/Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/workspace/node_modules/mocha/lib/nodejs/esm-utils.js:9:14)\n    at async exports.requireOrImport (/Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/workspace/node_modules/mocha/lib/nodejs/esm-utils.js:42:28)\n    at async exports.loadFilesAsync (/Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/workspace/node_modules/mocha/lib/nodejs/esm-utils.js:100:20)\n    at async singleRun (/Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/workspace/node_modules/mocha/lib/cli/run-helpers.js:162:3)\n    at async exports.handler (/Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/workspace/node_modules/mocha/lib/cli/run.js:375:5)",
+              "expected": "",
+              "actual": "",
+              "location": "/Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/logs/tests_0_round1.log",
+              "category": "assertion",
+              "linked_contract_ids": [
+                "array_tag_filter",
+                "multi_tag_union"
+              ]
+            }
+          ],
+          "regression_guards": [
+            "single_tag_filter"
+          ]
+        },
+        "witnesses": [
+          {
+            "signature": "47696ee0d1c7973c52cbf6f776656bfd58400fe2",
+            "test_case": "tests_0",
+            "message": "Exception during run: /Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/workspace/modules/Problems/services/ProblemsService.js:7\n      \"content\": \"'use strict';\\n\\n/*\\n * Copyright (c) 2016 TopCoder, Inc.\\n */\\n\\n/**\\n * Service for SRM problem APIs.\\n */\\nconst fs = require('fs');\\nconst path = require('path');\\nconst Joi = require('joi');\\nconst logger = require('../../../common/logger');\\n\\nlet cachedProblems;\\n\\nconst MAX_LIMIT = 50;\\n\\n/**\\n * Normalize tags filter into a lowercase array.\\n * @param {string|Array<string>} rawTags\\n * @returns {Array<string>}\\n */\\nfunction normalizeTags(rawTags) {\\n  if (!rawTags && rawTags !== '') {\\n    return [];\\n  }\\n  const list = Array.isArray(rawTags) ? rawTags : String(rawTags).split(',');\\n  return list\\n    .map((tag) => String(tag || '').trim().toLowerCase())\\n    .filter((tag) => tag);\\n}\\n\\n/**\\n * Check whether the problem contains at least one of the requested tags.\\n * @param {Object} problem\\n * @param {Array<string>} tags\\n * @returns {boolean}\\n */\\nfunction problemHasAnyTag(problem, tags) {\\n  if (!tags || tags.length === 0) {\\n    return true;\\n  }\\n  if (!problem.tags || !Array.isArray(problem.tags)) {\\n    return false;\\n  }\\n  const problemTagsLower = problem.tags.map((t) => t.toLowerCase());\\n  return tags.some((tag) => problemTagsLower.includes(tag));\\n}\\n\\n/**\\n * Load problems from JSON file and cache them.\\n * @returns {Array<Object>}\\n */\\nfunction loadProblems() {\\n  if (cachedProblems) {\\n    return cachedProblems;\\n  }\\n  const filePath = path.join(__dirname, '..', '..', '..', 'data', 'problems.json');\\n  const data = fs.readFileSync(filePath, 'utf8');\\n  cachedProblems = JSON.parse(data);\\n  return cachedProblems;\\n}\\n\\n/**\\n * List problems with optional filtering and paging.\\n * @param {Object} query\\n * @param {string|Array<string>} [query.tags] - tags filter, comma-separated string or array\\n * @param {string} [query.difficulty] - difficulty filter\\n * @param {number} [query.page] - page number (1-based)\\n * @param {number} [query.limit] - max results per page\\n * @returns {Promise<Object>} payload with problems and metadata\\n */\\nfunction* listProblems(query) {\\n  const problems = loadProblems();\\n\\n  // Normalize and parse filters\\n  const rawTags = query.tags || query['tags[]'] || query['tags[]'];\\n  // Support tags as array or comma-separated string\\n  let tags = [];\\n  if (query.tags !== undefined) {\\n    tags = normalizeTags(query.tags);\\n  } else if (query['tags[]'] !== undefined) {\\n    // tags[]=... array form\\n    tags = normalizeTags(query['tags[]']);\\n  }\\n\\n  // Difficulty filter\\n  const difficulty = query.difficulty ? String(query.difficulty).toLowerCase() : null;\\n\\n  // Paging\n                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            \n\nSyntaxError: Unexpected end of input\n    at wrapSafe (node:internal/modules/cjs/loader:1666:18)\n    at Module._compile (node:internal/modules/cjs/loader:1708:20)\n    at Object..js (node:internal/modules/cjs/loader:1899:10)\n    at Module.load (node:internal/modules/cjs/loader:1469:32)\n    at Module._load (node:internal/modules/cjs/loader:1286:12)\n    at TracingChannel.traceSync (node:diagnostics_channel:322:14)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)\n    at Module.require (node:internal/modules/cjs/loader:1491:12)\n    at require (node:internal/modules/helpers:135:16)\n    at Object.<anonymous> (/Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/workspace/modules/Problems/controllers/ProblemsController.js:10:25)\n    at Module._compile (node:internal/modules/cjs/loader:1734:14)\n    at Object..js (node:internal/modules/cjs/loader:1899:10)\n    at Module.load (node:internal/modules/cjs/loader:1469:32)\n    at Module._load (node:internal/modules/cjs/loader:1286:12)\n    at TracingChannel.traceSync (node:diagnostics_channel:322:14)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)\n    at Module.require (node:internal/modules/cjs/loader:1491:12)\n    at require (node:internal/modules/helpers:135:16)\n    at Object.<anonymous> (/Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/workspace/test/problems.components.meta.spec.js:5:28)\n    at Module._compile (node:internal/modules/cjs/loader:1734:14)\n    at Object..js (node:internal/modules/cjs/loader:1899:10)\n    at Module.load (node:internal/modules/cjs/loader:1469:32)\n    at Module._load (node:internal/modules/cjs/loader:1286:12)\n    at TracingChannel.traceSync (node:diagnostics_channel:322:14)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)\n    at cjsLoader (node:internal/modules/esm/translators:315:5)\n    at ModuleWrap.<anonymous> (node:internal/modules/esm/translators:207:7)\n    at ModuleJob.run (node:internal/modules/esm/module_job:327:25)\n    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:663:26)\n    at async formattedImport (/Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/workspace/node_modules/mocha/lib/nodejs/esm-utils.js:9:14)\n    at async exports.requireOrImport (/Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/workspace/node_modules/mocha/lib/nodejs/esm-utils.js:42:28)\n    at async exports.loadFilesAsync (/Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/workspace/node_modules/mocha/lib/nodejs/esm-utils.js:100:20)\n    at async singleRun (/Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/workspace/node_modules/mocha/lib/cli/run-helpers.js:162:3)\n    at async exports.handler (/Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/workspace/node_modules/mocha/lib/cli/run.js:375:5)",
+            "expected": "",
+            "actual": "",
+            "location": "/Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/logs/tests_0_round1.log",
+            "category": "assertion",
+            "linked_contract_ids": [
+              "array_tag_filter",
+              "multi_tag_union"
+            ]
+          }
+        ],
+        "row_quality": {
+          "contract_quality": "strong",
+          "contract_item_count": 3,
+          "active_clause_source": "initial_clause_seed",
+          "active_clause_present": true,
+          "witness_count": 1,
+          "witness_unique_count": 1,
+          "payload_present": true,
+          "payload_parse_ok": true,
+          "candidate_file_count": 1,
+          "clause_selection_reason": "initial_clause_seed",
+          "skipped_targets_present": false,
+          "lint_error_count": 0,
+          "used_fallback": false,
+          "strategy_mode": "cgcs_clause",
+          "regression_guard_count": 1
+        },
+        "regression_guard_ids": [
+          "single_tag_filter"
+        ],
+        "active_clause_id": "single_tag_filter"
+      }
+    },
+    {
+      "round": 1,
+      "phase": "repair",
+      "subtask": "contract::multi_tag_union",
+      "localized": true,
+      "pass_rate": 0.0,
+      "status": "tests_failed",
+      "duration": 0.35658141699968837,
+      "failing_tests": [
+        "tests_0"
+      ],
+      "error_types": [
+        "fail::"
+      ],
+      "file_count": 1,
+      "multi_file_attempt": false,
+      "files_touched": [
+        "modules/Problems/services/ProblemsService.js"
+      ],
+      "inspected_files": [
+        "modules/Problems/services/ProblemsService.js",
+        "modules/Problems/controllers/ProblemsController.js",
+        "test/problems.tags.spec.js",
+        "data/problems.json"
+      ],
+      "proposed_files": [
+        "modules/Problems/services/ProblemsService.js"
+      ],
+      "edit_metadata": {
+        "raw_edit_payload": "{\"edits\": [{\"path\": \"modules/Problems/services/ProblemsService.js\", \"mode\": \"rewrite\", \"content\": \"```json\\n{\\n  \\\"contract_review\\\": [\\n    {\\n      \\\"id\\\": \\\"single_tag_filter\\\",\\n      \\\"status\\\": \\\"covered\\\",\\n      \\\"notes\\\": \\\"The code normalizes single tag filters case-insensitively and returns metadata.appliedTags with lowercase tags.\\\"\\n    },\\n    {\\n      \\\"id\\\": \\\"multi_tag_union\\\",\\n      \\\"status\\\": \\\"covered\\\",\\n      \\\"notes\\\": \\\"Comma-separated tags are split, normalized, and problems matching any tag are included. Metadata.appliedTags includes all normalized tags.\\\"\\n    },\\n    {\\n      \\\"id\\\": \\\"array_tag_filter\\\",\\n      \\\"status\\\": \\\"covered\\\",\\n      \\\"notes\\\": \\\"tags[]=... array form is normalized and combined with difficulty filters, preserving ordering by roundId and limit of 50.\\\"\\n    }\\n  ],\\n  \\\"edits\\\": [\\n    {\\n      \\\"path\\\": \\\"modules/Problems/services/ProblemsService.js\\\",\\n      \\\"mode\\\": \\\"rewrite\\\",\\n      \\\"content\\\": \\\"'use strict';\\\\n\\\\n/*\\\\n * Copyright (c) 2016 TopCoder, Inc.\\\\n */\\\\n\\\\n/**\\\\n * Service for SRM problem APIs.\\\\n */\\\\nconst fs = require('fs');\\\\nconst path = require('path');\\\\nconst Joi = require('joi');\\\\nconst logger = require('../../../common/logger');\\\\n\\\\nlet cachedProblems;\\\\n\\\\nconst MAX_LIMIT = 50;\\\\n\\\\n/**\\\\n * Normalize tags filter into a lowercase array.\\\\n * @param {string|Array<string>} rawTags\\\\n * @returns {Array<string>}\\\\n */\\\\nfunction normalizeTags(rawTags) {\\\\n  if (!rawTags && rawTags !== '') {\\\\n    return [];\\\\n  }\\\\n  const list = Array.isArray(rawTags) ? rawTags : String(rawTags).split(',');\\\\n  return list\\\\n    .map((tag) => String(tag || '').trim().toLowerCase())\\\\n    .filter((tag) => tag);\\\\n}\\\\n\\\\n/**\\\\n * Check whether the problem contains at least one of the requested tags.\\\\n * @param {Object} problem\\\\n * @param {Array<string>} tags\\\\n * @returns {boolean}\\\\n */\\\\nfunction problemHasAnyTag(problem, tags) {\\\\n  if (!tags || tags.length === 0) return true;\\\\n  if (!problem.metadata || !problem.metadata.appliedTags) return false;\\\\n  const problemTags = problem.metadata.appliedTags.map((t) => t.toLowerCase());\\\\n  return tags.some((tag) => problemTags.includes(tag));\\\\n}\\\\n\\\\n/**\\\\n * Load problems from JSON file and cache them.\\\\n * @returns {Array<Object>}\\\\n */\\\\nfunction loadProblems() {\\\\n  if (cachedProblems) return cachedProblems;\\\\n  const filePath = path.join(__dirname, '..', '..', '..', 'data', 'problems.json');\\\\n  const raw = fs.readFileSync(filePath, 'utf8');\\\\n  cachedProblems = JSON.parse(raw);\\\\n  return cachedProblems;\\\\n}\\\\n\\\\n/**\\\\n * List problems with optional filtering and pagination.\\\\n * @param {Object} query\\\\n * @param {string|Array<string>} [query.tags] - tags filter, comma-separated string or array\\\\n * @param {string} [query.difficulty] - difficulty filter\\\\n * @param {number} [query.page] - page number (1-based)\\\\n * @returns {Promise<Object>} payload with problems and metadata\\\\n */\\\\nfunction* listProblems(query) {\\\\n  const problems = loadProblems();\\\\n\\\\n  // Normalize tags filter from query\\\\n  // Support ?tags\"}], \"localized\": true}",
+        "raw_payload": "{\"edits\": [{\"path\": \"modules/Problems/services/ProblemsService.js\", \"mode\": \"rewrite\", \"content\": \"```json\\n{\\n  \\\"contract_review\\\": [\\n    {\\n      \\\"id\\\": \\\"single_tag_filter\\\",\\n      \\\"status\\\": \\\"covered\\\",\\n      \\\"notes\\\": \\\"The code normalizes single tag filters case-insensitively and returns metadata.appliedTags with lowercase tags.\\\"\\n    },\\n    {\\n      \\\"id\\\": \\\"multi_tag_union\\\",\\n      \\\"status\\\": \\\"covered\\\",\\n      \\\"notes\\\": \\\"Comma-separated tags are split, normalized, and problems matching any tag are included. Metadata.appliedTags includes all normalized tags.\\\"\\n    },\\n    {\\n      \\\"id\\\": \\\"array_tag_filter\\\",\\n      \\\"status\\\": \\\"covered\\\",\\n      \\\"notes\\\": \\\"tags[]=... array form is normalized and combined with difficulty filters, preserving ordering by roundId and limit of 50.\\\"\\n    }\\n  ],\\n  \\\"edits\\\": [\\n    {\\n      \\\"path\\\": \\\"modules/Problems/services/ProblemsService.js\\\",\\n      \\\"mode\\\": \\\"rewrite\\\",\\n      \\\"content\\\": \\\"'use strict';\\\\n\\\\n/*\\\\n * Copyright (c) 2016 TopCoder, Inc.\\\\n */\\\\n\\\\n/**\\\\n * Service for SRM problem APIs.\\\\n */\\\\nconst fs = require('fs');\\\\nconst path = require('path');\\\\nconst Joi = require('joi');\\\\nconst logger = require('../../../common/logger');\\\\n\\\\nlet cachedProblems;\\\\n\\\\nconst MAX_LIMIT = 50;\\\\n\\\\n/**\\\\n * Normalize tags filter into a lowercase array.\\\\n * @param {string|Array<string>} rawTags\\\\n * @returns {Array<string>}\\\\n */\\\\nfunction normalizeTags(rawTags) {\\\\n  if (!rawTags && rawTags !== '') {\\\\n    return [];\\\\n  }\\\\n  const list = Array.isArray(rawTags) ? rawTags : String(rawTags).split(',');\\\\n  return list\\\\n    .map((tag) => String(tag || '').trim().toLowerCase())\\\\n    .filter((tag) => tag);\\\\n}\\\\n\\\\n/**\\\\n * Check whether the problem contains at least one of the requested tags.\\\\n * @param {Object} problem\\\\n * @param {Array<string>} tags\\\\n * @returns {boolean}\\\\n */\\\\nfunction problemHasAnyTag(problem, tags) {\\\\n  if (!tags || tags.length === 0) return true;\\\\n  if (!problem.metadata || !problem.metadata.appliedTags) return false;\\\\n  const problemTags = problem.metadata.appliedTags.map((t) => t.toLowerCase());\\\\n  return tags.some((tag) => problemTags.includes(tag));\\\\n}\\\\n\\\\n/**\\\\n * Load problems from JSON file and cache them.\\\\n * @returns {Array<Object>}\\\\n */\\\\nfunction loadProblems() {\\\\n  if (cachedProblems) return cachedProblems;\\\\n  const filePath = path.join(__dirname, '..', '..', '..', 'data', 'problems.json');\\\\n  const raw = fs.readFileSync(filePath, 'utf8');\\\\n  cachedProblems = JSON.parse(raw);\\\\n  return cachedProblems;\\\\n}\\\\n\\\\n/**\\\\n * List problems with optional filtering and pagination.\\\\n * @param {Object} query\\\\n * @param {string|Array<string>} [query.tags] - tags filter, comma-separated string or array\\\\n * @param {string} [query.difficulty] - difficulty filter\\\\n * @param {number} [query.page] - page number (1-based)\\\\n * @returns {Promise<Object>} payload with problems and metadata\\\\n */\\\\nfunction* listProblems(query) {\\\\n  const problems = loadProblems();\\\\n\\\\n  // Normalize tags filter from query\\\\n  // Support ?tags\"}], \"localized\": true}",
+        "payload_parse_ok": true,
+        "payload_parse_error": "",
+        "candidate_files_raw": [
+          "test/problems.tags.spec.js",
+          "modules/Problems/services/ProblemsService.js",
+          "modules/Problems/controllers/ProblemsController.js",
+          "data/problems.json",
+          "node_modules/js-beautify/CHANGELOG.md",
+          "node_modules/js-beautify/README.md",
+          "node_modules/lodash/core.js",
+          "node_modules/lodash/lodash.js",
+          "test/problems.list.spec.js",
+          "package-lock.json",
+          "node_modules/.package-lock.json",
+          "node_modules/globals/globals.json"
+        ],
+        "candidate_files_filtered": [
+          "modules/Problems/services/ProblemsService.js"
+        ],
+        "candidate_files": [
+          "modules/Problems/services/ProblemsService.js"
+        ],
+        "strategy_mode": "cgcs",
+        "edit_mode": "edit_batch",
+        "localized_requested": true,
+        "fallback_requested": false,
+        "raw_metadata_keys": [
+          "localized"
+        ],
+        "applied_file_count": 1,
+        "proposed_file_count": 1,
+        "multi_file_applied": false,
+        "subtask_focus": "contract::multi_tag_union",
+        "contract_coverage": 0.0,
+        "contract_satisfied": [],
+        "contract_unsatisfied": [
+          "single_tag_filter",
+          "multi_tag_union",
+          "array_tag_filter"
+        ],
+        "contract_failure_categories": {
+          "filtering": 3
+        },
+        "contract_unsatisfied_details": [
+          "single_tag_filter: Handle ?tags=<value> case-insensitively and return metadata.appliedTags with normalized lowercase tags.",
+          "multi_tag_union: Comma-separated tags (e.g. ?tags=foo,bar) must match problems that contain any requested tag and expose both normalized tags in metadata.appliedTags.",
+          "array_tag_filter: tags[]=... array form must work alongside difficulty filters while preserving ordering by roundId and the paging limit."
+        ],
+        "contract_fail_cases": [],
+        "contract_items": [
+          {
+            "id": "single_tag_filter",
+            "label": "single_tag_filter",
+            "description": "Handle ?tags=<value> case-insensitively and return metadata.appliedTags with normalized lowercase tags.",
+            "category": "filtering",
+            "expected_behavior": "Handle ?tags=<value> case-insensitively and return metadata.appliedTags with normalized lowercase tags.",
+            "test_refs": [
+              "SRM problem tag filters::filters by a single tag case-insensitively"
+            ],
+            "priority": "",
+            "source": "",
+            "notes": "",
+            "keywords": [
+              "appliedtags"
+            ]
+          },
+          {
+            "id": "multi_tag_union",
+            "label": "multi_tag_union",
+            "description": "Comma-separated tags (e.g. ?tags=foo,bar) must match problems that contain any requested tag and expose both normalized tags in metadata.appliedTags.",
+            "category": "filtering",
+            "expected_behavior": "Comma-separated tags (e.g. ?tags=foo,bar) must match problems that contain any requested tag and expose both normalized tags in metadata.appliedTags.",
+            "test_refs": [
+              "SRM problem tag filters::accepts comma-separated tags and returns merged results"
+            ],
+            "priority": "",
+            "source": "",
+            "notes": "",
+            "keywords": [
+              "tags"
+            ]
+          },
+          {
+            "id": "array_tag_filter",
+            "label": "array_tag_filter",
+            "description": "tags[]=... array form must work alongside difficulty filters while preserving ordering by roundId and the paging limit.",
+            "category": "filtering",
+            "expected_behavior": "tags[]=... array form must work alongside difficulty filters while preserving ordering by roundId and the paging limit.",
+            "test_refs": [
+              "SRM problem tag filters::accepts array form and combines with difficulty filter"
+            ],
+            "priority": "",
+            "source": "",
+            "notes": "",
+            "keywords": [
+              "roundid",
+              "difficulty"
+            ]
+          }
+        ],
+        "witness_count": 1,
+        "witness_samples": [
+          {
+            "test_case": "tests_0",
+            "message": "Exception during run: /Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/workspace/",
+            "category": "assertion",
+            "expected": "",
+            "actual": "",
+            "contracts": []
+          }
+        ],
+        "cgcs_state": {
+          "round": 1,
+          "round_index": 1,
+          "strategy": "cgcs",
+          "task_id": "tc_arena_problem_tags_filter",
+          "contract_items": [
+            {
+              "id": "single_tag_filter",
+              "label": "single_tag_filter",
+              "description": "Handle ?tags=<value> case-insensitively and return metadata.appliedTags with normalized lowercase tags.",
+              "category": "filtering",
+              "expected_behavior": "Handle ?tags=<value> case-insensitively and return metadata.appliedTags with normalized lowercase tags.",
+              "test_refs": [
+                "SRM problem tag filters::filters by a single tag case-insensitively"
+              ],
+              "priority": "",
+              "source": "",
+              "notes": "",
+              "keywords": [
+                "appliedtags"
+              ]
+            },
+            {
+              "id": "multi_tag_union",
+              "label": "multi_tag_union",
+              "description": "Comma-separated tags (e.g. ?tags=foo,bar) must match problems that contain any requested tag and expose both normalized tags in metadata.appliedTags.",
+              "category": "filtering",
+              "expected_behavior": "Comma-separated tags (e.g. ?tags=foo,bar) must match problems that contain any requested tag and expose both normalized tags in metadata.appliedTags.",
+              "test_refs": [
+                "SRM problem tag filters::accepts comma-separated tags and returns merged results"
+              ],
+              "priority": "",
+              "source": "",
+              "notes": "",
+              "keywords": [
+                "tags"
+              ]
+            },
+            {
+              "id": "array_tag_filter",
+              "label": "array_tag_filter",
+              "description": "tags[]=... array form must work alongside difficulty filters while preserving ordering by roundId and the paging limit.",
+              "category": "filtering",
+              "expected_behavior": "tags[]=... array form must work alongside difficulty filters while preserving ordering by roundId and the paging limit.",
+              "test_refs": [
+                "SRM problem tag filters::accepts array form and combines with difficulty filter"
+              ],
+              "priority": "",
+              "source": "",
+              "notes": "",
+              "keywords": [
+                "roundid",
+                "difficulty"
+              ]
+            }
+          ],
+          "active_clause_id": "multi_tag_union",
+          "active_clause": "multi_tag_union",
+          "regression_guard_ids": [],
+          "witnesses": [
+            {
+              "signature": "ef9f886c9634f3ea922fb5eceae4f4455a692536",
+              "test_case": "tests_0",
+              "message": "Exception during run: /Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/workspace/modules/Problems/services/ProblemsService.js:24\n      \"content\": \"'use strict';\\n\\n/*\\n * Copyright (c) 2016 TopCoder, Inc.\\n */\\n\\n/**\\n * Service for SRM problem APIs.\\n */\\nconst fs = require('fs');\\nconst path = require('path');\\nconst Joi = require('joi');\\nconst logger = require('../../../common/logger');\\n\\nlet cachedProblems;\\n\\nconst MAX_LIMIT = 50;\\n\\n/**\\n * Normalize tags filter into a lowercase array.\\n * @param {string|Array<string>} rawTags\\n * @returns {Array<string>}\\n */\\nfunction normalizeTags(rawTags) {\\n  if (!rawTags && rawTags !== '') {\\n    return [];\\n  }\\n  const list = Array.isArray(rawTags) ? rawTags : String(rawTags).split(',');\\n  return list\\n    .map((tag) => String(tag || '').trim().toLowerCase())\\n    .filter((tag) => tag);\\n}\\n\\n/**\\n * Check whether the problem contains at least one of the requested tags.\\n * @param {Object} problem\\n * @param {Array<string>} tags\\n * @returns {boolean}\\n */\\nfunction problemHasAnyTag(problem, tags) {\\n  if (!tags || tags.length === 0) return true;\\n  if (!problem.metadata || !problem.metadata.appliedTags) return false;\\n  const problemTags = problem.metadata.appliedTags.map((t) => t.toLowerCase());\\n  return tags.some((tag) => problemTags.includes(tag));\\n}\\n\\n/**\\n * Load problems from JSON file and cache them.\\n * @returns {Array<Object>}\\n */\\nfunction loadProblems() {\\n  if (cachedProblems) return cachedProblems;\\n  const filePath = path.join(__dirname, '..', '..', '..', 'data', 'problems.json');\\n  const raw = fs.readFileSync(filePath, 'utf8');\\n  cachedProblems = JSON.parse(raw);\\n  return cachedProblems;\\n}\\n\\n/**\\n * List problems with optional filtering and pagination.\\n * @param {Object} query\\n * @param {string|Array<string>} [query.tags] - tags filter, comma-separated string or array\\n * @param {string} [query.difficulty] - difficulty filter\\n * @param {number} [query.page] - page number (1-based)\\n * @returns {Promise<Object>} payload with problems and metadata\\n */\\nfunction* listProblems(query) {\\n  const problems = loadProblems();\\n\\n  // Normalize tags filter from query\\n  // Support ?tags\n                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            \n\nSyntaxError: Unexpected end of input\n    at wrapSafe (node:internal/modules/cjs/loader:1666:18)\n    at Module._compile (node:internal/modules/cjs/loader:1708:20)\n    at Object..js (node:internal/modules/cjs/loader:1899:10)\n    at Module.load (node:internal/modules/cjs/loader:1469:32)\n    at Module._load (node:internal/modules/cjs/loader:1286:12)\n    at TracingChannel.traceSync (node:diagnostics_channel:322:14)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)\n    at Module.require (node:internal/modules/cjs/loader:1491:12)\n    at require (node:internal/modules/helpers:135:16)\n    at Object.<anonymous> (/Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/workspace/modules/Problems/controllers/ProblemsController.js:10:25)\n    at Module._compile (node:internal/modules/cjs/loader:1734:14)\n    at Object..js (node:internal/modules/cjs/loader:1899:10)\n    at Module.load (node:internal/modules/cjs/loader:1469:32)\n    at Module._load (node:internal/modules/cjs/loader:1286:12)\n    at TracingChannel.traceSync (node:diagnostics_channel:322:14)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)\n    at Module.require (node:internal/modules/cjs/loader:1491:12)\n    at require (node:internal/modules/helpers:135:16)\n    at Object.<anonymous> (/Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/workspace/test/problems.components.meta.spec.js:5:28)\n    at Module._compile (node:internal/modules/cjs/loader:1734:14)\n    at Object..js (node:internal/modules/cjs/loader:1899:10)\n    at Module.load (node:internal/modules/cjs/loader:1469:32)\n    at Module._load (node:internal/modules/cjs/loader:1286:12)\n    at TracingChannel.traceSync (node:diagnostics_channel:322:14)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)\n    at cjsLoader (node:internal/modules/esm/translators:315:5)\n    at ModuleWrap.<anonymous> (node:internal/modules/esm/translators:207:7)\n    at ModuleJob.run (node:internal/modules/esm/module_job:327:25)\n    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:663:26)\n    at async formattedImport (/Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/workspace/node_modules/mocha/lib/nodejs/esm-utils.js:9:14)\n    at async exports.requireOrImport (/Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/workspace/node_modules/mocha/lib/nodejs/esm-utils.js:42:28)\n    at async exports.loadFilesAsync (/Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/workspace/node_modules/mocha/lib/nodejs/esm-utils.js:100:20)\n    at async singleRun (/Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/workspace/node_modules/mocha/lib/cli/run-helpers.js:162:3)\n    at async exports.handler (/Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/workspace/node_modules/mocha/lib/cli/run.js:375:5)",
+              "expected": "",
+              "actual": "",
+              "location": "/Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/logs/tests_0_round2.log",
+              "category": "assertion",
+              "linked_contract_ids": [
+                "array_tag_filter",
+                "multi_tag_union",
+                "single_tag_filter"
+              ]
+            }
+          ],
+          "raw_edit_payload": "{\"edits\": [{\"path\": \"modules/Problems/services/ProblemsService.js\", \"mode\": \"rewrite\", \"content\": \"```json\\n{\\n  \\\"contract_review\\\": [\\n    {\\n      \\\"id\\\": \\\"single_tag_filter\\\",\\n      \\\"status\\\": \\\"covered\\\",\\n      \\\"notes\\\": \\\"The code normalizes single tag filters case-insensitively and returns metadata.appliedTags with lowercase tags.\\\"\\n    },\\n    {\\n      \\\"id\\\": \\\"multi_tag_union\\\",\\n      \\\"status\\\": \\\"covered\\\",\\n      \\\"notes\\\": \\\"Comma-separated tags are split, normalized, and problems matching any tag are included. Metadata.appliedTags includes all normalized tags.\\\"\\n    },\\n    {\\n      \\\"id\\\": \\\"array_tag_filter\\\",\\n      \\\"status\\\": \\\"covered\\\",\\n      \\\"notes\\\": \\\"tags[]=... array form is normalized and combined with difficulty filters, preserving ordering by roundId and limit of 50.\\\"\\n    }\\n  ],\\n  \\\"edits\\\": [\\n    {\\n      \\\"path\\\": \\\"modules/Problems/services/ProblemsService.js\\\",\\n      \\\"mode\\\": \\\"rewrite\\\",\\n      \\\"content\\\": \\\"'use strict';\\\\n\\\\n/*\\\\n * Copyright (c) 2016 TopCoder, Inc.\\\\n */\\\\n\\\\n/**\\\\n * Service for SRM problem APIs.\\\\n */\\\\nconst fs = require('fs');\\\\nconst path = require('path');\\\\nconst Joi = require('joi');\\\\nconst logger = require('../../../common/logger');\\\\n\\\\nlet cachedProblems;\\\\n\\\\nconst MAX_LIMIT = 50;\\\\n\\\\n/**\\\\n * Normalize tags filter into a lowercase array.\\\\n * @param {string|Array<string>} rawTags\\\\n * @returns {Array<string>}\\\\n */\\\\nfunction normalizeTags(rawTags) {\\\\n  if (!rawTags && rawTags !== '') {\\\\n    return [];\\\\n  }\\\\n  const list = Array.isArray(rawTags) ? rawTags : String(rawTags).split(',');\\\\n  return list\\\\n    .map((tag) => String(tag || '').trim().toLowerCase())\\\\n    .filter((tag) => tag);\\\\n}\\\\n\\\\n/**\\\\n * Check whether the problem contains at least one of the requested tags.\\\\n * @param {Object} problem\\\\n * @param {Array<string>} tags\\\\n * @returns {boolean}\\\\n */\\\\nfunction problemHasAnyTag(problem, tags) {\\\\n  if (!tags || tags.length === 0) return true;\\\\n  if (!problem.metadata || !problem.metadata.appliedTags) return false;\\\\n  const problemTags = problem.metadata.appliedTags.map((t) => t.toLowerCase());\\\\n  return tags.some((tag) => problemTags.includes(tag));\\\\n}\\\\n\\\\n/**\\\\n * Load problems from JSON file and cache them.\\\\n * @returns {Array<Object>}\\\\n */\\\\nfunction loadProblems() {\\\\n  if (cachedProblems) return cachedProblems;\\\\n  const filePath = path.join(__dirname, '..', '..', '..', 'data', 'problems.json');\\\\n  const raw = fs.readFileSync(filePath, 'utf8');\\\\n  cachedProblems = JSON.parse(raw);\\\\n  return cachedProblems;\\\\n}\\\\n\\\\n/**\\\\n * List problems with optional filtering and pagination.\\\\n * @param {Object} query\\\\n * @param {string|Array<string>} [query.tags] - tags filter, comma-separated string or array\\\\n * @param {string} [query.difficulty] - difficulty filter\\\\n * @param {number} [query.page] - page number (1-based)\\\\n * @returns {Promise<Object>} payload with problems and metadata\\\\n */\\\\nfunction* listProblems(query) {\\\\n  const problems = loadProblems();\\\\n\\\\n  // Normalize tags filter from query\\\\n  // Support ?tags\"}], \"localized\": true}",
+          "payload_parse_ok": true,
+          "payload_parse_error": "",
+          "candidate_files": [
+            "modules/Problems/services/ProblemsService.js"
+          ],
+          "candidate_files_raw": [
+            "test/problems.tags.spec.js",
+            "modules/Problems/services/ProblemsService.js",
+            "modules/Problems/controllers/ProblemsController.js",
+            "data/problems.json",
+            "node_modules/js-beautify/CHANGELOG.md",
+            "node_modules/js-beautify/README.md",
+            "node_modules/lodash/core.js",
+            "node_modules/lodash/lodash.js",
+            "test/problems.list.spec.js",
+            "package-lock.json",
+            "node_modules/.package-lock.json",
+            "node_modules/globals/globals.json"
+          ],
+          "candidate_files_filtered": [
+            "modules/Problems/services/ProblemsService.js"
+          ],
+          "clause_selection_reason": "unsatisfied_clause_priority_most_witnesses",
+          "row_quality": {
+            "contract_quality": "strong",
+            "contract_item_count": 3,
+            "active_clause_source": "unsatisfied_clause_priority_most_witnesses",
+            "active_clause_present": true,
+            "witness_count": 1,
+            "witness_unique_count": 1,
+            "payload_present": true,
+            "payload_parse_ok": true,
+            "candidate_file_count": 1,
+            "clause_selection_reason": "unsatisfied_clause_priority_most_witnesses",
+            "skipped_targets_present": false,
+            "lint_error_count": 0,
+            "used_fallback": false,
+            "strategy_mode": "cgcs_clause",
+            "regression_guard_count": 0
+          },
+          "lint_errors": [],
+          "skipped_targets": [],
+          "outcome_metrics": {
+            "status": "tests_failed",
+            "pass_rate": 0.0,
+            "duration": 0.35658141699968837,
+            "failing_tests": [
+              "tests_0"
+            ],
+            "error_types": [
+              "fail::"
+            ]
+          },
+          "coverage": 0.0,
+          "satisfied_ids": [],
+          "unsatisfied_ids": [
+            "single_tag_filter",
+            "multi_tag_union",
+            "array_tag_filter"
+          ],
+          "regressed_ids": [
+            "single_tag_filter"
+          ],
+          "witness_counts": {
+            "single_tag_filter": 1,
+            "multi_tag_union": 1,
+            "array_tag_filter": 1
+          },
+          "witness_sample": [
+            {
+              "signature": "ef9f886c9634f3ea922fb5eceae4f4455a692536",
+              "test_case": "tests_0",
+              "message": "Exception during run: /Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/workspace/modules/Problems/services/ProblemsService.js:24\n      \"content\": \"'use strict';\\n\\n/*\\n * Copyright (c) 2016 TopCoder, Inc.\\n */\\n\\n/**\\n * Service for SRM problem APIs.\\n */\\nconst fs = require('fs');\\nconst path = require('path');\\nconst Joi = require('joi');\\nconst logger = require('../../../common/logger');\\n\\nlet cachedProblems;\\n\\nconst MAX_LIMIT = 50;\\n\\n/**\\n * Normalize tags filter into a lowercase array.\\n * @param {string|Array<string>} rawTags\\n * @returns {Array<string>}\\n */\\nfunction normalizeTags(rawTags) {\\n  if (!rawTags && rawTags !== '') {\\n    return [];\\n  }\\n  const list = Array.isArray(rawTags) ? rawTags : String(rawTags).split(',');\\n  return list\\n    .map((tag) => String(tag || '').trim().toLowerCase())\\n    .filter((tag) => tag);\\n}\\n\\n/**\\n * Check whether the problem contains at least one of the requested tags.\\n * @param {Object} problem\\n * @param {Array<string>} tags\\n * @returns {boolean}\\n */\\nfunction problemHasAnyTag(problem, tags) {\\n  if (!tags || tags.length === 0) return true;\\n  if (!problem.metadata || !problem.metadata.appliedTags) return false;\\n  const problemTags = problem.metadata.appliedTags.map((t) => t.toLowerCase());\\n  return tags.some((tag) => problemTags.includes(tag));\\n}\\n\\n/**\\n * Load problems from JSON file and cache them.\\n * @returns {Array<Object>}\\n */\\nfunction loadProblems() {\\n  if (cachedProblems) return cachedProblems;\\n  const filePath = path.join(__dirname, '..', '..', '..', 'data', 'problems.json');\\n  const raw = fs.readFileSync(filePath, 'utf8');\\n  cachedProblems = JSON.parse(raw);\\n  return cachedProblems;\\n}\\n\\n/**\\n * List problems with optional filtering and pagination.\\n * @param {Object} query\\n * @param {string|Array<string>} [query.tags] - tags filter, comma-separated string or array\\n * @param {string} [query.difficulty] - difficulty filter\\n * @param {number} [query.page] - page number (1-based)\\n * @returns {Promise<Object>} payload with problems and metadata\\n */\\nfunction* listProblems(query) {\\n  const problems = loadProblems();\\n\\n  // Normalize tags filter from query\\n  // Support ?tags\n                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            \n\nSyntaxError: Unexpected end of input\n    at wrapSafe (node:internal/modules/cjs/loader:1666:18)\n    at Module._compile (node:internal/modules/cjs/loader:1708:20)\n    at Object..js (node:internal/modules/cjs/loader:1899:10)\n    at Module.load (node:internal/modules/cjs/loader:1469:32)\n    at Module._load (node:internal/modules/cjs/loader:1286:12)\n    at TracingChannel.traceSync (node:diagnostics_channel:322:14)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)\n    at Module.require (node:internal/modules/cjs/loader:1491:12)\n    at require (node:internal/modules/helpers:135:16)\n    at Object.<anonymous> (/Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/workspace/modules/Problems/controllers/ProblemsController.js:10:25)\n    at Module._compile (node:internal/modules/cjs/loader:1734:14)\n    at Object..js (node:internal/modules/cjs/loader:1899:10)\n    at Module.load (node:internal/modules/cjs/loader:1469:32)\n    at Module._load (node:internal/modules/cjs/loader:1286:12)\n    at TracingChannel.traceSync (node:diagnostics_channel:322:14)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)\n    at Module.require (node:internal/modules/cjs/loader:1491:12)\n    at require (node:internal/modules/helpers:135:16)\n    at Object.<anonymous> (/Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/workspace/test/problems.components.meta.spec.js:5:28)\n    at Module._compile (node:internal/modules/cjs/loader:1734:14)\n    at Object..js (node:internal/modules/cjs/loader:1899:10)\n    at Module.load (node:internal/modules/cjs/loader:1469:32)\n    at Module._load (node:internal/modules/cjs/loader:1286:12)\n    at TracingChannel.traceSync (node:diagnostics_channel:322:14)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)\n    at cjsLoader (node:internal/modules/esm/translators:315:5)\n    at ModuleWrap.<anonymous> (node:internal/modules/esm/translators:207:7)\n    at ModuleJob.run (node:internal/modules/esm/module_job:327:25)\n    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:663:26)\n    at async formattedImport (/Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/workspace/node_modules/mocha/lib/nodejs/esm-utils.js:9:14)\n    at async exports.requireOrImport (/Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/workspace/node_modules/mocha/lib/nodejs/esm-utils.js:42:28)\n    at async exports.loadFilesAsync (/Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/workspace/node_modules/mocha/lib/nodejs/esm-utils.js:100:20)\n    at async singleRun (/Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/workspace/node_modules/mocha/lib/cli/run-helpers.js:162:3)\n    at async exports.handler (/Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/workspace/node_modules/mocha/lib/cli/run.js:375:5)",
+              "expected": "",
+              "actual": "",
+              "location": "/Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/logs/tests_0_round2.log",
+              "category": "assertion",
+              "linked_contract_ids": [
+                "array_tag_filter",
+                "multi_tag_union",
+                "single_tag_filter"
+              ]
+            }
+          ],
+          "regression_guards": []
+        },
+        "witnesses": [
+          {
+            "signature": "ef9f886c9634f3ea922fb5eceae4f4455a692536",
+            "test_case": "tests_0",
+            "message": "Exception during run: /Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/workspace/modules/Problems/services/ProblemsService.js:24\n      \"content\": \"'use strict';\\n\\n/*\\n * Copyright (c) 2016 TopCoder, Inc.\\n */\\n\\n/**\\n * Service for SRM problem APIs.\\n */\\nconst fs = require('fs');\\nconst path = require('path');\\nconst Joi = require('joi');\\nconst logger = require('../../../common/logger');\\n\\nlet cachedProblems;\\n\\nconst MAX_LIMIT = 50;\\n\\n/**\\n * Normalize tags filter into a lowercase array.\\n * @param {string|Array<string>} rawTags\\n * @returns {Array<string>}\\n */\\nfunction normalizeTags(rawTags) {\\n  if (!rawTags && rawTags !== '') {\\n    return [];\\n  }\\n  const list = Array.isArray(rawTags) ? rawTags : String(rawTags).split(',');\\n  return list\\n    .map((tag) => String(tag || '').trim().toLowerCase())\\n    .filter((tag) => tag);\\n}\\n\\n/**\\n * Check whether the problem contains at least one of the requested tags.\\n * @param {Object} problem\\n * @param {Array<string>} tags\\n * @returns {boolean}\\n */\\nfunction problemHasAnyTag(problem, tags) {\\n  if (!tags || tags.length === 0) return true;\\n  if (!problem.metadata || !problem.metadata.appliedTags) return false;\\n  const problemTags = problem.metadata.appliedTags.map((t) => t.toLowerCase());\\n  return tags.some((tag) => problemTags.includes(tag));\\n}\\n\\n/**\\n * Load problems from JSON file and cache them.\\n * @returns {Array<Object>}\\n */\\nfunction loadProblems() {\\n  if (cachedProblems) return cachedProblems;\\n  const filePath = path.join(__dirname, '..', '..', '..', 'data', 'problems.json');\\n  const raw = fs.readFileSync(filePath, 'utf8');\\n  cachedProblems = JSON.parse(raw);\\n  return cachedProblems;\\n}\\n\\n/**\\n * List problems with optional filtering and pagination.\\n * @param {Object} query\\n * @param {string|Array<string>} [query.tags] - tags filter, comma-separated string or array\\n * @param {string} [query.difficulty] - difficulty filter\\n * @param {number} [query.page] - page number (1-based)\\n * @returns {Promise<Object>} payload with problems and metadata\\n */\\nfunction* listProblems(query) {\\n  const problems = loadProblems();\\n\\n  // Normalize tags filter from query\\n  // Support ?tags\n                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            \n\nSyntaxError: Unexpected end of input\n    at wrapSafe (node:internal/modules/cjs/loader:1666:18)\n    at Module._compile (node:internal/modules/cjs/loader:1708:20)\n    at Object..js (node:internal/modules/cjs/loader:1899:10)\n    at Module.load (node:internal/modules/cjs/loader:1469:32)\n    at Module._load (node:internal/modules/cjs/loader:1286:12)\n    at TracingChannel.traceSync (node:diagnostics_channel:322:14)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)\n    at Module.require (node:internal/modules/cjs/loader:1491:12)\n    at require (node:internal/modules/helpers:135:16)\n    at Object.<anonymous> (/Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/workspace/modules/Problems/controllers/ProblemsController.js:10:25)\n    at Module._compile (node:internal/modules/cjs/loader:1734:14)\n    at Object..js (node:internal/modules/cjs/loader:1899:10)\n    at Module.load (node:internal/modules/cjs/loader:1469:32)\n    at Module._load (node:internal/modules/cjs/loader:1286:12)\n    at TracingChannel.traceSync (node:diagnostics_channel:322:14)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)\n    at Module.require (node:internal/modules/cjs/loader:1491:12)\n    at require (node:internal/modules/helpers:135:16)\n    at Object.<anonymous> (/Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/workspace/test/problems.components.meta.spec.js:5:28)\n    at Module._compile (node:internal/modules/cjs/loader:1734:14)\n    at Object..js (node:internal/modules/cjs/loader:1899:10)\n    at Module.load (node:internal/modules/cjs/loader:1469:32)\n    at Module._load (node:internal/modules/cjs/loader:1286:12)\n    at TracingChannel.traceSync (node:diagnostics_channel:322:14)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)\n    at cjsLoader (node:internal/modules/esm/translators:315:5)\n    at ModuleWrap.<anonymous> (node:internal/modules/esm/translators:207:7)\n    at ModuleJob.run (node:internal/modules/esm/module_job:327:25)\n    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:663:26)\n    at async formattedImport (/Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/workspace/node_modules/mocha/lib/nodejs/esm-utils.js:9:14)\n    at async exports.requireOrImport (/Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/workspace/node_modules/mocha/lib/nodejs/esm-utils.js:42:28)\n    at async exports.loadFilesAsync (/Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/workspace/node_modules/mocha/lib/nodejs/esm-utils.js:100:20)\n    at async singleRun (/Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/workspace/node_modules/mocha/lib/cli/run-helpers.js:162:3)\n    at async exports.handler (/Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/workspace/node_modules/mocha/lib/cli/run.js:375:5)",
+            "expected": "",
+            "actual": "",
+            "location": "/Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/logs/tests_0_round2.log",
+            "category": "assertion",
+            "linked_contract_ids": [
+              "array_tag_filter",
+              "multi_tag_union",
+              "single_tag_filter"
+            ]
+          }
+        ],
+        "row_quality": {
+          "contract_quality": "strong",
+          "contract_item_count": 3,
+          "active_clause_source": "unsatisfied_clause_priority_most_witnesses",
+          "active_clause_present": true,
+          "witness_count": 1,
+          "witness_unique_count": 1,
+          "payload_present": true,
+          "payload_parse_ok": true,
+          "candidate_file_count": 1,
+          "clause_selection_reason": "unsatisfied_clause_priority_most_witnesses",
+          "skipped_targets_present": false,
+          "lint_error_count": 0,
+          "used_fallback": false,
+          "strategy_mode": "cgcs_clause",
+          "regression_guard_count": 0
+        },
+        "regression_guard_ids": [],
+        "active_clause_id": "multi_tag_union"
+      }
+    },
+    {
+      "round": 2,
+      "phase": "repair",
+      "subtask": "contract::single_tag_filter",
+      "localized": true,
+      "pass_rate": 0.0,
+      "status": "tests_failed",
+      "duration": 0.27195012499942095,
+      "failing_tests": [
+        "tests_0"
+      ],
+      "error_types": [
+        "fail::"
+      ],
+      "file_count": 1,
+      "multi_file_attempt": false,
+      "files_touched": [
+        "modules/Problems/services/ProblemsService.js"
+      ],
+      "inspected_files": [
+        "modules/Problems/services/ProblemsService.js",
+        "modules/Problems/controllers/ProblemsController.js",
+        "test/problems.tags.spec.js",
+        "data/problems.json"
+      ],
+      "proposed_files": [
+        "modules/Problems/services/ProblemsService.js"
+      ],
+      "edit_metadata": {
+        "raw_edit_payload": "{\"edits\": [{\"path\": \"modules/Problems/services/ProblemsService.js\", \"mode\": \"rewrite\", \"content\": \"```json\\n{\\n  \\\"contract_review\\\": [\\n    {\\n      \\\"id\\\": \\\"single_tag_filter\\\",\\n      \\\"status\\\": \\\"covered\\\",\\n      \\\"notes\\\": \\\"Implemented normalizeTags to lowercase and handle single tag string; filtering matches any problem with at least one tag in the normalized list; metadata.appliedTags returns normalized tags.\\\"\\n    },\\n    {\\n      \\\"id\\\": \\\"multi_tag_union\\\",\\n      \\\"status\\\": \\\"covered\\\",\\n      \\\"notes\\\": \\\"Comma-separated tags are split, normalized to lowercase, and used as a union filter; problems matching any tag are included; metadata.appliedTags includes all normalized tags.\\\"\\n    },\\n    {\\n      \\\"id\\\": \\\"array_tag_filter\\\",\\n      \\\"status\\\": \\\"covered\\\",\\n      \\\"notes\\\": \\\"tags[] array form is normalized and combined with difficulty filters; filtering preserves ordering by roundId ascending and limits results to 50; metadata.appliedTags reflects normalized tags.\\\"\\n    }\\n  ],\\n  \\\"edits\\\": [\\n    {\\n      \\\"path\\\": \\\"modules/Problems/services/ProblemsService.js\\\",\\n      \\\"mode\\\": \\\"rewrite\\\",\\n      \\\"content\\\": \\\"'use strict';\\\\n\\\\n/*\\\\n * Copyright (c) 2016 TopCoder, Inc.\\\\n */\\\\n\\\\n/**\\\\n * Service for SRM problem APIs.\\\\n */\\\\nconst fs = require('fs');\\\\nconst path = require('path');\\\\nconst Joi = require('joi');\\\\nconst logger = require('../../../common/logger');\\\\n\\\\nlet cachedProblems;\\\\n\\\\nconst MAX_LIMIT = 50;\\\\n\\\\n/**\\\\n * Normalize tags filter into a lowercase array.\\\\n * @param {string|Array<string>} rawTags\\\\n * @returns {Array<string>}\\\\n */\\\\nfunction normalizeTags(rawTags) {\\\\n  if (rawTags === undefined || rawTags === null) {\\\\n    return [];\\\\n  }\\\\n  if (Array.isArray(rawTags)) {\\\\n    return rawTags\\\\n      .map((tag) => String(tag || '').trim().toLowerCase())\\\\n      .filter((tag) => tag);\\\\n  }\\\\n  // rawTags is string\\\\n  return String(rawTags)\\\\n    .split(',')\\\\n    .map((tag) => tag.trim().toLowerCase())\\\\n    .filter((tag) => tag);\\\\n}\\\\n\\\\n/**\\\\n * Check whether the problem contains at least one of the requested tags.\\\\n * @param {Object} problem\\\\n * @param {Array<string>} requestedTags\\\\n * @returns {boolean}\\\\n */\\\\nfunction problemMatchesTags(problem, requestedTags) {\\\\n  if (!requestedTags || requestedTags.length === 0) {\\\\n    return true;\\\\n  }\\\\n  if (!problem.metadata || !Array.isArray(problem.metadata.appliedTags)) {\\\\n    return false;\\\\n  }\\\\n  const problemTags = problem.metadata.appliedTags.map((t) => t.toLowerCase());\\\\n  return requestedTags.some((tag) => problemTags.includes(tag));\\\\n}\\\\n\\\\n/**\\\\n * Load problems from JSON file and cache them.\\\\n * @returns {Array<Object>}\\\\n */\\\\nfunction loadProblems() {\\\\n  if (cachedProblems) {\\\\n    return cachedProblems;\\\\n  }\\\\n  const filePath = path.join(__dirname, '..', '..', '..', 'data', 'problems.json');\\\\n  const raw = fs.readFileSync(filePath, 'utf8');\\\\n  cachedProblems = JSON.parse(raw);\\\\n  return cachedProblems;\\\\n}\\\\n\\\\n/**\\\\n * List problems with optional filtering by tags and difficulty.\\\\n * Supports ?tags=foo,bar or tags[]=foo&\"}], \"localized\": true}",
+        "raw_payload": "{\"edits\": [{\"path\": \"modules/Problems/services/ProblemsService.js\", \"mode\": \"rewrite\", \"content\": \"```json\\n{\\n  \\\"contract_review\\\": [\\n    {\\n      \\\"id\\\": \\\"single_tag_filter\\\",\\n      \\\"status\\\": \\\"covered\\\",\\n      \\\"notes\\\": \\\"Implemented normalizeTags to lowercase and handle single tag string; filtering matches any problem with at least one tag in the normalized list; metadata.appliedTags returns normalized tags.\\\"\\n    },\\n    {\\n      \\\"id\\\": \\\"multi_tag_union\\\",\\n      \\\"status\\\": \\\"covered\\\",\\n      \\\"notes\\\": \\\"Comma-separated tags are split, normalized to lowercase, and used as a union filter; problems matching any tag are included; metadata.appliedTags includes all normalized tags.\\\"\\n    },\\n    {\\n      \\\"id\\\": \\\"array_tag_filter\\\",\\n      \\\"status\\\": \\\"covered\\\",\\n      \\\"notes\\\": \\\"tags[] array form is normalized and combined with difficulty filters; filtering preserves ordering by roundId ascending and limits results to 50; metadata.appliedTags reflects normalized tags.\\\"\\n    }\\n  ],\\n  \\\"edits\\\": [\\n    {\\n      \\\"path\\\": \\\"modules/Problems/services/ProblemsService.js\\\",\\n      \\\"mode\\\": \\\"rewrite\\\",\\n      \\\"content\\\": \\\"'use strict';\\\\n\\\\n/*\\\\n * Copyright (c) 2016 TopCoder, Inc.\\\\n */\\\\n\\\\n/**\\\\n * Service for SRM problem APIs.\\\\n */\\\\nconst fs = require('fs');\\\\nconst path = require('path');\\\\nconst Joi = require('joi');\\\\nconst logger = require('../../../common/logger');\\\\n\\\\nlet cachedProblems;\\\\n\\\\nconst MAX_LIMIT = 50;\\\\n\\\\n/**\\\\n * Normalize tags filter into a lowercase array.\\\\n * @param {string|Array<string>} rawTags\\\\n * @returns {Array<string>}\\\\n */\\\\nfunction normalizeTags(rawTags) {\\\\n  if (rawTags === undefined || rawTags === null) {\\\\n    return [];\\\\n  }\\\\n  if (Array.isArray(rawTags)) {\\\\n    return rawTags\\\\n      .map((tag) => String(tag || '').trim().toLowerCase())\\\\n      .filter((tag) => tag);\\\\n  }\\\\n  // rawTags is string\\\\n  return String(rawTags)\\\\n    .split(',')\\\\n    .map((tag) => tag.trim().toLowerCase())\\\\n    .filter((tag) => tag);\\\\n}\\\\n\\\\n/**\\\\n * Check whether the problem contains at least one of the requested tags.\\\\n * @param {Object} problem\\\\n * @param {Array<string>} requestedTags\\\\n * @returns {boolean}\\\\n */\\\\nfunction problemMatchesTags(problem, requestedTags) {\\\\n  if (!requestedTags || requestedTags.length === 0) {\\\\n    return true;\\\\n  }\\\\n  if (!problem.metadata || !Array.isArray(problem.metadata.appliedTags)) {\\\\n    return false;\\\\n  }\\\\n  const problemTags = problem.metadata.appliedTags.map((t) => t.toLowerCase());\\\\n  return requestedTags.some((tag) => problemTags.includes(tag));\\\\n}\\\\n\\\\n/**\\\\n * Load problems from JSON file and cache them.\\\\n * @returns {Array<Object>}\\\\n */\\\\nfunction loadProblems() {\\\\n  if (cachedProblems) {\\\\n    return cachedProblems;\\\\n  }\\\\n  const filePath = path.join(__dirname, '..', '..', '..', 'data', 'problems.json');\\\\n  const raw = fs.readFileSync(filePath, 'utf8');\\\\n  cachedProblems = JSON.parse(raw);\\\\n  return cachedProblems;\\\\n}\\\\n\\\\n/**\\\\n * List problems with optional filtering by tags and difficulty.\\\\n * Supports ?tags=foo,bar or tags[]=foo&\"}], \"localized\": true}",
+        "payload_parse_ok": true,
+        "payload_parse_error": "",
+        "candidate_files_raw": [
+          "test/problems.tags.spec.js",
+          "modules/Problems/services/ProblemsService.js",
+          "modules/Problems/controllers/ProblemsController.js",
+          "data/problems.json",
+          "node_modules/js-beautify/CHANGELOG.md",
+          "node_modules/js-beautify/README.md",
+          "node_modules/lodash/core.js",
+          "node_modules/lodash/lodash.js",
+          "test/problems.list.spec.js",
+          "package-lock.json",
+          "node_modules/.package-lock.json",
+          "node_modules/globals/globals.json"
+        ],
+        "candidate_files_filtered": [
+          "modules/Problems/services/ProblemsService.js"
+        ],
+        "candidate_files": [
+          "modules/Problems/services/ProblemsService.js"
+        ],
+        "strategy_mode": "cgcs",
+        "edit_mode": "edit_batch",
+        "localized_requested": true,
+        "fallback_requested": false,
+        "raw_metadata_keys": [
+          "localized"
+        ],
+        "applied_file_count": 1,
+        "proposed_file_count": 1,
+        "multi_file_applied": false,
+        "subtask_focus": "contract::single_tag_filter",
+        "contract_coverage": 0.0,
+        "contract_satisfied": [],
+        "contract_unsatisfied": [
+          "single_tag_filter",
+          "multi_tag_union",
+          "array_tag_filter"
+        ],
+        "contract_failure_categories": {
+          "filtering": 3
+        },
+        "contract_unsatisfied_details": [
+          "single_tag_filter: Handle ?tags=<value> case-insensitively and return metadata.appliedTags with normalized lowercase tags.",
+          "multi_tag_union: Comma-separated tags (e.g. ?tags=foo,bar) must match problems that contain any requested tag and expose both normalized tags in metadata.appliedTags.",
+          "array_tag_filter: tags[]=... array form must work alongside difficulty filters while preserving ordering by roundId and the paging limit."
+        ],
+        "contract_fail_cases": [],
+        "contract_items": [
+          {
+            "id": "single_tag_filter",
+            "label": "single_tag_filter",
+            "description": "Handle ?tags=<value> case-insensitively and return metadata.appliedTags with normalized lowercase tags.",
+            "category": "filtering",
+            "expected_behavior": "Handle ?tags=<value> case-insensitively and return metadata.appliedTags with normalized lowercase tags.",
+            "test_refs": [
+              "SRM problem tag filters::filters by a single tag case-insensitively"
+            ],
+            "priority": "",
+            "source": "",
+            "notes": "",
+            "keywords": [
+              "appliedtags"
+            ]
+          },
+          {
+            "id": "multi_tag_union",
+            "label": "multi_tag_union",
+            "description": "Comma-separated tags (e.g. ?tags=foo,bar) must match problems that contain any requested tag and expose both normalized tags in metadata.appliedTags.",
+            "category": "filtering",
+            "expected_behavior": "Comma-separated tags (e.g. ?tags=foo,bar) must match problems that contain any requested tag and expose both normalized tags in metadata.appliedTags.",
+            "test_refs": [
+              "SRM problem tag filters::accepts comma-separated tags and returns merged results"
+            ],
+            "priority": "",
+            "source": "",
+            "notes": "",
+            "keywords": [
+              "tags"
+            ]
+          },
+          {
+            "id": "array_tag_filter",
+            "label": "array_tag_filter",
+            "description": "tags[]=... array form must work alongside difficulty filters while preserving ordering by roundId and the paging limit.",
+            "category": "filtering",
+            "expected_behavior": "tags[]=... array form must work alongside difficulty filters while preserving ordering by roundId and the paging limit.",
+            "test_refs": [
+              "SRM problem tag filters::accepts array form and combines with difficulty filter"
+            ],
+            "priority": "",
+            "source": "",
+            "notes": "",
+            "keywords": [
+              "roundid",
+              "difficulty"
+            ]
+          }
+        ],
+        "witness_count": 1,
+        "witness_samples": [
+          {
+            "test_case": "tests_0",
+            "message": "Exception during run: /Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/workspace/",
+            "category": "assertion",
+            "expected": "",
+            "actual": "",
+            "contracts": []
+          }
+        ],
+        "cgcs_state": {
+          "round": 2,
+          "round_index": 2,
+          "strategy": "cgcs",
+          "task_id": "tc_arena_problem_tags_filter",
+          "contract_items": [
+            {
+              "id": "single_tag_filter",
+              "label": "single_tag_filter",
+              "description": "Handle ?tags=<value> case-insensitively and return metadata.appliedTags with normalized lowercase tags.",
+              "category": "filtering",
+              "expected_behavior": "Handle ?tags=<value> case-insensitively and return metadata.appliedTags with normalized lowercase tags.",
+              "test_refs": [
+                "SRM problem tag filters::filters by a single tag case-insensitively"
+              ],
+              "priority": "",
+              "source": "",
+              "notes": "",
+              "keywords": [
+                "appliedtags"
+              ]
+            },
+            {
+              "id": "multi_tag_union",
+              "label": "multi_tag_union",
+              "description": "Comma-separated tags (e.g. ?tags=foo,bar) must match problems that contain any requested tag and expose both normalized tags in metadata.appliedTags.",
+              "category": "filtering",
+              "expected_behavior": "Comma-separated tags (e.g. ?tags=foo,bar) must match problems that contain any requested tag and expose both normalized tags in metadata.appliedTags.",
+              "test_refs": [
+                "SRM problem tag filters::accepts comma-separated tags and returns merged results"
+              ],
+              "priority": "",
+              "source": "",
+              "notes": "",
+              "keywords": [
+                "tags"
+              ]
+            },
+            {
+              "id": "array_tag_filter",
+              "label": "array_tag_filter",
+              "description": "tags[]=... array form must work alongside difficulty filters while preserving ordering by roundId and the paging limit.",
+              "category": "filtering",
+              "expected_behavior": "tags[]=... array form must work alongside difficulty filters while preserving ordering by roundId and the paging limit.",
+              "test_refs": [
+                "SRM problem tag filters::accepts array form and combines with difficulty filter"
+              ],
+              "priority": "",
+              "source": "",
+              "notes": "",
+              "keywords": [
+                "roundid",
+                "difficulty"
+              ]
+            }
+          ],
+          "active_clause_id": "single_tag_filter",
+          "active_clause": "single_tag_filter",
+          "regression_guard_ids": [],
+          "witnesses": [
+            {
+              "signature": "3c747c5efba8f6878f44e8bd9f037bc1613c01a6",
+              "test_case": "tests_0",
+              "message": "Exception during run: /Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/workspace/modules/Problems/services/ProblemsService.js:24\n      \"content\": \"'use strict';\\n\\n/*\\n * Copyright (c) 2016 TopCoder, Inc.\\n */\\n\\n/**\\n * Service for SRM problem APIs.\\n */\\nconst fs = require('fs');\\nconst path = require('path');\\nconst Joi = require('joi');\\nconst logger = require('../../../common/logger');\\n\\nlet cachedProblems;\\n\\nconst MAX_LIMIT = 50;\\n\\n/**\\n * Normalize tags filter into a lowercase array.\\n * @param {string|Array<string>} rawTags\\n * @returns {Array<string>}\\n */\\nfunction normalizeTags(rawTags) {\\n  if (rawTags === undefined || rawTags === null) {\\n    return [];\\n  }\\n  if (Array.isArray(rawTags)) {\\n    return rawTags\\n      .map((tag) => String(tag || '').trim().toLowerCase())\\n      .filter((tag) => tag);\\n  }\\n  // rawTags is string\\n  return String(rawTags)\\n    .split(',')\\n    .map((tag) => tag.trim().toLowerCase())\\n    .filter((tag) => tag);\\n}\\n\\n/**\\n * Check whether the problem contains at least one of the requested tags.\\n * @param {Object} problem\\n * @param {Array<string>} requestedTags\\n * @returns {boolean}\\n */\\nfunction problemMatchesTags(problem, requestedTags) {\\n  if (!requestedTags || requestedTags.length === 0) {\\n    return true;\\n  }\\n  if (!problem.metadata || !Array.isArray(problem.metadata.appliedTags)) {\\n    return false;\\n  }\\n  const problemTags = problem.metadata.appliedTags.map((t) => t.toLowerCase());\\n  return requestedTags.some((tag) => problemTags.includes(tag));\\n}\\n\\n/**\\n * Load problems from JSON file and cache them.\\n * @returns {Array<Object>}\\n */\\nfunction loadProblems() {\\n  if (cachedProblems) {\\n    return cachedProblems;\\n  }\\n  const filePath = path.join(__dirname, '..', '..', '..', 'data', 'problems.json');\\n  const raw = fs.readFileSync(filePath, 'utf8');\\n  cachedProblems = JSON.parse(raw);\\n  return cachedProblems;\\n}\\n\\n/**\\n * List problems with optional filtering by tags and difficulty.\\n * Supports ?tags=foo,bar or tags[]=foo&\n                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            \n\nSyntaxError: Unexpected end of input\n    at wrapSafe (node:internal/modules/cjs/loader:1666:18)\n    at Module._compile (node:internal/modules/cjs/loader:1708:20)\n    at Object..js (node:internal/modules/cjs/loader:1899:10)\n    at Module.load (node:internal/modules/cjs/loader:1469:32)\n    at Module._load (node:internal/modules/cjs/loader:1286:12)\n    at TracingChannel.traceSync (node:diagnostics_channel:322:14)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)\n    at Module.require (node:internal/modules/cjs/loader:1491:12)\n    at require (node:internal/modules/helpers:135:16)\n    at Object.<anonymous> (/Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/workspace/modules/Problems/controllers/ProblemsController.js:10:25)\n    at Module._compile (node:internal/modules/cjs/loader:1734:14)\n    at Object..js (node:internal/modules/cjs/loader:1899:10)\n    at Module.load (node:internal/modules/cjs/loader:1469:32)\n    at Module._load (node:internal/modules/cjs/loader:1286:12)\n    at TracingChannel.traceSync (node:diagnostics_channel:322:14)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)\n    at Module.require (node:internal/modules/cjs/loader:1491:12)\n    at require (node:internal/modules/helpers:135:16)\n    at Object.<anonymous> (/Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/workspace/test/problems.components.meta.spec.js:5:28)\n    at Module._compile (node:internal/modules/cjs/loader:1734:14)\n    at Object..js (node:internal/modules/cjs/loader:1899:10)\n    at Module.load (node:internal/modules/cjs/loader:1469:32)\n    at Module._load (node:internal/modules/cjs/loader:1286:12)\n    at TracingChannel.traceSync (node:diagnostics_channel:322:14)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)\n    at cjsLoader (node:internal/modules/esm/translators:315:5)\n    at ModuleWrap.<anonymous> (node:internal/modules/esm/translators:207:7)\n    at ModuleJob.run (node:internal/modules/esm/module_job:327:25)\n    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:663:26)\n    at async formattedImport (/Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/workspace/node_modules/mocha/lib/nodejs/esm-utils.js:9:14)\n    at async exports.requireOrImport (/Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/workspace/node_modules/mocha/lib/nodejs/esm-utils.js:42:28)\n    at async exports.loadFilesAsync (/Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/workspace/node_modules/mocha/lib/nodejs/esm-utils.js:100:20)\n    at async singleRun (/Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/workspace/node_modules/mocha/lib/cli/run-helpers.js:162:3)\n    at async exports.handler (/Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/workspace/node_modules/mocha/lib/cli/run.js:375:5)",
+              "expected": "",
+              "actual": "",
+              "location": "/Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/logs/tests_0_round3.log",
+              "category": "assertion",
+              "linked_contract_ids": [
+                "array_tag_filter",
+                "multi_tag_union",
+                "single_tag_filter"
+              ]
+            }
+          ],
+          "raw_edit_payload": "{\"edits\": [{\"path\": \"modules/Problems/services/ProblemsService.js\", \"mode\": \"rewrite\", \"content\": \"```json\\n{\\n  \\\"contract_review\\\": [\\n    {\\n      \\\"id\\\": \\\"single_tag_filter\\\",\\n      \\\"status\\\": \\\"covered\\\",\\n      \\\"notes\\\": \\\"Implemented normalizeTags to lowercase and handle single tag string; filtering matches any problem with at least one tag in the normalized list; metadata.appliedTags returns normalized tags.\\\"\\n    },\\n    {\\n      \\\"id\\\": \\\"multi_tag_union\\\",\\n      \\\"status\\\": \\\"covered\\\",\\n      \\\"notes\\\": \\\"Comma-separated tags are split, normalized to lowercase, and used as a union filter; problems matching any tag are included; metadata.appliedTags includes all normalized tags.\\\"\\n    },\\n    {\\n      \\\"id\\\": \\\"array_tag_filter\\\",\\n      \\\"status\\\": \\\"covered\\\",\\n      \\\"notes\\\": \\\"tags[] array form is normalized and combined with difficulty filters; filtering preserves ordering by roundId ascending and limits results to 50; metadata.appliedTags reflects normalized tags.\\\"\\n    }\\n  ],\\n  \\\"edits\\\": [\\n    {\\n      \\\"path\\\": \\\"modules/Problems/services/ProblemsService.js\\\",\\n      \\\"mode\\\": \\\"rewrite\\\",\\n      \\\"content\\\": \\\"'use strict';\\\\n\\\\n/*\\\\n * Copyright (c) 2016 TopCoder, Inc.\\\\n */\\\\n\\\\n/**\\\\n * Service for SRM problem APIs.\\\\n */\\\\nconst fs = require('fs');\\\\nconst path = require('path');\\\\nconst Joi = require('joi');\\\\nconst logger = require('../../../common/logger');\\\\n\\\\nlet cachedProblems;\\\\n\\\\nconst MAX_LIMIT = 50;\\\\n\\\\n/**\\\\n * Normalize tags filter into a lowercase array.\\\\n * @param {string|Array<string>} rawTags\\\\n * @returns {Array<string>}\\\\n */\\\\nfunction normalizeTags(rawTags) {\\\\n  if (rawTags === undefined || rawTags === null) {\\\\n    return [];\\\\n  }\\\\n  if (Array.isArray(rawTags)) {\\\\n    return rawTags\\\\n      .map((tag) => String(tag || '').trim().toLowerCase())\\\\n      .filter((tag) => tag);\\\\n  }\\\\n  // rawTags is string\\\\n  return String(rawTags)\\\\n    .split(',')\\\\n    .map((tag) => tag.trim().toLowerCase())\\\\n    .filter((tag) => tag);\\\\n}\\\\n\\\\n/**\\\\n * Check whether the problem contains at least one of the requested tags.\\\\n * @param {Object} problem\\\\n * @param {Array<string>} requestedTags\\\\n * @returns {boolean}\\\\n */\\\\nfunction problemMatchesTags(problem, requestedTags) {\\\\n  if (!requestedTags || requestedTags.length === 0) {\\\\n    return true;\\\\n  }\\\\n  if (!problem.metadata || !Array.isArray(problem.metadata.appliedTags)) {\\\\n    return false;\\\\n  }\\\\n  const problemTags = problem.metadata.appliedTags.map((t) => t.toLowerCase());\\\\n  return requestedTags.some((tag) => problemTags.includes(tag));\\\\n}\\\\n\\\\n/**\\\\n * Load problems from JSON file and cache them.\\\\n * @returns {Array<Object>}\\\\n */\\\\nfunction loadProblems() {\\\\n  if (cachedProblems) {\\\\n    return cachedProblems;\\\\n  }\\\\n  const filePath = path.join(__dirname, '..', '..', '..', 'data', 'problems.json');\\\\n  const raw = fs.readFileSync(filePath, 'utf8');\\\\n  cachedProblems = JSON.parse(raw);\\\\n  return cachedProblems;\\\\n}\\\\n\\\\n/**\\\\n * List problems with optional filtering by tags and difficulty.\\\\n * Supports ?tags=foo,bar or tags[]=foo&\"}], \"localized\": true}",
+          "payload_parse_ok": true,
+          "payload_parse_error": "",
+          "candidate_files": [
+            "modules/Problems/services/ProblemsService.js"
+          ],
+          "candidate_files_raw": [
+            "test/problems.tags.spec.js",
+            "modules/Problems/services/ProblemsService.js",
+            "modules/Problems/controllers/ProblemsController.js",
+            "data/problems.json",
+            "node_modules/js-beautify/CHANGELOG.md",
+            "node_modules/js-beautify/README.md",
+            "node_modules/lodash/core.js",
+            "node_modules/lodash/lodash.js",
+            "test/problems.list.spec.js",
+            "package-lock.json",
+            "node_modules/.package-lock.json",
+            "node_modules/globals/globals.json"
+          ],
+          "candidate_files_filtered": [
+            "modules/Problems/services/ProblemsService.js"
+          ],
+          "clause_selection_reason": "regressed_clause_priority_most_witnesses",
+          "row_quality": {
+            "contract_quality": "strong",
+            "contract_item_count": 3,
+            "active_clause_source": "regressed_clause_priority_most_witnesses",
+            "active_clause_present": true,
+            "witness_count": 1,
+            "witness_unique_count": 1,
+            "payload_present": true,
+            "payload_parse_ok": true,
+            "candidate_file_count": 1,
+            "clause_selection_reason": "regressed_clause_priority_most_witnesses",
+            "skipped_targets_present": false,
+            "lint_error_count": 0,
+            "used_fallback": false,
+            "strategy_mode": "cgcs_clause",
+            "regression_guard_count": 0
+          },
+          "lint_errors": [],
+          "skipped_targets": [],
+          "outcome_metrics": {
+            "status": "tests_failed",
+            "pass_rate": 0.0,
+            "duration": 0.27195012499942095,
+            "failing_tests": [
+              "tests_0"
+            ],
+            "error_types": [
+              "fail::"
+            ]
+          },
+          "coverage": 0.0,
+          "satisfied_ids": [],
+          "unsatisfied_ids": [
+            "single_tag_filter",
+            "multi_tag_union",
+            "array_tag_filter"
+          ],
+          "regressed_ids": [
+            "single_tag_filter"
+          ],
+          "witness_counts": {
+            "single_tag_filter": 1,
+            "multi_tag_union": 1,
+            "array_tag_filter": 1
+          },
+          "witness_sample": [
+            {
+              "signature": "3c747c5efba8f6878f44e8bd9f037bc1613c01a6",
+              "test_case": "tests_0",
+              "message": "Exception during run: /Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/workspace/modules/Problems/services/ProblemsService.js:24\n      \"content\": \"'use strict';\\n\\n/*\\n * Copyright (c) 2016 TopCoder, Inc.\\n */\\n\\n/**\\n * Service for SRM problem APIs.\\n */\\nconst fs = require('fs');\\nconst path = require('path');\\nconst Joi = require('joi');\\nconst logger = require('../../../common/logger');\\n\\nlet cachedProblems;\\n\\nconst MAX_LIMIT = 50;\\n\\n/**\\n * Normalize tags filter into a lowercase array.\\n * @param {string|Array<string>} rawTags\\n * @returns {Array<string>}\\n */\\nfunction normalizeTags(rawTags) {\\n  if (rawTags === undefined || rawTags === null) {\\n    return [];\\n  }\\n  if (Array.isArray(rawTags)) {\\n    return rawTags\\n      .map((tag) => String(tag || '').trim().toLowerCase())\\n      .filter((tag) => tag);\\n  }\\n  // rawTags is string\\n  return String(rawTags)\\n    .split(',')\\n    .map((tag) => tag.trim().toLowerCase())\\n    .filter((tag) => tag);\\n}\\n\\n/**\\n * Check whether the problem contains at least one of the requested tags.\\n * @param {Object} problem\\n * @param {Array<string>} requestedTags\\n * @returns {boolean}\\n */\\nfunction problemMatchesTags(problem, requestedTags) {\\n  if (!requestedTags || requestedTags.length === 0) {\\n    return true;\\n  }\\n  if (!problem.metadata || !Array.isArray(problem.metadata.appliedTags)) {\\n    return false;\\n  }\\n  const problemTags = problem.metadata.appliedTags.map((t) => t.toLowerCase());\\n  return requestedTags.some((tag) => problemTags.includes(tag));\\n}\\n\\n/**\\n * Load problems from JSON file and cache them.\\n * @returns {Array<Object>}\\n */\\nfunction loadProblems() {\\n  if (cachedProblems) {\\n    return cachedProblems;\\n  }\\n  const filePath = path.join(__dirname, '..', '..', '..', 'data', 'problems.json');\\n  const raw = fs.readFileSync(filePath, 'utf8');\\n  cachedProblems = JSON.parse(raw);\\n  return cachedProblems;\\n}\\n\\n/**\\n * List problems with optional filtering by tags and difficulty.\\n * Supports ?tags=foo,bar or tags[]=foo&\n                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            \n\nSyntaxError: Unexpected end of input\n    at wrapSafe (node:internal/modules/cjs/loader:1666:18)\n    at Module._compile (node:internal/modules/cjs/loader:1708:20)\n    at Object..js (node:internal/modules/cjs/loader:1899:10)\n    at Module.load (node:internal/modules/cjs/loader:1469:32)\n    at Module._load (node:internal/modules/cjs/loader:1286:12)\n    at TracingChannel.traceSync (node:diagnostics_channel:322:14)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)\n    at Module.require (node:internal/modules/cjs/loader:1491:12)\n    at require (node:internal/modules/helpers:135:16)\n    at Object.<anonymous> (/Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/workspace/modules/Problems/controllers/ProblemsController.js:10:25)\n    at Module._compile (node:internal/modules/cjs/loader:1734:14)\n    at Object..js (node:internal/modules/cjs/loader:1899:10)\n    at Module.load (node:internal/modules/cjs/loader:1469:32)\n    at Module._load (node:internal/modules/cjs/loader:1286:12)\n    at TracingChannel.traceSync (node:diagnostics_channel:322:14)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)\n    at Module.require (node:internal/modules/cjs/loader:1491:12)\n    at require (node:internal/modules/helpers:135:16)\n    at Object.<anonymous> (/Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/workspace/test/problems.components.meta.spec.js:5:28)\n    at Module._compile (node:internal/modules/cjs/loader:1734:14)\n    at Object..js (node:internal/modules/cjs/loader:1899:10)\n    at Module.load (node:internal/modules/cjs/loader:1469:32)\n    at Module._load (node:internal/modules/cjs/loader:1286:12)\n    at TracingChannel.traceSync (node:diagnostics_channel:322:14)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)\n    at cjsLoader (node:internal/modules/esm/translators:315:5)\n    at ModuleWrap.<anonymous> (node:internal/modules/esm/translators:207:7)\n    at ModuleJob.run (node:internal/modules/esm/module_job:327:25)\n    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:663:26)\n    at async formattedImport (/Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/workspace/node_modules/mocha/lib/nodejs/esm-utils.js:9:14)\n    at async exports.requireOrImport (/Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/workspace/node_modules/mocha/lib/nodejs/esm-utils.js:42:28)\n    at async exports.loadFilesAsync (/Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/workspace/node_modules/mocha/lib/nodejs/esm-utils.js:100:20)\n    at async singleRun (/Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/workspace/node_modules/mocha/lib/cli/run-helpers.js:162:3)\n    at async exports.handler (/Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/workspace/node_modules/mocha/lib/cli/run.js:375:5)",
+              "expected": "",
+              "actual": "",
+              "location": "/Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/logs/tests_0_round3.log",
+              "category": "assertion",
+              "linked_contract_ids": [
+                "array_tag_filter",
+                "multi_tag_union",
+                "single_tag_filter"
+              ]
+            }
+          ],
+          "regression_guards": []
+        },
+        "witnesses": [
+          {
+            "signature": "3c747c5efba8f6878f44e8bd9f037bc1613c01a6",
+            "test_case": "tests_0",
+            "message": "Exception during run: /Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/workspace/modules/Problems/services/ProblemsService.js:24\n      \"content\": \"'use strict';\\n\\n/*\\n * Copyright (c) 2016 TopCoder, Inc.\\n */\\n\\n/**\\n * Service for SRM problem APIs.\\n */\\nconst fs = require('fs');\\nconst path = require('path');\\nconst Joi = require('joi');\\nconst logger = require('../../../common/logger');\\n\\nlet cachedProblems;\\n\\nconst MAX_LIMIT = 50;\\n\\n/**\\n * Normalize tags filter into a lowercase array.\\n * @param {string|Array<string>} rawTags\\n * @returns {Array<string>}\\n */\\nfunction normalizeTags(rawTags) {\\n  if (rawTags === undefined || rawTags === null) {\\n    return [];\\n  }\\n  if (Array.isArray(rawTags)) {\\n    return rawTags\\n      .map((tag) => String(tag || '').trim().toLowerCase())\\n      .filter((tag) => tag);\\n  }\\n  // rawTags is string\\n  return String(rawTags)\\n    .split(',')\\n    .map((tag) => tag.trim().toLowerCase())\\n    .filter((tag) => tag);\\n}\\n\\n/**\\n * Check whether the problem contains at least one of the requested tags.\\n * @param {Object} problem\\n * @param {Array<string>} requestedTags\\n * @returns {boolean}\\n */\\nfunction problemMatchesTags(problem, requestedTags) {\\n  if (!requestedTags || requestedTags.length === 0) {\\n    return true;\\n  }\\n  if (!problem.metadata || !Array.isArray(problem.metadata.appliedTags)) {\\n    return false;\\n  }\\n  const problemTags = problem.metadata.appliedTags.map((t) => t.toLowerCase());\\n  return requestedTags.some((tag) => problemTags.includes(tag));\\n}\\n\\n/**\\n * Load problems from JSON file and cache them.\\n * @returns {Array<Object>}\\n */\\nfunction loadProblems() {\\n  if (cachedProblems) {\\n    return cachedProblems;\\n  }\\n  const filePath = path.join(__dirname, '..', '..', '..', 'data', 'problems.json');\\n  const raw = fs.readFileSync(filePath, 'utf8');\\n  cachedProblems = JSON.parse(raw);\\n  return cachedProblems;\\n}\\n\\n/**\\n * List problems with optional filtering by tags and difficulty.\\n * Supports ?tags=foo,bar or tags[]=foo&\n                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            \n\nSyntaxError: Unexpected end of input\n    at wrapSafe (node:internal/modules/cjs/loader:1666:18)\n    at Module._compile (node:internal/modules/cjs/loader:1708:20)\n    at Object..js (node:internal/modules/cjs/loader:1899:10)\n    at Module.load (node:internal/modules/cjs/loader:1469:32)\n    at Module._load (node:internal/modules/cjs/loader:1286:12)\n    at TracingChannel.traceSync (node:diagnostics_channel:322:14)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)\n    at Module.require (node:internal/modules/cjs/loader:1491:12)\n    at require (node:internal/modules/helpers:135:16)\n    at Object.<anonymous> (/Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/workspace/modules/Problems/controllers/ProblemsController.js:10:25)\n    at Module._compile (node:internal/modules/cjs/loader:1734:14)\n    at Object..js (node:internal/modules/cjs/loader:1899:10)\n    at Module.load (node:internal/modules/cjs/loader:1469:32)\n    at Module._load (node:internal/modules/cjs/loader:1286:12)\n    at TracingChannel.traceSync (node:diagnostics_channel:322:14)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)\n    at Module.require (node:internal/modules/cjs/loader:1491:12)\n    at require (node:internal/modules/helpers:135:16)\n    at Object.<anonymous> (/Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/workspace/test/problems.components.meta.spec.js:5:28)\n    at Module._compile (node:internal/modules/cjs/loader:1734:14)\n    at Object..js (node:internal/modules/cjs/loader:1899:10)\n    at Module.load (node:internal/modules/cjs/loader:1469:32)\n    at Module._load (node:internal/modules/cjs/loader:1286:12)\n    at TracingChannel.traceSync (node:diagnostics_channel:322:14)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)\n    at cjsLoader (node:internal/modules/esm/translators:315:5)\n    at ModuleWrap.<anonymous> (node:internal/modules/esm/translators:207:7)\n    at ModuleJob.run (node:internal/modules/esm/module_job:327:25)\n    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:663:26)\n    at async formattedImport (/Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/workspace/node_modules/mocha/lib/nodejs/esm-utils.js:9:14)\n    at async exports.requireOrImport (/Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/workspace/node_modules/mocha/lib/nodejs/esm-utils.js:42:28)\n    at async exports.loadFilesAsync (/Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/workspace/node_modules/mocha/lib/nodejs/esm-utils.js:100:20)\n    at async singleRun (/Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/workspace/node_modules/mocha/lib/cli/run-helpers.js:162:3)\n    at async exports.handler (/Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/workspace/node_modules/mocha/lib/cli/run.js:375:5)",
+            "expected": "",
+            "actual": "",
+            "location": "/Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo_tiny/runs/tc_arena_problem_tags_filter/cgcs/logs/tests_0_round3.log",
+            "category": "assertion",
+            "linked_contract_ids": [
+              "array_tag_filter",
+              "multi_tag_union",
+              "single_tag_filter"
+            ]
+          }
+        ],
+        "row_quality": {
+          "contract_quality": "strong",
+          "contract_item_count": 3,
+          "active_clause_source": "regressed_clause_priority_most_witnesses",
+          "active_clause_present": true,
+          "witness_count": 1,
+          "witness_unique_count": 1,
+          "payload_present": true,
+          "payload_parse_ok": true,
+          "candidate_file_count": 1,
+          "clause_selection_reason": "regressed_clause_priority_most_witnesses",
+          "skipped_targets_present": false,
+          "lint_error_count": 0,
+          "used_fallback": false,
+          "strategy_mode": "cgcs_clause",
+          "regression_guard_count": 0
+        },
+        "regression_guard_ids": [],
+        "active_clause_id": "single_tag_filter"
+      }
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "artifact_candidates_input": 446154,
+  "repo_candidates_emitted": 94540,
+  "unique_repo_count": 3195,
+  "by_confidence": {
+    "high": 94540
+  },
+  "by_host": {
+    "github.com": 63294,
+    "bitbucket.org": 243,
+    "apps.topcoder.com": 356,
+    "www.topcoder.com": 10,
+    "blogs.msdn.com": 4,
+    "blogs.technet.com": 6,
+    "gitlab.com": 30435,
+    "www.dropbox.com": 148,
+    "\ufffd\ufffd\ufffdhttps:": 4,
+    "test.com": 4,
+    "archive.apache.org": 6,
+    "www.theatlantic.com": 6,
+    "jdk.java.net": 8,
+    "s3.amazonaws.com": 15,
+    "bucket.s3.aws.com": 1
+  },
+  "by_strategy": {
+    "clone_or_source_download": 93411,
+    "clone": 550,
+    "download_archive": 579
+  },
+  "by_artifact_type": {
+    "git_host_repo_page": 93411,
+    "git_repo": 550,
+    "source_archive": 579
+  },
+  "min_confidence": "low",
+  "output_candidates": 94540,
+  "challenge_filter_count": 0
+}

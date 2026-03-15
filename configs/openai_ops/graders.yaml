@@ -1,0 +1,15 @@
+clause_discharge:
+  description: "Checks if each clause's acceptance criteria are satisfied by the proposed patch."
+  type: "llm"
+regression_violation:
+  description: "Ensures regression guards remain intact."
+  type: "llm"
+witness_usage_quality:
+  description: "Scores how well the witnesses were referenced when crafting the fix."
+  type: "llm"
+payload_schema_compliance:
+  description: "Validates JSON payload structure deterministically."
+  type: "python"
+unnecessary_edit_penalty:
+  description: "Flags edits that touch files outside the clause scope."
+  type: "python"

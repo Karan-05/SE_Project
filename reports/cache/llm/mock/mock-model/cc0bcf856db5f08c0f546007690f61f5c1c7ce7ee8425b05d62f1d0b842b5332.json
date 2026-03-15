@@ -1,0 +1,1 @@
+{"content": "[MOCK] bb3f4d6fd7681158 :: You are repairing code produced by strategy 'failure_mode_first'. Problem statement: You are fixing a seeded bug in the ", "tokens": 195, "elapsed": 6.832997314631939e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "failure_mode_first:repair"}}

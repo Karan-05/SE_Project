@@ -1,0 +1,69 @@
+{
+	"rules": {
+		"class-name": true,
+		"no-duplicate-variable": true,
+		"no-trailing-whitespace": true,
+		"no-eval": true,
+		"no-var-keyword": true,
+		"no-unused-variable": [
+			true
+		],
+		"semicolon": [
+			true,
+			"always"
+		],
+		"triple-equals": [
+			true,
+			"allow-null-check"
+		],
+		"indent": [
+			true,
+			"tabs"
+		],
+		"quotemark": [
+			true,
+			"single"
+		],
+		"typedef-whitespace": [
+			true,
+			{
+				"call-signature": "nospace",
+				"index-signature": "nospace",
+				"parameter": "nospace",
+				"property-declaration": "nospace",
+				"variable-declaration": "nospace"
+			}
+		],
+		"typedef": [
+			true,
+			"call-signature",
+			"parameter",
+			"arrow-parameter",
+			"property-declaration",
+			"variable-declaration",
+			"member-variable-declaration"
+		],
+		"variable-name": [
+			true,
+			"ban-keywords"
+		],
+		"whitespace": [
+			true,
+			"check-branch",
+			"check-decl",
+			"check-operator",
+			"check-separator",
+			"check-type"
+		],
+		"trailing-comma": [
+			true,
+			{
+				"multiline": "always",
+				"singleline": "never"
+			}
+		]
+	},
+	"rulesDirectory": [
+		"node_modules/tslint-eslint-rules/dist/rules"
+	]
+}

@@ -1,0 +1,2 @@
+run_id,grader,total_requests,success_count,error_count,malformed_json_count,avg_output_tokens
+batch_summary,batch_summary,0,0,0,0,0.0

@@ -1,0 +1,20 @@
+PODS:
+  - AgoraRtcEngine_iOS (3.2.1)
+  - ARVideoKit (1.51)
+
+DEPENDENCIES:
+  - AgoraRtcEngine_iOS (<= 3.2.1)
+  - ARVideoKit (~> 1.51)
+
+SPEC REPOS:
+  trunk:
+    - AgoraRtcEngine_iOS
+    - ARVideoKit
+
+SPEC CHECKSUMS:
+  AgoraRtcEngine_iOS: bf8ee53108d31dd9e3b7e448701b9098162c42c7
+  ARVideoKit: d575d98274aab060748514aa32ac964c24c1923f
+
+PODFILE CHECKSUM: 0505a2aedf5ad74a4c0aaee22ebe4677a1460b92
+
+COCOAPODS: 1.10.1

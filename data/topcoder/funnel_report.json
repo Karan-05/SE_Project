@@ -1,0 +1,26 @@
+{
+  "stages": {
+    "raw_corpus_count": 22023,
+    "indexed_count": 22023,
+    "likely_executable_count": 16562,
+    "executable_subset_count": 3966,
+    "usable_cgcs_row_count": 60,
+    "eval_item_count": 9,
+    "batch_request_count": 0,
+    "batch_success_count": 0,
+    "solved_count": 0
+  },
+  "details": {
+    "cgcs_rejections": {},
+    "skipped_eval_items": {},
+    "batch_errors": {}
+  },
+  "paths": {
+    "corpus_index": "data/topcoder/corpus_index.jsonl",
+    "executable_subset": "data/topcoder/executable_subset.jsonl",
+    "cgcs_dir": "data/cgcs",
+    "eval_items": "openai_artifacts/eval_items_test.jsonl",
+    "batch_requests": "openai_artifacts/batch_requests.jsonl",
+    "normalized_dir": "openai_artifacts/normalized"
+  }
+}

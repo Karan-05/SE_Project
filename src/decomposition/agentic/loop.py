@@ -4,13 +4,23 @@ from __future__ import annotations
 import os
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, List, Optional, Sequence, Tuple
 
 from src.config import PathConfig
 from src.decomposition.agentic.executor import ExecutionResult, execute_attempt
 from src.decomposition.agentic.semantic import SemanticVariantConfig, get_semantic_config
 from src.decomposition.agentic.solver import generate_initial_code, generate_repair_code
-from src.decomposition.real_repo.contracts import evaluate_contract_coverage, render_unsatisfied_details
+from src.decomposition.real_repo.contracts import (
+    ContractCoverageResult,
+    contract_items_to_dicts,
+    evaluate_contract_coverage,
+    get_contract_items,
+    render_unsatisfied_details,
+)
+from src.decomposition.real_repo.cgcs_logging import build_cgcs_round_trace
+from src.decomposition.real_repo.contract_graph import build_contract_graph, choose_next_clause, update_from_run
+from src.decomposition.real_repo.witnesses import SemanticWitness, extract_mocha_witnesses
+from src.decomposition.real_repo.strict_logging import persist_strict_trace_entry
 from src.decomposition.agentic.traces import write_round_traces
 from src.decomposition.interfaces import DecompositionContext, DecompositionPlan, StrategyResult
 from src.decomposition.strategies._utils import BudgetTracker
@@ -66,6 +76,7 @@ class RepairPolicy:
     localized: bool = True
     allow_monolithic_fallback: bool = True
     description: str = "subtasks_first"
+    clause_driven: bool = False
 
 
 @dataclass
@@ -159,6 +170,36 @@ def _round_entry(index: int, phase: str, subtask: str, localized: bool, result: 
     )
 
 
+def _normalize_file_list(*sources: Optional[List[str]]) -> List[str]:
+    seen: set[str] = set()
+    ordered: List[str] = []
+    for source in sources:
+        if not source:
+            continue
+        for entry in source:
+            entry_str = str(entry).strip()
+            if not entry_str or entry_str in seen:
+                continue
+            seen.add(entry_str)
+            ordered.append(entry_str)
+    return ordered
+
+
+def _select_active_clause_id(
+    active_clause_id: str,
+    contract_items: Sequence[Dict[str, object]],
+    strategy_name: str,
+) -> str:
+    normalized = str(active_clause_id or "").strip()
+    if normalized:
+        return normalized
+    for item in contract_items:
+        candidate = str(item.get("id") or "").strip()
+        if candidate:
+            return candidate
+    return f"{strategy_name}_default_clause"
+
+
 def execute_plan_with_repair(
     ctx: DecompositionContext,
     plan: DecompositionPlan,
@@ -195,23 +236,173 @@ def execute_plan_with_repair(
     if callable(candidate_runner):
         runner_callable = candidate_runner
 
+    contract_items = get_contract_items(metadata)
+    contract_item_dicts = contract_items_to_dicts(contract_items)
+    if contract_item_dicts and not plan.contract_items:
+        plan.contract_items = contract_item_dicts
+    cgcs_graph = build_contract_graph(contract_items) if contract_items else None
+    candidate_files_raw = _normalize_file_list(
+        metadata.get("repo_candidate_files"),
+        metadata.get("repo_target_files"),
+        metadata.get("expected_files"),
+        plan.candidate_files,
+    )
+    candidate_files_filtered = _normalize_file_list(
+        plan.candidate_files,
+        metadata.get("implementation_target_files"),
+        metadata.get("expected_files"),
+        metadata.get("repo_target_files"),
+    )
+    if not candidate_files_filtered:
+        candidate_files_filtered = candidate_files_raw or _normalize_file_list(metadata.get("repo_target_files"))
+    strategy_mode_label = policy.description if policy else strategy_name
+
     def _run_attempt(code: str, focus: Optional[str]) -> ExecutionResult:
         if runner_callable:
             return runner_callable(code=code, ctx=ctx, subtask_focus=focus)
         return execute_attempt(code, ctx, timeout_seconds=cfg.test_timeout_seconds)
 
+    def _annotate_contract_state(
+        result: ExecutionResult,
+        attempt_index: int,
+        active_clause_id: str,
+        clause_reason: str,
+    ) -> ContractCoverageResult:
+        contract_state_local = evaluate_contract_coverage(metadata, result.tests)
+        result.edit_metadata["contract_coverage"] = contract_state_local.coverage
+        result.edit_metadata["contract_satisfied"] = contract_state_local.satisfied_ids
+        result.edit_metadata["contract_unsatisfied"] = contract_state_local.unsatisfied_ids
+        result.edit_metadata["contract_failure_categories"] = contract_state_local.categories
+        result.edit_metadata["contract_unsatisfied_details"] = render_unsatisfied_details(
+            metadata,
+            contract_state_local.unsatisfied_ids,
+        )
+        result.edit_metadata["contract_fail_cases"] = contract_state_local.failing_cases
+        result.edit_metadata.setdefault("candidate_files_raw", candidate_files_raw)
+        result.edit_metadata.setdefault("candidate_files_filtered", candidate_files_filtered)
+        if "candidate_files" not in result.edit_metadata:
+            result.edit_metadata["candidate_files"] = candidate_files_filtered or candidate_files_raw
+        result.edit_metadata["contract_items"] = contract_item_dicts
+        witnesses = extract_mocha_witnesses(result.tests)
+        result.edit_metadata["witness_count"] = len(witnesses)
+        if witnesses:
+            result.edit_metadata["witness_samples"] = [
+                {
+                    "test_case": witness.test_case,
+                    "message": (witness.message or "")[:160],
+                    "category": witness.category,
+                    "expected": witness.expected,
+                    "actual": witness.actual,
+                    "contracts": witness.linked_contract_ids,
+                }
+                for witness in witnesses[:6]
+            ]
+        raw_payload = str(result.edit_metadata.get("raw_edit_payload") or "")
+        payload_parse_ok = bool(result.edit_metadata.get("payload_parse_ok", bool(raw_payload)))
+        payload_parse_error = str(result.edit_metadata.get("payload_parse_error") or "")
+        regression_guards = list(cgcs_graph.regression_guard_ids) if cgcs_graph else []
+        lint_errors = result.edit_metadata.get("lint_errors") or []
+        skipped_targets = result.edit_metadata.get("skipped_targets") or []
+        outcome_metrics = {
+            "status": result.status,
+            "pass_rate": result.pass_rate,
+            "duration": result.duration,
+            "failing_tests": result.summary.failing_tests if result.summary else [],
+            "error_types": result.summary.error_types if result.summary else [],
+        }
+        resolved_clause = _select_active_clause_id(active_clause_id, contract_item_dicts, strategy_name)
+        cgcs_trace = build_cgcs_round_trace(
+            task_id=ctx.task_id,
+            strategy=strategy_name,
+            round_index=attempt_index,
+            contract_items=contract_item_dicts,
+            active_clause_id=resolved_clause,
+            regression_guard_ids=regression_guards,
+            witnesses=witnesses,
+            raw_edit_payload=raw_payload,
+            payload_parse_ok=payload_parse_ok,
+            payload_parse_error=payload_parse_error or None,
+            candidate_files_raw=candidate_files_raw,
+            candidate_files_filtered=candidate_files_filtered,
+            clause_selection_reason=clause_reason,
+            lint_errors=lint_errors,
+            skipped_targets=skipped_targets,
+            outcome_metrics=outcome_metrics,
+            strategy_mode=strategy_mode_label,
+            used_fallback=bool(result.edit_metadata.get("fallback_requested")),
+        )
+        strict_payload = cgcs_trace.to_dict()
+        if cgcs_graph:
+            update_from_run(cgcs_graph, contract_state_local, witnesses, attempt_index)
+            cgcs_payload = dict(strict_payload)
+            cgcs_payload["coverage"] = contract_state_local.coverage
+            cgcs_payload["satisfied_ids"] = contract_state_local.satisfied_ids
+            cgcs_payload["unsatisfied_ids"] = contract_state_local.unsatisfied_ids
+            cgcs_payload["regressed_ids"] = list(cgcs_graph.regressed_ids)
+            cgcs_payload["witness_counts"] = {
+                cid: len(cgcs_graph.witness_index.get(cid, [])) for cid in cgcs_graph.nodes
+            }
+            cgcs_payload["witness_sample"] = cgcs_trace.witnesses[:6]
+            cgcs_payload["regression_guards"] = regression_guards
+            cgcs_payload.setdefault("active_clause", cgcs_trace.active_clause_id)
+            strict_payload = cgcs_payload
+            choose_next_clause(cgcs_graph)
+        artifacts = result.artifacts if isinstance(result.artifacts, dict) else {}
+        result.edit_metadata["cgcs_state"] = strict_payload
+        result.edit_metadata["witnesses"] = cgcs_trace.witnesses
+        result.edit_metadata["row_quality"] = cgcs_trace.row_quality
+        result.edit_metadata["regression_guard_ids"] = strict_payload.get("regression_guard_ids", regression_guards)
+        result.edit_metadata["candidate_files"] = cgcs_trace.candidate_files
+        result.edit_metadata["candidate_files_raw"] = cgcs_trace.candidate_files_raw
+        result.edit_metadata["candidate_files_filtered"] = cgcs_trace.candidate_files_filtered
+        result.edit_metadata["active_clause_id"] = cgcs_trace.active_clause_id
+        result.edit_metadata["strict_trace"] = strict_payload
+        persist_strict_trace_entry(
+            logs_dir=artifacts.get("logs_dir"),
+            edit_log_path=artifacts.get("edit_log"),
+            strict_entry=strict_payload,
+        )
+        return contract_state_local
+
+    def _populate_cgcs_metrics(metrics_dict: Dict[str, float | str]) -> None:
+        if not cgcs_graph or not cgcs_graph.nodes:
+            metrics_dict.setdefault("clause_discharge_rate", 0.0)
+            metrics_dict.setdefault("clauses_regressed_count", 0.0)
+            metrics_dict.setdefault("witness_count", 0.0)
+            metrics_dict.setdefault("witness_unique_count", 0.0)
+            metrics_dict.setdefault("time_to_first_discharge", -1.0)
+            metrics_dict.setdefault("rounds_to_full_discharge", -1.0)
+            return
+        total = len(cgcs_graph.nodes)
+        satisfied_rounds = [
+            node.satisfied_round for node in cgcs_graph.nodes.values() if node.satisfied_round is not None
+        ]
+        witness_count = sum(len(witnesses or []) for witnesses in cgcs_graph.witness_index.values())
+        unique_signatures = {
+            signature for node in cgcs_graph.nodes.values() for signature in node.witness_signatures
+        }
+        first_discharge = min(satisfied_rounds) if satisfied_rounds else -1
+        full_discharge = (
+            max(satisfied_rounds)
+            if satisfied_rounds and len(satisfied_rounds) == total and not cgcs_graph.unsatisfied_ids and not cgcs_graph.regressed_ids
+            else -1
+        )
+        metrics_dict["clause_discharge_rate"] = (len(cgcs_graph.regression_guard_ids) / total) if total else 0.0
+        metrics_dict["clauses_regressed_count"] = float(len(cgcs_graph.regressed_ids))
+        metrics_dict["witness_count"] = float(witness_count)
+        metrics_dict["witness_unique_count"] = float(len(unique_signatures))
+        metrics_dict["time_to_first_discharge"] = float(first_discharge)
+        metrics_dict["rounds_to_full_discharge"] = float(full_discharge)
+
     current_code, _ = generate_initial_code(strategy_name, ctx, plan, tracker, semantic_cfg)
     result = _run_attempt(current_code, None)
-    contract_state = evaluate_contract_coverage(ctx.metadata if isinstance(ctx.metadata, dict) else {}, result.tests)
-    result.edit_metadata["contract_coverage"] = contract_state.coverage
-    result.edit_metadata["contract_satisfied"] = contract_state.satisfied_ids
-    result.edit_metadata["contract_unsatisfied"] = contract_state.unsatisfied_ids
-    result.edit_metadata["contract_failure_categories"] = contract_state.categories
-    result.edit_metadata["contract_unsatisfied_details"] = render_unsatisfied_details(
-        ctx.metadata if isinstance(ctx.metadata, dict) else {},
-        contract_state.unsatisfied_ids,
-    )
-    result.edit_metadata["contract_fail_cases"] = contract_state.failing_cases
+    initial_clause_id = cgcs_graph.active_clause_id if cgcs_graph else ""
+    initial_clause_reason = ""
+    if cgcs_graph:
+        initial_clause_reason = cgcs_graph.last_clause_reason or "initial_clause_seed"
+    else:
+        initial_clause_reason = "no_contract_graph"
+    contract_state = _annotate_contract_state(result, 0, initial_clause_id, initial_clause_reason)
     last_contract_state = contract_state
     total_tests += len(result.tests)
     edited_files_acc.update(result.edited_files)
@@ -242,8 +433,25 @@ def execute_plan_with_repair(
         if forced_focus:
             focus = forced_focus
             localized = True
+        elif policy.clause_driven and cgcs_graph and cgcs_graph.active_clause_id:
+            focus = f"contract::{cgcs_graph.active_clause_id}"
+            localized = True
         else:
             focus, localized = _next_focus(localized_queue, policy, repairs_performed)
+        clause_id_for_round = cgcs_graph.active_clause_id if cgcs_graph else ""
+        clause_reason_for_round = ""
+        if not cgcs_graph:
+            clause_reason_for_round = "no_contract_graph"
+        elif forced_focus:
+            clause_reason_for_round = "implementation_target_guard"
+        elif localized and focus and str(focus).startswith("implementation::"):
+            clause_reason_for_round = "implementation_focus"
+        elif localized and focus and str(focus).startswith("contract::"):
+            clause_reason_for_round = cgcs_graph.last_clause_reason or "clause_queue"
+        elif localized and focus:
+            clause_reason_for_round = f"subtask_focus::{focus}"
+        else:
+            clause_reason_for_round = "global_default"
         new_code, _ = generate_repair_code(
             strategy_name,
             ctx,
@@ -261,16 +469,7 @@ def execute_plan_with_repair(
         monolithic_attempts += 0 if localized else 1
         current_code = new_code
         result = _run_attempt(current_code, focus if localized else "global")
-        contract_state = evaluate_contract_coverage(ctx.metadata if isinstance(ctx.metadata, dict) else {}, result.tests)
-        result.edit_metadata["contract_coverage"] = contract_state.coverage
-        result.edit_metadata["contract_satisfied"] = contract_state.satisfied_ids
-        result.edit_metadata["contract_unsatisfied"] = contract_state.unsatisfied_ids
-        result.edit_metadata["contract_failure_categories"] = contract_state.categories
-        result.edit_metadata["contract_unsatisfied_details"] = render_unsatisfied_details(
-            ctx.metadata if isinstance(ctx.metadata, dict) else {},
-            contract_state.unsatisfied_ids,
-        )
-        result.edit_metadata["contract_fail_cases"] = contract_state.failing_cases
+        contract_state = _annotate_contract_state(result, repairs_performed, clause_id_for_round, clause_reason_for_round)
         last_contract_state = contract_state
         total_tests += len(result.tests)
         edited_files_acc.update(result.edited_files)
@@ -452,6 +651,7 @@ def execute_plan_with_repair(
         metrics["contract_failure_categories"] = ""
         metrics["contract_failure_cases"] = ""
         metrics["dominant_semantic_failure"] = ""
+    _populate_cgcs_metrics(metrics)
     metrics.setdefault("decomposition_steps", float(len(plan.subtasks) or len(plan.contract) or 1))
     if extra_metrics:
         metrics.update(extra_metrics)

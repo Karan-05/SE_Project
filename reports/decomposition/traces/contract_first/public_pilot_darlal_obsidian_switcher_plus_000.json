@@ -1,0 +1,976 @@
+{
+  "task_id": "public_pilot_darlal_obsidian_switcher_plus_000",
+  "strategy": "contract_first",
+  "plan": {
+    "strategy": "contract_first",
+    "contract_items": [
+      {
+        "id": "M000_comparison_flip_2abb0d97",
+        "label": "Should use `>` (not `>=`) for correct boundary check",
+        "description": "[comparison_flip] In `src/main.ts` (line 6): Comparison operator changed from `>` to `>=`. Should use `>` (not `>=`) for correct boundary check.",
+        "category": "boundary_condition",
+        "expected_behavior": "Should use `>` (not `>=`) for correct boundary check",
+        "test_refs": [],
+        "priority": "",
+        "source": "",
+        "notes": "",
+        "keywords": [
+          "comparison_flip",
+          "src/main.ts",
+          "6"
+        ]
+      }
+    ],
+    "contract": {
+      "inputs": "Underspecified",
+      "outputs": "Underspecified",
+      "constraints": "",
+      "edge_cases": "None"
+    },
+    "patterns": [],
+    "subtasks": [
+      "Validate inputs vs contract",
+      "Implement core logic",
+      "Check edge cases",
+      "Generate minimal unit tests for critical behaviors",
+      "Add adversarial/edge-case tests",
+      "Run tests and interpret failures",
+      "Repair implementation and re-run tests"
+    ],
+    "tests": [
+      "critical unit tests",
+      "edge-case probes"
+    ],
+    "diagnostics": {
+      "missing_fields": "constraints",
+      "contract_length": "32",
+      "audit_note": "[MOCK] e020f26c1f503ca4 :: Review this contract for completeness and note any missing guarantees. Contract: {'inputs': 'Underspecified', 'outputs':",
+      "planning_tokens": "59",
+      "planning_time": "0.000009"
+    },
+    "target_files": [
+      "src/main.ts"
+    ],
+    "candidate_files": [
+      "src/main.ts",
+      "README.md",
+      "src/switcherPlus/__tests__/switcherPlusKeymap.test.ts",
+      "src/switcherPlus/switcherPlusKeymap.ts",
+      "src/settings/__tests__/switcherPlusSettings.test.ts",
+      "package.json",
+      "src/settings/generalSettingsTabSection.ts",
+      "src/settings/switcherPlusSettings.ts",
+      "src/switcherPlus/inputParser.ts",
+      "src/switcherPlus/modeHandler.ts",
+      "src/switcherPlus/__tests__/modeHandler.test.ts",
+      "src/switcherPlus/__tests__/modeHandler.perf.test.ts"
+    ],
+    "subtask_file_map": {
+      "Validate inputs vs contract": [
+        "src/main.ts"
+      ],
+      "Implement core logic": [
+        "README.md"
+      ],
+      "Check edge cases": [
+        "src/switcherPlus/__tests__/switcherPlusKeymap.test.ts"
+      ],
+      "Generate minimal unit tests for critical behaviors": [
+        "src/switcherPlus/switcherPlusKeymap.ts"
+      ],
+      "Add adversarial/edge-case tests": [
+        "src/settings/__tests__/switcherPlusSettings.test.ts"
+      ],
+      "Run tests and interpret failures": [
+        "package.json"
+      ],
+      "Repair implementation and re-run tests": [
+        "src/settings/generalSettingsTabSection.ts"
+      ]
+    }
+  },
+  "rounds": [
+    {
+      "round": 0,
+      "phase": "initial",
+      "subtask": "plan",
+      "localized": false,
+      "pass_rate": 0.0,
+      "status": "tests_failed",
+      "duration": 0.913249375000305,
+      "failing_tests": [
+        "tests_0"
+      ],
+      "error_types": [
+        "fail::"
+      ],
+      "file_count": 1,
+      "multi_file_attempt": false,
+      "files_touched": [
+        "src/main.ts"
+      ],
+      "inspected_files": [
+        "src/main.ts"
+      ],
+      "proposed_files": [
+        "src/main.ts"
+      ],
+      "edit_metadata": {
+        "raw_edit_payload": "{\"edits\": [{\"path\": \"src/main.ts\", \"mode\": \"rewrite\", \"content\": \"[MOCK] cbcac3b8824757f1 :: You are executing decomposition strategy 'contract_first' on a real repository task. Repository workspace: `/Users/karan\"}], \"localized\": true}",
+        "raw_payload": "{\"edits\": [{\"path\": \"src/main.ts\", \"mode\": \"rewrite\", \"content\": \"[MOCK] cbcac3b8824757f1 :: You are executing decomposition strategy 'contract_first' on a real repository task. Repository workspace: `/Users/karan\"}], \"localized\": true}",
+        "payload_parse_ok": true,
+        "payload_parse_error": "",
+        "candidate_files_raw": [
+          "src/main.ts",
+          "README.md",
+          "src/switcherPlus/__tests__/switcherPlusKeymap.test.ts",
+          "src/switcherPlus/switcherPlusKeymap.ts",
+          "src/settings/__tests__/switcherPlusSettings.test.ts",
+          "package.json",
+          "src/settings/generalSettingsTabSection.ts",
+          "src/settings/switcherPlusSettings.ts",
+          "src/switcherPlus/inputParser.ts",
+          "src/switcherPlus/modeHandler.ts",
+          "src/switcherPlus/__tests__/modeHandler.test.ts",
+          "src/switcherPlus/__tests__/modeHandler.perf.test.ts"
+        ],
+        "candidate_files_filtered": [
+          "src/main.ts",
+          "README.md",
+          "src/switcherPlus/__tests__/switcherPlusKeymap.test.ts",
+          "src/switcherPlus/switcherPlusKeymap.ts",
+          "src/settings/__tests__/switcherPlusSettings.test.ts",
+          "package.json",
+          "src/settings/generalSettingsTabSection.ts",
+          "src/settings/switcherPlusSettings.ts",
+          "src/switcherPlus/inputParser.ts",
+          "src/switcherPlus/modeHandler.ts",
+          "src/switcherPlus/__tests__/modeHandler.test.ts",
+          "src/switcherPlus/__tests__/modeHandler.perf.test.ts"
+        ],
+        "candidate_files": [
+          "src/main.ts",
+          "README.md",
+          "src/switcherPlus/__tests__/switcherPlusKeymap.test.ts",
+          "src/switcherPlus/switcherPlusKeymap.ts",
+          "src/settings/__tests__/switcherPlusSettings.test.ts",
+          "package.json",
+          "src/settings/generalSettingsTabSection.ts",
+          "src/settings/switcherPlusSettings.ts",
+          "src/switcherPlus/inputParser.ts",
+          "src/switcherPlus/modeHandler.ts",
+          "src/switcherPlus/__tests__/modeHandler.test.ts",
+          "src/switcherPlus/__tests__/modeHandler.perf.test.ts"
+        ],
+        "strategy_mode": "contract_first",
+        "edit_mode": "edit_batch",
+        "localized_requested": true,
+        "fallback_requested": false,
+        "raw_metadata_keys": [
+          "localized"
+        ],
+        "applied_file_count": 1,
+        "proposed_file_count": 1,
+        "multi_file_applied": false,
+        "subtask_focus": "global",
+        "contract_coverage": 0.0,
+        "contract_satisfied": [],
+        "contract_unsatisfied": [
+          "M000_comparison_flip_2abb0d97"
+        ],
+        "contract_failure_categories": {
+          "boundary_condition": 1
+        },
+        "contract_unsatisfied_details": [
+          "M000_comparison_flip_2abb0d97: [comparison_flip] In `src/main.ts` (line 6): Comparison operator changed from `>` to `>=`. Should use `>` (not `>=`) for correct boundary check."
+        ],
+        "contract_fail_cases": [],
+        "contract_items": [
+          {
+            "id": "M000_comparison_flip_2abb0d97",
+            "label": "Should use `>` (not `>=`) for correct boundary check",
+            "description": "[comparison_flip] In `src/main.ts` (line 6): Comparison operator changed from `>` to `>=`. Should use `>` (not `>=`) for correct boundary check.",
+            "category": "boundary_condition",
+            "expected_behavior": "Should use `>` (not `>=`) for correct boundary check",
+            "test_refs": [],
+            "priority": "",
+            "source": "",
+            "notes": "",
+            "keywords": [
+              "comparison_flip",
+              "src/main.ts",
+              "6"
+            ]
+          }
+        ],
+        "witness_count": 1,
+        "witness_samples": [
+          {
+            "test_case": "tests_0",
+            "message": "sh: jest: command not found",
+            "category": "missing_resource",
+            "expected": "",
+            "actual": "",
+            "contracts": []
+          }
+        ],
+        "cgcs_state": {
+          "round": 0,
+          "round_index": 0,
+          "strategy": "contract_first",
+          "task_id": "public_pilot_darlal_obsidian_switcher_plus_000",
+          "contract_items": [
+            {
+              "id": "M000_comparison_flip_2abb0d97",
+              "label": "Should use `>` (not `>=`) for correct boundary check",
+              "description": "[comparison_flip] In `src/main.ts` (line 6): Comparison operator changed from `>` to `>=`. Should use `>` (not `>=`) for correct boundary check.",
+              "category": "boundary_condition",
+              "expected_behavior": "Should use `>` (not `>=`) for correct boundary check",
+              "test_refs": [],
+              "priority": "",
+              "source": "",
+              "notes": "",
+              "keywords": [
+                "comparison_flip",
+                "src/main.ts",
+                "6"
+              ]
+            }
+          ],
+          "active_clause_id": "M000_comparison_flip_2abb0d97",
+          "active_clause": "M000_comparison_flip_2abb0d97",
+          "regression_guard_ids": [],
+          "witnesses": [
+            {
+              "signature": "481cbd2f9db521bff061acf116767477effc7624",
+              "test_case": "tests_0",
+              "message": "sh: jest: command not found",
+              "expected": "",
+              "actual": "",
+              "location": "/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_darlal_obsidian_switcher_plus_000/contract_first/logs/tests_0_round1.log",
+              "category": "missing_resource",
+              "linked_contract_ids": []
+            }
+          ],
+          "raw_edit_payload": "{\"edits\": [{\"path\": \"src/main.ts\", \"mode\": \"rewrite\", \"content\": \"[MOCK] cbcac3b8824757f1 :: You are executing decomposition strategy 'contract_first' on a real repository task. Repository workspace: `/Users/karan\"}], \"localized\": true}",
+          "payload_parse_ok": true,
+          "payload_parse_error": "",
+          "candidate_files": [
+            "src/main.ts",
+            "README.md",
+            "src/switcherPlus/__tests__/switcherPlusKeymap.test.ts",
+            "src/switcherPlus/switcherPlusKeymap.ts",
+            "src/settings/__tests__/switcherPlusSettings.test.ts",
+            "package.json",
+            "src/settings/generalSettingsTabSection.ts",
+            "src/settings/switcherPlusSettings.ts",
+            "src/switcherPlus/inputParser.ts",
+            "src/switcherPlus/modeHandler.ts",
+            "src/switcherPlus/__tests__/modeHandler.test.ts",
+            "src/switcherPlus/__tests__/modeHandler.perf.test.ts"
+          ],
+          "candidate_files_raw": [
+            "src/main.ts",
+            "README.md",
+            "src/switcherPlus/__tests__/switcherPlusKeymap.test.ts",
+            "src/switcherPlus/switcherPlusKeymap.ts",
+            "src/settings/__tests__/switcherPlusSettings.test.ts",
+            "package.json",
+            "src/settings/generalSettingsTabSection.ts",
+            "src/settings/switcherPlusSettings.ts",
+            "src/switcherPlus/inputParser.ts",
+            "src/switcherPlus/modeHandler.ts",
+            "src/switcherPlus/__tests__/modeHandler.test.ts",
+            "src/switcherPlus/__tests__/modeHandler.perf.test.ts"
+          ],
+          "candidate_files_filtered": [
+            "src/main.ts",
+            "README.md",
+            "src/switcherPlus/__tests__/switcherPlusKeymap.test.ts",
+            "src/switcherPlus/switcherPlusKeymap.ts",
+            "src/settings/__tests__/switcherPlusSettings.test.ts",
+            "package.json",
+            "src/settings/generalSettingsTabSection.ts",
+            "src/settings/switcherPlusSettings.ts",
+            "src/switcherPlus/inputParser.ts",
+            "src/switcherPlus/modeHandler.ts",
+            "src/switcherPlus/__tests__/modeHandler.test.ts",
+            "src/switcherPlus/__tests__/modeHandler.perf.test.ts"
+          ],
+          "clause_selection_reason": "initial_clause_seed",
+          "row_quality": {
+            "contract_quality": "strong",
+            "contract_item_count": 1,
+            "active_clause_source": "initial_clause_seed",
+            "active_clause_present": true,
+            "witness_count": 1,
+            "witness_unique_count": 1,
+            "payload_present": true,
+            "payload_parse_ok": true,
+            "candidate_file_count": 12,
+            "clause_selection_reason": "initial_clause_seed",
+            "skipped_targets_present": false,
+            "lint_error_count": 0,
+            "used_fallback": false,
+            "strategy_mode": "subtasks_first",
+            "regression_guard_count": 0
+          },
+          "lint_errors": [],
+          "skipped_targets": [],
+          "outcome_metrics": {
+            "status": "tests_failed",
+            "pass_rate": 0.0,
+            "duration": 0.913249375000305,
+            "failing_tests": [
+              "tests_0"
+            ],
+            "error_types": [
+              "fail::"
+            ]
+          },
+          "coverage": 0.0,
+          "satisfied_ids": [],
+          "unsatisfied_ids": [
+            "M000_comparison_flip_2abb0d97"
+          ],
+          "regressed_ids": [],
+          "witness_counts": {
+            "M000_comparison_flip_2abb0d97": 0
+          },
+          "witness_sample": [
+            {
+              "signature": "481cbd2f9db521bff061acf116767477effc7624",
+              "test_case": "tests_0",
+              "message": "sh: jest: command not found",
+              "expected": "",
+              "actual": "",
+              "location": "/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_darlal_obsidian_switcher_plus_000/contract_first/logs/tests_0_round1.log",
+              "category": "missing_resource",
+              "linked_contract_ids": []
+            }
+          ],
+          "regression_guards": []
+        },
+        "witnesses": [
+          {
+            "signature": "481cbd2f9db521bff061acf116767477effc7624",
+            "test_case": "tests_0",
+            "message": "sh: jest: command not found",
+            "expected": "",
+            "actual": "",
+            "location": "/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_darlal_obsidian_switcher_plus_000/contract_first/logs/tests_0_round1.log",
+            "category": "missing_resource",
+            "linked_contract_ids": []
+          }
+        ],
+        "row_quality": {
+          "contract_quality": "strong",
+          "contract_item_count": 1,
+          "active_clause_source": "initial_clause_seed",
+          "active_clause_present": true,
+          "witness_count": 1,
+          "witness_unique_count": 1,
+          "payload_present": true,
+          "payload_parse_ok": true,
+          "candidate_file_count": 12,
+          "clause_selection_reason": "initial_clause_seed",
+          "skipped_targets_present": false,
+          "lint_error_count": 0,
+          "used_fallback": false,
+          "strategy_mode": "subtasks_first",
+          "regression_guard_count": 0
+        },
+        "regression_guard_ids": [],
+        "active_clause_id": "M000_comparison_flip_2abb0d97"
+      }
+    },
+    {
+      "round": 1,
+      "phase": "repair",
+      "subtask": "Validate inputs vs contract",
+      "localized": true,
+      "pass_rate": 0.0,
+      "status": "tests_failed",
+      "duration": 0.1157574589997239,
+      "failing_tests": [
+        "tests_0"
+      ],
+      "error_types": [
+        "fail::"
+      ],
+      "file_count": 1,
+      "multi_file_attempt": false,
+      "files_touched": [
+        "src/main.ts"
+      ],
+      "inspected_files": [
+        "src/main.ts"
+      ],
+      "proposed_files": [
+        "src/main.ts"
+      ],
+      "edit_metadata": {
+        "raw_edit_payload": "{\"edits\": [{\"path\": \"src/main.ts\", \"mode\": \"rewrite\", \"content\": \"[MOCK] 8becc4b0f24a8877 :: You are repairing a repository-backed change produced by strategy 'contract_first'. Repository workspace: `/Users/karana\"}], \"localized\": true}",
+        "raw_payload": "{\"edits\": [{\"path\": \"src/main.ts\", \"mode\": \"rewrite\", \"content\": \"[MOCK] 8becc4b0f24a8877 :: You are repairing a repository-backed change produced by strategy 'contract_first'. Repository workspace: `/Users/karana\"}], \"localized\": true}",
+        "payload_parse_ok": true,
+        "payload_parse_error": "",
+        "candidate_files_raw": [
+          "src/main.ts",
+          "README.md",
+          "src/switcherPlus/__tests__/switcherPlusKeymap.test.ts",
+          "src/switcherPlus/switcherPlusKeymap.ts",
+          "src/settings/__tests__/switcherPlusSettings.test.ts",
+          "package.json",
+          "src/settings/generalSettingsTabSection.ts",
+          "src/settings/switcherPlusSettings.ts",
+          "src/switcherPlus/inputParser.ts",
+          "src/switcherPlus/modeHandler.ts",
+          "src/switcherPlus/__tests__/modeHandler.test.ts",
+          "src/switcherPlus/__tests__/modeHandler.perf.test.ts"
+        ],
+        "candidate_files_filtered": [
+          "src/main.ts",
+          "README.md",
+          "src/switcherPlus/__tests__/switcherPlusKeymap.test.ts",
+          "src/switcherPlus/switcherPlusKeymap.ts",
+          "src/settings/__tests__/switcherPlusSettings.test.ts",
+          "package.json",
+          "src/settings/generalSettingsTabSection.ts",
+          "src/settings/switcherPlusSettings.ts",
+          "src/switcherPlus/inputParser.ts",
+          "src/switcherPlus/modeHandler.ts",
+          "src/switcherPlus/__tests__/modeHandler.test.ts",
+          "src/switcherPlus/__tests__/modeHandler.perf.test.ts"
+        ],
+        "candidate_files": [
+          "src/main.ts",
+          "README.md",
+          "src/switcherPlus/__tests__/switcherPlusKeymap.test.ts",
+          "src/switcherPlus/switcherPlusKeymap.ts",
+          "src/settings/__tests__/switcherPlusSettings.test.ts",
+          "package.json",
+          "src/settings/generalSettingsTabSection.ts",
+          "src/settings/switcherPlusSettings.ts",
+          "src/switcherPlus/inputParser.ts",
+          "src/switcherPlus/modeHandler.ts",
+          "src/switcherPlus/__tests__/modeHandler.test.ts",
+          "src/switcherPlus/__tests__/modeHandler.perf.test.ts"
+        ],
+        "strategy_mode": "contract_first",
+        "edit_mode": "edit_batch",
+        "localized_requested": true,
+        "fallback_requested": false,
+        "raw_metadata_keys": [
+          "localized"
+        ],
+        "applied_file_count": 1,
+        "proposed_file_count": 1,
+        "multi_file_applied": false,
+        "subtask_focus": "Validate inputs vs contract",
+        "contract_coverage": 0.0,
+        "contract_satisfied": [],
+        "contract_unsatisfied": [
+          "M000_comparison_flip_2abb0d97"
+        ],
+        "contract_failure_categories": {
+          "boundary_condition": 1
+        },
+        "contract_unsatisfied_details": [
+          "M000_comparison_flip_2abb0d97: [comparison_flip] In `src/main.ts` (line 6): Comparison operator changed from `>` to `>=`. Should use `>` (not `>=`) for correct boundary check."
+        ],
+        "contract_fail_cases": [],
+        "contract_items": [
+          {
+            "id": "M000_comparison_flip_2abb0d97",
+            "label": "Should use `>` (not `>=`) for correct boundary check",
+            "description": "[comparison_flip] In `src/main.ts` (line 6): Comparison operator changed from `>` to `>=`. Should use `>` (not `>=`) for correct boundary check.",
+            "category": "boundary_condition",
+            "expected_behavior": "Should use `>` (not `>=`) for correct boundary check",
+            "test_refs": [],
+            "priority": "",
+            "source": "",
+            "notes": "",
+            "keywords": [
+              "comparison_flip",
+              "src/main.ts",
+              "6"
+            ]
+          }
+        ],
+        "witness_count": 1,
+        "witness_samples": [
+          {
+            "test_case": "tests_0",
+            "message": "sh: jest: command not found",
+            "category": "missing_resource",
+            "expected": "",
+            "actual": "",
+            "contracts": []
+          }
+        ],
+        "cgcs_state": {
+          "round": 1,
+          "round_index": 1,
+          "strategy": "contract_first",
+          "task_id": "public_pilot_darlal_obsidian_switcher_plus_000",
+          "contract_items": [
+            {
+              "id": "M000_comparison_flip_2abb0d97",
+              "label": "Should use `>` (not `>=`) for correct boundary check",
+              "description": "[comparison_flip] In `src/main.ts` (line 6): Comparison operator changed from `>` to `>=`. Should use `>` (not `>=`) for correct boundary check.",
+              "category": "boundary_condition",
+              "expected_behavior": "Should use `>` (not `>=`) for correct boundary check",
+              "test_refs": [],
+              "priority": "",
+              "source": "",
+              "notes": "",
+              "keywords": [
+                "comparison_flip",
+                "src/main.ts",
+                "6"
+              ]
+            }
+          ],
+          "active_clause_id": "M000_comparison_flip_2abb0d97",
+          "active_clause": "M000_comparison_flip_2abb0d97",
+          "regression_guard_ids": [],
+          "witnesses": [
+            {
+              "signature": "481cbd2f9db521bff061acf116767477effc7624",
+              "test_case": "tests_0",
+              "message": "sh: jest: command not found",
+              "expected": "",
+              "actual": "",
+              "location": "/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_darlal_obsidian_switcher_plus_000/contract_first/logs/tests_0_round2.log",
+              "category": "missing_resource",
+              "linked_contract_ids": []
+            }
+          ],
+          "raw_edit_payload": "{\"edits\": [{\"path\": \"src/main.ts\", \"mode\": \"rewrite\", \"content\": \"[MOCK] 8becc4b0f24a8877 :: You are repairing a repository-backed change produced by strategy 'contract_first'. Repository workspace: `/Users/karana\"}], \"localized\": true}",
+          "payload_parse_ok": true,
+          "payload_parse_error": "",
+          "candidate_files": [
+            "src/main.ts",
+            "README.md",
+            "src/switcherPlus/__tests__/switcherPlusKeymap.test.ts",
+            "src/switcherPlus/switcherPlusKeymap.ts",
+            "src/settings/__tests__/switcherPlusSettings.test.ts",
+            "package.json",
+            "src/settings/generalSettingsTabSection.ts",
+            "src/settings/switcherPlusSettings.ts",
+            "src/switcherPlus/inputParser.ts",
+            "src/switcherPlus/modeHandler.ts",
+            "src/switcherPlus/__tests__/modeHandler.test.ts",
+            "src/switcherPlus/__tests__/modeHandler.perf.test.ts"
+          ],
+          "candidate_files_raw": [
+            "src/main.ts",
+            "README.md",
+            "src/switcherPlus/__tests__/switcherPlusKeymap.test.ts",
+            "src/switcherPlus/switcherPlusKeymap.ts",
+            "src/settings/__tests__/switcherPlusSettings.test.ts",
+            "package.json",
+            "src/settings/generalSettingsTabSection.ts",
+            "src/settings/switcherPlusSettings.ts",
+            "src/switcherPlus/inputParser.ts",
+            "src/switcherPlus/modeHandler.ts",
+            "src/switcherPlus/__tests__/modeHandler.test.ts",
+            "src/switcherPlus/__tests__/modeHandler.perf.test.ts"
+          ],
+          "candidate_files_filtered": [
+            "src/main.ts",
+            "README.md",
+            "src/switcherPlus/__tests__/switcherPlusKeymap.test.ts",
+            "src/switcherPlus/switcherPlusKeymap.ts",
+            "src/settings/__tests__/switcherPlusSettings.test.ts",
+            "package.json",
+            "src/settings/generalSettingsTabSection.ts",
+            "src/settings/switcherPlusSettings.ts",
+            "src/switcherPlus/inputParser.ts",
+            "src/switcherPlus/modeHandler.ts",
+            "src/switcherPlus/__tests__/modeHandler.test.ts",
+            "src/switcherPlus/__tests__/modeHandler.perf.test.ts"
+          ],
+          "clause_selection_reason": "subtask_focus::Validate inputs vs contract",
+          "row_quality": {
+            "contract_quality": "strong",
+            "contract_item_count": 1,
+            "active_clause_source": "subtask_focus::Validate inputs vs contract",
+            "active_clause_present": true,
+            "witness_count": 1,
+            "witness_unique_count": 1,
+            "payload_present": true,
+            "payload_parse_ok": true,
+            "candidate_file_count": 12,
+            "clause_selection_reason": "subtask_focus::Validate inputs vs contract",
+            "skipped_targets_present": false,
+            "lint_error_count": 0,
+            "used_fallback": false,
+            "strategy_mode": "subtasks_first",
+            "regression_guard_count": 0
+          },
+          "lint_errors": [],
+          "skipped_targets": [],
+          "outcome_metrics": {
+            "status": "tests_failed",
+            "pass_rate": 0.0,
+            "duration": 0.1157574589997239,
+            "failing_tests": [
+              "tests_0"
+            ],
+            "error_types": [
+              "fail::"
+            ]
+          },
+          "coverage": 0.0,
+          "satisfied_ids": [],
+          "unsatisfied_ids": [
+            "M000_comparison_flip_2abb0d97"
+          ],
+          "regressed_ids": [],
+          "witness_counts": {
+            "M000_comparison_flip_2abb0d97": 0
+          },
+          "witness_sample": [
+            {
+              "signature": "481cbd2f9db521bff061acf116767477effc7624",
+              "test_case": "tests_0",
+              "message": "sh: jest: command not found",
+              "expected": "",
+              "actual": "",
+              "location": "/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_darlal_obsidian_switcher_plus_000/contract_first/logs/tests_0_round2.log",
+              "category": "missing_resource",
+              "linked_contract_ids": []
+            }
+          ],
+          "regression_guards": []
+        },
+        "witnesses": [
+          {
+            "signature": "481cbd2f9db521bff061acf116767477effc7624",
+            "test_case": "tests_0",
+            "message": "sh: jest: command not found",
+            "expected": "",
+            "actual": "",
+            "location": "/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_darlal_obsidian_switcher_plus_000/contract_first/logs/tests_0_round2.log",
+            "category": "missing_resource",
+            "linked_contract_ids": []
+          }
+        ],
+        "row_quality": {
+          "contract_quality": "strong",
+          "contract_item_count": 1,
+          "active_clause_source": "subtask_focus::Validate inputs vs contract",
+          "active_clause_present": true,
+          "witness_count": 1,
+          "witness_unique_count": 1,
+          "payload_present": true,
+          "payload_parse_ok": true,
+          "candidate_file_count": 12,
+          "clause_selection_reason": "subtask_focus::Validate inputs vs contract",
+          "skipped_targets_present": false,
+          "lint_error_count": 0,
+          "used_fallback": false,
+          "strategy_mode": "subtasks_first",
+          "regression_guard_count": 0
+        },
+        "regression_guard_ids": [],
+        "active_clause_id": "M000_comparison_flip_2abb0d97"
+      }
+    },
+    {
+      "round": 2,
+      "phase": "repair",
+      "subtask": "Implement core logic",
+      "localized": true,
+      "pass_rate": 0.0,
+      "status": "tests_failed",
+      "duration": 0.12739424999745097,
+      "failing_tests": [
+        "tests_0"
+      ],
+      "error_types": [
+        "fail::"
+      ],
+      "file_count": 1,
+      "multi_file_attempt": false,
+      "files_touched": [
+        "src/main.ts"
+      ],
+      "inspected_files": [
+        "src/main.ts"
+      ],
+      "proposed_files": [
+        "src/main.ts"
+      ],
+      "edit_metadata": {
+        "raw_edit_payload": "{\"edits\": [{\"path\": \"src/main.ts\", \"mode\": \"rewrite\", \"content\": \"[MOCK] 9bf77edbe1330164 :: You are repairing a repository-backed change produced by strategy 'contract_first'. Repository workspace: `/Users/karana\"}], \"localized\": true}",
+        "raw_payload": "{\"edits\": [{\"path\": \"src/main.ts\", \"mode\": \"rewrite\", \"content\": \"[MOCK] 9bf77edbe1330164 :: You are repairing a repository-backed change produced by strategy 'contract_first'. Repository workspace: `/Users/karana\"}], \"localized\": true}",
+        "payload_parse_ok": true,
+        "payload_parse_error": "",
+        "candidate_files_raw": [
+          "src/main.ts",
+          "README.md",
+          "src/switcherPlus/__tests__/switcherPlusKeymap.test.ts",
+          "src/switcherPlus/switcherPlusKeymap.ts",
+          "src/settings/__tests__/switcherPlusSettings.test.ts",
+          "package.json",
+          "src/settings/generalSettingsTabSection.ts",
+          "src/settings/switcherPlusSettings.ts",
+          "src/switcherPlus/inputParser.ts",
+          "src/switcherPlus/modeHandler.ts",
+          "src/switcherPlus/__tests__/modeHandler.test.ts",
+          "src/switcherPlus/__tests__/modeHandler.perf.test.ts"
+        ],
+        "candidate_files_filtered": [
+          "src/main.ts",
+          "README.md",
+          "src/switcherPlus/__tests__/switcherPlusKeymap.test.ts",
+          "src/switcherPlus/switcherPlusKeymap.ts",
+          "src/settings/__tests__/switcherPlusSettings.test.ts",
+          "package.json",
+          "src/settings/generalSettingsTabSection.ts",
+          "src/settings/switcherPlusSettings.ts",
+          "src/switcherPlus/inputParser.ts",
+          "src/switcherPlus/modeHandler.ts",
+          "src/switcherPlus/__tests__/modeHandler.test.ts",
+          "src/switcherPlus/__tests__/modeHandler.perf.test.ts"
+        ],
+        "candidate_files": [
+          "src/main.ts",
+          "README.md",
+          "src/switcherPlus/__tests__/switcherPlusKeymap.test.ts",
+          "src/switcherPlus/switcherPlusKeymap.ts",
+          "src/settings/__tests__/switcherPlusSettings.test.ts",
+          "package.json",
+          "src/settings/generalSettingsTabSection.ts",
+          "src/settings/switcherPlusSettings.ts",
+          "src/switcherPlus/inputParser.ts",
+          "src/switcherPlus/modeHandler.ts",
+          "src/switcherPlus/__tests__/modeHandler.test.ts",
+          "src/switcherPlus/__tests__/modeHandler.perf.test.ts"
+        ],
+        "strategy_mode": "contract_first",
+        "edit_mode": "edit_batch",
+        "localized_requested": true,
+        "fallback_requested": false,
+        "raw_metadata_keys": [
+          "localized"
+        ],
+        "applied_file_count": 1,
+        "proposed_file_count": 1,
+        "multi_file_applied": false,
+        "subtask_focus": "Implement core logic",
+        "contract_coverage": 0.0,
+        "contract_satisfied": [],
+        "contract_unsatisfied": [
+          "M000_comparison_flip_2abb0d97"
+        ],
+        "contract_failure_categories": {
+          "boundary_condition": 1
+        },
+        "contract_unsatisfied_details": [
+          "M000_comparison_flip_2abb0d97: [comparison_flip] In `src/main.ts` (line 6): Comparison operator changed from `>` to `>=`. Should use `>` (not `>=`) for correct boundary check."
+        ],
+        "contract_fail_cases": [],
+        "contract_items": [
+          {
+            "id": "M000_comparison_flip_2abb0d97",
+            "label": "Should use `>` (not `>=`) for correct boundary check",
+            "description": "[comparison_flip] In `src/main.ts` (line 6): Comparison operator changed from `>` to `>=`. Should use `>` (not `>=`) for correct boundary check.",
+            "category": "boundary_condition",
+            "expected_behavior": "Should use `>` (not `>=`) for correct boundary check",
+            "test_refs": [],
+            "priority": "",
+            "source": "",
+            "notes": "",
+            "keywords": [
+              "comparison_flip",
+              "src/main.ts",
+              "6"
+            ]
+          }
+        ],
+        "witness_count": 1,
+        "witness_samples": [
+          {
+            "test_case": "tests_0",
+            "message": "sh: jest: command not found",
+            "category": "missing_resource",
+            "expected": "",
+            "actual": "",
+            "contracts": []
+          }
+        ],
+        "cgcs_state": {
+          "round": 2,
+          "round_index": 2,
+          "strategy": "contract_first",
+          "task_id": "public_pilot_darlal_obsidian_switcher_plus_000",
+          "contract_items": [
+            {
+              "id": "M000_comparison_flip_2abb0d97",
+              "label": "Should use `>` (not `>=`) for correct boundary check",
+              "description": "[comparison_flip] In `src/main.ts` (line 6): Comparison operator changed from `>` to `>=`. Should use `>` (not `>=`) for correct boundary check.",
+              "category": "boundary_condition",
+              "expected_behavior": "Should use `>` (not `>=`) for correct boundary check",
+              "test_refs": [],
+              "priority": "",
+              "source": "",
+              "notes": "",
+              "keywords": [
+                "comparison_flip",
+                "src/main.ts",
+                "6"
+              ]
+            }
+          ],
+          "active_clause_id": "M000_comparison_flip_2abb0d97",
+          "active_clause": "M000_comparison_flip_2abb0d97",
+          "regression_guard_ids": [],
+          "witnesses": [
+            {
+              "signature": "481cbd2f9db521bff061acf116767477effc7624",
+              "test_case": "tests_0",
+              "message": "sh: jest: command not found",
+              "expected": "",
+              "actual": "",
+              "location": "/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_darlal_obsidian_switcher_plus_000/contract_first/logs/tests_0_round3.log",
+              "category": "missing_resource",
+              "linked_contract_ids": []
+            }
+          ],
+          "raw_edit_payload": "{\"edits\": [{\"path\": \"src/main.ts\", \"mode\": \"rewrite\", \"content\": \"[MOCK] 9bf77edbe1330164 :: You are repairing a repository-backed change produced by strategy 'contract_first'. Repository workspace: `/Users/karana\"}], \"localized\": true}",
+          "payload_parse_ok": true,
+          "payload_parse_error": "",
+          "candidate_files": [
+            "src/main.ts",
+            "README.md",
+            "src/switcherPlus/__tests__/switcherPlusKeymap.test.ts",
+            "src/switcherPlus/switcherPlusKeymap.ts",
+            "src/settings/__tests__/switcherPlusSettings.test.ts",
+            "package.json",
+            "src/settings/generalSettingsTabSection.ts",
+            "src/settings/switcherPlusSettings.ts",
+            "src/switcherPlus/inputParser.ts",
+            "src/switcherPlus/modeHandler.ts",
+            "src/switcherPlus/__tests__/modeHandler.test.ts",
+            "src/switcherPlus/__tests__/modeHandler.perf.test.ts"
+          ],
+          "candidate_files_raw": [
+            "src/main.ts",
+            "README.md",
+            "src/switcherPlus/__tests__/switcherPlusKeymap.test.ts",
+            "src/switcherPlus/switcherPlusKeymap.ts",
+            "src/settings/__tests__/switcherPlusSettings.test.ts",
+            "package.json",
+            "src/settings/generalSettingsTabSection.ts",
+            "src/settings/switcherPlusSettings.ts",
+            "src/switcherPlus/inputParser.ts",
+            "src/switcherPlus/modeHandler.ts",
+            "src/switcherPlus/__tests__/modeHandler.test.ts",
+            "src/switcherPlus/__tests__/modeHandler.perf.test.ts"
+          ],
+          "candidate_files_filtered": [
+            "src/main.ts",
+            "README.md",
+            "src/switcherPlus/__tests__/switcherPlusKeymap.test.ts",
+            "src/switcherPlus/switcherPlusKeymap.ts",
+            "src/settings/__tests__/switcherPlusSettings.test.ts",
+            "package.json",
+            "src/settings/generalSettingsTabSection.ts",
+            "src/settings/switcherPlusSettings.ts",
+            "src/switcherPlus/inputParser.ts",
+            "src/switcherPlus/modeHandler.ts",
+            "src/switcherPlus/__tests__/modeHandler.test.ts",
+            "src/switcherPlus/__tests__/modeHandler.perf.test.ts"
+          ],
+          "clause_selection_reason": "subtask_focus::Implement core logic",
+          "row_quality": {
+            "contract_quality": "strong",
+            "contract_item_count": 1,
+            "active_clause_source": "subtask_focus::Implement core logic",
+            "active_clause_present": true,
+            "witness_count": 1,
+            "witness_unique_count": 1,
+            "payload_present": true,
+            "payload_parse_ok": true,
+            "candidate_file_count": 12,
+            "clause_selection_reason": "subtask_focus::Implement core logic",
+            "skipped_targets_present": false,
+            "lint_error_count": 0,
+            "used_fallback": false,
+            "strategy_mode": "subtasks_first",
+            "regression_guard_count": 0
+          },
+          "lint_errors": [],
+          "skipped_targets": [],
+          "outcome_metrics": {
+            "status": "tests_failed",
+            "pass_rate": 0.0,
+            "duration": 0.12739424999745097,
+            "failing_tests": [
+              "tests_0"
+            ],
+            "error_types": [
+              "fail::"
+            ]
+          },
+          "coverage": 0.0,
+          "satisfied_ids": [],
+          "unsatisfied_ids": [
+            "M000_comparison_flip_2abb0d97"
+          ],
+          "regressed_ids": [],
+          "witness_counts": {
+            "M000_comparison_flip_2abb0d97": 0
+          },
+          "witness_sample": [
+            {
+              "signature": "481cbd2f9db521bff061acf116767477effc7624",
+              "test_case": "tests_0",
+              "message": "sh: jest: command not found",
+              "expected": "",
+              "actual": "",
+              "location": "/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_darlal_obsidian_switcher_plus_000/contract_first/logs/tests_0_round3.log",
+              "category": "missing_resource",
+              "linked_contract_ids": []
+            }
+          ],
+          "regression_guards": []
+        },
+        "witnesses": [
+          {
+            "signature": "481cbd2f9db521bff061acf116767477effc7624",
+            "test_case": "tests_0",
+            "message": "sh: jest: command not found",
+            "expected": "",
+            "actual": "",
+            "location": "/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_darlal_obsidian_switcher_plus_000/contract_first/logs/tests_0_round3.log",
+            "category": "missing_resource",
+            "linked_contract_ids": []
+          }
+        ],
+        "row_quality": {
+          "contract_quality": "strong",
+          "contract_item_count": 1,
+          "active_clause_source": "subtask_focus::Implement core logic",
+          "active_clause_present": true,
+          "witness_count": 1,
+          "witness_unique_count": 1,
+          "payload_present": true,
+          "payload_parse_ok": true,
+          "candidate_file_count": 12,
+          "clause_selection_reason": "subtask_focus::Implement core logic",
+          "skipped_targets_present": false,
+          "lint_error_count": 0,
+          "used_fallback": false,
+          "strategy_mode": "subtasks_first",
+          "regression_guard_count": 0
+        },
+        "regression_guard_ids": [],
+        "active_clause_id": "M000_comparison_flip_2abb0d97"
+      }
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "status": "skipped",
+  "duration": 0.0,
+  "commands": [],
+  "plan": {
+    "commands": [],
+    "strategy": "none",
+    "derived": true,
+    "package_manager": "",
+    "runtime_family": "python",
+    "notes": {}
+  },
+  "steps": [],
+  "requires_network": false,
+  "last_log": "",
+  "error": ""
+}

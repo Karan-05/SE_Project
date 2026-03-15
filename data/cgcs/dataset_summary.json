@@ -1,0 +1,21 @@
+{
+  "total_rows": 60,
+  "usable_rows": 0,
+  "rejected_rows": 60,
+  "missing_active_clause_id": 41,
+  "empty_contract_items": 24,
+  "empty_witnesses": 0,
+  "empty_payloads": 12,
+  "weak_contract_rows": 36,
+  "split_counts": {
+    "train": 0,
+    "dev": 0,
+    "test": 0
+  },
+  "rejection_reasons": {
+    "placeholder_contract": 36,
+    "missing_active_clause_id": 82,
+    "empty_payload": 12,
+    "empty_contract_items": 48
+  }
+}

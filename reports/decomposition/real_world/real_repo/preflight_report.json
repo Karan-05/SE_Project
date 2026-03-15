@@ -15,7 +15,7 @@
     "model": "gpt-4.1-mini",
     "runtime": {},
     "ping": {
-      "latency_sec": 1.6294313750695437,
+      "latency_sec": 1.2532763330000307,
       "tokens_used": 30,
       "response": "It looks like you're referring to a \"Topcoder repo benchmark preflight ping.\""
     }
@@ -41,7 +41,7 @@
       "ok": true,
       "message": "LLM ping succeeded.",
       "details": {
-        "latency_sec": 1.6294313750695437,
+        "latency_sec": 1.2532763330000307,
         "tokens_used": 30,
         "response": "It looks like you're referring to a \"Topcoder repo benchmark preflight ping.\""
       }

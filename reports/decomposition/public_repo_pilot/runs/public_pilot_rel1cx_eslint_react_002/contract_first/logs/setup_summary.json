@@ -1,0 +1,33 @@
+{
+  "status": "failed",
+  "duration": 6.154874291998567,
+  "commands": [
+    "npm install --no-audit --no-fund"
+  ],
+  "plan": {
+    "commands": [
+      "npm install --no-audit --no-fund"
+    ],
+    "strategy": "npm_install_package_json",
+    "derived": true,
+    "package_manager": "",
+    "runtime_family": "node",
+    "notes": {
+      "package_json": "/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_rel1cx_eslint_react_002/contract_first/workspace/package.json"
+    }
+  },
+  "steps": [
+    {
+      "name": "setup_0",
+      "status": "fail",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "npm error code EUNSUPPORTEDPROTOCOL\nnpm error Unsupported URL Type \"workspace:\": workspace:*\nnpm error A complete log of this run can be found in: /Users/karanallagh/.npm/_logs/2026-03-14T23_21_09_632Z-debug-0.log\n",
+      "duration": 6.154874291998567,
+      "log_path": "/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_rel1cx_eslint_react_002/contract_first/logs/setup_0_setup.log"
+    }
+  ],
+  "requires_network": false,
+  "last_log": "/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_rel1cx_eslint_react_002/contract_first/logs/setup_0_setup.log",
+  "error": "npm error code EUNSUPPORTEDPROTOCOL\nnpm error Unsupported URL Type \"workspace:\": workspace:*\nnpm error A complete log of this run can be found in: /Users/karanallagh/.npm/_logs/2026-03-14T23_21_09_632Z-debug-0.log"
+}

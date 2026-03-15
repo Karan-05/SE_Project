@@ -10,6 +10,7 @@ def test_registry_contains_all_strategies():
         "semantic_diff",
         "role_decomposed",
         "simulation_trace",
+        "cgcs",
     }
     assert expected.issubset(set(STRATEGIES.keys()))
     assert get_strategy("contract_first").name == "contract_first"

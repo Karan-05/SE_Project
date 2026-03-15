@@ -33,6 +33,66 @@
 3. Extend the prompt-tuning workflow to cover additional repos/tasks once new snapshots + tests are staged, and feed the resulting multi-file metrics directly into the ASE paper figures.
 
 ---
+# Session Log – 2026-03-29 (Public repo pilot instrumentation upgrade)
+
+## Commands Run
+1. `pytest tests/test_public_repo_pilot_subset.py -q` – verifies deterministic subset selection, pilot rank assignment, and selection reasons.
+2. `pytest tests/test_workspace_validation.py -q` – exercises the new install/build/test validation stages plus summary aggregation.
+3. `pytest tests/test_seeded_repair_tasks.py -q` – covers the expanded mutation families, contract metadata, and oracle restore info capture.
+4. `pytest tests/test_public_repo_trace_audit.py -q` – checks the shared trace-quality auditor (round flags, run aggregation).
+5. `pytest tests/test_public_repo_pilot_runner.py -q` – regression suite for the runner's strategy dispatch + harness failure handling.
+
+## Files Modified / Created
+- Reworked `scripts/public_repos/select_cgcs_pilot_subset.py` (new field schema, diversity scoring, selection reasons) and matching tests/docs/Makefile target.
+- New workspace validation flow (`scripts/public_repos/validate_cgcs_workspaces.py`, Markdown report writer) plus updated tests.
+- Seeded repair tooling refresh (`scripts/public_repos/generate_seeded_repair_tasks.py`, `src/decomposition/public_repo_tasks/{seeding,contracts}.py`) covering the eight mutation families, oracle patches, and enriched task.json schema.
+- Pilot runner/trace audit/report/eval-pack scripts now emit to `reports/decomposition/public_repo_pilot/`, enforce trace completeness, and tie into the CGCS dataset builder (`scripts/build_cgcs_dataset.py` now ingests the pilot runs).
+- Added `src/public_repos/pilot/trace_quality.py`, doc updates (`docs/PUBLIC_REPO_PILOT_BENCHMARK.md`), and refreshed Makefile targets; new unit tests keep the pipeline locked down.
+
+## Metrics Observed
+- `pytest tests/test_public_repo_pilot_subset.py -q` → 5 passed in 0.02s.
+- `pytest tests/test_workspace_validation.py -q` → 5 passed in 0.03s.
+- `pytest tests/test_seeded_repair_tasks.py -q` → 18 passed in 0.05s.
+- `pytest tests/test_public_repo_trace_audit.py -q` → 7 passed in 0.04s.
+- `pytest tests/test_public_repo_pilot_runner.py -q` → 4 passed in 0.14s.
+- No end-to-end pilot run executed yet; CGCS strict dataset still reflects the previous (0 usable rows) build until the new scripts are driven on real repos.
+
+## Blockers / Risks
+- Pilot runs and strict dataset rebuild require executing the actual strategies (LLM provider + creds) and copying repos into isolated workspaces—pending authorization.
+- Need to re-run the pipeline on the 82-repo pool to populate the new artifacts (cgcs subset, workspace validation, seeded tasks); current JSONs still contain historical data.
+- Strict dataset remains all rejected rows until we run `python scripts/build_cgcs_dataset.py --strict` after collecting fresh pilot traces.
+
+## Next Steps
+1. Run the refreshed make targets end-to-end (`public_repo_pilot_subset` → `public_repo_eval_pack`) on the deterministic 10-repo slice to generate new JSON/Markdown artifacts.
+2. Rebuild the strict CGCS dataset (`python scripts/build_cgcs_dataset.py --strict`) so `data/cgcs/dataset_summary.json` reports `usable_rows > 0`.
+3. Use the new eval-pack builder to emit `openai_artifacts/public_repo_eval_items.jsonl` and confirm trace completeness metrics improve (non-zero contract items, witnesses, regression guards).
+
+---
+
+# Session Log – 2026-03-21 (CGCS runtime instrumentation upgrade)
+
+## Commands Run
+1. `pytest tests/test_cgcs_runtime_logging.py -q` – validates the new CGCS trace dataclass, candidate-file logging, audit helper, and row-quality metadata.
+
+## Files Modified / Created
+- `src/decomposition/agentic/loop.py`, `src/decomposition/interfaces.py`, `src/decomposition/agentic/traces.py` – inject per-round CGCS trace builders, explicit `active_clause_id` logging, normalized candidate-file snapshots, and plan-level contract items.
+- `src/decomposition/real_repo/{contracts.py,cgcs_logging.py,contract_graph.py,edit_batch.py,harness.py}` – normalize clause metadata, add the `CGCSRoundTrace` dataclass, expose clause-selection reasons/guards, capture raw payloads + parse errors, and persist structured witnesses/candidate lists.
+- `src/decomposition/strategies/cgcs.py` – include normalized contract items in the plan snapshot.
+- `scripts/real_repo/run_tiny_cgcs_subset.py`, `scripts/real_repo/audit_cgcs_trace_quality.py`, `docs/RUNTIME_TRACE_CONTRACT.md` – helper CLI + documentation to run a deterministic 10-task subset, audit trace quality, and describe the runtime trace contract.
+- `tests/test_cgcs_runtime_logging.py` – new unit tests covering clause IDs, regression guards, candidate files, weak-contract marking, trace serialization, and trace audit readiness counts.
+
+## Metrics Observed
+- Targeted tests: `pytest tests/test_cgcs_runtime_logging.py -q` → **4 passed** in 0.24s (with sandbox escalation due to pytest invocation limits).
+
+## Blockers / Risks
+- Haven’t yet executed the new `run_tiny_cgcs_subset.py` runner on live tasks, so trace completeness is inferred from unit tests. Need at least one real subset run plus `audit_cgcs_trace_quality.py` to confirm strict rows exist before rebuilding the dataset.
+
+## Next Steps
+1. Run `python scripts/real_repo/run_tiny_cgcs_subset.py --input data/topcoder/executable_subset.jsonl --max-tasks 10 --strategies cgcs --output-dir reports/decomposition/real_world/real_repo_tiny --seed 0` followed by the audit helper to produce `trace_quality_summary.{json,md}`.
+2. Rerun `PYTHONPATH=. python scripts/build_cgcs_dataset.py --strict` so `usable_rows > 0` with the richer traces.
+3. If traces look good, scale the runner beyond the tiny subset and regenerate eval/batch artifacts.
+
+---
 
 # Session Log – 2026-03-11 (Contract-aware semantic ablations)
 
@@ -589,5 +649,402 @@
 1. Decide whether to compress or offload the remaining large CSV/JSONL artifacts (or enable Git LFS once direct filesystem access is available).
 2. Ensure every pipeline/documentation section that references `data/processed/tasks.csv` or the legacy Excel JSON mentions `scripts/unpack_large_assets.py`.
 3. Resume the ASE research artefact tasks now that the branch is in sync with `origin/main`.
+
+---
+
+# Session Log – 2026-03-14 (CGCS instrumentation + repo analysis)
+
+## Commands Run
+1. `pwd`, `which python`, `python --version` (session bootstrap).
+2. `ls`, `ls src/decomposition`, `ls reports/decomposition` (inventory code + traces).
+3. `pytest -q tests/test_witnesses.py tests/test_contract_graph.py tests/test_lint.py` (new unit tests).
+4. `pytest -q tests/test_witnesses.py tests/test_contract_graph.py tests/test_lint.py tests/test_strategy_registry.py` (after CGCS strategy/Makefile updates).
+5. `python - <<'PY' ... pd.read_csv("data/raw/tasks.csv") ...` (verified the 22,023-challenge count for the dataset audit).
+
+## Files Modified / Created
+- **CGCS instrumentation** – Added `src/decomposition/real_repo/{witnesses.py,contract_graph.py,lint.py}` plus new unit tests, wired them into `agentic/loop.py`, `agentic/solver.py`, and the repo harness so every attempt now records clause discharge, regression guards, witnesses, and lint failures (`cgcs_state` stored in each trace and log).
+- **CGCS strategy & tooling** – Added `src/decomposition/strategies/cgcs.py`, registered it, and exposed clause-driven focus via an extended `RepairPolicy`. New scripts (`scripts/build_cgcs_dataset.py`, `scripts/anonymize_artifact.py`, `scripts/make_paper_tables.py`, `scripts/make_paper_figures.py`) plus docs (`docs/CGCS_DATASET_SCHEMA.md`, `docs/REPRODUCIBILITY.md`) package the clause-level dataset; Makefile targets `real_repo_preflight`, `real_repo_run`, `cgcs_dataset`, `paper_tables`, `paper_figures` make the workflows reproducible.
+- **Repo harness + lint** – Enforced payload linting before edits are applied, logged raw payloads for later auditing, and surfaced lint errors back to the solver prompts.
+- **Analysis docs** – Authored `reports/repo_analysis/{data_pipeline_map.md,topcoder_dataset_audit.md,full_run_capability.md}`; refreshed `reports/ase2026_aegis/{main_method_decision.md,paper_positioning.md,abstract_draft.md,contributions_draft.md}` to reflect the CGCS dataset and instrumentation.
+
+## Metrics Observed
+- Unit tests: 9 targeted tests now cover the witness extractor, contract graph, lint rules, and strategy registry (`pytest …` outputs `9 passed in 0.11s`).
+- Dataset audit: `len(pd.read_csv("data/raw/tasks.csv")["task_id"].unique()) == 22023`, confirming the canonical challenge count referenced in the paper.
+
+## Blockers / Risks
+- CGCS instrumentation is wired in but we have not yet run the clause-driven strategy on the live provider, so `data/cgcs/*.jsonl` remains empty until a new real-repo run occurs.
+- The repo harness now enforces linting; existing strategies that emit malformed payloads will fail fast until their prompts are updated.
+
+## Next Steps
+1. Execute `make real_repo_run` (with valid provider credentials) to populate CGCS traces/dataset and validate the clause-driven focus end-to-end.
+2. Once runs exist, rerun `make cgcs_dataset`, `make paper_tables`, and `make paper_figures` to refresh the artefacts and cite the actual clause discharge metrics.
+3. Evaluate whether CGCS-driven focus improves semantic coverage enough to justify adding it to the strategy comparisons (otherwise keep the teacher as the flagship method).
+
+---
+
+# Session Log – 2026-03-15 (Real repo run + CGCS dataset build)
+
+## Commands Run
+1. `make real_repo_preflight` (with `PYTHONPATH=.` and OpenAI credentials) – prepared workspaces and validated setup.
+2. `make real_repo_run` – executed contract_first and failure_mode_first plus oracle_teacher on all four SRM tasks.
+3. `make cgcs_dataset` – generated `data/cgcs/{train,dev,test}.jsonl`.
+4. `make paper_tables` and `make paper_figures` – refreshed `reports/ase2026_aegis/cgcs_table_main.csv` and `figure_cgcs_pass_rate.png`.
+
+## Files Modified / Created
+- `reports/decomposition/real_world/real_repo/{runs,summary.md,strategy_comparison.csv}` – logs and metrics from the successful benchmark run.
+- `data/cgcs/train.jsonl`, `data/cgcs/dev.jsonl`, `data/cgcs/test.jsonl` – 60 CGCS attempt records (48/3/9 per split) with clause states, witnesses, and raw payloads.
+- `reports/ase2026_aegis/cgcs_table_main.csv` and `reports/ase2026_aegis/figure_cgcs_pass_rate.png` – paper-ready summary assets derived from the fresh dataset.
+
+## Metrics Observed
+- Both contract_first and failure_mode_first still finish with pass_rate=0 on all four tasks; contract coverage averages 0.52 (aggregation/filtering clauses remain unsatisfied), while oracle_teacher stays at pass_rate=1 (`reports/decomposition/real_world/real_repo/summary.md:1-3`).
+- CGCS dataset stats: train=48/dev=3/test=9 attempts with avg witness counts of 0.38/1.0/0.33 and regression_guard_rate≈0.33–1.0 (`reports/ase2026_aegis/cgcs_table_main.csv`).
+- Figure `figure_cgcs_pass_rate.png` shows average clause discharge pass rate is 0 across splits, underscoring that current clause-driven repairs never close the semantic gaps.
+
+## Blockers / Risks
+- Learned strategies still fail semantically despite perfect localization; the dataset confirms no clause achieves discharge (pass_rate remains 0). Need improved clause reasoning or richer witness prompts before promoting CGCS as more than instrumentation.
+- Raw edit payloads are blank for many attempts because the models returned empty JSON; need to audit prompts or LLM responses if we expect richer data.
+
+## Next Steps
+1. Analyze per-task logs in `reports/decomposition/real_world/real_repo/runs/*` to identify why aggregation clauses stay unsatisfied (inspect witness samples and contract reviews).
+2. Consider rerunning with CGCS strategy enabled to see whether clause-driven focus + new prompts improve contract coverage.
+3. Feed the CGCS dataset into paper drafts and document the negative-result angle (clause discharge still 0, witness volume low).
+
+---
+
+# Session Log – 2026-03-17 (Topcoder funnel, docs, and diagnostics)
+
+## Commands Run
+1. `pytest tests/test_topcoder_funnel.py tests/test_build_cgcs_dataset.py tests/test_build_batch_requests.py tests/test_poll_batch.py` – verified the new corpus index, executable subset, dataset builder, batch request generator, and poller behaviour (11 tests, 0 failures).
+2. `python scripts/topcoder/build_corpus_index.py --tasks data/raw/tasks.csv`
+3. `python scripts/topcoder/select_executable_subset.py --input data/topcoder/corpus_index.jsonl`
+4. `python scripts/topcoder/build_funnel_report.py`
+5. `PYTHONPATH=. python scripts/build_cgcs_dataset.py` (strict mode currently fails because every row is rejected; reran without `--strict` to refresh `data/cgcs`.)
+
+## Files Modified / Created
+- `scripts/topcoder/{build_corpus_index.py,select_executable_subset.py,build_funnel_report.py}` plus the new funnel tests (`tests/test_topcoder_funnel.py`) – added heuristics, duplicate handling, rejection summaries, and a machine-readable funnel report.
+- `Makefile` – introduced `topcoder_index`, `topcoder_select_executable`, `cgcs_debug_dataset`, `openai_build_eval`, `openai_debug_errors`, and `research_funnel_report` targets with explicit output locations.
+- Docs: updated `docs/PIPELINE_DEBUGGING.md`, added `docs/{OPENAI_BATCH_WORKFLOW,TOPCODER_SCALING_POLICY,RESEARCH_FUNNEL}.md`, and refreshed `reports/repo_analysis/{data_pipeline_map.md,topcoder_dataset_audit.md,full_run_capability.md}`.
+- Paper assets (`reports/ase2026_aegis/{abstract_draft,contributions_draft,main_method_decision.md,paper_positioning.md,funnel_snapshot.md}`) now cite the live funnel counts.
+
+## Metrics Observed
+- Corpus index: `raw_rows_seen=91,598`, `indexed_rows=22,023`, `repo_count=16,568`, `duplicate_group_count=2,060` (`data/topcoder/corpus_summary.json`).
+- Executable subset: `selected_rows=3,966`, rejection reasons (`missing_test_signal=6,652`, `duplicate=10,585`, `missing_repo=5,455`, `weak_executable_signal=7,259`) in `data/topcoder/executable_subset_summary.json`.
+- Funnel report: `usable_cgcs_row_count=60` (0 usable), `eval_item_count=9`, `batch_request_count=0`, `batch_success_count=0`, `solved_count=0` (`data/topcoder/funnel_report.json`).
+- `scripts/build_cgcs_dataset.py --strict` currently exits with “Strict mode enabled: 60 rows rejected.”
+
+## Blockers / Risks
+- CGCS rows remain unusable (missing clause IDs, weak contracts, or empty witnesses), so the Responses pipeline cannot be exercised yet.
+- No batch requests or normalized outputs exist for the current dataset; solved-count stays at zero until new traces or relaxed filters produce usable rows.
+
+## Next Steps
+1. Improve CGCS extraction quality (active clause IDs, witnesses, raw payloads) so at least a subset of the 60 rows becomes usable.
+2. Rebuild eval items and batch requests after CGCS improvements, then run `scripts/openai_ops/submit_batch.py` / `poll_batch.py --latest` to produce normalized outputs and batch error summaries.
+3. Expand the funnel diagnostics/visualizations to track progress as CGCS coverage improves.
+
+---
+
+# Session Log – 2026-03-12 (Topcoder repo acquisition foundations)
+
+## Commands Run
+1. `TMPDIR=$PWD/tests/.tmp PYTEST_ADDOPTS='--basetemp=tests/.tmp_pytest -q' pytest tests/test_repo_discovery.py tests/test_repo_fetch_manifest.py tests/test_repo_snapshot_detection.py tests/test_workspace_prep.py` – exercises the new discovery/fetch/snapshot/workspace helpers with synthetic fixtures.
+
+## Files Modified / Created
+- `src/decomposition/topcoder/{__init__.py,discovery.py,repos.py,snapshot.py,workspaces.py}` – new typed helpers for URL normalization, repo grouping, git subprocess wrappers, language/build/test detection, and workspace heuristics.
+- `scripts/topcoder/{discover_repo_candidates.py,fetch_topcoder_repos.py,build_repo_snapshots.py,prepare_workspaces.py,build_repo_acquisition_report.py}` – CLI entrypoints that emit JSONL manifests + summaries for each acquisition stage, with dry-run flags, challenge filters, and resumability.
+- `tests/test_repo_discovery.py`, `tests/test_repo_fetch_manifest.py`, `tests/test_repo_snapshot_detection.py`, `tests/test_workspace_prep.py` – lightweight pytest suites covering URL extraction, deduplication, failure recording, detection heuristics, and workspace command inference.
+- `docs/TOPCODER_REPO_ACQUISITION.md` + new Makefile targets (discover/fetch/snapshot/workspaces/report) explaining how to run small-subset dry runs and interpret manifest counts.
+
+## Metrics Observed
+- Targeted pytest run: 11 tests passed in 0.03s (see command above); verifies discovery regexp handling, dry-run fetch manifests, snapshot language/build detection, and workspace command inference.
+
+## Blockers / Risks
+- Repo fetching still relies on network access and git credentials; large-scale clones have not been executed yet in this environment.
+- Discovery currently depends on whatever Topcoder windows are present under `data/raw/` and `challenge_data/`; missing dumps will limit candidate coverage.
+
+## Next Steps
+1. Run `python scripts/topcoder/discover_repo_candidates.py --tasks data/raw/tasks.csv --pages-glob "data/raw/page*.json.gz"` to materialize `repo_candidates.jsonl` for the full dataset.
+2. Execute a dry-run fetch (`python scripts/topcoder/fetch_topcoder_repos.py --dry-run --max-repos 50`) to audit deduplication before cloning anything heavy.
+3. After a real fetch subset completes, generate snapshots/workspaces plus `scripts/topcoder/build_repo_acquisition_report.py` so the paper-ready manifests show real counts.
+
+---
+
+# Session Log – 2026-03-16 (CGCS dataset + OpenAI ops hardening)
+
+## Commands Run
+1. `pytest tests/test_build_cgcs_dataset.py tests/test_build_batch_requests.py tests/test_poll_batch.py` (multiple iterations while fixing regressions) – verifies the new dataset builder, batch request generator, and batch poller logic.
+
+## Files Modified / Created
+- `scripts/build_cgcs_dataset.py` – rewrote the builder around a typed schema, extraction helpers, row validation, CLI flags, and quality summaries (`dataset_summary.json`, `rejected.jsonl`, `all_rows.jsonl`).
+- `scripts/openai_ops/{build_batch_requests.py,poll_batch.py,debug_dataset_quality.py,debug_batch_errors.py}` plus `src/decomposition/openai_ops/{schema.py,normalize.py}` – added structured Responses payloads, skip accounting, full batch polling with error normalization, and diagnostic utilities.
+- `scripts/topcoder/{build_corpus_index.py,select_executable_subset.py}` and `docs/PIPELINE_DEBUGGING.md` – established the 22k-challenge indexing/scaling plan and documented root causes of empty rows & batch artifacts.
+- New targeted tests (`tests/test_build_cgcs_dataset.py`, `tests/test_build_batch_requests.py`, `tests/test_poll_batch.py`) ensure the pipeline fails loudly on regressions.
+
+## Metrics Observed
+- Targeted pytest suite: 8 tests passed in 0.24s (`pytest tests/test_build_cgcs_dataset.py tests/test_build_batch_requests.py tests/test_poll_batch.py`).
+- Dataset builder now reports row quality counts at runtime (`total_rows`, `usable_rows`, `rejected_rows`, missing field tallies) instead of silently succeeding.
+
+## Blockers / Risks
+- Still need to rerun `scripts/build_cgcs_dataset.py` against fresh traces to populate the new `row_quality` diagnostics and verify the placeholder/witness filters on real data.
+- The new Topcoder corpus scripts rely on `data/raw/tasks.csv` + legacy exports; if those files are stale or missing, the executable subset filter will need further validation.
+
+## Next Steps
+1. Rebuild the full CGCS dataset via `python scripts/build_cgcs_dataset.py --strict` so the new rejected/summary files reflect live traces.
+2. Use `scripts/openai_ops/build_batch_requests.py` + `poll_batch.py` on a small eval sample to ensure structured Responses output parses cleanly end-to-end.
+3. Run `scripts/topcoder/build_corpus_index.py` followed by `select_executable_subset.py` and feed the subset into upcoming CGCS/agent experiments.
+
+---
+
+# Session Log – 2026-03-21 (Topcoder source acquisition pipeline overhaul)
+
+## Commands Run
+1. `pytest tests/test_topcoder_artifact_classifier.py tests/test_repo_candidate_filtering.py tests/test_repo_fetch_manifest.py tests/test_source_acquisition_report.py` – verifies the new classifier, repo candidate filter, fetcher behaviours (clone/archive/rejection), and the source acquisition report aggregation (16 tests, 0 failures).
+2. `python scripts/topcoder/build_repo_acquisition_report.py` – refreshes `data/topcoder/source_acquisition_report.json` + `reports/ase2026_aegis/source_acquisition_snapshot.md` after the classifier/fetcher rewrite.
+
+## Files Modified / Created
+- `src/decomposition/topcoder/{artifact_classifier.py,discovery.py,repos.py,snapshot.py,workspaces.py}` – built the artifact classifier, multi-stage discovery (artifact + repo manifests), git/archives fetch helpers, and extended snapshot/workspace metadata to record `source_origin`, `source_url`, and `archive_hash`.
+- `scripts/topcoder/{discover_repo_candidates.py,fetch_topcoder_repos.py,build_repo_snapshots.py,prepare_workspaces.py,build_repo_acquisition_report.py,debug_repo_recovery.py}` – new CLI options for artifact outputs, host filters, high-recall mode, archive fallbacks, diagnostic summaries, and explicit JSON/Markdown reports (`data/topcoder/source_acquisition_report.json`, `reports/ase2026_aegis/source_acquisition_snapshot.md`, `data/topcoder/repo_recovery_debug.json`, `reports/ase2026_aegis/repo_recovery_debug.md`).
+- `docs/TOPCODER_SOURCE_RECOVERY.md` + `reports/repo_analysis/{data_pipeline_map.md,topcoder_dataset_audit.md,full_run_capability.md}` + `reports/ase2026_aegis/{main_method_decision.md,paper_positioning.md,abstract_draft.md,contributions_draft.md}` – documented the artifact classification, repo acquisition manifests, high-recall controls, and paper narrative updates.
+- `Makefile` – added `topcoder_discover_artifacts`, `topcoder_build_repo_candidates`, `topcoder_source_report`, and `topcoder_debug_repo_recovery` targets that print the resulting manifest/report locations.
+- New tests: `tests/test_topcoder_artifact_classifier.py`, `tests/test_repo_candidate_filtering.py`, `tests/test_source_acquisition_report.py`, and expanded `tests/test_repo_fetch_manifest.py`.
+
+## Metrics Observed
+- Targeted pytest suite: 16 tests passed in 0.10s (`pytest tests/test_topcoder_artifact_classifier.py tests/test_repo_candidate_filtering.py tests/test_repo_fetch_manifest.py tests/test_source_acquisition_report.py`).
+- `data/topcoder/source_acquisition_report.json` currently reflects the new schema with zero fetched repos (clone/download stages not executed yet in this environment), but all artifact counts, host/type breakdowns, and rejection counters are wired end-to-end.
+- `reports/ase2026_aegis/source_acquisition_snapshot.md` and `reports/ase2026_aegis/repo_recovery_debug.md` render the JSON metrics into reviewer-friendly Markdown tables.
+
+## Blockers / Risks
+- No real clones/archives have been run yet; `data/topcoder/repo_fetch_manifest.jsonl` still contains only dry-run entries. High-recall mode is wired, but we still need network time + host allowlist approvals to populate it with actual repos.
+- Raw single-file (`raw_code_file`) artifacts are recorded but not yet bundled into synthetic workspaces; challenges that only expose individual files remain unrecoverable until we group them.
+- Archive downloads require network access and may hit host-specific throttling—no retry/backoff has been exercised at scale.
+
+## Next Steps
+1. Execute a high-recall dry run on the full artifact manifest (`python scripts/topcoder/fetch_topcoder_repos.py --dry-run --recovery-mode high-recall --allowed-hosts github.com,gitlab.com,bitbucket.org --reject-host-patterns execute-api,amazonaws.com,cloudfront.net --prefer-archive-fallback --skip-non-source --emit-rejections`) and review the rejection summary in `data/topcoder/repo_recovery_debug.json`.
+2. Schedule a real fetch for the first 100 high-confidence repos once network access is approved, then regenerate snapshots/workspaces to populate `source_origin` stats with real values.
+3. Prototype raw-code bundling (grouping multiple `raw_code_file` artifacts from the same challenge into a synthetic workspace) so challenges without git repos still have auditable scaffolds.
+
+---
+
+# Session Log – 2026-03-22 (Public repo acquisition pipeline bootstrap)
+
+## Commands Run
+1. `pytest tests/test_public_repo_discovery.py tests/test_public_repo_selection.py` – validates the scoring heuristics, slug filtering, owner caps, and per-language selection logic for the new public repo discovery/selection modules.
+2. `pytest tests/test_public_repo_fetch.py tests/test_public_repo_snapshots.py tests/test_public_repo_workspaces.py` – exercises the fetch manifest builder (dry-run, retries, resumable state), snapshot detection of build/test signals, and workspace command synthesis + CGCS seed filtering.
+3. `PYTHONPATH=. python scripts/public_repos/build_public_repo_report.py` – generates the JSON + Markdown report stubs (`data/public_repos/public_repo_report.json`, `reports/ase2026_aegis/public_repo_snapshot.md`) even before the pipeline is run on real data.
+
+## Files Modified / Created
+- New package `src/public_repos/` with modules for discovery (`github_client`, `discovery`, `scoring`), selection (`selection`), fetch (`fetcher`), snapshots (`snapshots`), workspace planning (`workspaces`), and reporting (`reporting`).
+- Six CLI entry points under `scripts/public_repos/` (discover/select/fetch/snapshots/workspaces/report) plus matching unit tests in `tests/test_public_repo_{discovery,selection,fetch,snapshots,workspaces}.py`.
+- Makefile targets `public_repo_discover`, `public_repo_select`, `public_repo_fetch`, `public_repo_snapshots`, `public_repo_workspaces`, `public_repo_report`.
+- Documentation: `docs/PUBLIC_REPO_POOL.md` (purpose + how-to) and the autogenerated `reports/ase2026_aegis/public_repo_snapshot.md`.
+- Seed artifacts under `data/public_repos/` (empty `.gitkeep`, placeholder JSON report).
+
+## Metrics Observed
+- Discovery/selection pytest suite: 5 tests passed in 0.06s (`pytest tests/test_public_repo_discovery.py tests/test_public_repo_selection.py`).
+- Fetch/snapshot/workspace pytest suite: 6 tests passed in 0.03s (`pytest tests/test_public_repo_fetch.py tests/test_public_repo_snapshots.py tests/test_public_repo_workspaces.py`).
+- Combined: 11 new tests, all green in <0.1s; no real clones yet (report currently shows zeros until the pipeline runs against GitHub).
+
+## Blockers / Risks
+- GitHub search + clone stages still require a valid `GITHUB_TOKEN` and network approvals—without running them we only have empty manifests.
+- Snapshot/workspace heuristics assume standard project layouts; edge repos (monorepos, nonstandard build systems) may require manual overrides before running harness experiments.
+- CGCS seed pool has no entries until real repos are fetched and snapshots built.
+
+## Next Steps
+1. Provide a GitHub token with sufficient rate limits and run `make public_repo_discover public_repo_select public_repo_fetch` to populate `data/public_repos/repos/`.
+2. Re-run `make public_repo_snapshots` + `make public_repo_workspaces` to produce real workspace manifests and seed pools, then update `make public_repo_report`.
+3. Start wiring the CGCS/runtime instrumentation smoke tests against `data/public_repos/workspace_manifest.jsonl` to validate the harness before plugging back into Topcoder tasks.
+
+---
+
+# Session Log – 2026-03-23 (Pilot workspace normalization + validation repair)
+
+## Commands Run
+1. `python -m pytest -q tests/test_workspace_bootstrap.py`
+2. `python -m pytest -q tests/test_prepare_workspaces_enriched.py`
+3. `python -m pytest -q tests/test_validate_cgcs_workspaces_repair.py`
+4. `python -m pytest -q tests/test_debug_workspace_failures.py`
+5. `python -m pytest -q tests/test_workspace_validation.py`
+6. `python -m pytest -q tests/test_public_repo_workspaces.py`
+
+## Files Modified / Created
+- Added `src/public_repos/pilot/workspace_bootstrap.py` and rewired `src/public_repos/workspaces.py` to emit enriched manifests (language bucket, package manager, bootstrap commands, required tools, inference provenance).
+- Rewrote `scripts/public_repos/validate_cgcs_workspaces.py` with safe bootstrap mode, missing-tool detection, richer verdicts/records, CLI filters, and updated Makefile targets.
+- Added `scripts/public_repos/debug_workspace_failures.py`, documentation `docs/PUBLIC_REPO_WORKSPACE_NORMALIZATION.md`, and extended `scripts/public_repos/generate_seeded_repair_tasks.py` (`--allow-runnable-without-build`).
+- Expanded test coverage: new suites for bootstrap planning, manifest enrichment, validator repairs, failure-debug reporting, and refreshed `tests/test_public_repo_workspaces.py` / `tests/test_workspace_validation.py`.
+- Makefile updates for `public_repo_validate_workspaces`, new `public_repo_debug_workspace_failures`, and seeding command wiring.
+
+## Metrics Observed
+- `tests/test_workspace_bootstrap.py`: 3 passed (0.02s)
+- `tests/test_prepare_workspaces_enriched.py`: 2 passed (0.02s)
+- `tests/test_validate_cgcs_workspaces_repair.py`: 3 passed (0.02s)
+- `tests/test_debug_workspace_failures.py`: 1 passed (0.02s)
+- `tests/test_workspace_validation.py`: 4 passed (0.03s)
+- `tests/test_public_repo_workspaces.py`: 2 passed (0.03s)
+
+## Blockers / Risks
+- Still need to re-run the validation CLI against the real pilot subset to confirm multiple repos flip to `runnable`/`runnable_without_build`.
+- Environment bootstrap currently restricts itself to Python packaging gaps; Node/Java installations still depend on the host having `pnpm`, `yarn`, `mvn`, etc. pre-installed.
+- Manifest detection of build/test scripts requires `package.json` access; archives without scripts may still need manual hints.
+
+## Next Steps
+1. Regenerate manifests and rerun validation with `make public_repo_prepare_workspaces public_repo_validate_workspaces` (safe bootstrap mode) to capture real repos in the new schema.
+2. Execute `make public_repo_debug_workspace_failures` to prioritise bootstrap vs. command-inference fixes, then address the highest-frequency categories.
+3. Rebuild seeded tasks via `make public_repo_seed_tasks` (with `--allow-runnable-without-build`) once ≥2 repos validate, so the pilot runner can schedule multiple workspaces.
+
+---
+
+# Session Log – 2026-03-27 (Trace completeness + Node workspace rescue)
+
+## Commands Run
+1. `pytest tests/test_public_repo_trace_fields.py tests/test_workspace_package_manager_inference.py tests/test_workspace_node_engine_checks.py tests/test_workspace_npm_fallbacks.py`
+2. Exploratory editors / sed/rg to inspect `src/decomposition/agentic/loop.py`, `src/public_repos/pilot/workspace_bootstrap.py`, `scripts/public_repos/validate_cgcs_workspaces.py`, and related helpers while wiring strict trace persistence + bootstrap fixes.
+
+## Files Modified / Created
+- `src/decomposition/agentic/loop.py`, `src/decomposition/real_repo/strict_logging.py`, and `scripts/public_repos/run_public_repo_pilot.py` now emit per-round strict traces (`strict_round_traces.jsonl`), rewrite edit logs with the required fields, and fail a run immediately when the payload is missing.
+- `src/public_repos/pilot/workspace_bootstrap.py` + `src/public_repos/workspaces.py` respect `packageManager`, workspace dependency protocols, and emit corepack bootstrap advice alongside the new `package_manager_spec`.
+- `scripts/public_repos/validate_cgcs_workspaces.py` captures package manager overrides, corepack readiness, node engine requirements, npm fallback attempts, and annotates every row with `hard_blocked`, `rescueable`, `rescue_actions_attempted`, `engine_requirements`, and `actual_runtime_versions`.
+- Added focused tests (`tests/test_public_repo_trace_fields.py`, `tests/test_workspace_package_manager_inference.py`, `tests/test_workspace_node_engine_checks.py`, `tests/test_workspace_npm_fallbacks.py`) plus documentation `docs/PUBLIC_REPO_PILOT_RESCUE.md` covering the new rescue paths and trace contract.
+
+## Metrics Observed
+- Targeted pytest suite above: **10 tests passed** in ~0.26 s. No end-to-end pilot/validation run in this session because the repo still contains user data + seeded workspaces.
+
+## Blockers / Risks
+- Need to re-run `scripts/public_repos/prepare_workspaces.py` + `scripts/public_repos/validate_cgcs_workspaces.py` on the actual pilot manifests to populate the new `hard_blocked/rescueable` fields and confirm npm/corepack overrides behave as expected across real repos.
+- Pilot benchmarks still depend on running the full CLI trio (validation → pilot run → trace audit → dataset rebuild) against live LLM credentials; this session only laid the groundwork.
+- Corepack/yarn/pnpm are enforced now; runners lacking those binaries will immediately block validations until the environment is upgraded.
+
+## Next Steps
+1. Regenerate workspace manifests and rerun validation with safe bootstrap:  
+   `PYTHONPATH=. python scripts/public_repos/prepare_workspaces.py --snapshots data/public_repos/repo_snapshots.jsonl --out-dir data/public_repos`  
+   `PYTHONPATH=. python scripts/public_repos/validate_cgcs_workspaces.py --subset data/public_repos/pilot/cgcs_pilot_subset.jsonl --workspace-manifest data/public_repos/workspace_manifest.jsonl --out-dir data/public_repos/pilot --bootstrap-mode safe --skip-build-if-missing --timeout-seconds 300`
+2. Execute the pilot benchmark and audit traces once validations show multiple runnable repos:  
+   `PYTHONPATH=. python scripts/public_repos/run_public_repo_pilot.py --tasks-manifest data/public_repos/pilot/tasks_manifest.jsonl --strategies contract_first,failure_mode_first,cgcs --out-dir reports/decomposition/public_repo_pilot --seed 0`  
+   `PYTHONPATH=. python scripts/public_repos/audit_public_repo_trace_quality.py --input-dir reports/decomposition/public_repo_pilot`
+3. Rebuild the strict dataset (`PYTHONPATH=. python scripts/build_cgcs_dataset.py --strict`) to confirm the new trace rows feed downstream evaluations once at least one strategy run completes without setup failures.
+
+---
+
+# Session Log – 2026-03-24 (Pilot rescue + end-to-end orchestrator)
+
+## Commands Run
+1. `pytest tests/test_public_repo_expansion.py tests/test_public_repo_rescue_loop.py tests/test_build_optional_behavior.py tests/test_run_complete_public_repo_pilot.py`
+2. `python scripts/public_repos/rescue_and_expand_pilot.py --help`
+
+## Files Modified / Created
+- Added `src/public_repos/pilot/{bootstrap,rescue,expansion,selection}.py`, `scripts/public_repos/rescue_and_expand_pilot.py`, and `scripts/public_repos/run_complete_public_repo_pilot.py` to automate rescue/backfill and full pipeline orchestration.
+- Extended seeding (`generate_seeded_repair_tasks.py`) and pilot runner (`run_public_repo_pilot.py`) with reusable functions, plus new documentation `docs/PUBLIC_REPO_RESCUE_AND_BACKFILL.md`.
+- Makefile targets `public_repo_rescue_expand` and `public_repo_complete_pilot`, new diagnostics (`pilot_attempt_log.jsonl`, `rescue_debug.md`, `expansion_debug.md`), and orchestrator summary outputs.
+- Added tests covering rescue loop behaviour, expansion determinism, build-optional seeding, and the complete orchestrator flow.
+
+## Metrics Observed
+- Targeted pytest suite (4 files) passed locally; no full pipeline run yet because it depends on real repos and strategy execution.
+
+## Blockers / Risks
+- Need to run `rescue_and_expand_pilot.py` on the actual 82-repo seed pool to lift validated count beyond 1.
+- Full `run_complete_public_repo_pilot.py` still requires real pilot runs and strict dataset rebuilds, which demand LLM credentials + wall-clock time.
+- Safe bootstrap currently covers Python + Node tooling; JVM-specific gaps (maven/gradle) remain manual.
+
+## Next Steps
+1. Execute the new rescue loop command (see docs) to rewrite `workspace_validation.jsonl` with >1 runnable repo.
+2. Run `python scripts/public_repos/run_complete_public_repo_pilot.py ...` to seed tasks, run benchmarks, rebuild the strict dataset, and emit eval items once validations improve.
+3. Inspect `reports/decomposition/public_repo_pilot/{rescue,expansion}_debug.md` to confirm replacements behave deterministically and hard blockers are quarantined.
+
+---
+
+# Session Log – 2026-03-14 (Topcoder audit + STRIDE refresh)
+
+## Commands Run
+1. `pwd`
+2. `which python`
+3. `python --version`
+4. `python -c "import sys; print(sys.executable)"`
+5. `ls`
+6. `sed -n '1,160p' README.md` (plus additional `sed`/`cat` inspections of `setUp.py`, `fetch_functions.py`, `process.py`, `legacy_excel_loader.py`, `uploader.py`, `dbConnect.py`, `schema_registry.py`, `automation.py`, `config.py`, `http_utils.py`, `utility.py`, `scripts/export_real_tasks.py`, `src/data/preprocess.py`, and the STRIDE/AEGIS experiment files)
+7. `python - <<'PY' import pandas as pd; df = pd.read_csv('data/raw/tasks.csv'); print('rows', len(df)); print('unique task ids', df['task_id'].nunique())`
+8. `python scripts/run_stride_suite.py --variants stride_without_uncertainty_features stride_gate_plus_residual --episodes 32 --dataset-episodes 256 --seeds 0 1 2 3 4 --override-threshold 0.6 --residual-thresholds 0.6 0.75 0.8 0.9`
+9. `date`
+
+## Files Modified / Created
+- `reports/repo_analysis/data_pipeline_map.md` – rewritten with explicit stage-by-stage code references (downloader, Excel backfill, MySQL, export/preprocess, repo acquisition, RL/CGCS).
+- `reports/repo_analysis/topcoder_dataset_audit.md` – updated to answer provenance/dedup questions, cite executable subset counts, and note credential gaps.
+- `results/aegis_rl/stride_metrics.csv` plus the per-variant metric dumps (`metrics_stride_gate_plus_residual.csv`, `metrics_stride_gate_plus_residual_thr0p6/0p75/0p8/0p9.csv`, `metrics_stride_without_uncertainty_features.csv`) and reward-diag files regenerated by the STRIDE sweep.
+- `reports/ase2026_aegis/stride_table_main.csv` and `reports/ase2026_aegis/stride_table_ablation.csv` – rebuilt from the new sweep output.
+- Narrative assets refreshed with the latest metrics: `reports/ase2026_aegis/{main_method_decision.md,paper_positioning.md,abstract_draft.md,contributions_draft.md}`.
+- This log (`reports/ase2026_aegis/session_log.md`).
+
+## Metrics Observed
+- `data/raw/tasks.csv` contains 22,023 rows with 22,023 unique `task_id`s (Python/pandas check).
+- STRIDE teacher imitation (`reports/ase2026_aegis/stride_table_main.csv`): success rate **0.98125**, avg reward **61.20**, override rate **0**.
+- STRIDE gate+residual variant (`reports/ase2026_aegis/stride_table_ablation.csv`): success rate **0.76094**, override rate **0.237**, override win rate **0.211**, override regret **0.246**.
+- Counterfactual gate-only reference (unchanged but cited in text): success **1.0**, override rate **0.0889**, override win rate **0.81875** (`reports/ase2026_aegis/cstride_table_main.csv`).
+
+## Blockers / Risks
+- Still lack valid `TOPCODER_BEARER_TOKEN`/MySQL credentials, so the live API backfill + warehouse refresh could not be rerun—current evidence relies on the committed challenge windows.
+- Real-repo SRM runs remain frozen at four tasks with zero learned successes; expanding coverage requires additional vetted repo snapshots and LLM credits.
+- Counterfactual dataset continues to model single-step overrides only; without longer rollouts the value/residual heads keep misfiring.
+
+## Next Steps
+1. When credentials are available, run `python automation.py --year <year> --status Completed --storage ./challenge_data --track Dev` plus `scripts/export_real_tasks.py` to refresh the Topcoder windows and mirror them into MySQL.
+2. Extend the counterfactual dataset with deeper rollouts (`scripts/build_counterfactual_dataset.py --depth >1`) and rerun `scripts/run_cstride_aegis.py` to test whether richer labels reduce override regret.
+3. Schedule another real-repo benchmark sweep via `python scripts/prepare_real_repo_benchmark.py --mode real_world_research --strategies contract_first,failure_mode_first` once additional SRM repos/LLM quota are available, then rebuild `data/cgcs` and the funnel summaries.
+
+---
+
+# Session Log – 2026-03-15 (repo triage & push guidance)
+
+## Commands Run
+1. `pwd`
+2. `which python`
+3. `python --version`
+4. `python -c "import sys; print(sys.executable)"`
+5. `ls`
+6. `sed -n '1,160p' README.md`
+7. `git status -sb`
+8. `rg -n "22023" -n`
+9. `rg -n "22,023"`
+10. `ls reports/repo_analysis`
+11. `sed -n '1,200p' reports/repo_analysis/data_pipeline_map.md`
+12. `sed -n '1,200p' reports/repo_analysis/topcoder_dataset_audit.md`
+13. `sed -n '1,200p' reports/repo_analysis/full_run_capability.md`
+14. `ls results/aegis_rl`
+15. `ls reports/ase2026_aegis`
+16. `sed -n '1,200p' .gitignore`
+17. `sed -n '1,200p' reports/ase2026_aegis/main_method_decision.md`
+18. `tail -n 40 reports/ase2026_aegis/session_log.md`
+19. `date`
+20. `git check-ignore -v data/public_repos`
+21. `git status -sb | head`
+22. `git status --short data/public_repos | head`
+23. `git add -A`
+24. `touch .git/testfile && rm .git/testfile` (requires elevated permissions to verify write access)
+25. `git commit -m "Add Topcoder dataset + CGCS + RL assets"`
+26. `git reset HEAD~1`
+27. `du -h data/topcoder/artifact_candidates.jsonl`
+28. `gzip -c data/topcoder/artifact_candidates.jsonl > data/topcoder/artifact_candidates.jsonl.gz`
+29. `du -h data/topcoder/artifact_candidates.jsonl.gz`
+30. `gzip -c data/topcoder/repo_candidates.jsonl > data/topcoder/repo_candidates.jsonl.gz`
+31. `du -h data/topcoder/repo_candidates.jsonl.gz`
+32. `find data/topcoder/repos -name .git -type d -prune -exec rm -rf {} +`
+33. `git add -A`
+34. `git status -sb | head`
+35. `git commit -m "Add Topcoder dataset + CGCS + RL assets"`
+
+## Files Modified / Created
+- `.gitignore` – now ignores `data/public_repos/` plus the inflated Topcoder artifact/repo manifests so only their `.gz` versions live in git.
+- `scripts/unpack_large_assets.py` – teaches the helper to restore `artifact_candidates.jsonl` and `repo_candidates.jsonl` from the committed `.gz` archives.
+- `README.md` – documents that the unpack helper now restores both Topcoder manifest bundles in addition to the legacy Excel dump and processed CSV.
+- `reports/ase2026_aegis/session_log.md` – appended today’s entry with the repo triage + staging outcome and the follow-up changes (compression + re-commit).
+- `data/topcoder/artifact_candidates.jsonl.gz` / `data/topcoder/repo_candidates.jsonl.gz` – compressed archives committed in place of the >100 MB JSON files (raw `.jsonl` paths remain ignored so they can be regenerated locally).
+
+## Metrics Observed
+- No new analysis scripts executed; relied on the committed manifests showing 22,023 Topcoder challenges (`reports/repo_analysis/topcoder_dataset_audit.md`) and the teacher-baseline dominance (`reports/ase2026_aegis/main_method_decision.md`). Confirmed the compressed Topcoder manifests weigh in at 25 MB (`artifact_candidates.jsonl.gz`) and 5 MB (`repo_candidates.jsonl.gz`), keeping each well under GitHub’s 100 MB cap.
+
+## Blockers / Risks
+- Still operating without API bearer token / MySQL credentials, so could not rerun the downloader or DB ingest to refresh counts firsthand.
+- Pushing the raw repo snapshots under `data/topcoder/repos` may exceed GitHub’s size limits; will need to keep relying on manifests + acquisition scripts or gzip archives when publishing.
+
+## Next Steps
+1. Decide which heavy assets (e.g., `data/topcoder/repos/**`) must stay in Git based on size constraints; consider retaining only manifests and the helper scripts if the binaries exceed GitHub limits.
+2. If any doc gaps remain, refresh `reports/repo_analysis/*.md` and `reports/ase2026_aegis/*.md` after the next round of runs so the push includes the latest evidence.
+3. Once repo contents are finalized, run `scripts/unpack_large_assets.py` locally to ensure the checked-in `.gz` bundles match what reviewers will reproduce before pushing.
 
 ---

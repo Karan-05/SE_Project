@@ -1,0 +1,26 @@
+{
+  "allowed_edit_paths": [
+    "modules/Problems/services/*.js",
+    "modules/Problems/controllers/*.js",
+    "data/*.json"
+  ],
+  "forbidden_patterns": [
+    "console.log",
+    "debugger",
+    "process.exit"
+  ],
+  "payload_schema": {
+    "edits": [
+      {
+        "path": "string",
+        "mode": "rewrite",
+        "content": "string",
+        "allow_create": "optional<bool>"
+      }
+    ],
+    "localized": "bool",
+    "metadata": {
+      "contract_review": "array"
+    }
+  }
+}

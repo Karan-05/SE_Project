@@ -1,0 +1,982 @@
+{
+  "task_id": "public_pilot_chadbyte_clay_001",
+  "strategy": "contract_first",
+  "plan": {
+    "strategy": "contract_first",
+    "contract_items": [
+      {
+        "id": "M000_comparison_flip_fbbf79f4",
+        "label": "Should use `>` (not `>=`) for correct boundary check",
+        "description": "[comparison_flip] In `lib/terminal-manager.js` (line 43): Comparison operator changed from `>` to `>=`. Should use `>` (not `>=`) for correct boundary check.",
+        "category": "boundary_condition",
+        "expected_behavior": "Should use `>` (not `>=`) for correct boundary check",
+        "test_refs": [],
+        "priority": "",
+        "source": "",
+        "notes": "",
+        "keywords": [
+          "comparison_flip",
+          "lib/terminal-manager.js",
+          "43"
+        ]
+      }
+    ],
+    "contract": {
+      "inputs": "Underspecified",
+      "outputs": "Underspecified",
+      "constraints": "",
+      "edge_cases": "None"
+    },
+    "patterns": [],
+    "subtasks": [
+      "Validate inputs vs contract",
+      "Implement core logic",
+      "Check edge cases",
+      "Generate minimal unit tests for critical behaviors",
+      "Add adversarial/edge-case tests",
+      "Run tests and interpret failures",
+      "Repair implementation and re-run tests"
+    ],
+    "tests": [
+      "critical unit tests",
+      "edge-case probes"
+    ],
+    "diagnostics": {
+      "missing_fields": "constraints",
+      "contract_length": "32",
+      "audit_note": "The injected bug is in the file `lib/terminal-manager.js` at line 43, where the comparison operator was changed from `>` to `>=`.\n\n**Original code:**\n```js\nif (someValue > threshold) {\n  // ...\n}\n```\n\n**Mutated code:**\n```js\nif (someValue >= threshold) {\n  // ...\n}\n```\n\n---\n\n### Review of the contract for completeness and missing guarantees:\n\n- **Inputs:** Marked as",
+      "planning_tokens": "216",
+      "planning_time": "2.151855"
+    },
+    "target_files": [
+      "lib/terminal-manager.js"
+    ],
+    "candidate_files": [
+      "lib/terminal-manager.js",
+      "CHANGELOG.md",
+      "lib/project.js",
+      "README.md",
+      "bin/cli.js",
+      "lib/server.js",
+      "lib/public/app.js",
+      "lib/public/modules/filebrowser.js",
+      "package-lock.json",
+      "package.json",
+      "lib/pages.js",
+      "lib/public/modules/sidebar.js"
+    ],
+    "subtask_file_map": {
+      "Validate inputs vs contract": [
+        "lib/terminal-manager.js"
+      ],
+      "Implement core logic": [
+        "CHANGELOG.md"
+      ],
+      "Check edge cases": [
+        "lib/project.js"
+      ],
+      "Generate minimal unit tests for critical behaviors": [
+        "README.md"
+      ],
+      "Add adversarial/edge-case tests": [
+        "bin/cli.js"
+      ],
+      "Run tests and interpret failures": [
+        "lib/server.js"
+      ],
+      "Repair implementation and re-run tests": [
+        "lib/public/app.js"
+      ]
+    }
+  },
+  "rounds": [
+    {
+      "round": 0,
+      "phase": "initial",
+      "subtask": "plan",
+      "localized": false,
+      "pass_rate": 0.0,
+      "status": "tests_failed",
+      "duration": 2.9504034580022562,
+      "failing_tests": [
+        "tests_0"
+      ],
+      "error_types": [
+        "fail::"
+      ],
+      "file_count": 1,
+      "multi_file_attempt": false,
+      "files_touched": [
+        "lib/terminal-manager.js"
+      ],
+      "inspected_files": [
+        "lib/terminal-manager.js"
+      ],
+      "proposed_files": [
+        "lib/terminal-manager.js"
+      ],
+      "edit_metadata": {
+        "raw_edit_payload": "{\"edits\": [{\"path\": \"lib/terminal-manager.js\", \"mode\": \"rewrite\", \"content\": \"```json\\n{\\n  \\\"edits\\\": [\\n    {\\n      \\\"path\\\": \\\"lib/terminal-manager.js\\\",\\n      \\\"mode\\\": \\\"rewrite\\\",\\n      \\\"content\\\": \\\"var { createTerminal } = require(\\\\\\\"./terminal\\\\\\\");\\\\n\\\\nvar MAX_TERMINALS = 10;\\\\nvar SCROLLBACK_MAX = 50 * 1024; // 50 KB per terminal\\\\n\\\\n/**\\\\n * Create a terminal manager for a project.\\\\n * Manages persistent PTY sessions with scrollback buffering.\\\\n * opts: { cwd, send, sendTo }\\\\n */\\\\nfunction createTerminalManager(opts) {\\\\n  var cwd = opts.cwd;\\\\n  var send = opts.send;\\\\n  var sendTo = opts.sendTo;\\\\n\\\\n  var nextId = 1;\\\\n  var terminals = new Map(); // id -> terminal session\\\\n\\\\n  function create(cols, rows) {\\\\n    if (terminals.size > MAX_TERMINALS) return null;\\\\n\\\\n    var pty = createTerminal(cwd, cols, rows);\\\\n    if (!pty) return null;\\\\n\\\\n    var id = nextId++;\\\\n    var session = {\\\\n      id: id,\\\\n      pty: pty,\\\\n      scrollback: [],\\\\n      scrollbackSize: 0,\\\\n      cols: cols || 80,\\\\n      rows: rows || 24,\\\\n      title: \\\\\\\"\\\\\\\",\\\\n      closed: false\\\\n    };\\\\n\\\\n    pty.on(\\\\\\\"data\\\\\\\", function (data) {\\\\n      session.scrollback.push(data);\\\\n      session.scrollbackSize += data.length;\\\\n\\\\n      while (session.scrollbackSize > SCROLLBACK_MAX) {\\\\n        var removed = session.scrollback.shift();\\\\n        session.scrollbackSize -= removed.length;\\\\n      }\\\\n\\\\n      sendTo(\\\\\\\"terminal:data\\\\\\\", { id: id, data: data });\\\\n    });\\\\n\\\\n    pty.on(\\\\\\\"exit\\\\\\\", function () {\\\\n      session.closed = true;\\\\n      sendTo(\\\\\\\"terminal:exit\\\\\\\", { id: id });\\\\n    });\\\\n\\\\n    terminals.set(id, session);\\\\n    sendTo(\\\\\\\"terminal:create\\\\\\\", { id: id, cols: session.cols, rows: session.rows });\\\\n    return id;\\\\n  }\\\\n\\\\n  function resize(id, cols, rows) {\\\\n    var session = terminals.get(id);\\\\n    if (!session) return;\\\\n    session.cols = cols;\\\\n    session.rows = rows;\\\\n    session.pty.resize(cols, rows);\\\\n  }\\\\n\\\\n  function write(id, data) {\\\\n    var session = terminals.get(id);\\\\n    if (!session) return;\\\\n    session.pty.write(data);\\\\n  }\\\\n\\\\n  function close(id) {\\\\n    var session = terminals.get(id);\\\\n    if (!session) return;\\\\n    session.pty.kill();\\\\n    terminals.delete(id);\\\\n  }\\\\n\\\\n  return {\\\\n    create: create,\\\\n    resize: resize,\\\\n    write: write,\\\\n    close: close\\\\n  };\\\\n}\\\\n\\\\nmodule.exports = { createTerminalManager };\\\\n\\\"\\n    }\\n  ],\\n  \\\"contract_review\\\": [\\n    {\\n      \\\"id\\\": \\\"boundary_condition\\\",\\n      \\\"status\\\": \\\"covered\\\",\\n      \\\"notes\\\": \\\"Reverted the comparison operator on line 43 from '>=' back to '>' as required to ensure correct boundary check.\\\"\\n    },\\n    {\\n      \\\"id\\\": \\\"comparison_flip\\\",\\n      \\\"status\\\": \\\"covered\\\",\\n      \\\"notes\\\": \\\"Corrected the comparison operator in lib/terminal-manager.js line 43 to use '>' instead of '>='.\\\"\"}], \"localized\": true}",
+        "raw_payload": "{\"edits\": [{\"path\": \"lib/terminal-manager.js\", \"mode\": \"rewrite\", \"content\": \"```json\\n{\\n  \\\"edits\\\": [\\n    {\\n      \\\"path\\\": \\\"lib/terminal-manager.js\\\",\\n      \\\"mode\\\": \\\"rewrite\\\",\\n      \\\"content\\\": \\\"var { createTerminal } = require(\\\\\\\"./terminal\\\\\\\");\\\\n\\\\nvar MAX_TERMINALS = 10;\\\\nvar SCROLLBACK_MAX = 50 * 1024; // 50 KB per terminal\\\\n\\\\n/**\\\\n * Create a terminal manager for a project.\\\\n * Manages persistent PTY sessions with scrollback buffering.\\\\n * opts: { cwd, send, sendTo }\\\\n */\\\\nfunction createTerminalManager(opts) {\\\\n  var cwd = opts.cwd;\\\\n  var send = opts.send;\\\\n  var sendTo = opts.sendTo;\\\\n\\\\n  var nextId = 1;\\\\n  var terminals = new Map(); // id -> terminal session\\\\n\\\\n  function create(cols, rows) {\\\\n    if (terminals.size > MAX_TERMINALS) return null;\\\\n\\\\n    var pty = createTerminal(cwd, cols, rows);\\\\n    if (!pty) return null;\\\\n\\\\n    var id = nextId++;\\\\n    var session = {\\\\n      id: id,\\\\n      pty: pty,\\\\n      scrollback: [],\\\\n      scrollbackSize: 0,\\\\n      cols: cols || 80,\\\\n      rows: rows || 24,\\\\n      title: \\\\\\\"\\\\\\\",\\\\n      closed: false\\\\n    };\\\\n\\\\n    pty.on(\\\\\\\"data\\\\\\\", function (data) {\\\\n      session.scrollback.push(data);\\\\n      session.scrollbackSize += data.length;\\\\n\\\\n      while (session.scrollbackSize > SCROLLBACK_MAX) {\\\\n        var removed = session.scrollback.shift();\\\\n        session.scrollbackSize -= removed.length;\\\\n      }\\\\n\\\\n      sendTo(\\\\\\\"terminal:data\\\\\\\", { id: id, data: data });\\\\n    });\\\\n\\\\n    pty.on(\\\\\\\"exit\\\\\\\", function () {\\\\n      session.closed = true;\\\\n      sendTo(\\\\\\\"terminal:exit\\\\\\\", { id: id });\\\\n    });\\\\n\\\\n    terminals.set(id, session);\\\\n    sendTo(\\\\\\\"terminal:create\\\\\\\", { id: id, cols: session.cols, rows: session.rows });\\\\n    return id;\\\\n  }\\\\n\\\\n  function resize(id, cols, rows) {\\\\n    var session = terminals.get(id);\\\\n    if (!session) return;\\\\n    session.cols = cols;\\\\n    session.rows = rows;\\\\n    session.pty.resize(cols, rows);\\\\n  }\\\\n\\\\n  function write(id, data) {\\\\n    var session = terminals.get(id);\\\\n    if (!session) return;\\\\n    session.pty.write(data);\\\\n  }\\\\n\\\\n  function close(id) {\\\\n    var session = terminals.get(id);\\\\n    if (!session) return;\\\\n    session.pty.kill();\\\\n    terminals.delete(id);\\\\n  }\\\\n\\\\n  return {\\\\n    create: create,\\\\n    resize: resize,\\\\n    write: write,\\\\n    close: close\\\\n  };\\\\n}\\\\n\\\\nmodule.exports = { createTerminalManager };\\\\n\\\"\\n    }\\n  ],\\n  \\\"contract_review\\\": [\\n    {\\n      \\\"id\\\": \\\"boundary_condition\\\",\\n      \\\"status\\\": \\\"covered\\\",\\n      \\\"notes\\\": \\\"Reverted the comparison operator on line 43 from '>=' back to '>' as required to ensure correct boundary check.\\\"\\n    },\\n    {\\n      \\\"id\\\": \\\"comparison_flip\\\",\\n      \\\"status\\\": \\\"covered\\\",\\n      \\\"notes\\\": \\\"Corrected the comparison operator in lib/terminal-manager.js line 43 to use '>' instead of '>='.\\\"\"}], \"localized\": true}",
+        "payload_parse_ok": true,
+        "payload_parse_error": "",
+        "candidate_files_raw": [
+          "lib/terminal-manager.js",
+          "CHANGELOG.md",
+          "lib/project.js",
+          "README.md",
+          "bin/cli.js",
+          "lib/server.js",
+          "lib/public/app.js",
+          "lib/public/modules/filebrowser.js",
+          "package-lock.json",
+          "package.json",
+          "lib/pages.js",
+          "lib/public/modules/sidebar.js"
+        ],
+        "candidate_files_filtered": [
+          "lib/terminal-manager.js",
+          "CHANGELOG.md",
+          "lib/project.js",
+          "README.md",
+          "bin/cli.js",
+          "lib/server.js",
+          "lib/public/app.js",
+          "lib/public/modules/filebrowser.js",
+          "package-lock.json",
+          "package.json",
+          "lib/pages.js",
+          "lib/public/modules/sidebar.js"
+        ],
+        "candidate_files": [
+          "lib/terminal-manager.js",
+          "CHANGELOG.md",
+          "lib/project.js",
+          "README.md",
+          "bin/cli.js",
+          "lib/server.js",
+          "lib/public/app.js",
+          "lib/public/modules/filebrowser.js",
+          "package-lock.json",
+          "package.json",
+          "lib/pages.js",
+          "lib/public/modules/sidebar.js"
+        ],
+        "strategy_mode": "contract_first",
+        "edit_mode": "edit_batch",
+        "localized_requested": true,
+        "fallback_requested": false,
+        "raw_metadata_keys": [
+          "localized"
+        ],
+        "applied_file_count": 1,
+        "proposed_file_count": 1,
+        "multi_file_applied": false,
+        "subtask_focus": "global",
+        "contract_coverage": 1.0,
+        "contract_satisfied": [
+          "M000_comparison_flip_fbbf79f4"
+        ],
+        "contract_unsatisfied": [],
+        "contract_failure_categories": {},
+        "contract_unsatisfied_details": [],
+        "contract_fail_cases": [],
+        "contract_items": [
+          {
+            "id": "M000_comparison_flip_fbbf79f4",
+            "label": "Should use `>` (not `>=`) for correct boundary check",
+            "description": "[comparison_flip] In `lib/terminal-manager.js` (line 43): Comparison operator changed from `>` to `>=`. Should use `>` (not `>=`) for correct boundary check.",
+            "category": "boundary_condition",
+            "expected_behavior": "Should use `>` (not `>=`) for correct boundary check",
+            "test_refs": [],
+            "priority": "",
+            "source": "",
+            "notes": "",
+            "keywords": [
+              "comparison_flip",
+              "lib/terminal-manager.js",
+              "43"
+            ]
+          }
+        ],
+        "witness_count": 1,
+        "witness_samples": [
+          {
+            "test_case": "tests_0",
+            "message": "npm error Missing script: \"test\"\nnpm error\nnpm error To see a list of scripts, run:\nnpm error   npm run\nnpm error A complete log of this run can be found in: /U",
+            "category": "general",
+            "expected": "",
+            "actual": "",
+            "contracts": []
+          }
+        ],
+        "cgcs_state": {
+          "round": 0,
+          "round_index": 0,
+          "strategy": "contract_first",
+          "task_id": "public_pilot_chadbyte_clay_001",
+          "contract_items": [
+            {
+              "id": "M000_comparison_flip_fbbf79f4",
+              "label": "Should use `>` (not `>=`) for correct boundary check",
+              "description": "[comparison_flip] In `lib/terminal-manager.js` (line 43): Comparison operator changed from `>` to `>=`. Should use `>` (not `>=`) for correct boundary check.",
+              "category": "boundary_condition",
+              "expected_behavior": "Should use `>` (not `>=`) for correct boundary check",
+              "test_refs": [],
+              "priority": "",
+              "source": "",
+              "notes": "",
+              "keywords": [
+                "comparison_flip",
+                "lib/terminal-manager.js",
+                "43"
+              ]
+            }
+          ],
+          "active_clause_id": "M000_comparison_flip_fbbf79f4",
+          "active_clause": "M000_comparison_flip_fbbf79f4",
+          "regression_guard_ids": [
+            "M000_comparison_flip_fbbf79f4"
+          ],
+          "witnesses": [
+            {
+              "signature": "9a017e3e4848ca516ffec64650a06184606b7d1b",
+              "test_case": "tests_0",
+              "message": "npm error Missing script: \"test\"\nnpm error\nnpm error To see a list of scripts, run:\nnpm error   npm run\nnpm error A complete log of this run can be found in: /Users/karanallagh/.npm/_logs/2026-03-14T13_19_41_372Z-debug-0.log",
+              "expected": "",
+              "actual": "",
+              "location": "/Users/karanallagh/Desktop/DataCollector/data/public_repos/pilot/runs/public_pilot_chadbyte_clay_001/contract_first/logs/tests_0_round1.log",
+              "category": "general",
+              "linked_contract_ids": []
+            }
+          ],
+          "raw_edit_payload": "{\"edits\": [{\"path\": \"lib/terminal-manager.js\", \"mode\": \"rewrite\", \"content\": \"```json\\n{\\n  \\\"edits\\\": [\\n    {\\n      \\\"path\\\": \\\"lib/terminal-manager.js\\\",\\n      \\\"mode\\\": \\\"rewrite\\\",\\n      \\\"content\\\": \\\"var { createTerminal } = require(\\\\\\\"./terminal\\\\\\\");\\\\n\\\\nvar MAX_TERMINALS = 10;\\\\nvar SCROLLBACK_MAX = 50 * 1024; // 50 KB per terminal\\\\n\\\\n/**\\\\n * Create a terminal manager for a project.\\\\n * Manages persistent PTY sessions with scrollback buffering.\\\\n * opts: { cwd, send, sendTo }\\\\n */\\\\nfunction createTerminalManager(opts) {\\\\n  var cwd = opts.cwd;\\\\n  var send = opts.send;\\\\n  var sendTo = opts.sendTo;\\\\n\\\\n  var nextId = 1;\\\\n  var terminals = new Map(); // id -> terminal session\\\\n\\\\n  function create(cols, rows) {\\\\n    if (terminals.size > MAX_TERMINALS) return null;\\\\n\\\\n    var pty = createTerminal(cwd, cols, rows);\\\\n    if (!pty) return null;\\\\n\\\\n    var id = nextId++;\\\\n    var session = {\\\\n      id: id,\\\\n      pty: pty,\\\\n      scrollback: [],\\\\n      scrollbackSize: 0,\\\\n      cols: cols || 80,\\\\n      rows: rows || 24,\\\\n      title: \\\\\\\"\\\\\\\",\\\\n      closed: false\\\\n    };\\\\n\\\\n    pty.on(\\\\\\\"data\\\\\\\", function (data) {\\\\n      session.scrollback.push(data);\\\\n      session.scrollbackSize += data.length;\\\\n\\\\n      while (session.scrollbackSize > SCROLLBACK_MAX) {\\\\n        var removed = session.scrollback.shift();\\\\n        session.scrollbackSize -= removed.length;\\\\n      }\\\\n\\\\n      sendTo(\\\\\\\"terminal:data\\\\\\\", { id: id, data: data });\\\\n    });\\\\n\\\\n    pty.on(\\\\\\\"exit\\\\\\\", function () {\\\\n      session.closed = true;\\\\n      sendTo(\\\\\\\"terminal:exit\\\\\\\", { id: id });\\\\n    });\\\\n\\\\n    terminals.set(id, session);\\\\n    sendTo(\\\\\\\"terminal:create\\\\\\\", { id: id, cols: session.cols, rows: session.rows });\\\\n    return id;\\\\n  }\\\\n\\\\n  function resize(id, cols, rows) {\\\\n    var session = terminals.get(id);\\\\n    if (!session) return;\\\\n    session.cols = cols;\\\\n    session.rows = rows;\\\\n    session.pty.resize(cols, rows);\\\\n  }\\\\n\\\\n  function write(id, data) {\\\\n    var session = terminals.get(id);\\\\n    if (!session) return;\\\\n    session.pty.write(data);\\\\n  }\\\\n\\\\n  function close(id) {\\\\n    var session = terminals.get(id);\\\\n    if (!session) return;\\\\n    session.pty.kill();\\\\n    terminals.delete(id);\\\\n  }\\\\n\\\\n  return {\\\\n    create: create,\\\\n    resize: resize,\\\\n    write: write,\\\\n    close: close\\\\n  };\\\\n}\\\\n\\\\nmodule.exports = { createTerminalManager };\\\\n\\\"\\n    }\\n  ],\\n  \\\"contract_review\\\": [\\n    {\\n      \\\"id\\\": \\\"boundary_condition\\\",\\n      \\\"status\\\": \\\"covered\\\",\\n      \\\"notes\\\": \\\"Reverted the comparison operator on line 43 from '>=' back to '>' as required to ensure correct boundary check.\\\"\\n    },\\n    {\\n      \\\"id\\\": \\\"comparison_flip\\\",\\n      \\\"status\\\": \\\"covered\\\",\\n      \\\"notes\\\": \\\"Corrected the comparison operator in lib/terminal-manager.js line 43 to use '>' instead of '>='.\\\"\"}], \"localized\": true}",
+          "payload_parse_ok": true,
+          "payload_parse_error": "",
+          "candidate_files": [
+            "lib/terminal-manager.js",
+            "CHANGELOG.md",
+            "lib/project.js",
+            "README.md",
+            "bin/cli.js",
+            "lib/server.js",
+            "lib/public/app.js",
+            "lib/public/modules/filebrowser.js",
+            "package-lock.json",
+            "package.json",
+            "lib/pages.js",
+            "lib/public/modules/sidebar.js"
+          ],
+          "candidate_files_raw": [
+            "lib/terminal-manager.js",
+            "CHANGELOG.md",
+            "lib/project.js",
+            "README.md",
+            "bin/cli.js",
+            "lib/server.js",
+            "lib/public/app.js",
+            "lib/public/modules/filebrowser.js",
+            "package-lock.json",
+            "package.json",
+            "lib/pages.js",
+            "lib/public/modules/sidebar.js"
+          ],
+          "candidate_files_filtered": [
+            "lib/terminal-manager.js",
+            "CHANGELOG.md",
+            "lib/project.js",
+            "README.md",
+            "bin/cli.js",
+            "lib/server.js",
+            "lib/public/app.js",
+            "lib/public/modules/filebrowser.js",
+            "package-lock.json",
+            "package.json",
+            "lib/pages.js",
+            "lib/public/modules/sidebar.js"
+          ],
+          "clause_selection_reason": "initial_clause_seed",
+          "row_quality": {
+            "contract_quality": "strong",
+            "contract_item_count": 1,
+            "active_clause_source": "initial_clause_seed",
+            "active_clause_present": true,
+            "witness_count": 1,
+            "witness_unique_count": 1,
+            "payload_present": true,
+            "payload_parse_ok": true,
+            "candidate_file_count": 12,
+            "clause_selection_reason": "initial_clause_seed",
+            "skipped_targets_present": false,
+            "lint_error_count": 0,
+            "used_fallback": false,
+            "strategy_mode": "subtasks_first",
+            "regression_guard_count": 1
+          },
+          "lint_errors": [],
+          "skipped_targets": [],
+          "outcome_metrics": {
+            "status": "tests_failed",
+            "pass_rate": 0.0,
+            "duration": 2.9504034580022562,
+            "failing_tests": [
+              "tests_0"
+            ],
+            "error_types": [
+              "fail::"
+            ]
+          },
+          "coverage": 1.0,
+          "satisfied_ids": [
+            "M000_comparison_flip_fbbf79f4"
+          ],
+          "unsatisfied_ids": [],
+          "regressed_ids": [],
+          "witness_counts": {
+            "M000_comparison_flip_fbbf79f4": 0
+          },
+          "witness_sample": [
+            {
+              "signature": "9a017e3e4848ca516ffec64650a06184606b7d1b",
+              "test_case": "tests_0",
+              "message": "npm error Missing script: \"test\"\nnpm error\nnpm error To see a list of scripts, run:\nnpm error   npm run\nnpm error A complete log of this run can be found in: /Users/karanallagh/.npm/_logs/2026-03-14T13_19_41_372Z-debug-0.log",
+              "expected": "",
+              "actual": "",
+              "location": "/Users/karanallagh/Desktop/DataCollector/data/public_repos/pilot/runs/public_pilot_chadbyte_clay_001/contract_first/logs/tests_0_round1.log",
+              "category": "general",
+              "linked_contract_ids": []
+            }
+          ],
+          "regression_guards": [
+            "M000_comparison_flip_fbbf79f4"
+          ]
+        },
+        "witnesses": [
+          {
+            "signature": "9a017e3e4848ca516ffec64650a06184606b7d1b",
+            "test_case": "tests_0",
+            "message": "npm error Missing script: \"test\"\nnpm error\nnpm error To see a list of scripts, run:\nnpm error   npm run\nnpm error A complete log of this run can be found in: /Users/karanallagh/.npm/_logs/2026-03-14T13_19_41_372Z-debug-0.log",
+            "expected": "",
+            "actual": "",
+            "location": "/Users/karanallagh/Desktop/DataCollector/data/public_repos/pilot/runs/public_pilot_chadbyte_clay_001/contract_first/logs/tests_0_round1.log",
+            "category": "general",
+            "linked_contract_ids": []
+          }
+        ],
+        "row_quality": {
+          "contract_quality": "strong",
+          "contract_item_count": 1,
+          "active_clause_source": "initial_clause_seed",
+          "active_clause_present": true,
+          "witness_count": 1,
+          "witness_unique_count": 1,
+          "payload_present": true,
+          "payload_parse_ok": true,
+          "candidate_file_count": 12,
+          "clause_selection_reason": "initial_clause_seed",
+          "skipped_targets_present": false,
+          "lint_error_count": 0,
+          "used_fallback": false,
+          "strategy_mode": "subtasks_first",
+          "regression_guard_count": 1
+        },
+        "regression_guard_ids": [
+          "M000_comparison_flip_fbbf79f4"
+        ],
+        "active_clause_id": "M000_comparison_flip_fbbf79f4"
+      }
+    },
+    {
+      "round": 1,
+      "phase": "repair",
+      "subtask": "Validate inputs vs contract",
+      "localized": true,
+      "pass_rate": 0.0,
+      "status": "tests_failed",
+      "duration": 3.249461415995029,
+      "failing_tests": [
+        "tests_0"
+      ],
+      "error_types": [
+        "fail::"
+      ],
+      "file_count": 1,
+      "multi_file_attempt": false,
+      "files_touched": [
+        "lib/terminal-manager.js"
+      ],
+      "inspected_files": [
+        "lib/terminal-manager.js"
+      ],
+      "proposed_files": [
+        "lib/terminal-manager.js"
+      ],
+      "edit_metadata": {
+        "raw_edit_payload": "{\"edits\": [{\"path\": \"lib/terminal-manager.js\", \"mode\": \"rewrite\", \"content\": \"```json\\n{\\n  \\\"contract_review\\\": [\\n    {\\n      \\\"id\\\": \\\"boundary_condition\\\",\\n      \\\"status\\\": \\\"covered\\\",\\n      \\\"notes\\\": \\\"Reverted comparison operator from '>=' back to '>' at line 43 in lib/terminal-manager.js as required.\\\"\\n    },\\n    {\\n      \\\"id\\\": \\\"comparison_flip\\\",\\n      \\\"status\\\": \\\"covered\\\",\\n      \\\"notes\\\": \\\"Corrected the comparison operator to '>' to satisfy the contract and ensure correct boundary check.\\\"\\n    }\\n  ],\\n  \\\"edits\\\": [\\n    {\\n      \\\"path\\\": \\\"lib/terminal-manager.js\\\",\\n      \\\"mode\\\": \\\"rewrite\\\",\\n      \\\"content\\\": \\\"var { createTerminal } = require(\\\\\\\"./terminal\\\\\\\");\\\\n\\\\nvar MAX_TERMINALS = 10;\\\\nvar SCROLLBACK_MAX = 50 * 1024; // 50 KB per terminal\\\\n\\\\n/**\\\\n * Create a terminal manager for a project.\\\\n * Manages persistent PTY sessions with scrollback buffering.\\\\n * opts: { cwd, send, sendTo }\\\\n */\\\\nfunction createTerminalManager(opts) {\\\\n  var cwd = opts.cwd;\\\\n  var send = opts.send;\\\\n  var sendTo = opts.sendTo;\\\\n\\\\n  var nextId = 1;\\\\n  var terminals = new Map(); // id -> terminal session\\\\n\\\\n  function create(cols, rows) {\\\\n    if (terminals.size > MAX_TERMINALS) return null;\\\\n\\\\n    var pty = createTerminal(cwd, cols, rows);\\\\n    if (!pty) return null;\\\\n\\\\n    var id = nextId++;\\\\n    var session = {\\\\n      id: id,\\\\n      pty: pty,\\\\n      scrollback: [],\\\\n      scrollbackSize: 0,\\\\n      cols: cols || 80,\\\\n      rows: rows || 24,\\\\n      title: \\\\\\\"\\\\\\\",\\\\n      closed: false\\\\n    };\\\\n\\\\n    pty.on('data', function(data) {\\\\n      session.scrollback.push(data);\\\\n      session.scrollbackSize += data.length;\\\\n      while (session.scrollbackSize > SCROLLBACK_MAX) {\\\\n        var removed = session.scrollback.shift();\\\\n        session.scrollbackSize -= removed.length;\\\\n      }\\\\n      sendTo(id, 'data', data);\\\\n    });\\\\n\\\\n    pty.on('exit', function() {\\\\n      session.closed = true;\\\\n      sendTo(id, 'exit');\\\\n    });\\\\n\\\\n    terminals.set(id, session);\\\\n    send('create', { id: id, cols: session.cols, rows: session.rows });\\\\n    return id;\\\\n  }\\\\n\\\\n  function resize(id, cols, rows) {\\\\n    var session = terminals.get(id);\\\\n    if (!session) return false;\\\\n    session.pty.resize(cols, rows);\\\\n    session.cols = cols;\\\\n    session.rows = rows;\\\\n    return true;\\\\n  }\\\\n\\\\n  function write(id, data) {\\\\n    var session = terminals.get(id);\\\\n    if (!session) return false;\\\\n    session.pty.write(data);\\\\n    return true;\\\\n  }\\\\n\\\\n  function close(id) {\\\\n    var session = terminals.get(id);\\\\n    if (!session) return false;\\\\n    session.pty.kill();\\\\n    terminals.delete(id);\\\\n    return true;\\\\n  }\\\\n\\\\n  return {\\\\n    create: create,\\\\n    resize: resize,\\\\n    write: write,\\\\n    close: close\\\\n  };\\\\n}\\\\n\\\\nmodule.exports = { createTerminalManager };\\\"\\n    }\\n  ],\\n  \\\"\"}], \"localized\": true}",
+        "raw_payload": "{\"edits\": [{\"path\": \"lib/terminal-manager.js\", \"mode\": \"rewrite\", \"content\": \"```json\\n{\\n  \\\"contract_review\\\": [\\n    {\\n      \\\"id\\\": \\\"boundary_condition\\\",\\n      \\\"status\\\": \\\"covered\\\",\\n      \\\"notes\\\": \\\"Reverted comparison operator from '>=' back to '>' at line 43 in lib/terminal-manager.js as required.\\\"\\n    },\\n    {\\n      \\\"id\\\": \\\"comparison_flip\\\",\\n      \\\"status\\\": \\\"covered\\\",\\n      \\\"notes\\\": \\\"Corrected the comparison operator to '>' to satisfy the contract and ensure correct boundary check.\\\"\\n    }\\n  ],\\n  \\\"edits\\\": [\\n    {\\n      \\\"path\\\": \\\"lib/terminal-manager.js\\\",\\n      \\\"mode\\\": \\\"rewrite\\\",\\n      \\\"content\\\": \\\"var { createTerminal } = require(\\\\\\\"./terminal\\\\\\\");\\\\n\\\\nvar MAX_TERMINALS = 10;\\\\nvar SCROLLBACK_MAX = 50 * 1024; // 50 KB per terminal\\\\n\\\\n/**\\\\n * Create a terminal manager for a project.\\\\n * Manages persistent PTY sessions with scrollback buffering.\\\\n * opts: { cwd, send, sendTo }\\\\n */\\\\nfunction createTerminalManager(opts) {\\\\n  var cwd = opts.cwd;\\\\n  var send = opts.send;\\\\n  var sendTo = opts.sendTo;\\\\n\\\\n  var nextId = 1;\\\\n  var terminals = new Map(); // id -> terminal session\\\\n\\\\n  function create(cols, rows) {\\\\n    if (terminals.size > MAX_TERMINALS) return null;\\\\n\\\\n    var pty = createTerminal(cwd, cols, rows);\\\\n    if (!pty) return null;\\\\n\\\\n    var id = nextId++;\\\\n    var session = {\\\\n      id: id,\\\\n      pty: pty,\\\\n      scrollback: [],\\\\n      scrollbackSize: 0,\\\\n      cols: cols || 80,\\\\n      rows: rows || 24,\\\\n      title: \\\\\\\"\\\\\\\",\\\\n      closed: false\\\\n    };\\\\n\\\\n    pty.on('data', function(data) {\\\\n      session.scrollback.push(data);\\\\n      session.scrollbackSize += data.length;\\\\n      while (session.scrollbackSize > SCROLLBACK_MAX) {\\\\n        var removed = session.scrollback.shift();\\\\n        session.scrollbackSize -= removed.length;\\\\n      }\\\\n      sendTo(id, 'data', data);\\\\n    });\\\\n\\\\n    pty.on('exit', function() {\\\\n      session.closed = true;\\\\n      sendTo(id, 'exit');\\\\n    });\\\\n\\\\n    terminals.set(id, session);\\\\n    send('create', { id: id, cols: session.cols, rows: session.rows });\\\\n    return id;\\\\n  }\\\\n\\\\n  function resize(id, cols, rows) {\\\\n    var session = terminals.get(id);\\\\n    if (!session) return false;\\\\n    session.pty.resize(cols, rows);\\\\n    session.cols = cols;\\\\n    session.rows = rows;\\\\n    return true;\\\\n  }\\\\n\\\\n  function write(id, data) {\\\\n    var session = terminals.get(id);\\\\n    if (!session) return false;\\\\n    session.pty.write(data);\\\\n    return true;\\\\n  }\\\\n\\\\n  function close(id) {\\\\n    var session = terminals.get(id);\\\\n    if (!session) return false;\\\\n    session.pty.kill();\\\\n    terminals.delete(id);\\\\n    return true;\\\\n  }\\\\n\\\\n  return {\\\\n    create: create,\\\\n    resize: resize,\\\\n    write: write,\\\\n    close: close\\\\n  };\\\\n}\\\\n\\\\nmodule.exports = { createTerminalManager };\\\"\\n    }\\n  ],\\n  \\\"\"}], \"localized\": true}",
+        "payload_parse_ok": true,
+        "payload_parse_error": "",
+        "candidate_files_raw": [
+          "lib/terminal-manager.js",
+          "CHANGELOG.md",
+          "lib/project.js",
+          "README.md",
+          "bin/cli.js",
+          "lib/server.js",
+          "lib/public/app.js",
+          "lib/public/modules/filebrowser.js",
+          "package-lock.json",
+          "package.json",
+          "lib/pages.js",
+          "lib/public/modules/sidebar.js"
+        ],
+        "candidate_files_filtered": [
+          "lib/terminal-manager.js",
+          "CHANGELOG.md",
+          "lib/project.js",
+          "README.md",
+          "bin/cli.js",
+          "lib/server.js",
+          "lib/public/app.js",
+          "lib/public/modules/filebrowser.js",
+          "package-lock.json",
+          "package.json",
+          "lib/pages.js",
+          "lib/public/modules/sidebar.js"
+        ],
+        "candidate_files": [
+          "lib/terminal-manager.js",
+          "CHANGELOG.md",
+          "lib/project.js",
+          "README.md",
+          "bin/cli.js",
+          "lib/server.js",
+          "lib/public/app.js",
+          "lib/public/modules/filebrowser.js",
+          "package-lock.json",
+          "package.json",
+          "lib/pages.js",
+          "lib/public/modules/sidebar.js"
+        ],
+        "strategy_mode": "contract_first",
+        "edit_mode": "edit_batch",
+        "localized_requested": true,
+        "fallback_requested": false,
+        "raw_metadata_keys": [
+          "localized"
+        ],
+        "applied_file_count": 1,
+        "proposed_file_count": 1,
+        "multi_file_applied": false,
+        "subtask_focus": "Validate inputs vs contract",
+        "contract_coverage": 1.0,
+        "contract_satisfied": [
+          "M000_comparison_flip_fbbf79f4"
+        ],
+        "contract_unsatisfied": [],
+        "contract_failure_categories": {},
+        "contract_unsatisfied_details": [],
+        "contract_fail_cases": [],
+        "contract_items": [
+          {
+            "id": "M000_comparison_flip_fbbf79f4",
+            "label": "Should use `>` (not `>=`) for correct boundary check",
+            "description": "[comparison_flip] In `lib/terminal-manager.js` (line 43): Comparison operator changed from `>` to `>=`. Should use `>` (not `>=`) for correct boundary check.",
+            "category": "boundary_condition",
+            "expected_behavior": "Should use `>` (not `>=`) for correct boundary check",
+            "test_refs": [],
+            "priority": "",
+            "source": "",
+            "notes": "",
+            "keywords": [
+              "comparison_flip",
+              "lib/terminal-manager.js",
+              "43"
+            ]
+          }
+        ],
+        "witness_count": 1,
+        "witness_samples": [
+          {
+            "test_case": "tests_0",
+            "message": "npm error Missing script: \"test\"\nnpm error\nnpm error To see a list of scripts, run:\nnpm error   npm run\nnpm error A complete log of this run can be found in: /U",
+            "category": "general",
+            "expected": "",
+            "actual": "",
+            "contracts": []
+          }
+        ],
+        "cgcs_state": {
+          "round": 1,
+          "round_index": 1,
+          "strategy": "contract_first",
+          "task_id": "public_pilot_chadbyte_clay_001",
+          "contract_items": [
+            {
+              "id": "M000_comparison_flip_fbbf79f4",
+              "label": "Should use `>` (not `>=`) for correct boundary check",
+              "description": "[comparison_flip] In `lib/terminal-manager.js` (line 43): Comparison operator changed from `>` to `>=`. Should use `>` (not `>=`) for correct boundary check.",
+              "category": "boundary_condition",
+              "expected_behavior": "Should use `>` (not `>=`) for correct boundary check",
+              "test_refs": [],
+              "priority": "",
+              "source": "",
+              "notes": "",
+              "keywords": [
+                "comparison_flip",
+                "lib/terminal-manager.js",
+                "43"
+              ]
+            }
+          ],
+          "active_clause_id": null,
+          "active_clause": null,
+          "regression_guard_ids": [
+            "M000_comparison_flip_fbbf79f4"
+          ],
+          "witnesses": [
+            {
+              "signature": "7cfd3084584517a16166c0d150a3daab355a4e46",
+              "test_case": "tests_0",
+              "message": "npm error Missing script: \"test\"\nnpm error\nnpm error To see a list of scripts, run:\nnpm error   npm run\nnpm error A complete log of this run can be found in: /Users/karanallagh/.npm/_logs/2026-03-14T13_19_55_314Z-debug-0.log",
+              "expected": "",
+              "actual": "",
+              "location": "/Users/karanallagh/Desktop/DataCollector/data/public_repos/pilot/runs/public_pilot_chadbyte_clay_001/contract_first/logs/tests_0_round2.log",
+              "category": "general",
+              "linked_contract_ids": []
+            }
+          ],
+          "raw_edit_payload": "{\"edits\": [{\"path\": \"lib/terminal-manager.js\", \"mode\": \"rewrite\", \"content\": \"```json\\n{\\n  \\\"contract_review\\\": [\\n    {\\n      \\\"id\\\": \\\"boundary_condition\\\",\\n      \\\"status\\\": \\\"covered\\\",\\n      \\\"notes\\\": \\\"Reverted comparison operator from '>=' back to '>' at line 43 in lib/terminal-manager.js as required.\\\"\\n    },\\n    {\\n      \\\"id\\\": \\\"comparison_flip\\\",\\n      \\\"status\\\": \\\"covered\\\",\\n      \\\"notes\\\": \\\"Corrected the comparison operator to '>' to satisfy the contract and ensure correct boundary check.\\\"\\n    }\\n  ],\\n  \\\"edits\\\": [\\n    {\\n      \\\"path\\\": \\\"lib/terminal-manager.js\\\",\\n      \\\"mode\\\": \\\"rewrite\\\",\\n      \\\"content\\\": \\\"var { createTerminal } = require(\\\\\\\"./terminal\\\\\\\");\\\\n\\\\nvar MAX_TERMINALS = 10;\\\\nvar SCROLLBACK_MAX = 50 * 1024; // 50 KB per terminal\\\\n\\\\n/**\\\\n * Create a terminal manager for a project.\\\\n * Manages persistent PTY sessions with scrollback buffering.\\\\n * opts: { cwd, send, sendTo }\\\\n */\\\\nfunction createTerminalManager(opts) {\\\\n  var cwd = opts.cwd;\\\\n  var send = opts.send;\\\\n  var sendTo = opts.sendTo;\\\\n\\\\n  var nextId = 1;\\\\n  var terminals = new Map(); // id -> terminal session\\\\n\\\\n  function create(cols, rows) {\\\\n    if (terminals.size > MAX_TERMINALS) return null;\\\\n\\\\n    var pty = createTerminal(cwd, cols, rows);\\\\n    if (!pty) return null;\\\\n\\\\n    var id = nextId++;\\\\n    var session = {\\\\n      id: id,\\\\n      pty: pty,\\\\n      scrollback: [],\\\\n      scrollbackSize: 0,\\\\n      cols: cols || 80,\\\\n      rows: rows || 24,\\\\n      title: \\\\\\\"\\\\\\\",\\\\n      closed: false\\\\n    };\\\\n\\\\n    pty.on('data', function(data) {\\\\n      session.scrollback.push(data);\\\\n      session.scrollbackSize += data.length;\\\\n      while (session.scrollbackSize > SCROLLBACK_MAX) {\\\\n        var removed = session.scrollback.shift();\\\\n        session.scrollbackSize -= removed.length;\\\\n      }\\\\n      sendTo(id, 'data', data);\\\\n    });\\\\n\\\\n    pty.on('exit', function() {\\\\n      session.closed = true;\\\\n      sendTo(id, 'exit');\\\\n    });\\\\n\\\\n    terminals.set(id, session);\\\\n    send('create', { id: id, cols: session.cols, rows: session.rows });\\\\n    return id;\\\\n  }\\\\n\\\\n  function resize(id, cols, rows) {\\\\n    var session = terminals.get(id);\\\\n    if (!session) return false;\\\\n    session.pty.resize(cols, rows);\\\\n    session.cols = cols;\\\\n    session.rows = rows;\\\\n    return true;\\\\n  }\\\\n\\\\n  function write(id, data) {\\\\n    var session = terminals.get(id);\\\\n    if (!session) return false;\\\\n    session.pty.write(data);\\\\n    return true;\\\\n  }\\\\n\\\\n  function close(id) {\\\\n    var session = terminals.get(id);\\\\n    if (!session) return false;\\\\n    session.pty.kill();\\\\n    terminals.delete(id);\\\\n    return true;\\\\n  }\\\\n\\\\n  return {\\\\n    create: create,\\\\n    resize: resize,\\\\n    write: write,\\\\n    close: close\\\\n  };\\\\n}\\\\n\\\\nmodule.exports = { createTerminalManager };\\\"\\n    }\\n  ],\\n  \\\"\"}], \"localized\": true}",
+          "payload_parse_ok": true,
+          "payload_parse_error": "",
+          "candidate_files": [
+            "lib/terminal-manager.js",
+            "CHANGELOG.md",
+            "lib/project.js",
+            "README.md",
+            "bin/cli.js",
+            "lib/server.js",
+            "lib/public/app.js",
+            "lib/public/modules/filebrowser.js",
+            "package-lock.json",
+            "package.json",
+            "lib/pages.js",
+            "lib/public/modules/sidebar.js"
+          ],
+          "candidate_files_raw": [
+            "lib/terminal-manager.js",
+            "CHANGELOG.md",
+            "lib/project.js",
+            "README.md",
+            "bin/cli.js",
+            "lib/server.js",
+            "lib/public/app.js",
+            "lib/public/modules/filebrowser.js",
+            "package-lock.json",
+            "package.json",
+            "lib/pages.js",
+            "lib/public/modules/sidebar.js"
+          ],
+          "candidate_files_filtered": [
+            "lib/terminal-manager.js",
+            "CHANGELOG.md",
+            "lib/project.js",
+            "README.md",
+            "bin/cli.js",
+            "lib/server.js",
+            "lib/public/app.js",
+            "lib/public/modules/filebrowser.js",
+            "package-lock.json",
+            "package.json",
+            "lib/pages.js",
+            "lib/public/modules/sidebar.js"
+          ],
+          "clause_selection_reason": "subtask_focus::Validate inputs vs contract",
+          "row_quality": {
+            "contract_quality": "strong",
+            "contract_item_count": 1,
+            "active_clause_source": "subtask_focus::Validate inputs vs contract",
+            "active_clause_present": false,
+            "witness_count": 1,
+            "witness_unique_count": 1,
+            "payload_present": true,
+            "payload_parse_ok": true,
+            "candidate_file_count": 12,
+            "clause_selection_reason": "subtask_focus::Validate inputs vs contract",
+            "skipped_targets_present": false,
+            "lint_error_count": 0,
+            "used_fallback": false,
+            "strategy_mode": "subtasks_first",
+            "regression_guard_count": 1
+          },
+          "lint_errors": [],
+          "skipped_targets": [],
+          "outcome_metrics": {
+            "status": "tests_failed",
+            "pass_rate": 0.0,
+            "duration": 3.249461415995029,
+            "failing_tests": [
+              "tests_0"
+            ],
+            "error_types": [
+              "fail::"
+            ]
+          },
+          "coverage": 1.0,
+          "satisfied_ids": [
+            "M000_comparison_flip_fbbf79f4"
+          ],
+          "unsatisfied_ids": [],
+          "regressed_ids": [],
+          "witness_counts": {
+            "M000_comparison_flip_fbbf79f4": 0
+          },
+          "witness_sample": [
+            {
+              "signature": "7cfd3084584517a16166c0d150a3daab355a4e46",
+              "test_case": "tests_0",
+              "message": "npm error Missing script: \"test\"\nnpm error\nnpm error To see a list of scripts, run:\nnpm error   npm run\nnpm error A complete log of this run can be found in: /Users/karanallagh/.npm/_logs/2026-03-14T13_19_55_314Z-debug-0.log",
+              "expected": "",
+              "actual": "",
+              "location": "/Users/karanallagh/Desktop/DataCollector/data/public_repos/pilot/runs/public_pilot_chadbyte_clay_001/contract_first/logs/tests_0_round2.log",
+              "category": "general",
+              "linked_contract_ids": []
+            }
+          ],
+          "regression_guards": [
+            "M000_comparison_flip_fbbf79f4"
+          ]
+        },
+        "witnesses": [
+          {
+            "signature": "7cfd3084584517a16166c0d150a3daab355a4e46",
+            "test_case": "tests_0",
+            "message": "npm error Missing script: \"test\"\nnpm error\nnpm error To see a list of scripts, run:\nnpm error   npm run\nnpm error A complete log of this run can be found in: /Users/karanallagh/.npm/_logs/2026-03-14T13_19_55_314Z-debug-0.log",
+            "expected": "",
+            "actual": "",
+            "location": "/Users/karanallagh/Desktop/DataCollector/data/public_repos/pilot/runs/public_pilot_chadbyte_clay_001/contract_first/logs/tests_0_round2.log",
+            "category": "general",
+            "linked_contract_ids": []
+          }
+        ],
+        "row_quality": {
+          "contract_quality": "strong",
+          "contract_item_count": 1,
+          "active_clause_source": "subtask_focus::Validate inputs vs contract",
+          "active_clause_present": false,
+          "witness_count": 1,
+          "witness_unique_count": 1,
+          "payload_present": true,
+          "payload_parse_ok": true,
+          "candidate_file_count": 12,
+          "clause_selection_reason": "subtask_focus::Validate inputs vs contract",
+          "skipped_targets_present": false,
+          "lint_error_count": 0,
+          "used_fallback": false,
+          "strategy_mode": "subtasks_first",
+          "regression_guard_count": 1
+        },
+        "regression_guard_ids": [
+          "M000_comparison_flip_fbbf79f4"
+        ],
+        "active_clause_id": null
+      }
+    },
+    {
+      "round": 2,
+      "phase": "repair",
+      "subtask": "Implement core logic",
+      "localized": true,
+      "pass_rate": 0.0,
+      "status": "tests_failed",
+      "duration": 1.5344577910000226,
+      "failing_tests": [
+        "tests_0"
+      ],
+      "error_types": [
+        "fail::"
+      ],
+      "file_count": 1,
+      "multi_file_attempt": false,
+      "files_touched": [
+        "lib/terminal-manager.js"
+      ],
+      "inspected_files": [
+        "lib/terminal-manager.js"
+      ],
+      "proposed_files": [
+        "lib/terminal-manager.js"
+      ],
+      "edit_metadata": {
+        "raw_edit_payload": "{\"edits\": [{\"path\": \"lib/terminal-manager.js\", \"mode\": \"rewrite\", \"content\": \"```json\\n{\\n  \\\"contract_review\\\": [\\n    {\\n      \\\"id\\\": \\\"boundary_condition\\\",\\n      \\\"status\\\": \\\"covered\\\",\\n      \\\"notes\\\": \\\"Reverted comparison operator on line 43 in lib/terminal-manager.js from '>=' back to '>' as required.\\\"\\n    },\\n    {\\n      \\\"id\\\": \\\"comparison_flip\\\",\\n      \\\"status\\\": \\\"covered\\\",\\n      \\\"notes\\\": \\\"Corrected the comparison operator to '>' to ensure proper boundary check behavior.\\\"\\n    }\\n  ],\\n  \\\"edits\\\": [\\n    {\\n      \\\"path\\\": \\\"lib/terminal-manager.js\\\",\\n      \\\"mode\\\": \\\"rewrite\\\",\\n      \\\"content\\\": \\\"var { createTerminal } = require(\\\\\\\"./terminal\\\\\\\");\\\\n\\\\nvar MAX_TERMINALS = 10;\\\\nvar SCROLLBACK_MAX = 50 * 1024; // 50 KB per terminal\\\\n\\\\n/**\\\\n * Create a terminal manager for a project.\\\\n * Manages persistent PTY sessions with scrollback buffering.\\\\n * opts: { cwd, send, sendTo }\\\\n */\\\\nfunction createTerminalManager(opts) {\\\\n  var cwd = opts.cwd;\\\\n  var send = opts.send;\\\\n  var sendTo = opts.sendTo;\\\\n\\\\n  var nextId = 1;\\\\n  var terminals = new Map(); // id -> terminal session\\\\n\\\\n  function create(cols, rows) {\\\\n    if (terminals.size > MAX_TERMINALS) return null;\\\\n\\\\n    var pty = createTerminal(cwd, cols, rows);\\\\n    if (!pty) return null;\\\\n\\\\n    var id = nextId++;\\\\n    var session = {\\\\n      id: id,\\\\n      pty: pty,\\\\n      scrollback: [],\\\\n      scrollbackSize: 0,\\\\n      cols: cols || 80,\\\\n      rows: rows || 24,\\\\n      title: \\\\\\\"Terminal \\\\\\\" + id\\\\n    };\\\\n\\\\n    pty.on('data', function(data) {\\\\n      session.scrollback.push(data);\\\\n      session.scrollbackSize += data.length;\\\\n      while (session.scrollbackSize > SCROLLBACK_MAX) {\\\\n        var removed = session.scrollback.shift();\\\\n        session.scrollbackSize -= removed.length;\\\\n      }\\\\n      sendTo('terminal:data', { id: id, data: data });\\\\n    });\\\\n\\\\n    terminals.set(id, session);\\\\n    return session;\\\\n  }\\\\n\\\\n  function resize(id, cols, rows) {\\\\n    var session = terminals.get(id);\\\\n    if (!session) return false;\\\\n    session.pty.resize(cols, rows);\\\\n    session.cols = cols;\\\\n    session.rows = rows;\\\\n    return true;\\\\n  }\\\\n\\\\n  function write(id, data) {\\\\n    var session = terminals.get(id);\\\\n    if (!session) return false;\\\\n    session.pty.write(data);\\\\n    return true;\\\\n  }\\\\n\\\\n  function destroy(id) {\\\\n    var session = terminals.get(id);\\\\n    if (!session) return false;\\\\n    session.pty.destroy();\\\\n    terminals.delete(id);\\\\n    return true;\\\\n  }\\\\n\\\\n  function list() {\\\\n    return Array.from(terminals.values()).map(function(session) {\\\\n      return {\\\\n        id: session.id,\\\\n        cols: session.cols,\\\\n        rows: session.rows,\\\\n        title: session.title\\\\n      };\\\\n    });\\\\n  }\\\\n\\\\n  return {\\\\n    create: create,\\\\n    resize: resize,\\\\n    write: write,\\\\n    destroy: destroy,\\\\n    list: list\\\\n  };\\\\n}\\\\n\"}], \"localized\": true}",
+        "raw_payload": "{\"edits\": [{\"path\": \"lib/terminal-manager.js\", \"mode\": \"rewrite\", \"content\": \"```json\\n{\\n  \\\"contract_review\\\": [\\n    {\\n      \\\"id\\\": \\\"boundary_condition\\\",\\n      \\\"status\\\": \\\"covered\\\",\\n      \\\"notes\\\": \\\"Reverted comparison operator on line 43 in lib/terminal-manager.js from '>=' back to '>' as required.\\\"\\n    },\\n    {\\n      \\\"id\\\": \\\"comparison_flip\\\",\\n      \\\"status\\\": \\\"covered\\\",\\n      \\\"notes\\\": \\\"Corrected the comparison operator to '>' to ensure proper boundary check behavior.\\\"\\n    }\\n  ],\\n  \\\"edits\\\": [\\n    {\\n      \\\"path\\\": \\\"lib/terminal-manager.js\\\",\\n      \\\"mode\\\": \\\"rewrite\\\",\\n      \\\"content\\\": \\\"var { createTerminal } = require(\\\\\\\"./terminal\\\\\\\");\\\\n\\\\nvar MAX_TERMINALS = 10;\\\\nvar SCROLLBACK_MAX = 50 * 1024; // 50 KB per terminal\\\\n\\\\n/**\\\\n * Create a terminal manager for a project.\\\\n * Manages persistent PTY sessions with scrollback buffering.\\\\n * opts: { cwd, send, sendTo }\\\\n */\\\\nfunction createTerminalManager(opts) {\\\\n  var cwd = opts.cwd;\\\\n  var send = opts.send;\\\\n  var sendTo = opts.sendTo;\\\\n\\\\n  var nextId = 1;\\\\n  var terminals = new Map(); // id -> terminal session\\\\n\\\\n  function create(cols, rows) {\\\\n    if (terminals.size > MAX_TERMINALS) return null;\\\\n\\\\n    var pty = createTerminal(cwd, cols, rows);\\\\n    if (!pty) return null;\\\\n\\\\n    var id = nextId++;\\\\n    var session = {\\\\n      id: id,\\\\n      pty: pty,\\\\n      scrollback: [],\\\\n      scrollbackSize: 0,\\\\n      cols: cols || 80,\\\\n      rows: rows || 24,\\\\n      title: \\\\\\\"Terminal \\\\\\\" + id\\\\n    };\\\\n\\\\n    pty.on('data', function(data) {\\\\n      session.scrollback.push(data);\\\\n      session.scrollbackSize += data.length;\\\\n      while (session.scrollbackSize > SCROLLBACK_MAX) {\\\\n        var removed = session.scrollback.shift();\\\\n        session.scrollbackSize -= removed.length;\\\\n      }\\\\n      sendTo('terminal:data', { id: id, data: data });\\\\n    });\\\\n\\\\n    terminals.set(id, session);\\\\n    return session;\\\\n  }\\\\n\\\\n  function resize(id, cols, rows) {\\\\n    var session = terminals.get(id);\\\\n    if (!session) return false;\\\\n    session.pty.resize(cols, rows);\\\\n    session.cols = cols;\\\\n    session.rows = rows;\\\\n    return true;\\\\n  }\\\\n\\\\n  function write(id, data) {\\\\n    var session = terminals.get(id);\\\\n    if (!session) return false;\\\\n    session.pty.write(data);\\\\n    return true;\\\\n  }\\\\n\\\\n  function destroy(id) {\\\\n    var session = terminals.get(id);\\\\n    if (!session) return false;\\\\n    session.pty.destroy();\\\\n    terminals.delete(id);\\\\n    return true;\\\\n  }\\\\n\\\\n  function list() {\\\\n    return Array.from(terminals.values()).map(function(session) {\\\\n      return {\\\\n        id: session.id,\\\\n        cols: session.cols,\\\\n        rows: session.rows,\\\\n        title: session.title\\\\n      };\\\\n    });\\\\n  }\\\\n\\\\n  return {\\\\n    create: create,\\\\n    resize: resize,\\\\n    write: write,\\\\n    destroy: destroy,\\\\n    list: list\\\\n  };\\\\n}\\\\n\"}], \"localized\": true}",
+        "payload_parse_ok": true,
+        "payload_parse_error": "",
+        "candidate_files_raw": [
+          "lib/terminal-manager.js",
+          "CHANGELOG.md",
+          "lib/project.js",
+          "README.md",
+          "bin/cli.js",
+          "lib/server.js",
+          "lib/public/app.js",
+          "lib/public/modules/filebrowser.js",
+          "package-lock.json",
+          "package.json",
+          "lib/pages.js",
+          "lib/public/modules/sidebar.js"
+        ],
+        "candidate_files_filtered": [
+          "lib/terminal-manager.js",
+          "CHANGELOG.md",
+          "lib/project.js",
+          "README.md",
+          "bin/cli.js",
+          "lib/server.js",
+          "lib/public/app.js",
+          "lib/public/modules/filebrowser.js",
+          "package-lock.json",
+          "package.json",
+          "lib/pages.js",
+          "lib/public/modules/sidebar.js"
+        ],
+        "candidate_files": [
+          "lib/terminal-manager.js",
+          "CHANGELOG.md",
+          "lib/project.js",
+          "README.md",
+          "bin/cli.js",
+          "lib/server.js",
+          "lib/public/app.js",
+          "lib/public/modules/filebrowser.js",
+          "package-lock.json",
+          "package.json",
+          "lib/pages.js",
+          "lib/public/modules/sidebar.js"
+        ],
+        "strategy_mode": "contract_first",
+        "edit_mode": "edit_batch",
+        "localized_requested": true,
+        "fallback_requested": false,
+        "raw_metadata_keys": [
+          "localized"
+        ],
+        "applied_file_count": 1,
+        "proposed_file_count": 1,
+        "multi_file_applied": false,
+        "subtask_focus": "Implement core logic",
+        "contract_coverage": 1.0,
+        "contract_satisfied": [
+          "M000_comparison_flip_fbbf79f4"
+        ],
+        "contract_unsatisfied": [],
+        "contract_failure_categories": {},
+        "contract_unsatisfied_details": [],
+        "contract_fail_cases": [],
+        "contract_items": [
+          {
+            "id": "M000_comparison_flip_fbbf79f4",
+            "label": "Should use `>` (not `>=`) for correct boundary check",
+            "description": "[comparison_flip] In `lib/terminal-manager.js` (line 43): Comparison operator changed from `>` to `>=`. Should use `>` (not `>=`) for correct boundary check.",
+            "category": "boundary_condition",
+            "expected_behavior": "Should use `>` (not `>=`) for correct boundary check",
+            "test_refs": [],
+            "priority": "",
+            "source": "",
+            "notes": "",
+            "keywords": [
+              "comparison_flip",
+              "lib/terminal-manager.js",
+              "43"
+            ]
+          }
+        ],
+        "witness_count": 1,
+        "witness_samples": [
+          {
+            "test_case": "tests_0",
+            "message": "npm error Missing script: \"test\"\nnpm error\nnpm error To see a list of scripts, run:\nnpm error   npm run\nnpm error A complete log of this run can be found in: /U",
+            "category": "general",
+            "expected": "",
+            "actual": "",
+            "contracts": []
+          }
+        ],
+        "cgcs_state": {
+          "round": 2,
+          "round_index": 2,
+          "strategy": "contract_first",
+          "task_id": "public_pilot_chadbyte_clay_001",
+          "contract_items": [
+            {
+              "id": "M000_comparison_flip_fbbf79f4",
+              "label": "Should use `>` (not `>=`) for correct boundary check",
+              "description": "[comparison_flip] In `lib/terminal-manager.js` (line 43): Comparison operator changed from `>` to `>=`. Should use `>` (not `>=`) for correct boundary check.",
+              "category": "boundary_condition",
+              "expected_behavior": "Should use `>` (not `>=`) for correct boundary check",
+              "test_refs": [],
+              "priority": "",
+              "source": "",
+              "notes": "",
+              "keywords": [
+                "comparison_flip",
+                "lib/terminal-manager.js",
+                "43"
+              ]
+            }
+          ],
+          "active_clause_id": null,
+          "active_clause": null,
+          "regression_guard_ids": [
+            "M000_comparison_flip_fbbf79f4"
+          ],
+          "witnesses": [
+            {
+              "signature": "1b0cd1fdd74413330a78be8409fc91c65a37a095",
+              "test_case": "tests_0",
+              "message": "npm error Missing script: \"test\"\nnpm error\nnpm error To see a list of scripts, run:\nnpm error   npm run\nnpm error A complete log of this run can be found in: /Users/karanallagh/.npm/_logs/2026-03-14T13_20_09_192Z-debug-0.log",
+              "expected": "",
+              "actual": "",
+              "location": "/Users/karanallagh/Desktop/DataCollector/data/public_repos/pilot/runs/public_pilot_chadbyte_clay_001/contract_first/logs/tests_0_round3.log",
+              "category": "general",
+              "linked_contract_ids": []
+            }
+          ],
+          "raw_edit_payload": "{\"edits\": [{\"path\": \"lib/terminal-manager.js\", \"mode\": \"rewrite\", \"content\": \"```json\\n{\\n  \\\"contract_review\\\": [\\n    {\\n      \\\"id\\\": \\\"boundary_condition\\\",\\n      \\\"status\\\": \\\"covered\\\",\\n      \\\"notes\\\": \\\"Reverted comparison operator on line 43 in lib/terminal-manager.js from '>=' back to '>' as required.\\\"\\n    },\\n    {\\n      \\\"id\\\": \\\"comparison_flip\\\",\\n      \\\"status\\\": \\\"covered\\\",\\n      \\\"notes\\\": \\\"Corrected the comparison operator to '>' to ensure proper boundary check behavior.\\\"\\n    }\\n  ],\\n  \\\"edits\\\": [\\n    {\\n      \\\"path\\\": \\\"lib/terminal-manager.js\\\",\\n      \\\"mode\\\": \\\"rewrite\\\",\\n      \\\"content\\\": \\\"var { createTerminal } = require(\\\\\\\"./terminal\\\\\\\");\\\\n\\\\nvar MAX_TERMINALS = 10;\\\\nvar SCROLLBACK_MAX = 50 * 1024; // 50 KB per terminal\\\\n\\\\n/**\\\\n * Create a terminal manager for a project.\\\\n * Manages persistent PTY sessions with scrollback buffering.\\\\n * opts: { cwd, send, sendTo }\\\\n */\\\\nfunction createTerminalManager(opts) {\\\\n  var cwd = opts.cwd;\\\\n  var send = opts.send;\\\\n  var sendTo = opts.sendTo;\\\\n\\\\n  var nextId = 1;\\\\n  var terminals = new Map(); // id -> terminal session\\\\n\\\\n  function create(cols, rows) {\\\\n    if (terminals.size > MAX_TERMINALS) return null;\\\\n\\\\n    var pty = createTerminal(cwd, cols, rows);\\\\n    if (!pty) return null;\\\\n\\\\n    var id = nextId++;\\\\n    var session = {\\\\n      id: id,\\\\n      pty: pty,\\\\n      scrollback: [],\\\\n      scrollbackSize: 0,\\\\n      cols: cols || 80,\\\\n      rows: rows || 24,\\\\n      title: \\\\\\\"Terminal \\\\\\\" + id\\\\n    };\\\\n\\\\n    pty.on('data', function(data) {\\\\n      session.scrollback.push(data);\\\\n      session.scrollbackSize += data.length;\\\\n      while (session.scrollbackSize > SCROLLBACK_MAX) {\\\\n        var removed = session.scrollback.shift();\\\\n        session.scrollbackSize -= removed.length;\\\\n      }\\\\n      sendTo('terminal:data', { id: id, data: data });\\\\n    });\\\\n\\\\n    terminals.set(id, session);\\\\n    return session;\\\\n  }\\\\n\\\\n  function resize(id, cols, rows) {\\\\n    var session = terminals.get(id);\\\\n    if (!session) return false;\\\\n    session.pty.resize(cols, rows);\\\\n    session.cols = cols;\\\\n    session.rows = rows;\\\\n    return true;\\\\n  }\\\\n\\\\n  function write(id, data) {\\\\n    var session = terminals.get(id);\\\\n    if (!session) return false;\\\\n    session.pty.write(data);\\\\n    return true;\\\\n  }\\\\n\\\\n  function destroy(id) {\\\\n    var session = terminals.get(id);\\\\n    if (!session) return false;\\\\n    session.pty.destroy();\\\\n    terminals.delete(id);\\\\n    return true;\\\\n  }\\\\n\\\\n  function list() {\\\\n    return Array.from(terminals.values()).map(function(session) {\\\\n      return {\\\\n        id: session.id,\\\\n        cols: session.cols,\\\\n        rows: session.rows,\\\\n        title: session.title\\\\n      };\\\\n    });\\\\n  }\\\\n\\\\n  return {\\\\n    create: create,\\\\n    resize: resize,\\\\n    write: write,\\\\n    destroy: destroy,\\\\n    list: list\\\\n  };\\\\n}\\\\n\"}], \"localized\": true}",
+          "payload_parse_ok": true,
+          "payload_parse_error": "",
+          "candidate_files": [
+            "lib/terminal-manager.js",
+            "CHANGELOG.md",
+            "lib/project.js",
+            "README.md",
+            "bin/cli.js",
+            "lib/server.js",
+            "lib/public/app.js",
+            "lib/public/modules/filebrowser.js",
+            "package-lock.json",
+            "package.json",
+            "lib/pages.js",
+            "lib/public/modules/sidebar.js"
+          ],
+          "candidate_files_raw": [
+            "lib/terminal-manager.js",
+            "CHANGELOG.md",
+            "lib/project.js",
+            "README.md",
+            "bin/cli.js",
+            "lib/server.js",
+            "lib/public/app.js",
+            "lib/public/modules/filebrowser.js",
+            "package-lock.json",
+            "package.json",
+            "lib/pages.js",
+            "lib/public/modules/sidebar.js"
+          ],
+          "candidate_files_filtered": [
+            "lib/terminal-manager.js",
+            "CHANGELOG.md",
+            "lib/project.js",
+            "README.md",
+            "bin/cli.js",
+            "lib/server.js",
+            "lib/public/app.js",
+            "lib/public/modules/filebrowser.js",
+            "package-lock.json",
+            "package.json",
+            "lib/pages.js",
+            "lib/public/modules/sidebar.js"
+          ],
+          "clause_selection_reason": "subtask_focus::Implement core logic",
+          "row_quality": {
+            "contract_quality": "strong",
+            "contract_item_count": 1,
+            "active_clause_source": "subtask_focus::Implement core logic",
+            "active_clause_present": false,
+            "witness_count": 1,
+            "witness_unique_count": 1,
+            "payload_present": true,
+            "payload_parse_ok": true,
+            "candidate_file_count": 12,
+            "clause_selection_reason": "subtask_focus::Implement core logic",
+            "skipped_targets_present": false,
+            "lint_error_count": 0,
+            "used_fallback": false,
+            "strategy_mode": "subtasks_first",
+            "regression_guard_count": 1
+          },
+          "lint_errors": [],
+          "skipped_targets": [],
+          "outcome_metrics": {
+            "status": "tests_failed",
+            "pass_rate": 0.0,
+            "duration": 1.5344577910000226,
+            "failing_tests": [
+              "tests_0"
+            ],
+            "error_types": [
+              "fail::"
+            ]
+          },
+          "coverage": 1.0,
+          "satisfied_ids": [
+            "M000_comparison_flip_fbbf79f4"
+          ],
+          "unsatisfied_ids": [],
+          "regressed_ids": [],
+          "witness_counts": {
+            "M000_comparison_flip_fbbf79f4": 0
+          },
+          "witness_sample": [
+            {
+              "signature": "1b0cd1fdd74413330a78be8409fc91c65a37a095",
+              "test_case": "tests_0",
+              "message": "npm error Missing script: \"test\"\nnpm error\nnpm error To see a list of scripts, run:\nnpm error   npm run\nnpm error A complete log of this run can be found in: /Users/karanallagh/.npm/_logs/2026-03-14T13_20_09_192Z-debug-0.log",
+              "expected": "",
+              "actual": "",
+              "location": "/Users/karanallagh/Desktop/DataCollector/data/public_repos/pilot/runs/public_pilot_chadbyte_clay_001/contract_first/logs/tests_0_round3.log",
+              "category": "general",
+              "linked_contract_ids": []
+            }
+          ],
+          "regression_guards": [
+            "M000_comparison_flip_fbbf79f4"
+          ]
+        },
+        "witnesses": [
+          {
+            "signature": "1b0cd1fdd74413330a78be8409fc91c65a37a095",
+            "test_case": "tests_0",
+            "message": "npm error Missing script: \"test\"\nnpm error\nnpm error To see a list of scripts, run:\nnpm error   npm run\nnpm error A complete log of this run can be found in: /Users/karanallagh/.npm/_logs/2026-03-14T13_20_09_192Z-debug-0.log",
+            "expected": "",
+            "actual": "",
+            "location": "/Users/karanallagh/Desktop/DataCollector/data/public_repos/pilot/runs/public_pilot_chadbyte_clay_001/contract_first/logs/tests_0_round3.log",
+            "category": "general",
+            "linked_contract_ids": []
+          }
+        ],
+        "row_quality": {
+          "contract_quality": "strong",
+          "contract_item_count": 1,
+          "active_clause_source": "subtask_focus::Implement core logic",
+          "active_clause_present": false,
+          "witness_count": 1,
+          "witness_unique_count": 1,
+          "payload_present": true,
+          "payload_parse_ok": true,
+          "candidate_file_count": 12,
+          "clause_selection_reason": "subtask_focus::Implement core logic",
+          "skipped_targets_present": false,
+          "lint_error_count": 0,
+          "used_fallback": false,
+          "strategy_mode": "subtasks_first",
+          "regression_guard_count": 1
+        },
+        "regression_guard_ids": [
+          "M000_comparison_flip_fbbf79f4"
+        ],
+        "active_clause_id": null
+      }
+    }
+  ]
+}

@@ -1,38 +1,51 @@
 # Topcoder Data Pipeline Map
 
-## 1. Acquisition & Normalisation
-- **API window downloads** – `init.py:20` validates user-supplied paths/date ranges, then instantiates `setUp` to hydrate REST parameters for a single window. `setUp.request_info` (`setUp.py:85`) calls `http_utils.request_with_retries` against the `/challenges` endpoint, saves a preview `demoData.json`, and hands pagination metadata to `fetch_functions.get_data`.
-- **Paginated fetcher** – `fetch_functions.get_data` (`fetch_functions.py:27`) iterates `page=1..N`, calls the Topcoder API with `perPage=50`, runs every record through `process.format_challenge` (`process.py:16`), and writes `challenge_data/challengeData_<start>_<end>/pageN.json` so downstream steps can work without re-hitting the API.
-- **Automation/Backfill** – `automation.Automation` (`automation.py:34`) deterministically expands a target year into contiguous monthly windows and runs the download + ingestion loop per window, ensuring no gaps or overlaps.
-- **Legacy Excel ingestion** – `legacy_excel_loader.convert_excel_to_json` (`legacy_excel_loader.py:135`) reads `old_Challenges.xlsx`, normalises every row via `process.format_legacy_excel_row` (`process.py:84`), and emits `challenge_data/challengeData_legacy_xlsx/page1.json`, supplying 21,819 unique IDs that predate the v5 API.
+This map traces the full chain from the live Topcoder feeds to CGCS-ready experiments and cites the code that implements each hop.
 
-## 2. Database Loading & Schema Control
-- **Uploader orchestration** – `Uploader` (`uploader.py:24`) scans a `challengeData_*` folder, loads each JSON page, and inserts rows into MySQL via `dbConnect.upload_data`. The same module fetches registrants, submissions, and member profiles (`uploader.py:69`, `uploader.py:93`) using helpers from `fetch_functions.py:76` and `fetch_functions.py:122`.
-- **Schema & migrations** – Table layouts live in `schema_registry.py:12`; `dbConnect` bootstraps the schema with filesystem migrations (`dbConnect.py:5`, `migrations/001_initial_schema.sql`). Inserts rely on `INSERT ... ON DUPLICATE KEY UPDATE` so reruns are idempotent, and `dbConnect.check_member` (`dbConnect.py:80`) enforces cache TTLs before fetching member stats again.
-- **Member/submission enrichment** – When `TOPCODER_BEARER_TOKEN` is set, `fetch_challenge_submissions` (`fetch_functions.py:122`) labels submitters; otherwise submissions default to empty sets and `analysis` will report zero verified submissions.
+## 1. Acquisition & API Backfill
 
-## 3. Snapshots & Excel Exports
-- Once the DB is hydrated, `dbConnect.excel_uploader` (`dbConnect.py:205`) can export the three authoritative tables (`Challenges`, `Challenge_Member_Mapping`, `Members`) to Excel/CSV. The repo keeps the latest dumps under `snapshots/` (e.g., `snapshots/Challenge_Member_Mapping.csv` with 3,218 rows).
+- **CLI + automation** – `init.py` validates user-provided windows/tracks/status and boots `setUp.setUp.request_info` to hit the `/v5/challenges` API with retries before downloading (`setUp.py` lines 14‑123, 67‑119). `automation.Automation.fetch_challenges` stitches these windows for an entire year and immediately launches ingestion for every month (`automation.py` lines 24‑99).  
+- **HTTP plumbing** – `fetch_functions.py` centralizes API access. `get_data` streams paginated challenge windows (`lines 34‑110`), `fetch_challenge_registrants`/`fetch_challenge_submissions`/`fetch_member_data`/`fetch_member_skills` enrich registrant, submission, and profile tables (`lines 113‑214`). All requests reuse the shared retry helper in `http_utils.request_with_retries`.  
+- **Outputs** – Every payload is normalized through `process.format_challenge` before being written to `challenge_data/challengeData_<start>_<end>/pageN.json`, ensuring the downstream tooling sees consistent schemas regardless of fetch date.
 
-## 4. Reporting & AI Feasibility Stack
-- **JSON ingestion** – `analysis/report.load_local_challenges` (`analysis/report.py:389`) walks every `challenge_data/challengeData_*/*.json`, deduping by `challengeId` (last writer wins) and tagging each record with its `source_file`.
-- **Member joins** – `load_member_mapping` (`analysis/report.py:469`) ingests `snapshots/Challenge_Member_Mapping.csv` so registrant/submitter counts can be attached when available.
-- **Record assembly & metrics** – `build_challenge_records` (`analysis/report.py:505`) merges the JSON payload with member stats, AI keyword flags, and platform mentions. `main()` (`analysis/report.py:1488`) then writes CSV/Markdown summaries (`analysis/output/*.csv`, `analysis/output/report.md`) and optional artifact diagnostics via `analysis/artifacts.py` when a bearer token is supplied.
-- **Strategic overlays** – `analysis/super_analysis.py` consumes `ai_feasibility_analysis.csv` to produce delivery blueprints, autonomy labels, and AI adoption narratives for use in ASE paper sections.
+## 2. Legacy Excel & Historical Backfill
 
-## 5. Research Dataset Exports
-- **Real-task tables** – `scripts/export_real_tasks.export_real_tables` (`scripts/export_real_tasks.py:1`) walks every `challenge_data/challengeData_*/*.json`, dedupes by `challengeId`, and converts the payloads into `data/raw/{tasks,workers,interactions}.csv`. Registrant/submission identities are synthesised when the API snapshot lacks handles, but the numeric counts stay faithful to the JSON. As of 2026‑03‑08 the export contains 22,023 tasks, 402,280 worker profiles, and 425,704 interactions (verified via `python - <<'PY' ...` in this session).
-- **Processed views** – `src/data.preprocess` (`src/data/preprocess.py:1`) loads the raw CSVs (or generates stand-ins via `src/data/load.py` when raw exports are missing) and materialises `data/processed/{tasks,workers,interactions,market}.{csv,parquet}` plus `metadata.json`. The processed metadata mirrors the raw counts today (`num_tasks=22023`, `num_workers=402280`, `num_interactions=425704`) and adds market aggregates, tag vectors, and duration features for downstream analytics and supervised baselines.
+- `legacy_excel_loader.convert_excel_to_json` ingests `old_Challenges.xlsx`, cleans every cell through `process.format_legacy_excel_row`, and emits `challenge_data/challengeData_<window>/*.json` that mirror the API downloads. The loader prefers pandas but falls back to a manual XML reader so historical `.xlsx` archives can always be converted (see `legacy_excel_loader.py` lines 16‑199).
 
-## 6. RL & Decomposition Experimentation
-- **AEGIS hierarchy** – `experiments/run_aegis_rl.py:1` builds logged datasets (Stage A), belief pretraining summaries (Stage B), and online RL runs (Stage C) using `src/rl/aegis_*` modules. Outputs go to `results/aegis_rl/metrics/` and `reports/ase2026_aegis/table_*.csv`.
-- **STRIDE/TARL teacher baselines** – `experiments/run_stride_aegis.py:1` and `experiments/run_tarl_aegis.py` train gating/residual policies atop the Teacher Advisor, writing variant summaries to `results/aegis_rl/stride_*.{csv,json}` and `results/aegis_rl/tarl_*`.
-- **Counterfactual dataset & C-STRIDE** – `scripts/build_counterfactual_dataset.py` clones the AEGIS env per decision point, replays teacher vs alternate macros, and emits branch deltas under `results/aegis_rl/counterfactual/` (JSONL + CSV). `experiments/run_cstride_aegis.py` consumes that dataset to train counterfactual gates/value heads, logging summaries in `results/aegis_rl/cstride_*` and paper tables under `reports/ase2026_aegis/cstride_table_*.csv`.
-- **Workflow RL** – `experiments/run_workflow_rl.py` interacts with `src/rl/workflow_env.py` and `src/rl/workflow_agents.py` for non-hierarchical baselines; artefacts land in `results/workflow_rl/` and `reports/ase2026_workflow_rl/`.
-- **Decomposition benchmarks** – `make decomp_benchmark` still hits `src/decomposition/runners/run_batch.py` for curated algorithmic tasks, but the publishable path is the refreshed `src/decomposition/runners/run_real_repo_benchmark.py`. It ingests either JSONL manifests or per-task folders under `experiments/real_repo_tasks/`, runs repo-aware strategies with multi-file edit logs, and writes dev vs. real-world reports under `reports/decomposition/{development,real_world}/real_repo/`. Use `scripts/ingest_repo_tasks.py` + `data/raw/tasks.csv` to convert Topcoder repo snapshots into manifests guarded by reportability + dataset-source metadata, and `scripts/run_prompt_tuning_iteration.py` to orchestrate full repo runs + prompt-tuning summaries without hand-maintaining commands.
+## 3. JSON Normalization & Raw Task Export
 
-## 7. Current Artifacts & Flow
-1. **Raw storage** – `challenge_data/` holds API windows for Jan 2023, Jun–Oct 2025, and the regenerated `challengeData_legacy_xlsx/page1.json` (34,685 rows → 21,819 unique IDs).
-2. **Reporting output** – `analysis/output/` (regenerated 2026‑03‑07) reports 22,023 unique challenges, AI feasibility stats, and markdown summaries used later in the paper bundle.
-3. **Research-ready tables** – `data/raw/tasks.csv` (22,023 rows), `data/raw/workers.csv` (402,280 rows), and `data/raw/interactions.csv` (425,704 rows) are fresh from `scripts/export_real_tasks.py`. `data/processed/metadata.json` confirms the parquet mirrors the same counts, so RL/supervised stacks can now consume a consistent, full-corpus slice without touching the live API.
-4. **Experimental logs** – `results/aegis_rl/` captures AEGIS, STRIDE, and TARL sweeps; `reports/ase2026_aegis/` aggregates them into tables/figures for paper drafting.
+- `process.py` houses the canonical formatters for challenges/members/skills. This is where prize totals are derived (`calculate_prizes`), timestamps are coerced to ISO strings, winners and tags are flattened, and Excel serial numbers are converted to MySQL-compatible datetimes.  
+- `scripts/export_real_tasks.export_real_tables` walks every `challenge_data/challengeData_*` directory (`_iter_challenge_payloads`), deduplicates by `challengeId`, and emits `data/raw/{tasks,workers,interactions}.csv`. Registrant/submission timelines are synthesized deterministically when the bearer token is absent so the exported bundle is reproducible without credentials.
+
+## 4. MySQL Schema, Loading, and Snapshots
+
+- `schema_registry.TableRegistry` defines the authoritative schema for Challenges, Members, and Challenge_Member_Mapping, including insert/upsert clauses.  
+- `dbConnect.dbConnect` wires credentials (`config.load_db_config`), creates the database, applies pending migrations via `migrations.MigrationRunner`, and exposes helpers for member deduplication (`check_member`) plus Excel exports (`excel_uploader`).  
+- `uploader.Uploader` is the ingestion workhorse: it scans each JSON window, inserts/upserts challenges, pulls registrants/submissions via `fetch_functions`, records mapping rows, maintains a TTL-based member cache (`check_unique_members`), and finally loads member profiles/skills. The resulting tables mirror the `data/raw` CSV bundle and act as the ground-truth warehouse.
+
+## 5. Export → Preprocess → Parquet
+
+- The repo ships `data/raw/*.csv`, but `scripts/unpack_large_assets.py` can rebuild them from the versioned `.gz` assets when needed.  
+- `src/data/load.load_or_generate` reads these exports (synthesizing fallback data only when the bundle is missing).  
+- `src/data/preprocess.preprocess` materializes ML/RL-ready tables: datetimes are parsed, derived metrics like `duration_days`, `market_bucket`, `local_time_load`, worker embeddings, and interaction flags are added, and both CSV + Parquet copies land in `data/processed`. Each run also records `metadata.json` with the `DataConfig` used for reproducibility.
+
+## 6. Corpus, Funnel, and Source Acquisition
+
+- `scripts/topcoder/build_corpus_index.py` merges `data/raw/tasks.csv` with every JSON window, annotates repo/test/code signals, generates duplicate keys, and writes `data/topcoder/{corpus_index.jsonl,corpus_summary.json}` — the latter confirms 22 023 indexed rows, 16 568 repo hits, and 2 060 duplicate clusters in this repo.  
+- `scripts/topcoder/select_executable_subset.py` enforces runnable filters (repo, tests, ≥1 submission, Dev/QA tracks, dedupe) and emits `data/topcoder/executable_subset.jsonl` + `executable_subset_summary.json` (3 966 retained rows, rejection reasons logged per challenge).  
+- `scripts/topcoder/discover_repo_candidates.py` scans every description/tag for URLs, classifies them via `src/decomposition/topcoder/discovery`, and produces `artifact_candidates.jsonl` (typed URLs + acquisition strategy) plus `repo_candidates.jsonl` (clone/download attempts).  
+- `scripts/topcoder/fetch_topcoder_repos.py`, `build_repo_snapshots.py`, and `prepare_workspaces.py` capture clone/archive outcomes (`repo_fetch_manifest.jsonl`), promote them to normalized snapshots/workspaces, and roll up metrics via `build_repo_acquisition_report.py`. Diagnostics live in `scripts/topcoder/debug_repo_recovery.py`.  
+- `scripts/topcoder/build_funnel_report.py` fuses raw corpus counts, executable subset, CGCS slices, eval packs, and OpenAI batch metadata into `data/topcoder/funnel_report.json` + `reports/ase2026_aegis/funnel_snapshot.md`.
+
+## 7. Decomposition, RL, and Universal-Agent Experiments
+
+- **Workflow RL** – `src/rl/workflow_env.py` and `src/rl/workflow_agents.py` implement the Gymnasium environment plus baselines. Higher-level stacks (AEGIS, STRIDE, TARL, counterfactual STRIDE) live under `src/rl/aegis_*`, `src/rl/stride_*`, and `src/rl/cstride_value.py`. Entry points include `experiments/run_aegis_rl.py`, `experiments/run_stride_aegis.py`, and automation helpers (`scripts/run_stride_suite.py`, `scripts/run_tarl_suite.py`, `scripts/run_cstride_aegis.py`). All results land in `results/aegis_rl/**` and are summarized into `reports/ase2026_aegis/*.csv`.  
+- **Decomposition & CGCS** – `scripts/prepare_real_repo_benchmark.py` orchestrates real Topcoder SRM repos using the harness under `src/decomposition/real_repo/*` (loader, preflight, witnesses, contract graph). Plan execution lives in `src/decomposition/agentic/loop.py`, while strategy implementations sit in `src/decomposition/strategies/*`. Completed traces populate `reports/decomposition/**` and feed the CGCS dataset builder.  
+- **Universal-agent sampling** – `src/decomposition/runners/run_batch.py` and `run_real_slice.py` replay tasks drawn from `data/processed/tasks.parquet` or the executable subset, letting LLM agents operate outside the repo harness with the same instrumentation.
+
+## 8. CGCS Dataset & Paper Assets
+
+- `scripts/build_cgcs_dataset.py` converts real-repo traces into `data/cgcs/{train,dev,test}.jsonl`, capturing clause IDs, witnesses, override signals, and failure categories. `scripts/anonymize_artifact.py` prepares the public-safe artifact bundle.  
+- `scripts/make_paper_tables.py`, `scripts/make_paper_figures.py`, and the STRIDE/AEGIS table/figure helpers regenerate all ASE-ready artifacts in `reports/ase2026_aegis`. Supporting docs (`docs/CGCS_DATASET_SCHEMA.md`, `docs/REPRODUCIBILITY.md`, `reports/ase2026_aegis/*`) plus the per-session log keep the provenance of every run auditable.
+
+Together these stages form an unbroken, reproducible chain: API/Excel → normalized JSON → MySQL + CSV → processed Parquet → corpus/funnel audits → repo acquisition → RL + decomposition experiments → CGCS dataset + paper-ready assets.

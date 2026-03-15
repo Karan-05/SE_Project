@@ -1,0 +1,57 @@
+{
+  "name": "@angular/cli",
+  "version": "0.0.0-PLACEHOLDER",
+  "description": "CLI tool for Angular",
+  "main": "lib/cli/index.js",
+  "bin": {
+    "ng": "bin/ng.js"
+  },
+  "keywords": [
+    "angular",
+    "angular-cli",
+    "Angular CLI"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/angular/angular-cli.git"
+  },
+  "author": "Angular Authors",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/angular/angular-cli/issues"
+  },
+  "homepage": "https://github.com/angular/angular-cli",
+  "dependencies": {
+    "@angular-devkit/architect": "workspace:0.0.0-EXPERIMENTAL-PLACEHOLDER",
+    "@angular-devkit/core": "workspace:0.0.0-PLACEHOLDER",
+    "@angular-devkit/schematics": "workspace:0.0.0-PLACEHOLDER",
+    "@inquirer/prompts": "8.3.0",
+    "@listr2/prompt-adapter-inquirer": "4.2.1",
+    "@modelcontextprotocol/sdk": "1.27.1",
+    "@schematics/angular": "workspace:0.0.0-PLACEHOLDER",
+    "@yarnpkg/lockfile": "1.1.0",
+    "algoliasearch": "5.49.1",
+    "ini": "6.0.0",
+    "jsonc-parser": "3.3.1",
+    "listr2": "10.2.1",
+    "npm-package-arg": "13.0.2",
+    "pacote": "21.4.0",
+    "parse5-html-rewriting-stream": "8.0.0",
+    "semver": "7.7.4",
+    "yargs": "18.0.0",
+    "zod": "4.3.6"
+  },
+  "ng-update": {
+    "migrations": "@schematics/angular/migrations/migration-collection.json",
+    "packageGroup": {
+      "@angular/cli": "0.0.0-PLACEHOLDER",
+      "@angular/build": "0.0.0-PLACEHOLDER",
+      "@angular/ssr": "0.0.0-PLACEHOLDER",
+      "@angular-devkit/architect": "0.0.0-EXPERIMENTAL-PLACEHOLDER",
+      "@angular-devkit/build-angular": "0.0.0-PLACEHOLDER",
+      "@angular-devkit/build-webpack": "0.0.0-EXPERIMENTAL-PLACEHOLDER",
+      "@angular-devkit/core": "0.0.0-PLACEHOLDER",
+      "@angular-devkit/schematics": "0.0.0-PLACEHOLDER"
+    }
+  }
+}

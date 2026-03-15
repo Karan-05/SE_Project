@@ -22,6 +22,7 @@ from src.decomposition.strategies.semantic_diff import SemanticDiffStrategy
 from src.decomposition.strategies.role_decomposed import RoleDecomposedStrategy
 from src.decomposition.strategies.simulation_trace import SimulationTraceStrategy
 from src.decomposition.strategies.direct_baseline import DirectBaselineStrategy
+from src.decomposition.strategies.cgcs import CGCSStrategy
 
 
 STRATEGIES: Dict[str, TaskDecompositionStrategy] = {
@@ -39,6 +40,7 @@ STRATEGIES: Dict[str, TaskDecompositionStrategy] = {
     "semantic_diff": SemanticDiffStrategy(),
     "role_decomposed": RoleDecomposedStrategy(),
     "simulation_trace": SimulationTraceStrategy(),
+    "cgcs": CGCSStrategy(),
 }
 
 

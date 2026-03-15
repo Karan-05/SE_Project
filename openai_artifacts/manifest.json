@@ -1,0 +1,172 @@
+{
+  "files": [
+    {
+      "path": "data/cgcs/train.jsonl",
+      "file_id": null,
+      "purpose": "assistants",
+      "status": "error"
+    },
+    {
+      "path": "data/cgcs/dev.jsonl",
+      "file_id": null,
+      "purpose": "assistants",
+      "status": "error"
+    },
+    {
+      "path": "data/cgcs/test.jsonl",
+      "file_id": null,
+      "purpose": "assistants",
+      "status": "error"
+    },
+    {
+      "path": "reports/ase2026_aegis/tarl_table_ablation.csv",
+      "file_id": "file-PjnGY5AqFL2JgG6crr5MXj",
+      "purpose": "assistants",
+      "status": "processed"
+    },
+    {
+      "path": "reports/ase2026_aegis/table_calibration.csv",
+      "file_id": "file-Q98NDfKVrXdBKTPTpHBfx4",
+      "purpose": "assistants",
+      "status": "processed"
+    },
+    {
+      "path": "reports/ase2026_aegis/table_ablation.csv",
+      "file_id": "file-KXsn5XtEiqQnHZNopd3UGr",
+      "purpose": "assistants",
+      "status": "processed"
+    },
+    {
+      "path": "reports/ase2026_aegis/cstride_table_ablation.csv",
+      "file_id": "file-M5jjZLHTK6wnME7DuKNvRu",
+      "purpose": "assistants",
+      "status": "processed"
+    },
+    {
+      "path": "reports/ase2026_aegis/cstride_table_main.csv",
+      "file_id": "file-49c6kaPZFP5qopnq4opsUk",
+      "purpose": "assistants",
+      "status": "processed"
+    },
+    {
+      "path": "reports/ase2026_aegis/table_main.csv",
+      "file_id": "file-CyUnavQQN8X5Cst6fFSbTc",
+      "purpose": "assistants",
+      "status": "processed"
+    },
+    {
+      "path": "reports/ase2026_aegis/aegis_table_main_run0.csv",
+      "file_id": "file-UCfoSp2XAgerQSSLapyDHu",
+      "purpose": "assistants",
+      "status": "processed"
+    },
+    {
+      "path": "reports/ase2026_aegis/decomposition_strategy_comparison.csv",
+      "file_id": "file-S83eGmpbK8XQHWpP1NZxW9",
+      "purpose": "assistants",
+      "status": "processed"
+    },
+    {
+      "path": "reports/ase2026_aegis/stride_table_ablation.csv",
+      "file_id": "file-94WJfzx6eNT1DJNcgStBRu",
+      "purpose": "assistants",
+      "status": "processed"
+    },
+    {
+      "path": "reports/ase2026_aegis/real_eval_table_by_category.csv",
+      "file_id": "file-TKypvFrc2YKUuYskMQwdgB",
+      "purpose": "assistants",
+      "status": "processed"
+    },
+    {
+      "path": "reports/ase2026_aegis/stride_table_main.csv",
+      "file_id": "file-ByJEoduP6SvQZLND5wj6iD",
+      "purpose": "assistants",
+      "status": "processed"
+    },
+    {
+      "path": "reports/ase2026_aegis/cgcs_table_main.csv",
+      "file_id": "file-4FMJ63shx49W1pEMi7QBUF",
+      "purpose": "assistants",
+      "status": "processed"
+    },
+    {
+      "path": "reports/ase2026_aegis/tarl_table_main.csv",
+      "file_id": "file-JKLJ1GHE5C8hMFV1y5C3b3",
+      "purpose": "assistants",
+      "status": "processed"
+    },
+    {
+      "path": "reports/ase2026_aegis/real_eval_table_main.csv",
+      "file_id": "file-8NNzNmWHPut7MnjgtDAuPZ",
+      "purpose": "assistants",
+      "status": "processed"
+    },
+    {
+      "path": "reports/ase2026_aegis/figure_cgcs_pass_rate.png",
+      "file_id": "file-LiTvDybvWeV1GMGR1BPmSU",
+      "purpose": "assistants",
+      "status": "processed"
+    },
+    {
+      "path": "reports/ase2026_aegis/stride_fig_override_value.png",
+      "file_id": "file-1qinysK4aJaBd8ARE3cWbN",
+      "purpose": "assistants",
+      "status": "processed"
+    },
+    {
+      "path": "reports/ase2026_aegis/figure_action_diversity.png",
+      "file_id": "file-MM6nw8evCmLXKeBqaEsq77",
+      "purpose": "assistants",
+      "status": "processed"
+    },
+    {
+      "path": "reports/ase2026_aegis/stride_fig_override_regret.png",
+      "file_id": "file-1FkHtET6ncRZiESMUdMFJg",
+      "purpose": "assistants",
+      "status": "processed"
+    },
+    {
+      "path": "reports/ase2026_aegis/figure_action_heatmap.png",
+      "file_id": "file-83aZmRS5JhaSF5SoBBUBxu",
+      "purpose": "assistants",
+      "status": "processed"
+    },
+    {
+      "path": "reports/ase2026_aegis/figure_reward_diagnostics.png",
+      "file_id": "file-KY1sqK2DjPMZbj8SBa8VQC",
+      "purpose": "assistants",
+      "status": "processed"
+    },
+    {
+      "path": "reports/ase2026_aegis/figure_calibration.png",
+      "file_id": "file-NPVbNs1RNuzFEQZYfqf5qs",
+      "purpose": "assistants",
+      "status": "processed"
+    },
+    {
+      "path": "reports/ase2026_aegis/figure_budgeted_success.png",
+      "file_id": "file-7av2p8m2ddJb5mrL4xJ1Wx",
+      "purpose": "assistants",
+      "status": "processed"
+    },
+    {
+      "path": "reports/ase2026_aegis/figure_failure_modes.png",
+      "file_id": "file-2Fg7Q7oD9ikUdiQzQuWDND",
+      "purpose": "assistants",
+      "status": "processed"
+    },
+    {
+      "path": "reports/ase2026_aegis/figure_success_vs_cost.png",
+      "file_id": "file-DRY81m3WFMbg6xL7sRaP1N",
+      "purpose": "assistants",
+      "status": "processed"
+    },
+    {
+      "path": "reports/ase2026_aegis/stride_fig_success_vs_cost.png",
+      "file_id": "file-WkBkJx9xTf9WYhUAAgHUF6",
+      "purpose": "assistants",
+      "status": "processed"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+es/
+lib/
+coverage/
+node_modules/
+tool/
+.idea
+npm-debug.log
+README.md

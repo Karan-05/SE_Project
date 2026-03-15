@@ -26,6 +26,16 @@ ASSETS: Iterable[Asset] = [
         Path("data/processed/tasks.csv"),
         "Processed Topcoder challenge table (22,023 rows)",
     ),
+    (
+        Path("data/topcoder/artifact_candidates.jsonl.gz"),
+        Path("data/topcoder/artifact_candidates.jsonl"),
+        "Topcoder artifact candidate manifests",
+    ),
+    (
+        Path("data/topcoder/repo_candidates.jsonl.gz"),
+        Path("data/topcoder/repo_candidates.jsonl"),
+        "Topcoder repo candidate manifests",
+    ),
 ]
 
 

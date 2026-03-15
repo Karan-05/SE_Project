@@ -1,0 +1,1 @@
+{"content": "[MOCK] 87a079da7ed05e62 :: You are executing decomposition strategy 'cgcs' on a real repository task. Repository workspace: `/Users/karanallagh/Des", "tokens": 614, "elapsed": 2.2125001123640686e-05, "budget_exceeded": false, "meta": {"provider": "mock", "model": "plan-runner", "caller": "cgcs:initial"}}

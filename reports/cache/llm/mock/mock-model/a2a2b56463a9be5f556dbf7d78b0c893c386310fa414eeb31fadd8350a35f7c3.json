@@ -1,0 +1,1 @@
+{"content": "[MOCK] 6171a8eec5eaa82d :: List three high-risk failure modes for this coding task along with short rationales: You are fixing a seeded bug in the ", "tokens": 50, "elapsed": 6.708000000799075e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "failure-scout", "caller": "failure_mode_first"}}

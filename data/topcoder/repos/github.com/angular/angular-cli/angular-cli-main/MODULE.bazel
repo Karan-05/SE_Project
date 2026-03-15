@@ -1,0 +1,197 @@
+"""Rules/toolchains for angular_cli with Bazel."""
+
+module(
+    name = "angular_cli",
+)
+
+bazel_dep(name = "platforms", version = "1.0.0")
+bazel_dep(name = "yq.bzl", version = "0.3.5")
+bazel_dep(name = "rules_nodejs", version = "6.7.3")
+bazel_dep(name = "aspect_rules_js", version = "3.0.3")
+bazel_dep(name = "aspect_rules_ts", version = "3.8.6")
+bazel_dep(name = "rules_pkg", version = "1.2.0")
+bazel_dep(name = "rules_cc", version = "0.2.17")
+bazel_dep(name = "jq.bzl", version = "0.6.1")
+bazel_dep(name = "bazel_lib", version = "3.2.2")
+bazel_dep(name = "bazel_skylib", version = "1.9.0")
+bazel_dep(name = "aspect_rules_esbuild", version = "0.25.1")
+bazel_dep(name = "aspect_rules_jasmine", version = "2.0.4")
+bazel_dep(name = "rules_angular")
+git_override(
+    module_name = "rules_angular",
+    commit = "b930bab8deb308e14d8862d359ef064204daee2a",
+    remote = "https://github.com/angular/rules_angular.git",
+)
+
+bazel_dep(name = "devinfra")
+git_override(
+    module_name = "devinfra",
+    commit = "08542a03ec636e2b37541e3e4104ec1cdf2c32d6",
+    remote = "https://github.com/angular/dev-infra.git",
+)
+
+bazel_dep(name = "rules_sass")
+git_override(
+    module_name = "rules_sass",
+    commit = "ac89385361e502fb88fdbffe9979648045d8919c",
+    remote = "https://github.com/angular/rules_sass.git",
+)
+
+bazel_dep(name = "rules_browsers")
+git_override(
+    module_name = "rules_browsers",
+    commit = "7043f918640169063a6281ab4afb61389a0aad6d",
+    remote = "https://github.com/angular/rules_browsers.git",
+)
+
+node = use_extension("@rules_nodejs//nodejs:extensions.bzl", "node")
+node.toolchain(
+    node_repositories = {
+        "22.22.1-darwin_arm64": ("node-v22.22.1-darwin-arm64.tar.gz", "node-v22.22.1-darwin-arm64", "679ad4966339e4ef4900f57996714864e4211b898825bb840c3086c419fbcef2"),
+        "22.22.1-darwin_amd64": ("node-v22.22.1-darwin-x64.tar.gz", "node-v22.22.1-darwin-x64", "07b13722d558790fca20bb1ecf61bde24b7a4863111f7be77fc57251a407359a"),
+        "22.22.1-linux_arm64": ("node-v22.22.1-linux-arm64.tar.xz", "node-v22.22.1-linux-arm64", "0f3550d58d45e5d3cf7103d9e3f69937f09fe82fb5dd474c66a5d816fa58c9ee"),
+        "22.22.1-linux_ppc64le": ("node-v22.22.1-linux-ppc64le.tar.xz", "node-v22.22.1-linux-ppc64le", "a65a44cf0224505f052b90357b763dbc1ea9148f4f5f2284f0596cf2000f819b"),
+        "22.22.1-linux_s390x": ("node-v22.22.1-linux-s390x.tar.xz", "node-v22.22.1-linux-s390x", "e08b3a73d0bd840e008f589e4be4a2ef3d4a0c59015f4f20a04ed7fc968042a2"),
+        "22.22.1-linux_amd64": ("node-v22.22.1-linux-x64.tar.xz", "node-v22.22.1-linux-x64", "9a6bc82f9b491279147219f6a18add1e18424dce90d41d2a5fcd69d4924ba3aa"),
+        "22.22.1-windows_amd64": ("node-v22.22.1-win-x64.zip", "node-v22.22.1-win-x64", "877cb93829e14fffbbc7903e7d8037336c9a79f3ea43c5d0b8c2379b79da56de"),
+    },
+    node_version = "22.22.1",
+)
+use_repo(
+    node,
+    "nodejs_darwin_amd64",
+    "nodejs_darwin_arm64",
+    "nodejs_linux_amd64",
+    "nodejs_linux_arm64",
+    "nodejs_toolchains",
+    "nodejs_windows_amd64",
+)
+
+node_dev = use_extension("@rules_nodejs//nodejs:extensions.bzl", "node", dev_dependency = True)
+
+# Node.js 22
+node_dev.toolchain(
+    name = "node22",
+    node_repositories = {
+        "22.22.0-darwin_arm64": ("node-v22.22.0-darwin-arm64.tar.gz", "node-v22.22.0-darwin-arm64", "5ed4db0fcf1eaf84d91ad12462631d73bf4576c1377e192d222e48026a902640"),
+        "22.22.0-darwin_amd64": ("node-v22.22.0-darwin-x64.tar.gz", "node-v22.22.0-darwin-x64", "5ea50c9d6dea3dfa3abb66b2656f7a4e1c8cef23432b558d45fb538c7b5dedce"),
+        "22.22.0-linux_arm64": ("node-v22.22.0-linux-arm64.tar.xz", "node-v22.22.0-linux-arm64", "1bf1eb9ee63ffc4e5d324c0b9b62cf4a289f44332dfef9607cea1a0d9596ba6f"),
+        "22.22.0-linux_ppc64le": ("node-v22.22.0-linux-ppc64le.tar.xz", "node-v22.22.0-linux-ppc64le", "d83b9957431cc18e1fc143a4b99f89cde7b8a18f53ef392231b4336afd058865"),
+        "22.22.0-linux_s390x": ("node-v22.22.0-linux-s390x.tar.xz", "node-v22.22.0-linux-s390x", "5aa0e520689448c4233e8d73f284e8e0634fdcd32b479735698494be5641f3e4"),
+        "22.22.0-linux_amd64": ("node-v22.22.0-linux-x64.tar.xz", "node-v22.22.0-linux-x64", "9aa8e9d2298ab68c600bd6fb86a6c13bce11a4eca1ba9b39d79fa021755d7c37"),
+        "22.22.0-windows_amd64": ("node-v22.22.0-win-x64.zip", "node-v22.22.0-win-x64", "c97fa376d2becdc8863fcd3ca2dd9a83a9f3468ee7ccf7a6d076ec66a645c77a"),
+    },
+    node_version = "22.22.0",
+)
+
+# Node.js 24
+node_dev.toolchain(
+    name = "node24",
+    node_repositories = {
+        "24.13.1-darwin_arm64": ("node-v24.13.1-darwin-arm64.tar.gz", "node-v24.13.1-darwin-arm64", "8c039d59f2fec6195e4281ad5b0d02b9a940897b4df7b849c6fb48be6787bba6"),
+        "24.13.1-darwin_amd64": ("node-v24.13.1-darwin-x64.tar.gz", "node-v24.13.1-darwin-x64", "527f0578d9812e7dfa225121bda0b1546a6a0e4b5f556295fc8299c272de5fbf"),
+        "24.13.1-linux_arm64": ("node-v24.13.1-linux-arm64.tar.xz", "node-v24.13.1-linux-arm64", "c827d3d301e2eed1a51f36d0116b71b9e3d9e3b728f081615270ea40faac34c1"),
+        "24.13.1-linux_ppc64le": ("node-v24.13.1-linux-ppc64le.tar.xz", "node-v24.13.1-linux-ppc64le", "fb712a08d317655dbf776c90f60ac2105109d802e33811df6c9ed33d12f801c6"),
+        "24.13.1-linux_s390x": ("node-v24.13.1-linux-s390x.tar.xz", "node-v24.13.1-linux-s390x", "8e2c0d9b5545c3db22623e8cb8d6f0c28fcd470f29d32dbeabf9432dda289de2"),
+        "24.13.1-linux_amd64": ("node-v24.13.1-linux-x64.tar.xz", "node-v24.13.1-linux-x64", "30215f90ea3cd04dfbc06e762c021393fa173a1d392974298bbc871a8e461089"),
+        "24.13.1-windows_amd64": ("node-v24.13.1-win-x64.zip", "node-v24.13.1-win-x64", "fba577c4bb87df04d54dd87bbdaa5a2272f1f99a2acbf9152e1a91b8b5f0b279"),
+    },
+    node_version = "24.13.1",
+)
+use_repo(
+    node_dev,
+    "node22_darwin_amd64",
+    "node22_darwin_arm64",
+    "node22_linux_amd64",
+    "node22_linux_arm64",
+    "node22_toolchains",
+    "node22_windows_amd64",
+    "node24_darwin_amd64",
+    "node24_darwin_arm64",
+    "node24_linux_amd64",
+    "node24_linux_arm64",
+    "node24_toolchains",
+    "node24_windows_amd64",
+)
+
+pnpm = use_extension("@aspect_rules_js//npm:extensions.bzl", "pnpm")
+pnpm.pnpm(
+    name = "pnpm",
+    pnpm_version = "10.32.1",
+    pnpm_version_integrity = "sha512-pwaTjw6JrBRWtlY+q07fHR+vM2jRGR/FxZeQ6W3JGORFarLmfWE94QQ9LoyB+HMD5rQNT/7KnfFe8a1Wc0jyvg==",
+)
+use_repo(pnpm, "pnpm")
+
+npm = use_extension("@aspect_rules_js//npm:extensions.bzl", "npm")
+npm.npm_translate_lock(
+    name = "npm",
+    custom_postinstalls = {
+        # TODO: Standardize browser management for `rules_js`
+        "webdriver-manager": "node ./bin/webdriver-manager update --standalone false --gecko false --versions.chrome 106.0.5249.21",
+    },
+    data = [
+        "//:package.json",
+        "//:pnpm-workspace.yaml",
+        "//modules/testing/builder:package.json",
+        "//packages/angular/build:package.json",
+        "//packages/angular/cli:package.json",
+        "//packages/angular/create/package.json",
+        "//packages/angular/pwa:package.json",
+        "//packages/angular/ssr:package.json",
+        "//packages/angular_devkit/architect:package.json",
+        "//packages/angular_devkit/build_angular:package.json",
+        "//packages/angular_devkit/build_webpack:package.json",
+        "//packages/angular_devkit/core:package.json",
+        "//packages/angular_devkit/schematics:package.json",
+        "//packages/angular_devkit/schematics_cli:package.json",
+        "//packages/ngtools/webpack:package.json",
+        "//packages/schematics/angular:package.json",
+        "//tests:package.json",
+    ],
+    lifecycle_hooks_envs = {
+        # TODO: Standardize browser management for `rules_js`
+        "puppeteer": ["PUPPETEER_DOWNLOAD_PATH=./downloads"],
+    },
+    lifecycle_hooks_execution_requirements = {
+        # Needed for downloading chromedriver.
+        # Also `update-config` of webdriver manager would store an absolute path;
+        # which would then break execution.
+        "webdriver-manager": ["local"],
+    },
+    npmrc = "//:.npmrc",
+    pnpm_lock = "//:pnpm-lock.yaml",
+)
+
+# This is needed as by default `.md` files are excluded from the npm package.
+# But @angular/core includes best-practices.md file.
+# See: https://github.com/aspect-build/rules_js/blob/786a74a158dd36ed073188b0e506c423cd05501a/npm/private/exclude_package_contents_presets.bzl#L29
+npm.npm_exclude_package_contents(
+    package = "@angular/core",
+    presets = [],
+)
+use_repo(npm, "npm")
+
+rules_ts_ext = use_extension("@aspect_rules_ts//ts:extensions.bzl", "ext")
+rules_ts_ext.deps(
+    name = "angular_cli_npm_typescript",
+    # Obtained by: npm info typescript@6.0.1-rc dist.integrity
+    ts_integrity = "sha512-7XlzYb+p/7YxX6qSOzwB4mxVFRdAgWWkj1PgAZ+jzldeuFV6Z77vwFbNxHsUXAL/bhlWY2jCT8shLwDJR8337g==",
+    ts_version = "6.0.1-rc",
+)
+use_repo(rules_ts_ext, **{"npm_typescript": "angular_cli_npm_typescript"})
+
+rules_angular = use_extension("@rules_angular//setup:extensions.bzl", "rules_angular")
+rules_angular.setup(
+    name = "components_rules_angular_configurable_deps",
+    angular_compiler_cli = "//:node_modules/@angular/compiler-cli",
+    typescript = "//:node_modules/typescript",
+)
+use_repo(rules_angular, **{"rules_angular_configurable_deps": "components_rules_angular_configurable_deps"})
+
+register_toolchains(
+    "@devinfra//bazel/git-toolchain:git_linux_toolchain",
+    "@devinfra//bazel/git-toolchain:git_macos_x86_toolchain",
+    "@devinfra//bazel/git-toolchain:git_macos_arm64_toolchain",
+    "@devinfra//bazel/git-toolchain:git_windows_toolchain",
+    "//tools/toolchains:dummy_cc_windows_no_exec_toolchain",
+)

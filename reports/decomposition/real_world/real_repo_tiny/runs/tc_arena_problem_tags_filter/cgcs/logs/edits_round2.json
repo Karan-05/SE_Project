@@ -1,0 +1,53 @@
+{
+  "round": 2,
+  "strategy": "cgcs",
+  "proposed_files": [
+    "modules/Problems/services/ProblemsService.js"
+  ],
+  "applied_files": [
+    "modules/Problems/services/ProblemsService.js"
+  ],
+  "status": "applied",
+  "metadata": {
+    "raw_edit_payload": "{\"edits\": [{\"path\": \"modules/Problems/services/ProblemsService.js\", \"mode\": \"rewrite\", \"content\": \"```json\\n{\\n  \\\"contract_review\\\": [\\n    {\\n      \\\"id\\\": \\\"single_tag_filter\\\",\\n      \\\"status\\\": \\\"covered\\\",\\n      \\\"notes\\\": \\\"The code normalizes single tag filters case-insensitively and returns metadata.appliedTags with lowercase tags.\\\"\\n    },\\n    {\\n      \\\"id\\\": \\\"multi_tag_union\\\",\\n      \\\"status\\\": \\\"covered\\\",\\n      \\\"notes\\\": \\\"Comma-separated tags are split, normalized, and problems matching any tag are included. Metadata.appliedTags includes all normalized tags.\\\"\\n    },\\n    {\\n      \\\"id\\\": \\\"array_tag_filter\\\",\\n      \\\"status\\\": \\\"covered\\\",\\n      \\\"notes\\\": \\\"tags[]=... array form is normalized and combined with difficulty filters, preserving ordering by roundId and limit of 50.\\\"\\n    }\\n  ],\\n  \\\"edits\\\": [\\n    {\\n      \\\"path\\\": \\\"modules/Problems/services/ProblemsService.js\\\",\\n      \\\"mode\\\": \\\"rewrite\\\",\\n      \\\"content\\\": \\\"'use strict';\\\\n\\\\n/*\\\\n * Copyright (c) 2016 TopCoder, Inc.\\\\n */\\\\n\\\\n/**\\\\n * Service for SRM problem APIs.\\\\n */\\\\nconst fs = require('fs');\\\\nconst path = require('path');\\\\nconst Joi = require('joi');\\\\nconst logger = require('../../../common/logger');\\\\n\\\\nlet cachedProblems;\\\\n\\\\nconst MAX_LIMIT = 50;\\\\n\\\\n/**\\\\n * Normalize tags filter into a lowercase array.\\\\n * @param {string|Array<string>} rawTags\\\\n * @returns {Array<string>}\\\\n */\\\\nfunction normalizeTags(rawTags) {\\\\n  if (!rawTags && rawTags !== '') {\\\\n    return [];\\\\n  }\\\\n  const list = Array.isArray(rawTags) ? rawTags : String(rawTags).split(',');\\\\n  return list\\\\n    .map((tag) => String(tag || '').trim().toLowerCase())\\\\n    .filter((tag) => tag);\\\\n}\\\\n\\\\n/**\\\\n * Check whether the problem contains at least one of the requested tags.\\\\n * @param {Object} problem\\\\n * @param {Array<string>} tags\\\\n * @returns {boolean}\\\\n */\\\\nfunction problemHasAnyTag(problem, tags) {\\\\n  if (!tags || tags.length === 0) return true;\\\\n  if (!problem.metadata || !problem.metadata.appliedTags) return false;\\\\n  const problemTags = problem.metadata.appliedTags.map((t) => t.toLowerCase());\\\\n  return tags.some((tag) => problemTags.includes(tag));\\\\n}\\\\n\\\\n/**\\\\n * Load problems from JSON file and cache them.\\\\n * @returns {Array<Object>}\\\\n */\\\\nfunction loadProblems() {\\\\n  if (cachedProblems) return cachedProblems;\\\\n  const filePath = path.join(__dirname, '..', '..', '..', 'data', 'problems.json');\\\\n  const raw = fs.readFileSync(filePath, 'utf8');\\\\n  cachedProblems = JSON.parse(raw);\\\\n  return cachedProblems;\\\\n}\\\\n\\\\n/**\\\\n * List problems with optional filtering and pagination.\\\\n * @param {Object} query\\\\n * @param {string|Array<string>} [query.tags] - tags filter, comma-separated string or array\\\\n * @param {string} [query.difficulty] - difficulty filter\\\\n * @param {number} [query.page] - page number (1-based)\\\\n * @returns {Promise<Object>} payload with problems and metadata\\\\n */\\\\nfunction* listProblems(query) {\\\\n  const problems = loadProblems();\\\\n\\\\n  // Normalize tags filter from query\\\\n  // Support ?tags\"}], \"localized\": true}",
+    "raw_payload": "{\"edits\": [{\"path\": \"modules/Problems/services/ProblemsService.js\", \"mode\": \"rewrite\", \"content\": \"```json\\n{\\n  \\\"contract_review\\\": [\\n    {\\n      \\\"id\\\": \\\"single_tag_filter\\\",\\n      \\\"status\\\": \\\"covered\\\",\\n      \\\"notes\\\": \\\"The code normalizes single tag filters case-insensitively and returns metadata.appliedTags with lowercase tags.\\\"\\n    },\\n    {\\n      \\\"id\\\": \\\"multi_tag_union\\\",\\n      \\\"status\\\": \\\"covered\\\",\\n      \\\"notes\\\": \\\"Comma-separated tags are split, normalized, and problems matching any tag are included. Metadata.appliedTags includes all normalized tags.\\\"\\n    },\\n    {\\n      \\\"id\\\": \\\"array_tag_filter\\\",\\n      \\\"status\\\": \\\"covered\\\",\\n      \\\"notes\\\": \\\"tags[]=... array form is normalized and combined with difficulty filters, preserving ordering by roundId and limit of 50.\\\"\\n    }\\n  ],\\n  \\\"edits\\\": [\\n    {\\n      \\\"path\\\": \\\"modules/Problems/services/ProblemsService.js\\\",\\n      \\\"mode\\\": \\\"rewrite\\\",\\n      \\\"content\\\": \\\"'use strict';\\\\n\\\\n/*\\\\n * Copyright (c) 2016 TopCoder, Inc.\\\\n */\\\\n\\\\n/**\\\\n * Service for SRM problem APIs.\\\\n */\\\\nconst fs = require('fs');\\\\nconst path = require('path');\\\\nconst Joi = require('joi');\\\\nconst logger = require('../../../common/logger');\\\\n\\\\nlet cachedProblems;\\\\n\\\\nconst MAX_LIMIT = 50;\\\\n\\\\n/**\\\\n * Normalize tags filter into a lowercase array.\\\\n * @param {string|Array<string>} rawTags\\\\n * @returns {Array<string>}\\\\n */\\\\nfunction normalizeTags(rawTags) {\\\\n  if (!rawTags && rawTags !== '') {\\\\n    return [];\\\\n  }\\\\n  const list = Array.isArray(rawTags) ? rawTags : String(rawTags).split(',');\\\\n  return list\\\\n    .map((tag) => String(tag || '').trim().toLowerCase())\\\\n    .filter((tag) => tag);\\\\n}\\\\n\\\\n/**\\\\n * Check whether the problem contains at least one of the requested tags.\\\\n * @param {Object} problem\\\\n * @param {Array<string>} tags\\\\n * @returns {boolean}\\\\n */\\\\nfunction problemHasAnyTag(problem, tags) {\\\\n  if (!tags || tags.length === 0) return true;\\\\n  if (!problem.metadata || !problem.metadata.appliedTags) return false;\\\\n  const problemTags = problem.metadata.appliedTags.map((t) => t.toLowerCase());\\\\n  return tags.some((tag) => problemTags.includes(tag));\\\\n}\\\\n\\\\n/**\\\\n * Load problems from JSON file and cache them.\\\\n * @returns {Array<Object>}\\\\n */\\\\nfunction loadProblems() {\\\\n  if (cachedProblems) return cachedProblems;\\\\n  const filePath = path.join(__dirname, '..', '..', '..', 'data', 'problems.json');\\\\n  const raw = fs.readFileSync(filePath, 'utf8');\\\\n  cachedProblems = JSON.parse(raw);\\\\n  return cachedProblems;\\\\n}\\\\n\\\\n/**\\\\n * List problems with optional filtering and pagination.\\\\n * @param {Object} query\\\\n * @param {string|Array<string>} [query.tags] - tags filter, comma-separated string or array\\\\n * @param {string} [query.difficulty] - difficulty filter\\\\n * @param {number} [query.page] - page number (1-based)\\\\n * @returns {Promise<Object>} payload with problems and metadata\\\\n */\\\\nfunction* listProblems(query) {\\\\n  const problems = loadProblems();\\\\n\\\\n  // Normalize tags filter from query\\\\n  // Support ?tags\"}], \"localized\": true}",
+    "payload_parse_ok": true,
+    "payload_parse_error": "",
+    "candidate_files_raw": [
+      "test/problems.tags.spec.js",
+      "modules/Problems/services/ProblemsService.js",
+      "modules/Problems/controllers/ProblemsController.js",
+      "data/problems.json",
+      "node_modules/js-beautify/CHANGELOG.md",
+      "node_modules/js-beautify/README.md",
+      "node_modules/lodash/core.js",
+      "node_modules/lodash/lodash.js",
+      "test/problems.list.spec.js",
+      "package-lock.json",
+      "node_modules/.package-lock.json",
+      "node_modules/globals/globals.json"
+    ],
+    "candidate_files_filtered": [
+      "modules/Problems/services/ProblemsService.js"
+    ],
+    "candidate_files": [
+      "modules/Problems/services/ProblemsService.js"
+    ],
+    "strategy_mode": "cgcs",
+    "edit_mode": "edit_batch",
+    "localized_requested": true,
+    "fallback_requested": false,
+    "raw_metadata_keys": [
+      "localized"
+    ],
+    "applied_file_count": 1,
+    "proposed_file_count": 1,
+    "multi_file_applied": false,
+    "subtask_focus": "contract::multi_tag_union"
+  },
+  "error": "",
+  "proposed_file_count": 1,
+  "applied_file_count": 1,
+  "multi_file_proposed": false,
+  "multi_file_applied": false
+}

@@ -1,0 +1,815 @@
+{
+  "task_id": "public_pilot_darlal_obsidian_switcher_plus_000",
+  "strategy": "cgcs",
+  "plan": {
+    "strategy": "cgcs",
+    "contract_items": [
+      {
+        "id": "M000_comparison_flip_2abb0d97",
+        "label": "Should use `>` (not `>=`) for correct boundary check",
+        "description": "[comparison_flip] In `src/main.ts` (line 6): Comparison operator changed from `>` to `>=`. Should use `>` (not `>=`) for correct boundary check.",
+        "category": "boundary_condition",
+        "expected_behavior": "Should use `>` (not `>=`) for correct boundary check",
+        "test_refs": [],
+        "priority": "",
+        "source": "",
+        "notes": "",
+        "keywords": [
+          "comparison_flip",
+          "src/main.ts",
+          "6"
+        ]
+      }
+    ],
+    "contract": {
+      "clauses": [
+        "[comparison_flip] In `src/main.ts` (line 6): Comparison operator changed from `>` to `>=`. Should use `>` (not `>=`) for correct boundary check."
+      ],
+      "categories": [
+        "boundary_condition"
+      ],
+      "mapping": {
+        "M000_comparison_flip_2abb0d97": "[comparison_flip] In `src/main.ts` (line 6): Comparison operator changed from `>` to `>=`. Should use `>` (not `>=`) for correct boundary check."
+      }
+    },
+    "patterns": [],
+    "subtasks": [
+      "contract::M000_comparison_flip_2abb0d97",
+      "Generate minimal unit tests for critical behaviors",
+      "Add adversarial/edge-case tests",
+      "Run tests and interpret failures",
+      "Repair implementation and re-run tests"
+    ],
+    "tests": [
+      "critical unit tests",
+      "edge-case probes"
+    ],
+    "diagnostics": {
+      "contract_clause_count": "1",
+      "contract_ids": "M000_comparison_flip_2abb0d97"
+    },
+    "target_files": [
+      "src/main.ts"
+    ],
+    "candidate_files": [
+      "src/main.ts"
+    ],
+    "subtask_file_map": {
+      "contract::M000_comparison_flip_2abb0d97": [
+        "src/main.ts"
+      ]
+    }
+  },
+  "rounds": [
+    {
+      "round": 0,
+      "phase": "initial",
+      "subtask": "plan",
+      "localized": false,
+      "pass_rate": 0.0,
+      "status": "tests_failed",
+      "duration": 0.6667031659999338,
+      "failing_tests": [
+        "tests_0"
+      ],
+      "error_types": [
+        "fail::"
+      ],
+      "file_count": 1,
+      "multi_file_attempt": false,
+      "files_touched": [
+        "src/main.ts"
+      ],
+      "inspected_files": [
+        "src/main.ts"
+      ],
+      "proposed_files": [
+        "src/main.ts"
+      ],
+      "edit_metadata": {
+        "raw_edit_payload": "{\"edits\": [{\"path\": \"src/main.ts\", \"mode\": \"rewrite\", \"content\": \"[MOCK] fafa73d5cfe8e7f1 :: You are executing decomposition strategy 'cgcs' on a real repository task. Repository workspace: `/Users/karanallagh/Des\"}], \"localized\": true}",
+        "raw_payload": "{\"edits\": [{\"path\": \"src/main.ts\", \"mode\": \"rewrite\", \"content\": \"[MOCK] fafa73d5cfe8e7f1 :: You are executing decomposition strategy 'cgcs' on a real repository task. Repository workspace: `/Users/karanallagh/Des\"}], \"localized\": true}",
+        "payload_parse_ok": true,
+        "payload_parse_error": "",
+        "candidate_files_raw": [
+          "src/main.ts",
+          "README.md",
+          "src/switcherPlus/__tests__/switcherPlusKeymap.test.ts",
+          "src/switcherPlus/switcherPlusKeymap.ts",
+          "src/settings/__tests__/switcherPlusSettings.test.ts",
+          "package.json",
+          "src/settings/generalSettingsTabSection.ts",
+          "src/settings/switcherPlusSettings.ts",
+          "src/switcherPlus/inputParser.ts",
+          "src/switcherPlus/modeHandler.ts",
+          "src/switcherPlus/__tests__/modeHandler.test.ts",
+          "src/switcherPlus/__tests__/modeHandler.perf.test.ts"
+        ],
+        "candidate_files_filtered": [
+          "src/main.ts"
+        ],
+        "candidate_files": [
+          "src/main.ts"
+        ],
+        "strategy_mode": "cgcs",
+        "edit_mode": "edit_batch",
+        "localized_requested": true,
+        "fallback_requested": false,
+        "raw_metadata_keys": [
+          "localized"
+        ],
+        "applied_file_count": 1,
+        "proposed_file_count": 1,
+        "multi_file_applied": false,
+        "subtask_focus": "global",
+        "contract_coverage": 0.0,
+        "contract_satisfied": [],
+        "contract_unsatisfied": [
+          "M000_comparison_flip_2abb0d97"
+        ],
+        "contract_failure_categories": {
+          "boundary_condition": 1
+        },
+        "contract_unsatisfied_details": [
+          "M000_comparison_flip_2abb0d97: [comparison_flip] In `src/main.ts` (line 6): Comparison operator changed from `>` to `>=`. Should use `>` (not `>=`) for correct boundary check."
+        ],
+        "contract_fail_cases": [],
+        "contract_items": [
+          {
+            "id": "M000_comparison_flip_2abb0d97",
+            "label": "Should use `>` (not `>=`) for correct boundary check",
+            "description": "[comparison_flip] In `src/main.ts` (line 6): Comparison operator changed from `>` to `>=`. Should use `>` (not `>=`) for correct boundary check.",
+            "category": "boundary_condition",
+            "expected_behavior": "Should use `>` (not `>=`) for correct boundary check",
+            "test_refs": [],
+            "priority": "",
+            "source": "",
+            "notes": "",
+            "keywords": [
+              "comparison_flip",
+              "src/main.ts",
+              "6"
+            ]
+          }
+        ],
+        "witness_count": 1,
+        "witness_samples": [
+          {
+            "test_case": "tests_0",
+            "message": "sh: jest: command not found",
+            "category": "missing_resource",
+            "expected": "",
+            "actual": "",
+            "contracts": []
+          }
+        ],
+        "cgcs_state": {
+          "round": 0,
+          "round_index": 0,
+          "strategy": "cgcs",
+          "task_id": "public_pilot_darlal_obsidian_switcher_plus_000",
+          "contract_items": [
+            {
+              "id": "M000_comparison_flip_2abb0d97",
+              "label": "Should use `>` (not `>=`) for correct boundary check",
+              "description": "[comparison_flip] In `src/main.ts` (line 6): Comparison operator changed from `>` to `>=`. Should use `>` (not `>=`) for correct boundary check.",
+              "category": "boundary_condition",
+              "expected_behavior": "Should use `>` (not `>=`) for correct boundary check",
+              "test_refs": [],
+              "priority": "",
+              "source": "",
+              "notes": "",
+              "keywords": [
+                "comparison_flip",
+                "src/main.ts",
+                "6"
+              ]
+            }
+          ],
+          "active_clause_id": "M000_comparison_flip_2abb0d97",
+          "active_clause": "M000_comparison_flip_2abb0d97",
+          "regression_guard_ids": [],
+          "witnesses": [
+            {
+              "signature": "481cbd2f9db521bff061acf116767477effc7624",
+              "test_case": "tests_0",
+              "message": "sh: jest: command not found",
+              "expected": "",
+              "actual": "",
+              "location": "/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_darlal_obsidian_switcher_plus_000/cgcs/logs/tests_0_round1.log",
+              "category": "missing_resource",
+              "linked_contract_ids": []
+            }
+          ],
+          "raw_edit_payload": "{\"edits\": [{\"path\": \"src/main.ts\", \"mode\": \"rewrite\", \"content\": \"[MOCK] fafa73d5cfe8e7f1 :: You are executing decomposition strategy 'cgcs' on a real repository task. Repository workspace: `/Users/karanallagh/Des\"}], \"localized\": true}",
+          "payload_parse_ok": true,
+          "payload_parse_error": "",
+          "candidate_files": [
+            "src/main.ts"
+          ],
+          "candidate_files_raw": [
+            "src/main.ts",
+            "README.md",
+            "src/switcherPlus/__tests__/switcherPlusKeymap.test.ts",
+            "src/switcherPlus/switcherPlusKeymap.ts",
+            "src/settings/__tests__/switcherPlusSettings.test.ts",
+            "package.json",
+            "src/settings/generalSettingsTabSection.ts",
+            "src/settings/switcherPlusSettings.ts",
+            "src/switcherPlus/inputParser.ts",
+            "src/switcherPlus/modeHandler.ts",
+            "src/switcherPlus/__tests__/modeHandler.test.ts",
+            "src/switcherPlus/__tests__/modeHandler.perf.test.ts"
+          ],
+          "candidate_files_filtered": [
+            "src/main.ts"
+          ],
+          "clause_selection_reason": "initial_clause_seed",
+          "row_quality": {
+            "contract_quality": "strong",
+            "contract_item_count": 1,
+            "active_clause_source": "initial_clause_seed",
+            "active_clause_present": true,
+            "witness_count": 1,
+            "witness_unique_count": 1,
+            "payload_present": true,
+            "payload_parse_ok": true,
+            "candidate_file_count": 1,
+            "clause_selection_reason": "initial_clause_seed",
+            "skipped_targets_present": false,
+            "lint_error_count": 0,
+            "used_fallback": false,
+            "strategy_mode": "cgcs_clause",
+            "regression_guard_count": 0
+          },
+          "lint_errors": [],
+          "skipped_targets": [],
+          "outcome_metrics": {
+            "status": "tests_failed",
+            "pass_rate": 0.0,
+            "duration": 0.6667031659999338,
+            "failing_tests": [
+              "tests_0"
+            ],
+            "error_types": [
+              "fail::"
+            ]
+          },
+          "coverage": 0.0,
+          "satisfied_ids": [],
+          "unsatisfied_ids": [
+            "M000_comparison_flip_2abb0d97"
+          ],
+          "regressed_ids": [],
+          "witness_counts": {
+            "M000_comparison_flip_2abb0d97": 0
+          },
+          "witness_sample": [
+            {
+              "signature": "481cbd2f9db521bff061acf116767477effc7624",
+              "test_case": "tests_0",
+              "message": "sh: jest: command not found",
+              "expected": "",
+              "actual": "",
+              "location": "/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_darlal_obsidian_switcher_plus_000/cgcs/logs/tests_0_round1.log",
+              "category": "missing_resource",
+              "linked_contract_ids": []
+            }
+          ],
+          "regression_guards": []
+        },
+        "witnesses": [
+          {
+            "signature": "481cbd2f9db521bff061acf116767477effc7624",
+            "test_case": "tests_0",
+            "message": "sh: jest: command not found",
+            "expected": "",
+            "actual": "",
+            "location": "/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_darlal_obsidian_switcher_plus_000/cgcs/logs/tests_0_round1.log",
+            "category": "missing_resource",
+            "linked_contract_ids": []
+          }
+        ],
+        "row_quality": {
+          "contract_quality": "strong",
+          "contract_item_count": 1,
+          "active_clause_source": "initial_clause_seed",
+          "active_clause_present": true,
+          "witness_count": 1,
+          "witness_unique_count": 1,
+          "payload_present": true,
+          "payload_parse_ok": true,
+          "candidate_file_count": 1,
+          "clause_selection_reason": "initial_clause_seed",
+          "skipped_targets_present": false,
+          "lint_error_count": 0,
+          "used_fallback": false,
+          "strategy_mode": "cgcs_clause",
+          "regression_guard_count": 0
+        },
+        "regression_guard_ids": [],
+        "active_clause_id": "M000_comparison_flip_2abb0d97"
+      }
+    },
+    {
+      "round": 1,
+      "phase": "repair",
+      "subtask": "contract::M000_comparison_flip_2abb0d97",
+      "localized": true,
+      "pass_rate": 0.0,
+      "status": "tests_failed",
+      "duration": 0.13430870799857075,
+      "failing_tests": [
+        "tests_0"
+      ],
+      "error_types": [
+        "fail::"
+      ],
+      "file_count": 1,
+      "multi_file_attempt": false,
+      "files_touched": [
+        "src/main.ts"
+      ],
+      "inspected_files": [
+        "src/main.ts"
+      ],
+      "proposed_files": [
+        "src/main.ts"
+      ],
+      "edit_metadata": {
+        "raw_edit_payload": "{\"edits\": [{\"path\": \"src/main.ts\", \"mode\": \"rewrite\", \"content\": \"[MOCK] 43f977739a927582 :: You are repairing a repository-backed change produced by strategy 'cgcs'. Repository workspace: `/Users/karanallagh/Desk\"}], \"localized\": true}",
+        "raw_payload": "{\"edits\": [{\"path\": \"src/main.ts\", \"mode\": \"rewrite\", \"content\": \"[MOCK] 43f977739a927582 :: You are repairing a repository-backed change produced by strategy 'cgcs'. Repository workspace: `/Users/karanallagh/Desk\"}], \"localized\": true}",
+        "payload_parse_ok": true,
+        "payload_parse_error": "",
+        "candidate_files_raw": [
+          "src/main.ts",
+          "README.md",
+          "src/switcherPlus/__tests__/switcherPlusKeymap.test.ts",
+          "src/switcherPlus/switcherPlusKeymap.ts",
+          "src/settings/__tests__/switcherPlusSettings.test.ts",
+          "package.json",
+          "src/settings/generalSettingsTabSection.ts",
+          "src/settings/switcherPlusSettings.ts",
+          "src/switcherPlus/inputParser.ts",
+          "src/switcherPlus/modeHandler.ts",
+          "src/switcherPlus/__tests__/modeHandler.test.ts",
+          "src/switcherPlus/__tests__/modeHandler.perf.test.ts"
+        ],
+        "candidate_files_filtered": [
+          "src/main.ts"
+        ],
+        "candidate_files": [
+          "src/main.ts"
+        ],
+        "strategy_mode": "cgcs",
+        "edit_mode": "edit_batch",
+        "localized_requested": true,
+        "fallback_requested": false,
+        "raw_metadata_keys": [
+          "localized"
+        ],
+        "applied_file_count": 1,
+        "proposed_file_count": 1,
+        "multi_file_applied": false,
+        "subtask_focus": "contract::M000_comparison_flip_2abb0d97",
+        "contract_coverage": 0.0,
+        "contract_satisfied": [],
+        "contract_unsatisfied": [
+          "M000_comparison_flip_2abb0d97"
+        ],
+        "contract_failure_categories": {
+          "boundary_condition": 1
+        },
+        "contract_unsatisfied_details": [
+          "M000_comparison_flip_2abb0d97: [comparison_flip] In `src/main.ts` (line 6): Comparison operator changed from `>` to `>=`. Should use `>` (not `>=`) for correct boundary check."
+        ],
+        "contract_fail_cases": [],
+        "contract_items": [
+          {
+            "id": "M000_comparison_flip_2abb0d97",
+            "label": "Should use `>` (not `>=`) for correct boundary check",
+            "description": "[comparison_flip] In `src/main.ts` (line 6): Comparison operator changed from `>` to `>=`. Should use `>` (not `>=`) for correct boundary check.",
+            "category": "boundary_condition",
+            "expected_behavior": "Should use `>` (not `>=`) for correct boundary check",
+            "test_refs": [],
+            "priority": "",
+            "source": "",
+            "notes": "",
+            "keywords": [
+              "comparison_flip",
+              "src/main.ts",
+              "6"
+            ]
+          }
+        ],
+        "witness_count": 1,
+        "witness_samples": [
+          {
+            "test_case": "tests_0",
+            "message": "sh: jest: command not found",
+            "category": "missing_resource",
+            "expected": "",
+            "actual": "",
+            "contracts": []
+          }
+        ],
+        "cgcs_state": {
+          "round": 1,
+          "round_index": 1,
+          "strategy": "cgcs",
+          "task_id": "public_pilot_darlal_obsidian_switcher_plus_000",
+          "contract_items": [
+            {
+              "id": "M000_comparison_flip_2abb0d97",
+              "label": "Should use `>` (not `>=`) for correct boundary check",
+              "description": "[comparison_flip] In `src/main.ts` (line 6): Comparison operator changed from `>` to `>=`. Should use `>` (not `>=`) for correct boundary check.",
+              "category": "boundary_condition",
+              "expected_behavior": "Should use `>` (not `>=`) for correct boundary check",
+              "test_refs": [],
+              "priority": "",
+              "source": "",
+              "notes": "",
+              "keywords": [
+                "comparison_flip",
+                "src/main.ts",
+                "6"
+              ]
+            }
+          ],
+          "active_clause_id": "M000_comparison_flip_2abb0d97",
+          "active_clause": "M000_comparison_flip_2abb0d97",
+          "regression_guard_ids": [],
+          "witnesses": [
+            {
+              "signature": "481cbd2f9db521bff061acf116767477effc7624",
+              "test_case": "tests_0",
+              "message": "sh: jest: command not found",
+              "expected": "",
+              "actual": "",
+              "location": "/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_darlal_obsidian_switcher_plus_000/cgcs/logs/tests_0_round2.log",
+              "category": "missing_resource",
+              "linked_contract_ids": []
+            }
+          ],
+          "raw_edit_payload": "{\"edits\": [{\"path\": \"src/main.ts\", \"mode\": \"rewrite\", \"content\": \"[MOCK] 43f977739a927582 :: You are repairing a repository-backed change produced by strategy 'cgcs'. Repository workspace: `/Users/karanallagh/Desk\"}], \"localized\": true}",
+          "payload_parse_ok": true,
+          "payload_parse_error": "",
+          "candidate_files": [
+            "src/main.ts"
+          ],
+          "candidate_files_raw": [
+            "src/main.ts",
+            "README.md",
+            "src/switcherPlus/__tests__/switcherPlusKeymap.test.ts",
+            "src/switcherPlus/switcherPlusKeymap.ts",
+            "src/settings/__tests__/switcherPlusSettings.test.ts",
+            "package.json",
+            "src/settings/generalSettingsTabSection.ts",
+            "src/settings/switcherPlusSettings.ts",
+            "src/switcherPlus/inputParser.ts",
+            "src/switcherPlus/modeHandler.ts",
+            "src/switcherPlus/__tests__/modeHandler.test.ts",
+            "src/switcherPlus/__tests__/modeHandler.perf.test.ts"
+          ],
+          "candidate_files_filtered": [
+            "src/main.ts"
+          ],
+          "clause_selection_reason": "unsatisfied_clause_priority",
+          "row_quality": {
+            "contract_quality": "strong",
+            "contract_item_count": 1,
+            "active_clause_source": "unsatisfied_clause_priority",
+            "active_clause_present": true,
+            "witness_count": 1,
+            "witness_unique_count": 1,
+            "payload_present": true,
+            "payload_parse_ok": true,
+            "candidate_file_count": 1,
+            "clause_selection_reason": "unsatisfied_clause_priority",
+            "skipped_targets_present": false,
+            "lint_error_count": 0,
+            "used_fallback": false,
+            "strategy_mode": "cgcs_clause",
+            "regression_guard_count": 0
+          },
+          "lint_errors": [],
+          "skipped_targets": [],
+          "outcome_metrics": {
+            "status": "tests_failed",
+            "pass_rate": 0.0,
+            "duration": 0.13430870799857075,
+            "failing_tests": [
+              "tests_0"
+            ],
+            "error_types": [
+              "fail::"
+            ]
+          },
+          "coverage": 0.0,
+          "satisfied_ids": [],
+          "unsatisfied_ids": [
+            "M000_comparison_flip_2abb0d97"
+          ],
+          "regressed_ids": [],
+          "witness_counts": {
+            "M000_comparison_flip_2abb0d97": 0
+          },
+          "witness_sample": [
+            {
+              "signature": "481cbd2f9db521bff061acf116767477effc7624",
+              "test_case": "tests_0",
+              "message": "sh: jest: command not found",
+              "expected": "",
+              "actual": "",
+              "location": "/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_darlal_obsidian_switcher_plus_000/cgcs/logs/tests_0_round2.log",
+              "category": "missing_resource",
+              "linked_contract_ids": []
+            }
+          ],
+          "regression_guards": []
+        },
+        "witnesses": [
+          {
+            "signature": "481cbd2f9db521bff061acf116767477effc7624",
+            "test_case": "tests_0",
+            "message": "sh: jest: command not found",
+            "expected": "",
+            "actual": "",
+            "location": "/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_darlal_obsidian_switcher_plus_000/cgcs/logs/tests_0_round2.log",
+            "category": "missing_resource",
+            "linked_contract_ids": []
+          }
+        ],
+        "row_quality": {
+          "contract_quality": "strong",
+          "contract_item_count": 1,
+          "active_clause_source": "unsatisfied_clause_priority",
+          "active_clause_present": true,
+          "witness_count": 1,
+          "witness_unique_count": 1,
+          "payload_present": true,
+          "payload_parse_ok": true,
+          "candidate_file_count": 1,
+          "clause_selection_reason": "unsatisfied_clause_priority",
+          "skipped_targets_present": false,
+          "lint_error_count": 0,
+          "used_fallback": false,
+          "strategy_mode": "cgcs_clause",
+          "regression_guard_count": 0
+        },
+        "regression_guard_ids": [],
+        "active_clause_id": "M000_comparison_flip_2abb0d97"
+      }
+    },
+    {
+      "round": 2,
+      "phase": "repair",
+      "subtask": "contract::M000_comparison_flip_2abb0d97",
+      "localized": true,
+      "pass_rate": 0.0,
+      "status": "tests_failed",
+      "duration": 0.10901216600177577,
+      "failing_tests": [
+        "tests_0"
+      ],
+      "error_types": [
+        "fail::"
+      ],
+      "file_count": 1,
+      "multi_file_attempt": false,
+      "files_touched": [
+        "src/main.ts"
+      ],
+      "inspected_files": [
+        "src/main.ts"
+      ],
+      "proposed_files": [
+        "src/main.ts"
+      ],
+      "edit_metadata": {
+        "raw_edit_payload": "{\"edits\": [{\"path\": \"src/main.ts\", \"mode\": \"rewrite\", \"content\": \"[MOCK] 43f977739a927582 :: You are repairing a repository-backed change produced by strategy 'cgcs'. Repository workspace: `/Users/karanallagh/Desk\"}], \"localized\": true}",
+        "raw_payload": "{\"edits\": [{\"path\": \"src/main.ts\", \"mode\": \"rewrite\", \"content\": \"[MOCK] 43f977739a927582 :: You are repairing a repository-backed change produced by strategy 'cgcs'. Repository workspace: `/Users/karanallagh/Desk\"}], \"localized\": true}",
+        "payload_parse_ok": true,
+        "payload_parse_error": "",
+        "candidate_files_raw": [
+          "src/main.ts",
+          "README.md",
+          "src/switcherPlus/__tests__/switcherPlusKeymap.test.ts",
+          "src/switcherPlus/switcherPlusKeymap.ts",
+          "src/settings/__tests__/switcherPlusSettings.test.ts",
+          "package.json",
+          "src/settings/generalSettingsTabSection.ts",
+          "src/settings/switcherPlusSettings.ts",
+          "src/switcherPlus/inputParser.ts",
+          "src/switcherPlus/modeHandler.ts",
+          "src/switcherPlus/__tests__/modeHandler.test.ts",
+          "src/switcherPlus/__tests__/modeHandler.perf.test.ts"
+        ],
+        "candidate_files_filtered": [
+          "src/main.ts"
+        ],
+        "candidate_files": [
+          "src/main.ts"
+        ],
+        "strategy_mode": "cgcs",
+        "edit_mode": "edit_batch",
+        "localized_requested": true,
+        "fallback_requested": false,
+        "raw_metadata_keys": [
+          "localized"
+        ],
+        "applied_file_count": 1,
+        "proposed_file_count": 1,
+        "multi_file_applied": false,
+        "subtask_focus": "contract::M000_comparison_flip_2abb0d97",
+        "contract_coverage": 0.0,
+        "contract_satisfied": [],
+        "contract_unsatisfied": [
+          "M000_comparison_flip_2abb0d97"
+        ],
+        "contract_failure_categories": {
+          "boundary_condition": 1
+        },
+        "contract_unsatisfied_details": [
+          "M000_comparison_flip_2abb0d97: [comparison_flip] In `src/main.ts` (line 6): Comparison operator changed from `>` to `>=`. Should use `>` (not `>=`) for correct boundary check."
+        ],
+        "contract_fail_cases": [],
+        "contract_items": [
+          {
+            "id": "M000_comparison_flip_2abb0d97",
+            "label": "Should use `>` (not `>=`) for correct boundary check",
+            "description": "[comparison_flip] In `src/main.ts` (line 6): Comparison operator changed from `>` to `>=`. Should use `>` (not `>=`) for correct boundary check.",
+            "category": "boundary_condition",
+            "expected_behavior": "Should use `>` (not `>=`) for correct boundary check",
+            "test_refs": [],
+            "priority": "",
+            "source": "",
+            "notes": "",
+            "keywords": [
+              "comparison_flip",
+              "src/main.ts",
+              "6"
+            ]
+          }
+        ],
+        "witness_count": 1,
+        "witness_samples": [
+          {
+            "test_case": "tests_0",
+            "message": "sh: jest: command not found",
+            "category": "missing_resource",
+            "expected": "",
+            "actual": "",
+            "contracts": []
+          }
+        ],
+        "cgcs_state": {
+          "round": 2,
+          "round_index": 2,
+          "strategy": "cgcs",
+          "task_id": "public_pilot_darlal_obsidian_switcher_plus_000",
+          "contract_items": [
+            {
+              "id": "M000_comparison_flip_2abb0d97",
+              "label": "Should use `>` (not `>=`) for correct boundary check",
+              "description": "[comparison_flip] In `src/main.ts` (line 6): Comparison operator changed from `>` to `>=`. Should use `>` (not `>=`) for correct boundary check.",
+              "category": "boundary_condition",
+              "expected_behavior": "Should use `>` (not `>=`) for correct boundary check",
+              "test_refs": [],
+              "priority": "",
+              "source": "",
+              "notes": "",
+              "keywords": [
+                "comparison_flip",
+                "src/main.ts",
+                "6"
+              ]
+            }
+          ],
+          "active_clause_id": "M000_comparison_flip_2abb0d97",
+          "active_clause": "M000_comparison_flip_2abb0d97",
+          "regression_guard_ids": [],
+          "witnesses": [
+            {
+              "signature": "481cbd2f9db521bff061acf116767477effc7624",
+              "test_case": "tests_0",
+              "message": "sh: jest: command not found",
+              "expected": "",
+              "actual": "",
+              "location": "/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_darlal_obsidian_switcher_plus_000/cgcs/logs/tests_0_round3.log",
+              "category": "missing_resource",
+              "linked_contract_ids": []
+            }
+          ],
+          "raw_edit_payload": "{\"edits\": [{\"path\": \"src/main.ts\", \"mode\": \"rewrite\", \"content\": \"[MOCK] 43f977739a927582 :: You are repairing a repository-backed change produced by strategy 'cgcs'. Repository workspace: `/Users/karanallagh/Desk\"}], \"localized\": true}",
+          "payload_parse_ok": true,
+          "payload_parse_error": "",
+          "candidate_files": [
+            "src/main.ts"
+          ],
+          "candidate_files_raw": [
+            "src/main.ts",
+            "README.md",
+            "src/switcherPlus/__tests__/switcherPlusKeymap.test.ts",
+            "src/switcherPlus/switcherPlusKeymap.ts",
+            "src/settings/__tests__/switcherPlusSettings.test.ts",
+            "package.json",
+            "src/settings/generalSettingsTabSection.ts",
+            "src/settings/switcherPlusSettings.ts",
+            "src/switcherPlus/inputParser.ts",
+            "src/switcherPlus/modeHandler.ts",
+            "src/switcherPlus/__tests__/modeHandler.test.ts",
+            "src/switcherPlus/__tests__/modeHandler.perf.test.ts"
+          ],
+          "candidate_files_filtered": [
+            "src/main.ts"
+          ],
+          "clause_selection_reason": "unsatisfied_clause_priority",
+          "row_quality": {
+            "contract_quality": "strong",
+            "contract_item_count": 1,
+            "active_clause_source": "unsatisfied_clause_priority",
+            "active_clause_present": true,
+            "witness_count": 1,
+            "witness_unique_count": 1,
+            "payload_present": true,
+            "payload_parse_ok": true,
+            "candidate_file_count": 1,
+            "clause_selection_reason": "unsatisfied_clause_priority",
+            "skipped_targets_present": false,
+            "lint_error_count": 0,
+            "used_fallback": false,
+            "strategy_mode": "cgcs_clause",
+            "regression_guard_count": 0
+          },
+          "lint_errors": [],
+          "skipped_targets": [],
+          "outcome_metrics": {
+            "status": "tests_failed",
+            "pass_rate": 0.0,
+            "duration": 0.10901216600177577,
+            "failing_tests": [
+              "tests_0"
+            ],
+            "error_types": [
+              "fail::"
+            ]
+          },
+          "coverage": 0.0,
+          "satisfied_ids": [],
+          "unsatisfied_ids": [
+            "M000_comparison_flip_2abb0d97"
+          ],
+          "regressed_ids": [],
+          "witness_counts": {
+            "M000_comparison_flip_2abb0d97": 0
+          },
+          "witness_sample": [
+            {
+              "signature": "481cbd2f9db521bff061acf116767477effc7624",
+              "test_case": "tests_0",
+              "message": "sh: jest: command not found",
+              "expected": "",
+              "actual": "",
+              "location": "/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_darlal_obsidian_switcher_plus_000/cgcs/logs/tests_0_round3.log",
+              "category": "missing_resource",
+              "linked_contract_ids": []
+            }
+          ],
+          "regression_guards": []
+        },
+        "witnesses": [
+          {
+            "signature": "481cbd2f9db521bff061acf116767477effc7624",
+            "test_case": "tests_0",
+            "message": "sh: jest: command not found",
+            "expected": "",
+            "actual": "",
+            "location": "/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_darlal_obsidian_switcher_plus_000/cgcs/logs/tests_0_round3.log",
+            "category": "missing_resource",
+            "linked_contract_ids": []
+          }
+        ],
+        "row_quality": {
+          "contract_quality": "strong",
+          "contract_item_count": 1,
+          "active_clause_source": "unsatisfied_clause_priority",
+          "active_clause_present": true,
+          "witness_count": 1,
+          "witness_unique_count": 1,
+          "payload_present": true,
+          "payload_parse_ok": true,
+          "candidate_file_count": 1,
+          "clause_selection_reason": "unsatisfied_clause_priority",
+          "skipped_targets_present": false,
+          "lint_error_count": 0,
+          "used_fallback": false,
+          "strategy_mode": "cgcs_clause",
+          "regression_guard_count": 0
+        },
+        "regression_guard_ids": [],
+        "active_clause_id": "M000_comparison_flip_2abb0d97"
+      }
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "input_rows": 22023,
+  "selected_rows": 3966,
+  "rejections": {
+    "missing_test_signal": 6652,
+    "duplicate": 10585,
+    "missing_repo": 5455,
+    "weak_executable_signal": 7259
+  },
+  "filters": {
+    "min_submissions": 1,
+    "min_prize": 0.0,
+    "require_tests": true,
+    "tracks": [
+      "development",
+      "qa",
+      "quality assurance"
+    ],
+    "technologies": [],
+    "tags": [],
+    "posted_after": ""
+  },
+  "output_file": "data/topcoder/executable_subset.jsonl",
+  "rejections_file": "data/topcoder/executable_subset_rejections.jsonl"
+}

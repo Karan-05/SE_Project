@@ -74,7 +74,7 @@
       "localized": false,
       "pass_rate": 0.0,
       "status": "tests_failed",
-      "duration": 1.9221642080228776,
+      "duration": 1.165158667000469,
       "failing_tests": [
         "tests_0"
       ],
@@ -102,6 +102,7 @@
         "raw_metadata_keys": [
           "localized"
         ],
+        "raw_payload": "{\"edits\": [{\"path\": \"modules/Problems/services/ProblemsService.js\", \"mode\": \"rewrite\", \"content\": \"```json\\n{\\n  \\\"contract_review\\\": [\\n    {\\n      \\\"id\\\": \\\"aggregation\\\",\\n      \\\"status\\\": \\\"covered\\\",\\n      \\\"notes\\\": \\\"The service aggregates componentStats including languages, statusCounts, and maxPoints from the problem's components array.\\\"\\n    },\\n    {\\n      \\\"id\\\": \\\"error_handling\\\",\\n      \\\"status\\\": \\\"covered\\\",\\n      \\\"notes\\\": \\\"The service returns null for unknown problemId, and the controller returns 404 with JSON { message } accordingly.\\\"\\n    },\\n    {\\n      \\\"id\\\": \\\"architecture\\\",\\n      \\\"status\\\": \\\"covered\\\",\\n      \\\"notes\\\": \\\"The controller delegates aggregation to the service and does not mutate global state or filter data itself.\\\"\\n    }\\n  ],\\n  \\\"edits\\\": [\\n    {\\n      \\\"path\\\": \\\"modules/Problems/services/ProblemsService.js\\\",\\n      \\\"mode\\\": \\\"rewrite\\\",\\n      \\\"content\\\": \\\"'use strict';\\\\n\\\\n/*\\\\n * Copyright (c) 2016 TopCoder, Inc.\\\\n */\\\\n\\\\n/**\\\\n * Service for SRM problem APIs.\\\\n */\\\\nconst fs = require('fs');\\\\nconst path = require('path');\\\\nconst Joi = require('joi');\\\\nconst logger = require('../../../common/logger');\\\\n\\\\nlet cachedProblems;\\\\n\\\\nconst MAX_LIMIT = 50;\\\\n\\\\n/**\\\\n * Normalize tags filter into a lowercase array.\\\\n * @param {string|Array<string>} rawTags\\\\n * @returns {Array<string>}\\\\n */\\\\nfunction normalizeTags(rawTags) {\\\\n  if (!rawTags && rawTags !== '') {\\\\n    return [];\\\\n  }\\\\n  const list = Array.isArray(rawTags) ? rawTags : String(rawTags).split(',');\\\\n  return list\\\\n    .map((tag) => String(tag || '').trim().toLowerCase())\\\\n    .filter((tag) => tag);\\\\n}\\\\n\\\\n/**\\\\n * Check whether the problem contains at least one of the requested tags.\\\\n * @param {Object} problem\\\\n * @param {Array<string>} tags\\\\n * @returns {boolean}\\\\n */\\\\nfunction problemHasTags(problem, tags) {\\\\n  if (!tags || tags.length === 0) {\\\\n    return true;\\\\n  }\\\\n  if (!problem.tags || !Array.isArray(problem.tags)) {\\\\n    return false;\\\\n  }\\\\n  const problemTags = problem.tags.map((t) => t.toLowerCase());\\\\n  return tags.some((tag) => problemTags.includes(tag));\\\\n}\\\\n\\\\n/**\\\\n * Load problems from JSON file, cache in memory.\\\\n * @returns {Array<Object>} problems\\\\n */\\\\nfunction loadProblems() {\\\\n  if (cachedProblems) {\\\\n    return cachedProblems;\\\\n  }\\\\n  const filePath = path.join(__dirname, '..', '..', '..', 'data', 'problems.json');\\\\n  const raw = fs.readFileSync(filePath, 'utf8');\\\\n  cachedProblems = JSON.parse(raw);\\\\n  return cachedProblems;\\\\n}\\\\n\\\\n/**\\\\n * Aggregate component statistics for a problem.\\\\n * @param {Object} problem\\\\n * @returns {Object} componentStats\\\\n */\\\\nfunction aggregateComponentStats(problem) {\\\\n  const languages = {};\\\\n  const statusCounts = {};\\\\n  let maxPoints = 0;\\\\n\\\\n  if (problem.components && Array.isArray(problem.components)) {\\\\n    for (const comp of problem.components) {\\\\n      // Count languages\\\\n      if (comp.language) {\\\\n        languages[comp.language] = (languages[comp.language] || 0) + 1\"}], \"localized\": true}",
         "applied_file_count": 1,
         "proposed_file_count": 1,
         "multi_file_applied": false,
@@ -122,7 +123,52 @@
           "component_stats_payload: Detail responses must include componentStats.languages/statusCounts/maxPoints derived from each problem's components array.",
           "controller_service_boundary: Keep the controller thin: delegate aggregation to the service without mutating global state or controller-side filtering."
         ],
-        "contract_fail_cases": []
+        "contract_fail_cases": [],
+        "witness_count": 1,
+        "witness_samples": [
+          {
+            "test_case": "tests_0",
+            "message": "Exception during run: /Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo/runs/tc_arena_problem_detail/failure_mode_first/worksp",
+            "category": "assertion",
+            "expected": "",
+            "actual": "",
+            "contracts": []
+          }
+        ],
+        "cgcs_state": {
+          "round": 0,
+          "active_clause": "controller_service_boundary",
+          "satisfied_ids": [
+            "missing_problem_404"
+          ],
+          "unsatisfied_ids": [
+            "component_stats_payload",
+            "controller_service_boundary"
+          ],
+          "regressed_ids": [],
+          "regression_guards": [
+            "missing_problem_404"
+          ],
+          "witness_counts": {
+            "component_stats_payload": 1,
+            "missing_problem_404": 0,
+            "controller_service_boundary": 1
+          },
+          "witness_sample": [
+            {
+              "test_case": "tests_0",
+              "message": "Exception during run: /Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo/runs/tc_arena_problem_detail/failure_mode_first/workspace/modules/Problems",
+              "category": "assertion",
+              "expected": "",
+              "actual": "",
+              "linked_contract_ids": [
+                "component_stats_payload",
+                "controller_service_boundary"
+              ]
+            }
+          ],
+          "coverage": 0.3333333333333333
+        }
       }
     },
     {
@@ -132,7 +178,7 @@
       "localized": true,
       "pass_rate": 0.0,
       "status": "tests_failed",
-      "duration": 1.3873404590412974,
+      "duration": 0.4877699159997064,
       "failing_tests": [
         "tests_0"
       ],
@@ -160,6 +206,7 @@
         "raw_metadata_keys": [
           "localized"
         ],
+        "raw_payload": "{\"edits\": [{\"path\": \"modules/Problems/services/ProblemsService.js\", \"mode\": \"rewrite\", \"content\": \"```json\\n{\\n  \\\"edits\\\": [\\n    {\\n      \\\"path\\\": \\\"modules/Problems/services/ProblemsService.js\\\",\\n      \\\"mode\\\": \\\"rewrite\\\",\\n      \\\"content\\\": \\\"'use strict';\\\\n\\\\n/*\\\\n * Copyright (c) 2016 TopCoder, Inc.\\\\n */\\\\n\\\\n/**\\\\n * Service for SRM problem APIs.\\\\n */\\\\nconst fs = require('fs');\\\\nconst path = require('path');\\\\nconst Joi = require('joi');\\\\nconst logger = require('../../../common/logger');\\\\n\\\\nlet cachedProblems;\\\\n\\\\nconst MAX_LIMIT = 50;\\\\n\\\\n/**\\\\n * Normalize tags filter into a lowercase array.\\\\n * @param {string|Array<string>} rawTags\\\\n * @returns {Array<string>}\\\\n */\\\\nfunction normalizeTags(rawTags) {\\\\n  if (!rawTags && rawTags !== '') {\\\\n    return [];\\\\n  }\\\\n  const list = Array.isArray(rawTags) ? rawTags : String(rawTags).split(',');\\\\n  return list\\\\n    .map((tag) => String(tag || '').trim().toLowerCase())\\\\n    .filter((tag) => tag);\\\\n}\\\\n\\\\n/**\\\\n * Check whether the problem contains at least one of the requested tags.\\\\n * @param {Object} problem\\\\n * @param {Array<string>} tags\\\\n * @returns {boolean}\\\\n */\\\\nfunction problemHasTags(problem, tags) {\\\\n  if (!tags || tags.length === 0) return true;\\\\n  if (!problem.tags || !Array.isArray(problem.tags)) return false;\\\\n  const problemTags = problem.tags.map((t) => t.toLowerCase());\\\\n  return tags.some((tag) => problemTags.includes(tag));\\\\n}\\\\n\\\\n/**\\\\n * Load problems from data file, caching the result.\\\\n * @returns {Array<Object>}\\\\n */\\\\nfunction loadProblems() {\\\\n  if (cachedProblems) return cachedProblems;\\\\n  const filePath = path.join(__dirname, '..', '..', '..', 'data', 'problems.json');\\\\n  const content = fs.readFileSync(filePath, 'utf8');\\\\n  cachedProblems = JSON.parse(content);\\\\n  return cachedProblems;\\\\n}\\\\n\\\\n/**\\\\n * Aggregate component statistics for a problem.\\\\n * @param {Object} problem\\\\n * @returns {Object} componentStats\\\\n */\\\\nfunction aggregateComponentStats(problem) {\\\\n  const componentStats = {\\\\n    languages: {},\\\\n    statusCounts: {},\\\\n    maxPoints: 0\\\\n  };\\\\n  if (!problem.components || !Array.isArray(problem.components)) {\\\\n    return componentStats;\\\\n  }\\\\n  problem.components.forEach((component) => {\\\\n    // Aggregate languages\\\\n    if (component.language) {\\\\n      componentStats.languages[component.language] = (componentStats.languages[component.language] || 0) + 1;\\\\n    }\\\\n    // Aggregate status counts\\\\n    if (component.status) {\\\\n      componentStats.statusCounts[component.status] = (componentStats.statusCounts[component.status] || 0) + 1;\\\\n    }\\\\n    // Track max points\\\\n    if (typeof component.points === 'number' && component.points > componentStats.maxPoints) {\\\\n      componentStats.maxPoints = component.points;\\\\n    }\\\\n  });\\\\n  return componentStats;\\\\n}\\\\n\\\\n/**\\\\n * List problems with optional filtering and pagination.\\\\n * @param {Object} query\\\\n * @returns {Promise<Object>} payload\\\\n */\\\\nfunction*\"}], \"localized\": true}",
         "applied_file_count": 1,
         "proposed_file_count": 1,
         "multi_file_applied": false,
@@ -180,7 +227,52 @@
           "component_stats_payload: Detail responses must include componentStats.languages/statusCounts/maxPoints derived from each problem's components array.",
           "controller_service_boundary: Keep the controller thin: delegate aggregation to the service without mutating global state or controller-side filtering."
         ],
-        "contract_fail_cases": []
+        "contract_fail_cases": [],
+        "witness_count": 1,
+        "witness_samples": [
+          {
+            "test_case": "tests_0",
+            "message": "Exception during run: /Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo/runs/tc_arena_problem_detail/failure_mode_first/worksp",
+            "category": "assertion",
+            "expected": "",
+            "actual": "",
+            "contracts": []
+          }
+        ],
+        "cgcs_state": {
+          "round": 1,
+          "active_clause": "controller_service_boundary",
+          "satisfied_ids": [
+            "missing_problem_404"
+          ],
+          "unsatisfied_ids": [
+            "component_stats_payload",
+            "controller_service_boundary"
+          ],
+          "regressed_ids": [],
+          "regression_guards": [
+            "missing_problem_404"
+          ],
+          "witness_counts": {
+            "component_stats_payload": 1,
+            "missing_problem_404": 0,
+            "controller_service_boundary": 1
+          },
+          "witness_sample": [
+            {
+              "test_case": "tests_0",
+              "message": "Exception during run: /Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo/runs/tc_arena_problem_detail/failure_mode_first/workspace/modules/Problems",
+              "category": "assertion",
+              "expected": "",
+              "actual": "",
+              "linked_contract_ids": [
+                "component_stats_payload",
+                "controller_service_boundary"
+              ]
+            }
+          ],
+          "coverage": 0.3333333333333333
+        }
       }
     },
     {
@@ -190,7 +282,7 @@
       "localized": true,
       "pass_rate": 0.0,
       "status": "tests_failed",
-      "duration": 1.5045254590222612,
+      "duration": 0.40487095800017414,
       "failing_tests": [
         "tests_0"
       ],
@@ -218,6 +310,7 @@
         "raw_metadata_keys": [
           "localized"
         ],
+        "raw_payload": "{\"edits\": [{\"path\": \"modules/Problems/services/ProblemsService.js\", \"mode\": \"rewrite\", \"content\": \"```json\\n{\\n  \\\"edits\\\": [\\n    {\\n      \\\"path\\\": \\\"modules/Problems/services/ProblemsService.js\\\",\\n      \\\"mode\\\": \\\"rewrite\\\",\\n      \\\"content\\\": \\\"'use strict';\\\\n\\\\n/*\\\\n * Copyright (c) 2016 TopCoder, Inc.\\\\n */\\\\n\\\\n/**\\\\n * Service for SRM problem APIs.\\\\n */\\\\nconst fs = require('fs');\\\\nconst path = require('path');\\\\nconst Joi = require('joi');\\\\nconst logger = require('../../../common/logger');\\\\n\\\\nlet cachedProblems;\\\\n\\\\nconst MAX_LIMIT = 50;\\\\n\\\\n/**\\\\n * Normalize tags filter into a lowercase array.\\\\n * @param {string|Array<string>} rawTags\\\\n * @returns {Array<string>}\\\\n */\\\\nfunction normalizeTags(rawTags) {\\\\n  if (!rawTags && rawTags !== '') {\\\\n    return [];\\\\n  }\\\\n  const list = Array.isArray(rawTags) ? rawTags : String(rawTags).split(',');\\\\n  return list\\\\n    .map((tag) => String(tag || '').trim().toLowerCase())\\\\n    .filter((tag) => tag);\\\\n}\\\\n\\\\n/**\\\\n * Check whether the problem contains at least one of the requested tags.\\\\n * @param {Object} problem\\\\n * @param {Array<string>} tags\\\\n * @returns {boolean}\\\\n */\\\\nfunction problemHasTags(problem, tags) {\\\\n  if (!tags || tags.length === 0) return true;\\\\n  if (!problem.tags || !Array.isArray(problem.tags)) return false;\\\\n  const problemTags = problem.tags.map((t) => t.toLowerCase());\\\\n  return tags.some((tag) => problemTags.includes(tag));\\\\n}\\\\n\\\\n/**\\\\n * Load problems from JSON file, cache them.\\\\n * @returns {Array<Object>}\\\\n */\\\\nfunction loadProblems() {\\\\n  if (cachedProblems) return cachedProblems;\\\\n  const filePath = path.resolve(__dirname, '../../data/problems.json');\\\\n  const raw = fs.readFileSync(filePath, 'utf8');\\\\n  cachedProblems = JSON.parse(raw);\\\\n  return cachedProblems;\\\\n}\\\\n\\\\n/**\\\\n * Aggregate component statistics for a problem.\\\\n * @param {Object} problem\\\\n * @returns {Object} componentStats\\\\n */\\\\nfunction aggregateComponentStats(problem) {\\\\n  const languages = {};\\\\n  const statusCounts = {};\\\\n  let maxPoints = 0;\\\\n\\\\n  if (problem.components && Array.isArray(problem.components)) {\\\\n    for (const comp of problem.components) {\\\\n      // Count languages\\\\n      if (comp.language) {\\\\n        languages[comp.language] = (languages[comp.language] || 0) + 1;\\\\n      }\\\\n      // Count status\\\\n      if (comp.status) {\\\\n        statusCounts[comp.status] = (statusCounts[comp.status] || 0) + 1;\\\\n      }\\\\n      // Track max points\\\\n      if (typeof comp.points === 'number' && comp.points > maxPoints) {\\\\n        maxPoints = comp.points;\\\\n      }\\\\n    }\\\\n  }\\\\n\\\\n  return {\\\\n    languages,\\\\n    statusCounts,\\\\n    maxPoints\\\\n  };\\\\n}\\\\n\\\\n/**\\\\n * List problems with optional filtering and pagination.\\\\n * @param {Object} query\\\\n * @returns {Promise<Object>} payload\\\\n */\\\\nfunction* listProblems(query) {\\\\n  const problems = loadProblems();\\\\n\\\\n  // Normalize tags filter\"}], \"localized\": true}",
         "applied_file_count": 1,
         "proposed_file_count": 1,
         "multi_file_applied": false,
@@ -238,7 +331,52 @@
           "component_stats_payload: Detail responses must include componentStats.languages/statusCounts/maxPoints derived from each problem's components array.",
           "controller_service_boundary: Keep the controller thin: delegate aggregation to the service without mutating global state or controller-side filtering."
         ],
-        "contract_fail_cases": []
+        "contract_fail_cases": [],
+        "witness_count": 1,
+        "witness_samples": [
+          {
+            "test_case": "tests_0",
+            "message": "Exception during run: /Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo/runs/tc_arena_problem_detail/failure_mode_first/worksp",
+            "category": "assertion",
+            "expected": "",
+            "actual": "",
+            "contracts": []
+          }
+        ],
+        "cgcs_state": {
+          "round": 2,
+          "active_clause": "controller_service_boundary",
+          "satisfied_ids": [
+            "missing_problem_404"
+          ],
+          "unsatisfied_ids": [
+            "component_stats_payload",
+            "controller_service_boundary"
+          ],
+          "regressed_ids": [],
+          "regression_guards": [
+            "missing_problem_404"
+          ],
+          "witness_counts": {
+            "component_stats_payload": 1,
+            "missing_problem_404": 0,
+            "controller_service_boundary": 1
+          },
+          "witness_sample": [
+            {
+              "test_case": "tests_0",
+              "message": "Exception during run: /Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo/runs/tc_arena_problem_detail/failure_mode_first/workspace/modules/Problems",
+              "category": "assertion",
+              "expected": "",
+              "actual": "",
+              "linked_contract_ids": [
+                "component_stats_payload",
+                "controller_service_boundary"
+              ]
+            }
+          ],
+          "coverage": 0.3333333333333333
+        }
       }
     }
   ]

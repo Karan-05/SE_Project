@@ -1,0 +1,1 @@
+{"content": "[MOCK] 06855d7fce51db0c :: You are repairing code produced by strategy 'cgcs'. Problem statement: You are fixing a seeded bug in the repository `gi", "tokens": 179, "elapsed": 5.832996976096183e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "cgcs:repair"}}

@@ -1,0 +1,821 @@
+{
+  "task_id": "public_pilot_maziggy_bambuddy_005",
+  "strategy": "cgcs",
+  "plan": {
+    "strategy": "cgcs",
+    "contract_items": [
+      {
+        "id": "M000_off_by_one_afe45163",
+        "label": "Should be `- 1` (not `- 2`)",
+        "description": "[off_by_one] In `backend/app/services/spoolman_tracking.py` (line 42): Off-by-one: `- 1` changed to `- 2`. Should be `- 1` (not `- 2`).",
+        "category": "off_by_one",
+        "expected_behavior": "Should be `- 1` (not `- 2`)",
+        "test_refs": [],
+        "priority": "",
+        "source": "",
+        "notes": "",
+        "keywords": [
+          "off_by_one",
+          "backend/app/services/spoolman_tracking.py",
+          "42"
+        ]
+      }
+    ],
+    "contract": {
+      "clauses": [
+        "[off_by_one] In `backend/app/services/spoolman_tracking.py` (line 42): Off-by-one: `- 1` changed to `- 2`. Should be `- 1` (not `- 2`)."
+      ],
+      "categories": [
+        "off_by_one"
+      ],
+      "mapping": {
+        "M000_off_by_one_afe45163": "[off_by_one] In `backend/app/services/spoolman_tracking.py` (line 42): Off-by-one: `- 1` changed to `- 2`. Should be `- 1` (not `- 2`)."
+      }
+    },
+    "patterns": [],
+    "subtasks": [
+      "contract::M000_off_by_one_afe45163",
+      "Generate minimal unit tests for critical behaviors",
+      "Add adversarial/edge-case tests",
+      "Run tests and interpret failures",
+      "Repair implementation and re-run tests"
+    ],
+    "tests": [
+      "critical unit tests",
+      "edge-case probes"
+    ],
+    "diagnostics": {
+      "contract_clause_count": "1",
+      "contract_ids": "M000_off_by_one_afe45163"
+    },
+    "target_files": [
+      "backend/app/services/spoolman_tracking.py"
+    ],
+    "candidate_files": [
+      "backend/app/services/spoolman_tracking.py"
+    ],
+    "subtask_file_map": {
+      "contract::M000_off_by_one_afe45163": [
+        "backend/app/services/spoolman_tracking.py"
+      ]
+    }
+  },
+  "rounds": [
+    {
+      "round": 0,
+      "phase": "initial",
+      "subtask": "plan",
+      "localized": false,
+      "pass_rate": 0.0,
+      "status": "tests_failed",
+      "duration": 2.3477377500094008,
+      "failing_tests": [
+        "tests_0"
+      ],
+      "error_types": [
+        "fail::"
+      ],
+      "file_count": 1,
+      "multi_file_attempt": false,
+      "files_touched": [
+        "backend/app/services/spoolman_tracking.py"
+      ],
+      "inspected_files": [
+        "backend/app/services/spoolman_tracking.py"
+      ],
+      "proposed_files": [
+        "backend/app/services/spoolman_tracking.py"
+      ],
+      "edit_metadata": {
+        "raw_edit_payload": "{\"edits\": [{\"path\": \"backend/app/services/spoolman_tracking.py\", \"mode\": \"rewrite\", \"content\": \"```json\\n{\\n  \\\"edits\\\": [\\n    {\\n      \\\"path\\\": \\\"backend/app/services/spoolman_tracking.py\\\",\\n      \\\"mode\\\": \\\"rewrite\\\",\\n      \\\"content\\\": \\\"\\\\\\\"\\\\\\\"\\\\\\\"Spoolman per-filament usage tracking for active prints.\\\\n\\\\nCaptures AMS tray state and G-code data at print start, then reports\\\\nper-filament usage to the correct Spoolman spools at print completion.\\\\nSupports accurate partial usage reporting for failed/cancelled prints.\\\\n\\\\\\\"\\\\\\\"\\\\\\\"\\\\n\\\\nimport json\\\\nimport logging\\\\n\\\\nfrom sqlalchemy import delete, select\\\\n\\\\nfrom backend.app.core.config import settings as app_settings\\\\nfrom backend.app.core.database import async_session\\\\nfrom backend.app.services.spoolman import get_spoolman_client, init_spoolman_client\\\\n\\\\nlogger = logging.getLogger(__name__)\\\\n\\\\n# Zero UUID used by Bambu printers for empty/unset tray_uuid\\\\n_ZERO_UUID = \\\\\\\"00000000000000000000000000000000\\\\\\\"\\\\n\\\\n\\\\ndef _resolve_spool_tag(tray_info: dict) -> str:\\\\n    \\\\\\\"\\\\\\\"\\\\\\\"Get the best spool identifier from tray info (prefer tray_uuid, fallback to spool_id).\\\\\\\"\\\\\\\"\\\\\\\"\\\\n    if not tray_info:\\\\n        return \\\\\\\"\\\\\\\"\\\\n    tray_uuid = tray_info.get(\\\\\\\"tray_uuid\\\\\\\", \\\\\\\"\\\\\\\")\\\\n    if tray_uuid and tray_uuid != _ZERO_UUID:\\\\n        return tray_uuid\\\\n    # Fallback to spool_id if tray_uuid is empty or zero UUID\\\\n    return tray_info.get(\\\\\\\"spool_id\\\\\\\", \\\\\\\"\\\\\\\")\\\\n\\\\n\\\\ndef _parse_gcode_filament_usage(gcode_data: str) -> dict:\\\\n    \\\\\\\"\\\\\\\"\\\\\\\"Parse G-code data to extract filament usage per tool.\\\\n\\\\n    Returns a dict mapping tool index (int) to filament used (float).\\\\n    \\\\\\\"\\\\\\\"\\\\\\\"\\\\n    usage = {}\\\\n    for line in gcode_data.splitlines():\\\\n        line = line.strip()\\\\n        if line.startswith(\\\\\\\"; filament used (mm) per tool:\\\\\\\"):\\\\n            # Next lines contain usage info\\\\n            continue\\\\n        if line.startswith(\\\\\\\"; T\\\\\\\") and \\\\\\\":\\\\\\\" in line:\\\\n            # Example line: ; T0: 123.45\\\\n            try:\\\\n                parts = line[1:].split(\\\\\\\":\\\\\\\")\\\\n                tool_str = parts[0].strip()  # e.g. 'T0'\\\\n                amount_str = parts[1].strip()\\\\n                tool_idx = int(tool_str[1:])\\\\n                amount = float(amount_str)\\\\n                usage[tool_idx] = amount\\\\n            except Exception:\\\\n                pass\\\\n    return usage\\\\n\\\\n\\\\ndef _get_filament_usage_delta(start_usage: dict, end_usage: dict) -> dict:\\\\n    \\\\\\\"\\\\\\\"\\\\\\\"Calculate filament usage delta between start and end usage dicts.\\\\n\\\\n    Returns a dict mapping tool index to delta usage (float).\\\\n    \\\\\\\"\\\\\\\"\\\\\\\"\\\\n    delta = {}\\\\n    for tool_idx, end_val in end_usage.items():\\\\n        start_val = start_usage.get(tool_idx, 0.0)\\\\n        diff = end_val - start_val\\\\n        if diff < 0:\\\\n            # Defensive: usage should not go backwards, clamp to 0\\\\n            diff = 0.0\\\\n        delta[tool_idx] = diff\\\\n    return delta\\\\n\\\\n\\\\nasync def track_spoolman_usage(print_job_id: str, tray_info_start: dict, tray_info_end: dict, gcode_start: str, gcode_end: str):\\\\n    \\\\\\\"\\\\\\\"\\\\\\\"Track filament usage for a print job and report to Spoolman.\\\\n\\\\n    Arguments:\\\\n\"}], \"localized\": true}",
+        "raw_payload": "{\"edits\": [{\"path\": \"backend/app/services/spoolman_tracking.py\", \"mode\": \"rewrite\", \"content\": \"```json\\n{\\n  \\\"edits\\\": [\\n    {\\n      \\\"path\\\": \\\"backend/app/services/spoolman_tracking.py\\\",\\n      \\\"mode\\\": \\\"rewrite\\\",\\n      \\\"content\\\": \\\"\\\\\\\"\\\\\\\"\\\\\\\"Spoolman per-filament usage tracking for active prints.\\\\n\\\\nCaptures AMS tray state and G-code data at print start, then reports\\\\nper-filament usage to the correct Spoolman spools at print completion.\\\\nSupports accurate partial usage reporting for failed/cancelled prints.\\\\n\\\\\\\"\\\\\\\"\\\\\\\"\\\\n\\\\nimport json\\\\nimport logging\\\\n\\\\nfrom sqlalchemy import delete, select\\\\n\\\\nfrom backend.app.core.config import settings as app_settings\\\\nfrom backend.app.core.database import async_session\\\\nfrom backend.app.services.spoolman import get_spoolman_client, init_spoolman_client\\\\n\\\\nlogger = logging.getLogger(__name__)\\\\n\\\\n# Zero UUID used by Bambu printers for empty/unset tray_uuid\\\\n_ZERO_UUID = \\\\\\\"00000000000000000000000000000000\\\\\\\"\\\\n\\\\n\\\\ndef _resolve_spool_tag(tray_info: dict) -> str:\\\\n    \\\\\\\"\\\\\\\"\\\\\\\"Get the best spool identifier from tray info (prefer tray_uuid, fallback to spool_id).\\\\\\\"\\\\\\\"\\\\\\\"\\\\n    if not tray_info:\\\\n        return \\\\\\\"\\\\\\\"\\\\n    tray_uuid = tray_info.get(\\\\\\\"tray_uuid\\\\\\\", \\\\\\\"\\\\\\\")\\\\n    if tray_uuid and tray_uuid != _ZERO_UUID:\\\\n        return tray_uuid\\\\n    # Fallback to spool_id if tray_uuid is empty or zero UUID\\\\n    return tray_info.get(\\\\\\\"spool_id\\\\\\\", \\\\\\\"\\\\\\\")\\\\n\\\\n\\\\ndef _parse_gcode_filament_usage(gcode_data: str) -> dict:\\\\n    \\\\\\\"\\\\\\\"\\\\\\\"Parse G-code data to extract filament usage per tool.\\\\n\\\\n    Returns a dict mapping tool index (int) to filament used (float).\\\\n    \\\\\\\"\\\\\\\"\\\\\\\"\\\\n    usage = {}\\\\n    for line in gcode_data.splitlines():\\\\n        line = line.strip()\\\\n        if line.startswith(\\\\\\\"; filament used (mm) per tool:\\\\\\\"):\\\\n            # Next lines contain usage info\\\\n            continue\\\\n        if line.startswith(\\\\\\\"; T\\\\\\\") and \\\\\\\":\\\\\\\" in line:\\\\n            # Example line: ; T0: 123.45\\\\n            try:\\\\n                parts = line[1:].split(\\\\\\\":\\\\\\\")\\\\n                tool_str = parts[0].strip()  # e.g. 'T0'\\\\n                amount_str = parts[1].strip()\\\\n                tool_idx = int(tool_str[1:])\\\\n                amount = float(amount_str)\\\\n                usage[tool_idx] = amount\\\\n            except Exception:\\\\n                pass\\\\n    return usage\\\\n\\\\n\\\\ndef _get_filament_usage_delta(start_usage: dict, end_usage: dict) -> dict:\\\\n    \\\\\\\"\\\\\\\"\\\\\\\"Calculate filament usage delta between start and end usage dicts.\\\\n\\\\n    Returns a dict mapping tool index to delta usage (float).\\\\n    \\\\\\\"\\\\\\\"\\\\\\\"\\\\n    delta = {}\\\\n    for tool_idx, end_val in end_usage.items():\\\\n        start_val = start_usage.get(tool_idx, 0.0)\\\\n        diff = end_val - start_val\\\\n        if diff < 0:\\\\n            # Defensive: usage should not go backwards, clamp to 0\\\\n            diff = 0.0\\\\n        delta[tool_idx] = diff\\\\n    return delta\\\\n\\\\n\\\\nasync def track_spoolman_usage(print_job_id: str, tray_info_start: dict, tray_info_end: dict, gcode_start: str, gcode_end: str):\\\\n    \\\\\\\"\\\\\\\"\\\\\\\"Track filament usage for a print job and report to Spoolman.\\\\n\\\\n    Arguments:\\\\n\"}], \"localized\": true}",
+        "payload_parse_ok": true,
+        "payload_parse_error": "",
+        "candidate_files_raw": [
+          "backend/app/services/spoolman_tracking.py",
+          "backend/app/services/github_backup.py",
+          "CHANGELOG.md",
+          "README.md",
+          "CONTRIBUTING.md",
+          "backend/app/main.py",
+          "backend/app/services/virtual_printer/manager.py",
+          ".github/MAINTAINERS.md",
+          "backend/tests/unit/services/test_spoolman_tracking.py",
+          "backend/app/core/database.py",
+          "backend/tests/unit/services/test_background_dispatch.py",
+          "backend/app/services/print_scheduler.py"
+        ],
+        "candidate_files_filtered": [
+          "backend/app/services/spoolman_tracking.py"
+        ],
+        "candidate_files": [
+          "backend/app/services/spoolman_tracking.py"
+        ],
+        "strategy_mode": "cgcs",
+        "edit_mode": "edit_batch",
+        "localized_requested": true,
+        "fallback_requested": false,
+        "raw_metadata_keys": [
+          "localized"
+        ],
+        "applied_file_count": 1,
+        "proposed_file_count": 1,
+        "multi_file_applied": false,
+        "subtask_focus": "global",
+        "contract_coverage": 1.0,
+        "contract_satisfied": [
+          "M000_off_by_one_afe45163"
+        ],
+        "contract_unsatisfied": [],
+        "contract_failure_categories": {},
+        "contract_unsatisfied_details": [],
+        "contract_fail_cases": [],
+        "contract_items": [
+          {
+            "id": "M000_off_by_one_afe45163",
+            "label": "Should be `- 1` (not `- 2`)",
+            "description": "[off_by_one] In `backend/app/services/spoolman_tracking.py` (line 42): Off-by-one: `- 1` changed to `- 2`. Should be `- 1` (not `- 2`).",
+            "category": "off_by_one",
+            "expected_behavior": "Should be `- 1` (not `- 2`)",
+            "test_refs": [],
+            "priority": "",
+            "source": "",
+            "notes": "",
+            "keywords": [
+              "off_by_one",
+              "backend/app/services/spoolman_tracking.py",
+              "42"
+            ]
+          }
+        ],
+        "witness_count": 1,
+        "witness_samples": [
+          {
+            "test_case": "tests_0",
+            "message": "ImportError while loading conftest '/Users/karanallagh/Desktop/DataCollector/data/public_repos/pilot/runs/public_pilot_maziggy_bambuddy_005/cgcs/workspace/backe",
+            "category": "general",
+            "expected": "",
+            "actual": "",
+            "contracts": []
+          }
+        ],
+        "cgcs_state": {
+          "round": 0,
+          "round_index": 0,
+          "strategy": "cgcs",
+          "task_id": "public_pilot_maziggy_bambuddy_005",
+          "contract_items": [
+            {
+              "id": "M000_off_by_one_afe45163",
+              "label": "Should be `- 1` (not `- 2`)",
+              "description": "[off_by_one] In `backend/app/services/spoolman_tracking.py` (line 42): Off-by-one: `- 1` changed to `- 2`. Should be `- 1` (not `- 2`).",
+              "category": "off_by_one",
+              "expected_behavior": "Should be `- 1` (not `- 2`)",
+              "test_refs": [],
+              "priority": "",
+              "source": "",
+              "notes": "",
+              "keywords": [
+                "off_by_one",
+                "backend/app/services/spoolman_tracking.py",
+                "42"
+              ]
+            }
+          ],
+          "active_clause_id": "M000_off_by_one_afe45163",
+          "active_clause": "M000_off_by_one_afe45163",
+          "regression_guard_ids": [
+            "M000_off_by_one_afe45163"
+          ],
+          "witnesses": [
+            {
+              "signature": "3d82f7af1a4cffa64a5ee128c5cd3f00e87214c5",
+              "test_case": "tests_0",
+              "message": "ImportError while loading conftest '/Users/karanallagh/Desktop/DataCollector/data/public_repos/pilot/runs/public_pilot_maziggy_bambuddy_005/cgcs/workspace/backend/tests/conftest.py'.\nbackend/tests/conftest.py:22: in <module>\n    from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine  # noqa: E402\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   ModuleNotFoundError: No module named 'sqlalchemy'",
+              "expected": "",
+              "actual": "",
+              "location": "/Users/karanallagh/Desktop/DataCollector/data/public_repos/pilot/runs/public_pilot_maziggy_bambuddy_005/cgcs/logs/tests_0_round1.log",
+              "category": "general",
+              "linked_contract_ids": []
+            }
+          ],
+          "raw_edit_payload": "{\"edits\": [{\"path\": \"backend/app/services/spoolman_tracking.py\", \"mode\": \"rewrite\", \"content\": \"```json\\n{\\n  \\\"edits\\\": [\\n    {\\n      \\\"path\\\": \\\"backend/app/services/spoolman_tracking.py\\\",\\n      \\\"mode\\\": \\\"rewrite\\\",\\n      \\\"content\\\": \\\"\\\\\\\"\\\\\\\"\\\\\\\"Spoolman per-filament usage tracking for active prints.\\\\n\\\\nCaptures AMS tray state and G-code data at print start, then reports\\\\nper-filament usage to the correct Spoolman spools at print completion.\\\\nSupports accurate partial usage reporting for failed/cancelled prints.\\\\n\\\\\\\"\\\\\\\"\\\\\\\"\\\\n\\\\nimport json\\\\nimport logging\\\\n\\\\nfrom sqlalchemy import delete, select\\\\n\\\\nfrom backend.app.core.config import settings as app_settings\\\\nfrom backend.app.core.database import async_session\\\\nfrom backend.app.services.spoolman import get_spoolman_client, init_spoolman_client\\\\n\\\\nlogger = logging.getLogger(__name__)\\\\n\\\\n# Zero UUID used by Bambu printers for empty/unset tray_uuid\\\\n_ZERO_UUID = \\\\\\\"00000000000000000000000000000000\\\\\\\"\\\\n\\\\n\\\\ndef _resolve_spool_tag(tray_info: dict) -> str:\\\\n    \\\\\\\"\\\\\\\"\\\\\\\"Get the best spool identifier from tray info (prefer tray_uuid, fallback to spool_id).\\\\\\\"\\\\\\\"\\\\\\\"\\\\n    if not tray_info:\\\\n        return \\\\\\\"\\\\\\\"\\\\n    tray_uuid = tray_info.get(\\\\\\\"tray_uuid\\\\\\\", \\\\\\\"\\\\\\\")\\\\n    if tray_uuid and tray_uuid != _ZERO_UUID:\\\\n        return tray_uuid\\\\n    # Fallback to spool_id if tray_uuid is empty or zero UUID\\\\n    return tray_info.get(\\\\\\\"spool_id\\\\\\\", \\\\\\\"\\\\\\\")\\\\n\\\\n\\\\ndef _parse_gcode_filament_usage(gcode_data: str) -> dict:\\\\n    \\\\\\\"\\\\\\\"\\\\\\\"Parse G-code data to extract filament usage per tool.\\\\n\\\\n    Returns a dict mapping tool index (int) to filament used (float).\\\\n    \\\\\\\"\\\\\\\"\\\\\\\"\\\\n    usage = {}\\\\n    for line in gcode_data.splitlines():\\\\n        line = line.strip()\\\\n        if line.startswith(\\\\\\\"; filament used (mm) per tool:\\\\\\\"):\\\\n            # Next lines contain usage info\\\\n            continue\\\\n        if line.startswith(\\\\\\\"; T\\\\\\\") and \\\\\\\":\\\\\\\" in line:\\\\n            # Example line: ; T0: 123.45\\\\n            try:\\\\n                parts = line[1:].split(\\\\\\\":\\\\\\\")\\\\n                tool_str = parts[0].strip()  # e.g. 'T0'\\\\n                amount_str = parts[1].strip()\\\\n                tool_idx = int(tool_str[1:])\\\\n                amount = float(amount_str)\\\\n                usage[tool_idx] = amount\\\\n            except Exception:\\\\n                pass\\\\n    return usage\\\\n\\\\n\\\\ndef _get_filament_usage_delta(start_usage: dict, end_usage: dict) -> dict:\\\\n    \\\\\\\"\\\\\\\"\\\\\\\"Calculate filament usage delta between start and end usage dicts.\\\\n\\\\n    Returns a dict mapping tool index to delta usage (float).\\\\n    \\\\\\\"\\\\\\\"\\\\\\\"\\\\n    delta = {}\\\\n    for tool_idx, end_val in end_usage.items():\\\\n        start_val = start_usage.get(tool_idx, 0.0)\\\\n        diff = end_val - start_val\\\\n        if diff < 0:\\\\n            # Defensive: usage should not go backwards, clamp to 0\\\\n            diff = 0.0\\\\n        delta[tool_idx] = diff\\\\n    return delta\\\\n\\\\n\\\\nasync def track_spoolman_usage(print_job_id: str, tray_info_start: dict, tray_info_end: dict, gcode_start: str, gcode_end: str):\\\\n    \\\\\\\"\\\\\\\"\\\\\\\"Track filament usage for a print job and report to Spoolman.\\\\n\\\\n    Arguments:\\\\n\"}], \"localized\": true}",
+          "payload_parse_ok": true,
+          "payload_parse_error": "",
+          "candidate_files": [
+            "backend/app/services/spoolman_tracking.py"
+          ],
+          "candidate_files_raw": [
+            "backend/app/services/spoolman_tracking.py",
+            "backend/app/services/github_backup.py",
+            "CHANGELOG.md",
+            "README.md",
+            "CONTRIBUTING.md",
+            "backend/app/main.py",
+            "backend/app/services/virtual_printer/manager.py",
+            ".github/MAINTAINERS.md",
+            "backend/tests/unit/services/test_spoolman_tracking.py",
+            "backend/app/core/database.py",
+            "backend/tests/unit/services/test_background_dispatch.py",
+            "backend/app/services/print_scheduler.py"
+          ],
+          "candidate_files_filtered": [
+            "backend/app/services/spoolman_tracking.py"
+          ],
+          "clause_selection_reason": "initial_clause_seed",
+          "row_quality": {
+            "contract_quality": "strong",
+            "contract_item_count": 1,
+            "active_clause_source": "initial_clause_seed",
+            "active_clause_present": true,
+            "witness_count": 1,
+            "witness_unique_count": 1,
+            "payload_present": true,
+            "payload_parse_ok": true,
+            "candidate_file_count": 1,
+            "clause_selection_reason": "initial_clause_seed",
+            "skipped_targets_present": false,
+            "lint_error_count": 0,
+            "used_fallback": false,
+            "strategy_mode": "cgcs_clause",
+            "regression_guard_count": 1
+          },
+          "lint_errors": [],
+          "skipped_targets": [],
+          "outcome_metrics": {
+            "status": "tests_failed",
+            "pass_rate": 0.0,
+            "duration": 2.3477377500094008,
+            "failing_tests": [
+              "tests_0"
+            ],
+            "error_types": [
+              "fail::"
+            ]
+          },
+          "coverage": 1.0,
+          "satisfied_ids": [
+            "M000_off_by_one_afe45163"
+          ],
+          "unsatisfied_ids": [],
+          "regressed_ids": [],
+          "witness_counts": {
+            "M000_off_by_one_afe45163": 0
+          },
+          "witness_sample": [
+            {
+              "signature": "3d82f7af1a4cffa64a5ee128c5cd3f00e87214c5",
+              "test_case": "tests_0",
+              "message": "ImportError while loading conftest '/Users/karanallagh/Desktop/DataCollector/data/public_repos/pilot/runs/public_pilot_maziggy_bambuddy_005/cgcs/workspace/backend/tests/conftest.py'.\nbackend/tests/conftest.py:22: in <module>\n    from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine  # noqa: E402\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   ModuleNotFoundError: No module named 'sqlalchemy'",
+              "expected": "",
+              "actual": "",
+              "location": "/Users/karanallagh/Desktop/DataCollector/data/public_repos/pilot/runs/public_pilot_maziggy_bambuddy_005/cgcs/logs/tests_0_round1.log",
+              "category": "general",
+              "linked_contract_ids": []
+            }
+          ],
+          "regression_guards": [
+            "M000_off_by_one_afe45163"
+          ]
+        },
+        "witnesses": [
+          {
+            "signature": "3d82f7af1a4cffa64a5ee128c5cd3f00e87214c5",
+            "test_case": "tests_0",
+            "message": "ImportError while loading conftest '/Users/karanallagh/Desktop/DataCollector/data/public_repos/pilot/runs/public_pilot_maziggy_bambuddy_005/cgcs/workspace/backend/tests/conftest.py'.\nbackend/tests/conftest.py:22: in <module>\n    from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine  # noqa: E402\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   ModuleNotFoundError: No module named 'sqlalchemy'",
+            "expected": "",
+            "actual": "",
+            "location": "/Users/karanallagh/Desktop/DataCollector/data/public_repos/pilot/runs/public_pilot_maziggy_bambuddy_005/cgcs/logs/tests_0_round1.log",
+            "category": "general",
+            "linked_contract_ids": []
+          }
+        ],
+        "row_quality": {
+          "contract_quality": "strong",
+          "contract_item_count": 1,
+          "active_clause_source": "initial_clause_seed",
+          "active_clause_present": true,
+          "witness_count": 1,
+          "witness_unique_count": 1,
+          "payload_present": true,
+          "payload_parse_ok": true,
+          "candidate_file_count": 1,
+          "clause_selection_reason": "initial_clause_seed",
+          "skipped_targets_present": false,
+          "lint_error_count": 0,
+          "used_fallback": false,
+          "strategy_mode": "cgcs_clause",
+          "regression_guard_count": 1
+        },
+        "regression_guard_ids": [
+          "M000_off_by_one_afe45163"
+        ],
+        "active_clause_id": "M000_off_by_one_afe45163"
+      }
+    },
+    {
+      "round": 1,
+      "phase": "repair",
+      "subtask": "contract::M000_off_by_one_afe45163",
+      "localized": true,
+      "pass_rate": 0.0,
+      "status": "tests_failed",
+      "duration": 3.753960832997109,
+      "failing_tests": [
+        "tests_0"
+      ],
+      "error_types": [
+        "fail::"
+      ],
+      "file_count": 1,
+      "multi_file_attempt": false,
+      "files_touched": [
+        "backend/app/services/spoolman_tracking.py"
+      ],
+      "inspected_files": [
+        "backend/app/services/spoolman_tracking.py"
+      ],
+      "proposed_files": [
+        "backend/app/services/spoolman_tracking.py"
+      ],
+      "edit_metadata": {
+        "raw_edit_payload": "{\"edits\": [{\"path\": \"backend/app/services/spoolman_tracking.py\", \"mode\": \"rewrite\", \"content\": \"```json\\n{\\n  \\\"edits\\\": [\\n    {\\n      \\\"path\\\": \\\"backend/app/services/spoolman_tracking.py\\\",\\n      \\\"mode\\\": \\\"rewrite\\\",\\n      \\\"content\\\": \\\"\\\\\\\"\\\\\\\"\\\\\\\"Spoolman per-filament usage tracking for active prints.\\\\n\\\\nCaptures AMS tray state and G-code data at print start, then reports\\\\nper-filament usage to the correct Spoolman spools at print completion.\\\\nSupports accurate partial usage reporting for failed/cancelled prints.\\\\n\\\\\\\"\\\\\\\"\\\\\\\"\\\\n\\\\nimport json\\\\nimport logging\\\\n\\\\nfrom sqlalchemy import delete, select\\\\n\\\\nfrom backend.app.core.config import settings as app_settings\\\\nfrom backend.app.core.database import async_session\\\\nfrom backend.app.services.spoolman import get_spoolman_client, init_spoolman_client\\\\n\\\\nlogger = logging.getLogger(__name__)\\\\n\\\\n# Zero UUID used by Bambu printers for empty/unset tray_uuid\\\\n_ZERO_UUID = \\\\\\\"00000000000000000000000000000000\\\\\\\"\\\\n\\\\n\\\\ndef _resolve_spool_tag(tray_info: dict) -> str:\\\\n    \\\\\\\"\\\\\\\"\\\\\\\"Get the best spool identifier from tray info (prefer tray_uuid, fallback to filament_id).\\\\\\\"\\\\\\\"\\\\\\\"\\\\n    tray_uuid = tray_info.get(\\\\\\\"tray_uuid\\\\\\\")\\\\n    if tray_uuid and tray_uuid != _ZERO_UUID:\\\\n        return tray_uuid\\\\n    filament_id = tray_info.get(\\\\\\\"filament_id\\\\\\\")\\\\n    if filament_id:\\\\n        return filament_id\\\\n    return \\\\\\\"\\\\\\\"\\\\n\\\\n\\\\ndef _parse_gcode_line(line: str) -> dict:\\\\n    \\\\\\\"\\\\\\\"\\\\\\\"Parse a G-code line into a command and parameters.\\\\\\\"\\\\\\\"\\\\\\\"\\\\n    parts = line.strip().split()\\\\n    if not parts:\\\\n        return {}\\\\n    cmd = parts[0]\\\\n    params = {}\\\\n    for part in parts[1:]:\\\\n        if len(part) < 2:\\\\n            continue\\\\n        key = part[0]\\\\n        try:\\\\n            value = float(part[1:])\\\\n        except ValueError:\\\\n            value = part[1:]\\\\n        params[key] = value\\\\n    return {\\\\\\\"cmd\\\\\\\": cmd, \\\\\\\"params\\\\\\\": params}\\\\n\\\\n\\\\ndef _extract_filament_usage(gcode_lines: list) -> float:\\\\n    \\\\\\\"\\\\\\\"\\\\\\\"Extract filament usage from G-code lines by summing E parameters.\\\\\\\"\\\\\\\"\\\\\\\"\\\\n    total_e = 0.0\\\\n    last_e = None\\\\n    for line in gcode_lines:\\\\n        parsed = _parse_gcode_line(line)\\\\n        if not parsed:\\\\n            continue\\\\n        if parsed[\\\\\\\"cmd\\\\\\\"].startswith(\\\\\\\"G\\\\\\\") and \\\\\\\"E\\\\\\\" in parsed[\\\\\\\"params\\\\\\\"]:\\\\n            e_val = parsed[\\\\\\\"params\\\\\\\"][\\\\\\\"E\\\\\\\"]\\\\n            if last_e is not None:\\\\n                delta = e_val - last_e\\\\n                if delta > 0:\\\\n                    total_e += delta\\\\n            last_e = e_val\\\\n    return total_e\\\\n\\\\n\\\\nasync def report_spoolman_usage(print_job_id: str, tray_infos: list, gcode_lines: list):\\\\n    \\\\\\\"\\\\\\\"\\\\\\\"Report filament usage to Spoolman for a completed print job.\\\\\\\"\\\\\\\"\\\\\\\"\\\\n    client = await get_spoolman_client()\\\\n    if client is None:\\\\n        client = await init_spoolman_client()\\\\n    if client is None:\\\\n        logger.warning(\\\\\\\"Spoolman client not available, skipping usage report.\\\\\\\")\\\\n        return\\\\n\\\\n    # Map tray tags to usage\\\\n    usage_map = {}\\\\n    total_usage = _extract_filament_usage(gcode_lines)\\\\n\\\\n    # Distribute usage evenly across trays for now\"}], \"localized\": true}",
+        "raw_payload": "{\"edits\": [{\"path\": \"backend/app/services/spoolman_tracking.py\", \"mode\": \"rewrite\", \"content\": \"```json\\n{\\n  \\\"edits\\\": [\\n    {\\n      \\\"path\\\": \\\"backend/app/services/spoolman_tracking.py\\\",\\n      \\\"mode\\\": \\\"rewrite\\\",\\n      \\\"content\\\": \\\"\\\\\\\"\\\\\\\"\\\\\\\"Spoolman per-filament usage tracking for active prints.\\\\n\\\\nCaptures AMS tray state and G-code data at print start, then reports\\\\nper-filament usage to the correct Spoolman spools at print completion.\\\\nSupports accurate partial usage reporting for failed/cancelled prints.\\\\n\\\\\\\"\\\\\\\"\\\\\\\"\\\\n\\\\nimport json\\\\nimport logging\\\\n\\\\nfrom sqlalchemy import delete, select\\\\n\\\\nfrom backend.app.core.config import settings as app_settings\\\\nfrom backend.app.core.database import async_session\\\\nfrom backend.app.services.spoolman import get_spoolman_client, init_spoolman_client\\\\n\\\\nlogger = logging.getLogger(__name__)\\\\n\\\\n# Zero UUID used by Bambu printers for empty/unset tray_uuid\\\\n_ZERO_UUID = \\\\\\\"00000000000000000000000000000000\\\\\\\"\\\\n\\\\n\\\\ndef _resolve_spool_tag(tray_info: dict) -> str:\\\\n    \\\\\\\"\\\\\\\"\\\\\\\"Get the best spool identifier from tray info (prefer tray_uuid, fallback to filament_id).\\\\\\\"\\\\\\\"\\\\\\\"\\\\n    tray_uuid = tray_info.get(\\\\\\\"tray_uuid\\\\\\\")\\\\n    if tray_uuid and tray_uuid != _ZERO_UUID:\\\\n        return tray_uuid\\\\n    filament_id = tray_info.get(\\\\\\\"filament_id\\\\\\\")\\\\n    if filament_id:\\\\n        return filament_id\\\\n    return \\\\\\\"\\\\\\\"\\\\n\\\\n\\\\ndef _parse_gcode_line(line: str) -> dict:\\\\n    \\\\\\\"\\\\\\\"\\\\\\\"Parse a G-code line into a command and parameters.\\\\\\\"\\\\\\\"\\\\\\\"\\\\n    parts = line.strip().split()\\\\n    if not parts:\\\\n        return {}\\\\n    cmd = parts[0]\\\\n    params = {}\\\\n    for part in parts[1:]:\\\\n        if len(part) < 2:\\\\n            continue\\\\n        key = part[0]\\\\n        try:\\\\n            value = float(part[1:])\\\\n        except ValueError:\\\\n            value = part[1:]\\\\n        params[key] = value\\\\n    return {\\\\\\\"cmd\\\\\\\": cmd, \\\\\\\"params\\\\\\\": params}\\\\n\\\\n\\\\ndef _extract_filament_usage(gcode_lines: list) -> float:\\\\n    \\\\\\\"\\\\\\\"\\\\\\\"Extract filament usage from G-code lines by summing E parameters.\\\\\\\"\\\\\\\"\\\\\\\"\\\\n    total_e = 0.0\\\\n    last_e = None\\\\n    for line in gcode_lines:\\\\n        parsed = _parse_gcode_line(line)\\\\n        if not parsed:\\\\n            continue\\\\n        if parsed[\\\\\\\"cmd\\\\\\\"].startswith(\\\\\\\"G\\\\\\\") and \\\\\\\"E\\\\\\\" in parsed[\\\\\\\"params\\\\\\\"]:\\\\n            e_val = parsed[\\\\\\\"params\\\\\\\"][\\\\\\\"E\\\\\\\"]\\\\n            if last_e is not None:\\\\n                delta = e_val - last_e\\\\n                if delta > 0:\\\\n                    total_e += delta\\\\n            last_e = e_val\\\\n    return total_e\\\\n\\\\n\\\\nasync def report_spoolman_usage(print_job_id: str, tray_infos: list, gcode_lines: list):\\\\n    \\\\\\\"\\\\\\\"\\\\\\\"Report filament usage to Spoolman for a completed print job.\\\\\\\"\\\\\\\"\\\\\\\"\\\\n    client = await get_spoolman_client()\\\\n    if client is None:\\\\n        client = await init_spoolman_client()\\\\n    if client is None:\\\\n        logger.warning(\\\\\\\"Spoolman client not available, skipping usage report.\\\\\\\")\\\\n        return\\\\n\\\\n    # Map tray tags to usage\\\\n    usage_map = {}\\\\n    total_usage = _extract_filament_usage(gcode_lines)\\\\n\\\\n    # Distribute usage evenly across trays for now\"}], \"localized\": true}",
+        "payload_parse_ok": true,
+        "payload_parse_error": "",
+        "candidate_files_raw": [
+          "backend/app/services/spoolman_tracking.py",
+          "backend/app/services/github_backup.py",
+          "CHANGELOG.md",
+          "README.md",
+          "CONTRIBUTING.md",
+          "backend/app/main.py",
+          "backend/app/services/virtual_printer/manager.py",
+          ".github/MAINTAINERS.md",
+          "backend/tests/unit/services/test_spoolman_tracking.py",
+          "backend/app/core/database.py",
+          "backend/tests/unit/services/test_background_dispatch.py",
+          "backend/app/services/print_scheduler.py"
+        ],
+        "candidate_files_filtered": [
+          "backend/app/services/spoolman_tracking.py"
+        ],
+        "candidate_files": [
+          "backend/app/services/spoolman_tracking.py"
+        ],
+        "strategy_mode": "cgcs",
+        "edit_mode": "edit_batch",
+        "localized_requested": true,
+        "fallback_requested": false,
+        "raw_metadata_keys": [
+          "localized"
+        ],
+        "applied_file_count": 1,
+        "proposed_file_count": 1,
+        "multi_file_applied": false,
+        "subtask_focus": "contract::M000_off_by_one_afe45163",
+        "contract_coverage": 1.0,
+        "contract_satisfied": [
+          "M000_off_by_one_afe45163"
+        ],
+        "contract_unsatisfied": [],
+        "contract_failure_categories": {},
+        "contract_unsatisfied_details": [],
+        "contract_fail_cases": [],
+        "contract_items": [
+          {
+            "id": "M000_off_by_one_afe45163",
+            "label": "Should be `- 1` (not `- 2`)",
+            "description": "[off_by_one] In `backend/app/services/spoolman_tracking.py` (line 42): Off-by-one: `- 1` changed to `- 2`. Should be `- 1` (not `- 2`).",
+            "category": "off_by_one",
+            "expected_behavior": "Should be `- 1` (not `- 2`)",
+            "test_refs": [],
+            "priority": "",
+            "source": "",
+            "notes": "",
+            "keywords": [
+              "off_by_one",
+              "backend/app/services/spoolman_tracking.py",
+              "42"
+            ]
+          }
+        ],
+        "witness_count": 1,
+        "witness_samples": [
+          {
+            "test_case": "tests_0",
+            "message": "ImportError while loading conftest '/Users/karanallagh/Desktop/DataCollector/data/public_repos/pilot/runs/public_pilot_maziggy_bambuddy_005/cgcs/workspace/backe",
+            "category": "general",
+            "expected": "",
+            "actual": "",
+            "contracts": []
+          }
+        ],
+        "cgcs_state": {
+          "round": 1,
+          "round_index": 1,
+          "strategy": "cgcs",
+          "task_id": "public_pilot_maziggy_bambuddy_005",
+          "contract_items": [
+            {
+              "id": "M000_off_by_one_afe45163",
+              "label": "Should be `- 1` (not `- 2`)",
+              "description": "[off_by_one] In `backend/app/services/spoolman_tracking.py` (line 42): Off-by-one: `- 1` changed to `- 2`. Should be `- 1` (not `- 2`).",
+              "category": "off_by_one",
+              "expected_behavior": "Should be `- 1` (not `- 2`)",
+              "test_refs": [],
+              "priority": "",
+              "source": "",
+              "notes": "",
+              "keywords": [
+                "off_by_one",
+                "backend/app/services/spoolman_tracking.py",
+                "42"
+              ]
+            }
+          ],
+          "active_clause_id": null,
+          "active_clause": null,
+          "regression_guard_ids": [
+            "M000_off_by_one_afe45163"
+          ],
+          "witnesses": [
+            {
+              "signature": "3d82f7af1a4cffa64a5ee128c5cd3f00e87214c5",
+              "test_case": "tests_0",
+              "message": "ImportError while loading conftest '/Users/karanallagh/Desktop/DataCollector/data/public_repos/pilot/runs/public_pilot_maziggy_bambuddy_005/cgcs/workspace/backend/tests/conftest.py'.\nbackend/tests/conftest.py:22: in <module>\n    from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine  # noqa: E402\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   ModuleNotFoundError: No module named 'sqlalchemy'",
+              "expected": "",
+              "actual": "",
+              "location": "/Users/karanallagh/Desktop/DataCollector/data/public_repos/pilot/runs/public_pilot_maziggy_bambuddy_005/cgcs/logs/tests_0_round2.log",
+              "category": "general",
+              "linked_contract_ids": []
+            }
+          ],
+          "raw_edit_payload": "{\"edits\": [{\"path\": \"backend/app/services/spoolman_tracking.py\", \"mode\": \"rewrite\", \"content\": \"```json\\n{\\n  \\\"edits\\\": [\\n    {\\n      \\\"path\\\": \\\"backend/app/services/spoolman_tracking.py\\\",\\n      \\\"mode\\\": \\\"rewrite\\\",\\n      \\\"content\\\": \\\"\\\\\\\"\\\\\\\"\\\\\\\"Spoolman per-filament usage tracking for active prints.\\\\n\\\\nCaptures AMS tray state and G-code data at print start, then reports\\\\nper-filament usage to the correct Spoolman spools at print completion.\\\\nSupports accurate partial usage reporting for failed/cancelled prints.\\\\n\\\\\\\"\\\\\\\"\\\\\\\"\\\\n\\\\nimport json\\\\nimport logging\\\\n\\\\nfrom sqlalchemy import delete, select\\\\n\\\\nfrom backend.app.core.config import settings as app_settings\\\\nfrom backend.app.core.database import async_session\\\\nfrom backend.app.services.spoolman import get_spoolman_client, init_spoolman_client\\\\n\\\\nlogger = logging.getLogger(__name__)\\\\n\\\\n# Zero UUID used by Bambu printers for empty/unset tray_uuid\\\\n_ZERO_UUID = \\\\\\\"00000000000000000000000000000000\\\\\\\"\\\\n\\\\n\\\\ndef _resolve_spool_tag(tray_info: dict) -> str:\\\\n    \\\\\\\"\\\\\\\"\\\\\\\"Get the best spool identifier from tray info (prefer tray_uuid, fallback to filament_id).\\\\\\\"\\\\\\\"\\\\\\\"\\\\n    tray_uuid = tray_info.get(\\\\\\\"tray_uuid\\\\\\\")\\\\n    if tray_uuid and tray_uuid != _ZERO_UUID:\\\\n        return tray_uuid\\\\n    filament_id = tray_info.get(\\\\\\\"filament_id\\\\\\\")\\\\n    if filament_id:\\\\n        return filament_id\\\\n    return \\\\\\\"\\\\\\\"\\\\n\\\\n\\\\ndef _parse_gcode_line(line: str) -> dict:\\\\n    \\\\\\\"\\\\\\\"\\\\\\\"Parse a G-code line into a command and parameters.\\\\\\\"\\\\\\\"\\\\\\\"\\\\n    parts = line.strip().split()\\\\n    if not parts:\\\\n        return {}\\\\n    cmd = parts[0]\\\\n    params = {}\\\\n    for part in parts[1:]:\\\\n        if len(part) < 2:\\\\n            continue\\\\n        key = part[0]\\\\n        try:\\\\n            value = float(part[1:])\\\\n        except ValueError:\\\\n            value = part[1:]\\\\n        params[key] = value\\\\n    return {\\\\\\\"cmd\\\\\\\": cmd, \\\\\\\"params\\\\\\\": params}\\\\n\\\\n\\\\ndef _extract_filament_usage(gcode_lines: list) -> float:\\\\n    \\\\\\\"\\\\\\\"\\\\\\\"Extract filament usage from G-code lines by summing E parameters.\\\\\\\"\\\\\\\"\\\\\\\"\\\\n    total_e = 0.0\\\\n    last_e = None\\\\n    for line in gcode_lines:\\\\n        parsed = _parse_gcode_line(line)\\\\n        if not parsed:\\\\n            continue\\\\n        if parsed[\\\\\\\"cmd\\\\\\\"].startswith(\\\\\\\"G\\\\\\\") and \\\\\\\"E\\\\\\\" in parsed[\\\\\\\"params\\\\\\\"]:\\\\n            e_val = parsed[\\\\\\\"params\\\\\\\"][\\\\\\\"E\\\\\\\"]\\\\n            if last_e is not None:\\\\n                delta = e_val - last_e\\\\n                if delta > 0:\\\\n                    total_e += delta\\\\n            last_e = e_val\\\\n    return total_e\\\\n\\\\n\\\\nasync def report_spoolman_usage(print_job_id: str, tray_infos: list, gcode_lines: list):\\\\n    \\\\\\\"\\\\\\\"\\\\\\\"Report filament usage to Spoolman for a completed print job.\\\\\\\"\\\\\\\"\\\\\\\"\\\\n    client = await get_spoolman_client()\\\\n    if client is None:\\\\n        client = await init_spoolman_client()\\\\n    if client is None:\\\\n        logger.warning(\\\\\\\"Spoolman client not available, skipping usage report.\\\\\\\")\\\\n        return\\\\n\\\\n    # Map tray tags to usage\\\\n    usage_map = {}\\\\n    total_usage = _extract_filament_usage(gcode_lines)\\\\n\\\\n    # Distribute usage evenly across trays for now\"}], \"localized\": true}",
+          "payload_parse_ok": true,
+          "payload_parse_error": "",
+          "candidate_files": [
+            "backend/app/services/spoolman_tracking.py"
+          ],
+          "candidate_files_raw": [
+            "backend/app/services/spoolman_tracking.py",
+            "backend/app/services/github_backup.py",
+            "CHANGELOG.md",
+            "README.md",
+            "CONTRIBUTING.md",
+            "backend/app/main.py",
+            "backend/app/services/virtual_printer/manager.py",
+            ".github/MAINTAINERS.md",
+            "backend/tests/unit/services/test_spoolman_tracking.py",
+            "backend/app/core/database.py",
+            "backend/tests/unit/services/test_background_dispatch.py",
+            "backend/app/services/print_scheduler.py"
+          ],
+          "candidate_files_filtered": [
+            "backend/app/services/spoolman_tracking.py"
+          ],
+          "clause_selection_reason": "all_clauses_satisfied",
+          "row_quality": {
+            "contract_quality": "strong",
+            "contract_item_count": 1,
+            "active_clause_source": "all_clauses_satisfied",
+            "active_clause_present": false,
+            "witness_count": 1,
+            "witness_unique_count": 1,
+            "payload_present": true,
+            "payload_parse_ok": true,
+            "candidate_file_count": 1,
+            "clause_selection_reason": "all_clauses_satisfied",
+            "skipped_targets_present": false,
+            "lint_error_count": 0,
+            "used_fallback": false,
+            "strategy_mode": "cgcs_clause",
+            "regression_guard_count": 1
+          },
+          "lint_errors": [],
+          "skipped_targets": [],
+          "outcome_metrics": {
+            "status": "tests_failed",
+            "pass_rate": 0.0,
+            "duration": 3.753960832997109,
+            "failing_tests": [
+              "tests_0"
+            ],
+            "error_types": [
+              "fail::"
+            ]
+          },
+          "coverage": 1.0,
+          "satisfied_ids": [
+            "M000_off_by_one_afe45163"
+          ],
+          "unsatisfied_ids": [],
+          "regressed_ids": [],
+          "witness_counts": {
+            "M000_off_by_one_afe45163": 0
+          },
+          "witness_sample": [
+            {
+              "signature": "3d82f7af1a4cffa64a5ee128c5cd3f00e87214c5",
+              "test_case": "tests_0",
+              "message": "ImportError while loading conftest '/Users/karanallagh/Desktop/DataCollector/data/public_repos/pilot/runs/public_pilot_maziggy_bambuddy_005/cgcs/workspace/backend/tests/conftest.py'.\nbackend/tests/conftest.py:22: in <module>\n    from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine  # noqa: E402\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   ModuleNotFoundError: No module named 'sqlalchemy'",
+              "expected": "",
+              "actual": "",
+              "location": "/Users/karanallagh/Desktop/DataCollector/data/public_repos/pilot/runs/public_pilot_maziggy_bambuddy_005/cgcs/logs/tests_0_round2.log",
+              "category": "general",
+              "linked_contract_ids": []
+            }
+          ],
+          "regression_guards": [
+            "M000_off_by_one_afe45163"
+          ]
+        },
+        "witnesses": [
+          {
+            "signature": "3d82f7af1a4cffa64a5ee128c5cd3f00e87214c5",
+            "test_case": "tests_0",
+            "message": "ImportError while loading conftest '/Users/karanallagh/Desktop/DataCollector/data/public_repos/pilot/runs/public_pilot_maziggy_bambuddy_005/cgcs/workspace/backend/tests/conftest.py'.\nbackend/tests/conftest.py:22: in <module>\n    from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine  # noqa: E402\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   ModuleNotFoundError: No module named 'sqlalchemy'",
+            "expected": "",
+            "actual": "",
+            "location": "/Users/karanallagh/Desktop/DataCollector/data/public_repos/pilot/runs/public_pilot_maziggy_bambuddy_005/cgcs/logs/tests_0_round2.log",
+            "category": "general",
+            "linked_contract_ids": []
+          }
+        ],
+        "row_quality": {
+          "contract_quality": "strong",
+          "contract_item_count": 1,
+          "active_clause_source": "all_clauses_satisfied",
+          "active_clause_present": false,
+          "witness_count": 1,
+          "witness_unique_count": 1,
+          "payload_present": true,
+          "payload_parse_ok": true,
+          "candidate_file_count": 1,
+          "clause_selection_reason": "all_clauses_satisfied",
+          "skipped_targets_present": false,
+          "lint_error_count": 0,
+          "used_fallback": false,
+          "strategy_mode": "cgcs_clause",
+          "regression_guard_count": 1
+        },
+        "regression_guard_ids": [
+          "M000_off_by_one_afe45163"
+        ],
+        "active_clause_id": null
+      }
+    },
+    {
+      "round": 2,
+      "phase": "repair",
+      "subtask": "Generate minimal unit tests for critical behaviors",
+      "localized": true,
+      "pass_rate": 0.0,
+      "status": "tests_failed",
+      "duration": 3.0383583749935497,
+      "failing_tests": [
+        "tests_0"
+      ],
+      "error_types": [
+        "fail::"
+      ],
+      "file_count": 1,
+      "multi_file_attempt": false,
+      "files_touched": [
+        "backend/app/services/spoolman_tracking.py"
+      ],
+      "inspected_files": [
+        "backend/app/services/spoolman_tracking.py"
+      ],
+      "proposed_files": [
+        "backend/app/services/spoolman_tracking.py"
+      ],
+      "edit_metadata": {
+        "raw_edit_payload": "{\"edits\": [{\"path\": \"backend/app/services/spoolman_tracking.py\", \"mode\": \"rewrite\", \"content\": \"```json\\n{\\n  \\\"edits\\\": [\\n    {\\n      \\\"path\\\": \\\"backend/app/services/spoolman_tracking.py\\\",\\n      \\\"mode\\\": \\\"rewrite\\\",\\n      \\\"content\\\": \\\"\\\\\\\"\\\\\\\"\\\\\\\"Spoolman per-filament usage tracking for active prints.\\\\n\\\\nCaptures AMS tray state and G-code data at print start, then reports\\\\nper-filament usage to the correct Spoolman spools at print completion.\\\\nSupports accurate partial usage reporting for failed/cancelled prints.\\\\n\\\\\\\"\\\\\\\"\\\\\\\"\\\\n\\\\nimport json\\\\nimport logging\\\\n\\\\nfrom sqlalchemy import delete, select\\\\n\\\\nfrom backend.app.core.config import settings as app_settings\\\\nfrom backend.app.core.database import async_session\\\\nfrom backend.app.services.spoolman import get_spoolman_client, init_spoolman_client\\\\n\\\\nlogger = logging.getLogger(__name__)\\\\n\\\\n# Zero UUID used by Bambu printers for empty/unset tray_uuid\\\\n_ZERO_UUID = \\\\\\\"00000000000000000000000000000000\\\\\\\"\\\\n\\\\n\\\\ndef _resolve_spool_tag(tray_info: dict) -> str:\\\\n    \\\\\\\"\\\\\\\"\\\\\\\"Get the best spool identifier from tray info (prefer tray_uuid, fallback to filament_type).\\\\\\\"\\\\\\\"\\\\\\\"\\\\n    tray_uuid = tray_info.get(\\\\\\\"tray_uuid\\\\\\\", _ZERO_UUID)\\\\n    if tray_uuid and tray_uuid != _ZERO_UUID:\\\\n        return tray_uuid\\\\n    # Fallback to filament_type if tray_uuid is zero or missing\\\\n    return tray_info.get(\\\\\\\"filament_type\\\\\\\", \\\\\\\"unknown\\\\\\\")\\\\n\\\\n\\\\ndef _parse_gcode_for_filament_usage(gcode: str) -> dict:\\\\n    \\\\\\\"\\\\\\\"\\\\\\\"Parse G-code to extract filament usage per color/tool.\\\\n\\\\n    Returns a dict mapping filament color/tool to used length in mm.\\\\n    \\\\\\\"\\\\\\\"\\\\\\\"\\\\n    usage = {}\\\\n    for line in gcode.splitlines():\\\\n        line = line.strip()\\\\n        if line.startswith(\\\\\\\";LAYER:\\\\\\\"):\\\\n            # Example: ;LAYER:0\\\\n            continue\\\\n        if line.startswith(\\\\\\\"G1\\\\\\\") and \\\\\\\"E\\\\\\\" in line:\\\\n            # Parse extrusion length\\\\n            parts = line.split()\\\\n            e_value = None\\\\n            for part in parts:\\\\n                if part.startswith(\\\\\\\"E\\\\\\\"):\\\\n                    try:\\\\n                        e_value = float(part[1:])\\\\n                    except ValueError:\\\\n                        e_value = None\\\\n                    break\\\\n            if e_value is not None:\\\\n                # For simplicity, accumulate total extrusion\\\\n                usage[\\\\\\\"total\\\\\\\"] = usage.get(\\\\\\\"total\\\\\\\", 0.0) + e_value\\\\n    return usage\\\\n\\\\n\\\\ndef _calculate_filament_usage(start_gcode: str, end_gcode: str) -> float:\\\\n    \\\\\\\"\\\\\\\"\\\\\\\"Calculate filament usage by subtracting start extrusion from end extrusion.\\\\\\\"\\\\\\\"\\\\\\\"\\\\n    start_usage = _parse_gcode_for_filament_usage(start_gcode)\\\\n    end_usage = _parse_gcode_for_filament_usage(end_gcode)\\\\n    start_total = start_usage.get(\\\\\\\"total\\\\\\\", 0.0)\\\\n    end_total = end_usage.get(\\\\\\\"total\\\\\\\", 0.0)\\\\n    # Off-by-one fix: use -1, not -2\\\\n    usage = end_total - start_total - 1\\\\n    if usage < 0:\\\\n        usage = 0\\\\n    return usage\\\\n\\\\n\\\\nasync def track_spoolman_usage(print_id: str, start_tray_info: dict, end_tray_info: dict, start_gcode: str, end_gcode: str):\\\\n    \\\\\\\"\\\\\\\"\\\\\\\"Track filament usage for a print and report to Spoolman.\\\\\\\"\\\\\\\"\\\\\\\"\\\\n    # Initialize Spoolman client\\\\n    client\"}], \"localized\": true}",
+        "raw_payload": "{\"edits\": [{\"path\": \"backend/app/services/spoolman_tracking.py\", \"mode\": \"rewrite\", \"content\": \"```json\\n{\\n  \\\"edits\\\": [\\n    {\\n      \\\"path\\\": \\\"backend/app/services/spoolman_tracking.py\\\",\\n      \\\"mode\\\": \\\"rewrite\\\",\\n      \\\"content\\\": \\\"\\\\\\\"\\\\\\\"\\\\\\\"Spoolman per-filament usage tracking for active prints.\\\\n\\\\nCaptures AMS tray state and G-code data at print start, then reports\\\\nper-filament usage to the correct Spoolman spools at print completion.\\\\nSupports accurate partial usage reporting for failed/cancelled prints.\\\\n\\\\\\\"\\\\\\\"\\\\\\\"\\\\n\\\\nimport json\\\\nimport logging\\\\n\\\\nfrom sqlalchemy import delete, select\\\\n\\\\nfrom backend.app.core.config import settings as app_settings\\\\nfrom backend.app.core.database import async_session\\\\nfrom backend.app.services.spoolman import get_spoolman_client, init_spoolman_client\\\\n\\\\nlogger = logging.getLogger(__name__)\\\\n\\\\n# Zero UUID used by Bambu printers for empty/unset tray_uuid\\\\n_ZERO_UUID = \\\\\\\"00000000000000000000000000000000\\\\\\\"\\\\n\\\\n\\\\ndef _resolve_spool_tag(tray_info: dict) -> str:\\\\n    \\\\\\\"\\\\\\\"\\\\\\\"Get the best spool identifier from tray info (prefer tray_uuid, fallback to filament_type).\\\\\\\"\\\\\\\"\\\\\\\"\\\\n    tray_uuid = tray_info.get(\\\\\\\"tray_uuid\\\\\\\", _ZERO_UUID)\\\\n    if tray_uuid and tray_uuid != _ZERO_UUID:\\\\n        return tray_uuid\\\\n    # Fallback to filament_type if tray_uuid is zero or missing\\\\n    return tray_info.get(\\\\\\\"filament_type\\\\\\\", \\\\\\\"unknown\\\\\\\")\\\\n\\\\n\\\\ndef _parse_gcode_for_filament_usage(gcode: str) -> dict:\\\\n    \\\\\\\"\\\\\\\"\\\\\\\"Parse G-code to extract filament usage per color/tool.\\\\n\\\\n    Returns a dict mapping filament color/tool to used length in mm.\\\\n    \\\\\\\"\\\\\\\"\\\\\\\"\\\\n    usage = {}\\\\n    for line in gcode.splitlines():\\\\n        line = line.strip()\\\\n        if line.startswith(\\\\\\\";LAYER:\\\\\\\"):\\\\n            # Example: ;LAYER:0\\\\n            continue\\\\n        if line.startswith(\\\\\\\"G1\\\\\\\") and \\\\\\\"E\\\\\\\" in line:\\\\n            # Parse extrusion length\\\\n            parts = line.split()\\\\n            e_value = None\\\\n            for part in parts:\\\\n                if part.startswith(\\\\\\\"E\\\\\\\"):\\\\n                    try:\\\\n                        e_value = float(part[1:])\\\\n                    except ValueError:\\\\n                        e_value = None\\\\n                    break\\\\n            if e_value is not None:\\\\n                # For simplicity, accumulate total extrusion\\\\n                usage[\\\\\\\"total\\\\\\\"] = usage.get(\\\\\\\"total\\\\\\\", 0.0) + e_value\\\\n    return usage\\\\n\\\\n\\\\ndef _calculate_filament_usage(start_gcode: str, end_gcode: str) -> float:\\\\n    \\\\\\\"\\\\\\\"\\\\\\\"Calculate filament usage by subtracting start extrusion from end extrusion.\\\\\\\"\\\\\\\"\\\\\\\"\\\\n    start_usage = _parse_gcode_for_filament_usage(start_gcode)\\\\n    end_usage = _parse_gcode_for_filament_usage(end_gcode)\\\\n    start_total = start_usage.get(\\\\\\\"total\\\\\\\", 0.0)\\\\n    end_total = end_usage.get(\\\\\\\"total\\\\\\\", 0.0)\\\\n    # Off-by-one fix: use -1, not -2\\\\n    usage = end_total - start_total - 1\\\\n    if usage < 0:\\\\n        usage = 0\\\\n    return usage\\\\n\\\\n\\\\nasync def track_spoolman_usage(print_id: str, start_tray_info: dict, end_tray_info: dict, start_gcode: str, end_gcode: str):\\\\n    \\\\\\\"\\\\\\\"\\\\\\\"Track filament usage for a print and report to Spoolman.\\\\\\\"\\\\\\\"\\\\\\\"\\\\n    # Initialize Spoolman client\\\\n    client\"}], \"localized\": true}",
+        "payload_parse_ok": true,
+        "payload_parse_error": "",
+        "candidate_files_raw": [
+          "backend/app/services/spoolman_tracking.py",
+          "backend/app/services/github_backup.py",
+          "CHANGELOG.md",
+          "README.md",
+          "CONTRIBUTING.md",
+          "backend/app/main.py",
+          "backend/app/services/virtual_printer/manager.py",
+          ".github/MAINTAINERS.md",
+          "backend/tests/unit/services/test_spoolman_tracking.py",
+          "backend/app/core/database.py",
+          "backend/tests/unit/services/test_background_dispatch.py",
+          "backend/app/services/print_scheduler.py"
+        ],
+        "candidate_files_filtered": [
+          "backend/app/services/spoolman_tracking.py"
+        ],
+        "candidate_files": [
+          "backend/app/services/spoolman_tracking.py"
+        ],
+        "strategy_mode": "cgcs",
+        "edit_mode": "edit_batch",
+        "localized_requested": true,
+        "fallback_requested": false,
+        "raw_metadata_keys": [
+          "localized"
+        ],
+        "applied_file_count": 1,
+        "proposed_file_count": 1,
+        "multi_file_applied": false,
+        "subtask_focus": "Generate minimal unit tests for critical behaviors",
+        "contract_coverage": 1.0,
+        "contract_satisfied": [
+          "M000_off_by_one_afe45163"
+        ],
+        "contract_unsatisfied": [],
+        "contract_failure_categories": {},
+        "contract_unsatisfied_details": [],
+        "contract_fail_cases": [],
+        "contract_items": [
+          {
+            "id": "M000_off_by_one_afe45163",
+            "label": "Should be `- 1` (not `- 2`)",
+            "description": "[off_by_one] In `backend/app/services/spoolman_tracking.py` (line 42): Off-by-one: `- 1` changed to `- 2`. Should be `- 1` (not `- 2`).",
+            "category": "off_by_one",
+            "expected_behavior": "Should be `- 1` (not `- 2`)",
+            "test_refs": [],
+            "priority": "",
+            "source": "",
+            "notes": "",
+            "keywords": [
+              "off_by_one",
+              "backend/app/services/spoolman_tracking.py",
+              "42"
+            ]
+          }
+        ],
+        "witness_count": 1,
+        "witness_samples": [
+          {
+            "test_case": "tests_0",
+            "message": "ImportError while loading conftest '/Users/karanallagh/Desktop/DataCollector/data/public_repos/pilot/runs/public_pilot_maziggy_bambuddy_005/cgcs/workspace/backe",
+            "category": "general",
+            "expected": "",
+            "actual": "",
+            "contracts": []
+          }
+        ],
+        "cgcs_state": {
+          "round": 2,
+          "round_index": 2,
+          "strategy": "cgcs",
+          "task_id": "public_pilot_maziggy_bambuddy_005",
+          "contract_items": [
+            {
+              "id": "M000_off_by_one_afe45163",
+              "label": "Should be `- 1` (not `- 2`)",
+              "description": "[off_by_one] In `backend/app/services/spoolman_tracking.py` (line 42): Off-by-one: `- 1` changed to `- 2`. Should be `- 1` (not `- 2`).",
+              "category": "off_by_one",
+              "expected_behavior": "Should be `- 1` (not `- 2`)",
+              "test_refs": [],
+              "priority": "",
+              "source": "",
+              "notes": "",
+              "keywords": [
+                "off_by_one",
+                "backend/app/services/spoolman_tracking.py",
+                "42"
+              ]
+            }
+          ],
+          "active_clause_id": null,
+          "active_clause": null,
+          "regression_guard_ids": [
+            "M000_off_by_one_afe45163"
+          ],
+          "witnesses": [
+            {
+              "signature": "3d82f7af1a4cffa64a5ee128c5cd3f00e87214c5",
+              "test_case": "tests_0",
+              "message": "ImportError while loading conftest '/Users/karanallagh/Desktop/DataCollector/data/public_repos/pilot/runs/public_pilot_maziggy_bambuddy_005/cgcs/workspace/backend/tests/conftest.py'.\nbackend/tests/conftest.py:22: in <module>\n    from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine  # noqa: E402\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   ModuleNotFoundError: No module named 'sqlalchemy'",
+              "expected": "",
+              "actual": "",
+              "location": "/Users/karanallagh/Desktop/DataCollector/data/public_repos/pilot/runs/public_pilot_maziggy_bambuddy_005/cgcs/logs/tests_0_round3.log",
+              "category": "general",
+              "linked_contract_ids": []
+            }
+          ],
+          "raw_edit_payload": "{\"edits\": [{\"path\": \"backend/app/services/spoolman_tracking.py\", \"mode\": \"rewrite\", \"content\": \"```json\\n{\\n  \\\"edits\\\": [\\n    {\\n      \\\"path\\\": \\\"backend/app/services/spoolman_tracking.py\\\",\\n      \\\"mode\\\": \\\"rewrite\\\",\\n      \\\"content\\\": \\\"\\\\\\\"\\\\\\\"\\\\\\\"Spoolman per-filament usage tracking for active prints.\\\\n\\\\nCaptures AMS tray state and G-code data at print start, then reports\\\\nper-filament usage to the correct Spoolman spools at print completion.\\\\nSupports accurate partial usage reporting for failed/cancelled prints.\\\\n\\\\\\\"\\\\\\\"\\\\\\\"\\\\n\\\\nimport json\\\\nimport logging\\\\n\\\\nfrom sqlalchemy import delete, select\\\\n\\\\nfrom backend.app.core.config import settings as app_settings\\\\nfrom backend.app.core.database import async_session\\\\nfrom backend.app.services.spoolman import get_spoolman_client, init_spoolman_client\\\\n\\\\nlogger = logging.getLogger(__name__)\\\\n\\\\n# Zero UUID used by Bambu printers for empty/unset tray_uuid\\\\n_ZERO_UUID = \\\\\\\"00000000000000000000000000000000\\\\\\\"\\\\n\\\\n\\\\ndef _resolve_spool_tag(tray_info: dict) -> str:\\\\n    \\\\\\\"\\\\\\\"\\\\\\\"Get the best spool identifier from tray info (prefer tray_uuid, fallback to filament_type).\\\\\\\"\\\\\\\"\\\\\\\"\\\\n    tray_uuid = tray_info.get(\\\\\\\"tray_uuid\\\\\\\", _ZERO_UUID)\\\\n    if tray_uuid and tray_uuid != _ZERO_UUID:\\\\n        return tray_uuid\\\\n    # Fallback to filament_type if tray_uuid is zero or missing\\\\n    return tray_info.get(\\\\\\\"filament_type\\\\\\\", \\\\\\\"unknown\\\\\\\")\\\\n\\\\n\\\\ndef _parse_gcode_for_filament_usage(gcode: str) -> dict:\\\\n    \\\\\\\"\\\\\\\"\\\\\\\"Parse G-code to extract filament usage per color/tool.\\\\n\\\\n    Returns a dict mapping filament color/tool to used length in mm.\\\\n    \\\\\\\"\\\\\\\"\\\\\\\"\\\\n    usage = {}\\\\n    for line in gcode.splitlines():\\\\n        line = line.strip()\\\\n        if line.startswith(\\\\\\\";LAYER:\\\\\\\"):\\\\n            # Example: ;LAYER:0\\\\n            continue\\\\n        if line.startswith(\\\\\\\"G1\\\\\\\") and \\\\\\\"E\\\\\\\" in line:\\\\n            # Parse extrusion length\\\\n            parts = line.split()\\\\n            e_value = None\\\\n            for part in parts:\\\\n                if part.startswith(\\\\\\\"E\\\\\\\"):\\\\n                    try:\\\\n                        e_value = float(part[1:])\\\\n                    except ValueError:\\\\n                        e_value = None\\\\n                    break\\\\n            if e_value is not None:\\\\n                # For simplicity, accumulate total extrusion\\\\n                usage[\\\\\\\"total\\\\\\\"] = usage.get(\\\\\\\"total\\\\\\\", 0.0) + e_value\\\\n    return usage\\\\n\\\\n\\\\ndef _calculate_filament_usage(start_gcode: str, end_gcode: str) -> float:\\\\n    \\\\\\\"\\\\\\\"\\\\\\\"Calculate filament usage by subtracting start extrusion from end extrusion.\\\\\\\"\\\\\\\"\\\\\\\"\\\\n    start_usage = _parse_gcode_for_filament_usage(start_gcode)\\\\n    end_usage = _parse_gcode_for_filament_usage(end_gcode)\\\\n    start_total = start_usage.get(\\\\\\\"total\\\\\\\", 0.0)\\\\n    end_total = end_usage.get(\\\\\\\"total\\\\\\\", 0.0)\\\\n    # Off-by-one fix: use -1, not -2\\\\n    usage = end_total - start_total - 1\\\\n    if usage < 0:\\\\n        usage = 0\\\\n    return usage\\\\n\\\\n\\\\nasync def track_spoolman_usage(print_id: str, start_tray_info: dict, end_tray_info: dict, start_gcode: str, end_gcode: str):\\\\n    \\\\\\\"\\\\\\\"\\\\\\\"Track filament usage for a print and report to Spoolman.\\\\\\\"\\\\\\\"\\\\\\\"\\\\n    # Initialize Spoolman client\\\\n    client\"}], \"localized\": true}",
+          "payload_parse_ok": true,
+          "payload_parse_error": "",
+          "candidate_files": [
+            "backend/app/services/spoolman_tracking.py"
+          ],
+          "candidate_files_raw": [
+            "backend/app/services/spoolman_tracking.py",
+            "backend/app/services/github_backup.py",
+            "CHANGELOG.md",
+            "README.md",
+            "CONTRIBUTING.md",
+            "backend/app/main.py",
+            "backend/app/services/virtual_printer/manager.py",
+            ".github/MAINTAINERS.md",
+            "backend/tests/unit/services/test_spoolman_tracking.py",
+            "backend/app/core/database.py",
+            "backend/tests/unit/services/test_background_dispatch.py",
+            "backend/app/services/print_scheduler.py"
+          ],
+          "candidate_files_filtered": [
+            "backend/app/services/spoolman_tracking.py"
+          ],
+          "clause_selection_reason": "subtask_focus::Generate minimal unit tests for critical behaviors",
+          "row_quality": {
+            "contract_quality": "strong",
+            "contract_item_count": 1,
+            "active_clause_source": "subtask_focus::Generate minimal unit tests for critical behaviors",
+            "active_clause_present": false,
+            "witness_count": 1,
+            "witness_unique_count": 1,
+            "payload_present": true,
+            "payload_parse_ok": true,
+            "candidate_file_count": 1,
+            "clause_selection_reason": "subtask_focus::Generate minimal unit tests for critical behaviors",
+            "skipped_targets_present": false,
+            "lint_error_count": 0,
+            "used_fallback": false,
+            "strategy_mode": "cgcs_clause",
+            "regression_guard_count": 1
+          },
+          "lint_errors": [],
+          "skipped_targets": [],
+          "outcome_metrics": {
+            "status": "tests_failed",
+            "pass_rate": 0.0,
+            "duration": 3.0383583749935497,
+            "failing_tests": [
+              "tests_0"
+            ],
+            "error_types": [
+              "fail::"
+            ]
+          },
+          "coverage": 1.0,
+          "satisfied_ids": [
+            "M000_off_by_one_afe45163"
+          ],
+          "unsatisfied_ids": [],
+          "regressed_ids": [],
+          "witness_counts": {
+            "M000_off_by_one_afe45163": 0
+          },
+          "witness_sample": [
+            {
+              "signature": "3d82f7af1a4cffa64a5ee128c5cd3f00e87214c5",
+              "test_case": "tests_0",
+              "message": "ImportError while loading conftest '/Users/karanallagh/Desktop/DataCollector/data/public_repos/pilot/runs/public_pilot_maziggy_bambuddy_005/cgcs/workspace/backend/tests/conftest.py'.\nbackend/tests/conftest.py:22: in <module>\n    from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine  # noqa: E402\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   ModuleNotFoundError: No module named 'sqlalchemy'",
+              "expected": "",
+              "actual": "",
+              "location": "/Users/karanallagh/Desktop/DataCollector/data/public_repos/pilot/runs/public_pilot_maziggy_bambuddy_005/cgcs/logs/tests_0_round3.log",
+              "category": "general",
+              "linked_contract_ids": []
+            }
+          ],
+          "regression_guards": [
+            "M000_off_by_one_afe45163"
+          ]
+        },
+        "witnesses": [
+          {
+            "signature": "3d82f7af1a4cffa64a5ee128c5cd3f00e87214c5",
+            "test_case": "tests_0",
+            "message": "ImportError while loading conftest '/Users/karanallagh/Desktop/DataCollector/data/public_repos/pilot/runs/public_pilot_maziggy_bambuddy_005/cgcs/workspace/backend/tests/conftest.py'.\nbackend/tests/conftest.py:22: in <module>\n    from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine  # noqa: E402\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   ModuleNotFoundError: No module named 'sqlalchemy'",
+            "expected": "",
+            "actual": "",
+            "location": "/Users/karanallagh/Desktop/DataCollector/data/public_repos/pilot/runs/public_pilot_maziggy_bambuddy_005/cgcs/logs/tests_0_round3.log",
+            "category": "general",
+            "linked_contract_ids": []
+          }
+        ],
+        "row_quality": {
+          "contract_quality": "strong",
+          "contract_item_count": 1,
+          "active_clause_source": "subtask_focus::Generate minimal unit tests for critical behaviors",
+          "active_clause_present": false,
+          "witness_count": 1,
+          "witness_unique_count": 1,
+          "payload_present": true,
+          "payload_parse_ok": true,
+          "candidate_file_count": 1,
+          "clause_selection_reason": "subtask_focus::Generate minimal unit tests for critical behaviors",
+          "skipped_targets_present": false,
+          "lint_error_count": 0,
+          "used_fallback": false,
+          "strategy_mode": "cgcs_clause",
+          "regression_guard_count": 1
+        },
+        "regression_guard_ids": [
+          "M000_off_by_one_afe45163"
+        ],
+        "active_clause_id": null
+      }
+    }
+  ]
+}

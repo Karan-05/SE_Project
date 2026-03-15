@@ -1,0 +1,13 @@
+defaults:
+  cgcs_dataset_dir: data/cgcs
+  eval_items: openai_artifacts/eval_items.jsonl
+  batch_requests: openai_artifacts/batch_requests.jsonl
+  normalized_dir: openai_artifacts/normalized
+  graders_dir: openai_artifacts/graders
+  fine_tune_dir: data/cgcs_finetune
+  held_out_tasks:
+    - tc_arena_problem_tags_filter
+
+# Splits that should never appear in fine-tune training
+held_out:
+  - tc_arena_problem_tags_filter

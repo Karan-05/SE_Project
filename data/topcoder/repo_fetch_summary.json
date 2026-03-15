@@ -1,0 +1,43 @@
+{
+  "input_candidates": 94540,
+  "deduped_repo_count": 3195,
+  "eligible_group_count": 100,
+  "rejected_group_count": 119,
+  "clone_attempted_count": 79,
+  "clone_success_count": 0,
+  "clone_failed_count": 79,
+  "archive_download_attempted_count": 21,
+  "archive_download_success_count": 21,
+  "archive_download_failed_count": 0,
+  "rejected_non_repo_count": 119,
+  "dry_run": false,
+  "min_confidence": "medium",
+  "recovery_mode": "high-recall",
+  "prefer_archive_fallback": true,
+  "allowed_hosts": [
+    "github.com",
+    "gitlab.com"
+  ],
+  "reject_host_patterns": [
+    "execute-api",
+    "amazonaws.com",
+    "cloudfront.net"
+  ],
+  "error_types": {
+    "git_error": 79
+  },
+  "status_counts": {
+    "rejected": 119,
+    "failed": 79,
+    "archive_downloaded": 21
+  },
+  "source_origin_counts": {
+    "clone": 79,
+    "archive": 21
+  },
+  "rejection_reasons": {
+    "host_not_allowed": 117,
+    "invalid_repo_slug": 2
+  },
+  "challenge_filter_count": 0
+}

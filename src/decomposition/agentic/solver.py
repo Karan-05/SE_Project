@@ -191,6 +191,7 @@ def _repo_edit_guidance(
         "10. Guard existing behavior: outside the described contract (filters, metadata, 404 payloads) everything must remain byte-identical so existing tests continue to pass.\n"
         "11. If you decide not to edit an implementation target file, include a `\"skipped_targets\": [\"path\", ...]` field in the payload metadata explaining why.\n"
         "12. Satisfy every requirement in the prompt (filters, metadata totals, 404 handling, tag normalization, etc.), not just the first failure you observe.\n"
+        "13. Emit a `\"contract_review\"` array that lists each contract clause with `{\"id\": \"CLAUSE\", \"status\": \"covered\"|\"needs-work\", \"notes\": \"how witnesses are handled\"}` so the harness can confirm CGCS state.\n"
     )
     if config and config.require_checklist:
         instructions += (
@@ -258,6 +259,36 @@ def _build_repo_diagnosis(
         "task_notes": str(metadata.get("notes") or metadata.get("repo_notes") or "")[:240],
     }
     return json.dumps(diag, indent=2)
+
+
+def _format_cgcs_section(ctx: DecompositionContext, cgcs_state: Optional[Dict[str, object]]) -> str:
+    if not cgcs_state:
+        return ""
+    items = {item.id: item for item in get_contract_items(ctx.metadata or {})}
+    lines: List[str] = []
+    active_clause = cgcs_state.get("active_clause") or cgcs_state.get("active_clause_id")
+    if active_clause:
+        desc = items.get(active_clause).description if items.get(active_clause) else ""
+        detail = f"{active_clause}: {desc}" if desc else str(active_clause)
+        lines.append(f"Active clause focus -> {detail}.")
+    guards = cgcs_state.get("regression_guards") or []
+    if guards:
+        guard_lines = []
+        for cid in guards[:6]:
+            guard_desc = items.get(cid).description if items.get(cid) else ""
+            guard_lines.append(f"{cid} ({guard_desc})" if guard_desc else cid)
+        lines.append("Regression guards (keep satisfied): " + ", ".join(guard_lines))
+    witness_samples = cgcs_state.get("witness_sample") or cgcs_state.get("witnesses") or []
+    if witness_samples:
+        preview = []
+        for witness in witness_samples[:5]:
+            test_case = str(witness.get("test_case") or "")
+            message = str(witness.get("message") or "")[:160]
+            preview.append(f"- {test_case}: {message}")
+        lines.append("Linked witnesses:\n" + "\n".join(preview))
+    if not lines:
+        return ""
+    return "CGCS state:\n" + "\n".join(lines) + "\n"
 
 
 def _ensure_repo_payload(text: str, ctx: DecompositionContext, plan: DecompositionPlan) -> str:
@@ -361,6 +392,15 @@ def _build_repo_repair_prompt(
     plan_outline = _plan_outline(plan)
     diagnostics = _diagnostics_summary(plan)
     diagnosis_block = _build_repo_diagnosis(ctx, plan, summary, last_result) if summary else ""
+    cgcs_note = ""
+    lint_note = ""
+    if last_result and last_result.edit_metadata:
+        cgcs_note = _format_cgcs_section(ctx, last_result.edit_metadata.get("cgcs_state"))
+        lint_errors = last_result.edit_metadata.get("lint_errors")
+        if lint_errors:
+            lint_list = lint_errors if isinstance(lint_errors, list) else [str(lint_errors)]
+            lint_lines = "\n".join(f"- {err}" for err in lint_list[:4])
+            lint_note = f"Payload lint errors last round:\n{lint_lines}\n"
     focus_note_parts: List[str] = []
     if isinstance(subtask_focus, str) and subtask_focus.startswith("implementation::"):
         impl_target = subtask_focus.split("implementation::", 1)[1]
@@ -415,6 +455,8 @@ def _build_repo_repair_prompt(
         f"{last_files_note}"
         f"{pending_note}"
         f"{coverage_note}"
+        f"{cgcs_note}"
+        f"{lint_note}"
         f"{critic_block}"
         f"{context_block}"
         f"Problem statement: {ctx.problem_statement[:600]}\n"

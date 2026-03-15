@@ -1,0 +1,1 @@
+{"content": "[MOCK] d0f888370781077d :: You are repairing code produced by strategy 'contract_first'. Problem statement: You are fixing a seeded bug in the repo", "tokens": 179, "elapsed": 7.833001291146502e-06, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "contract_first:repair"}}

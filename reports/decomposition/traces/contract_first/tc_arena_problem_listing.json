@@ -79,7 +79,7 @@
       "localized": false,
       "pass_rate": 0.0,
       "status": "tests_failed",
-      "duration": 2.039466959075071,
+      "duration": 0.7887896669999463,
       "failing_tests": [
         "tests_0"
       ],
@@ -107,21 +107,75 @@
         "raw_metadata_keys": [
           "localized"
         ],
+        "raw_payload": "{\"edits\": [{\"path\": \"modules/Problems/services/ProblemsService.js\", \"mode\": \"rewrite\", \"content\": \"```json\\n{\\n  \\\"contract_review\\\": [\\n    {\\n      \\\"id\\\": \\\"filtering\\\",\\n      \\\"status\\\": \\\"covered\\\",\\n      \\\"notes\\\": \\\"Implemented case-insensitive difficulty filtering, limit capped at 50, metadata includes totalProblems, filteredCount, appliedLimit, and difficultyBreakdown.\\\"\\n    },\\n    {\\n      \\\"id\\\": \\\"sorting\\\",\\n      \\\"status\\\": \\\"covered\\\",\\n      \\\"notes\\\": \\\"Problems are sorted by roundId ascending deterministically after filtering and limiting.\\\"\\n    },\\n    {\\n      \\\"id\\\": \\\"aggregation\\\",\\n      \\\"status\\\": \\\"covered\\\",\\n      \\\"notes\\\": \\\"When includeComponents=true, metadata.componentLanguageTotals and componentStatusTotals are computed from the filtered+limited set; per-problem componentLanguages are deduplicated and sorted case-insensitively.\\\"\\n    },\\n    {\\n      \\\"id\\\": \\\"per-problem componentLanguages sorting\\\",\\n      \\\"status\\\": \\\"covered\\\",\\n      \\\"notes\\\": \\\"Per-problem componentLanguages arrays are deduplicated and sorted case-insensitively.\\\"\\n    }\\n  ],\\n  \\\"edits\\\": [\\n    {\\n      \\\"path\\\": \\\"modules/Problems/services/ProblemsService.js\\\",\\n      \\\"mode\\\": \\\"rewrite\\\",\\n      \\\"content\\\": \\\"'use strict';\\\\n\\\\n/*\\\\n * Copyright (c) 2016 TopCoder, Inc.\\\\n */\\\\n\\\\n/**\\\\n * Service for SRM problem APIs.\\\\n */\\\\nconst fs = require('fs');\\\\nconst path = require('path');\\\\nconst Joi = require('joi');\\\\nconst logger = require('../../../common/logger');\\\\n\\\\nlet cachedProblems;\\\\n\\\\nconst MAX_LIMIT = 50;\\\\n\\\\n/**\\\\n * Normalize tags filter into a lowercase array.\\\\n * @param {string|Array<string>} rawTags\\\\n * @returns {Array<string>}\\\\n */\\\\nfunction normalizeTags(rawTags) {\\\\n  if (!rawTags && rawTags !== '') {\\\\n    return [];\\\\n  }\\\\n  const list = Array.isArray(rawTags) ? rawTags : String(rawTags).split(',');\\\\n  return list\\\\n    .map((tag) => String(tag || '').trim().toLowerCase())\\\\n    .filter((tag) => tag);\\\\n}\\\\n\\\\n/**\\\\n * Check whether the problem contains at least one of the requested tags.\\\\n * @param {Object} problem\\\\n * @param {Array<string>} tags\\\\n * @returns {boolean}\\\\n */\\\\nfunction problemHasTags(problem, tags) {\\\\n  if (!tags || tags.length === 0) return true;\\\\n  if (!problem.tags || !Array.isArray(problem.tags)) return false;\\\\n  const problemTags = problem.tags.map((t) => t.toLowerCase());\\\\n  return tags.some((tag) => problemTags.includes(tag));\\\\n}\\\\n\\\\n/**\\\\n * Load problems from data file, cache in memory.\\\\n * @returns {Array<Object>} problems\\\\n */\\\\nfunction loadProblems() {\\\\n  if (cachedProblems) return cachedProblems;\\\\n  const dataPath = path.join(__dirname, '../../data/problems.json');\\\\n  const raw = fs.readFileSync(dataPath, 'utf8');\\\\n  const problems = JSON.parse(raw);\\\\n  cachedProblems = problems;\\\\n  return cachedProblems;\\\\n}\\\\n\\\\n/**\\\\n * Deduplicate and sort componentLanguages case-insensitively.\\\\n * @param {Array<string>} langs\\\\n * @returns {Array<string>}\\\\n */\\\\nfunction dedupeAndSortLanguages(langs) {\\\\n  if (!langs || !Array.isArray(langs)) return [];\\\\n  const lowered = new Map();\\\\n  langs.for\"}], \"localized\": true}",
         "applied_file_count": 1,
         "proposed_file_count": 1,
         "multi_file_applied": false,
         "subtask_focus": "global",
-        "contract_coverage": 1.0,
+        "contract_coverage": 0.75,
         "contract_satisfied": [
           "difficulty_limit_metadata",
           "sorted_round_id",
-          "include_components_metadata",
+          "include_components_metadata"
+        ],
+        "contract_unsatisfied": [
           "component_lang_sorting"
         ],
-        "contract_unsatisfied": [],
-        "contract_failure_categories": {},
-        "contract_unsatisfied_details": [],
-        "contract_fail_cases": []
+        "contract_failure_categories": {
+          "sorting": 1
+        },
+        "contract_unsatisfied_details": [
+          "component_lang_sorting: Per-problem componentLanguages arrays must be deduplicated and sorted case-insensitively to aid the UI."
+        ],
+        "contract_fail_cases": [],
+        "witness_count": 1,
+        "witness_samples": [
+          {
+            "test_case": "tests_0",
+            "message": "Exception during run: /Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo/runs/tc_arena_problem_listing/contract_first/workspace",
+            "category": "assertion",
+            "expected": "",
+            "actual": "",
+            "contracts": []
+          }
+        ],
+        "cgcs_state": {
+          "round": 0,
+          "active_clause": "component_lang_sorting",
+          "satisfied_ids": [
+            "difficulty_limit_metadata",
+            "include_components_metadata",
+            "sorted_round_id"
+          ],
+          "unsatisfied_ids": [
+            "component_lang_sorting"
+          ],
+          "regressed_ids": [],
+          "regression_guards": [
+            "difficulty_limit_metadata",
+            "include_components_metadata",
+            "sorted_round_id"
+          ],
+          "witness_counts": {
+            "difficulty_limit_metadata": 0,
+            "sorted_round_id": 0,
+            "include_components_metadata": 0,
+            "component_lang_sorting": 1
+          },
+          "witness_sample": [
+            {
+              "test_case": "tests_0",
+              "message": "Exception during run: /Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo/runs/tc_arena_problem_listing/contract_first/workspace/modules/Problems/se",
+              "category": "assertion",
+              "expected": "",
+              "actual": "",
+              "linked_contract_ids": [
+                "component_lang_sorting"
+              ]
+            }
+          ],
+          "coverage": 0.75
+        }
       }
     },
     {
@@ -131,7 +185,7 @@
       "localized": true,
       "pass_rate": 0.0,
       "status": "tests_failed",
-      "duration": 0.8125849580392241,
+      "duration": 0.2763382080001975,
       "failing_tests": [
         "tests_0"
       ],
@@ -159,6 +213,7 @@
         "raw_metadata_keys": [
           "localized"
         ],
+        "raw_payload": "{\"edits\": [{\"path\": \"modules/Problems/services/ProblemsService.js\", \"mode\": \"rewrite\", \"content\": \"```json\\n{\\n  \\\"edits\\\": [\\n    {\\n      \\\"path\\\": \\\"modules/Problems/services/ProblemsService.js\\\",\\n      \\\"mode\\\": \\\"rewrite\\\",\\n      \\\"content\\\": \\\"'use strict';\\\\n\\\\n/*\\\\n * Copyright (c) 2016 TopCoder, Inc.\\\\n */\\\\n\\\\n/**\\\\n * Service for SRM problem APIs.\\\\n */\\\\nconst fs = require('fs');\\\\nconst path = require('path');\\\\nconst Joi = require('joi');\\\\nconst logger = require('../../../common/logger');\\\\n\\\\nlet cachedProblems;\\\\n\\\\nconst MAX_LIMIT = 50;\\\\n\\\\n/**\\\\n * Normalize tags filter into a lowercase array.\\\\n * @param {string|Array<string>} rawTags\\\\n * @returns {Array<string>}\\\\n */\\\\nfunction normalizeTags(rawTags) {\\\\n  if (!rawTags && rawTags !== '') {\\\\n    return [];\\\\n  }\\\\n  const list = Array.isArray(rawTags) ? rawTags : String(rawTags).split(',');\\\\n  return list\\\\n    .map((tag) => String(tag || '').trim().toLowerCase())\\\\n    .filter((tag) => tag);\\\\n}\\\\n\\\\n/**\\\\n * Check whether the problem contains at least one of the requested tags.\\\\n * @param {Object} problem\\\\n * @param {Array<string>} tags\\\\n * @returns {boolean}\\\\n */\\\\nfunction problemHasTags(problem, tags) {\\\\n  if (!tags || tags.length === 0) {\\\\n    return true;\\\\n  }\\\\n  if (!problem.tags || !Array.isArray(problem.tags)) {\\\\n    return false;\\\\n  }\\\\n  const problemTags = problem.tags.map((t) => t.toLowerCase());\\\\n  return tags.some((tag) => problemTags.includes(tag));\\\\n}\\\\n\\\\n/**\\\\n * Load problems from JSON file, cache in memory.\\\\n * @returns {Array<Object>} problems\\\\n */\\\\nfunction loadProblems() {\\\\n  if (cachedProblems) {\\\\n    return cachedProblems;\\\\n  }\\\\n  const filePath = path.join(__dirname, '../../data/problems.json');\\\\n  const raw = fs.readFileSync(filePath, 'utf8');\\\\n  const problems = JSON.parse(raw);\\\\n  cachedProblems = problems;\\\\n  return cachedProblems;\\\\n}\\\\n\\\\n/**\\\\n * Deduplicate and case-insensitively sort array of strings.\\\\n * @param {Array<string>} arr\\\\n * @returns {Array<string>}\\\\n */\\\\nfunction dedupSortCaseInsensitive(arr) {\\\\n  const lowered = new Set();\\\\n  const result = [];\\\\n  for (const item of arr) {\\\\n    const lower = item.toLowerCase();\\\\n    if (!lowered.has(lower)) {\\\\n      lowered.add(lower);\\\\n      result.push(item);\\\\n    }\\\\n  }\\\\n  result.sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));\\\\n  return result;\\\\n}\\\\n\\\\n/**\\\\n * Aggregate component language totals and status totals.\\\\n * @param {Array<Object>} problems\\\\n * @returns {{componentLanguageTotals: Object, componentStatusTotals: Object}}\\\\n */\\\\nfunction aggregateComponentTotals(problems) {\\\\n  const componentLanguageTotals = {};\\\\n  const componentStatusTotals = {};\\\\n\\\\n  for (const problem of problems) {\\\\n    if (!problem.components || !Array.isArray(problem.components)) {\\\\n      continue;\\\\n    }\\\\n    for (const comp of problem.components) {\\\\n      if (comp.language) {\\\\\"}], \"localized\": true}",
         "applied_file_count": 1,
         "proposed_file_count": 1,
         "multi_file_applied": false,
@@ -173,7 +228,53 @@
         "contract_unsatisfied": [],
         "contract_failure_categories": {},
         "contract_unsatisfied_details": [],
-        "contract_fail_cases": []
+        "contract_fail_cases": [],
+        "witness_count": 1,
+        "witness_samples": [
+          {
+            "test_case": "tests_0",
+            "message": "Exception during run: /Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo/runs/tc_arena_problem_listing/contract_first/workspace",
+            "category": "assertion",
+            "expected": "",
+            "actual": "",
+            "contracts": []
+          }
+        ],
+        "cgcs_state": {
+          "round": 1,
+          "active_clause": "",
+          "satisfied_ids": [
+            "component_lang_sorting",
+            "difficulty_limit_metadata",
+            "include_components_metadata",
+            "sorted_round_id"
+          ],
+          "unsatisfied_ids": [],
+          "regressed_ids": [],
+          "regression_guards": [
+            "component_lang_sorting",
+            "difficulty_limit_metadata",
+            "include_components_metadata",
+            "sorted_round_id"
+          ],
+          "witness_counts": {
+            "difficulty_limit_metadata": 0,
+            "sorted_round_id": 0,
+            "include_components_metadata": 0,
+            "component_lang_sorting": 0
+          },
+          "witness_sample": [
+            {
+              "test_case": "tests_0",
+              "message": "Exception during run: /Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo/runs/tc_arena_problem_listing/contract_first/workspace/modules/Problems/se",
+              "category": "assertion",
+              "expected": "",
+              "actual": "",
+              "linked_contract_ids": []
+            }
+          ],
+          "coverage": 1.0
+        }
       }
     },
     {
@@ -183,7 +284,7 @@
       "localized": true,
       "pass_rate": 0.0,
       "status": "tests_failed",
-      "duration": 0.8555272920057178,
+      "duration": 0.536643625000579,
       "failing_tests": [
         "tests_0"
       ],
@@ -211,21 +312,75 @@
         "raw_metadata_keys": [
           "localized"
         ],
+        "raw_payload": "{\"edits\": [{\"path\": \"modules/Problems/services/ProblemsService.js\", \"mode\": \"rewrite\", \"content\": \"```json\\n{\\n  \\\"edits\\\": [\\n    {\\n      \\\"path\\\": \\\"modules/Problems/services/ProblemsService.js\\\",\\n      \\\"mode\\\": \\\"rewrite\\\",\\n      \\\"content\\\": \\\"'use strict';\\\\n\\\\n/*\\\\n * Copyright (c) 2016 TopCoder, Inc.\\\\n */\\\\n\\\\n/**\\\\n * Service for SRM problem APIs.\\\\n */\\\\nconst fs = require('fs');\\\\nconst path = require('path');\\\\nconst Joi = require('joi');\\\\nconst logger = require('../../../common/logger');\\\\n\\\\nlet cachedProblems;\\\\n\\\\nconst MAX_LIMIT = 50;\\\\n\\\\n/**\\\\n * Normalize tags filter into a lowercase array.\\\\n * @param {string|Array<string>} rawTags\\\\n * @returns {Array<string>}\\\\n */\\\\nfunction normalizeTags(rawTags) {\\\\n  if (!rawTags && rawTags !== '') {\\\\n    return [];\\\\n  }\\\\n  const list = Array.isArray(rawTags) ? rawTags : String(rawTags).split(',');\\\\n  return list\\\\n    .map((tag) => String(tag || '').trim().toLowerCase())\\\\n    .filter((tag) => tag);\\\\n}\\\\n\\\\n/**\\\\n * Check whether the problem contains at least one of the requested tags.\\\\n * @param {Object} problem\\\\n * @param {Array<string>} tags\\\\n * @returns {boolean}\\\\n */\\\\nfunction problemHasTags(problem, tags) {\\\\n  if (!tags || tags.length === 0) return true;\\\\n  if (!problem.tags || !Array.isArray(problem.tags)) return false;\\\\n  const problemTags = problem.tags.map((t) => t.toLowerCase());\\\\n  return tags.some((tag) => problemTags.includes(tag));\\\\n}\\\\n\\\\n/**\\\\n * Load problems from JSON file and cache them.\\\\n * @returns {Array<Object>}\\\\n */\\\\nfunction loadProblems() {\\\\n  if (cachedProblems) return cachedProblems;\\\\n  const filePath = path.resolve(__dirname, '../../data/problems.json');\\\\n  const raw = fs.readFileSync(filePath, 'utf8');\\\\n  const problems = JSON.parse(raw);\\\\n  cachedProblems = problems;\\\\n  return cachedProblems;\\\\n}\\\\n\\\\n/**\\\\n * Deduplicate and case-insensitively sort an array of strings.\\\\n * @param {Array<string>} arr\\\\n * @returns {Array<string>}\\\\n */\\\\nfunction dedupeAndSortCaseInsensitive(arr) {\\\\n  const lowered = new Map();\\\\n  arr.forEach((item) => {\\\\n    const lower = item.toLowerCase();\\\\n    if (!lowered.has(lower)) {\\\\n      lowered.set(lower, item);\\\\n    }\\\\n  });\\\\n  return Array.from(lowered.values()).sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));\\\\n}\\\\n\\\\n/**\\\\n * Aggregate component language totals and status totals from a list of problems.\\\\n * @param {Array<Object>} problems\\\\n * @returns {{componentLanguageTotals: Object, componentStatusTotals: Object}}\\\\n */\\\\nfunction aggregateComponentTotals(problems) {\\\\n  const componentLanguageTotals = {};\\\\n  const componentStatusTotals = {};\\\\n\\\\n  problems.forEach((problem) => {\\\\n    if (!problem.components || !Array.isArray(problem.components)) return;\\\\n    problem.components.forEach((component) => {\\\\n      if (component.language) {\\\\n        const lang = component.language;\\\\n        componentLanguageTotals[lang] = (componentLanguageTotals[lang] || 0\"}], \"localized\": true}",
         "applied_file_count": 1,
         "proposed_file_count": 1,
         "multi_file_applied": false,
         "subtask_focus": "Implement core logic",
-        "contract_coverage": 1.0,
+        "contract_coverage": 0.75,
         "contract_satisfied": [
           "difficulty_limit_metadata",
           "sorted_round_id",
-          "include_components_metadata",
           "component_lang_sorting"
         ],
-        "contract_unsatisfied": [],
-        "contract_failure_categories": {},
-        "contract_unsatisfied_details": [],
-        "contract_fail_cases": []
+        "contract_unsatisfied": [
+          "include_components_metadata"
+        ],
+        "contract_failure_categories": {
+          "aggregation": 1
+        },
+        "contract_unsatisfied_details": [
+          "include_components_metadata: When includeComponents=true, both metadata.componentLanguageTotals/componentStatusTotals and per-problem componentLanguages must reflect the filtered+limited set."
+        ],
+        "contract_fail_cases": [],
+        "witness_count": 1,
+        "witness_samples": [
+          {
+            "test_case": "tests_0",
+            "message": "Exception during run: /Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo/runs/tc_arena_problem_listing/contract_first/workspace",
+            "category": "assertion",
+            "expected": "",
+            "actual": "",
+            "contracts": []
+          }
+        ],
+        "cgcs_state": {
+          "round": 2,
+          "active_clause": "include_components_metadata",
+          "satisfied_ids": [
+            "component_lang_sorting",
+            "difficulty_limit_metadata",
+            "sorted_round_id"
+          ],
+          "unsatisfied_ids": [],
+          "regressed_ids": [
+            "include_components_metadata"
+          ],
+          "regression_guards": [
+            "component_lang_sorting",
+            "difficulty_limit_metadata",
+            "sorted_round_id"
+          ],
+          "witness_counts": {
+            "difficulty_limit_metadata": 0,
+            "sorted_round_id": 0,
+            "include_components_metadata": 1,
+            "component_lang_sorting": 0
+          },
+          "witness_sample": [
+            {
+              "test_case": "tests_0",
+              "message": "Exception during run: /Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo/runs/tc_arena_problem_listing/contract_first/workspace/modules/Problems/se",
+              "category": "assertion",
+              "expected": "",
+              "actual": "",
+              "linked_contract_ids": [
+                "include_components_metadata"
+              ]
+            }
+          ],
+          "coverage": 0.75
+        }
       }
     }
   ]

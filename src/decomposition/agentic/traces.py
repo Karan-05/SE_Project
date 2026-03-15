@@ -16,6 +16,7 @@ def _default_trace_dir() -> Path:
 def _plan_snapshot(plan: DecompositionPlan) -> Dict[str, object]:
     return {
         "strategy": plan.strategy_name,
+        "contract_items": plan.contract_items,
         "contract": plan.contract,
         "patterns": plan.patterns,
         "subtasks": plan.subtasks,

@@ -1,0 +1,53 @@
+{
+  "round": 2,
+  "strategy": "contract_first",
+  "proposed_files": [
+    "mlxsnn/datasets/cifar10dvs.py"
+  ],
+  "applied_files": [
+    "mlxsnn/datasets/cifar10dvs.py"
+  ],
+  "status": "applied",
+  "metadata": {
+    "raw_edit_payload": "{\"edits\": [{\"path\": \"mlxsnn/datasets/cifar10dvs.py\", \"mode\": \"rewrite\", \"content\": \"[MOCK] 307f3fdf0618c9f3 :: You are repairing a repository-backed change produced by strategy 'contract_first'. Repository workspace: `/Users/karana\"}], \"localized\": true}",
+    "raw_payload": "{\"edits\": [{\"path\": \"mlxsnn/datasets/cifar10dvs.py\", \"mode\": \"rewrite\", \"content\": \"[MOCK] 307f3fdf0618c9f3 :: You are repairing a repository-backed change produced by strategy 'contract_first'. Repository workspace: `/Users/karana\"}], \"localized\": true}",
+    "payload_parse_ok": true,
+    "payload_parse_error": "",
+    "candidate_files_raw": [
+      "mlxsnn/datasets/cifar10dvs.py",
+      "LICENSE",
+      "mlx_snn.egg-info/PKG-INFO",
+      "mlxsnn/datasets/__init__.py",
+      "CHANGELOG.md",
+      "README.md",
+      "docs/index.md",
+      "mlxsnn/datasets/dvs_gesture.py",
+      "mlxsnn/datasets/utils.py",
+      "mlxsnn/datasets/nmnist.py",
+      "mlxsnn/datasets/shd.py",
+      "tests/test_datasets.py"
+    ],
+    "candidate_files_filtered": [
+      "mlxsnn/datasets/cifar10dvs.py"
+    ],
+    "candidate_files": [
+      "mlxsnn/datasets/cifar10dvs.py"
+    ],
+    "strategy_mode": "contract_first",
+    "edit_mode": "edit_batch",
+    "localized_requested": true,
+    "fallback_requested": false,
+    "raw_metadata_keys": [
+      "localized"
+    ],
+    "applied_file_count": 1,
+    "proposed_file_count": 1,
+    "multi_file_applied": false,
+    "subtask_focus": "Validate inputs vs contract"
+  },
+  "error": "",
+  "proposed_file_count": 1,
+  "applied_file_count": 1,
+  "multi_file_proposed": false,
+  "multi_file_applied": false
+}

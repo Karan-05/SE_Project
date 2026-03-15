@@ -1,0 +1,1 @@
+{"content": "[MOCK] 4abdf4cd29f92504 :: You are repairing a repository-backed change produced by strategy 'cgcs'. Repository workspace: `/Users/karanallagh/Desk", "tokens": 768, "elapsed": 2.4708002456463873e-05, "budget_exceeded": false, "meta": {"provider": "mock", "model": "repair-loop", "caller": "cgcs:repair"}}

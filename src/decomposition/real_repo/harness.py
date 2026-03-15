@@ -15,7 +15,12 @@ from fnmatch import fnmatch
 from src.decomposition.agentic.executor import ExecutionResult
 from src.decomposition.interfaces import DecompositionContext
 from src.decomposition.self_verify import summarize_failures
-from src.decomposition.real_repo.edit_batch import RepoEditBatch, parse_repo_edit_payload
+from src.decomposition.real_repo.edit_batch import (
+    RepoEditBatch,
+    parse_repo_edit_payload,
+    parse_repo_edit_payload_with_diagnostics,
+)
+from src.decomposition.real_repo.lint import lint_repo_edit_payload
 from src.decomposition.real_repo.task import RepoTaskSpec
 from src.decomposition.real_repo.setup import resolve_setup_plan, SetupPlan
 from src.decomposition.real_repo.ground_truth import load_ground_truth_files
@@ -26,6 +31,21 @@ def _as_shell_command(cmd: str | List[str]) -> List[str]:
     if isinstance(cmd, list):
         return cmd
     return ["bash", "-lc", cmd]
+
+
+def _normalize_candidate_entries(*sources: Optional[List[str]]) -> List[str]:
+    seen: set[str] = set()
+    ordered: List[str] = []
+    for source in sources:
+        if not source:
+            continue
+        for entry in source:
+            entry_str = str(entry).strip()
+            if not entry_str or entry_str in seen:
+                continue
+            seen.add(entry_str)
+            ordered.append(entry_str)
+    return ordered
 
 
 _REPO_FINGERPRINT_CACHE: Dict[str, str] = {}
@@ -460,30 +480,106 @@ class RepoTaskHarness:
         compile_failed = False
         edited_files: List[str] = []
         proposed_files: List[str] = []
-        edit_metadata: Dict[str, object] = {}
         edit_log_path: Optional[Path] = None
+        task_metadata = ctx.metadata if isinstance(ctx.metadata, dict) else {}
+        candidate_files_raw = _normalize_candidate_entries(
+            task_metadata.get("repo_candidate_files"),
+            task_metadata.get("repo_target_files"),
+            task_metadata.get("expected_files"),
+        )
+        candidate_files_filtered = _normalize_candidate_entries(
+            task_metadata.get("implementation_target_files"),
+            task_metadata.get("expected_files"),
+            task_metadata.get("repo_target_files"),
+        )
+        if not candidate_files_filtered:
+            candidate_files_filtered = list(candidate_files_raw)
+        edit_metadata: Dict[str, object] = {
+            "raw_edit_payload": code,
+            "raw_payload": code,
+            "payload_parse_ok": False,
+            "payload_parse_error": "",
+            "candidate_files_raw": candidate_files_raw,
+            "candidate_files_filtered": candidate_files_filtered,
+            "candidate_files": candidate_files_filtered or candidate_files_raw,
+            "strategy_mode": self.strategy_name,
+        }
 
         try:
-            batch = parse_repo_edit_payload(code)
+            batch, parse_error = parse_repo_edit_payload_with_diagnostics(code)
             if batch and batch.edits:
                 proposed_files = batch.proposed_files
-                edit_metadata = {
-                    "edit_mode": "edit_batch",
-                    "localized_requested": batch.localized,
-                    "fallback_requested": batch.fallback_to_full_regen,
-                    "raw_metadata_keys": list(batch.metadata.keys()),
-                }
+                edit_metadata.update(
+                    {
+                        "edit_mode": "edit_batch",
+                        "localized_requested": batch.localized,
+                        "fallback_requested": batch.fallback_to_full_regen,
+                        "raw_metadata_keys": list(batch.metadata.keys()),
+                        "raw_payload": batch.raw_payload,
+                        "raw_edit_payload": batch.raw_payload or code,
+                        "payload_parse_ok": True,
+                        "payload_parse_error": "",
+                    }
+                )
                 contract_review = batch.metadata.get("contract_review")
                 if contract_review:
                     edit_metadata["contract_review"] = contract_review
+                skipped_targets = batch.metadata.get("skipped_targets")
+                if skipped_targets:
+                    edit_metadata["skipped_targets"] = skipped_targets
+                lint_errors = lint_repo_edit_payload(batch, self.task, task_metadata)
+                if lint_errors:
+                    edit_metadata["lint_errors"] = lint_errors
+                    lint_message = "; ".join(lint_errors)
+                    tests.append(
+                        {
+                            "name": "payload_lint",
+                            "status": "fail",
+                            "error": lint_message,
+                            "stdout": "",
+                            "stderr": lint_message,
+                        }
+                    )
+                    status = "lint_failed"
+                    compile_failed = True
+                    edit_log_path = self._log_edit_attempt(
+                        proposed_files=proposed_files,
+                        applied_files=edited_files,
+                        status="lint_failed",
+                        metadata=edit_metadata,
+                        error=lint_message,
+                    )
+                    summary = summarize_failures(tests)
+                    return ExecutionResult(
+                        code=code,
+                        tests=tests,
+                        pass_rate=0.0,
+                        status=status,
+                        duration=time.perf_counter() - attempt_start,
+                        summary=summary,
+                        compile_failed=compile_failed,
+                        edited_files=edited_files,
+                        proposed_files=proposed_files,
+                        inspected_files=self.task.file_context,
+                        artifacts={
+                            "workspace": str(self.workspace),
+                            "logs_dir": str(self.logs_dir),
+                            "edit_log": str(edit_log_path) if edit_log_path else "",
+                        },
+                            edit_metadata=edit_metadata,
+                        )
                 edited_files = self._apply_edit_batch(batch)
             else:
+                edit_metadata["payload_parse_ok"] = False
+                edit_metadata["payload_parse_error"] = parse_error or "no_structured_payload"
                 rel_path = self._apply_code(code)
                 edited_files.append(str(rel_path))
                 proposed_files = [str(rel_path)]
-                edit_metadata = {
-                    "edit_mode": "single_file_markers",
-                }
+                edit_metadata.update(
+                    {
+                        "edit_mode": "single_file_markers",
+                    }
+                )
             applied_count = len(set(edited_files))
             proposed_count = len(set(proposed_files))
             edit_metadata["applied_file_count"] = applied_count

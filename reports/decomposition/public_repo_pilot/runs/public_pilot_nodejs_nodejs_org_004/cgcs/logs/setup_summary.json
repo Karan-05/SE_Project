@@ -1,0 +1,33 @@
+{
+  "status": "failed",
+  "duration": 0.870990041999903,
+  "commands": [
+    "npm install --no-audit --no-fund"
+  ],
+  "plan": {
+    "commands": [
+      "npm install --no-audit --no-fund"
+    ],
+    "strategy": "npm_install_package_json",
+    "derived": true,
+    "package_manager": "",
+    "runtime_family": "node",
+    "notes": {
+      "package_json": "/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_nodejs_nodejs_org_004/cgcs/workspace/package.json"
+    }
+  },
+  "steps": [
+    {
+      "name": "setup_0",
+      "status": "fail",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "npm error code EBADDEVENGINES\nnpm error EBADDEVENGINES The developer of this package has specified the following through devEngines\nnpm error EBADDEVENGINES Invalid devEngines.runtime\nnpm error EBADDEVENGINES Invalid semver version \">=v24.11.0\" does not match \"v24.1.0\" for \"runtime\"\nnpm error EBADDEVENGINES {\nnpm error EBADDEVENGINES   current: { name: 'node', version: 'v24.1.0' },\nnpm error EBADDEVENGINES   required: { name: 'node', version: '>=v24.11.0', onFail: 'error' }\nnpm error EBADDEVENGINES }\nnpm error A complete log of this run can be found in: /Users/karanallagh/.npm/_logs/2026-03-14T23_36_04_167Z-debug-0.log\n",
+      "duration": 0.870990041999903,
+      "log_path": "/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_nodejs_nodejs_org_004/cgcs/logs/setup_0_setup.log"
+    }
+  ],
+  "requires_network": false,
+  "last_log": "/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_nodejs_nodejs_org_004/cgcs/logs/setup_0_setup.log",
+  "error": "npm error code EBADDEVENGINES\nnpm error EBADDEVENGINES The developer of this package has specified the following through devEngines\nnpm error EBADDEVENGINES Invalid devEngines.runtime\nnpm error EBADDEVENGINES Invalid semver version \">=v24.11.0\" does not match \"v24.1.0\" for \"runtime\"\nnpm error EBADDEVENGINES {\nnpm error EBADDEVENGINES   current: { name: 'node', version: 'v24.1.0' },\nnpm error EBADDEVENGINES   required: { name: 'node', version: '>=v24.11.0', onFail: 'error' }\nnpm error EBADDEVENGINES }\nnpm error A complete log of this run can be found in: /Users/karanallagh/.npm/_logs/2026-03-14T23_36_04_167Z-debug-0.log"
+}

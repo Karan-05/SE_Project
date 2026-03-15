@@ -1,0 +1,14 @@
+{
+  "total_runs": 15,
+  "status_counts": {
+    "trace_missing_fields": 6,
+    "setup_failed": 9
+  },
+  "strategies": [
+    "contract_first",
+    "failure_mode_first",
+    "cgcs"
+  ],
+  "tasks": 5,
+  "dry_run": false
+}

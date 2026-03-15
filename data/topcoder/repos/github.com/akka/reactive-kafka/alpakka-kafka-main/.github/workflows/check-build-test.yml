@@ -1,0 +1,231 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - release-*
+    tags-ignore: [ v.* ]
+
+permissions:
+  contents: read # allow actions/checkout
+
+env:
+  AKKA_TEST_TIMEFACTOR: 10.0
+  EVENT_NAME: ${{ github.event_name }}
+
+jobs:
+  check-code-style:
+    name: Check Code Style
+    runs-on: Akka-Default
+    steps:
+      - name: Checkout
+        # https://github.com/actions/checkout/releases
+        # v4.1.1
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
+        with:
+          # we don't know what commit the last tag was it's safer to get entire repo so previousStableVersion resolves
+          fetch-depth: 0
+
+      - name: Checkout GitHub merge
+        if: github.event.pull_request
+        run: |-
+          git fetch origin pull/${{ github.event.pull_request.number }}/merge:scratch
+          git checkout scratch
+
+      - name: Cache Coursier cache
+        # https://github.com/coursier/cache-action/releases
+        # v6.4.5
+        uses: coursier/cache-action@1ff273bff02a8787bc9f1877d347948af647956d
+
+      - name: Set up JDK 11
+        # https://github.com/coursier/setup-action/releases
+        # v1.3.5
+        uses: coursier/setup-action@7bde40eee928896f074dbb76d22dd772eed5c65f
+        with:
+          jvm: temurin:1.11
+
+      - name: Code style check and binary-compatibility check
+        # Run locally with: sbt 'verifyCodeStyle ; mimaReportBinaryIssues'
+        run: sbt "; verifyCodeStyle; mimaReportBinaryIssues"
+
+  check-code-compilation:
+    name: Check Code Compilation
+    runs-on: Akka-Default
+    steps:
+      - name: Checkout
+        # https://github.com/actions/checkout/releases
+        # v4.1.1
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
+        with:
+          fetch-depth: 0
+
+      - name: Checkout GitHub merge
+        if: github.event.pull_request
+        run: |-
+          git fetch origin pull/${{ github.event.pull_request.number }}/merge:scratch
+          git checkout scratch
+
+      - name: Cache Coursier cache
+        # https://github.com/coursier/cache-action/releases
+        # v6.4.5
+        uses: coursier/cache-action@1ff273bff02a8787bc9f1877d347948af647956d
+
+      - name: Set up JDK 11
+        # https://github.com/coursier/setup-action/releases
+        # v1.3.5
+        uses: coursier/setup-action@7bde40eee928896f074dbb76d22dd772eed5c65f
+        with:
+          jvm: temurin:1.11
+
+      - name: Compile all code with fatal warnings for Java 11 and all Scala versions
+        # Run locally with: env CI=true sbt 'clean ; Test/compile'
+        run: sbt "+Test/compile"
+
+  check-docs:
+    name: Check Docs
+    runs-on: Akka-Default
+    steps:
+      - name: Checkout
+        # https://github.com/actions/checkout/releases
+        # v4.1.1
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
+        with:
+          fetch-depth: 0
+
+      - name: Checkout GitHub merge
+        if: github.event.pull_request
+        run: |-
+          git fetch origin pull/${{ github.event.pull_request.number }}/merge:scratch
+          git checkout scratch
+
+      - name: Cache Coursier cache
+        # https://github.com/coursier/cache-action/releases
+        # v6.4.5
+        uses: coursier/cache-action@1ff273bff02a8787bc9f1877d347948af647956d
+
+      - name: Set up JDK 17
+        # https://github.com/coursier/setup-action/releases
+        # v1.3.5
+        uses: coursier/setup-action@7bde40eee928896f074dbb76d22dd772eed5c65f
+        with:
+          jvm: temurin:1.17.0.5
+
+      - name: Create all API docs for artifacts/website and all reference docs
+        # Run locally with: sbt verifyDocs
+        run: sbt docs/makeSite
+
+  test:
+    name: Build and Test
+    runs-on: Akka-Default
+    needs: [check-code-style, check-code-compilation, check-docs]
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { name: "Scala 2.13, JDK 11", scalaVersion: '2.13', java-version: 'temurin:1.11', sbt-opts: '-J-XX:+UnlockExperimentalVMOptions -J-XX:+UseJVMCICompiler' }
+          - { name: "Scala 2.13, JDK 21", scalaVersion: '2.13', java-version: 'temurin:1.21', sbt-opts: '' }
+          - { name: "Scala 2.13, JDK 25", scalaVersion: '2.13', java-version: 'temurin:1.25', sbt-opts: '' }
+          - { name: "Scala 3.3, JDK 21", scalaVersion: '3.3', java-version: 'temurin:1.21', sbt-opts: '' }
+    steps:
+      - name: Checkout
+        # https://github.com/actions/checkout/releases
+        # v4.1.1
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
+        with:
+          fetch-depth: 0
+
+      - name: Checkout GitHub merge
+        if: github.event.pull_request
+        run: |-
+          git fetch origin pull/${{ github.event.pull_request.number }}/merge:scratch
+          git checkout scratch
+
+      - name: Cache Coursier cache
+        # https://github.com/coursier/cache-action/releases
+        # v6.4.5
+        uses: coursier/cache-action@1ff273bff02a8787bc9f1877d347948af647956d
+
+      - name: Set up JDK ${{ matrix.java-version }}
+        # https://github.com/coursier/setup-action/releases
+        # v1.3.5
+        uses: coursier/setup-action@7bde40eee928896f074dbb76d22dd772eed5c65f
+        with:
+          jvm: ${{ matrix.java-version }}
+
+      - name: Run tests/test with Scala ${{ matrix.scala-version }} and Java ${{ matrix.java-version }}
+        run: sbt ++${{ matrix.scalaVersion }} ${{ matrix.sbt-opts }} "tests/test"
+
+      - name: Print logs on failure
+        if: ${{ failure() }}
+        run: find . -name "*.log" -exec ./scripts/cat-log.sh {} \;
+
+  integration-test:
+    name: Integration tests
+    needs: [check-code-style, check-code-compilation, check-docs]
+    runs-on: Akka-Default
+    steps:
+      - name: Checkout
+        # https://github.com/actions/checkout/releases
+        # v4.1.1
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
+        with:
+          fetch-depth: 0
+
+      - name: Checkout GitHub merge
+        if: github.event.pull_request
+        run: |-
+          git fetch origin pull/${{ github.event.pull_request.number }}/merge:scratch
+          git checkout scratch
+
+      - name: Cache Coursier cache
+        # https://github.com/coursier/cache-action/releases
+        # v6.4.5
+        uses: coursier/cache-action@1ff273bff02a8787bc9f1877d347948af647956d
+
+      - name: Set up JDK 11
+        # https://github.com/coursier/setup-action/releases
+        # v1.3.5
+        uses: coursier/setup-action@7bde40eee928896f074dbb76d22dd772eed5c65f
+        with:
+          jvm: temurin:1.11
+
+      - name: Run multi-broker and long running integration tests
+        run: sbt "integrationTests/test"
+
+      - name: Print logs on failure
+        if: ${{ failure() }}
+        run: find . -name "*.log" -exec ./scripts/cat-log.sh {} \;
+  build-benchmark:
+    name: Build benchmarks
+    needs: [check-code-style, check-code-compilation, check-docs]
+    runs-on: Akka-Default
+    steps:
+      - name: Checkout
+        # https://github.com/actions/checkout/releases
+        # v4.1.1
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
+        with:
+          fetch-depth: 0
+
+      - name: Checkout GitHub merge
+        if: github.event.pull_request
+        run: |-
+          git fetch origin pull/${{ github.event.pull_request.number }}/merge:scratch
+          git checkout scratch
+
+      - name: Cache Coursier cache
+        # https://github.com/coursier/cache-action/releases
+        # v6.4.5
+        uses: coursier/cache-action@1ff273bff02a8787bc9f1877d347948af647956d
+
+      - name: Set up JDK 11
+        # https://github.com/coursier/setup-action/releases
+        # v1.3.5
+        uses: coursier/setup-action@7bde40eee928896f074dbb76d22dd772eed5c65f
+        with:
+          jvm: temurin:1.11
+
+      - name: "Compile benchmark tests"
+        run: sbt "benchmarks/Test/compile"

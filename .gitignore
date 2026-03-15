@@ -175,6 +175,9 @@ mysql_data/
 tmp/
 challenge_data/legacy_excel/challengeData_legacy_xlsx/page1.json
 data/processed/tasks.csv
+data/public_repos/
+data/topcoder/artifact_candidates.jsonl
+data/topcoder/repo_candidates.jsonl
 
 ### vscode ###
 .vscode/*

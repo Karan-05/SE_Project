@@ -1,0 +1,994 @@
+{
+  "task_id": "public_pilot_d_st_sword_mlx_snn_001",
+  "strategy": "contract_first",
+  "plan": {
+    "strategy": "contract_first",
+    "contract_items": [
+      {
+        "id": "M000_incorrect_boolean_condition_f83dccdf",
+        "label": "Should use `and`",
+        "description": "[incorrect_boolean_condition] In `mlxsnn/datasets/cifar10dvs.py` (line 4): Logical operator changed from `and` to `or`. Should use `and`.",
+        "category": "logical_correctness",
+        "expected_behavior": "Should use `and`",
+        "test_refs": [],
+        "priority": "",
+        "source": "",
+        "notes": "",
+        "keywords": [
+          "incorrect_boolean_condition",
+          "mlxsnn/datasets/cifar10dvs.py",
+          "4"
+        ]
+      }
+    ],
+    "contract": {
+      "inputs": "Underspecified",
+      "outputs": "Underspecified",
+      "constraints": "",
+      "edge_cases": "None"
+    },
+    "patterns": [],
+    "subtasks": [
+      "Validate inputs vs contract",
+      "Implement core logic",
+      "Check edge cases",
+      "Generate minimal unit tests for critical behaviors",
+      "Add adversarial/edge-case tests",
+      "Run tests and interpret failures",
+      "Repair implementation and re-run tests"
+    ],
+    "tests": [
+      "critical unit tests",
+      "edge-case probes"
+    ],
+    "diagnostics": {
+      "missing_fields": "constraints",
+      "contract_length": "32",
+      "audit_note": "[MOCK] 2fee772b55ea386f :: Review this contract for completeness and note any missing guarantees. Contract: {'inputs': 'Underspecified', 'outputs':",
+      "planning_tokens": "57",
+      "planning_time": "0.000006"
+    },
+    "target_files": [
+      "mlxsnn/datasets/cifar10dvs.py"
+    ],
+    "candidate_files": [
+      "mlxsnn/datasets/cifar10dvs.py",
+      "LICENSE",
+      "mlx_snn.egg-info/PKG-INFO",
+      "mlxsnn/datasets/__init__.py",
+      "CHANGELOG.md",
+      "README.md",
+      "docs/index.md",
+      "mlxsnn/datasets/dvs_gesture.py",
+      "mlxsnn/datasets/utils.py",
+      "mlxsnn/datasets/nmnist.py",
+      "mlxsnn/datasets/shd.py",
+      "tests/test_datasets.py"
+    ],
+    "subtask_file_map": {
+      "Validate inputs vs contract": [
+        "mlxsnn/datasets/cifar10dvs.py"
+      ],
+      "Implement core logic": [
+        "LICENSE"
+      ],
+      "Check edge cases": [
+        "mlx_snn.egg-info/PKG-INFO"
+      ],
+      "Generate minimal unit tests for critical behaviors": [
+        "mlxsnn/datasets/__init__.py"
+      ],
+      "Add adversarial/edge-case tests": [
+        "CHANGELOG.md"
+      ],
+      "Run tests and interpret failures": [
+        "README.md"
+      ],
+      "Repair implementation and re-run tests": [
+        "docs/index.md"
+      ]
+    }
+  },
+  "rounds": [
+    {
+      "round": 0,
+      "phase": "initial",
+      "subtask": "plan",
+      "localized": false,
+      "pass_rate": 0.0,
+      "status": "tests_failed",
+      "duration": 2.626218624998728,
+      "failing_tests": [
+        "tests_0"
+      ],
+      "error_types": [
+        "fail::"
+      ],
+      "file_count": 1,
+      "multi_file_attempt": false,
+      "files_touched": [
+        "mlxsnn/datasets/cifar10dvs.py"
+      ],
+      "inspected_files": [
+        "mlxsnn/datasets/cifar10dvs.py"
+      ],
+      "proposed_files": [
+        "mlxsnn/datasets/cifar10dvs.py"
+      ],
+      "edit_metadata": {
+        "raw_edit_payload": "{\"edits\": [{\"path\": \"mlxsnn/datasets/cifar10dvs.py\", \"mode\": \"rewrite\", \"content\": \"[MOCK] 135df4012ee11341 :: You are executing decomposition strategy 'contract_first' on a real repository task. Repository workspace: `/Users/karan\"}], \"localized\": true}",
+        "raw_payload": "{\"edits\": [{\"path\": \"mlxsnn/datasets/cifar10dvs.py\", \"mode\": \"rewrite\", \"content\": \"[MOCK] 135df4012ee11341 :: You are executing decomposition strategy 'contract_first' on a real repository task. Repository workspace: `/Users/karan\"}], \"localized\": true}",
+        "payload_parse_ok": true,
+        "payload_parse_error": "",
+        "candidate_files_raw": [
+          "mlxsnn/datasets/cifar10dvs.py",
+          "LICENSE",
+          "mlx_snn.egg-info/PKG-INFO",
+          "mlxsnn/datasets/__init__.py",
+          "CHANGELOG.md",
+          "README.md",
+          "docs/index.md",
+          "mlxsnn/datasets/dvs_gesture.py",
+          "mlxsnn/datasets/utils.py",
+          "mlxsnn/datasets/nmnist.py",
+          "mlxsnn/datasets/shd.py",
+          "tests/test_datasets.py"
+        ],
+        "candidate_files_filtered": [
+          "mlxsnn/datasets/cifar10dvs.py",
+          "LICENSE",
+          "mlx_snn.egg-info/PKG-INFO",
+          "mlxsnn/datasets/__init__.py",
+          "CHANGELOG.md",
+          "README.md",
+          "docs/index.md",
+          "mlxsnn/datasets/dvs_gesture.py",
+          "mlxsnn/datasets/utils.py",
+          "mlxsnn/datasets/nmnist.py",
+          "mlxsnn/datasets/shd.py",
+          "tests/test_datasets.py"
+        ],
+        "candidate_files": [
+          "mlxsnn/datasets/cifar10dvs.py",
+          "LICENSE",
+          "mlx_snn.egg-info/PKG-INFO",
+          "mlxsnn/datasets/__init__.py",
+          "CHANGELOG.md",
+          "README.md",
+          "docs/index.md",
+          "mlxsnn/datasets/dvs_gesture.py",
+          "mlxsnn/datasets/utils.py",
+          "mlxsnn/datasets/nmnist.py",
+          "mlxsnn/datasets/shd.py",
+          "tests/test_datasets.py"
+        ],
+        "strategy_mode": "contract_first",
+        "edit_mode": "edit_batch",
+        "localized_requested": true,
+        "fallback_requested": false,
+        "raw_metadata_keys": [
+          "localized"
+        ],
+        "applied_file_count": 1,
+        "proposed_file_count": 1,
+        "multi_file_applied": false,
+        "subtask_focus": "global",
+        "contract_coverage": 0.0,
+        "contract_satisfied": [],
+        "contract_unsatisfied": [
+          "M000_incorrect_boolean_condition_f83dccdf"
+        ],
+        "contract_failure_categories": {
+          "logical_correctness": 1
+        },
+        "contract_unsatisfied_details": [
+          "M000_incorrect_boolean_condition_f83dccdf: [incorrect_boolean_condition] In `mlxsnn/datasets/cifar10dvs.py` (line 4): Logical operator changed from `and` to `or`. Should use `and`."
+        ],
+        "contract_fail_cases": [],
+        "contract_items": [
+          {
+            "id": "M000_incorrect_boolean_condition_f83dccdf",
+            "label": "Should use `and`",
+            "description": "[incorrect_boolean_condition] In `mlxsnn/datasets/cifar10dvs.py` (line 4): Logical operator changed from `and` to `or`. Should use `and`.",
+            "category": "logical_correctness",
+            "expected_behavior": "Should use `and`",
+            "test_refs": [],
+            "priority": "",
+            "source": "",
+            "notes": "",
+            "keywords": [
+              "incorrect_boolean_condition",
+              "mlxsnn/datasets/cifar10dvs.py",
+              "4"
+            ]
+          }
+        ],
+        "witness_count": 1,
+        "witness_samples": [
+          {
+            "test_case": "tests_0",
+            "message": "==================================== ERRORS ====================================\n____________________ ERROR collecting tests/test_compile.py ___________________",
+            "category": "syntax",
+            "expected": "",
+            "actual": "",
+            "contracts": []
+          }
+        ],
+        "cgcs_state": {
+          "round": 0,
+          "round_index": 0,
+          "strategy": "contract_first",
+          "task_id": "public_pilot_d_st_sword_mlx_snn_001",
+          "contract_items": [
+            {
+              "id": "M000_incorrect_boolean_condition_f83dccdf",
+              "label": "Should use `and`",
+              "description": "[incorrect_boolean_condition] In `mlxsnn/datasets/cifar10dvs.py` (line 4): Logical operator changed from `and` to `or`. Should use `and`.",
+              "category": "logical_correctness",
+              "expected_behavior": "Should use `and`",
+              "test_refs": [],
+              "priority": "",
+              "source": "",
+              "notes": "",
+              "keywords": [
+                "incorrect_boolean_condition",
+                "mlxsnn/datasets/cifar10dvs.py",
+                "4"
+              ]
+            }
+          ],
+          "active_clause_id": "M000_incorrect_boolean_condition_f83dccdf",
+          "active_clause": "M000_incorrect_boolean_condition_f83dccdf",
+          "regression_guard_ids": [],
+          "witnesses": [
+            {
+              "signature": "c85900beeba106994578ea760c19d52f59c739bf",
+              "test_case": "tests_0",
+              "message": "==================================== ERRORS ====================================\n____________________ ERROR collecting tests/test_compile.py ____________________\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/python.py:498: in importtestmodule\n    mod = import_path(\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/pathlib.py:587: in import_path\n    importlib.import_module(module_name)\n/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/importlib/__init__.py:88: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<frozen importlib._bootstrap>:1398: in _gcd_import\n    ???\n<frozen importlib._bootstrap>:1371: in _find_and_load\n    ???\n<frozen importlib._bootstrap>:1342: in _find_and_load_unlocked\n    ???\n<frozen importlib._bootstrap>:938: in _load_unlocked\n    ???\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/assertion/rewrite.py:186: in exec_module\n    exec(co, module.__dict__)\n../../../../../../../data/public_repos/repos/github.com/d-st-sword/mlx-snn/tests/test_compile.py:9: in <module>\n    import mlxsnn\nmlxsnn/__init__.py:82: in <module>\n    from mlxsnn.datasets import (\nmlxsnn/datasets/__init__.py:19: in <module>\n    from mlxsnn.datasets.cifar10dvs import CIFAR10DVSDataset\nE     File \"/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_d_st_sword_mlx_snn_001/contract_first/workspace/mlxsnn/datasets/cifar10dvs.py\", line 1\nE       [MOCK] 135df4012ee11341 :: You are executing decomposition strategy 'contract_first' on a real repository task. Repository workspace: `/Users/karan\nE                ^\nE   SyntaxError: invalid decimal literal\n___________________ ERROR collecting tests/test_datasets.py ____________________\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/python.py:498: in importtestmodule\n    mod = import_path(\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/pathlib.py:587: in import_path\n    importlib.import_module(module_name)\n/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/importlib/__init__.py:88: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<frozen importlib._bootstrap>:1398: in _gcd_import\n    ???\n<frozen importlib._bootstrap>:1371: in _find_and_load\n    ???\n<frozen importlib._bootstrap>:1342: in _find_and_load_unlocked\n    ???\n<frozen importlib._bootstrap>:938: in _load_unlocked\n    ???\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/assertion/rewrite.py:186: in exec_module\n    exec(co, module.__dict__)\n../../../../../../../data/public_repos/repos/github.com/d-st-sword/mlx-snn/tests/test_datasets.py:18: in <module>\n    from mlxsnn.datasets.utils import events_to_frames, resize_frames, EventDataloader\nmlxsnn/__init__.py:82: in <module>\n    from mlxsnn.datasets import (\nmlxsnn/datasets/__init__.py:19: in <module>\n    from mlxsnn.datasets.cifar10dvs import CIFAR10DVSDataset\nE     File \"/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_d_st_sword_mlx_snn_001/contract_first/workspace/mlxsnn/datasets/cifar10dvs.py\", line 1\nE       [MOCK] 135df4012ee11341 :: You are executing decomposition strategy 'contract_first' on a real repository task. Repository workspace: `/Users/karan\nE                ^\nE   SyntaxError: invalid decimal literal\n____________________ ERROR collecting tests/test_liquid.py _____________________\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/python.py:498: in importtestmodule\n    mod = import_path(\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/pathlib.py:587: in import_path\n    importlib.import_module(module_name)\n/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/importlib/__init__.py:88: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<frozen importlib._bootstrap>:1398: in _gcd_import\n    ???\n<frozen importlib._bootstrap>:1371: in _find_and_load\n    ???\n<frozen importlib._bootstrap>:1342: in _find_and_load_unlocked\n    ???\n<frozen importlib._bootstrap>:938: in _load_unlocked\n    ???\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/assertion/rewrite.py:186: in exec_module\n    exec(co, module.__dict__)\n../../../../../../../data/public_repos/repos/github.com/d-st-sword/mlx-snn/tests/test_liquid.py:10: in <module>\n    from mlxsnn.liquid import LiquidReservoir, LSM\nmlxsnn/__init__.py:82: in <module>\n    from mlxsnn.datasets import (\nmlxsnn/datasets/__init__.py:19: in <module>\n    from mlxsnn.datasets.cifar10dvs import CIFAR10DVSDataset\nE     File \"/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_d_st_sword_mlx_snn_001/contract_first/workspace/mlxsnn/datasets/cifar10dvs.py\", line 1\nE       [MOCK] 135df4012ee11341 :: You are executing decomposition strategy 'contract_first' on a real repository task. Repository workspace: `/Users/karan\nE                ^\nE   SyntaxError: invalid decimal literal\n___________________ ERROR collecting tests/test_operators.py ___________________\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/python.py:498: in importtestmodule\n    mod = import_path(\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/pathlib.py:587: in import_path\n    importlib.import_module(module_name)\n/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/importlib/__init__.py:88: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<frozen importlib._bootstrap>:1398: in _gcd_import\n    ???\n<frozen importlib._bootstrap>:1371: in _find_and_load\n    ???\n<frozen importlib._bootstrap>:1342: in _find_and_load_unlocked\n    ???\n<frozen importlib._bootstrap>:938: in _load_unlocked\n    ???\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/assertion/rewrite.py:186: in exec_module\n    exec(co, module.__dict__)\n../../../../../../../data/public_repos/repos/github.com/d-st-sword/mlx-snn/tests/test_operators.py:9: in <module>\n    from mlxsnn.operators import (\nmlxsnn/__init__.py:82: in <module>\n    from mlxsnn.datasets import (\nmlxsnn/datasets/__init__.py:19: in <module>\n    from mlxsnn.datasets.cifar10dvs import CIFAR10DVSDataset\nE     File \"/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_d_st_sword_mlx_snn_001/contract_first/workspace/mlxsnn/datasets/cifar10dvs.py\", line 1\nE       [MOCK] 135df4012ee11341 :: You are executing decomposition strategy 'contract_first' on a real repository task. Repository workspace: `/Users/karan\nE                ^\nE   SyntaxError: invalid decimal literal\n_________________ ERROR collecting tests/test_v05_datasets.py __________________\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/python.py:498: in importtestmodule\n    mod = import_path(\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/pathlib.py:587: in import_path\n    importlib.import_module(module_name)\n/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/importlib/__init__.py:88: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<frozen importlib._bootstrap>:1398: in _gcd_import\n    ???\n<frozen importlib._bootstrap>:1371: in _find_and_load\n    ???\n<frozen importlib._bootstrap>:1342: in _find_and_load_unlocked\n    ???\n<frozen importlib._bootstrap>:938: in _load_unlocked\n    ???\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/assertion/rewrite.py:186: in exec_module\n    exec(co, module.__dict__)\n../../../../../../../data/public_repos/repos/github.com/d-st-sword/mlx-snn/tests/test_v05_datasets.py:11: in <module>\n    from mlxsnn.datasets.shd import SHDDataset, _ensure_h5py\nmlxsnn/__init__.py:82: in <module>\n    from mlxsnn.datasets import (\nmlxsnn/datasets/__init__.py:19: in <module>\n    from mlxsnn.datasets.cifar10dvs import CIFAR10DVSDataset\nE     File \"/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_d_st_sword_mlx_snn_001/contract_first/workspace/mlxsnn/datasets/cifar10dvs.py\", line 1\nE       [MOCK] 135df4012ee11341 :: You are executing decomposition strategy 'contract_first' on a real repository task. Repository workspace: `/Users/karan\nE                ^\nE   SyntaxError: invalid decimal literal\n=========================== short test summary info ============================\nERROR tests/test_compile.py\nERROR tests/test_datasets.py\nERROR tests/test_liquid.py\nERROR tests/test_operators.py\nERROR tests/test_v05_datasets.py\n!!!!!!!!!!!!!!!!!!! Interrupted: 5 errors during collection !!!!!!!!!!!!!!!!!!!!\n1 skipped, 5 errors in 1.16s",
+              "expected": "",
+              "actual": "",
+              "location": "/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_d_st_sword_mlx_snn_001/contract_first/logs/tests_0_round1.log",
+              "category": "syntax",
+              "linked_contract_ids": [
+                "M000_incorrect_boolean_condition_f83dccdf"
+              ]
+            }
+          ],
+          "raw_edit_payload": "{\"edits\": [{\"path\": \"mlxsnn/datasets/cifar10dvs.py\", \"mode\": \"rewrite\", \"content\": \"[MOCK] 135df4012ee11341 :: You are executing decomposition strategy 'contract_first' on a real repository task. Repository workspace: `/Users/karan\"}], \"localized\": true}",
+          "payload_parse_ok": true,
+          "payload_parse_error": "",
+          "candidate_files": [
+            "mlxsnn/datasets/cifar10dvs.py",
+            "LICENSE",
+            "mlx_snn.egg-info/PKG-INFO",
+            "mlxsnn/datasets/__init__.py",
+            "CHANGELOG.md",
+            "README.md",
+            "docs/index.md",
+            "mlxsnn/datasets/dvs_gesture.py",
+            "mlxsnn/datasets/utils.py",
+            "mlxsnn/datasets/nmnist.py",
+            "mlxsnn/datasets/shd.py",
+            "tests/test_datasets.py"
+          ],
+          "candidate_files_raw": [
+            "mlxsnn/datasets/cifar10dvs.py",
+            "LICENSE",
+            "mlx_snn.egg-info/PKG-INFO",
+            "mlxsnn/datasets/__init__.py",
+            "CHANGELOG.md",
+            "README.md",
+            "docs/index.md",
+            "mlxsnn/datasets/dvs_gesture.py",
+            "mlxsnn/datasets/utils.py",
+            "mlxsnn/datasets/nmnist.py",
+            "mlxsnn/datasets/shd.py",
+            "tests/test_datasets.py"
+          ],
+          "candidate_files_filtered": [
+            "mlxsnn/datasets/cifar10dvs.py",
+            "LICENSE",
+            "mlx_snn.egg-info/PKG-INFO",
+            "mlxsnn/datasets/__init__.py",
+            "CHANGELOG.md",
+            "README.md",
+            "docs/index.md",
+            "mlxsnn/datasets/dvs_gesture.py",
+            "mlxsnn/datasets/utils.py",
+            "mlxsnn/datasets/nmnist.py",
+            "mlxsnn/datasets/shd.py",
+            "tests/test_datasets.py"
+          ],
+          "clause_selection_reason": "initial_clause_seed",
+          "row_quality": {
+            "contract_quality": "strong",
+            "contract_item_count": 1,
+            "active_clause_source": "initial_clause_seed",
+            "active_clause_present": true,
+            "witness_count": 1,
+            "witness_unique_count": 1,
+            "payload_present": true,
+            "payload_parse_ok": true,
+            "candidate_file_count": 12,
+            "clause_selection_reason": "initial_clause_seed",
+            "skipped_targets_present": false,
+            "lint_error_count": 0,
+            "used_fallback": false,
+            "strategy_mode": "subtasks_first",
+            "regression_guard_count": 0
+          },
+          "lint_errors": [],
+          "skipped_targets": [],
+          "outcome_metrics": {
+            "status": "tests_failed",
+            "pass_rate": 0.0,
+            "duration": 2.626218624998728,
+            "failing_tests": [
+              "tests_0"
+            ],
+            "error_types": [
+              "fail::"
+            ]
+          },
+          "coverage": 0.0,
+          "satisfied_ids": [],
+          "unsatisfied_ids": [
+            "M000_incorrect_boolean_condition_f83dccdf"
+          ],
+          "regressed_ids": [],
+          "witness_counts": {
+            "M000_incorrect_boolean_condition_f83dccdf": 1
+          },
+          "witness_sample": [
+            {
+              "signature": "c85900beeba106994578ea760c19d52f59c739bf",
+              "test_case": "tests_0",
+              "message": "==================================== ERRORS ====================================\n____________________ ERROR collecting tests/test_compile.py ____________________\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/python.py:498: in importtestmodule\n    mod = import_path(\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/pathlib.py:587: in import_path\n    importlib.import_module(module_name)\n/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/importlib/__init__.py:88: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<frozen importlib._bootstrap>:1398: in _gcd_import\n    ???\n<frozen importlib._bootstrap>:1371: in _find_and_load\n    ???\n<frozen importlib._bootstrap>:1342: in _find_and_load_unlocked\n    ???\n<frozen importlib._bootstrap>:938: in _load_unlocked\n    ???\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/assertion/rewrite.py:186: in exec_module\n    exec(co, module.__dict__)\n../../../../../../../data/public_repos/repos/github.com/d-st-sword/mlx-snn/tests/test_compile.py:9: in <module>\n    import mlxsnn\nmlxsnn/__init__.py:82: in <module>\n    from mlxsnn.datasets import (\nmlxsnn/datasets/__init__.py:19: in <module>\n    from mlxsnn.datasets.cifar10dvs import CIFAR10DVSDataset\nE     File \"/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_d_st_sword_mlx_snn_001/contract_first/workspace/mlxsnn/datasets/cifar10dvs.py\", line 1\nE       [MOCK] 135df4012ee11341 :: You are executing decomposition strategy 'contract_first' on a real repository task. Repository workspace: `/Users/karan\nE                ^\nE   SyntaxError: invalid decimal literal\n___________________ ERROR collecting tests/test_datasets.py ____________________\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/python.py:498: in importtestmodule\n    mod = import_path(\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/pathlib.py:587: in import_path\n    importlib.import_module(module_name)\n/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/importlib/__init__.py:88: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<frozen importlib._bootstrap>:1398: in _gcd_import\n    ???\n<frozen importlib._bootstrap>:1371: in _find_and_load\n    ???\n<frozen importlib._bootstrap>:1342: in _find_and_load_unlocked\n    ???\n<frozen importlib._bootstrap>:938: in _load_unlocked\n    ???\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/assertion/rewrite.py:186: in exec_module\n    exec(co, module.__dict__)\n../../../../../../../data/public_repos/repos/github.com/d-st-sword/mlx-snn/tests/test_datasets.py:18: in <module>\n    from mlxsnn.datasets.utils import events_to_frames, resize_frames, EventDataloader\nmlxsnn/__init__.py:82: in <module>\n    from mlxsnn.datasets import (\nmlxsnn/datasets/__init__.py:19: in <module>\n    from mlxsnn.datasets.cifar10dvs import CIFAR10DVSDataset\nE     File \"/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_d_st_sword_mlx_snn_001/contract_first/workspace/mlxsnn/datasets/cifar10dvs.py\", line 1\nE       [MOCK] 135df4012ee11341 :: You are executing decomposition strategy 'contract_first' on a real repository task. Repository workspace: `/Users/karan\nE                ^\nE   SyntaxError: invalid decimal literal\n____________________ ERROR collecting tests/test_liquid.py _____________________\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/python.py:498: in importtestmodule\n    mod = import_path(\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/pathlib.py:587: in import_path\n    importlib.import_module(module_name)\n/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/importlib/__init__.py:88: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<frozen importlib._bootstrap>:1398: in _gcd_import\n    ???\n<frozen importlib._bootstrap>:1371: in _find_and_load\n    ???\n<frozen importlib._bootstrap>:1342: in _find_and_load_unlocked\n    ???\n<frozen importlib._bootstrap>:938: in _load_unlocked\n    ???\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/assertion/rewrite.py:186: in exec_module\n    exec(co, module.__dict__)\n../../../../../../../data/public_repos/repos/github.com/d-st-sword/mlx-snn/tests/test_liquid.py:10: in <module>\n    from mlxsnn.liquid import LiquidReservoir, LSM\nmlxsnn/__init__.py:82: in <module>\n    from mlxsnn.datasets import (\nmlxsnn/datasets/__init__.py:19: in <module>\n    from mlxsnn.datasets.cifar10dvs import CIFAR10DVSDataset\nE     File \"/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_d_st_sword_mlx_snn_001/contract_first/workspace/mlxsnn/datasets/cifar10dvs.py\", line 1\nE       [MOCK] 135df4012ee11341 :: You are executing decomposition strategy 'contract_first' on a real repository task. Repository workspace: `/Users/karan\nE                ^\nE   SyntaxError: invalid decimal literal\n___________________ ERROR collecting tests/test_operators.py ___________________\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/python.py:498: in importtestmodule\n    mod = import_path(\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/pathlib.py:587: in import_path\n    importlib.import_module(module_name)\n/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/importlib/__init__.py:88: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<frozen importlib._bootstrap>:1398: in _gcd_import\n    ???\n<frozen importlib._bootstrap>:1371: in _find_and_load\n    ???\n<frozen importlib._bootstrap>:1342: in _find_and_load_unlocked\n    ???\n<frozen importlib._bootstrap>:938: in _load_unlocked\n    ???\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/assertion/rewrite.py:186: in exec_module\n    exec(co, module.__dict__)\n../../../../../../../data/public_repos/repos/github.com/d-st-sword/mlx-snn/tests/test_operators.py:9: in <module>\n    from mlxsnn.operators import (\nmlxsnn/__init__.py:82: in <module>\n    from mlxsnn.datasets import (\nmlxsnn/datasets/__init__.py:19: in <module>\n    from mlxsnn.datasets.cifar10dvs import CIFAR10DVSDataset\nE     File \"/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_d_st_sword_mlx_snn_001/contract_first/workspace/mlxsnn/datasets/cifar10dvs.py\", line 1\nE       [MOCK] 135df4012ee11341 :: You are executing decomposition strategy 'contract_first' on a real repository task. Repository workspace: `/Users/karan\nE                ^\nE   SyntaxError: invalid decimal literal\n_________________ ERROR collecting tests/test_v05_datasets.py __________________\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/python.py:498: in importtestmodule\n    mod = import_path(\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/pathlib.py:587: in import_path\n    importlib.import_module(module_name)\n/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/importlib/__init__.py:88: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<frozen importlib._bootstrap>:1398: in _gcd_import\n    ???\n<frozen importlib._bootstrap>:1371: in _find_and_load\n    ???\n<frozen importlib._bootstrap>:1342: in _find_and_load_unlocked\n    ???\n<frozen importlib._bootstrap>:938: in _load_unlocked\n    ???\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/assertion/rewrite.py:186: in exec_module\n    exec(co, module.__dict__)\n../../../../../../../data/public_repos/repos/github.com/d-st-sword/mlx-snn/tests/test_v05_datasets.py:11: in <module>\n    from mlxsnn.datasets.shd import SHDDataset, _ensure_h5py\nmlxsnn/__init__.py:82: in <module>\n    from mlxsnn.datasets import (\nmlxsnn/datasets/__init__.py:19: in <module>\n    from mlxsnn.datasets.cifar10dvs import CIFAR10DVSDataset\nE     File \"/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_d_st_sword_mlx_snn_001/contract_first/workspace/mlxsnn/datasets/cifar10dvs.py\", line 1\nE       [MOCK] 135df4012ee11341 :: You are executing decomposition strategy 'contract_first' on a real repository task. Repository workspace: `/Users/karan\nE                ^\nE   SyntaxError: invalid decimal literal\n=========================== short test summary info ============================\nERROR tests/test_compile.py\nERROR tests/test_datasets.py\nERROR tests/test_liquid.py\nERROR tests/test_operators.py\nERROR tests/test_v05_datasets.py\n!!!!!!!!!!!!!!!!!!! Interrupted: 5 errors during collection !!!!!!!!!!!!!!!!!!!!\n1 skipped, 5 errors in 1.16s",
+              "expected": "",
+              "actual": "",
+              "location": "/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_d_st_sword_mlx_snn_001/contract_first/logs/tests_0_round1.log",
+              "category": "syntax",
+              "linked_contract_ids": [
+                "M000_incorrect_boolean_condition_f83dccdf"
+              ]
+            }
+          ],
+          "regression_guards": []
+        },
+        "witnesses": [
+          {
+            "signature": "c85900beeba106994578ea760c19d52f59c739bf",
+            "test_case": "tests_0",
+            "message": "==================================== ERRORS ====================================\n____________________ ERROR collecting tests/test_compile.py ____________________\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/python.py:498: in importtestmodule\n    mod = import_path(\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/pathlib.py:587: in import_path\n    importlib.import_module(module_name)\n/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/importlib/__init__.py:88: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<frozen importlib._bootstrap>:1398: in _gcd_import\n    ???\n<frozen importlib._bootstrap>:1371: in _find_and_load\n    ???\n<frozen importlib._bootstrap>:1342: in _find_and_load_unlocked\n    ???\n<frozen importlib._bootstrap>:938: in _load_unlocked\n    ???\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/assertion/rewrite.py:186: in exec_module\n    exec(co, module.__dict__)\n../../../../../../../data/public_repos/repos/github.com/d-st-sword/mlx-snn/tests/test_compile.py:9: in <module>\n    import mlxsnn\nmlxsnn/__init__.py:82: in <module>\n    from mlxsnn.datasets import (\nmlxsnn/datasets/__init__.py:19: in <module>\n    from mlxsnn.datasets.cifar10dvs import CIFAR10DVSDataset\nE     File \"/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_d_st_sword_mlx_snn_001/contract_first/workspace/mlxsnn/datasets/cifar10dvs.py\", line 1\nE       [MOCK] 135df4012ee11341 :: You are executing decomposition strategy 'contract_first' on a real repository task. Repository workspace: `/Users/karan\nE                ^\nE   SyntaxError: invalid decimal literal\n___________________ ERROR collecting tests/test_datasets.py ____________________\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/python.py:498: in importtestmodule\n    mod = import_path(\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/pathlib.py:587: in import_path\n    importlib.import_module(module_name)\n/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/importlib/__init__.py:88: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<frozen importlib._bootstrap>:1398: in _gcd_import\n    ???\n<frozen importlib._bootstrap>:1371: in _find_and_load\n    ???\n<frozen importlib._bootstrap>:1342: in _find_and_load_unlocked\n    ???\n<frozen importlib._bootstrap>:938: in _load_unlocked\n    ???\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/assertion/rewrite.py:186: in exec_module\n    exec(co, module.__dict__)\n../../../../../../../data/public_repos/repos/github.com/d-st-sword/mlx-snn/tests/test_datasets.py:18: in <module>\n    from mlxsnn.datasets.utils import events_to_frames, resize_frames, EventDataloader\nmlxsnn/__init__.py:82: in <module>\n    from mlxsnn.datasets import (\nmlxsnn/datasets/__init__.py:19: in <module>\n    from mlxsnn.datasets.cifar10dvs import CIFAR10DVSDataset\nE     File \"/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_d_st_sword_mlx_snn_001/contract_first/workspace/mlxsnn/datasets/cifar10dvs.py\", line 1\nE       [MOCK] 135df4012ee11341 :: You are executing decomposition strategy 'contract_first' on a real repository task. Repository workspace: `/Users/karan\nE                ^\nE   SyntaxError: invalid decimal literal\n____________________ ERROR collecting tests/test_liquid.py _____________________\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/python.py:498: in importtestmodule\n    mod = import_path(\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/pathlib.py:587: in import_path\n    importlib.import_module(module_name)\n/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/importlib/__init__.py:88: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<frozen importlib._bootstrap>:1398: in _gcd_import\n    ???\n<frozen importlib._bootstrap>:1371: in _find_and_load\n    ???\n<frozen importlib._bootstrap>:1342: in _find_and_load_unlocked\n    ???\n<frozen importlib._bootstrap>:938: in _load_unlocked\n    ???\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/assertion/rewrite.py:186: in exec_module\n    exec(co, module.__dict__)\n../../../../../../../data/public_repos/repos/github.com/d-st-sword/mlx-snn/tests/test_liquid.py:10: in <module>\n    from mlxsnn.liquid import LiquidReservoir, LSM\nmlxsnn/__init__.py:82: in <module>\n    from mlxsnn.datasets import (\nmlxsnn/datasets/__init__.py:19: in <module>\n    from mlxsnn.datasets.cifar10dvs import CIFAR10DVSDataset\nE     File \"/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_d_st_sword_mlx_snn_001/contract_first/workspace/mlxsnn/datasets/cifar10dvs.py\", line 1\nE       [MOCK] 135df4012ee11341 :: You are executing decomposition strategy 'contract_first' on a real repository task. Repository workspace: `/Users/karan\nE                ^\nE   SyntaxError: invalid decimal literal\n___________________ ERROR collecting tests/test_operators.py ___________________\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/python.py:498: in importtestmodule\n    mod = import_path(\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/pathlib.py:587: in import_path\n    importlib.import_module(module_name)\n/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/importlib/__init__.py:88: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<frozen importlib._bootstrap>:1398: in _gcd_import\n    ???\n<frozen importlib._bootstrap>:1371: in _find_and_load\n    ???\n<frozen importlib._bootstrap>:1342: in _find_and_load_unlocked\n    ???\n<frozen importlib._bootstrap>:938: in _load_unlocked\n    ???\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/assertion/rewrite.py:186: in exec_module\n    exec(co, module.__dict__)\n../../../../../../../data/public_repos/repos/github.com/d-st-sword/mlx-snn/tests/test_operators.py:9: in <module>\n    from mlxsnn.operators import (\nmlxsnn/__init__.py:82: in <module>\n    from mlxsnn.datasets import (\nmlxsnn/datasets/__init__.py:19: in <module>\n    from mlxsnn.datasets.cifar10dvs import CIFAR10DVSDataset\nE     File \"/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_d_st_sword_mlx_snn_001/contract_first/workspace/mlxsnn/datasets/cifar10dvs.py\", line 1\nE       [MOCK] 135df4012ee11341 :: You are executing decomposition strategy 'contract_first' on a real repository task. Repository workspace: `/Users/karan\nE                ^\nE   SyntaxError: invalid decimal literal\n_________________ ERROR collecting tests/test_v05_datasets.py __________________\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/python.py:498: in importtestmodule\n    mod = import_path(\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/pathlib.py:587: in import_path\n    importlib.import_module(module_name)\n/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/importlib/__init__.py:88: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<frozen importlib._bootstrap>:1398: in _gcd_import\n    ???\n<frozen importlib._bootstrap>:1371: in _find_and_load\n    ???\n<frozen importlib._bootstrap>:1342: in _find_and_load_unlocked\n    ???\n<frozen importlib._bootstrap>:938: in _load_unlocked\n    ???\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/assertion/rewrite.py:186: in exec_module\n    exec(co, module.__dict__)\n../../../../../../../data/public_repos/repos/github.com/d-st-sword/mlx-snn/tests/test_v05_datasets.py:11: in <module>\n    from mlxsnn.datasets.shd import SHDDataset, _ensure_h5py\nmlxsnn/__init__.py:82: in <module>\n    from mlxsnn.datasets import (\nmlxsnn/datasets/__init__.py:19: in <module>\n    from mlxsnn.datasets.cifar10dvs import CIFAR10DVSDataset\nE     File \"/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_d_st_sword_mlx_snn_001/contract_first/workspace/mlxsnn/datasets/cifar10dvs.py\", line 1\nE       [MOCK] 135df4012ee11341 :: You are executing decomposition strategy 'contract_first' on a real repository task. Repository workspace: `/Users/karan\nE                ^\nE   SyntaxError: invalid decimal literal\n=========================== short test summary info ============================\nERROR tests/test_compile.py\nERROR tests/test_datasets.py\nERROR tests/test_liquid.py\nERROR tests/test_operators.py\nERROR tests/test_v05_datasets.py\n!!!!!!!!!!!!!!!!!!! Interrupted: 5 errors during collection !!!!!!!!!!!!!!!!!!!!\n1 skipped, 5 errors in 1.16s",
+            "expected": "",
+            "actual": "",
+            "location": "/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_d_st_sword_mlx_snn_001/contract_first/logs/tests_0_round1.log",
+            "category": "syntax",
+            "linked_contract_ids": [
+              "M000_incorrect_boolean_condition_f83dccdf"
+            ]
+          }
+        ],
+        "row_quality": {
+          "contract_quality": "strong",
+          "contract_item_count": 1,
+          "active_clause_source": "initial_clause_seed",
+          "active_clause_present": true,
+          "witness_count": 1,
+          "witness_unique_count": 1,
+          "payload_present": true,
+          "payload_parse_ok": true,
+          "candidate_file_count": 12,
+          "clause_selection_reason": "initial_clause_seed",
+          "skipped_targets_present": false,
+          "lint_error_count": 0,
+          "used_fallback": false,
+          "strategy_mode": "subtasks_first",
+          "regression_guard_count": 0
+        },
+        "regression_guard_ids": [],
+        "active_clause_id": "M000_incorrect_boolean_condition_f83dccdf"
+      }
+    },
+    {
+      "round": 1,
+      "phase": "repair",
+      "subtask": "Validate inputs vs contract",
+      "localized": true,
+      "pass_rate": 0.0,
+      "status": "tests_failed",
+      "duration": 1.2875744999982999,
+      "failing_tests": [
+        "tests_0"
+      ],
+      "error_types": [
+        "fail::"
+      ],
+      "file_count": 1,
+      "multi_file_attempt": false,
+      "files_touched": [
+        "mlxsnn/datasets/cifar10dvs.py"
+      ],
+      "inspected_files": [
+        "mlxsnn/datasets/cifar10dvs.py"
+      ],
+      "proposed_files": [
+        "mlxsnn/datasets/cifar10dvs.py"
+      ],
+      "edit_metadata": {
+        "raw_edit_payload": "{\"edits\": [{\"path\": \"mlxsnn/datasets/cifar10dvs.py\", \"mode\": \"rewrite\", \"content\": \"[MOCK] 307f3fdf0618c9f3 :: You are repairing a repository-backed change produced by strategy 'contract_first'. Repository workspace: `/Users/karana\"}], \"localized\": true}",
+        "raw_payload": "{\"edits\": [{\"path\": \"mlxsnn/datasets/cifar10dvs.py\", \"mode\": \"rewrite\", \"content\": \"[MOCK] 307f3fdf0618c9f3 :: You are repairing a repository-backed change produced by strategy 'contract_first'. Repository workspace: `/Users/karana\"}], \"localized\": true}",
+        "payload_parse_ok": true,
+        "payload_parse_error": "",
+        "candidate_files_raw": [
+          "mlxsnn/datasets/cifar10dvs.py",
+          "LICENSE",
+          "mlx_snn.egg-info/PKG-INFO",
+          "mlxsnn/datasets/__init__.py",
+          "CHANGELOG.md",
+          "README.md",
+          "docs/index.md",
+          "mlxsnn/datasets/dvs_gesture.py",
+          "mlxsnn/datasets/utils.py",
+          "mlxsnn/datasets/nmnist.py",
+          "mlxsnn/datasets/shd.py",
+          "tests/test_datasets.py"
+        ],
+        "candidate_files_filtered": [
+          "mlxsnn/datasets/cifar10dvs.py",
+          "LICENSE",
+          "mlx_snn.egg-info/PKG-INFO",
+          "mlxsnn/datasets/__init__.py",
+          "CHANGELOG.md",
+          "README.md",
+          "docs/index.md",
+          "mlxsnn/datasets/dvs_gesture.py",
+          "mlxsnn/datasets/utils.py",
+          "mlxsnn/datasets/nmnist.py",
+          "mlxsnn/datasets/shd.py",
+          "tests/test_datasets.py"
+        ],
+        "candidate_files": [
+          "mlxsnn/datasets/cifar10dvs.py",
+          "LICENSE",
+          "mlx_snn.egg-info/PKG-INFO",
+          "mlxsnn/datasets/__init__.py",
+          "CHANGELOG.md",
+          "README.md",
+          "docs/index.md",
+          "mlxsnn/datasets/dvs_gesture.py",
+          "mlxsnn/datasets/utils.py",
+          "mlxsnn/datasets/nmnist.py",
+          "mlxsnn/datasets/shd.py",
+          "tests/test_datasets.py"
+        ],
+        "strategy_mode": "contract_first",
+        "edit_mode": "edit_batch",
+        "localized_requested": true,
+        "fallback_requested": false,
+        "raw_metadata_keys": [
+          "localized"
+        ],
+        "applied_file_count": 1,
+        "proposed_file_count": 1,
+        "multi_file_applied": false,
+        "subtask_focus": "Validate inputs vs contract",
+        "contract_coverage": 0.0,
+        "contract_satisfied": [],
+        "contract_unsatisfied": [
+          "M000_incorrect_boolean_condition_f83dccdf"
+        ],
+        "contract_failure_categories": {
+          "logical_correctness": 1
+        },
+        "contract_unsatisfied_details": [
+          "M000_incorrect_boolean_condition_f83dccdf: [incorrect_boolean_condition] In `mlxsnn/datasets/cifar10dvs.py` (line 4): Logical operator changed from `and` to `or`. Should use `and`."
+        ],
+        "contract_fail_cases": [],
+        "contract_items": [
+          {
+            "id": "M000_incorrect_boolean_condition_f83dccdf",
+            "label": "Should use `and`",
+            "description": "[incorrect_boolean_condition] In `mlxsnn/datasets/cifar10dvs.py` (line 4): Logical operator changed from `and` to `or`. Should use `and`.",
+            "category": "logical_correctness",
+            "expected_behavior": "Should use `and`",
+            "test_refs": [],
+            "priority": "",
+            "source": "",
+            "notes": "",
+            "keywords": [
+              "incorrect_boolean_condition",
+              "mlxsnn/datasets/cifar10dvs.py",
+              "4"
+            ]
+          }
+        ],
+        "witness_count": 1,
+        "witness_samples": [
+          {
+            "test_case": "tests_0",
+            "message": "==================================== ERRORS ====================================\n____________________ ERROR collecting tests/test_compile.py ___________________",
+            "category": "syntax",
+            "expected": "",
+            "actual": "",
+            "contracts": []
+          }
+        ],
+        "cgcs_state": {
+          "round": 1,
+          "round_index": 1,
+          "strategy": "contract_first",
+          "task_id": "public_pilot_d_st_sword_mlx_snn_001",
+          "contract_items": [
+            {
+              "id": "M000_incorrect_boolean_condition_f83dccdf",
+              "label": "Should use `and`",
+              "description": "[incorrect_boolean_condition] In `mlxsnn/datasets/cifar10dvs.py` (line 4): Logical operator changed from `and` to `or`. Should use `and`.",
+              "category": "logical_correctness",
+              "expected_behavior": "Should use `and`",
+              "test_refs": [],
+              "priority": "",
+              "source": "",
+              "notes": "",
+              "keywords": [
+                "incorrect_boolean_condition",
+                "mlxsnn/datasets/cifar10dvs.py",
+                "4"
+              ]
+            }
+          ],
+          "active_clause_id": "M000_incorrect_boolean_condition_f83dccdf",
+          "active_clause": "M000_incorrect_boolean_condition_f83dccdf",
+          "regression_guard_ids": [],
+          "witnesses": [
+            {
+              "signature": "e1ec4575724b0a7d7ed351548e7d6aec361a91c3",
+              "test_case": "tests_0",
+              "message": "==================================== ERRORS ====================================\n____________________ ERROR collecting tests/test_compile.py ____________________\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/python.py:498: in importtestmodule\n    mod = import_path(\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/pathlib.py:587: in import_path\n    importlib.import_module(module_name)\n/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/importlib/__init__.py:88: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<frozen importlib._bootstrap>:1398: in _gcd_import\n    ???\n<frozen importlib._bootstrap>:1371: in _find_and_load\n    ???\n<frozen importlib._bootstrap>:1342: in _find_and_load_unlocked\n    ???\n<frozen importlib._bootstrap>:938: in _load_unlocked\n    ???\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/assertion/rewrite.py:186: in exec_module\n    exec(co, module.__dict__)\n../../../../../../../data/public_repos/repos/github.com/d-st-sword/mlx-snn/tests/test_compile.py:9: in <module>\n    import mlxsnn\nmlxsnn/__init__.py:82: in <module>\n    from mlxsnn.datasets import (\nmlxsnn/datasets/__init__.py:19: in <module>\n    from mlxsnn.datasets.cifar10dvs import CIFAR10DVSDataset\nE     File \"/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_d_st_sword_mlx_snn_001/contract_first/workspace/mlxsnn/datasets/cifar10dvs.py\", line 1\nE       [MOCK] 307f3fdf0618c9f3 :: You are repairing a repository-backed change produced by strategy 'contract_first'. Repository workspace: `/Users/karana\nE                ^\nE   SyntaxError: invalid decimal literal\n___________________ ERROR collecting tests/test_datasets.py ____________________\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/python.py:498: in importtestmodule\n    mod = import_path(\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/pathlib.py:587: in import_path\n    importlib.import_module(module_name)\n/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/importlib/__init__.py:88: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<frozen importlib._bootstrap>:1398: in _gcd_import\n    ???\n<frozen importlib._bootstrap>:1371: in _find_and_load\n    ???\n<frozen importlib._bootstrap>:1342: in _find_and_load_unlocked\n    ???\n<frozen importlib._bootstrap>:938: in _load_unlocked\n    ???\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/assertion/rewrite.py:186: in exec_module\n    exec(co, module.__dict__)\n../../../../../../../data/public_repos/repos/github.com/d-st-sword/mlx-snn/tests/test_datasets.py:18: in <module>\n    from mlxsnn.datasets.utils import events_to_frames, resize_frames, EventDataloader\nmlxsnn/__init__.py:82: in <module>\n    from mlxsnn.datasets import (\nmlxsnn/datasets/__init__.py:19: in <module>\n    from mlxsnn.datasets.cifar10dvs import CIFAR10DVSDataset\nE     File \"/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_d_st_sword_mlx_snn_001/contract_first/workspace/mlxsnn/datasets/cifar10dvs.py\", line 1\nE       [MOCK] 307f3fdf0618c9f3 :: You are repairing a repository-backed change produced by strategy 'contract_first'. Repository workspace: `/Users/karana\nE                ^\nE   SyntaxError: invalid decimal literal\n____________________ ERROR collecting tests/test_liquid.py _____________________\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/python.py:498: in importtestmodule\n    mod = import_path(\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/pathlib.py:587: in import_path\n    importlib.import_module(module_name)\n/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/importlib/__init__.py:88: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<frozen importlib._bootstrap>:1398: in _gcd_import\n    ???\n<frozen importlib._bootstrap>:1371: in _find_and_load\n    ???\n<frozen importlib._bootstrap>:1342: in _find_and_load_unlocked\n    ???\n<frozen importlib._bootstrap>:938: in _load_unlocked\n    ???\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/assertion/rewrite.py:186: in exec_module\n    exec(co, module.__dict__)\n../../../../../../../data/public_repos/repos/github.com/d-st-sword/mlx-snn/tests/test_liquid.py:10: in <module>\n    from mlxsnn.liquid import LiquidReservoir, LSM\nmlxsnn/__init__.py:82: in <module>\n    from mlxsnn.datasets import (\nmlxsnn/datasets/__init__.py:19: in <module>\n    from mlxsnn.datasets.cifar10dvs import CIFAR10DVSDataset\nE     File \"/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_d_st_sword_mlx_snn_001/contract_first/workspace/mlxsnn/datasets/cifar10dvs.py\", line 1\nE       [MOCK] 307f3fdf0618c9f3 :: You are repairing a repository-backed change produced by strategy 'contract_first'. Repository workspace: `/Users/karana\nE                ^\nE   SyntaxError: invalid decimal literal\n___________________ ERROR collecting tests/test_operators.py ___________________\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/python.py:498: in importtestmodule\n    mod = import_path(\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/pathlib.py:587: in import_path\n    importlib.import_module(module_name)\n/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/importlib/__init__.py:88: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<frozen importlib._bootstrap>:1398: in _gcd_import\n    ???\n<frozen importlib._bootstrap>:1371: in _find_and_load\n    ???\n<frozen importlib._bootstrap>:1342: in _find_and_load_unlocked\n    ???\n<frozen importlib._bootstrap>:938: in _load_unlocked\n    ???\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/assertion/rewrite.py:186: in exec_module\n    exec(co, module.__dict__)\n../../../../../../../data/public_repos/repos/github.com/d-st-sword/mlx-snn/tests/test_operators.py:9: in <module>\n    from mlxsnn.operators import (\nmlxsnn/__init__.py:82: in <module>\n    from mlxsnn.datasets import (\nmlxsnn/datasets/__init__.py:19: in <module>\n    from mlxsnn.datasets.cifar10dvs import CIFAR10DVSDataset\nE     File \"/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_d_st_sword_mlx_snn_001/contract_first/workspace/mlxsnn/datasets/cifar10dvs.py\", line 1\nE       [MOCK] 307f3fdf0618c9f3 :: You are repairing a repository-backed change produced by strategy 'contract_first'. Repository workspace: `/Users/karana\nE                ^\nE   SyntaxError: invalid decimal literal\n_________________ ERROR collecting tests/test_v05_datasets.py __________________\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/python.py:498: in importtestmodule\n    mod = import_path(\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/pathlib.py:587: in import_path\n    importlib.import_module(module_name)\n/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/importlib/__init__.py:88: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<frozen importlib._bootstrap>:1398: in _gcd_import\n    ???\n<frozen importlib._bootstrap>:1371: in _find_and_load\n    ???\n<frozen importlib._bootstrap>:1342: in _find_and_load_unlocked\n    ???\n<frozen importlib._bootstrap>:938: in _load_unlocked\n    ???\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/assertion/rewrite.py:186: in exec_module\n    exec(co, module.__dict__)\n../../../../../../../data/public_repos/repos/github.com/d-st-sword/mlx-snn/tests/test_v05_datasets.py:11: in <module>\n    from mlxsnn.datasets.shd import SHDDataset, _ensure_h5py\nmlxsnn/__init__.py:82: in <module>\n    from mlxsnn.datasets import (\nmlxsnn/datasets/__init__.py:19: in <module>\n    from mlxsnn.datasets.cifar10dvs import CIFAR10DVSDataset\nE     File \"/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_d_st_sword_mlx_snn_001/contract_first/workspace/mlxsnn/datasets/cifar10dvs.py\", line 1\nE       [MOCK] 307f3fdf0618c9f3 :: You are repairing a repository-backed change produced by strategy 'contract_first'. Repository workspace: `/Users/karana\nE                ^\nE   SyntaxError: invalid decimal literal\n=========================== short test summary info ============================\nERROR tests/test_compile.py\nERROR tests/test_datasets.py\nERROR tests/test_liquid.py\nERROR tests/test_operators.py\nERROR tests/test_v05_datasets.py\n!!!!!!!!!!!!!!!!!!! Interrupted: 5 errors during collection !!!!!!!!!!!!!!!!!!!!\n1 skipped, 5 errors in 0.61s",
+              "expected": "",
+              "actual": "",
+              "location": "/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_d_st_sword_mlx_snn_001/contract_first/logs/tests_0_round2.log",
+              "category": "syntax",
+              "linked_contract_ids": [
+                "M000_incorrect_boolean_condition_f83dccdf"
+              ]
+            }
+          ],
+          "raw_edit_payload": "{\"edits\": [{\"path\": \"mlxsnn/datasets/cifar10dvs.py\", \"mode\": \"rewrite\", \"content\": \"[MOCK] 307f3fdf0618c9f3 :: You are repairing a repository-backed change produced by strategy 'contract_first'. Repository workspace: `/Users/karana\"}], \"localized\": true}",
+          "payload_parse_ok": true,
+          "payload_parse_error": "",
+          "candidate_files": [
+            "mlxsnn/datasets/cifar10dvs.py",
+            "LICENSE",
+            "mlx_snn.egg-info/PKG-INFO",
+            "mlxsnn/datasets/__init__.py",
+            "CHANGELOG.md",
+            "README.md",
+            "docs/index.md",
+            "mlxsnn/datasets/dvs_gesture.py",
+            "mlxsnn/datasets/utils.py",
+            "mlxsnn/datasets/nmnist.py",
+            "mlxsnn/datasets/shd.py",
+            "tests/test_datasets.py"
+          ],
+          "candidate_files_raw": [
+            "mlxsnn/datasets/cifar10dvs.py",
+            "LICENSE",
+            "mlx_snn.egg-info/PKG-INFO",
+            "mlxsnn/datasets/__init__.py",
+            "CHANGELOG.md",
+            "README.md",
+            "docs/index.md",
+            "mlxsnn/datasets/dvs_gesture.py",
+            "mlxsnn/datasets/utils.py",
+            "mlxsnn/datasets/nmnist.py",
+            "mlxsnn/datasets/shd.py",
+            "tests/test_datasets.py"
+          ],
+          "candidate_files_filtered": [
+            "mlxsnn/datasets/cifar10dvs.py",
+            "LICENSE",
+            "mlx_snn.egg-info/PKG-INFO",
+            "mlxsnn/datasets/__init__.py",
+            "CHANGELOG.md",
+            "README.md",
+            "docs/index.md",
+            "mlxsnn/datasets/dvs_gesture.py",
+            "mlxsnn/datasets/utils.py",
+            "mlxsnn/datasets/nmnist.py",
+            "mlxsnn/datasets/shd.py",
+            "tests/test_datasets.py"
+          ],
+          "clause_selection_reason": "subtask_focus::Validate inputs vs contract",
+          "row_quality": {
+            "contract_quality": "strong",
+            "contract_item_count": 1,
+            "active_clause_source": "subtask_focus::Validate inputs vs contract",
+            "active_clause_present": true,
+            "witness_count": 1,
+            "witness_unique_count": 1,
+            "payload_present": true,
+            "payload_parse_ok": true,
+            "candidate_file_count": 12,
+            "clause_selection_reason": "subtask_focus::Validate inputs vs contract",
+            "skipped_targets_present": false,
+            "lint_error_count": 0,
+            "used_fallback": false,
+            "strategy_mode": "subtasks_first",
+            "regression_guard_count": 0
+          },
+          "lint_errors": [],
+          "skipped_targets": [],
+          "outcome_metrics": {
+            "status": "tests_failed",
+            "pass_rate": 0.0,
+            "duration": 1.2875744999982999,
+            "failing_tests": [
+              "tests_0"
+            ],
+            "error_types": [
+              "fail::"
+            ]
+          },
+          "coverage": 0.0,
+          "satisfied_ids": [],
+          "unsatisfied_ids": [
+            "M000_incorrect_boolean_condition_f83dccdf"
+          ],
+          "regressed_ids": [],
+          "witness_counts": {
+            "M000_incorrect_boolean_condition_f83dccdf": 1
+          },
+          "witness_sample": [
+            {
+              "signature": "e1ec4575724b0a7d7ed351548e7d6aec361a91c3",
+              "test_case": "tests_0",
+              "message": "==================================== ERRORS ====================================\n____________________ ERROR collecting tests/test_compile.py ____________________\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/python.py:498: in importtestmodule\n    mod = import_path(\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/pathlib.py:587: in import_path\n    importlib.import_module(module_name)\n/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/importlib/__init__.py:88: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<frozen importlib._bootstrap>:1398: in _gcd_import\n    ???\n<frozen importlib._bootstrap>:1371: in _find_and_load\n    ???\n<frozen importlib._bootstrap>:1342: in _find_and_load_unlocked\n    ???\n<frozen importlib._bootstrap>:938: in _load_unlocked\n    ???\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/assertion/rewrite.py:186: in exec_module\n    exec(co, module.__dict__)\n../../../../../../../data/public_repos/repos/github.com/d-st-sword/mlx-snn/tests/test_compile.py:9: in <module>\n    import mlxsnn\nmlxsnn/__init__.py:82: in <module>\n    from mlxsnn.datasets import (\nmlxsnn/datasets/__init__.py:19: in <module>\n    from mlxsnn.datasets.cifar10dvs import CIFAR10DVSDataset\nE     File \"/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_d_st_sword_mlx_snn_001/contract_first/workspace/mlxsnn/datasets/cifar10dvs.py\", line 1\nE       [MOCK] 307f3fdf0618c9f3 :: You are repairing a repository-backed change produced by strategy 'contract_first'. Repository workspace: `/Users/karana\nE                ^\nE   SyntaxError: invalid decimal literal\n___________________ ERROR collecting tests/test_datasets.py ____________________\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/python.py:498: in importtestmodule\n    mod = import_path(\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/pathlib.py:587: in import_path\n    importlib.import_module(module_name)\n/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/importlib/__init__.py:88: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<frozen importlib._bootstrap>:1398: in _gcd_import\n    ???\n<frozen importlib._bootstrap>:1371: in _find_and_load\n    ???\n<frozen importlib._bootstrap>:1342: in _find_and_load_unlocked\n    ???\n<frozen importlib._bootstrap>:938: in _load_unlocked\n    ???\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/assertion/rewrite.py:186: in exec_module\n    exec(co, module.__dict__)\n../../../../../../../data/public_repos/repos/github.com/d-st-sword/mlx-snn/tests/test_datasets.py:18: in <module>\n    from mlxsnn.datasets.utils import events_to_frames, resize_frames, EventDataloader\nmlxsnn/__init__.py:82: in <module>\n    from mlxsnn.datasets import (\nmlxsnn/datasets/__init__.py:19: in <module>\n    from mlxsnn.datasets.cifar10dvs import CIFAR10DVSDataset\nE     File \"/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_d_st_sword_mlx_snn_001/contract_first/workspace/mlxsnn/datasets/cifar10dvs.py\", line 1\nE       [MOCK] 307f3fdf0618c9f3 :: You are repairing a repository-backed change produced by strategy 'contract_first'. Repository workspace: `/Users/karana\nE                ^\nE   SyntaxError: invalid decimal literal\n____________________ ERROR collecting tests/test_liquid.py _____________________\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/python.py:498: in importtestmodule\n    mod = import_path(\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/pathlib.py:587: in import_path\n    importlib.import_module(module_name)\n/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/importlib/__init__.py:88: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<frozen importlib._bootstrap>:1398: in _gcd_import\n    ???\n<frozen importlib._bootstrap>:1371: in _find_and_load\n    ???\n<frozen importlib._bootstrap>:1342: in _find_and_load_unlocked\n    ???\n<frozen importlib._bootstrap>:938: in _load_unlocked\n    ???\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/assertion/rewrite.py:186: in exec_module\n    exec(co, module.__dict__)\n../../../../../../../data/public_repos/repos/github.com/d-st-sword/mlx-snn/tests/test_liquid.py:10: in <module>\n    from mlxsnn.liquid import LiquidReservoir, LSM\nmlxsnn/__init__.py:82: in <module>\n    from mlxsnn.datasets import (\nmlxsnn/datasets/__init__.py:19: in <module>\n    from mlxsnn.datasets.cifar10dvs import CIFAR10DVSDataset\nE     File \"/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_d_st_sword_mlx_snn_001/contract_first/workspace/mlxsnn/datasets/cifar10dvs.py\", line 1\nE       [MOCK] 307f3fdf0618c9f3 :: You are repairing a repository-backed change produced by strategy 'contract_first'. Repository workspace: `/Users/karana\nE                ^\nE   SyntaxError: invalid decimal literal\n___________________ ERROR collecting tests/test_operators.py ___________________\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/python.py:498: in importtestmodule\n    mod = import_path(\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/pathlib.py:587: in import_path\n    importlib.import_module(module_name)\n/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/importlib/__init__.py:88: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<frozen importlib._bootstrap>:1398: in _gcd_import\n    ???\n<frozen importlib._bootstrap>:1371: in _find_and_load\n    ???\n<frozen importlib._bootstrap>:1342: in _find_and_load_unlocked\n    ???\n<frozen importlib._bootstrap>:938: in _load_unlocked\n    ???\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/assertion/rewrite.py:186: in exec_module\n    exec(co, module.__dict__)\n../../../../../../../data/public_repos/repos/github.com/d-st-sword/mlx-snn/tests/test_operators.py:9: in <module>\n    from mlxsnn.operators import (\nmlxsnn/__init__.py:82: in <module>\n    from mlxsnn.datasets import (\nmlxsnn/datasets/__init__.py:19: in <module>\n    from mlxsnn.datasets.cifar10dvs import CIFAR10DVSDataset\nE     File \"/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_d_st_sword_mlx_snn_001/contract_first/workspace/mlxsnn/datasets/cifar10dvs.py\", line 1\nE       [MOCK] 307f3fdf0618c9f3 :: You are repairing a repository-backed change produced by strategy 'contract_first'. Repository workspace: `/Users/karana\nE                ^\nE   SyntaxError: invalid decimal literal\n_________________ ERROR collecting tests/test_v05_datasets.py __________________\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/python.py:498: in importtestmodule\n    mod = import_path(\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/pathlib.py:587: in import_path\n    importlib.import_module(module_name)\n/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/importlib/__init__.py:88: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<frozen importlib._bootstrap>:1398: in _gcd_import\n    ???\n<frozen importlib._bootstrap>:1371: in _find_and_load\n    ???\n<frozen importlib._bootstrap>:1342: in _find_and_load_unlocked\n    ???\n<frozen importlib._bootstrap>:938: in _load_unlocked\n    ???\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/assertion/rewrite.py:186: in exec_module\n    exec(co, module.__dict__)\n../../../../../../../data/public_repos/repos/github.com/d-st-sword/mlx-snn/tests/test_v05_datasets.py:11: in <module>\n    from mlxsnn.datasets.shd import SHDDataset, _ensure_h5py\nmlxsnn/__init__.py:82: in <module>\n    from mlxsnn.datasets import (\nmlxsnn/datasets/__init__.py:19: in <module>\n    from mlxsnn.datasets.cifar10dvs import CIFAR10DVSDataset\nE     File \"/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_d_st_sword_mlx_snn_001/contract_first/workspace/mlxsnn/datasets/cifar10dvs.py\", line 1\nE       [MOCK] 307f3fdf0618c9f3 :: You are repairing a repository-backed change produced by strategy 'contract_first'. Repository workspace: `/Users/karana\nE                ^\nE   SyntaxError: invalid decimal literal\n=========================== short test summary info ============================\nERROR tests/test_compile.py\nERROR tests/test_datasets.py\nERROR tests/test_liquid.py\nERROR tests/test_operators.py\nERROR tests/test_v05_datasets.py\n!!!!!!!!!!!!!!!!!!! Interrupted: 5 errors during collection !!!!!!!!!!!!!!!!!!!!\n1 skipped, 5 errors in 0.61s",
+              "expected": "",
+              "actual": "",
+              "location": "/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_d_st_sword_mlx_snn_001/contract_first/logs/tests_0_round2.log",
+              "category": "syntax",
+              "linked_contract_ids": [
+                "M000_incorrect_boolean_condition_f83dccdf"
+              ]
+            }
+          ],
+          "regression_guards": []
+        },
+        "witnesses": [
+          {
+            "signature": "e1ec4575724b0a7d7ed351548e7d6aec361a91c3",
+            "test_case": "tests_0",
+            "message": "==================================== ERRORS ====================================\n____________________ ERROR collecting tests/test_compile.py ____________________\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/python.py:498: in importtestmodule\n    mod = import_path(\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/pathlib.py:587: in import_path\n    importlib.import_module(module_name)\n/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/importlib/__init__.py:88: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<frozen importlib._bootstrap>:1398: in _gcd_import\n    ???\n<frozen importlib._bootstrap>:1371: in _find_and_load\n    ???\n<frozen importlib._bootstrap>:1342: in _find_and_load_unlocked\n    ???\n<frozen importlib._bootstrap>:938: in _load_unlocked\n    ???\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/assertion/rewrite.py:186: in exec_module\n    exec(co, module.__dict__)\n../../../../../../../data/public_repos/repos/github.com/d-st-sword/mlx-snn/tests/test_compile.py:9: in <module>\n    import mlxsnn\nmlxsnn/__init__.py:82: in <module>\n    from mlxsnn.datasets import (\nmlxsnn/datasets/__init__.py:19: in <module>\n    from mlxsnn.datasets.cifar10dvs import CIFAR10DVSDataset\nE     File \"/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_d_st_sword_mlx_snn_001/contract_first/workspace/mlxsnn/datasets/cifar10dvs.py\", line 1\nE       [MOCK] 307f3fdf0618c9f3 :: You are repairing a repository-backed change produced by strategy 'contract_first'. Repository workspace: `/Users/karana\nE                ^\nE   SyntaxError: invalid decimal literal\n___________________ ERROR collecting tests/test_datasets.py ____________________\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/python.py:498: in importtestmodule\n    mod = import_path(\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/pathlib.py:587: in import_path\n    importlib.import_module(module_name)\n/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/importlib/__init__.py:88: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<frozen importlib._bootstrap>:1398: in _gcd_import\n    ???\n<frozen importlib._bootstrap>:1371: in _find_and_load\n    ???\n<frozen importlib._bootstrap>:1342: in _find_and_load_unlocked\n    ???\n<frozen importlib._bootstrap>:938: in _load_unlocked\n    ???\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/assertion/rewrite.py:186: in exec_module\n    exec(co, module.__dict__)\n../../../../../../../data/public_repos/repos/github.com/d-st-sword/mlx-snn/tests/test_datasets.py:18: in <module>\n    from mlxsnn.datasets.utils import events_to_frames, resize_frames, EventDataloader\nmlxsnn/__init__.py:82: in <module>\n    from mlxsnn.datasets import (\nmlxsnn/datasets/__init__.py:19: in <module>\n    from mlxsnn.datasets.cifar10dvs import CIFAR10DVSDataset\nE     File \"/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_d_st_sword_mlx_snn_001/contract_first/workspace/mlxsnn/datasets/cifar10dvs.py\", line 1\nE       [MOCK] 307f3fdf0618c9f3 :: You are repairing a repository-backed change produced by strategy 'contract_first'. Repository workspace: `/Users/karana\nE                ^\nE   SyntaxError: invalid decimal literal\n____________________ ERROR collecting tests/test_liquid.py _____________________\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/python.py:498: in importtestmodule\n    mod = import_path(\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/pathlib.py:587: in import_path\n    importlib.import_module(module_name)\n/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/importlib/__init__.py:88: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<frozen importlib._bootstrap>:1398: in _gcd_import\n    ???\n<frozen importlib._bootstrap>:1371: in _find_and_load\n    ???\n<frozen importlib._bootstrap>:1342: in _find_and_load_unlocked\n    ???\n<frozen importlib._bootstrap>:938: in _load_unlocked\n    ???\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/assertion/rewrite.py:186: in exec_module\n    exec(co, module.__dict__)\n../../../../../../../data/public_repos/repos/github.com/d-st-sword/mlx-snn/tests/test_liquid.py:10: in <module>\n    from mlxsnn.liquid import LiquidReservoir, LSM\nmlxsnn/__init__.py:82: in <module>\n    from mlxsnn.datasets import (\nmlxsnn/datasets/__init__.py:19: in <module>\n    from mlxsnn.datasets.cifar10dvs import CIFAR10DVSDataset\nE     File \"/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_d_st_sword_mlx_snn_001/contract_first/workspace/mlxsnn/datasets/cifar10dvs.py\", line 1\nE       [MOCK] 307f3fdf0618c9f3 :: You are repairing a repository-backed change produced by strategy 'contract_first'. Repository workspace: `/Users/karana\nE                ^\nE   SyntaxError: invalid decimal literal\n___________________ ERROR collecting tests/test_operators.py ___________________\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/python.py:498: in importtestmodule\n    mod = import_path(\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/pathlib.py:587: in import_path\n    importlib.import_module(module_name)\n/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/importlib/__init__.py:88: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<frozen importlib._bootstrap>:1398: in _gcd_import\n    ???\n<frozen importlib._bootstrap>:1371: in _find_and_load\n    ???\n<frozen importlib._bootstrap>:1342: in _find_and_load_unlocked\n    ???\n<frozen importlib._bootstrap>:938: in _load_unlocked\n    ???\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/assertion/rewrite.py:186: in exec_module\n    exec(co, module.__dict__)\n../../../../../../../data/public_repos/repos/github.com/d-st-sword/mlx-snn/tests/test_operators.py:9: in <module>\n    from mlxsnn.operators import (\nmlxsnn/__init__.py:82: in <module>\n    from mlxsnn.datasets import (\nmlxsnn/datasets/__init__.py:19: in <module>\n    from mlxsnn.datasets.cifar10dvs import CIFAR10DVSDataset\nE     File \"/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_d_st_sword_mlx_snn_001/contract_first/workspace/mlxsnn/datasets/cifar10dvs.py\", line 1\nE       [MOCK] 307f3fdf0618c9f3 :: You are repairing a repository-backed change produced by strategy 'contract_first'. Repository workspace: `/Users/karana\nE                ^\nE   SyntaxError: invalid decimal literal\n_________________ ERROR collecting tests/test_v05_datasets.py __________________\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/python.py:498: in importtestmodule\n    mod = import_path(\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/pathlib.py:587: in import_path\n    importlib.import_module(module_name)\n/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/importlib/__init__.py:88: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<frozen importlib._bootstrap>:1398: in _gcd_import\n    ???\n<frozen importlib._bootstrap>:1371: in _find_and_load\n    ???\n<frozen importlib._bootstrap>:1342: in _find_and_load_unlocked\n    ???\n<frozen importlib._bootstrap>:938: in _load_unlocked\n    ???\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/assertion/rewrite.py:186: in exec_module\n    exec(co, module.__dict__)\n../../../../../../../data/public_repos/repos/github.com/d-st-sword/mlx-snn/tests/test_v05_datasets.py:11: in <module>\n    from mlxsnn.datasets.shd import SHDDataset, _ensure_h5py\nmlxsnn/__init__.py:82: in <module>\n    from mlxsnn.datasets import (\nmlxsnn/datasets/__init__.py:19: in <module>\n    from mlxsnn.datasets.cifar10dvs import CIFAR10DVSDataset\nE     File \"/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_d_st_sword_mlx_snn_001/contract_first/workspace/mlxsnn/datasets/cifar10dvs.py\", line 1\nE       [MOCK] 307f3fdf0618c9f3 :: You are repairing a repository-backed change produced by strategy 'contract_first'. Repository workspace: `/Users/karana\nE                ^\nE   SyntaxError: invalid decimal literal\n=========================== short test summary info ============================\nERROR tests/test_compile.py\nERROR tests/test_datasets.py\nERROR tests/test_liquid.py\nERROR tests/test_operators.py\nERROR tests/test_v05_datasets.py\n!!!!!!!!!!!!!!!!!!! Interrupted: 5 errors during collection !!!!!!!!!!!!!!!!!!!!\n1 skipped, 5 errors in 0.61s",
+            "expected": "",
+            "actual": "",
+            "location": "/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_d_st_sword_mlx_snn_001/contract_first/logs/tests_0_round2.log",
+            "category": "syntax",
+            "linked_contract_ids": [
+              "M000_incorrect_boolean_condition_f83dccdf"
+            ]
+          }
+        ],
+        "row_quality": {
+          "contract_quality": "strong",
+          "contract_item_count": 1,
+          "active_clause_source": "subtask_focus::Validate inputs vs contract",
+          "active_clause_present": true,
+          "witness_count": 1,
+          "witness_unique_count": 1,
+          "payload_present": true,
+          "payload_parse_ok": true,
+          "candidate_file_count": 12,
+          "clause_selection_reason": "subtask_focus::Validate inputs vs contract",
+          "skipped_targets_present": false,
+          "lint_error_count": 0,
+          "used_fallback": false,
+          "strategy_mode": "subtasks_first",
+          "regression_guard_count": 0
+        },
+        "regression_guard_ids": [],
+        "active_clause_id": "M000_incorrect_boolean_condition_f83dccdf"
+      }
+    },
+    {
+      "round": 2,
+      "phase": "repair",
+      "subtask": "Implement core logic",
+      "localized": true,
+      "pass_rate": 0.0,
+      "status": "tests_failed",
+      "duration": 1.1257458750005753,
+      "failing_tests": [
+        "tests_0"
+      ],
+      "error_types": [
+        "fail::"
+      ],
+      "file_count": 1,
+      "multi_file_attempt": false,
+      "files_touched": [
+        "mlxsnn/datasets/cifar10dvs.py"
+      ],
+      "inspected_files": [
+        "mlxsnn/datasets/cifar10dvs.py"
+      ],
+      "proposed_files": [
+        "mlxsnn/datasets/cifar10dvs.py"
+      ],
+      "edit_metadata": {
+        "raw_edit_payload": "{\"edits\": [{\"path\": \"mlxsnn/datasets/cifar10dvs.py\", \"mode\": \"rewrite\", \"content\": \"[MOCK] 66fbea497b149bfd :: You are repairing a repository-backed change produced by strategy 'contract_first'. Repository workspace: `/Users/karana\"}], \"localized\": true}",
+        "raw_payload": "{\"edits\": [{\"path\": \"mlxsnn/datasets/cifar10dvs.py\", \"mode\": \"rewrite\", \"content\": \"[MOCK] 66fbea497b149bfd :: You are repairing a repository-backed change produced by strategy 'contract_first'. Repository workspace: `/Users/karana\"}], \"localized\": true}",
+        "payload_parse_ok": true,
+        "payload_parse_error": "",
+        "candidate_files_raw": [
+          "mlxsnn/datasets/cifar10dvs.py",
+          "LICENSE",
+          "mlx_snn.egg-info/PKG-INFO",
+          "mlxsnn/datasets/__init__.py",
+          "CHANGELOG.md",
+          "README.md",
+          "docs/index.md",
+          "mlxsnn/datasets/dvs_gesture.py",
+          "mlxsnn/datasets/utils.py",
+          "mlxsnn/datasets/nmnist.py",
+          "mlxsnn/datasets/shd.py",
+          "tests/test_datasets.py"
+        ],
+        "candidate_files_filtered": [
+          "mlxsnn/datasets/cifar10dvs.py",
+          "LICENSE",
+          "mlx_snn.egg-info/PKG-INFO",
+          "mlxsnn/datasets/__init__.py",
+          "CHANGELOG.md",
+          "README.md",
+          "docs/index.md",
+          "mlxsnn/datasets/dvs_gesture.py",
+          "mlxsnn/datasets/utils.py",
+          "mlxsnn/datasets/nmnist.py",
+          "mlxsnn/datasets/shd.py",
+          "tests/test_datasets.py"
+        ],
+        "candidate_files": [
+          "mlxsnn/datasets/cifar10dvs.py",
+          "LICENSE",
+          "mlx_snn.egg-info/PKG-INFO",
+          "mlxsnn/datasets/__init__.py",
+          "CHANGELOG.md",
+          "README.md",
+          "docs/index.md",
+          "mlxsnn/datasets/dvs_gesture.py",
+          "mlxsnn/datasets/utils.py",
+          "mlxsnn/datasets/nmnist.py",
+          "mlxsnn/datasets/shd.py",
+          "tests/test_datasets.py"
+        ],
+        "strategy_mode": "contract_first",
+        "edit_mode": "edit_batch",
+        "localized_requested": true,
+        "fallback_requested": false,
+        "raw_metadata_keys": [
+          "localized"
+        ],
+        "applied_file_count": 1,
+        "proposed_file_count": 1,
+        "multi_file_applied": false,
+        "subtask_focus": "Implement core logic",
+        "contract_coverage": 0.0,
+        "contract_satisfied": [],
+        "contract_unsatisfied": [
+          "M000_incorrect_boolean_condition_f83dccdf"
+        ],
+        "contract_failure_categories": {
+          "logical_correctness": 1
+        },
+        "contract_unsatisfied_details": [
+          "M000_incorrect_boolean_condition_f83dccdf: [incorrect_boolean_condition] In `mlxsnn/datasets/cifar10dvs.py` (line 4): Logical operator changed from `and` to `or`. Should use `and`."
+        ],
+        "contract_fail_cases": [],
+        "contract_items": [
+          {
+            "id": "M000_incorrect_boolean_condition_f83dccdf",
+            "label": "Should use `and`",
+            "description": "[incorrect_boolean_condition] In `mlxsnn/datasets/cifar10dvs.py` (line 4): Logical operator changed from `and` to `or`. Should use `and`.",
+            "category": "logical_correctness",
+            "expected_behavior": "Should use `and`",
+            "test_refs": [],
+            "priority": "",
+            "source": "",
+            "notes": "",
+            "keywords": [
+              "incorrect_boolean_condition",
+              "mlxsnn/datasets/cifar10dvs.py",
+              "4"
+            ]
+          }
+        ],
+        "witness_count": 1,
+        "witness_samples": [
+          {
+            "test_case": "tests_0",
+            "message": "==================================== ERRORS ====================================\n____________________ ERROR collecting tests/test_compile.py ___________________",
+            "category": "syntax",
+            "expected": "",
+            "actual": "",
+            "contracts": []
+          }
+        ],
+        "cgcs_state": {
+          "round": 2,
+          "round_index": 2,
+          "strategy": "contract_first",
+          "task_id": "public_pilot_d_st_sword_mlx_snn_001",
+          "contract_items": [
+            {
+              "id": "M000_incorrect_boolean_condition_f83dccdf",
+              "label": "Should use `and`",
+              "description": "[incorrect_boolean_condition] In `mlxsnn/datasets/cifar10dvs.py` (line 4): Logical operator changed from `and` to `or`. Should use `and`.",
+              "category": "logical_correctness",
+              "expected_behavior": "Should use `and`",
+              "test_refs": [],
+              "priority": "",
+              "source": "",
+              "notes": "",
+              "keywords": [
+                "incorrect_boolean_condition",
+                "mlxsnn/datasets/cifar10dvs.py",
+                "4"
+              ]
+            }
+          ],
+          "active_clause_id": "M000_incorrect_boolean_condition_f83dccdf",
+          "active_clause": "M000_incorrect_boolean_condition_f83dccdf",
+          "regression_guard_ids": [],
+          "witnesses": [
+            {
+              "signature": "0cdb616c8337b72f6c38fdd109d689ea143ccabd",
+              "test_case": "tests_0",
+              "message": "==================================== ERRORS ====================================\n____________________ ERROR collecting tests/test_compile.py ____________________\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/python.py:498: in importtestmodule\n    mod = import_path(\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/pathlib.py:587: in import_path\n    importlib.import_module(module_name)\n/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/importlib/__init__.py:88: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<frozen importlib._bootstrap>:1398: in _gcd_import\n    ???\n<frozen importlib._bootstrap>:1371: in _find_and_load\n    ???\n<frozen importlib._bootstrap>:1342: in _find_and_load_unlocked\n    ???\n<frozen importlib._bootstrap>:938: in _load_unlocked\n    ???\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/assertion/rewrite.py:186: in exec_module\n    exec(co, module.__dict__)\n../../../../../../../data/public_repos/repos/github.com/d-st-sword/mlx-snn/tests/test_compile.py:9: in <module>\n    import mlxsnn\nmlxsnn/__init__.py:82: in <module>\n    from mlxsnn.datasets import (\nmlxsnn/datasets/__init__.py:19: in <module>\n    from mlxsnn.datasets.cifar10dvs import CIFAR10DVSDataset\nE     File \"/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_d_st_sword_mlx_snn_001/contract_first/workspace/mlxsnn/datasets/cifar10dvs.py\", line 1\nE       [MOCK] 66fbea497b149bfd :: You are repairing a repository-backed change produced by strategy 'contract_first'. Repository workspace: `/Users/karana\nE               ^\nE   SyntaxError: invalid decimal literal\n___________________ ERROR collecting tests/test_datasets.py ____________________\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/python.py:498: in importtestmodule\n    mod = import_path(\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/pathlib.py:587: in import_path\n    importlib.import_module(module_name)\n/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/importlib/__init__.py:88: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<frozen importlib._bootstrap>:1398: in _gcd_import\n    ???\n<frozen importlib._bootstrap>:1371: in _find_and_load\n    ???\n<frozen importlib._bootstrap>:1342: in _find_and_load_unlocked\n    ???\n<frozen importlib._bootstrap>:938: in _load_unlocked\n    ???\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/assertion/rewrite.py:186: in exec_module\n    exec(co, module.__dict__)\n../../../../../../../data/public_repos/repos/github.com/d-st-sword/mlx-snn/tests/test_datasets.py:18: in <module>\n    from mlxsnn.datasets.utils import events_to_frames, resize_frames, EventDataloader\nmlxsnn/__init__.py:82: in <module>\n    from mlxsnn.datasets import (\nmlxsnn/datasets/__init__.py:19: in <module>\n    from mlxsnn.datasets.cifar10dvs import CIFAR10DVSDataset\nE     File \"/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_d_st_sword_mlx_snn_001/contract_first/workspace/mlxsnn/datasets/cifar10dvs.py\", line 1\nE       [MOCK] 66fbea497b149bfd :: You are repairing a repository-backed change produced by strategy 'contract_first'. Repository workspace: `/Users/karana\nE               ^\nE   SyntaxError: invalid decimal literal\n____________________ ERROR collecting tests/test_liquid.py _____________________\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/python.py:498: in importtestmodule\n    mod = import_path(\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/pathlib.py:587: in import_path\n    importlib.import_module(module_name)\n/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/importlib/__init__.py:88: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<frozen importlib._bootstrap>:1398: in _gcd_import\n    ???\n<frozen importlib._bootstrap>:1371: in _find_and_load\n    ???\n<frozen importlib._bootstrap>:1342: in _find_and_load_unlocked\n    ???\n<frozen importlib._bootstrap>:938: in _load_unlocked\n    ???\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/assertion/rewrite.py:186: in exec_module\n    exec(co, module.__dict__)\n../../../../../../../data/public_repos/repos/github.com/d-st-sword/mlx-snn/tests/test_liquid.py:10: in <module>\n    from mlxsnn.liquid import LiquidReservoir, LSM\nmlxsnn/__init__.py:82: in <module>\n    from mlxsnn.datasets import (\nmlxsnn/datasets/__init__.py:19: in <module>\n    from mlxsnn.datasets.cifar10dvs import CIFAR10DVSDataset\nE     File \"/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_d_st_sword_mlx_snn_001/contract_first/workspace/mlxsnn/datasets/cifar10dvs.py\", line 1\nE       [MOCK] 66fbea497b149bfd :: You are repairing a repository-backed change produced by strategy 'contract_first'. Repository workspace: `/Users/karana\nE               ^\nE   SyntaxError: invalid decimal literal\n___________________ ERROR collecting tests/test_operators.py ___________________\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/python.py:498: in importtestmodule\n    mod = import_path(\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/pathlib.py:587: in import_path\n    importlib.import_module(module_name)\n/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/importlib/__init__.py:88: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<frozen importlib._bootstrap>:1398: in _gcd_import\n    ???\n<frozen importlib._bootstrap>:1371: in _find_and_load\n    ???\n<frozen importlib._bootstrap>:1342: in _find_and_load_unlocked\n    ???\n<frozen importlib._bootstrap>:938: in _load_unlocked\n    ???\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/assertion/rewrite.py:186: in exec_module\n    exec(co, module.__dict__)\n../../../../../../../data/public_repos/repos/github.com/d-st-sword/mlx-snn/tests/test_operators.py:9: in <module>\n    from mlxsnn.operators import (\nmlxsnn/__init__.py:82: in <module>\n    from mlxsnn.datasets import (\nmlxsnn/datasets/__init__.py:19: in <module>\n    from mlxsnn.datasets.cifar10dvs import CIFAR10DVSDataset\nE     File \"/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_d_st_sword_mlx_snn_001/contract_first/workspace/mlxsnn/datasets/cifar10dvs.py\", line 1\nE       [MOCK] 66fbea497b149bfd :: You are repairing a repository-backed change produced by strategy 'contract_first'. Repository workspace: `/Users/karana\nE               ^\nE   SyntaxError: invalid decimal literal\n_________________ ERROR collecting tests/test_v05_datasets.py __________________\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/python.py:498: in importtestmodule\n    mod = import_path(\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/pathlib.py:587: in import_path\n    importlib.import_module(module_name)\n/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/importlib/__init__.py:88: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<frozen importlib._bootstrap>:1398: in _gcd_import\n    ???\n<frozen importlib._bootstrap>:1371: in _find_and_load\n    ???\n<frozen importlib._bootstrap>:1342: in _find_and_load_unlocked\n    ???\n<frozen importlib._bootstrap>:938: in _load_unlocked\n    ???\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/assertion/rewrite.py:186: in exec_module\n    exec(co, module.__dict__)\n../../../../../../../data/public_repos/repos/github.com/d-st-sword/mlx-snn/tests/test_v05_datasets.py:11: in <module>\n    from mlxsnn.datasets.shd import SHDDataset, _ensure_h5py\nmlxsnn/__init__.py:82: in <module>\n    from mlxsnn.datasets import (\nmlxsnn/datasets/__init__.py:19: in <module>\n    from mlxsnn.datasets.cifar10dvs import CIFAR10DVSDataset\nE     File \"/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_d_st_sword_mlx_snn_001/contract_first/workspace/mlxsnn/datasets/cifar10dvs.py\", line 1\nE       [MOCK] 66fbea497b149bfd :: You are repairing a repository-backed change produced by strategy 'contract_first'. Repository workspace: `/Users/karana\nE               ^\nE   SyntaxError: invalid decimal literal\n=========================== short test summary info ============================\nERROR tests/test_compile.py\nERROR tests/test_datasets.py\nERROR tests/test_liquid.py\nERROR tests/test_operators.py\nERROR tests/test_v05_datasets.py\n!!!!!!!!!!!!!!!!!!! Interrupted: 5 errors during collection !!!!!!!!!!!!!!!!!!!!\n1 skipped, 5 errors in 0.57s",
+              "expected": "",
+              "actual": "",
+              "location": "/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_d_st_sword_mlx_snn_001/contract_first/logs/tests_0_round3.log",
+              "category": "syntax",
+              "linked_contract_ids": [
+                "M000_incorrect_boolean_condition_f83dccdf"
+              ]
+            }
+          ],
+          "raw_edit_payload": "{\"edits\": [{\"path\": \"mlxsnn/datasets/cifar10dvs.py\", \"mode\": \"rewrite\", \"content\": \"[MOCK] 66fbea497b149bfd :: You are repairing a repository-backed change produced by strategy 'contract_first'. Repository workspace: `/Users/karana\"}], \"localized\": true}",
+          "payload_parse_ok": true,
+          "payload_parse_error": "",
+          "candidate_files": [
+            "mlxsnn/datasets/cifar10dvs.py",
+            "LICENSE",
+            "mlx_snn.egg-info/PKG-INFO",
+            "mlxsnn/datasets/__init__.py",
+            "CHANGELOG.md",
+            "README.md",
+            "docs/index.md",
+            "mlxsnn/datasets/dvs_gesture.py",
+            "mlxsnn/datasets/utils.py",
+            "mlxsnn/datasets/nmnist.py",
+            "mlxsnn/datasets/shd.py",
+            "tests/test_datasets.py"
+          ],
+          "candidate_files_raw": [
+            "mlxsnn/datasets/cifar10dvs.py",
+            "LICENSE",
+            "mlx_snn.egg-info/PKG-INFO",
+            "mlxsnn/datasets/__init__.py",
+            "CHANGELOG.md",
+            "README.md",
+            "docs/index.md",
+            "mlxsnn/datasets/dvs_gesture.py",
+            "mlxsnn/datasets/utils.py",
+            "mlxsnn/datasets/nmnist.py",
+            "mlxsnn/datasets/shd.py",
+            "tests/test_datasets.py"
+          ],
+          "candidate_files_filtered": [
+            "mlxsnn/datasets/cifar10dvs.py",
+            "LICENSE",
+            "mlx_snn.egg-info/PKG-INFO",
+            "mlxsnn/datasets/__init__.py",
+            "CHANGELOG.md",
+            "README.md",
+            "docs/index.md",
+            "mlxsnn/datasets/dvs_gesture.py",
+            "mlxsnn/datasets/utils.py",
+            "mlxsnn/datasets/nmnist.py",
+            "mlxsnn/datasets/shd.py",
+            "tests/test_datasets.py"
+          ],
+          "clause_selection_reason": "subtask_focus::Implement core logic",
+          "row_quality": {
+            "contract_quality": "strong",
+            "contract_item_count": 1,
+            "active_clause_source": "subtask_focus::Implement core logic",
+            "active_clause_present": true,
+            "witness_count": 1,
+            "witness_unique_count": 1,
+            "payload_present": true,
+            "payload_parse_ok": true,
+            "candidate_file_count": 12,
+            "clause_selection_reason": "subtask_focus::Implement core logic",
+            "skipped_targets_present": false,
+            "lint_error_count": 0,
+            "used_fallback": false,
+            "strategy_mode": "subtasks_first",
+            "regression_guard_count": 0
+          },
+          "lint_errors": [],
+          "skipped_targets": [],
+          "outcome_metrics": {
+            "status": "tests_failed",
+            "pass_rate": 0.0,
+            "duration": 1.1257458750005753,
+            "failing_tests": [
+              "tests_0"
+            ],
+            "error_types": [
+              "fail::"
+            ]
+          },
+          "coverage": 0.0,
+          "satisfied_ids": [],
+          "unsatisfied_ids": [
+            "M000_incorrect_boolean_condition_f83dccdf"
+          ],
+          "regressed_ids": [],
+          "witness_counts": {
+            "M000_incorrect_boolean_condition_f83dccdf": 1
+          },
+          "witness_sample": [
+            {
+              "signature": "0cdb616c8337b72f6c38fdd109d689ea143ccabd",
+              "test_case": "tests_0",
+              "message": "==================================== ERRORS ====================================\n____________________ ERROR collecting tests/test_compile.py ____________________\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/python.py:498: in importtestmodule\n    mod = import_path(\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/pathlib.py:587: in import_path\n    importlib.import_module(module_name)\n/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/importlib/__init__.py:88: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<frozen importlib._bootstrap>:1398: in _gcd_import\n    ???\n<frozen importlib._bootstrap>:1371: in _find_and_load\n    ???\n<frozen importlib._bootstrap>:1342: in _find_and_load_unlocked\n    ???\n<frozen importlib._bootstrap>:938: in _load_unlocked\n    ???\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/assertion/rewrite.py:186: in exec_module\n    exec(co, module.__dict__)\n../../../../../../../data/public_repos/repos/github.com/d-st-sword/mlx-snn/tests/test_compile.py:9: in <module>\n    import mlxsnn\nmlxsnn/__init__.py:82: in <module>\n    from mlxsnn.datasets import (\nmlxsnn/datasets/__init__.py:19: in <module>\n    from mlxsnn.datasets.cifar10dvs import CIFAR10DVSDataset\nE     File \"/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_d_st_sword_mlx_snn_001/contract_first/workspace/mlxsnn/datasets/cifar10dvs.py\", line 1\nE       [MOCK] 66fbea497b149bfd :: You are repairing a repository-backed change produced by strategy 'contract_first'. Repository workspace: `/Users/karana\nE               ^\nE   SyntaxError: invalid decimal literal\n___________________ ERROR collecting tests/test_datasets.py ____________________\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/python.py:498: in importtestmodule\n    mod = import_path(\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/pathlib.py:587: in import_path\n    importlib.import_module(module_name)\n/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/importlib/__init__.py:88: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<frozen importlib._bootstrap>:1398: in _gcd_import\n    ???\n<frozen importlib._bootstrap>:1371: in _find_and_load\n    ???\n<frozen importlib._bootstrap>:1342: in _find_and_load_unlocked\n    ???\n<frozen importlib._bootstrap>:938: in _load_unlocked\n    ???\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/assertion/rewrite.py:186: in exec_module\n    exec(co, module.__dict__)\n../../../../../../../data/public_repos/repos/github.com/d-st-sword/mlx-snn/tests/test_datasets.py:18: in <module>\n    from mlxsnn.datasets.utils import events_to_frames, resize_frames, EventDataloader\nmlxsnn/__init__.py:82: in <module>\n    from mlxsnn.datasets import (\nmlxsnn/datasets/__init__.py:19: in <module>\n    from mlxsnn.datasets.cifar10dvs import CIFAR10DVSDataset\nE     File \"/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_d_st_sword_mlx_snn_001/contract_first/workspace/mlxsnn/datasets/cifar10dvs.py\", line 1\nE       [MOCK] 66fbea497b149bfd :: You are repairing a repository-backed change produced by strategy 'contract_first'. Repository workspace: `/Users/karana\nE               ^\nE   SyntaxError: invalid decimal literal\n____________________ ERROR collecting tests/test_liquid.py _____________________\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/python.py:498: in importtestmodule\n    mod = import_path(\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/pathlib.py:587: in import_path\n    importlib.import_module(module_name)\n/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/importlib/__init__.py:88: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<frozen importlib._bootstrap>:1398: in _gcd_import\n    ???\n<frozen importlib._bootstrap>:1371: in _find_and_load\n    ???\n<frozen importlib._bootstrap>:1342: in _find_and_load_unlocked\n    ???\n<frozen importlib._bootstrap>:938: in _load_unlocked\n    ???\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/assertion/rewrite.py:186: in exec_module\n    exec(co, module.__dict__)\n../../../../../../../data/public_repos/repos/github.com/d-st-sword/mlx-snn/tests/test_liquid.py:10: in <module>\n    from mlxsnn.liquid import LiquidReservoir, LSM\nmlxsnn/__init__.py:82: in <module>\n    from mlxsnn.datasets import (\nmlxsnn/datasets/__init__.py:19: in <module>\n    from mlxsnn.datasets.cifar10dvs import CIFAR10DVSDataset\nE     File \"/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_d_st_sword_mlx_snn_001/contract_first/workspace/mlxsnn/datasets/cifar10dvs.py\", line 1\nE       [MOCK] 66fbea497b149bfd :: You are repairing a repository-backed change produced by strategy 'contract_first'. Repository workspace: `/Users/karana\nE               ^\nE   SyntaxError: invalid decimal literal\n___________________ ERROR collecting tests/test_operators.py ___________________\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/python.py:498: in importtestmodule\n    mod = import_path(\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/pathlib.py:587: in import_path\n    importlib.import_module(module_name)\n/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/importlib/__init__.py:88: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<frozen importlib._bootstrap>:1398: in _gcd_import\n    ???\n<frozen importlib._bootstrap>:1371: in _find_and_load\n    ???\n<frozen importlib._bootstrap>:1342: in _find_and_load_unlocked\n    ???\n<frozen importlib._bootstrap>:938: in _load_unlocked\n    ???\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/assertion/rewrite.py:186: in exec_module\n    exec(co, module.__dict__)\n../../../../../../../data/public_repos/repos/github.com/d-st-sword/mlx-snn/tests/test_operators.py:9: in <module>\n    from mlxsnn.operators import (\nmlxsnn/__init__.py:82: in <module>\n    from mlxsnn.datasets import (\nmlxsnn/datasets/__init__.py:19: in <module>\n    from mlxsnn.datasets.cifar10dvs import CIFAR10DVSDataset\nE     File \"/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_d_st_sword_mlx_snn_001/contract_first/workspace/mlxsnn/datasets/cifar10dvs.py\", line 1\nE       [MOCK] 66fbea497b149bfd :: You are repairing a repository-backed change produced by strategy 'contract_first'. Repository workspace: `/Users/karana\nE               ^\nE   SyntaxError: invalid decimal literal\n_________________ ERROR collecting tests/test_v05_datasets.py __________________\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/python.py:498: in importtestmodule\n    mod = import_path(\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/pathlib.py:587: in import_path\n    importlib.import_module(module_name)\n/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/importlib/__init__.py:88: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<frozen importlib._bootstrap>:1398: in _gcd_import\n    ???\n<frozen importlib._bootstrap>:1371: in _find_and_load\n    ???\n<frozen importlib._bootstrap>:1342: in _find_and_load_unlocked\n    ???\n<frozen importlib._bootstrap>:938: in _load_unlocked\n    ???\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/assertion/rewrite.py:186: in exec_module\n    exec(co, module.__dict__)\n../../../../../../../data/public_repos/repos/github.com/d-st-sword/mlx-snn/tests/test_v05_datasets.py:11: in <module>\n    from mlxsnn.datasets.shd import SHDDataset, _ensure_h5py\nmlxsnn/__init__.py:82: in <module>\n    from mlxsnn.datasets import (\nmlxsnn/datasets/__init__.py:19: in <module>\n    from mlxsnn.datasets.cifar10dvs import CIFAR10DVSDataset\nE     File \"/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_d_st_sword_mlx_snn_001/contract_first/workspace/mlxsnn/datasets/cifar10dvs.py\", line 1\nE       [MOCK] 66fbea497b149bfd :: You are repairing a repository-backed change produced by strategy 'contract_first'. Repository workspace: `/Users/karana\nE               ^\nE   SyntaxError: invalid decimal literal\n=========================== short test summary info ============================\nERROR tests/test_compile.py\nERROR tests/test_datasets.py\nERROR tests/test_liquid.py\nERROR tests/test_operators.py\nERROR tests/test_v05_datasets.py\n!!!!!!!!!!!!!!!!!!! Interrupted: 5 errors during collection !!!!!!!!!!!!!!!!!!!!\n1 skipped, 5 errors in 0.57s",
+              "expected": "",
+              "actual": "",
+              "location": "/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_d_st_sword_mlx_snn_001/contract_first/logs/tests_0_round3.log",
+              "category": "syntax",
+              "linked_contract_ids": [
+                "M000_incorrect_boolean_condition_f83dccdf"
+              ]
+            }
+          ],
+          "regression_guards": []
+        },
+        "witnesses": [
+          {
+            "signature": "0cdb616c8337b72f6c38fdd109d689ea143ccabd",
+            "test_case": "tests_0",
+            "message": "==================================== ERRORS ====================================\n____________________ ERROR collecting tests/test_compile.py ____________________\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/python.py:498: in importtestmodule\n    mod = import_path(\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/pathlib.py:587: in import_path\n    importlib.import_module(module_name)\n/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/importlib/__init__.py:88: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<frozen importlib._bootstrap>:1398: in _gcd_import\n    ???\n<frozen importlib._bootstrap>:1371: in _find_and_load\n    ???\n<frozen importlib._bootstrap>:1342: in _find_and_load_unlocked\n    ???\n<frozen importlib._bootstrap>:938: in _load_unlocked\n    ???\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/assertion/rewrite.py:186: in exec_module\n    exec(co, module.__dict__)\n../../../../../../../data/public_repos/repos/github.com/d-st-sword/mlx-snn/tests/test_compile.py:9: in <module>\n    import mlxsnn\nmlxsnn/__init__.py:82: in <module>\n    from mlxsnn.datasets import (\nmlxsnn/datasets/__init__.py:19: in <module>\n    from mlxsnn.datasets.cifar10dvs import CIFAR10DVSDataset\nE     File \"/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_d_st_sword_mlx_snn_001/contract_first/workspace/mlxsnn/datasets/cifar10dvs.py\", line 1\nE       [MOCK] 66fbea497b149bfd :: You are repairing a repository-backed change produced by strategy 'contract_first'. Repository workspace: `/Users/karana\nE               ^\nE   SyntaxError: invalid decimal literal\n___________________ ERROR collecting tests/test_datasets.py ____________________\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/python.py:498: in importtestmodule\n    mod = import_path(\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/pathlib.py:587: in import_path\n    importlib.import_module(module_name)\n/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/importlib/__init__.py:88: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<frozen importlib._bootstrap>:1398: in _gcd_import\n    ???\n<frozen importlib._bootstrap>:1371: in _find_and_load\n    ???\n<frozen importlib._bootstrap>:1342: in _find_and_load_unlocked\n    ???\n<frozen importlib._bootstrap>:938: in _load_unlocked\n    ???\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/assertion/rewrite.py:186: in exec_module\n    exec(co, module.__dict__)\n../../../../../../../data/public_repos/repos/github.com/d-st-sword/mlx-snn/tests/test_datasets.py:18: in <module>\n    from mlxsnn.datasets.utils import events_to_frames, resize_frames, EventDataloader\nmlxsnn/__init__.py:82: in <module>\n    from mlxsnn.datasets import (\nmlxsnn/datasets/__init__.py:19: in <module>\n    from mlxsnn.datasets.cifar10dvs import CIFAR10DVSDataset\nE     File \"/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_d_st_sword_mlx_snn_001/contract_first/workspace/mlxsnn/datasets/cifar10dvs.py\", line 1\nE       [MOCK] 66fbea497b149bfd :: You are repairing a repository-backed change produced by strategy 'contract_first'. Repository workspace: `/Users/karana\nE               ^\nE   SyntaxError: invalid decimal literal\n____________________ ERROR collecting tests/test_liquid.py _____________________\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/python.py:498: in importtestmodule\n    mod = import_path(\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/pathlib.py:587: in import_path\n    importlib.import_module(module_name)\n/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/importlib/__init__.py:88: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<frozen importlib._bootstrap>:1398: in _gcd_import\n    ???\n<frozen importlib._bootstrap>:1371: in _find_and_load\n    ???\n<frozen importlib._bootstrap>:1342: in _find_and_load_unlocked\n    ???\n<frozen importlib._bootstrap>:938: in _load_unlocked\n    ???\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/assertion/rewrite.py:186: in exec_module\n    exec(co, module.__dict__)\n../../../../../../../data/public_repos/repos/github.com/d-st-sword/mlx-snn/tests/test_liquid.py:10: in <module>\n    from mlxsnn.liquid import LiquidReservoir, LSM\nmlxsnn/__init__.py:82: in <module>\n    from mlxsnn.datasets import (\nmlxsnn/datasets/__init__.py:19: in <module>\n    from mlxsnn.datasets.cifar10dvs import CIFAR10DVSDataset\nE     File \"/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_d_st_sword_mlx_snn_001/contract_first/workspace/mlxsnn/datasets/cifar10dvs.py\", line 1\nE       [MOCK] 66fbea497b149bfd :: You are repairing a repository-backed change produced by strategy 'contract_first'. Repository workspace: `/Users/karana\nE               ^\nE   SyntaxError: invalid decimal literal\n___________________ ERROR collecting tests/test_operators.py ___________________\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/python.py:498: in importtestmodule\n    mod = import_path(\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/pathlib.py:587: in import_path\n    importlib.import_module(module_name)\n/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/importlib/__init__.py:88: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<frozen importlib._bootstrap>:1398: in _gcd_import\n    ???\n<frozen importlib._bootstrap>:1371: in _find_and_load\n    ???\n<frozen importlib._bootstrap>:1342: in _find_and_load_unlocked\n    ???\n<frozen importlib._bootstrap>:938: in _load_unlocked\n    ???\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/assertion/rewrite.py:186: in exec_module\n    exec(co, module.__dict__)\n../../../../../../../data/public_repos/repos/github.com/d-st-sword/mlx-snn/tests/test_operators.py:9: in <module>\n    from mlxsnn.operators import (\nmlxsnn/__init__.py:82: in <module>\n    from mlxsnn.datasets import (\nmlxsnn/datasets/__init__.py:19: in <module>\n    from mlxsnn.datasets.cifar10dvs import CIFAR10DVSDataset\nE     File \"/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_d_st_sword_mlx_snn_001/contract_first/workspace/mlxsnn/datasets/cifar10dvs.py\", line 1\nE       [MOCK] 66fbea497b149bfd :: You are repairing a repository-backed change produced by strategy 'contract_first'. Repository workspace: `/Users/karana\nE               ^\nE   SyntaxError: invalid decimal literal\n_________________ ERROR collecting tests/test_v05_datasets.py __________________\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/python.py:498: in importtestmodule\n    mod = import_path(\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/pathlib.py:587: in import_path\n    importlib.import_module(module_name)\n/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/importlib/__init__.py:88: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<frozen importlib._bootstrap>:1398: in _gcd_import\n    ???\n<frozen importlib._bootstrap>:1371: in _find_and_load\n    ???\n<frozen importlib._bootstrap>:1342: in _find_and_load_unlocked\n    ???\n<frozen importlib._bootstrap>:938: in _load_unlocked\n    ???\n../../../../../../../venv/lib/python3.14/site-packages/_pytest/assertion/rewrite.py:186: in exec_module\n    exec(co, module.__dict__)\n../../../../../../../data/public_repos/repos/github.com/d-st-sword/mlx-snn/tests/test_v05_datasets.py:11: in <module>\n    from mlxsnn.datasets.shd import SHDDataset, _ensure_h5py\nmlxsnn/__init__.py:82: in <module>\n    from mlxsnn.datasets import (\nmlxsnn/datasets/__init__.py:19: in <module>\n    from mlxsnn.datasets.cifar10dvs import CIFAR10DVSDataset\nE     File \"/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_d_st_sword_mlx_snn_001/contract_first/workspace/mlxsnn/datasets/cifar10dvs.py\", line 1\nE       [MOCK] 66fbea497b149bfd :: You are repairing a repository-backed change produced by strategy 'contract_first'. Repository workspace: `/Users/karana\nE               ^\nE   SyntaxError: invalid decimal literal\n=========================== short test summary info ============================\nERROR tests/test_compile.py\nERROR tests/test_datasets.py\nERROR tests/test_liquid.py\nERROR tests/test_operators.py\nERROR tests/test_v05_datasets.py\n!!!!!!!!!!!!!!!!!!! Interrupted: 5 errors during collection !!!!!!!!!!!!!!!!!!!!\n1 skipped, 5 errors in 0.57s",
+            "expected": "",
+            "actual": "",
+            "location": "/Users/karanallagh/Desktop/DataCollector/reports/decomposition/public_repo_pilot/runs/public_pilot_d_st_sword_mlx_snn_001/contract_first/logs/tests_0_round3.log",
+            "category": "syntax",
+            "linked_contract_ids": [
+              "M000_incorrect_boolean_condition_f83dccdf"
+            ]
+          }
+        ],
+        "row_quality": {
+          "contract_quality": "strong",
+          "contract_item_count": 1,
+          "active_clause_source": "subtask_focus::Implement core logic",
+          "active_clause_present": true,
+          "witness_count": 1,
+          "witness_unique_count": 1,
+          "payload_present": true,
+          "payload_parse_ok": true,
+          "candidate_file_count": 12,
+          "clause_selection_reason": "subtask_focus::Implement core logic",
+          "skipped_targets_present": false,
+          "lint_error_count": 0,
+          "used_fallback": false,
+          "strategy_mode": "subtasks_first",
+          "regression_guard_count": 0
+        },
+        "regression_guard_ids": [],
+        "active_clause_id": "M000_incorrect_boolean_condition_f83dccdf"
+      }
+    }
+  ]
+}

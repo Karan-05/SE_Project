@@ -1,0 +1,436 @@
+{
+  "raw_rows_seen": 91598,
+  "tasks_csv_rows": 22023,
+  "json_rows": 69575,
+  "indexed_rows": 22023,
+  "repo_count": 16568,
+  "test_count": 15371,
+  "likely_executable_count": 16562,
+  "duplicate_group_count": 2060,
+  "duplicate_groups": {
+    "https://github.com/topcoder-platform/community-app": [
+      "0c9d344e-6452-4d0c-a474-34d203f04f6c",
+      "b0e66fb3-6bce-48c8-929f-9d8bebc76885",
+      "70ea3d72-66a5-432d-a410-7202da79b00e",
+      "3cded57a-b863-4804-8d4d-21747cc9d996",
+      "10f01117-9661-4868-bf96-d0457dac10e0",
+      "743c9ef3-6dda-4dcd-9f43-0874001d0502",
+      "c90790bd-d289-42b7-bd97-4bc65d7232f5",
+      "faa95748-8dbe-4d5b-87e1-b96d8073e31c",
+      "abdd7dcf-38ca-47d6-a9b5-a134682bc9a8",
+      "92515220-cce4-4bfb-9def-a941e03e148a"
+    ],
+    "https://reactjs.org": [
+      "a4826c63-5e86-45f7-899b-6ed2a3aa60f4",
+      "a36db4cc-cc1c-40e9-a331-d94b35ce01fb",
+      "05bf88c9-b0e1-4b02-bbf2-17d0732130f6",
+      "2c0bf6fa-0342-4ac7-8007-0873c4a5dd2f"
+    ],
+    "https://docs.google.com/document/d/15bk8daay8fdaskewphv4fux6emtmq5jn9aezlvnqfqw/edit": [
+      "e8231040-e63f-40c4-980c-eb815062aeec",
+      "aeaaeac2-907e-4f11-bb09-30143522da50",
+      "558999e4-323e-4867-81b1-e989c4028a09"
+    ],
+    "https://www.figma.com/file/wdmii42s0wsc3pmykohrot/payments-track-reskin": [
+      "774f1c4d-0ca0-4de2-ae8b-87882784f2c5",
+      "9c0e8f57-190b-4427-a78c-c722af5ca8c9",
+      "f71e8aa6-359f-494a-b2a7-e20cfe317cd4",
+      "b4210a15-4a64-4fd4-9073-2a3e7e71c52c",
+      "c1d1ce40-9337-4a23-af35-af6593a969f3",
+      "2c73511d-5677-4ded-9d1c-089102bacb87",
+      "db84aa79-98e1-4ea2-aca1-3503d7ebac41",
+      "f4c318a9-edff-45ab-9ccc-703fa2d80239",
+      "16655ff7-f1ca-4466-bd44-6e74f5f79a3f",
+      "97745303-0ae1-4196-87db-3a03c1909b13"
+    ],
+    "https://github.com/topcoder-platform/work-manager": [
+      "42460057-3735-4a87-9300-e22965ae6d78",
+      "2362226c-ab72-4c46-819a-37d09f9fbf16",
+      "3a891b85-ad6c-454b-983c-30a3e4ab61a5"
+    ],
+    "https://www.topcoder.com/challenges/7dc44b10-2e27-4e57-bec1-4891c34aec4a": [
+      "b2217817-3aaf-478f-a73f-2817e1b348fc",
+      "28238fd9-139a-48fc-a6c7-639c7ca359b3",
+      "bb63ec8d-e3bb-4dc8-80dd-ddf2dd84ed61",
+      "987f731a-503d-440e-b25e-101d04d701b5",
+      "f0a449ac-540f-4325-9910-ca69f4df99a8",
+      "656b1948-2bd9-41e8-826e-39834eafb888"
+    ],
+    "https://github.com/topcoder-platform/tc-review-api": [
+      "4817666d-dcbe-4c62-9e32-56ade2b59b63",
+      "73d5b29a-3bef-4979-863c-80d0bae43e56",
+      "cd9b908a-f6d0-49ec-aca4-332916a6a7ee",
+      "56b3df85-e4f4-40ab-a975-2a9e6810866e",
+      "c014f257-51be-441b-a53a-22307d0e01e5"
+    ],
+    "https://github.com/topcoder-platform/platform-ui": [
+      "44b93939-2622-4429-b8b1-3d9518f84680",
+      "65b7f3c8-06a6-422b-92d9-6353fa5c3a2d",
+      "b4ce6cb7-8df8-4ca5-ab75-2b962df71ce9",
+      "051e70ad-a32b-40fc-86c8-fe55b67fd611",
+      "8ce4125b-ba2c-4be9-a9a9-0a1ce1d21a97",
+      "d29af94a-f951-479c-8f39-86a413c7c100"
+    ],
+    "https://www.topcoder.com/challenges/6cf9672f-6a55-4043-8661-df9917bb3271": [
+      "a4f17d0f-2196-4d00-8c29-3a33871da825",
+      "7bcd00f9-9cdb-4722-bddd-80915e6d55f5",
+      "02e6ada6-c495-45a5-a597-f3dd42174827",
+      "06525af6-cea6-40f0-9d8a-95c750cd9f45",
+      "209e1aa5-8062-4ca9-888d-11ae6e22d896",
+      "ecfed727-3e85-41ab-9ce4-6d0032f80c57",
+      "29f79b9f-32ef-43e5-8298-1028dfbf1136",
+      "5f695f88-8075-4e83-8727-100bf12c516e",
+      "73d5e42b-91c5-4ab5-9e9b-eb3f3d5c7075",
+      "4ecc36e0-b1d5-4d9d-81dd-616ad6fbdd8d"
+    ],
+    "https://api.topcoder-dev.com/v5/members": [
+      "c77d02db-c3e4-48c3-bee0-f3e2599824b7",
+      "329f27bd-9176-4b7b-8d2a-e1996c60db09",
+      "64fb1a44-804d-4187-b983-f528b564e7ce"
+    ],
+    "https://www.topcoder.com/challenges/77910b35-7ad7-4e67-a953-85d88b7d6cf6": [
+      "aa869b61-572c-4929-8d05-db890d5c21ce",
+      "de4f9d67-957f-497e-bcb4-597e8f583911",
+      "d91b8780-5069-45a1-9842-b9fcbec65101"
+    ],
+    "test|development": [
+      "b094c72f-4e9c-4582-9f00-4eec70d7c687",
+      "92190348-b60b-4928-8ea8-55148d8f65dc",
+      "5783bde3-cc95-4711-af27-274af7b19e5d",
+      "b69aef29-e2e4-4d5c-8ced-c94528e3308c",
+      "a648845e-6312-4940-bc37-d452cef4d442",
+      "02d2fc13-2597-4b37-9a3a-2fee4e09f2f0",
+      "ebbaa17a-17a1-4725-b096-51a9a7ca5ff4"
+    ],
+    "https://github.com/topcoder-platform/groups-api": [
+      "a5cf9a06-6362-475b-8dcc-fd748da21d18",
+      "647c28fa-794e-4f7e-8ac2-4f109aa6368d",
+      "eb72e187-1216-46f6-bcd9-2b5c8bc53bef",
+      "7c97eb69-d9b4-4f60-8234-8e4063c9554f",
+      "c884a126-30f8-4410-9c72-f5cc74350338",
+      "6e01b8a3-1106-4673-8249-bef2fa4e8084"
+    ],
+    "http://www.topcoder.com/challenge-details/30377016": [
+      "11408887-1418-46b6-8d1b-5656d1f7b0ec",
+      "d07192fe-fc8e-48ce-88b6-9c190a8ff4ac",
+      "eeb7d819-1984-47d0-989f-77421af704e8"
+    ],
+    "https://github.com/topcoder-platform/lookups-api": [
+      "9f836b8b-205e-41fc-9f58-fe31b3164dae",
+      "f03409fd-2286-4723-bd49-23e4a2413caa",
+      "33cc46d3-79f6-4fa6-82b6-4dcb71c03a05",
+      "a1359861-e039-42e1-85d9-ed37541ba73e",
+      "dacb7cd1-5edf-45e2-9d36-e62dbcb0cbc0",
+      "86ce07bd-2859-4302-b4e1-36c7f2e7f6c5",
+      "598f0b41-76e7-489a-a0dc-40895b0512a6",
+      "1ee19823-79c8-4ac4-a729-60b2b7a952c1",
+      "f9ff5839-c9b4-49e1-825c-533d0c4b77b3",
+      "22cb1bf4-204b-4f81-aa34-13407846d3cc"
+    ],
+    "https://github.com/topcoder-platform/tc-project-service": [
+      "78b3768b-8665-48f5-90fb-3d8b728dccf6",
+      "409e33c1-aab0-492e-b636-71b56b90aaf5",
+      "c7a1b438-bcbd-42ff-bdb4-f784f8da1938",
+      "92fb1b28-b77e-4517-a135-899e55e2bf2a",
+      "e17287ad-1e1d-4db6-818a-16929b581bc4",
+      "16e1982d-27fb-4e35-9604-8f420105bec2",
+      "e89f6213-3934-4e9a-8c11-ae495d7ed739",
+      "222744c3-7e66-4ffc-8390-1e58adaa5821"
+    ],
+    "https://github.com/topcoder-platform/autopilot-v6": [
+      "723e2183-4a58-406b-8a4a-900826d8fbe4",
+      "f537cf53-949f-42eb-ae9b-9659ba55820b",
+      "501af155-2bf6-4b6a-ab17-6ae4c0387ea8",
+      "63966897-0b67-433c-831a-81170f44e0db",
+      "0c490c53-e00c-41d0-a9c6-dd0ac701395e"
+    ],
+    "https://huggingface.co/topcoder-platform": [
+      "355a5497-71c3-4e3a-b200-f53d62564667",
+      "181e5a18-8f46-4366-9aa7-4550a25adceb"
+    ],
+    "https://github.com/topcoder-platform/ratings-processor-v6/tree/develop": [
+      "0ab3daf4-5ea4-4210-a224-7739ff23bfb5",
+      "f5b289f7-d7c9-4228-8f6b-2c5caa989525"
+    ],
+    "https://github.com/topcoder-platform/review-api-v6": [
+      "56dd2d4f-981a-47e6-87f7-ea81cb93e7b5",
+      "81aca1d1-840d-4362-8288-348cc8fd77f6",
+      "ac7837cd-349d-4a6a-aa97-82f1d19ad557",
+      "ec992916-4f83-4d20-9a0c-e623d7258b6a",
+      "3ebd01d4-e53e-4e2b-9240-7834cedad79b",
+      "3429059f-7f1e-42d2-8d21-836fae3cf949",
+      "b49648b6-9772-461e-bdd2-12531df0f94b"
+    ],
+    "https://marvelapp.com/prototype/11a2f99e/screen/97582714": [
+      "6a707d6e-c768-480e-ab9e-b096ea9c49c3",
+      "e12ee862-474a-4e40-9d2d-2699ae1dfc2a"
+    ],
+    "https://github.com/topcoder-platform/member-api-v6/tree/develop": [
+      "d4d7b154-8d23-4b52-abde-1d37d3edf8bd",
+      "cdb60740-ab44-40e2-9491-7c14f71a8256"
+    ],
+    "https://a4e-bb-demo1.replit.app": [
+      "aa2c0a99-7a47-4de8-8ad9-de1fdf35800a",
+      "54df4e6d-43c5-44da-8f4a-e4ee94c5ed1b"
+    ],
+    "http://apps.topcoder.com/wiki/display/docs/hestia": [
+      "c9dc5199-159b-4fb6-b130-63f686b4c3f7",
+      "ea9851bb-bf2b-422e-a6ea-82d17d9654c3",
+      "47f62a30-ecb4-40df-9675-5501dae44d07",
+      "f4406e17-de1d-4e36-a0cb-71edaa71012f",
+      "fb5a979e-d734-4f2e-98e1-7d64f7580453",
+      "6db4012d-9ad4-4266-9081-4768efc8ab28",
+      "20db95b0-40cb-4037-b662-714ca6675dca",
+      "42fc7857-59bd-4986-a0e8-f1e6734dcdc3",
+      "98e0e851-829b-4998-880b-0fbd64c44f6e",
+      "af8ca4fd-bd0f-4e5e-b00b-ff03cf2b77a3"
+    ],
+    "http://apps.topcoder.com/wiki/display/docs/nasa": [
+      "5eacfbaa-d3a5-42a8-98eb-d6c7bed0eb1c",
+      "b3ce56cd-5bb5-40db-a7fa-27b53d0ebb0a",
+      "f76874f0-cd33-4cf3-b466-7a3a9c0e685c",
+      "78775dd0-f6c7-4066-beff-dac3e190e083",
+      "53ad544d-0231-4330-b76d-f1dbea79257c",
+      "2f72c2b0-519a-4fe5-952f-d4848b536961",
+      "d715f5f0-d7e0-4a79-ad27-fd8f0d393839",
+      "b32658cb-aa76-4624-b5a4-24e807d961cd",
+      "a312b2f5-3302-45ad-ba38-5ccf7e4b29dd",
+      "7402d3ee-4221-45de-9c00-fec497be9de0"
+    ],
+    "http://apps.topcoder.com/wiki/display": [
+      "beba8d32-3d3e-4185-8c3c-0b603d1eebab",
+      "43f77dbc-77a0-4fac-a17c-0230d28674bb",
+      "9c443cdc-4860-4681-a36c-d0d2e1c074b8",
+      "65c0e357-10cf-49e3-8aef-40e6e450ab7c",
+      "6be97383-e1d1-4d4b-b02c-ab6add63bebf",
+      "1d7a2284-6ad3-42a7-a941-a28788df25a9",
+      "0ccf310f-be56-4ece-b3fe-3515015e77a2",
+      "b98ca280-4d6d-4f70-9631-bcb6be737897",
+      "f9534630-0908-4b3a-9e3e-1f13da4a0f37",
+      "de95112f-360c-4fcf-8aaf-7f6e3e22d9c7"
+    ],
+    "http://apps.topcoder.com/wiki/display/docs/java": [
+      "94dfcfad-71ab-456b-8a86-454a93f6add2",
+      "1010600c-0172-4e1c-8f5f-ce6422992a13",
+      "d538dd85-c550-41a7-901a-2e08832ab7ec",
+      "3c7b2630-8d7c-43d1-ae2b-251df5ef6c81",
+      "e2c3e96c-9424-4ed3-8a25-0c42c7e377a6",
+      "f02eb1e8-a75f-4abd-94dd-89e2f470e470",
+      "facf557e-2044-40d8-b02f-1c58308dab19",
+      "52056426-a520-4571-91a2-83beefe62a2b",
+      "4e1bafc2-1ccb-4493-af87-9977d522b4e0",
+      "5d53aaac-c12b-4c93-abb7-27af20b96acb"
+    ],
+    "http://apps.topcoder.com/wiki/display/docs/topcoder": [
+      "849e5c77-ebba-4127-9e8a-77b325ca7ce4",
+      "e481ec6a-609f-421b-8aa7-2b02968e3547",
+      "5b1251d6-f273-4c39-b369-e140782def5c",
+      "c0b82b38-e5a6-4804-95b8-1015120ec95d",
+      "fa39e5fd-7942-48ae-906e-463f7c333627",
+      "3053953b-ae04-476c-be03-562dd28dc1f4",
+      "78f43a0f-6e76-48ba-9a4b-f750e3b52abd",
+      "f0315719-2e2f-4b0f-bb7d-80b793a95b07",
+      "1bc4d380-e7c7-4d21-a119-15a15ee71c50",
+      "2bfb3187-0402-411f-a3a2-97d0429136b6"
+    ],
+    "http://apps.topcoder.com/wiki/display/docs/conceptualization": [
+      "c172ec2a-4cbe-4292-8bcd-b0c7283234fa",
+      "cbe49421-b53e-4be6-9074-1e8b277a6d8d",
+      "1dee9832-6f41-45e5-ba57-32fe8d0e3dc3",
+      "73c2b5af-1c19-4be0-8601-8d04b7b5548c",
+      "66e5f660-a06b-40a8-a2c7-9db37bd80392",
+      "6571f3be-2732-4622-939f-59c16ccaed49",
+      "557fddbb-8ae6-4575-97fe-ce98ca111ea3"
+    ],
+    "http://community.topcoder.com/wiki/display/docs/module": [
+      "24354180-e49a-46c2-aa19-3bde505bcaa0",
+      "653cc00f-a1ae-4d51-926b-af564df712d5",
+      "1581c3be-816e-402b-97fd-2b97e5687950",
+      "512f618b-2133-4966-939e-66767c32b0c7",
+      "573b5248-170d-4748-baca-7956fe63316c",
+      "d8322425-0928-45cf-bb5a-0689a60b2592",
+      "01687756-21d2-4f7e-a8ef-8c46cb0bb294",
+      "11683215-e6d2-481e-941a-bbe54f77dbc2",
+      "5e3f39c3-f4b1-4dcb-bf6b-c1ef268cf660",
+      "43931f4b-c0e7-4257-bf1c-4c6301e8e3b3"
+    ],
+    "topcoder security groups frontend part 2|development": [
+      "67aa1ef8-e170-4419-80e6-36f542dddbd7",
+      "5495f946-8d5e-4a19-b958-5ab938415718"
+    ],
+    "topcoder security groups frontend part 3|development": [
+      "75c9bc83-4afb-4b5e-a884-8f0086a5545c",
+      "cb37d462-f42c-4f6d-8a88-3dd45e856e6b"
+    ],
+    "http://blog.jeffdouglas.com/2009/05/08/inline-visualforce-pages-with-standard-page-layouts": [
+      "35185d32-ac32-40d9-892f-395a60a06942",
+      "28c2082b-1732-40c8-9f6f-711295261690",
+      "4d76c255-2bc1-418e-ba99-6729033817b0",
+      "a300ac84-8698-43d9-9984-7a78b87b9749"
+    ],
+    "morpheus - application framework mq implementation|development": [
+      "0c22d516-d0af-431e-9030-ac24708a10c2",
+      "8c854b07-e6bd-4d43-b7c4-e3c887e37cb9"
+    ],
+    "morpheus - application framework soap and http implementation|development": [
+      "78ca8a8e-12a9-4109-b390-60e396d09b35",
+      "222a0142-c64b-4f9a-a825-ffa4ae4caa5a"
+    ],
+    "http://apps.topcoder.com/wiki/display/docs/subset": [
+      "4c622119-8e22-4696-9b2e-cc92455f8fe4",
+      "59861c42-1f79-4ba6-bc7e-71b38c3588bb",
+      "cc36a840-86c6-42bd-b612-1be207721b08",
+      "7709e019-c489-4737-9d91-954cc2d37145",
+      "23b61ed4-5125-4a65-8e77-cea09db89ae2",
+      "26dd3dbd-6930-459d-8752-5aa30bddf5ba",
+      "54ba84d7-68bc-4230-89ac-3e949c780b97"
+    ],
+    "http://apps.topcoder.com/wiki/display/docs/module": [
+      "40435a0f-a91d-4184-8473-79fe922a03df",
+      "8dcd2ab3-0410-4da1-9c93-ab13d354af6d",
+      "e0d30bac-e563-4b62-bb01-f9b35316e5af",
+      "b4539cdb-1d38-48fc-9ef4-1e97438d86f5",
+      "fac86057-feba-4d95-ac81-9577619f57de",
+      "02b931bc-812f-4d7b-9318-116eed651fd5",
+      "2582ccc3-71aa-4f7c-934c-6801495c6f1e",
+      "93b96883-4960-42e4-91ef-32fcb6b120cd",
+      "3939f613-12c8-450a-80b3-945ed6c78121",
+      "87ab2e08-1098-4d80-833e-0082e6898bf6"
+    ],
+    "http://webkit.org/projects/javascript": [
+      "7517ae70-07fe-4750-a559-686cb8110f1d",
+      "233f4eb7-7167-4933-ac3a-18401eee52da",
+      "03265d60-e080-4292-abf0-39a7992b7ec3",
+      "6b64702d-20ba-41f2-9fcc-0ed089d798d8",
+      "93114878-71fe-4872-b792-b6cd602d8680",
+      "0476424d-cd9d-401b-9189-0b466909599e",
+      "42cdb091-ab8f-4788-b37e-09e30a4a84de",
+      "9f670980-ec70-47d5-b2cb-3e35f60b22dd",
+      "c2cc161c-71aa-4f3b-84fe-3370eabc665c",
+      "3e20a1a7-b1f6-460f-a41d-06cdbfc5bfe0"
+    ],
+    "http://apps.topcoder.com/wiki/display/docs/morpheus": [
+      "c9e62f42-22b9-4a25-96e6-878a61255eea",
+      "0caa9e98-83e4-4b1a-b20c-a6650b03cbdc",
+      "eeccf34d-186f-41ca-99d5-9084cbe0c747",
+      "fb7440ab-8ba6-4f1b-8c85-185c1abd3073",
+      "81bf79b4-5f2c-4ad9-8969-af1e17fc14cf",
+      "fc71272f-f359-4605-9e38-fe814e76dca9",
+      "5261ecc8-5dfa-4116-998a-a2109f2a3721",
+      "c73540e8-7d17-4ef7-9bf1-7776869b324a",
+      "04fab2db-a36e-45e7-bdb5-eb9ec40d4ec3",
+      "f4895b5d-2905-4c22-ae38-4f5bc622876b"
+    ],
+    "http://www.cloudspokes.com/challenges/1229": [
+      "7b1d82e0-18e8-477f-bc61-69ea135394da",
+      "d0827dc6-a478-416f-b453-566e79f00de2"
+    ],
+    "http://apps.topcoder.com/wiki/display/docs/milo": [
+      "a584cbd8-e5c1-4b40-a917-ce139fd9366d",
+      "5e1b7feb-b750-464f-befb-25295b96c1db",
+      "ca1cb473-9762-4b1b-a719-da4f64cbfd13",
+      "60a9d212-bf81-47ca-87d3-e4fa6f688016",
+      "a18be7e2-e97c-4de9-a5e3-904edcf1d4ac",
+      "248f50e4-3c17-41c1-bfd3-50f3a1f0fce9",
+      "d3d9c0e1-c1b5-49b1-82c9-2edc217c9789",
+      "e5d9384e-1959-44e3-8ebd-cbfb61a096a9",
+      "62a848da-5b56-44b0-a218-f8474c9ffc25",
+      "e39fe640-2b51-43ea-8b94-38aea333d7aa"
+    ],
+    "http://apps.topcoder.com/wiki/display/docs/bcms": [
+      "6046a242-cfc5-4871-8cdb-fc338b757af6",
+      "7ab2c56e-dd90-4f9f-9123-f355a9f1122f",
+      "e73834b9-f9ad-47f0-a132-37e853aaf75b",
+      "476fb81e-bb1b-4d2a-b123-d6705a1bc5cf",
+      "d645c9ea-8a87-47c4-9d13-757ea0771387",
+      "99039e53-64a8-474e-9015-f264f0b56ed4",
+      "dde2e8a0-adcd-48cb-a0ea-0f917f0b4d22",
+      "ef8e7ba3-2d5d-4931-a148-76ca11f88a7d",
+      "4f682efb-60d1-4ccf-b9a7-99a217dc3413",
+      "18e1417b-4511-4bbd-a5d8-1b25282028be"
+    ],
+    "http://apps.topcoder.com/wiki/display/docs/release": [
+      "6c4ac71c-014c-400e-af3f-0997b9cf0982",
+      "2232ffdd-12f6-41b4-9e16-139d9f14684f",
+      "7a9de6b6-2aef-43e8-bf2f-6cf210f3a609",
+      "900a6df1-a6be-4c52-882a-879a1dbf5ca1",
+      "5763187e-709b-43eb-b5a1-1936fa973d36",
+      "38212982-7f45-4bbb-8e22-4b7ef5e110ca",
+      "53b73107-9d09-4670-b90d-522527acbc15",
+      "fa839972-dc9e-49f9-b05f-39b2c5bba6c8",
+      "cc0ddf7f-0ef2-4f4d-8b9e-2e4fcf7ad9f1",
+      "ffd3093e-076b-41d5-9aae-536624c49e9a"
+    ],
+    "https://apps.topcoder.com/wiki/display/docs/accenture": [
+      "78f5f98d-0046-4901-8f19-7db5a0b7dc07",
+      "1c64cb6d-5cb2-4878-bbe3-cacf3343bb1d",
+      "cfd32e04-763e-4b30-b1fd-f5e626328a04",
+      "1a1fe91e-cf3a-4784-9684-bfc2774e962f",
+      "043be81d-a643-4e9b-9d31-02c247400101",
+      "e5437a0c-650f-4225-8a27-9679b2cf01c5",
+      "952e9bcc-8f77-4f8c-b6be-b63e91ed975c",
+      "00b234e7-16ff-478e-8c79-502536c097c6"
+    ],
+    "http://apps.topcoder.com/wiki/display/docs/soteria": [
+      "301e7bd5-706c-4abe-965d-4e96b0f3dcb2",
+      "909f8e2c-0581-43d7-a392-f632f34230cd",
+      "022d8ab1-967d-46d5-8323-2ccbe98a43c4",
+      "673b4184-810f-4533-ae5a-df1eb7dac705",
+      "68b23d85-eff0-4395-981a-8394b69375ed",
+      "305d6f23-8e7b-42fa-8648-7bcec9b5e2e5",
+      "e04e2724-a5d2-4b5a-9769-7eb32eb26fb1",
+      "dc2072f8-ed69-4d46-89e5-f537004c5358",
+      "e73077ee-55ca-4147-bd6d-12a39848c9c0",
+      "03c5c53b-e79b-4051-8f19-61d3eb04dd15"
+    ],
+    "http://apps.topcoder.com/wiki/display/docs/contracts": [
+      "50eaf1d0-a81b-4039-b65d-b4282499b78d",
+      "e03b277e-21bf-40c1-9ee3-09c2ab39283d",
+      "53e2ffcb-1ecc-4d0f-82e2-0207bbde00ab",
+      "8626b8e2-e349-49e7-9614-7dfc2c442f62",
+      "3b0a7dd7-cefe-46f3-a2eb-bccdb91cfc1e",
+      "7d659895-6c7e-49d9-a092-f6b08049cdd7",
+      "b547e66d-49c9-44fb-90b9-b18168e51d80",
+      "4f5b64d5-df51-4558-a07c-e5c73796a42d",
+      "e1537a88-7343-4271-9554-d81d8d4e3d94",
+      "7875a09b-e64a-43e5-a268-529f340a4335"
+    ],
+    "http://apps.topcoder.com/wiki/display/docs/arete": [
+      "9c57c257-4ed4-4645-a073-391907a86fb9",
+      "3b489ac9-3b9d-4449-b542-5c3c64da07b5",
+      "275165f5-9520-4a17-9707-82a3e37e9cdf",
+      "741d54df-7907-4304-8d83-44cce8019b0a",
+      "2d360bfc-0f97-4616-8f76-b2055a4713ee",
+      "fce940eb-5ac0-4eaf-9662-2a53bcf8cf6e"
+    ],
+    "http://apps.topcoder.com/wiki/display/docs/prototype": [
+      "a8b54767-74f0-4171-8969-976384fbe7f3",
+      "ec6dd741-3f0e-4acf-ae39-ffc620c83f55",
+      "b6efe9b1-52ea-4ad3-9297-6ff7a3636e78",
+      "7d07fd79-adda-45df-bc5c-5759d41fda22",
+      "5bdfe0a6-a300-4f24-b6c4-549833452bba",
+      "73b5e0ac-d068-4404-bf72-091d3e41231c",
+      "080f3e14-2af5-428a-967b-ea7761722155"
+    ],
+    "http://studio.topcoder.com": [
+      "30139e7a-4ab7-4938-aeda-bfb949d67670",
+      "1c093a45-ec91-47e2-aca1-5906f9615473",
+      "0d0f211b-9083-44a5-b7ad-2d4548acdb10",
+      "0330dda2-01cf-4665-8a15-16e60e43d48a",
+      "8fd609b7-7bb2-478e-a902-fc64e22b980d",
+      "eeef9494-53aa-461a-818a-49c73abe19ef",
+      "ac3a371d-71d9-462b-8628-5ce5ab786815",
+      "d4a7544e-1adb-4eba-a132-6e65a31115d5",
+      "b1b1f271-f064-4c9c-9d7b-e6d56e91580e",
+      "6f20f206-a258-4bd9-9b32-1fe1ce3cc20a"
+    ],
+    "http://nonamesite.com": [
+      "ba0abfde-e357-405a-bbce-9fe05b84da32",
+      "7378ffa4-6f11-4c45-91a6-1d631f0706c6",
+      "64eb1f39-3207-4fcc-baca-8302dfded063",
+      "76f8458e-e627-4e40-b385-1dbeb0af6618",
+      "a8060b27-893e-480b-9395-ce1357a37a77",
+      "de59d67c-a9ac-4a93-a974-470f214bc8c7"
+    ]
+  }
+}

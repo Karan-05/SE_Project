@@ -1,0 +1,1 @@
+{"content": "[MOCK] 9ce831c914353535 :: You are executing decomposition strategy 'failure_mode_first' on a real repository task. Repository workspace: `/Users/k", "tokens": 669, "elapsed": 2.204100019298494e-05, "budget_exceeded": false, "meta": {"provider": "mock", "model": "plan-runner", "caller": "failure_mode_first:initial"}}

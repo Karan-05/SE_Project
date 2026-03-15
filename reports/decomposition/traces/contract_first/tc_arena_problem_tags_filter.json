@@ -79,7 +79,7 @@
       "localized": false,
       "pass_rate": 0.0,
       "status": "tests_failed",
-      "duration": 1.5566045000450686,
+      "duration": 0.9374722080001447,
       "failing_tests": [
         "tests_0"
       ],
@@ -107,6 +107,7 @@
         "raw_metadata_keys": [
           "localized"
         ],
+        "raw_payload": "{\"edits\": [{\"path\": \"modules/Problems/services/ProblemsService.js\", \"mode\": \"rewrite\", \"content\": \"```json\\n{\\n  \\\"contract_review\\\": [\\n    {\\n      \\\"id\\\": \\\"filtering_case_insensitive_tags\\\",\\n      \\\"status\\\": \\\"covered\\\",\\n      \\\"notes\\\": \\\"Implemented normalizeTags to lowercase all tags and match problems case-insensitively.\\\"\\n    },\\n    {\\n      \\\"id\\\": \\\"filtering_comma_separated_tags\\\",\\n      \\\"status\\\": \\\"covered\\\",\\n      \\\"notes\\\": \\\"Supports comma-separated tags by splitting and normalizing them, matching any problem containing any tag.\\\"\\n    },\\n    {\\n      \\\"id\\\": \\\"filtering_array_tags_with_difficulty_and_limit\\\",\\n      \\\"status\\\": \\\"covered\\\",\\n      \\\"notes\\\": \\\"Supports tags[] array form alongside difficulty filters, preserves ordering by roundId and limits results to 50.\\\"\\n    }\\n  ],\\n  \\\"edits\\\": [\\n    {\\n      \\\"path\\\": \\\"modules/Problems/services/ProblemsService.js\\\",\\n      \\\"mode\\\": \\\"rewrite\\\",\\n      \\\"content\\\": \\\"'use strict';\\\\n\\\\n/*\\\\n * Copyright (c) 2016 TopCoder, Inc.\\\\n */\\\\n\\\\n/**\\\\n * Service for SRM problem APIs.\\\\n */\\\\nconst fs = require('fs');\\\\nconst path = require('path');\\\\nconst Joi = require('joi');\\\\nconst logger = require('../../../common/logger');\\\\n\\\\nlet cachedProblems;\\\\n\\\\nconst MAX_LIMIT = 50;\\\\n\\\\n/**\\\\n * Normalize tags filter into a lowercase array.\\\\n * @param {string|Array<string>} rawTags\\\\n * @returns {Array<string>}\\\\n */\\\\nfunction normalizeTags(rawTags) {\\\\n  if (!rawTags && rawTags !== '') {\\\\n    return [];\\\\n  }\\\\n  const list = Array.isArray(rawTags) ? rawTags : String(rawTags).split(',');\\\\n  return list\\\\n    .map((tag) => String(tag || '').trim().toLowerCase())\\\\n    .filter((tag) => tag);\\\\n}\\\\n\\\\n/**\\\\n * Check whether the problem contains at least one of the requested tags.\\\\n * @param {Object} problem\\\\n * @param {Array<string>} tags\\\\n * @returns {boolean}\\\\n */\\\\nfunction problemMatchesTags(problem, tags) {\\\\n  if (!tags || tags.length === 0) {\\\\n    return true;\\\\n  }\\\\n  if (!problem.tags || !Array.isArray(problem.tags)) {\\\\n    return false;\\\\n  }\\\\n  const problemTagsLower = problem.tags.map((t) => String(t).toLowerCase());\\\\n  return tags.some((tag) => problemTagsLower.includes(tag));\\\\n}\\\\n\\\\n/**\\\\n * Load problems from JSON file and cache them.\\\\n * @returns {Array<Object>} problems\\\\n */\\\\nfunction loadProblems() {\\\\n  if (cachedProblems) {\\\\n    return cachedProblems;\\\\n  }\\\\n  const filePath = path.join(__dirname, '..', '..', '..', 'data', 'problems.json');\\\\n  const raw = fs.readFileSync(filePath, 'utf8');\\\\n  cachedProblems = JSON.parse(raw);\\\\n  return cachedProblems;\\\\n}\\\\n\\\\n/**\\\\n * List problems with optional filtering by difficulty and tags.\\\\n * @param {Object} filters\\\\n * @param {string|Array<string>} [filters.tags] - tags filter, comma-separated string or array\\\\n * @param {string} [filters.difficulty] - difficulty filter\\\\n * @returns {Promise<Object>} payload with problems and metadata\\\\n */\\\\nfunction* listProblems(filters) {\\\\n  filters = filters || {};\\\\n\\\\n  // Validate filters\\\\n  const schema = Joi.object({\\\\n\"}], \"localized\": true}",
         "applied_file_count": 1,
         "proposed_file_count": 1,
         "multi_file_applied": false,
@@ -126,7 +127,52 @@
           "multi_tag_union: Comma-separated tags (e.g. ?tags=foo,bar) must match problems that contain any requested tag and expose both normalized tags in metadata.appliedTags.",
           "array_tag_filter: tags[]=... array form must work alongside difficulty filters while preserving ordering by roundId and the paging limit."
         ],
-        "contract_fail_cases": []
+        "contract_fail_cases": [],
+        "witness_count": 1,
+        "witness_samples": [
+          {
+            "test_case": "tests_0",
+            "message": "Exception during run: /Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo/runs/tc_arena_problem_tags_filter/contract_first/works",
+            "category": "assertion",
+            "expected": "",
+            "actual": "",
+            "contracts": []
+          }
+        ],
+        "cgcs_state": {
+          "round": 0,
+          "active_clause": "multi_tag_union",
+          "satisfied_ids": [
+            "single_tag_filter"
+          ],
+          "unsatisfied_ids": [
+            "array_tag_filter",
+            "multi_tag_union"
+          ],
+          "regressed_ids": [],
+          "regression_guards": [
+            "single_tag_filter"
+          ],
+          "witness_counts": {
+            "single_tag_filter": 0,
+            "multi_tag_union": 1,
+            "array_tag_filter": 1
+          },
+          "witness_sample": [
+            {
+              "test_case": "tests_0",
+              "message": "Exception during run: /Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo/runs/tc_arena_problem_tags_filter/contract_first/workspace/modules/Problem",
+              "category": "assertion",
+              "expected": "",
+              "actual": "",
+              "linked_contract_ids": [
+                "array_tag_filter",
+                "multi_tag_union"
+              ]
+            }
+          ],
+          "coverage": 0.3333333333333333
+        }
       }
     },
     {
@@ -136,7 +182,7 @@
       "localized": true,
       "pass_rate": 0.0,
       "status": "tests_failed",
-      "duration": 0.8555797500303015,
+      "duration": 0.4159198329998617,
       "failing_tests": [
         "tests_0"
       ],
@@ -164,6 +210,7 @@
         "raw_metadata_keys": [
           "localized"
         ],
+        "raw_payload": "{\"edits\": [{\"path\": \"modules/Problems/services/ProblemsService.js\", \"mode\": \"rewrite\", \"content\": \"```json\\n{\\n  \\\"edits\\\": [\\n    {\\n      \\\"path\\\": \\\"modules/Problems/services/ProblemsService.js\\\",\\n      \\\"mode\\\": \\\"rewrite\\\",\\n      \\\"content\\\": \\\"'use strict';\\\\n\\\\n/*\\\\n * Copyright (c) 2016 TopCoder, Inc.\\\\n */\\\\n\\\\n/**\\\\n * Service for SRM problem APIs.\\\\n */\\\\nconst fs = require('fs');\\\\nconst path = require('path');\\\\nconst Joi = require('joi');\\\\nconst logger = require('../../../common/logger');\\\\n\\\\nlet cachedProblems;\\\\n\\\\nconst MAX_LIMIT = 50;\\\\n\\\\n/**\\\\n * Normalize tags filter into a lowercase array.\\\\n * @param {string|Array<string>} rawTags\\\\n * @returns {Array<string>}\\\\n */\\\\nfunction normalizeTags(rawTags) {\\\\n  if (!rawTags && rawTags !== '') {\\\\n    return [];\\\\n  }\\\\n  const list = Array.isArray(rawTags) ? rawTags : String(rawTags).split(',');\\\\n  return list\\\\n    .map((tag) => String(tag || '').trim().toLowerCase())\\\\n    .filter((tag) => tag);\\\\n}\\\\n\\\\n/**\\\\n * Check whether the problem contains at least one of the requested tags.\\\\n * @param {Object} problem\\\\n * @param {Array<string>} tags\\\\n * @returns {boolean}\\\\n */\\\\nfunction problemMatchesTags(problem, tags) {\\\\n  if (!tags || tags.length === 0) {\\\\n    return true;\\\\n  }\\\\n  if (!problem.tags || !Array.isArray(problem.tags)) {\\\\n    return false;\\\\n  }\\\\n  const problemTagsLower = problem.tags.map(t => t.toLowerCase());\\\\n  return tags.some(tag => problemTagsLower.includes(tag));\\\\n}\\\\n\\\\n/**\\\\n * List problems with optional filtering.\\\\n * @param {Object} query\\\\n * @returns {Promise<Object>} payload with problems and metadata\\\\n */\\\\nfunction* listProblems(query) {\\\\n  if (!cachedProblems) {\\\\n    const dataPath = path.join(__dirname, '..', '..', '..', 'data', 'problems.json');\\\\n    const rawData = fs.readFileSync(dataPath, 'utf8');\\\\n    cachedProblems = JSON.parse(rawData);\\\\n  }\\\\n\\\\n  // Validate and normalize query parameters\\\\n  const schema = Joi.object({\\\\n    difficulty: Joi.string().valid('easy', 'medium', 'hard'),\\\\n    tags: Joi.alternatives().try(Joi.string(), Joi.array().items(Joi.string())),\\\\n    'tags[]': Joi.alternatives().try(Joi.string(), Joi.array().items(Joi.string())),\\\\n    limit: Joi.number().integer().min(1).max(MAX_LIMIT).default(MAX_LIMIT),\\\\n    offset: Joi.number().integer().min(0).default(0)\\\\n  });\\\\n\\\\n  const { error, value } = schema.validate(query);\\\\n  if (error) {\\\\n    throw error;\\\\n  }\\\\n\\\\n  const difficulty = value.difficulty;\\\\n  const limit = value.limit;\\\\n  const offset = value.offset;\\\\n\\\\n  // Normalize tags from either ?tags= or ?tags[]=\\\\n  // Priority: if tags[] present, use it; else if tags present, use it\\\\n  let rawTags = [];\\\\n  if (value['tags[]'] !== undefined) {\\\\n    rawTags = value['tags[]'];\\\\n  } else if (value.tags !== undefined) {\\\\n    rawTags =\"}], \"localized\": true}",
         "applied_file_count": 1,
         "proposed_file_count": 1,
         "multi_file_applied": false,
@@ -183,7 +230,52 @@
           "multi_tag_union: Comma-separated tags (e.g. ?tags=foo,bar) must match problems that contain any requested tag and expose both normalized tags in metadata.appliedTags.",
           "array_tag_filter: tags[]=... array form must work alongside difficulty filters while preserving ordering by roundId and the paging limit."
         ],
-        "contract_fail_cases": []
+        "contract_fail_cases": [],
+        "witness_count": 1,
+        "witness_samples": [
+          {
+            "test_case": "tests_0",
+            "message": "Exception during run: /Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo/runs/tc_arena_problem_tags_filter/contract_first/works",
+            "category": "assertion",
+            "expected": "",
+            "actual": "",
+            "contracts": []
+          }
+        ],
+        "cgcs_state": {
+          "round": 1,
+          "active_clause": "multi_tag_union",
+          "satisfied_ids": [
+            "single_tag_filter"
+          ],
+          "unsatisfied_ids": [
+            "array_tag_filter",
+            "multi_tag_union"
+          ],
+          "regressed_ids": [],
+          "regression_guards": [
+            "single_tag_filter"
+          ],
+          "witness_counts": {
+            "single_tag_filter": 0,
+            "multi_tag_union": 1,
+            "array_tag_filter": 1
+          },
+          "witness_sample": [
+            {
+              "test_case": "tests_0",
+              "message": "Exception during run: /Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo/runs/tc_arena_problem_tags_filter/contract_first/workspace/modules/Problem",
+              "category": "assertion",
+              "expected": "",
+              "actual": "",
+              "linked_contract_ids": [
+                "array_tag_filter",
+                "multi_tag_union"
+              ]
+            }
+          ],
+          "coverage": 0.3333333333333333
+        }
       }
     },
     {
@@ -193,7 +285,7 @@
       "localized": true,
       "pass_rate": 0.0,
       "status": "tests_failed",
-      "duration": 0.7014435410965234,
+      "duration": 0.4250755000002755,
       "failing_tests": [
         "tests_0"
       ],
@@ -221,6 +313,7 @@
         "raw_metadata_keys": [
           "localized"
         ],
+        "raw_payload": "{\"edits\": [{\"path\": \"modules/Problems/services/ProblemsService.js\", \"mode\": \"rewrite\", \"content\": \"```json\\n{\\n  \\\"edits\\\": [\\n    {\\n      \\\"path\\\": \\\"modules/Problems/services/ProblemsService.js\\\",\\n      \\\"mode\\\": \\\"rewrite\\\",\\n      \\\"content\\\": \\\"'use strict';\\\\n\\\\n/*\\\\n * Copyright (c) 2016 TopCoder, Inc.\\\\n */\\\\n\\\\n/**\\\\n * Service for SRM problem APIs.\\\\n */\\\\nconst fs = require('fs');\\\\nconst path = require('path');\\\\nconst Joi = require('joi');\\\\nconst logger = require('../../../common/logger');\\\\n\\\\nlet cachedProblems;\\\\n\\\\nconst MAX_LIMIT = 50;\\\\n\\\\n/**\\\\n * Normalize tags filter into a lowercase array.\\\\n * @param {string|Array<string>} rawTags\\\\n * @returns {Array<string>}\\\\n */\\\\nfunction normalizeTags(rawTags) {\\\\n  if (!rawTags && rawTags !== '') {\\\\n    return [];\\\\n  }\\\\n  const list = Array.isArray(rawTags) ? rawTags : String(rawTags).split(',');\\\\n  return list\\\\n    .map((tag) => String(tag || '').trim().toLowerCase())\\\\n    .filter((tag) => tag);\\\\n}\\\\n\\\\n/**\\\\n * Check whether the problem contains at least one of the requested tags.\\\\n * @param {Object} problem\\\\n * @param {Array<string>} requestedTags\\\\n * @returns {boolean}\\\\n */\\\\nfunction problemMatchesTags(problem, requestedTags) {\\\\n  if (!requestedTags || requestedTags.length === 0) {\\\\n    return true;\\\\n  }\\\\n  if (!problem.tags || !Array.isArray(problem.tags)) {\\\\n    return false;\\\\n  }\\\\n  const problemTagsLower = problem.tags.map((t) => String(t).toLowerCase());\\\\n  return requestedTags.some((tag) => problemTagsLower.includes(tag));\\\\n}\\\\n\\\\n/**\\\\n * Load problems from JSON file and cache them.\\\\n * @returns {Array<Object>} problems\\\\n */\\\\nfunction loadProblems() {\\\\n  if (cachedProblems) {\\\\n    return cachedProblems;\\\\n  }\\\\n  const filePath = path.join(__dirname, '..', '..', '..', 'data', 'problems.json');\\\\n  const raw = fs.readFileSync(filePath, 'utf8');\\\\n  cachedProblems = JSON.parse(raw);\\\\n  return cachedProblems;\\\\n}\\\\n\\\\n/**\\\\n * List problems with optional filtering and paging.\\\\n * @param {Object} filters\\\\n * @param {string|string[]} [filters.tags] - tags filter, comma-separated string or array\\\\n * @param {string} [filters.difficulty] - difficulty filter\\\\n * @param {number} [filters.page] - page number (1-based)\\\\n * @param {number} [filters.limit] - max results per page\\\\n * @returns {Promise<Object>} payload with problems and metadata\\\\n */\\\\nfunction* listProblems(filters) {\\\\n  filters = filters || {};\\\\n\\\\n  // Normalize tags filter to array of lowercase strings\\\\n  const requestedTags = normalizeTags(filters.tags);\\\\n\\\\n  // Normalize difficulty filter\\\\n  const difficulty = filters.difficulty ? String(filters.difficulty).toLowerCase() : null;\\\\n\\\\n  // Pagination params\\\\n  let page = parseInt(filters.page, 10);\\\\n  if (isNaN(page) || page < 1) {\\\\n    page = 1;\\\\n  }\\\\n  let limit = parseInt(filters.limit, 10);\\\\n  if (isNaN(limit) || limit < 1 || limit > MAX_LIMIT) {\\\\n    limit\"}], \"localized\": true}",
         "applied_file_count": 1,
         "proposed_file_count": 1,
         "multi_file_applied": false,
@@ -240,7 +333,52 @@
           "multi_tag_union: Comma-separated tags (e.g. ?tags=foo,bar) must match problems that contain any requested tag and expose both normalized tags in metadata.appliedTags.",
           "array_tag_filter: tags[]=... array form must work alongside difficulty filters while preserving ordering by roundId and the paging limit."
         ],
-        "contract_fail_cases": []
+        "contract_fail_cases": [],
+        "witness_count": 1,
+        "witness_samples": [
+          {
+            "test_case": "tests_0",
+            "message": "Exception during run: /Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo/runs/tc_arena_problem_tags_filter/contract_first/works",
+            "category": "assertion",
+            "expected": "",
+            "actual": "",
+            "contracts": []
+          }
+        ],
+        "cgcs_state": {
+          "round": 2,
+          "active_clause": "multi_tag_union",
+          "satisfied_ids": [
+            "single_tag_filter"
+          ],
+          "unsatisfied_ids": [
+            "array_tag_filter",
+            "multi_tag_union"
+          ],
+          "regressed_ids": [],
+          "regression_guards": [
+            "single_tag_filter"
+          ],
+          "witness_counts": {
+            "single_tag_filter": 0,
+            "multi_tag_union": 1,
+            "array_tag_filter": 1
+          },
+          "witness_sample": [
+            {
+              "test_case": "tests_0",
+              "message": "Exception during run: /Users/karanallagh/Desktop/DataCollector/reports/decomposition/real_world/real_repo/runs/tc_arena_problem_tags_filter/contract_first/workspace/modules/Problem",
+              "category": "assertion",
+              "expected": "",
+              "actual": "",
+              "linked_contract_ids": [
+                "array_tag_filter",
+                "multi_tag_union"
+              ]
+            }
+          ],
+          "coverage": 0.3333333333333333
+        }
       }
     }
   ]

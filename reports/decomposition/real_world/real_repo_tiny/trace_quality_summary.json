@@ -1,0 +1,13 @@
+{
+  "total_rounds": 3,
+  "rounds_with_contract_items": 3,
+  "rounds_with_active_clause_id": 3,
+  "rounds_with_regression_guard_ids": 1,
+  "rounds_with_witnesses": 3,
+  "rounds_with_raw_edit_payload": 3,
+  "rounds_with_candidate_files": 3,
+  "rounds_payload_parse_failed": 0,
+  "rounds_with_weak_contracts": 0,
+  "rounds_ready_for_strict_dataset": 3,
+  "failure_reasons": []
+}

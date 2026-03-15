@@ -4,7 +4,7 @@ from __future__ import annotations
 import json
 import re
 from dataclasses import dataclass, field
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Tuple
 
 
 FILE_BLOCK_PATTERN = re.compile(
@@ -118,11 +118,10 @@ def _parse_block_format(text: str) -> Optional[RepoEditBatch]:
     )
 
 
-def parse_repo_edit_payload(text: str) -> Optional[RepoEditBatch]:
-    """Try to parse multi-file edit instructions from an LLM reply."""
-
+def _attempt_parse_repo_edit_payload(text: str) -> Tuple[Optional[RepoEditBatch], List[str]]:
+    errors: List[str] = []
     if not text or len(text.strip()) < 4:
-        return None
+        return None, ["empty_payload"]
     stripped = text.strip()
     candidates = [stripped]
     fenced = _strip_code_fence(stripped)
@@ -131,15 +130,39 @@ def parse_repo_edit_payload(text: str) -> Optional[RepoEditBatch]:
     for candidate in candidates:
         try:
             parsed = json.loads(candidate)
-        except json.JSONDecodeError:
+        except json.JSONDecodeError as exc:
+            errors.append(f"json_error:{exc.msg}")
             continue
         if isinstance(parsed, (dict, list)):
             payload = {"edits": parsed} if isinstance(parsed, list) else parsed
             try:
-                return RepoEditBatch.from_dict(payload, raw=text)
-            except ValueError:
+                batch = RepoEditBatch.from_dict(payload, raw=text)
+                return batch, errors
+            except ValueError as exc:
+                errors.append(f"payload_error:{exc}")
                 continue
-    return _parse_block_format(stripped)
+    batch = _parse_block_format(stripped)
+    if batch:
+        return batch, errors
+    if not errors:
+        errors.append("unrecognized_payload")
+    return None, errors
 
 
-__all__ = ["RepoEdit", "RepoEditBatch", "parse_repo_edit_payload"]
+def parse_repo_edit_payload(text: str) -> Optional[RepoEditBatch]:
+    """Try to parse multi-file edit instructions from an LLM reply."""
+
+    batch, _ = _attempt_parse_repo_edit_payload(text)
+    return batch
+
+
+def parse_repo_edit_payload_with_diagnostics(text: str) -> Tuple[Optional[RepoEditBatch], Optional[str]]:
+    """Parse payload and return error summary when parsing fails."""
+
+    batch, errors = _attempt_parse_repo_edit_payload(text)
+    if batch is not None:
+        return batch, None
+    return None, "; ".join(errors) if errors else "unrecognized_payload"
+
+
+__all__ = ["RepoEdit", "RepoEditBatch", "parse_repo_edit_payload", "parse_repo_edit_payload_with_diagnostics"]
